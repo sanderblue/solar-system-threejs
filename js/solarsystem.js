@@ -6,48 +6,53 @@ var SolarSystemConstants
   , Zoom;
 
 
-  Zoom = 1700;
+  Zoom = 2500;
   
   SolarSystemConstants = {
     Sun: {
       radius: 700,
-      diameter: 1400,
-      meanDistanctFromSun: 0,
-      moons: {}
+      diameter: 1400
     },
     Mercury: {
       radius: 2.45,
       diameter: 4.9,
       meanDistanctFromSun: 57.9,
+      earthDaysToOrbitSun: 88,
       moons: {}
     },
     Venus: {
       radius: 6.05,
       diameter: 12.1,
       meanDistanctFromSun: 108.2,
+      earthDaysToOrbitSun: 224.7,
       moons: {}
     },
     Earth: {
       radius: 6.35,
       diameter: 12.7,
       meanDistanctFromSun: 149.5,
+      earthDaysToOrbitSun: 364.25,
       moons: {}
     },
     Mars: {
       radius: 3.4,
       diameter: 6.8,
       meanDistanctFromSun: 227.9,
+      earthDaysToOrbitSun: 687,
       moons: {}
     },
     Jupiter: {
-      radius: 7.15,
+      radius: 71.5,
       diameter: 143,
       meanDistanctFromSun: 778.3,
+      earthDaysToOrbitSun: 4329,
       moons: {}
     },
     Saturn: {
-      diameter: 12.0,
-      meanDistanctFromSun: 142.94,
+      radius: 60,
+      diameter: 120,
+      meanDistanctFromSun: 1429.4,
+      earthDaysToOrbitSun: 10753,
       moons: {}
     },
     Uranus: {
@@ -71,7 +76,10 @@ var container
   , Sun
   , Mercury
   , Venus
-  , Jupiter;  
+  , Jupiter
+  , Saturn
+  , Uranus
+  , Neptune;  
 
 var getOrbitAmplitute = function(distanceFromSun) {
   var orbitAmplitude = (SolarSystemConstants.Sun.radius + distanceFromSun);
@@ -83,7 +91,7 @@ function init() {
   container = document.createElement('div');
   document.body.appendChild(container);
 
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000);
   camera.position.set(1000, 500)
 
   scene = new THREE.Scene();
@@ -99,11 +107,14 @@ function init() {
   sunLight.position.set(0, 0, 0);
 
   var sunTexture     = THREE.ImageUtils.loadTexture('../textures/lava.jpg')
-    , mercuryTexture = THREE.ImageUtils.loadTexture('../textures/w.jpg')
-    , venusTexture   = THREE.ImageUtils.loadTexture('../textures/w.jpg')
+    , mercuryTexture = THREE.ImageUtils.loadTexture('../textures/mercury.jpg')
+    , venusTexture   = THREE.ImageUtils.loadTexture('../textures/venus.jpg')
     , earthTexture   = THREE.ImageUtils.loadTexture('../textures/earth.jpg')
     , marsTexture    = THREE.ImageUtils.loadTexture('../textures/mars.jpg')
-    , jupiterTexture = THREE.ImageUtils.loadTexture('../textures/w.jpg');
+    , jupiterTexture = THREE.ImageUtils.loadTexture('../textures/jupiter.jpg')
+    , saturnTexture  = THREE.ImageUtils.loadTexture('../textures/saturn.jpg')
+    , uranusTexture  = THREE.ImageUtils.loadTexture('../textures/uranus.jpg')
+    , neptuneTexture = THREE.ImageUtils.loadTexture('../textures/neptune.jpg');
   
 
   var sunMaterial = new THREE.MeshLambertMaterial({ 
@@ -168,6 +179,20 @@ function init() {
   jupiterTexture.anisotropy = 16;
 
 
+  var saturnMaterial = new THREE.MeshLambertMaterial({ 
+                        ambient: 0xbbbbbb, 
+                        map: saturnTexture, 
+                        side: THREE.DoubleSide
+                      });
+
+  saturnTexture.wrapS = saturnTexture.wrapT = THREE.RepeatWrapping;
+  saturnTexture.anisotropy = 16;
+
+
+  /*
+   * Manually build each planet object as a spherical mesh.
+   */
+
   // Build Sun geometry
   Sun = new THREE.Mesh(
           new THREE.SphereGeometry(
@@ -222,7 +247,7 @@ function init() {
 
   Earth.position.set(earthPosition, 0, 0);
 
-  // Build Earth geometry
+  // Build Mars geometry
   Mars = new THREE.Mesh(
               new THREE.SphereGeometry(
                 SolarSystemConstants.Mars.radius, 
@@ -236,12 +261,12 @@ function init() {
 
   Mars.position.set(marsPosition, 0, 0);
 
-  // Build Earth geometry
+  // Build Jupiter geometry
   Jupiter = new THREE.Mesh(
               new THREE.SphereGeometry(
                 SolarSystemConstants.Jupiter.radius, 
-                130, 
-                90
+                200, 
+                120
               ), 
               jupiterMaterial
             );
@@ -250,17 +275,134 @@ function init() {
 
   Jupiter.position.set(jupiterPosition, 0, 0);
 
-  var resolution = 200;
+  // Build Jupiter geometry
+  Saturn = new THREE.Mesh(
+              new THREE.SphereGeometry(
+                SolarSystemConstants.Saturn.radius, 
+                200, 
+                120
+              ), 
+              saturnMaterial
+            );
+
+  var saturnPosition = getOrbitAmplitute(SolarSystemConstants.Saturn.meanDistanctFromSun);
+
+  Saturn.position.set(saturnPosition, 0, 0);
+
+
+  /*
+   * Manualling build each planet's orbit line for visual reference.
+   */
+
+  // Create a generic line
+  var resolution = 200; // segments in the line
   var size = 360 / resolution;
-  var lineMaterial = new THREE.LineBasicMaterial({ color: 0xe6e6e6, opacity: 0.1 });
 
+  var lineMaterial = new THREE.LineBasicMaterial({ 
+                          color: 0xe6e6e6, 
+                          opacity: 0.1 
+                        });
 
+  var saturnRingMaterial = new THREE.LineBasicMaterial({ 
+                                color: 0xF7BE81, 
+                                opacity: 0.5, 
+                                lineWidth: 50,
+                                fog: true
+                              });
+  
+  // Manual build each of the orbit lines to scale
   var mercuryOrbitLine = new THREE.Geometry()
     , venusOrbitLine   = new THREE.Geometry()
     , earthOrbitLine   = new THREE.Geometry()
     , marsOrbitLine    = new THREE.Geometry()
-    , jupiterOrbitLine = new THREE.Geometry();
+    , jupiterOrbitLine = new THREE.Geometry()
+    , saturnOrbitLine  = new THREE.Geometry()
+    , saturnRing1      = new THREE.Geometry()
+    , saturnRing2      = new THREE.Geometry()
+    , saturnRing3      = new THREE.Geometry()
+    , saturnRing4      = new THREE.Geometry()
+    , saturnRing5      = new THREE.Geometry()
+    , saturnRing6      = new THREE.Geometry();
 
+  // Saturn's rings
+  for(var i = 0; i <= resolution; i++) {
+    var segment = ( i * size ) * Math.PI / 180
+      , ringAmplitude1 = 92
+      , ringAmplitude2 = 100
+      , ringAmplitude3 = 105
+      , ringAmplitude4 = 110
+      , ringAmplitude5 = 119
+      , ringAmplitude6 = 125;
+
+    saturnRing1.vertices.push(
+      new THREE.Vector3(
+        Math.cos(segment) * ringAmplitude1, 
+        0,
+        Math.sin(segment) * ringAmplitude1 
+      )
+    );
+
+    saturnRing2.vertices.push(
+      new THREE.Vector3(
+        Math.cos(segment) * ringAmplitude2, 
+        0,
+        Math.sin(segment) * ringAmplitude2 
+      )
+    ); 
+
+    saturnRing3.vertices.push(
+      new THREE.Vector3(
+        Math.cos(segment) * ringAmplitude3, 
+        0,
+        Math.sin(segment) * ringAmplitude3 
+      )
+    ); 
+
+    saturnRing4.vertices.push(
+      new THREE.Vector3(
+        Math.cos(segment) * ringAmplitude4, 
+        0,
+        Math.sin(segment) * ringAmplitude4 
+      )
+    ); 
+
+    saturnRing5.vertices.push(
+      new THREE.Vector3(
+        Math.cos(segment) * ringAmplitude5, 
+        0,
+        Math.sin(segment) * ringAmplitude5 
+      )
+    ); 
+
+    saturnRing6.vertices.push(
+      new THREE.Vector3(
+        Math.cos(segment) * ringAmplitude6, 
+        0,
+        Math.sin(segment) * ringAmplitude6 
+      )
+    );          
+  }
+
+  var SaturnRing1 = new THREE.Line(saturnRing1, saturnRingMaterial);
+  Saturn.add(SaturnRing1);
+  
+  var SaturnRing2 = new THREE.Line(saturnRing2, saturnRingMaterial);
+  Saturn.add(SaturnRing2);
+  
+  var SaturnRing3 = new THREE.Line(saturnRing3, saturnRingMaterial);
+  Saturn.add(SaturnRing3);
+  
+  var SaturnRing4 = new THREE.Line(saturnRing4, saturnRingMaterial);
+  Saturn.add(SaturnRing4);
+  
+  var SaturnRing5 = new THREE.Line(saturnRing5, saturnRingMaterial);
+  Saturn.add(SaturnRing5);
+
+  var SaturnRing6 = new THREE.Line(saturnRing6, saturnRingMaterial);
+  Saturn.add(SaturnRing6);
+
+
+  // Mercury's orbit line
   for(var i = 0; i <= resolution; i++) {
     var segment = ( i * size ) * Math.PI / 180
       , mercuryOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Mercury.meanDistanctFromSun);
@@ -274,6 +416,7 @@ function init() {
     );         
   }
 
+  // Venus's orbit line
   for(var i = 0; i <= resolution; i++) {
     var segment = ( i * size ) * Math.PI / 180
       , venusOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Venus.meanDistanctFromSun);
@@ -287,6 +430,7 @@ function init() {
     );         
   }
 
+  // Earth's orbit line
   for(var i = 0; i <= resolution; i++) {
     var segment = ( i * size ) * Math.PI / 180
       , earthOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Earth.meanDistanctFromSun);
@@ -300,6 +444,7 @@ function init() {
     );         
   }
 
+  // Mars's orbit line
   for(var i = 0; i <= resolution; i++) {
     var segment = ( i * size ) * Math.PI / 180
       , marsOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanctFromSun);
@@ -313,6 +458,7 @@ function init() {
     );         
   }
 
+  // Jupiter's orbit line
   for(var i = 0; i <= resolution; i++) {
     var segment = ( i * size ) * Math.PI / 180
       , jupiterOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanctFromSun);
@@ -326,6 +472,21 @@ function init() {
     );         
   }
 
+  // Saturn's orbit line
+  for(var i = 0; i <= resolution; i++) {
+    var segment = ( i * size ) * Math.PI / 180
+      , saturnOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Saturn.meanDistanctFromSun);
+
+    saturnOrbitLine.vertices.push(
+      new THREE.Vector3(
+        Math.cos(segment) * saturnOrbitAmplitude, 
+        0,
+        Math.sin(segment) * saturnOrbitAmplitude 
+      )
+    );         
+  }
+
+  // Add orbit lines to the scene
   var MercuryOrbitLine = new THREE.Line(mercuryOrbitLine, lineMaterial);
   scene.add(MercuryOrbitLine);
 
@@ -340,8 +501,11 @@ function init() {
 
   var JupiterOrbitLine = new THREE.Line(jupiterOrbitLine, lineMaterial);
   scene.add(JupiterOrbitLine);
+
+  var SaturnOrbitLine = new THREE.Line(saturnOrbitLine, lineMaterial);
+  scene.add(SaturnOrbitLine);
   
-  // Add objects to the scene
+  // Add main objects to the scene
   scene.add(new THREE.AmbientLight(0x404040));
   scene.add(ambientLight);
   scene.add(sunLight);
@@ -351,6 +515,7 @@ function init() {
   scene.add(Earth);
   scene.add(Mars);
   scene.add(Jupiter);
+  scene.add(Saturn);
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -364,6 +529,13 @@ function init() {
   container.appendChild( stats.domElement );
 
   window.addEventListener('resize', onWindowResize, false);
+}
+
+// Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
+// This ratio helps create an accurate representation of each planet's location along it's orbit circumference.
+function getPlanetRadian(planet) {
+  var planetRadian = 360 / planet.earthDaysToOrbitSun;
+  return planetRadian;
 }
 
 function onWindowResize() {
@@ -380,32 +552,9 @@ function animate() {
   stats.update();
 }
 
-console.log(SolarSystemConstants.Jupiter.radius * Math.cos(360 * 0.0174532925));
-
-console.log('x: ', 0 + SolarSystemConstants.Jupiter.radius * Math.cos(1 * 0.0174532925), 
-            '\n',
-            'y: ', 0 + SolarSystemConstants.Jupiter.radius * Math.sin(1 * 0.0174532925)
-           );
-
-// function startOrbit(Jupiter) {
-//   for (var i = 1; i < 360; i++) {
-//     Jupiter.position.set(
-//       SolarSystemConstants.Jupiter.radius * Math.cos(i * 0.0174532925), 
-//       0, 
-//       SolarSystemConstants.Jupiter.radius * Math.sin(i * 0.0174532925)
-//     );
-
-//     console.log('x: ', 0 + SolarSystemConstants.Jupiter.radius * Math.cos(i * 0.0174532925), 
-//                 '\n',
-//                 'y: ', 0 + SolarSystemConstants.Jupiter.radius * Math.sin(i * 0.0174532925)
-//                );
-//   }
-// }
-
-// startOrbit(Jupiter);
-
 function render() {
-  var timer = Date.now() * 0.00001;
+  var timer = Date.now() * 0.00002
+    , degreesToRadianRatio = 0.0174532925;
 
   // camera.position.x = Math.cos(timer) * Zoom;
   // camera.position.z = Math.sin(timer) * Zoom;
@@ -414,31 +563,83 @@ function render() {
 
   Jupiter.rotation.y = Math.cos(timer);
 
-  var start = 1;
+  radian = (new Date().getSeconds() * 60) / 10;
 
-  ms = (new Date().getSeconds() * 60) / 10;
-
-  console.log(ms)
-  // console.log(getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanctFromSun) * Math.cos(ms * 0.0174532925));
-
-  Jupiter.position.set(
-    getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanctFromSun) * Math.cos(ms * 0.0174532925), 
+  /*
+   * Animate each planet's orbit. Updates every second. 
+   */
+  var mercuryPosX = getOrbitAmplitute(SolarSystemConstants.Mercury.meanDistanctFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Mercury) * degreesToRadianRatio);
+  var mercuryPosY = getOrbitAmplitute(SolarSystemConstants.Mercury.meanDistanctFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Mercury) * degreesToRadianRatio);
+  
+  Mercury.position.set(
+    mercuryPosX, 
     0,
-    getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanctFromSun) * Math.sin(ms * 0.0174532925)
+    mercuryPosY
   );
 
-  // console.log(Jupiter.position);
+
+  var venusPosX = getOrbitAmplitute(SolarSystemConstants.Venus.meanDistanctFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Venus) * degreesToRadianRatio);
+  var venusPosY = getOrbitAmplitute(SolarSystemConstants.Venus.meanDistanctFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Venus) * degreesToRadianRatio);
+  
+  Venus.position.set(
+    venusPosX, 
+    0,
+    venusPosY
+  );
+
+
+  var earthPosX = getOrbitAmplitute(SolarSystemConstants.Earth.meanDistanctFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Earth) * degreesToRadianRatio);
+  var earthPosY = getOrbitAmplitute(SolarSystemConstants.Earth.meanDistanctFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Earth) * degreesToRadianRatio);
+
+  Earth.position.set(
+    earthPosX, 
+    0,
+    earthPosY
+  );
+
+
+  var marsPosX = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanctFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Mars) * degreesToRadianRatio);
+  var marsPosY = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanctFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Mars) * degreesToRadianRatio);
+
+  Mars.position.set(
+    marsPosX, 
+    0,
+    marsPosY
+  );
+
+
+  var marsPosX = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanctFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Mars) * degreesToRadianRatio);
+  var marsPosY = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanctFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Mars) * degreesToRadianRatio);
+
+  Mars.position.set(
+    marsPosX, 
+    0,
+    marsPosY
+  );
+
+
+  var jupiterPosX = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanctFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Jupiter) * degreesToRadianRatio);
+  var jupiterPosY = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanctFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Jupiter) * degreesToRadianRatio);
+
+  Jupiter.position.set(
+    jupiterPosX, 
+    0,
+    jupiterPosY
+  );
+
+
+  var saturnPosX = getOrbitAmplitute(SolarSystemConstants.Saturn.meanDistanctFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Saturn) * degreesToRadianRatio);
+  var saturnPosY = getOrbitAmplitute(SolarSystemConstants.Saturn.meanDistanctFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Saturn) * degreesToRadianRatio);
+
+  Saturn.position.set(
+    saturnPosX, 
+    0,
+    saturnPosY
+  );
 
   camera.position.x = Zoom;
   camera.position.z = Zoom;
   camera.lookAt(scene.position);
-
-  // for (var i = 0, l = scene.children.length; i < l; i++) {
-  //   var Sun = scene.children[ i ];
-
-  //   Sun.rotation.x = timer * 1.9;
-  //   Sun.rotation.y = timer * 0.2;
-  // }
 
   renderer.render(scene, camera);
 }
