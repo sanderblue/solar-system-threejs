@@ -6,7 +6,7 @@ var SolarSystemContants
   , Zoom;
 
 
-  Zoom = 1600;
+  Zoom = 1700;
   
   SolarSystemContants = {
     Sun: {
@@ -65,10 +65,13 @@ var container
   , stats
   , camera
   , scene
-  , renderer;
-
-init();
-animate();
+  , renderer
+  , ambientLight
+  , sunLight
+  , Sun
+  , Mercury
+  , Venus
+  , Jupiter;  
 
 function init() {
 
@@ -82,13 +85,6 @@ function init() {
 
   scene.add(new THREE.AxisHelper(20));
 
-  var ambientLight
-    , sunLight
-    , Sun
-    , Mercury
-    , Venus
-    , Jupiter;  
-
   // Ambient Light
   ambientLight = new THREE.DirectionalLight(0xffffff);
   ambientLight.position.set(0, 1, 0);
@@ -98,13 +94,7 @@ function init() {
   sunLight.position.set(0, 0, 0);
 
   var getOrbitAmplitute = function(distanceFromSun) {
-
-    console.log(distanceFromSun);
-
     var orbitAmplitude = (SolarSystemContants.Sun.radius + distanceFromSun);
-
-    // console.log(orbitAmplitude);
-
     return orbitAmplitude;
   };
 
@@ -112,7 +102,7 @@ function init() {
     , mercuryTexture = THREE.ImageUtils.loadTexture('../textures/w.jpg')
     , venusTexture   = THREE.ImageUtils.loadTexture('../textures/w.jpg')
     , earthTexture   = THREE.ImageUtils.loadTexture('../textures/earth.jpg')
-    , marsTexture   = THREE.ImageUtils.loadTexture('../textures/mars.jpg')
+    , marsTexture    = THREE.ImageUtils.loadTexture('../textures/mars.jpg')
     , jupiterTexture = THREE.ImageUtils.loadTexture('../textures/w.jpg');
   
 
@@ -346,11 +336,11 @@ function init() {
   var EarthOrbitLine = new THREE.Line(earthOrbitLine, lineMaterial);
   scene.add(EarthOrbitLine);
 
-  var JupiterOrbitLine = new THREE.Line(jupiterOrbitLine, lineMaterial);
-  scene.add(JupiterOrbitLine);
-
   var MarsOrbitLine = new THREE.Line(marsOrbitLine, lineMaterial);
   scene.add(MarsOrbitLine);
+
+  var JupiterOrbitLine = new THREE.Line(jupiterOrbitLine, lineMaterial);
+  scene.add(JupiterOrbitLine);
   
   // Add objects to the scene
   scene.add(new THREE.AmbientLight(0x404040));
@@ -392,19 +382,32 @@ function animate() {
 }
 
 function render() {
-  var timer = Date.now() * 0.0001;
+  var timer = Date.now() * 0.00004;
 
-  camera.position.x = Math.cos(timer) * Zoom;
-  camera.position.z = Math.sin(timer) * Zoom;
+  // camera.position.x = Math.cos(timer) * Zoom;
+  // camera.position.z = Math.sin(timer) * Zoom;
 
+  setTimeout(function() {
+    // console.log('what')
+    Sun.rotation.y = Math.cos(timer);
+
+  }, 100);
+
+  camera.position.x = Zoom;
+  camera.position.z = Zoom;
   camera.lookAt(scene.position);
 
-  for (var i = 0, l = scene.children.length; i < l; i++) {
-    var Sun = scene.children[ i ];
+  // Sun.rotation.y -= 0.005;
 
-    // Sun.rotation.x = timer * 1.9;
-    // Sun.rotation.y = timer * 0.2;
-  }
+  // for (var i = 0, l = scene.children.length; i < l; i++) {
+  //   var Sun = scene.children[ i ];
 
-  renderer.render( scene, camera );
+  //   Sun.rotation.x = timer * 1.9;
+  //   Sun.rotation.y = timer * 0.2;
+  // }
+
+  renderer.render(scene, camera);
 }
+
+init();
+animate();
