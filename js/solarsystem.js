@@ -6,7 +6,7 @@ var SolarSystemConstants
   , Zoom;
 
 
-  Zoom = 1700;
+  Zoom = 1300;
   
   SolarSystemConstants = {
     Sun: {
@@ -629,6 +629,25 @@ function getPlanetRadian(planet) {
   return planetRadian;
 }
 
+// 1 minute = 1 earth year
+function setPlanetOrbit(planet) {
+  var orbitSeconds = Math.round(planet.earthDaysToOrbitSun / SolarSystemConstants.Earth.earthDaysToOrbitSun * 60);
+
+  console.log(orbitSeconds);
+
+  for (var i = 0; i < orbitSeconds; i++) {
+    var locationX = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun) 
+                    * Math.cos((i * 6) * getPlanetRadian(SolarSystemConstants.Jupiter) * 0.0174532925);
+
+    var locationY = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun) 
+                    * Math.sin((i * 6) * getPlanetRadian(SolarSystemConstants.Jupiter) * 0.0174532925);
+
+    console.log(locationX, locationY);
+  }
+}
+
+setPlanetOrbit(SolarSystemConstants.Jupiter);
+
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -654,7 +673,10 @@ function render() {
 
   Jupiter.rotation.y = Math.cos(timer);
 
-  radian = (new Date().getSeconds() * 60) / 10;
+  radian = new Date().getSeconds() * 6; 
+  // radian = Number(Number(new Date().getMilliseconds() * 360 / 1000).toFixed(3).replace(/\.0{0,3}$/, '.' + new Date().getMilliseconds()));
+
+  // console.log(radian);
 
   /*
    * Animate each planet's orbit. Updates every second. 
@@ -662,6 +684,8 @@ function render() {
   var mercuryPosX = getOrbitAmplitute(SolarSystemConstants.Mercury.meanDistanceFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Mercury) * degreesToRadianRatio);
   var mercuryPosY = getOrbitAmplitute(SolarSystemConstants.Mercury.meanDistanceFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Mercury) * degreesToRadianRatio);
   
+  // console.log(Number(mercuryPosX).toFixed(3).replace(/\.0{0,3}$/, '.' + new Date().getMilliseconds()));
+
   Mercury.position.set(
     mercuryPosX, 
     0,
@@ -686,16 +710,6 @@ function render() {
     earthPosX, 
     0,
     earthPosY
-  );
-
-
-  var marsPosX = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanceFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Mars) * degreesToRadianRatio);
-  var marsPosY = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanceFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Mars) * degreesToRadianRatio);
-
-  Mars.position.set(
-    marsPosX, 
-    0,
-    marsPosY
   );
 
 
