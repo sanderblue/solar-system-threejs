@@ -629,24 +629,48 @@ function getPlanetRadian(planet) {
   return planetRadian;
 }
 
+var day  = 0
+  , year = 0;
+
 // 1 minute = 1 earth year
 function setPlanetOrbit(planet) {
+  var sec = new Date().getSeconds();
+
   var orbitSeconds = Math.round(planet.earthDaysToOrbitSun / SolarSystemConstants.Earth.earthDaysToOrbitSun * 60);
 
-  console.log(orbitSeconds);
+  // console.log('Time', orbitSeconds * year * 60);
+  // for (var i = 0; i < orbitSeconds; i++) {
+  //   var locationX = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun) 
+  //                   * Math.cos((i * 6) * getPlanetRadian(SolarSystemConstants.Jupiter) * 0.0174532925);
 
-  for (var i = 0; i < orbitSeconds; i++) {
-    var locationX = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun) 
-                    * Math.cos((i * 6) * getPlanetRadian(SolarSystemConstants.Jupiter) * 0.0174532925);
+  //   var locationY = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun) 
+  //                   * Math.sin((i * 6) * getPlanetRadian(SolarSystemConstants.Jupiter) * 0.0174532925);
 
-    var locationY = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun) 
-                    * Math.sin((i * 6) * getPlanetRadian(SolarSystemConstants.Jupiter) * 0.0174532925);
+  //   // console.log(locationX, locationY);
+  // }
 
-    console.log(locationX, locationY);
+  console.log('d: ', day, day % 365);
+
+  if (day !== 0 && day % 365 === 0) {
+    year++;
+
+    console.log('Day: ', day, day * 365, '\n', 'Year: ', year);
+
+    // Jupiter ~ 11 years (11.88 years)
+    if (year % 11 /* make this year number a variable */ === 0) {
+        console.log('\n1 full orbit for Jupiter: ', year);
+    }
   }
 }
 
-setPlanetOrbit(SolarSystemConstants.Jupiter);
+setInterval(function() {
+  setPlanetOrbit(SolarSystemConstants.Jupiter);
+
+  // var radian = new Date().getSeconds() * 6; 
+
+  day++;
+
+}, 1000);
 
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -674,6 +698,7 @@ function render() {
   Jupiter.rotation.y = Math.cos(timer);
 
   radian = new Date().getSeconds() * 6; 
+
   // radian = Number(Number(new Date().getMilliseconds() * 360 / 1000).toFixed(3).replace(/\.0{0,3}$/, '.' + new Date().getMilliseconds()));
 
   // console.log(radian);
