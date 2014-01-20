@@ -6,7 +6,7 @@ var SolarSystemConstants
   , Zoom;
 
 
-  Zoom = 1800;
+  Zoom = 800;
   
   SolarSystemConstants = {
     Sun: {
@@ -97,7 +97,7 @@ function init() {
   document.body.appendChild(container);
 
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000);
-  camera.position.set(1000, 700)
+  camera.position.set(1000, 400)
 
   scene = new THREE.Scene();
 
@@ -638,7 +638,7 @@ function createTime() {
     dayOfYear = 1;
     year++;
 
-    console.log('Day: ', count, '\nDay of Year: ', dayOfYear, '\nYear: ', year, '\n');
+    // console.log('Day: ', count, '\nDay of Year: ', dayOfYear, '\nYear: ', year, '\n');
 
     // Jupiter ~ 11 years (11.88 years)
     if (year % 11 /* make this year number a variable */ === 0) {
@@ -655,7 +655,7 @@ setInterval(function() {
   createTime();
 
   count++;
-}, 1000);
+}, 100);
 
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -680,21 +680,16 @@ function render() {
 
   Sun.rotation.y = Math.cos(timer);
 
-  Jupiter.rotation.y = Math.cos(timer);
-
-  radian = new Date().getSeconds() * 6; 
-
-  // radian = Number(Number(new Date().getMilliseconds() * 360 / 1000).toFixed(3).replace(/\.0{0,3}$/, '.' + new Date().getMilliseconds()));
-
-  // console.log('Radian', radian);
+  Jupiter.rotation.y = Math.cos(timer * 0.004);
 
   /*
    * Animate each planet's orbit. Updates every second. 
    */
-  var mercuryPosX = getOrbitAmplitute(SolarSystemConstants.Mercury.meanDistanceFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Mercury) * degreesToRadianRatio);
-  var mercuryPosY = getOrbitAmplitute(SolarSystemConstants.Mercury.meanDistanceFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Mercury) * degreesToRadianRatio);
+  var mercuryPosX = getOrbitAmplitute(SolarSystemConstants.Mercury.meanDistanceFromSun) 
+                  * Math.cos(count * getPlanetRadian(SolarSystemConstants.Mercury) * 0.0174532925);
   
-  // console.log(Number(mercuryPosX).toFixed(3).replace(/\.0{0,3}$/, '.' + new Date().getMilliseconds()));
+  var mercuryPosY = getOrbitAmplitute(SolarSystemConstants.Mercury.meanDistanceFromSun) 
+                  * Math.sin(count * getPlanetRadian(SolarSystemConstants.Mercury) * 0.0174532925);
 
   Mercury.position.set(
     mercuryPosX, 
@@ -703,18 +698,23 @@ function render() {
   );
 
 
-  var venusPosX = getOrbitAmplitute(SolarSystemConstants.Venus.meanDistanceFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Venus) * degreesToRadianRatio);
-  var venusPosY = getOrbitAmplitute(SolarSystemConstants.Venus.meanDistanceFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Venus) * degreesToRadianRatio);
+  var venusPosX = getOrbitAmplitute(SolarSystemConstants.Venus.meanDistanceFromSun) 
+                  * Math.cos(count * getPlanetRadian(SolarSystemConstants.Venus) * 0.0174532925);
   
+  var venusPosY = getOrbitAmplitute(SolarSystemConstants.Venus.meanDistanceFromSun) 
+                  * Math.sin(count * getPlanetRadian(SolarSystemConstants.Venus) * 0.0174532925);
+
   Venus.position.set(
     venusPosX, 
     0,
     venusPosY
   );
 
-
-  var earthPosX = getOrbitAmplitute(SolarSystemConstants.Earth.meanDistanceFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Earth) * degreesToRadianRatio);
-  var earthPosY = getOrbitAmplitute(SolarSystemConstants.Earth.meanDistanceFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Earth) * degreesToRadianRatio);
+  var earthPosX = getOrbitAmplitute(SolarSystemConstants.Earth.meanDistanceFromSun) 
+                  * Math.cos(count * getPlanetRadian(SolarSystemConstants.Earth) * 0.0174532925);
+  
+  var earthPosY = getOrbitAmplitute(SolarSystemConstants.Earth.meanDistanceFromSun) 
+                  * Math.sin(count * getPlanetRadian(SolarSystemConstants.Earth) * 0.0174532925);
 
   Earth.position.set(
     earthPosX, 
@@ -723,8 +723,11 @@ function render() {
   );
 
 
-  var marsPosX = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanceFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Mars) * degreesToRadianRatio);
-  var marsPosY = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanceFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Mars) * degreesToRadianRatio);
+  var marsPosX = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanceFromSun) 
+                  * Math.cos(count * getPlanetRadian(SolarSystemConstants.Mars) * 0.0174532925);
+  
+  var marsPosY = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanceFromSun) 
+                  * Math.sin(count * getPlanetRadian(SolarSystemConstants.Mars) * 0.0174532925);
 
   Mars.position.set(
     marsPosX, 
@@ -733,8 +736,11 @@ function render() {
   );
 
 
-  var jupiterPosX = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Jupiter) * degreesToRadianRatio);
-  var jupiterPosY = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Jupiter) * degreesToRadianRatio);
+  var jupiterPosX = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun) 
+                  * Math.cos(count * getPlanetRadian(SolarSystemConstants.Jupiter) * 0.0174532925);
+  
+  var jupiterPosY = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun) 
+                  * Math.sin(count * getPlanetRadian(SolarSystemConstants.Jupiter) * 0.0174532925);
 
   Jupiter.position.set(
     jupiterPosX, 
@@ -743,8 +749,11 @@ function render() {
   );
 
 
-  var saturnPosX = getOrbitAmplitute(SolarSystemConstants.Saturn.meanDistanceFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Saturn) * degreesToRadianRatio);
-  var saturnPosY = getOrbitAmplitute(SolarSystemConstants.Saturn.meanDistanceFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Saturn) * degreesToRadianRatio);
+  var saturnPosX = getOrbitAmplitute(SolarSystemConstants.Saturn.meanDistanceFromSun) 
+                  * Math.cos(count * getPlanetRadian(SolarSystemConstants.Saturn) * 0.0174532925);
+  
+  var saturnPosY = getOrbitAmplitute(SolarSystemConstants.Saturn.meanDistanceFromSun) 
+                  * Math.sin(count * getPlanetRadian(SolarSystemConstants.Saturn) * 0.0174532925);
 
   Saturn.position.set(
     saturnPosX, 
@@ -753,8 +762,11 @@ function render() {
   );
 
 
-  var uranusPosX = getOrbitAmplitute(SolarSystemConstants.Uranus.meanDistanceFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Uranus) * degreesToRadianRatio);
-  var uranusPosY = getOrbitAmplitute(SolarSystemConstants.Uranus.meanDistanceFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Uranus) * degreesToRadianRatio);
+  var uranusPosX = getOrbitAmplitute(SolarSystemConstants.Uranus.meanDistanceFromSun) 
+                  * Math.cos(count * getPlanetRadian(SolarSystemConstants.Uranus) * 0.0174532925);
+  
+  var uranusPosY = getOrbitAmplitute(SolarSystemConstants.Uranus.meanDistanceFromSun) 
+                  * Math.sin(count * getPlanetRadian(SolarSystemConstants.Uranus) * 0.0174532925);
 
   Uranus.position.set(
     uranusPosX, 
@@ -763,8 +775,11 @@ function render() {
   );
 
 
-  var neptunePosX = getOrbitAmplitute(SolarSystemConstants.Neptune.meanDistanceFromSun) * Math.cos(radian * getPlanetRadian(SolarSystemConstants.Neptune) * degreesToRadianRatio);
-  var neptunePosY = getOrbitAmplitute(SolarSystemConstants.Neptune.meanDistanceFromSun) * Math.sin(radian * getPlanetRadian(SolarSystemConstants.Neptune) * degreesToRadianRatio);
+  var neptunePosX = getOrbitAmplitute(SolarSystemConstants.Neptune.meanDistanceFromSun) 
+                  * Math.cos(count * getPlanetRadian(SolarSystemConstants.Neptune) * 0.0174532925);
+  
+  var neptunePosY = getOrbitAmplitute(SolarSystemConstants.Neptune.meanDistanceFromSun) 
+                  * Math.sin(count * getPlanetRadian(SolarSystemConstants.Neptune) * 0.0174532925);
 
   Neptune.position.set(
     neptunePosX, 
