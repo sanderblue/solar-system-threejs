@@ -120,7 +120,6 @@ function init() {
 
     setScene: function() {
       Scene.scene = new THREE.Scene();
-
       Scene.scene.add(new THREE.AxisHelper(20));
     },
 
@@ -283,8 +282,7 @@ function init() {
     },
 
     getTexture: function(planet) {
-      console.log('texture: ', planet)
-      return new THREE.ImageUtils.loadTexture('../textures/' + planet.name + '.jpg');
+      return new THREE.ImageUtils.loadTexture('../textures/' + planet.name.toLowerCase() + '.jpg');
     },
 
     build: function(planet) {
@@ -299,7 +297,7 @@ function init() {
                       // rotation: ,
                     });
 
-      console.log('PLANET: ', planet);
+      console.log('Build PLANET: ', planet);
 
       var texture = PlanetBuilder.getTexture(planet);
 
@@ -331,10 +329,10 @@ function init() {
         0     // z
       );
 
-      if (planet.rings) {
-        console.log('RINGS', planet.name, planet.rings);
-        PlanetBuilder.buildRings(thisPlanet, planet);
-      }
+      // if (planet.rings.length > 0) {
+      //   console.log('RINGS', planet.name, planet.rings);
+      //   PlanetBuilder.buildRings(thisPlanet, planet);
+      // }
 
       PlanetBuilder.addPlanet(thisPlanet);
     },
@@ -352,7 +350,7 @@ function init() {
 
   var planets = SolarSystem.Planets;
 
-  console.log('The Planets: ', planets[0].Mercury)
+  console.log('The Planets: ', planets[0])
 
   for (var i = 0; i < planets.length; i++) {
     var start = new Date().getTime();
@@ -361,7 +359,7 @@ function init() {
     
     var end = new Date().getTime();
 
-    console.log(SolarSystem.Planets[i] + ' Complete: ', end - start + ' milliseconds');
+    console.log(planets[i] + ' Complete: ', end - start + ' milliseconds');
   }
 
   var endFor = new Date().getTime();
@@ -373,38 +371,38 @@ function init() {
 
 // Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
 // This ratio helps create an accurate representation of each planet's location along it's orbit circumference.
-function getPlanetRadian(planet) {
-  var planetRadian = 360 / planet.earthDaysToOrbitSun;
-  return planetRadian;
-}
+// function getPlanetRadian(planet) {
+//   var planetRadian = 360 / planet.earthDaysToOrbitSun;
+//   return planetRadian;
+// }
 
-var count     = 0
-  , year      = 0
-  , dayOfYear = 0;
+// var count     = 0
+//   , year      = 0
+//   , dayOfYear = 0;
 
-function createTime() {
-  if (count !== 0 && count % 365 === 0) {
-    dayOfYear = 1;
-    year++;
+// function createTime() {
+//   if (count !== 0 && count % 365 === 0) {
+//     dayOfYear = 1;
+//     year++;
 
-    // console.log('Day: ', count, '\nDay of Year: ', dayOfYear, '\nYear: ', year, '\n');
+//     // console.log('Day: ', count, '\nDay of Year: ', dayOfYear, '\nYear: ', year, '\n');
 
-    // Jupiter ~ 11 years (11.88 years)
-    if (year % 11 /* make this year number a variable */ === 0) {
-        console.log('\n1 full orbit for Jupiter: ', year);
-    }
-  } else {
-    dayOfYear++;
-  }
+//     // Jupiter ~ 11 years (11.88 years)
+//     if (year % 11 /* make this year number a variable */ === 0) {
+//         console.log('\n1 full orbit for Jupiter: ', year);
+//     }
+//   } else {
+//     dayOfYear++;
+//   }
 
-  // console.log('Count: ', count, '\nDay of Year: ', dayOfYear, '\n');
-}
+//   // console.log('Count: ', count, '\nDay of Year: ', dayOfYear, '\n');
+// }
 
-setInterval(function() {
-  createTime();
+// setInterval(function() {
+//   createTime();
 
-  count++;
-}, 100);
+//   count++;
+// }, 100);
 
 function onWindowResize() {
   Scene.camera.aspect = window.innerWidth / window.innerHeight;
