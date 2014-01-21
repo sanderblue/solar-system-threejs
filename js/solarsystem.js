@@ -10,10 +10,10 @@ Zoom = 800;
 
 SolarSystem = {
   Parent: {
-    Sun: {
+      name: 'Sun',
       radius: 700,
-      diameter: 1400
-    }
+      diameter: 1400,
+      texture: THREE.ImageUtils.loadTexture('../textures/sun.jpg')
   },
   Planets: [
     { 
@@ -115,25 +115,122 @@ SolarSystem = {
   ]
 };
 
-var Sun = new THREE.Object3D(); // add properties
+var Scene = {
+  setScene: function() {
+    Scene.scene = new THREE.Scene();
 
+    Scene.scene.add(new THREE.AxisHelper(20));
+  },
+  setLights: function() {
+    Scene.ambientLight = new THREE.DirectionalLight(0xffffff);
+    Scene.ambientLight.position.set(0, 1, 0);
+
+    Scene.scene.add(new THREE.AmbientLight(0x404040));
+    Scene.scene.add(Scene.ambientLight);
+  },
+
+  setCamera: function() {
+    Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000);
+    
+    Scene.camera.position.set(1000, 400);
+  },
+
+  init: function() {
+    Scene.setScene();
+    Scene.setLights();
+    Scene.setCamera();
+  }
+};
+
+Scene.init();
+
+var SunBuilder = {
+  buildSunLight: function() {
+    var SunLight = new THREE.AmbientLight(0xffffff);
+    SunLight.position.set(0, 0, 0);
+
+    Scene.scene.add(SunLight);
+  },
+
+  getTexture: function() {
+    return new THREE.ImageUtils.loadTexture('../textures/sun.jpg');
+  },
+  build: function(object) {
+
+    var texture = SunBuilder.getTexture();
+
+    var material = new THREE.MeshLambertMaterial({ 
+                          ambient: 0xbbbbbb, 
+                          map: texturetexture, 
+                          side: THREE.DoubleSide,
+                          transparent: true, 
+                          opacity: 0.8
+                        });
+
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.anisotropy = 16;
+
+    var Sun = new THREE.Mesh(
+            new THREE.SphereGeometry(
+              SolarSystem.Parent.Sun.radius, 
+              SolarSystem.Parent.Sun.radius / 3.75, 
+              SolarSystem.Parent.Sun.radius / 7.5
+            ), 
+            material
+          );
+
+    Sun.position.set(0, 0, 0);
+  }
+};
 
 var PlanetBuilder = {
+  OrbitBuilder: {
+    getOrbitAmplitute: function(distance) {
+      return Number(SolarSystem.Parent.radius + distance);
+    },
+
+    build: function(planet) {
+      var resolution = 200; // segments in the line
+      var size = 360 / resolution;
+
+      var material = new THREE.LineBasicMaterial({ 
+                              color: 0xe6e6e6, 
+                              opacity: 0.1 
+                            });
+
+      var orbitLine = new THREE.Geometry();
+
+      // Build the orbit line
+      for(var i = 0; i <= resolution; i++) {
+        var segment = ( i * size ) * Math.PI / 180
+          , orbitAmplitude = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+
+        orbitLine.vertices.push(
+          new THREE.Vector3(
+            Math.cos(segment) * orbitAmplitude, 
+            0,
+            Math.sin(segment) * orbitAmplitude 
+          )
+        );         
+      }
+      var orbitLine = new THREE.Line(orbitLine, material);
+      
+      Scene.scene.add(orbitLine);
+    }
+  },
+
   getTexture: function(planet) {
     return new THREE.ImageUtils.loadTexture('../textures/' + planet.name + '.jpg');
   },
 
-  getOrbitAmplitute: function(distance) {
-    var orbitAmplitude = Number(SolarSystem.Parent.Sun + distance);
-    return orbitAmplitude;
-  },
-
   build: function(planet) {
-    console.log('Start Build: ', planet);
+    // Create our orbit line geometry first
+    PlanetBuilder.OrbitBuilder.build(planet);
+
     var thisPlanet = new THREE.Object3D({
                     id: planet.id,
                     name: planet.name,
-                    parent: Sun
+                    // parent: Sun
                     // position: ,
                     // rotation: ,
                   });
@@ -160,7 +257,7 @@ var PlanetBuilder = {
               planetMaterial
             );
 
-    var posX = PlanetBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+    var posX = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
 
     thisPlanet.position.set(
       posX, // x
@@ -168,9 +265,11 @@ var PlanetBuilder = {
       0     // z
     );
 
-    console.log('End Build: ', thisPlanet);
+    Scene.scene.add(thisPlanet);
   }
 };
+
+console.log(Scene);
 
 var startFor = new Date().getTime();
 
@@ -181,35 +280,19 @@ for (var i = 0; i < SolarSystem.Planets.length; i++) {
   
   var end = new Date().getTime();
 
-  console.log('Planet Complete: ', end - start);
+  console.log('Planet Complete: ', end - start + ' milliseconds');
 }
 
 var endFor = new Date().getTime();
 
-console.log('Builder Done: ', endFor - startFor);
+console.log('Builder Done: ', endFor - startFor + ' milliseconds');
 
 
 return; 
 
 var container
   , stats
-  , camera
-  , scene
-  , renderer
-  , ambientLight
-  , sunLight
-  , Sun
-  , Mercury
-  , Venus
-  , Jupiter
-  , Saturn
-  , Uranus
-  , Neptune;  
-
-var getOrbitAmplitute = function(distanceFromSun) {
-  var orbitAmplitude = (SolarSystemConstants.Sun.radius + distanceFromSun);
-  return orbitAmplitude;
-};
+  , renderer;
 
 function init() {
 
@@ -230,16 +313,6 @@ function init() {
   // Sun Light
   sunLight = new THREE.AmbientLight(0xffffff);
   sunLight.position.set(0, 0, 0);
-
-  var sunTexture     = THREE.ImageUtils.loadTexture('../textures/lava.jpg')
-    , mercuryTexture = THREE.ImageUtils.loadTexture('../textures/mercury.jpg')
-    , venusTexture   = THREE.ImageUtils.loadTexture('../textures/venus.jpg')
-    , earthTexture   = THREE.ImageUtils.loadTexture('../textures/earth.jpg')
-    , marsTexture    = THREE.ImageUtils.loadTexture('../textures/mars.jpg')
-    , jupiterTexture = THREE.ImageUtils.loadTexture('../textures/jupiter.jpg')
-    , saturnTexture  = THREE.ImageUtils.loadTexture('../textures/saturn.jpg')
-    , uranusTexture  = THREE.ImageUtils.loadTexture('../textures/uranus.jpg')
-    , neptuneTexture = THREE.ImageUtils.loadTexture('../textures/neptune.jpg');
   
 
   var sunMaterial = new THREE.MeshLambertMaterial({ 
@@ -253,83 +326,6 @@ function init() {
   sunTexture.wrapS = sunTexture.wrapT = THREE.RepeatWrapping;
   sunTexture.anisotropy = 16;
 
-
-  var mercuryMaterial = new THREE.MeshLambertMaterial({ 
-                        ambient: 0xbbbbbb, 
-                        map: mercuryTexture, 
-                        side: THREE.DoubleSide
-                      });
-
-  mercuryTexture.wrapS = mercuryTexture.wrapT = THREE.RepeatWrapping;
-  mercuryTexture.anisotropy = 16;
-
-
-  var venusMaterial = new THREE.MeshLambertMaterial({ 
-                        ambient: 0xbbbbbb, 
-                        map: venusTexture, 
-                        side: THREE.DoubleSide
-                      });
-
-  venusTexture.wrapS = venusTexture.wrapT = THREE.RepeatWrapping;
-  venusTexture.anisotropy = 16;
-
-
-  var earthMaterial = new THREE.MeshLambertMaterial({ 
-                        ambient: 0xbbbbbb, 
-                        map: earthTexture, 
-                        side: THREE.DoubleSide
-                      });
-
-  earthTexture.wrapS = earthTexture.wrapT = THREE.RepeatWrapping;
-  earthTexture.anisotropy = 16;
-
-
-  var marsMaterial = new THREE.MeshLambertMaterial({ 
-                        ambient: 0xbbbbbb, 
-                        map: marsTexture, 
-                        side: THREE.DoubleSide
-                      });
-
-  marsTexture.wrapS = marsTexture.wrapT = THREE.RepeatWrapping;
-  marsTexture.anisotropy = 16;
-
-
-  var jupiterMaterial = new THREE.MeshLambertMaterial({ 
-                        ambient: 0xbbbbbb, 
-                        map: jupiterTexture, 
-                        side: THREE.DoubleSide
-                      });
-
-  jupiterTexture.wrapS = jupiterTexture.wrapT = THREE.RepeatWrapping;
-  jupiterTexture.anisotropy = 16;
-
-
-  var saturnMaterial = new THREE.MeshLambertMaterial({ 
-                        ambient: 0xbbbbbb, 
-                        map: saturnTexture, 
-                        side: THREE.DoubleSide
-                      });
-
-  saturnTexture.wrapS = saturnTexture.wrapT = THREE.RepeatWrapping;
-  saturnTexture.anisotropy = 16;
-
-  var uranusMaterial = new THREE.MeshLambertMaterial({ 
-                        ambient: 0xbbbbbb, 
-                        map: uranusTexture, 
-                        side: THREE.DoubleSide
-                      });
-
-  uranusTexture.wrapS = uranusTexture.wrapT = THREE.RepeatWrapping;
-  uranusTexture.anisotropy = 16;
-
-  var neptuneMaterial = new THREE.MeshLambertMaterial({ 
-                        ambient: 0xbbbbbb, 
-                        map: neptuneTexture, 
-                        side: THREE.DoubleSide
-                      });
-
-  neptuneTexture.wrapS = neptuneTexture.wrapT = THREE.RepeatWrapping;
-  neptuneTexture.anisotropy = 16;
 
 
   /*
@@ -347,118 +343,6 @@ function init() {
         );
 
   Sun.position.set(0, 0, 0);
-
-  // Build Mercury geometry
-  Mercury = new THREE.Mesh(
-              new THREE.SphereGeometry(
-                SolarSystemConstants.Mercury.diameter, 
-                8, 
-                6
-              ), 
-              mercuryMaterial
-            );
-
-  var mercuryPosition = getOrbitAmplitute(SolarSystemConstants.Mercury.meanDistanceFromSun);
-
-  Mercury.position.set(mercuryPosition, 0, 0);
-
-  // Build Venus geometry
-  Venus = new THREE.Mesh(
-              new THREE.SphereGeometry(
-                SolarSystemConstants.Venus.radius, 
-                8, 
-                6
-              ), 
-              venusMaterial
-            );
-
-  var venusPosition = getOrbitAmplitute(SolarSystemConstants.Venus.meanDistanceFromSun);
-
-  Venus.position.set(venusPosition, 0, 0);
-
-  // Build Earth geometry
-  Earth = new THREE.Mesh(
-              new THREE.SphereGeometry(
-                SolarSystemConstants.Earth.radius, 
-                13, 
-                9
-              ), 
-              earthMaterial
-            );
-
-  var earthPosition = getOrbitAmplitute(SolarSystemConstants.Earth.meanDistanceFromSun);
-
-  Earth.position.set(earthPosition, 0, 0);
-
-  // Build Mars geometry
-  Mars = new THREE.Mesh(
-              new THREE.SphereGeometry(
-                SolarSystemConstants.Mars.radius, 
-                13, 
-                9
-              ), 
-              marsMaterial
-            );
-
-  var marsPosition = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanceFromSun);
-
-  Mars.position.set(marsPosition, 0, 0);
-
-  // Build Jupiter geometry
-  Jupiter = new THREE.Mesh(
-              new THREE.SphereGeometry(
-                SolarSystemConstants.Jupiter.radius, 
-                200, 
-                120
-              ), 
-              jupiterMaterial
-            );
-
-  var jupiterPosition = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun);
-
-  Jupiter.position.set(jupiterPosition, 0, 0);
-
-  // Build Jupiter geometry
-  Saturn = new THREE.Mesh(
-              new THREE.SphereGeometry(
-                SolarSystemConstants.Saturn.radius, 
-                200, 
-                120
-              ), 
-              saturnMaterial
-            );
-
-  var saturnPosition = getOrbitAmplitute(SolarSystemConstants.Saturn.meanDistanceFromSun);
-
-  Saturn.position.set(saturnPosition, 0, 0);
-
-  // Build Jupiter geometry
-  Uranus = new THREE.Mesh(
-              new THREE.SphereGeometry(
-                SolarSystemConstants.Uranus.radius, 
-                200, 
-                120
-              ), 
-              uranusMaterial
-            );
-
-  var uranusPosition = getOrbitAmplitute(SolarSystemConstants.Uranus.meanDistanceFromSun);
-
-  Uranus.position.set(uranusPosition, 0, 0);
-
-  // Build Jupiter geometry
-  Neptune = new THREE.Mesh(
-              new THREE.SphereGeometry(
-                SolarSystemConstants.Neptune.radius, 
-                200, 
-                120
-              ), 
-              neptuneMaterial
-            );
-
-  var neptunePosition = getOrbitAmplitute(SolarSystemConstants.Neptune.meanDistanceFromSun);
-
-  Neptune.position.set(neptunePosition, 0, 0);
 
 
   /*
@@ -480,19 +364,9 @@ function init() {
                                 lineWidth: 50,
                                 fog: true
                               });
-  
-  // Manual build each of the orbit lines to scale
-  var mercuryOrbitLine = new THREE.Geometry()
-    , venusOrbitLine   = new THREE.Geometry()
-    , earthOrbitLine   = new THREE.Geometry()
-    , marsOrbitLine    = new THREE.Geometry()
-    , jupiterOrbitLine = new THREE.Geometry()
-    , saturnOrbitLine  = new THREE.Geometry()
-    , uranusOrbitLine  = new THREE.Geometry()
-    , neptuneOrbitLine = new THREE.Geometry()
 
     // Saturn's rings also need to be built
-    , saturnRing1      = new THREE.Geometry()
+  var saturnRing1      = new THREE.Geometry()
     , saturnRing2      = new THREE.Geometry()
     , saturnRing3      = new THREE.Geometry()
     , saturnRing4      = new THREE.Geometry()
@@ -575,158 +449,6 @@ function init() {
 
   var SaturnRing6 = new THREE.Line(saturnRing6, saturnRingMaterial);
   Saturn.add(SaturnRing6);
-
-
-  // Mercury's orbit line
-  for(var i = 0; i <= resolution; i++) {
-    var segment = ( i * size ) * Math.PI / 180
-      , mercuryOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Mercury.meanDistanceFromSun);
-
-    mercuryOrbitLine.vertices.push(
-      new THREE.Vector3(
-        Math.cos(segment) * mercuryOrbitAmplitude, 
-        0,
-        Math.sin(segment) * mercuryOrbitAmplitude 
-      )
-    );         
-  }
-
-  // Venus's orbit line
-  for(var i = 0; i <= resolution; i++) {
-    var segment = ( i * size ) * Math.PI / 180
-      , venusOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Venus.meanDistanceFromSun);
-
-    venusOrbitLine.vertices.push(
-      new THREE.Vector3(
-        Math.cos(segment) * venusOrbitAmplitude, 
-        0,
-        Math.sin(segment) * venusOrbitAmplitude 
-      )
-    );         
-  }
-
-  // Earth's orbit line
-  for(var i = 0; i <= resolution; i++) {
-    var segment = ( i * size ) * Math.PI / 180
-      , earthOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Earth.meanDistanceFromSun);
-
-    earthOrbitLine.vertices.push(
-      new THREE.Vector3(
-        Math.cos(segment) * earthOrbitAmplitude, 
-        0,
-        Math.sin(segment) * earthOrbitAmplitude 
-      )
-    );         
-  }
-
-  // Mars's orbit line
-  for(var i = 0; i <= resolution; i++) {
-    var segment = ( i * size ) * Math.PI / 180
-      , marsOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanceFromSun);
-
-    marsOrbitLine.vertices.push(
-      new THREE.Vector3(
-        Math.cos(segment) * marsOrbitAmplitude, 
-        0,
-        Math.sin(segment) * marsOrbitAmplitude 
-      )
-    );         
-  }
-
-  // Jupiter's orbit line
-  for(var i = 0; i <= resolution; i++) {
-    var segment = ( i * size ) * Math.PI / 180
-      , jupiterOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun);
-
-    jupiterOrbitLine.vertices.push(
-      new THREE.Vector3(
-        Math.cos(segment) * jupiterOrbitAmplitude, 
-        0,
-        Math.sin(segment) * jupiterOrbitAmplitude 
-      )
-    );         
-  }
-
-  // Saturn's orbit line
-  for(var i = 0; i <= resolution; i++) {
-    var segment = ( i * size ) * Math.PI / 180
-      , saturnOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Saturn.meanDistanceFromSun);
-
-    saturnOrbitLine.vertices.push(
-      new THREE.Vector3(
-        Math.cos(segment) * saturnOrbitAmplitude, 
-        0,
-        Math.sin(segment) * saturnOrbitAmplitude 
-      )
-    );         
-  }
-
-  // Uranus's orbit line
-  for(var i = 0; i <= resolution; i++) {
-    var segment = ( i * size ) * Math.PI / 180
-      , uranusOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Uranus.meanDistanceFromSun);
-
-    uranusOrbitLine.vertices.push(
-      new THREE.Vector3(
-        Math.cos(segment) * uranusOrbitAmplitude, 
-        0,
-        Math.sin(segment) * uranusOrbitAmplitude 
-      )
-    );         
-  }
-
-  // Neptune's orbit line
-  for(var i = 0; i <= resolution; i++) {
-    var segment = ( i * size ) * Math.PI / 180
-      , neptuneOrbitAmplitude = getOrbitAmplitute(SolarSystemConstants.Neptune.meanDistanceFromSun);
-
-    neptuneOrbitLine.vertices.push(
-      new THREE.Vector3(
-        Math.cos(segment) * neptuneOrbitAmplitude, 
-        0,
-        Math.sin(segment) * neptuneOrbitAmplitude 
-      )
-    );         
-  }
-
-  // Add orbit lines to the scene
-  var MercuryOrbitLine = new THREE.Line(mercuryOrbitLine, lineMaterial);
-  scene.add(MercuryOrbitLine);
-
-  var VenusOrbitLine = new THREE.Line(venusOrbitLine, lineMaterial);
-  scene.add(VenusOrbitLine);
-
-  var EarthOrbitLine = new THREE.Line(earthOrbitLine, lineMaterial);
-  scene.add(EarthOrbitLine);
-
-  var MarsOrbitLine = new THREE.Line(marsOrbitLine, lineMaterial);
-  scene.add(MarsOrbitLine);
-
-  var JupiterOrbitLine = new THREE.Line(jupiterOrbitLine, lineMaterial);
-  scene.add(JupiterOrbitLine);
-
-  var SaturnOrbitLine = new THREE.Line(saturnOrbitLine, lineMaterial);
-  scene.add(SaturnOrbitLine);
-
-  var UranusOrbitLine = new THREE.Line(uranusOrbitLine, lineMaterial);
-  scene.add(UranusOrbitLine);
-
-  var NeptuneOrbitLine = new THREE.Line(neptuneOrbitLine, lineMaterial);
-  scene.add(NeptuneOrbitLine);
-  
-  // Add main objects to the scene
-  scene.add(new THREE.AmbientLight(0x404040));
-  scene.add(ambientLight);
-  scene.add(sunLight);
-  scene.add(Sun);
-  scene.add(Mercury);
-  scene.add(Venus);
-  scene.add(Earth);
-  scene.add(Mars);
-  scene.add(Jupiter);
-  scene.add(Saturn);
-  scene.add(Uranus);
-  scene.add(Neptune);
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
