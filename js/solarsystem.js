@@ -9,15 +9,16 @@ var SolarSystem
 Zoom = 800;
 
 SolarSystem = {
-  // ParentStar: {
-  //   Sun: {
-  //     radius: 700,
-  //     diameter: 1400
-  //   }
-  // },
+  Parent: {
+    Sun: {
+      radius: 700,
+      diameter: 1400
+    }
+  },
   Planets: [
     { 
       Mercury: {
+        id: 1,
         name: 'Mercury',
         radius: 2.45,
         diameter: 4.9,
@@ -29,6 +30,7 @@ SolarSystem = {
     },
     {
       Venus: {
+        id: 2,
         name: 'Venus',
         radius: 6.05,
         diameter: 12.1,
@@ -40,6 +42,7 @@ SolarSystem = {
     },
     {
       Earth: {
+        id: 3,
         name: 'Earth',
         radius: 6.35,
         diameter: 12.7,
@@ -51,6 +54,7 @@ SolarSystem = {
     },
     {
       Mars: {
+        id: 4,
         name: 'Mars',
         radius: 3.4,
         diameter: 6.8,
@@ -62,6 +66,7 @@ SolarSystem = {
     },
     {
       Jupiter: {
+        id: 5,
         name: 'Jupiter',
         radius: 71.5,
         diameter: 143,
@@ -73,6 +78,7 @@ SolarSystem = {
     },
     {
       Saturn: {
+        id: 6,
         name: 'Saturn',
         radius: 60,
         diameter: 120,
@@ -84,6 +90,7 @@ SolarSystem = {
     },
     {
       Uranus: {
+        id: 7,
         name: 'Uranus',
         radius: 25.6,
         diamter: 51.2,
@@ -95,6 +102,7 @@ SolarSystem = {
     },
     {
       Neptune: {
+        id: 8,
         name: 'Neptune',
         radius: 24.3,
         diameter: 48.6,
@@ -107,16 +115,78 @@ SolarSystem = {
   ]
 };
 
+var Sun = new THREE.Object3D(); // add properties
+
 
 var PlanetBuilder = {
+  getTexture: function(planet) {
+    return new THREE.ImageUtils.loadTexture('../textures/' + planet.name + '.jpg');
+  },
+
+  getOrbitAmplitute: function(distance) {
+    var orbitAmplitude = Number(SolarSystem.Parent.Sun + distance);
+    return orbitAmplitude;
+  },
+
   build: function(planet) {
-    console.log(planet);
+    console.log('Start Build: ', planet);
+    var thisPlanet = new THREE.Object3D({
+                    id: planet.id,
+                    name: planet.name,
+                    parent: Sun
+                    // position: ,
+                    // rotation: ,
+                  });
+
+    var texture = PlanetBuilder.getTexture(planet);
+
+    var planetMaterial = new THREE.MeshLambertMaterial({ 
+                            ambient: 0xbbbbbb, 
+                            map: texture, 
+                            side: THREE.DoubleSide
+                          });
+
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+
+    texture.anisotropy = 16;
+
+    thisPlanet = new THREE.Mesh(
+              new THREE.SphereGeometry(
+                planet.diameter, 
+                200, 
+                120
+              ), 
+              planetMaterial
+            );
+
+    var posX = PlanetBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+
+    thisPlanet.position.set(
+      posX, // x
+      0,    // y
+      0     // z
+    );
+
+    console.log('End Build: ', thisPlanet);
   }
 };
 
+var startFor = new Date().getTime();
+
 for (var i = 0; i < SolarSystem.Planets.length; i++) {
+  var start = new Date().getTime();
+
   PlanetBuilder.build(SolarSystem.Planets[i])
+  
+  var end = new Date().getTime();
+
+  console.log('Planet Complete: ', end - start);
 }
+
+var endFor = new Date().getTime();
+
+console.log('Builder Done: ', endFor - startFor);
 
 
 return; 
