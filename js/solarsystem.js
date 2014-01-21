@@ -6,98 +6,106 @@ var SolarSystem
   , Zoom;
 
 
-  Zoom = 800;
-  
-  SolarSystem = {
-    // ParentStar: {
-    //   Sun: {
-    //     radius: 700,
-    //     diameter: 1400
-    //   }
-    // },
-    Planets: [
-      { 
-        Mercury: {
-          name: 'Mercury',
-          radius: 2.45,
-          diameter: 4.9,
-          meanDistanceFromSun: 57.9,
-          earthDaysToOrbitSun: 88,
-          moons: []
-        }
-      },
-      {
-        Venus: {
-          name: 'Venus',
-          radius: 6.05,
-          diameter: 12.1,
-          meanDistanceFromSun: 108.2,
-          earthDaysToOrbitSun: 224.7,
-          moons: []
-        }
-      },
-      {
-        Earth: {
-          name: 'Earth',
-          radius: 6.35,
-          diameter: 12.7,
-          meanDistanceFromSun: 149.5,
-          earthDaysToOrbitSun: 364.25,
-          moons: []
-        }
-      },
-      {
-        Mars: {
-          name: 'Mars',
-          radius: 3.4,
-          diameter: 6.8,
-          meanDistanceFromSun: 227.9,
-          earthDaysToOrbitSun: 687,
-          moons: []
-        }
-      },
-      {
-        Jupiter: {
-          name: 'Jupiter',
-          radius: 71.5,
-          diameter: 143,
-          meanDistanceFromSun: 778.3,
-          earthDaysToOrbitSun: 4329,
-          moons: []
-        }
-      },
-      {
-        Saturn: {
-          name: 'Saturn',
-          radius: 60,
-          diameter: 120,
-          meanDistanceFromSun: 1429.4,
-          earthDaysToOrbitSun: 10753,
-          moons: []
-        }
-      },
-      {
-        Uranus: {
-          name: 'Uranus',
-          radius: 25.6,
-          diamter: 51.2,
-          meanDistanceFromSun: 2871,
-          earthDaysToOrbitSun: 30714,
-          moons: []
-        }
-      },
-      {
-        Neptune: {
-          name: 'Neptune',
-          radius: 24.3,
-          diameter: 48.6,
-          meanDistanceFromSun: 4504.3,
-          earthDaysToOrbitSun: 60025,
-          moons: []
-        }
+Zoom = 800;
+
+SolarSystem = {
+  // ParentStar: {
+  //   Sun: {
+  //     radius: 700,
+  //     diameter: 1400
+  //   }
+  // },
+  Planets: [
+    { 
+      Mercury: {
+        name: 'Mercury',
+        radius: 2.45,
+        diameter: 4.9,
+        meanDistanceFromSun: 57.9,
+        earthDaysToOrbitSun: 88,
+        moons: [],
+        texture: THREE.ImageUtils.loadTexture('../textures/mercury.jpg')
       }
-    ]
-  };
+    },
+    {
+      Venus: {
+        name: 'Venus',
+        radius: 6.05,
+        diameter: 12.1,
+        meanDistanceFromSun: 108.2,
+        earthDaysToOrbitSun: 224.7,
+        moons: [],
+        texture: THREE.ImageUtils.loadTexture('../textures/venus.jpg')
+      }
+    },
+    {
+      Earth: {
+        name: 'Earth',
+        radius: 6.35,
+        diameter: 12.7,
+        meanDistanceFromSun: 149.5,
+        earthDaysToOrbitSun: 364.25,
+        moons: [],
+        texture: THREE.ImageUtils.loadTexture('../textures/earth.jpg')
+      }
+    },
+    {
+      Mars: {
+        name: 'Mars',
+        radius: 3.4,
+        diameter: 6.8,
+        meanDistanceFromSun: 227.9,
+        earthDaysToOrbitSun: 687,
+        moons: [],
+        texture: THREE.ImageUtils.loadTexture('../textures/mars.jpg')
+      }
+    },
+    {
+      Jupiter: {
+        name: 'Jupiter',
+        radius: 71.5,
+        diameter: 143,
+        meanDistanceFromSun: 778.3,
+        earthDaysToOrbitSun: 4329,
+        moons: [],
+        texture: THREE.ImageUtils.loadTexture('../textures/jupiter.jpg')
+      }
+    },
+    {
+      Saturn: {
+        name: 'Saturn',
+        radius: 60,
+        diameter: 120,
+        meanDistanceFromSun: 1429.4,
+        earthDaysToOrbitSun: 10753,
+        moons: [],
+        texture: THREE.ImageUtils.loadTexture('../textures/saturn.jpg')
+      }
+    },
+    {
+      Uranus: {
+        name: 'Uranus',
+        radius: 25.6,
+        diamter: 51.2,
+        meanDistanceFromSun: 2871,
+        earthDaysToOrbitSun: 30714,
+        moons: [],
+        texture: THREE.ImageUtils.loadTexture('../textures/uranus.jpg')
+      }
+    },
+    {
+      Neptune: {
+        name: 'Neptune',
+        radius: 24.3,
+        diameter: 48.6,
+        meanDistanceFromSun: 4504.3,
+        earthDaysToOrbitSun: 60025,
+        moons: [],
+        texture: THREE.ImageUtils.loadTexture('../textures/neptune.jpg')
+      }
+    }
+  ]
+};
 
 
 var PlanetBuilder = {
