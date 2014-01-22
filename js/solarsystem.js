@@ -256,7 +256,13 @@ function init() {
 
       var line = new THREE.Geometry();
 
-      if (thisPlanet.name == 'Saturn') {
+      console.log('Derp:', planet.name);
+
+
+      if (planet.name == 'Saturn') {
+        
+        console.log('Building Saturn\'s rings:', thisPlanet);
+
         // Build the ring line
         for(var i = 0; i <= resolution; i++) {
           var segment = ( i * size ) * Math.PI / 180
@@ -270,6 +276,7 @@ function init() {
             )
           );         
         }
+
         var ringLine = new THREE.Line(ringLine, material);
         
         thisPlanet.add(ringLine);
@@ -355,7 +362,7 @@ function init() {
                       // rotation: ,
                     });
 
-      console.log('Build PLANET: ', planet);
+      // console.log('Build PLANET: ', planet);
 
       var texture = PlanetBuilder.getTexture(planet);
 
@@ -379,6 +386,10 @@ function init() {
                 planetMaterial
               );
 
+      if (planet.rings.length > 0) {
+        PlanetBuilder.buildRings(thisPlanet, planet);
+      }
+
       var posX = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
 
       thisPlanet.position.set(
@@ -386,10 +397,6 @@ function init() {
         0,    // y
         0     // z
       );
-
-      if (planet.rings.length > 0) {
-        PlanetBuilder.buildRings(thisPlanet, planet);
-      }
 
       PlanetBuilder.addPlanet(thisPlanet);
     },
@@ -401,7 +408,7 @@ function init() {
     }
   };
 
-  console.log('Scene: ', Scene);
+  // console.log('Scene: ', Scene);
 
   SunBuilder.build();
 
@@ -409,7 +416,7 @@ function init() {
 
   var planets = SolarSystem.Planets;
 
-  console.log('The Planets: ', planets[0])
+  // console.log('The Planets: ', planets[0]);
 
   for (var i = 0; i < planets.length; i++) {
     var start = new Date().getTime();
@@ -418,7 +425,7 @@ function init() {
     
     var end = new Date().getTime();
 
-    console.log(planets[i] + ' Complete: ', end - start + ' milliseconds');
+    // console.log(planets[i] + ' Complete: ', end - start + ' milliseconds');
   }
 
   var endFor = new Date().getTime();
