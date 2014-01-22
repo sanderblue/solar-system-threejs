@@ -7,7 +7,7 @@ var SolarSystem
   , Scene;
 
 
-Zoom = 800;
+Zoom = 2600;
 
 SolarSystem = {
   Parent: {
@@ -250,35 +250,93 @@ function init() {
       var size = 360 / resolution;
 
       var material = new THREE.LineBasicMaterial({ 
-                          color: 0xF7BE81, 
-                          opacity: 0.5, 
-                          lineWidth: 50,
-                          fog: true
+                          color: 0xe6e6e6, 
+                          opacity: 0.1 
                         });
 
-      if (planet.name === 'Saturn') {
+      var line = new THREE.Geometry();
 
-        for (var i = 0; i < planet.rings.length; i++) {
-          var ringLine = new THREE.Geometry();
+      if (thisPlanet.name == 'Saturn') {
+        // Build the ring line
+        for(var i = 0; i <= resolution; i++) {
+          var segment = ( i * size ) * Math.PI / 180
+            , ringAmplitude = 100;
 
-          for (var i = 0; i <= resolution; i++) {
-            var segment    = (i * size) * Math.PI / 180;
-            var amplitudes = [92, 100, 105, 110, 119, 125];
-
-            for (var i = 0; i < amplitudes.length; i++) {
-              ringLine.vertices.push(
-                new THREE.Vector3(
-                  Math.cos(segment) * amplitudes[i], 
-                  0,
-                  Math.sin(segment) * amplitudes[i] 
-                )
-              );
-            }
-          }
-
-          thisPlanet.add(new THREE.Line(ringLine, material));
+          line.vertices.push(
+            new THREE.Vector3(
+              Math.cos(segment) * ringAmplitude, 
+              0,
+              Math.sin(segment) * ringAmplitude 
+            )
+          );         
         }
+        var ringLine = new THREE.Line(ringLine, material);
+        
+        thisPlanet.add(ringLine);
       }
+
+      ///////////////////////////////////////////
+      // var resolution = 200; // segments in the line
+      // var size = 360 / resolution;
+
+      // var material = new THREE.LineBasicMaterial({ 
+      //                     color: 0xF7BE81, 
+      //                     opacity: 0.5, 
+      //                     lineWidth: 50,
+      //                     fog: true
+      //                   });
+
+      // if (planet.name === 'Saturn') {
+
+      //   var ringLine   = new THREE.Geometry()
+      //     , amplitudes = [92, 100, 105, 110, 119, 125];
+
+
+
+      //   // for (var i = 0; i < planet.rings.length; i++) {
+      //   //
+      //   // }
+
+      //   for (var i = 0; i < amplitudes.length; i++) {
+      //     var segment;
+
+      //     for (var i = 0; i <= resolution; i++) {
+      //       segment = (i * size) * Math.PI / 180;
+
+      //       ringLine.vertices.push(
+      //         new THREE.Vector3(
+      //           Math.cos(segment) * amplitudes[i], 
+      //           0,
+      //           Math.sin(segment) * amplitudes[i] 
+      //         )
+      //       );
+      //     }
+
+      //     console.log('PLANET: ', thisPlanet, 'Ring line: ', i+': ', ringLine);
+      //     thisPlanet.add(new THREE.Line(ringLine, material));
+      //   }
+
+        // for (var i = 0; i < planet.rings.length; i++) {
+        //   var ringLine = new THREE.Geometry();
+
+        //   for (var i = 0; i <= resolution; i++) {
+        //     var segment    = (i * size) * Math.PI / 180;
+        //     var amplitudes = [92, 100, 105, 110, 119, 125];
+
+        //     for (var i = 0; i < amplitudes.length; i++) {
+        //       ringLine.vertices.push(
+        //         new THREE.Vector3(
+        //           Math.cos(segment) * amplitudes[i], 
+        //           0,
+        //           Math.sin(segment) * amplitudes[i] 
+        //         )
+        //       );
+        //     }
+        //   }
+
+        //   thisPlanet.add(new THREE.Line(ringLine, material));
+        // }
+      // }
     },
 
     getTexture: function(planet) {
@@ -329,16 +387,17 @@ function init() {
         0     // z
       );
 
-      // if (planet.rings.length > 0) {
-      //   console.log('RINGS', planet.name, planet.rings);
-      //   PlanetBuilder.buildRings(thisPlanet, planet);
-      // }
+      if (planet.rings.length > 0) {
+        PlanetBuilder.buildRings(thisPlanet, planet);
+      }
 
       PlanetBuilder.addPlanet(thisPlanet);
     },
     
     addPlanet: function(planet) {
-       Scene.scene.add(planet);
+        setTimeout(function() {
+          Scene.scene.add(planet);
+        }, 300);
     }
   };
 
@@ -548,7 +607,7 @@ function mouseMove( e ) {
   var d = ((typeof e.wheelDelta != "undefined") ? (-e.wheelDelta) : e.detail);
   d = 100 * ((d > 0) ? 1 : -1);
 
-  var cPos = camera.position;
+  var cPos = Scene.camera.position;
   if (isNaN(cPos.x) || isNaN(cPos.y) || isNaN(cPos.y)) {
     return;
   }
