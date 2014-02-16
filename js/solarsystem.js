@@ -111,331 +111,340 @@ SolarSystem = {
 
 function init() {
 
-    Scene = {
-        setContainer: function() {
-            Scene.container = document.createElement('div');
+    return $.Deferred(function(promise) {
+        Scene = {
+            planets: [],
 
-            document.body.appendChild(Scene.container);
-        },
+            setContainer: function() {
+                Scene.container = document.createElement('div');
 
-        setScene: function() {
-            Scene.scene = new THREE.Scene();
-            Scene.scene.add(new THREE.AxisHelper(20));
-        },
-
-        setLights: function() {
-            Scene.ambientLight = new THREE.DirectionalLight(0xffffff);
-            Scene.ambientLight.position.set(0, 1, 0);
-
-            Scene.scene.add(new THREE.AmbientLight(0x404040));
-            Scene.scene.add(Scene.ambientLight);
-        },
-
-        setCamera: function() {
-            Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000);
-
-            Scene.camera.position.set(1000, 400);
-        },
-
-        setRender: function() {
-            Scene.renderer = new THREE.WebGLRenderer({ antialias: true });
-            Scene.renderer.setSize(window.innerWidth, window.innerHeight);
-
-            Scene.container.appendChild(Scene.renderer.domElement);
-        },
-
-        setStats: function() {
-            Scene.stats = new Stats();
-            Scene.stats.domElement.style.position = 'absolute';
-            Scene.stats.domElement.style.top = '0px';
-
-            Scene.container.appendChild( Scene.stats.domElement );
-        },
-
-        init: function() {
-            Scene.setContainer();
-            Scene.setScene();
-            Scene.setLights();
-            Scene.setCamera();
-            Scene.setRender();
-            Scene.setStats();
-        }
-    };
-
-    Scene.init();
-
-    var SunBuilder = {
-        buildSunLight: function() {
-            var SunLight = new THREE.AmbientLight(0xffffff);
-            SunLight.position.set(0, 0, 0);
-
-            Scene.scene.add(SunLight);
-        },
-
-        getTexture: function() {
-            return new THREE.ImageUtils.loadTexture('../textures/sun.jpg');
-        },
-        build: function() {
-            var texture = SunBuilder.getTexture();
-            var material = new THREE.MeshLambertMaterial({
-                                  ambient: 0xbbbbbb,
-                                  map: texture,
-                                  side: THREE.DoubleSide,
-                                  transparent: true,
-                                  opacity: 0.8
-                                });
-
-            texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-            texture.anisotropy = 16;
-
-            var Sun = new THREE.Mesh(
-                    new THREE.SphereGeometry(
-                      SolarSystem.Parent.radius,
-                      SolarSystem.Parent.radius / 3.75,
-                      SolarSystem.Parent.radius / 7.5
-                    ),
-                    material
-                  );
-
-            Sun.position.set(0, 0, 0);
-
-            Scene.scene.add(Sun);
-        }
-    };
-
-    var RingBuilder = {
-        buildRing: function(amplitude) {
-            console.log('Building ring...', amplitude);
-
-            return $.Deferred(function(promise) {
-                var resolution = 200, // segments in the line
-                    size       = 360 / resolution;
-
-                var material = new THREE.LineBasicMaterial({
-                                    color: 0xe6e6e6,
-                                    opacity: 0.1
-                                  });
-
-                var ringLine = new THREE.Geometry();
-
-                for (var i = 0; i <= resolution; i++) {
-                    var segment = (i * size) * Math.PI / 180;
-
-                    ringLine.vertices.push(
-                        new THREE.Vector3(
-                            Math.cos(segment) * amplitude,
-                            0,
-                            Math.sin(segment) * amplitude
-                        )
-                    );
-                }
-
-                var ringLine = new THREE.Line(ringLine, material);
-
-                var responseObject = {
-                    line: ringLine
-                };
-
-                promise.resolve(responseObject);
-            });
-        },
-    };
-
-    var PlanetBuilder = {
-        OrbitBuilder: {
-            getPlanetRadian: function(planet) {
-                return 360 / planet.earthDaysToOrbitSun;
+                document.body.appendChild(Scene.container);
             },
 
-            getOrbitAmplitute: function(distance) {
-                return Number(SolarSystem.Parent.radius + distance);
+            setScene: function() {
+                Scene.scene = new THREE.Scene();
+                Scene.scene.add(new THREE.AxisHelper(20));
+            },
+
+            setLights: function() {
+                Scene.ambientLight = new THREE.DirectionalLight(0xffffff);
+                Scene.ambientLight.position.set(0, 1, 0);
+
+                Scene.scene.add(new THREE.AmbientLight(0x404040));
+                Scene.scene.add(Scene.ambientLight);
+            },
+
+            setCamera: function() {
+                Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000);
+
+                Scene.camera.position.set(1000, 400);
+            },
+
+            setRender: function() {
+                Scene.renderer = new THREE.WebGLRenderer({ antialias: true });
+                Scene.renderer.setSize(window.innerWidth, window.innerHeight);
+
+                Scene.container.appendChild(Scene.renderer.domElement);
+            },
+
+            setStats: function() {
+                Scene.stats = new Stats();
+                Scene.stats.domElement.style.position = 'absolute';
+                Scene.stats.domElement.style.top = '0px';
+
+                Scene.container.appendChild( Scene.stats.domElement );
+            },
+
+            init: function() {
+                Scene.setContainer();
+                Scene.setScene();
+                Scene.setLights();
+                Scene.setCamera();
+                Scene.setRender();
+                Scene.setStats();
+            }
+        };
+
+        Scene.init();
+
+        var SunBuilder = {
+            buildSunLight: function() {
+                var SunLight = new THREE.AmbientLight(0xffffff);
+                SunLight.position.set(0, 0, 0);
+
+                Scene.scene.add(SunLight);
+            },
+
+            getTexture: function() {
+                return new THREE.ImageUtils.loadTexture('../textures/sun.jpg');
+            },
+            build: function() {
+                var texture = SunBuilder.getTexture();
+                var material = new THREE.MeshLambertMaterial({
+                                      ambient: 0xbbbbbb,
+                                      map: texture,
+                                      side: THREE.DoubleSide,
+                                      transparent: true,
+                                      opacity: 0.8
+                                    });
+
+                texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+                texture.anisotropy = 16;
+
+                var Sun = new THREE.Mesh(
+                        new THREE.SphereGeometry(
+                          SolarSystem.Parent.radius,
+                          SolarSystem.Parent.radius / 3.75,
+                          SolarSystem.Parent.radius / 7.5
+                        ),
+                        material
+                      );
+
+                Sun.position.set(0, 0, 0);
+
+                Scene.scene.add(Sun);
+            }
+        };
+
+        var RingBuilder = {
+            buildRing: function(amplitude) {
+                console.log('Building ring...', amplitude);
+
+                return $.Deferred(function(promise) {
+                    var resolution = 200, // segments in the line
+                        size       = 360 / resolution;
+
+                    var material = new THREE.LineBasicMaterial({
+                                        color: 0xe6e6e6,
+                                        opacity: 0.1
+                                      });
+
+                    var ringLine = new THREE.Geometry();
+
+                    for (var i = 0; i <= resolution; i++) {
+                        var segment = (i * size) * Math.PI / 180;
+
+                        ringLine.vertices.push(
+                            new THREE.Vector3(
+                                Math.cos(segment) * amplitude,
+                                0,
+                                Math.sin(segment) * amplitude
+                            )
+                        );
+                    }
+
+                    var ringLine = new THREE.Line(ringLine, material);
+
+                    var responseObject = {
+                        line: ringLine
+                    };
+
+                    promise.resolve(responseObject);
+                });
+            },
+        };
+
+        var PlanetBuilder = {
+            OrbitBuilder: {
+                getPlanetRadian: function(planet) {
+                    return 360 / planet.earthDaysToOrbitSun;
+                },
+
+                getOrbitAmplitute: function(distance) {
+                    return Number(SolarSystem.Parent.radius + distance);
+                },
+
+                build: function(planet) {
+                    var resolution = 200; // segments in the line
+                    var size = 360 / resolution;
+
+                    var material = new THREE.LineBasicMaterial({
+                                            color: 0xe6e6e6,
+                                            opacity: 0.1
+                                        });
+
+                    var orbitLine = new THREE.Geometry();
+
+                    // Build the orbit line
+                    for(var i = 0; i <= resolution; i++) {
+                        var segment = ( i * size ) * Math.PI / 180,
+                            orbitAmplitude = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+
+                        orbitLine.vertices.push(
+                            new THREE.Vector3(
+                                Math.cos(segment) * orbitAmplitude,
+                                0,
+                                Math.sin(segment) * orbitAmplitude
+                            )
+                        );
+                    }
+                    var orbitLine = new THREE.Line(orbitLine, material);
+
+                    Scene.scene.add(orbitLine);
+                }
+            },
+
+            buildRings: function(thisPlanet, planet) {
+                return $.Deferred(function(promise) {
+                    if (planet.name == 'Saturn') {
+                        var amplitudes = [160, 180, 185, 195, 210, 220, 225, 240];
+
+                        for (var i = 0; i < amplitudes.length; i++) {
+                            $.when(RingBuilder.buildRing(amplitudes[i])).done(function(response) {
+                                console.log('Done making line ' + (i + 1));
+                                thisPlanet.add(response.line);
+                            });
+                        }
+
+                        var promiseObject = {
+                            planet: planet,
+                            thisPlanet: thisPlanet
+                        };
+
+                        promise.resolve(promiseObject);
+                    }
+                });
+            },
+
+            getTexture: function(planet) {
+                return new THREE.ImageUtils.loadTexture('../textures/' + planet.name.toLowerCase() + '.jpg');
             },
 
             build: function(planet) {
-                var resolution = 200; // segments in the line
-                var size = 360 / resolution;
+                return $.Deferred(function(promise) {
+                    // Create our orbit line geometry first
+                    PlanetBuilder.OrbitBuilder.build(planet);
 
-                var material = new THREE.LineBasicMaterial({
-                                        color: 0xe6e6e6,
-                                        opacity: 0.1
+                    var thisPlanet = new THREE.Object3D({
+                                        id: planet.id,
+                                        name: planet.name,
+                                        // parent: Sun
+                                        // position: ,
+                                        // rotation: ,
                                     });
 
-                var orbitLine = new THREE.Geometry();
+                    // console.log('Build PLANET: ', planet);
 
-                // Build the orbit line
-                for(var i = 0; i <= resolution; i++) {
-                    var segment = ( i * size ) * Math.PI / 180,
-                        orbitAmplitude = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+                    var texture = PlanetBuilder.getTexture(planet);
 
-                    orbitLine.vertices.push(
-                        new THREE.Vector3(
-                            Math.cos(segment) * orbitAmplitude,
-                            0,
-                            Math.sin(segment) * orbitAmplitude
-                        )
-                    );
-                }
-                var orbitLine = new THREE.Line(orbitLine, material);
+                    var planetMaterial = new THREE.MeshLambertMaterial({
+                                              ambient: 0xbbbbbb,
+                                              map: texture,
+                                              side: THREE.DoubleSide
+                                            });
 
-                Scene.scene.add(orbitLine);
-            }
-        },
+                    texture.wrapS = THREE.RepeatWrapping;
+                    texture.wrapT = THREE.RepeatWrapping;
 
-        buildRings: function(thisPlanet, planet) {
-            return $.Deferred(function(promise) {
-                if (planet.name == 'Saturn') {
-                    var amplitudes = [160, 180, 185, 195, 210, 220, 225, 240];
+                    texture.anisotropy = 16;
 
-                    for (var i = 0; i < amplitudes.length; i++) {
-                        $.when(RingBuilder.buildRing(amplitudes[i])).done(function(response) {
-                            console.log('Done making line ' + (i + 1));
-                            thisPlanet.add(response.line);
+                    thisPlanet = new THREE.Mesh(
+                                new THREE.SphereGeometry(
+                                        planet.diameter,
+                                        200,
+                                        120
+                                    ),
+                                    planetMaterial
+                                 );
+
+                    thisPlanet.name = planet.name;
+
+                    if (planet.name === 'Saturn') {
+                        var posX = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+
+                        thisPlanet.position.set(
+                            posX, // x
+                            0,    // y
+                            0     // z
+                        );
+
+                        $.when(PlanetBuilder.buildRings(thisPlanet, planet)).done(function(response) {
+                            PlanetBuilder.addPlanet(thisPlanet);
                         });
+                    } else {
+                        var posX = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+
+                        thisPlanet.position.set(
+                            posX, // x
+                            0,    // y
+                            0     // z
+                        );
+
+                        PlanetBuilder.addPlanet(thisPlanet);
+                        Scene.planets.push(thisPlanet);
+
+                        promise.resolve(thisPlanet);
                     }
-
-                    var promiseObject = {
-                        planet: planet,
-                        thisPlanet: thisPlanet
-                    };
-
-                    promise.resolve(promiseObject);
-                }
-            });
-        },
-
-        getTexture: function(planet) {
-            return new THREE.ImageUtils.loadTexture('../textures/' + planet.name.toLowerCase() + '.jpg');
-        },
-
-        build: function(planet) {
-            // Create our orbit line geometry first
-            PlanetBuilder.OrbitBuilder.build(planet);
-
-            var thisPlanet = new THREE.Object3D({
-                                id: planet.id,
-                                name: planet.name,
-                                // parent: Sun
-                                // position: ,
-                                // rotation: ,
-                            });
-
-            // console.log('Build PLANET: ', planet);
-
-            var texture = PlanetBuilder.getTexture(planet);
-
-            var planetMaterial = new THREE.MeshLambertMaterial({
-                                      ambient: 0xbbbbbb,
-                                      map: texture,
-                                      side: THREE.DoubleSide
-                                    });
-
-            texture.wrapS = THREE.RepeatWrapping;
-            texture.wrapT = THREE.RepeatWrapping;
-
-            texture.anisotropy = 16;
-
-            thisPlanet = new THREE.Mesh(
-                        new THREE.SphereGeometry(
-                                planet.diameter,
-                                200,
-                                120
-                            ),
-                            planetMaterial
-                         );
-
-            if (planet.name === 'Saturn') {
-                var posX = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
-
-                thisPlanet.position.set(
-                    posX, // x
-                    0,    // y
-                    0     // z
-                );
-
-                $.when(PlanetBuilder.buildRings(thisPlanet, planet)).done(function(response) {
-                    PlanetBuilder.addPlanet(thisPlanet);
                 });
-            } else {
-                var posX = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+            },
 
-                thisPlanet.position.set(
-                    posX, // x
-                    0,    // y
-                    0     // z
-                );
-
-                PlanetBuilder.addPlanet(thisPlanet);
+            addPlanet: function(planet) {
+                setTimeout(function() {
+                    Scene.scene.add(planet);
+                }, 300);
             }
-        },
+        };
 
-        addPlanet: function(planet) {
-            setTimeout(function() {
-                Scene.scene.add(planet);
-            }, 300);
+        SunBuilder.build();
+
+        var startFor = new Date().getTime();
+        var planets = SolarSystem.Planets;
+
+        for (var i = 0; i < planets.length; i++) {
+            $.when(PlanetBuilder.build(planets[i])).done(function(planet) {
+                console.log('Planet builder done: ', planet);
+            });
         }
-    };
 
-  // console.log('Scene: ', Scene);
+        var endFor = new Date().getTime();
 
-  SunBuilder.build();
+        console.log('Builder Done: ', endFor - startFor + ' milliseconds');
 
-  var startFor = new Date().getTime();
-
-  var planets = SolarSystem.Planets;
-
-  // console.log('The Planets: ', planets[0]);
-
-    for (var i = 0; i < planets.length; i++) {
-        var start = new Date().getTime();
-
-        PlanetBuilder.build(planets[i])
-
-        var end = new Date().getTime();
-
-        // console.log(planets[i] + ' Complete: ', end - start + ' milliseconds');
-    }
-
-    var endFor = new Date().getTime();
-
-    console.log('Builder Done: ', endFor - startFor + ' milliseconds');
+        promise.resolve(Scene);
+    });
 
     window.addEventListener('resize', onWindowResize, false);
 }
 
+var getOrbitAmplitute = function(distanceFromSun) {
+  var orbitAmplitude = (SolarSystem.Parent.radius + distanceFromSun);
+  return orbitAmplitude;
+};
+
 // Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
 // This ratio helps create an accurate representation of each planet's location along it's orbit circumference.
-// function getPlanetRadian(planet) {
-//   var planetRadian = 360 / planet.earthDaysToOrbitSun;
-//   return planetRadian;
-// }
+function getPlanetRadian(planet) {
+  var planetRadian = 360 / planet.earthDaysToOrbitSun;
+  return planetRadian;
+}
 
-// var count     = 0
-//   , year      = 0
-//   , dayOfYear = 0;
+var count     = 0
+  , year      = 0
+  , dayOfYear = 0;
 
-// function createTime() {
-//   if (count !== 0 && count % 365 === 0) {
-//     dayOfYear = 1;
-//     year++;
+function createTime() {
+  if (count !== 0 && count % 365 === 0) {
+    dayOfYear = 1;
+    year++;
 
-//     // console.log('Day: ', count, '\nDay of Year: ', dayOfYear, '\nYear: ', year, '\n');
+    // console.log('Day: ', count, '\nDay of Year: ', dayOfYear, '\nYear: ', year, '\n');
 
-//     // Jupiter ~ 11 years (11.88 years)
-//     if (year % 11 /* make this year number a variable */ === 0) {
-//         console.log('\n1 full orbit for Jupiter: ', year);
-//     }
-//   } else {
-//     dayOfYear++;
-//   }
+    // Jupiter ~ 11 years (11.88 years)
+    if (year % 11 /* make this year number a variable */ === 0) {
+        console.log('\n1 full orbit for Jupiter: ', year);
+    }
+  } else {
+    dayOfYear++;
+  }
 
-//   // console.log('Count: ', count, '\nDay of Year: ', dayOfYear, '\n');
-// }
+  // console.log('Count: ', count, '\nDay of Year: ', dayOfYear, '\n');
+}
 
-// setInterval(function() {
-//   createTime();
+setInterval(function() {
+  createTime();
 
-//   count++;
-// }, 100);
+  count++;
+}, 100);
 
 function onWindowResize() {
     Scene.camera.aspect = window.innerWidth / window.innerHeight;
@@ -445,127 +454,36 @@ function onWindowResize() {
 }
 
 function animate() {
-    requestAnimationFrame( animate );
+    requestAnimationFrame(animate);
 
     render();
     Scene.stats.update();
 }
 
 function render() {
-  var timer                = Date.now() * 0.00002,
-      degreesToRadianRatio = 0.0174532925;
+    var timer                = Date.now() * 0.00002,
+        degreesToRadianRatio = 0.0174532925;
+
+    // console.log('wtf', scene);
 
   // camera.position.x = Math.cos(timer) * Zoom;
   // camera.position.z = Math.sin(timer) * Zoom;
 
   // Sun.rotation.y = Math.cos(timer);
 
-  // Jupiter.rotation.y = Math.cos(timer * 0.004);
+    // Jupiter.rotation.y = Math.cos(timer * 0.004);
 
-  // /*
-  //  * Animate each planet's orbit. Updates every second.
-  //  */
-  // var mercuryPosX = getOrbitAmplitute(SolarSystemConstants.Mercury.meanDistanceFromSun)
-  //                 * Math.cos(count * getPlanetRadian(SolarSystemConstants.Mercury) * 0.0174532925);
+    var jupiterPosX = getOrbitAmplitute(SolarSystem.Planets[4].meanDistanceFromSun)
+                    * Math.cos(count * getPlanetRadian(SolarSystem.Planets[4]) * 0.0174532925);
 
-  // var mercuryPosY = getOrbitAmplitute(SolarSystemConstants.Mercury.meanDistanceFromSun)
-  //                 * Math.sin(count * getPlanetRadian(SolarSystemConstants.Mercury) * 0.0174532925);
+    var jupiterPosY = getOrbitAmplitute(SolarSystem.Planets[4].meanDistanceFromSun)
+                    * Math.sin(count * getPlanetRadian(SolarSystem.Planets[4]) * 0.0174532925);
 
-  // Mercury.position.set(
-  //   mercuryPosX,
-  //   0,
-  //   mercuryPosY
-  // );
-
-
-  // var venusPosX = getOrbitAmplitute(SolarSystemConstants.Venus.meanDistanceFromSun)
-  //                 * Math.cos(count * getPlanetRadian(SolarSystemConstants.Venus) * 0.0174532925);
-
-  // var venusPosY = getOrbitAmplitute(SolarSystemConstants.Venus.meanDistanceFromSun)
-  //                 * Math.sin(count * getPlanetRadian(SolarSystemConstants.Venus) * 0.0174532925);
-
-  // Venus.position.set(
-  //   venusPosX,
-  //   0,
-  //   venusPosY
-  // );
-
-  // var earthPosX = getOrbitAmplitute(SolarSystemConstants.Earth.meanDistanceFromSun)
-  //                 * Math.cos(count * getPlanetRadian(SolarSystemConstants.Earth) * 0.0174532925);
-
-  // var earthPosY = getOrbitAmplitute(SolarSystemConstants.Earth.meanDistanceFromSun)
-  //                 * Math.sin(count * getPlanetRadian(SolarSystemConstants.Earth) * 0.0174532925);
-
-  // Earth.position.set(
-  //   earthPosX,
-  //   0,
-  //   earthPosY
-  // );
-
-
-  // var marsPosX = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanceFromSun)
-  //                 * Math.cos(count * getPlanetRadian(SolarSystemConstants.Mars) * 0.0174532925);
-
-  // var marsPosY = getOrbitAmplitute(SolarSystemConstants.Mars.meanDistanceFromSun)
-  //                 * Math.sin(count * getPlanetRadian(SolarSystemConstants.Mars) * 0.0174532925);
-
-  // Mars.position.set(
-  //   marsPosX,
-  //   0,
-  //   marsPosY
-  // );
-
-
-  // var jupiterPosX = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun)
-  //                 * Math.cos(count * getPlanetRadian(SolarSystemConstants.Jupiter) * 0.0174532925);
-
-  // var jupiterPosY = getOrbitAmplitute(SolarSystemConstants.Jupiter.meanDistanceFromSun)
-  //                 * Math.sin(count * getPlanetRadian(SolarSystemConstants.Jupiter) * 0.0174532925);
-
-  // Jupiter.position.set(
-  //   jupiterPosX,
-  //   0,
-  //   jupiterPosY
-  // );
-
-
-  // var saturnPosX = getOrbitAmplitute(SolarSystemConstants.Saturn.meanDistanceFromSun)
-  //                 * Math.cos(count * getPlanetRadian(SolarSystemConstants.Saturn) * 0.0174532925);
-
-  // var saturnPosY = getOrbitAmplitute(SolarSystemConstants.Saturn.meanDistanceFromSun)
-  //                 * Math.sin(count * getPlanetRadian(SolarSystemConstants.Saturn) * 0.0174532925);
-
-  // Saturn.position.set(
-  //   saturnPosX,
-  //   0,
-  //   saturnPosY
-  // );
-
-
-  // var uranusPosX = getOrbitAmplitute(SolarSystemConstants.Uranus.meanDistanceFromSun)
-  //                 * Math.cos(count * getPlanetRadian(SolarSystemConstants.Uranus) * 0.0174532925);
-
-  // var uranusPosY = getOrbitAmplitute(SolarSystemConstants.Uranus.meanDistanceFromSun)
-  //                 * Math.sin(count * getPlanetRadian(SolarSystemConstants.Uranus) * 0.0174532925);
-
-  // Uranus.position.set(
-  //   uranusPosX,
-  //   0,
-  //   uranusPosY
-  // );
-
-
-  // var neptunePosX = getOrbitAmplitute(SolarSystemConstants.Neptune.meanDistanceFromSun)
-  //                 * Math.cos(count * getPlanetRadian(SolarSystemConstants.Neptune) * 0.0174532925);
-
-  // var neptunePosY = getOrbitAmplitute(SolarSystemConstants.Neptune.meanDistanceFromSun)
-  //                 * Math.sin(count * getPlanetRadian(SolarSystemConstants.Neptune) * 0.0174532925);
-
-  // Neptune.position.set(
-  //   neptunePosX,
-  //   0,
-  //   neptunePosY
-  // );
+    Scene.planet[4].position.set(
+      jupiterPosX,
+      0,
+      jupiterPosY
+    );
 
     Scene.camera.position.x = Zoom;
     Scene.camera.position.z = Zoom;
@@ -604,5 +522,6 @@ function mouseMove( e ) {
     cPos.z = nz;
 }
 
-init();
-animate();
+$.when(init()).done(function(scene) {
+    animate();
+});
