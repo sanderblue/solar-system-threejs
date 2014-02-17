@@ -7,7 +7,7 @@ var SolarSystem,
     Scene;
 
 
-Zoom = 2600;
+Zoom = 1800;
 
 SolarSystem = {
     Parent: {
@@ -126,11 +126,15 @@ function init() {
             },
 
             setLights: function() {
-                Scene.ambientLight = new THREE.DirectionalLight(0xffffff);
-                Scene.ambientLight.position.set(0, 1, 0);
+                Scene.ambientLight1 = new THREE.DirectionalLight(0xffffff);
+                Scene.ambientLight2 = new THREE.DirectionalLight(0xffffff);
+
+                Scene.ambientLight1.position.set(0, 1, 0);
+                Scene.ambientLight2.position.set(0, 0, 30);
 
                 Scene.scene.add(new THREE.AmbientLight(0x404040));
-                Scene.scene.add(Scene.ambientLight);
+                Scene.scene.add(Scene.ambientLight1);
+                Scene.scene.add(Scene.ambientLight2);
             },
 
             setCamera: function() {
@@ -318,10 +322,7 @@ function init() {
 
                     var thisPlanet = new THREE.Object3D({
                                         id: planet.id,
-                                        name: planet.name,
-                                        // parent: Sun
-                                        // position: ,
-                                        // rotation: ,
+                                        name: planet.name
                                     });
 
                     // console.log('Build PLANET: ', planet);
@@ -347,6 +348,17 @@ function init() {
                                     ),
                                     planetMaterial
                                  );
+
+                    if (planet.name = 'Saturn') {
+
+                        var quaternion = new THREE.Quaternion();
+                        quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
+
+                        var vector = new THREE.Vector3( 10, 0, 0 );
+                        vector.applyQuaternion( quaternion );
+
+                        thisPlanet.add( vector );
+                    }
 
                     thisPlanet.name = planet.name;
 
@@ -464,17 +476,20 @@ function animate() {
 }
 
 function positionPlanets() {
-    var degreesToRadianRatio = 0.0174532925;
-        planets = Scene.planets;
+    var degreesToRadianRatio = 0.0174532925,
+        planets = Scene.planets,
+        timer   = Date.now() * 0.00002;
+
     for (var i = 0; i < planets.length; i++) {
-
-        // console.log('Name: ', planets[i].name)
-
         var posX = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
-                        * Math.cos(count * getPlanetRadian(SolarSystem.Planets[i]) * degreesToRadianRatio);
+                        * Math.cos(count
+                        * getPlanetRadian(SolarSystem.Planets[i])
+                        * degreesToRadianRatio);
 
         var posY = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
-                        * Math.sin(count * getPlanetRadian(SolarSystem.Planets[i]) * degreesToRadianRatio);
+                        * Math.sin(count
+                        * getPlanetRadian(SolarSystem.Planets[i])
+                        * degreesToRadianRatio);
 
         Scene.planets[i].position.set(
           posX,
@@ -494,7 +509,7 @@ function render() {
 
     // Jupiter.rotation.y = Math.cos(timer * 0.004);
 
-    // positionPlanets();
+    positionPlanets();
 
     Scene.camera.position.x = Zoom;
     Scene.camera.position.z = Zoom;
