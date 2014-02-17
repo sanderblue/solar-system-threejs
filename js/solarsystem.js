@@ -103,7 +103,6 @@ SolarSystem = {
             earthDaysToOrbitSun: 60025,
             moons: [],
             texture: null,
-            hasRings: true,
             rings: [60, 67, 71] // Neptune has 9 rings (3 major)
         }
     ]
@@ -351,9 +350,7 @@ function init() {
 
                     thisPlanet.name = planet.name;
 
-                    var hasRings = new Boolean(planet.rings.length);
-
-                    console.log('Has Rings? ', planet.name, hasRings, planet.rings.length);
+                    var hasRings = Boolean(planet.rings.length);
 
                     if (hasRings) {
                         var posX = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
