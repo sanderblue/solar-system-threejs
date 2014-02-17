@@ -81,7 +81,7 @@ SolarSystem = {
             earthDaysToOrbitSun: 10753,
             moons: [],
             texture: null,
-            rings: [1, 2, 3, 4, 5, 6, 7, 8]
+            rings: [160, 180, 185, 195, 210, 220, 225, 240]
         },
         {
             id: 7,
@@ -92,7 +92,7 @@ SolarSystem = {
             earthDaysToOrbitSun: 30714,
             moons: [],
             texture: null,
-            rings: [1, 2, 3]
+            rings: [65, 69, 72]
         },
         {
             id: 8,
@@ -104,7 +104,7 @@ SolarSystem = {
             moons: [],
             texture: null,
             hasRings: true,
-            rings: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            rings: [60, 67, 71] // Neptune has 9 rings (3 major)
         }
     ]
 };
@@ -208,8 +208,6 @@ function init() {
 
         var RingBuilder = {
             buildRing: function(amplitude) {
-                console.log('Building ring...', amplitude);
-
                 return $.Deferred(function(promise) {
                     var resolution = 200, // segments in the line
                         size       = 360 / resolution;
@@ -286,23 +284,27 @@ function init() {
 
             buildRings: function(thisPlanet, planet) {
                 return $.Deferred(function(promise) {
-                    if (planet.name == 'Saturn') {
-                        var amplitudes = [160, 180, 185, 195, 210, 220, 225, 240];
+                    var amplitudes = planet.rings;
 
-                        for (var i = 0; i < amplitudes.length; i++) {
-                            $.when(RingBuilder.buildRing(amplitudes[i])).done(function(response) {
-                                console.log('Done making line ' + (i + 1));
-                                thisPlanet.add(response.line);
-                            });
-                        }
+                    // if (planet.name == 'Saturn') {
+                    //     var amplitudes = [160, 180, 185, 195, 210, 220, 225, 240];
+                    // } else if (planet.name == 'Neptune') {
 
-                        var promiseObject = {
-                            planet: planet,
-                            thisPlanet: thisPlanet
-                        };
+                    // }
 
-                        promise.resolve(promiseObject);
+                    for (var i = 0; i < amplitudes.length; i++) {
+                        $.when(RingBuilder.buildRing(amplitudes[i])).done(function(response) {
+                            console.log('Done making line ' + (i + 1));
+                            thisPlanet.add(response.line);
+                        });
                     }
+
+                    var promiseObject = {
+                        planet: planet,
+                        thisPlanet: thisPlanet
+                    };
+
+                    promise.resolve(promiseObject);
                 });
             },
 
@@ -349,7 +351,11 @@ function init() {
 
                     thisPlanet.name = planet.name;
 
-                    if (planet.name === 'Saturn') {
+                    var hasRings = new Boolean(planet.rings.length);
+
+                    console.log('Has Rings? ', planet.name, hasRings, planet.rings.length);
+
+                    if (hasRings) {
                         var posX = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
 
                         thisPlanet.position.set(
@@ -460,30 +466,38 @@ function animate() {
     Scene.stats.update();
 }
 
+function positionPlanets() {
+    var degreesToRadianRatio = 0.0174532925;
+        planets = Scene.planets;
+    for (var i = 0; i < planets.length; i++) {
+
+        // console.log('Name: ', planets[i].name)
+
+        var posX = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
+                        * Math.cos(count * getPlanetRadian(SolarSystem.Planets[i]) * degreesToRadianRatio);
+
+        var posY = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
+                        * Math.sin(count * getPlanetRadian(SolarSystem.Planets[i]) * degreesToRadianRatio);
+
+        Scene.planets[i].position.set(
+          posX,
+          0,
+          posY
+        );
+    }
+}
+
 function render() {
-    var timer                = Date.now() * 0.00002,
-        degreesToRadianRatio = 0.0174532925;
+    var timer = Date.now() * 0.00002;
 
-    // console.log('wtf', scene);
+    // camera.position.x = Math.cos(timer) * Zoom;
+    // camera.position.z = Math.sin(timer) * Zoom;
 
-  // camera.position.x = Math.cos(timer) * Zoom;
-  // camera.position.z = Math.sin(timer) * Zoom;
-
-  // Sun.rotation.y = Math.cos(timer);
+    // Sun.rotation.y = Math.cos(timer);
 
     // Jupiter.rotation.y = Math.cos(timer * 0.004);
 
-    var jupiterPosX = getOrbitAmplitute(SolarSystem.Planets[4].meanDistanceFromSun)
-                    * Math.cos(count * getPlanetRadian(SolarSystem.Planets[4]) * 0.0174532925);
-
-    var jupiterPosY = getOrbitAmplitute(SolarSystem.Planets[4].meanDistanceFromSun)
-                    * Math.sin(count * getPlanetRadian(SolarSystem.Planets[4]) * 0.0174532925);
-
-    Scene.planet[4].position.set(
-      jupiterPosX,
-      0,
-      jupiterPosY
-    );
+    // positionPlanets();
 
     Scene.camera.position.x = Zoom;
     Scene.camera.position.z = Zoom;
