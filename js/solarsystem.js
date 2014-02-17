@@ -205,6 +205,8 @@ function init() {
 
                 Sun.position.set(0, 0, 0);
 
+                Scene.Sun = Sun;
+
                 Scene.scene.add(Sun);
             }
         };
@@ -287,27 +289,32 @@ function init() {
 
             buildRings: function(thisPlanet, planet) {
                 return $.Deferred(function(promise) {
-                    var amplitudes = planet.rings;
+                    var hasRings = Boolean(planet.rings.length);
 
-                    // if (planet.name == 'Saturn') {
-                    //     var amplitudes = [160, 180, 185, 195, 210, 220, 225, 240];
-                    // } else if (planet.name == 'Neptune') {
+                    if (hasRings) {
+                        var amplitudes = planet.rings;
 
-                    // }
+                        for (var i = 0; i < amplitudes.length; i++) {
+                            $.when(RingBuilder.buildRing(amplitudes[i])).done(function(response) {
+                                thisPlanet.add(response.line);
+                            });
+                        }
 
-                    for (var i = 0; i < amplitudes.length; i++) {
-                        $.when(RingBuilder.buildRing(amplitudes[i])).done(function(response) {
-                            console.log('Done making line ' + (i + 1));
-                            thisPlanet.add(response.line);
-                        });
+                        var promiseObject = {
+                            planet: planet,
+                            thisPlanet: thisPlanet
+                        };
+
+                        promise.resolve(promiseObject);
+
+                    } else {
+                        var promiseObject = {
+                            planet: planet,
+                            thisPlanet: thisPlanet
+                        };
+
+                        promise.resolve(promiseObject);
                     }
-
-                    var promiseObject = {
-                        planet: planet,
-                        thisPlanet: thisPlanet
-                    };
-
-                    promise.resolve(promiseObject);
                 });
             },
 
@@ -362,21 +369,11 @@ function init() {
 
                     thisPlanet.name = planet.name;
 
-                    var hasRings = Boolean(planet.rings.length);
+                    // var hasRings = Boolean(planet.rings.length);
 
-                    if (hasRings) {
-                        var posX = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+                    $.when(PlanetBuilder.buildRings(thisPlanet, planet)).done(function(response) {
+                        PlanetBuilder.addPlanet(thisPlanet);
 
-                        thisPlanet.position.set(
-                            posX, // x
-                            0,    // y
-                            0     // z
-                        );
-
-                        $.when(PlanetBuilder.buildRings(thisPlanet, planet)).done(function(response) {
-                            PlanetBuilder.addPlanet(thisPlanet);
-                        });
-                    } else {
                         var posX = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
 
                         thisPlanet.position.set(
@@ -389,7 +386,7 @@ function init() {
                         Scene.planets.push(thisPlanet);
 
                         promise.resolve(thisPlanet);
-                    }
+                    });
                 });
             },
 
@@ -422,43 +419,43 @@ function init() {
 }
 
 var getOrbitAmplitute = function(distanceFromSun) {
-  var orbitAmplitude = (SolarSystem.Parent.radius + distanceFromSun);
-  return orbitAmplitude;
+    var orbitAmplitude = (SolarSystem.Parent.radius + distanceFromSun);
+    return orbitAmplitude;
 };
 
 // Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
 // This ratio helps create an accurate representation of each planet's location along it's orbit circumference.
 function getPlanetRadian(planet) {
-  var planetRadian = 360 / planet.earthDaysToOrbitSun;
-  return planetRadian;
+    var planetRadian = 360 / planet.earthDaysToOrbitSun;
+    return planetRadian;
 }
 
-var count     = 0
-  , year      = 0
-  , dayOfYear = 0;
+var count     = 0,
+    year      = 0,
+    dayOfYear = 0;
 
 function createTime() {
-  if (count !== 0 && count % 365 === 0) {
-    dayOfYear = 1;
-    year++;
+    if (count !== 0 && count % 365 === 0) {
+        dayOfYear = 1;
+        year++;
 
-    // console.log('Day: ', count, '\nDay of Year: ', dayOfYear, '\nYear: ', year, '\n');
+        // console.log('Day: ', count, '\nDay of Year: ', dayOfYear, '\nYear: ', year, '\n');
 
-    // Jupiter ~ 11 years (11.88 years)
-    if (year % 11 /* make this year number a variable */ === 0) {
-        console.log('\n1 full orbit for Jupiter: ', year);
+        // Jupiter ~ 11 years (11.88 years)
+        if (year % 11 /* make this year number a variable */ === 0) {
+            console.log('\n1 full orbit for Jupiter: ', year);
+        }
+    } else {
+        dayOfYear++;
     }
-  } else {
-    dayOfYear++;
-  }
 
-  // console.log('Count: ', count, '\nDay of Year: ', dayOfYear, '\n');
+    // console.log('Count: ', count, '\nDay of Year: ', dayOfYear, '\n');
 }
 
 setInterval(function() {
-  createTime();
+    createTime();
 
-  count++;
+    count++;
 }, 100);
 
 function onWindowResize() {
@@ -482,19 +479,19 @@ function positionPlanets() {
 
     for (var i = 0; i < planets.length; i++) {
         var posX = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
-                        * Math.cos(count
-                        * getPlanetRadian(SolarSystem.Planets[i])
-                        * degreesToRadianRatio);
+                    * Math.cos(count
+                    * getPlanetRadian(SolarSystem.Planets[i])
+                    * degreesToRadianRatio);
 
         var posY = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
-                        * Math.sin(count
-                        * getPlanetRadian(SolarSystem.Planets[i])
-                        * degreesToRadianRatio);
+                    * Math.sin(count
+                    * getPlanetRadian(SolarSystem.Planets[i])
+                    * degreesToRadianRatio);
 
         Scene.planets[i].position.set(
-          posX,
-          0,
-          posY
+            posX,
+            0,
+            posY
         );
     }
 }
@@ -505,9 +502,7 @@ function render() {
     // camera.position.x = Math.cos(timer) * Zoom;
     // camera.position.z = Math.sin(timer) * Zoom;
 
-    // Sun.rotation.y = Math.cos(timer);
-
-    // Jupiter.rotation.y = Math.cos(timer * 0.004);
+    Scene.Sun.rotation.y = Math.cos(timer);
 
     positionPlanets();
 
