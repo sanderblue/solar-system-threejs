@@ -143,6 +143,11 @@ function init() {
                 Scene.camera.position.set(1000, 400);
             },
 
+            setCameraControls: function() {
+                Scene.controls = new THREE.OrbitControls(Scene.camera);
+                Scene.controls.addEventListener('change', render);
+            },
+
             setRender: function() {
                 Scene.renderer = new THREE.WebGLRenderer({ antialias: true });
                 Scene.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -155,7 +160,7 @@ function init() {
                 Scene.stats.domElement.style.position = 'absolute';
                 Scene.stats.domElement.style.top = '0px';
 
-                Scene.container.appendChild( Scene.stats.domElement );
+                Scene.container.appendChild(Scene.stats.domElement);
             },
 
             init: function() {
@@ -163,6 +168,7 @@ function init() {
                 Scene.setScene();
                 Scene.setLights();
                 Scene.setCamera();
+                Scene.setCameraControls();
                 Scene.setRender();
                 Scene.setStats();
             }
@@ -462,7 +468,7 @@ function onWindowResize() {
     Scene.camera.aspect = window.innerWidth / window.innerHeight;
     Scene.camera.updateProjectionMatrix();
 
-    Scene.renderer.setSize( window.innerWidth, window.innerHeight );
+    Scene.renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function animate() {
@@ -511,36 +517,6 @@ function render() {
     Scene.camera.lookAt(Scene.scene.position);
 
     Scene.renderer.render(Scene.scene, Scene.camera);
-}
-
-document.body.addEventListener( 'mousewheel', mouseMove, false );
-document.body.addEventListener( 'DOMMouseScroll', mouseMove, false ); // firefox
-
-function mouseMove( e ) {
-    var d = ((typeof e.wheelDelta != "undefined") ? (-e.wheelDelta) : e.detail);
-        d = 100 * ((d > 0) ? 1 : -1);
-
-    var cPos = Scene.camera.position;
-
-    if (isNaN(cPos.x) || isNaN(cPos.y) || isNaN(cPos.y)) {
-        return;
-    }
-
-    var r    = cPos.x * cPos.x + cPos.y * cPos.y;
-    var sqr  = Math.sqrt(r);
-    var sqrZ = Math.sqrt(cPos.z * cPos.z + r);
-
-    var nx = cPos.x + ((r == 0) ? 0 : (d * cPos.x / sqr));
-    var ny = cPos.y + ((r == 0) ? 0 : (d * cPos.y / sqr));
-    var nz = cPos.z + ((sqrZ==0) ? 0 : (d * cPos.z / sqrZ));
-
-    if (isNaN(nx) || isNaN(ny) || isNaN(nz)) {
-        return;
-    }
-
-    cPos.x = nx;
-    cPos.y = ny;
-    cPos.z = nz;
 }
 
 $.when(init()).done(function(scene) {
