@@ -338,8 +338,6 @@ function init() {
                                         name: planet.name
                                     });
 
-                    // console.log('Build PLANET: ', planet);
-
                     var texture = PlanetBuilder.getTexture(planet);
 
                     var planetMaterial = new THREE.MeshLambertMaterial({
@@ -375,8 +373,6 @@ function init() {
 
                     thisPlanet.name = planet.name;
 
-                    // var hasRings = Boolean(planet.rings.length);
-
                     $.when(PlanetBuilder.buildRings(thisPlanet, planet)).done(function(response) {
                         PlanetBuilder.addPlanet(thisPlanet);
 
@@ -410,7 +406,7 @@ function init() {
 
         for (var i = 0; i < planets.length; i++) {
             $.when(PlanetBuilder.build(planets[i])).done(function(planet) {
-                console.log('Planet builder done: ', planet);
+                // console.log('Planet builder done: ', planet);
             });
         }
 
@@ -424,13 +420,13 @@ function init() {
     window.addEventListener('resize', onWindowResize, false);
 }
 
-var getOrbitAmplitute = function(distanceFromSun) {
+function getOrbitAmplitute(distanceFromSun) {
     var orbitAmplitude = (SolarSystem.Parent.radius + distanceFromSun);
     return orbitAmplitude;
 };
 
 // Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
-// This ratio helps create an accurate representation of each planet's location along it's orbit circumference.
+// This ratio helps create an accurate representation of each planet's location along its orbit circumference.
 function getPlanetRadian(planet) {
     var planetRadian = 360 / planet.earthDaysToOrbitSun;
     return planetRadian;
@@ -445,17 +441,13 @@ function createTime() {
         dayOfYear = 1;
         year++;
 
-        // console.log('Day: ', count, '\nDay of Year: ', dayOfYear, '\nYear: ', year, '\n');
-
         // Jupiter ~ 11 years (11.88 years)
-        if (year % 11 /* make this year number a variable */ === 0) {
+        if (year % 11 === 0) {
             console.log('\n1 full orbit for Jupiter: ', year);
         }
     } else {
         dayOfYear++;
     }
-
-    // console.log('Count: ', count, '\nDay of Year: ', dayOfYear, '\n');
 }
 
 setInterval(function() {

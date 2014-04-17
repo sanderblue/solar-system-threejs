@@ -1,6 +1,6 @@
 The Solar System
 ================
 
-The Solar System: Modeled with Three.js
+Modeled with Three.js
 
-![Image](../blob/master/img/screenshot.png?raw=true)
+![Image](../master/img/screenshot.png?raw=true)
