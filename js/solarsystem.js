@@ -7,7 +7,7 @@ var SolarSystem,
     Scene;
 
 
-Zoom = 2000;
+Zoom = 1400;
 
 SolarSystem = {
     Parent: {
