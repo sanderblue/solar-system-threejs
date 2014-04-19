@@ -7,7 +7,7 @@ var SolarSystem,
     Scene;
 
 
-Zoom = 1900;
+Zoom = 1000;
 
 SolarSystem = {
     Parent: {
@@ -105,8 +105,30 @@ SolarSystem = {
             texture: null,
             rings: [60, 67, 71] // Neptune has 9 rings (3 major)
         }
-    ]
+    ],
+    AstroidBelt: {
+        astroidCount: 700
+    }
 };
+
+var count     = 0,
+    year      = 0,
+    dayOfYear = 0;
+
+function createTime() {
+   if (count !== 0 && count % 365 === 0) {
+        dayOfYear = 1;
+        year++;
+    } else  {
+        dayOfYear++;
+    }
+}
+
+setInterval(function() {
+    createTime();
+
+    count++;
+}, 150);
 
 function init() {
 
@@ -141,7 +163,7 @@ function init() {
             setCamera: function() {
                 Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000);
 
-                Scene.camera.position.set(1000, 400);
+                Scene.camera.position.set(0, 200, 100);
             },
 
             setCameraControls: function() {
@@ -396,7 +418,7 @@ function init() {
             addPlanet: function(planet) {
                 setTimeout(function() {
                     Scene.scene.add(planet);
-                }, 300);
+                }, 150);
             }
         };
 
@@ -413,25 +435,41 @@ function init() {
                 );
             },
 
-            build: function() {
+            buildRandomPoints: function() {
+                var points = [];
+
+                for (var i = 0; i < 8; i ++) {
+                    var radius = Math.random(); // provides a workable number no matter what Math.random() returns
+
+                    points.push(AstroidBelt.getRandomPointInSphere(radius));
+                }
+
+                return points;
+            },
+
+            positionAstroid: function(astroid, count) {
+                var degreesToRadianRatio = 0.0174532925;
+
+                var posX = getOrbitAmplitute(SolarSystem.Planets[3].meanDistanceFromSun + Math.random() * 20)
+                            * Math.cos(count
+                            * getPlanetRadian(SolarSystem.Planets[3])
+                            * degreesToRadianRatio);
+
+                var posY = getOrbitAmplitute(SolarSystem.Planets[3].meanDistanceFromSun + Math.random() * 20)
+                            * Math.sin(count
+                            * getPlanetRadian(SolarSystem.Planets[3])
+                            * degreesToRadianRatio);
+
+                astroid.position.set(
+                    posX,
+                    0,
+                    posY
+                );
+            },
+
+            buildAstroid: function(index) {
                 return $.Deferred(function(promise) {
-                    var points = [
-                        new THREE.Vector3( 50, 50, 50 ),
-                        new THREE.Vector3( 50, 50, -50 ),
-                        new THREE.Vector3( -50, 50, -50 ),
-                        new THREE.Vector3( -50, 50, 50 ),
-                        new THREE.Vector3( 50, -50, 50 ),
-                        new THREE.Vector3( 50, -50, -50 ),
-                        new THREE.Vector3( -50, -50, -50 ),
-                        new THREE.Vector3( -50, -50, 50 ),
-                    ];
-
-                    // Random convex mesh to represent rock-like shapes
-                    points = [];
-                    for (var i = 0; i < 30; i ++) {
-
-                        points.push(AstroidBelt.getRandomPointInSphere(50));
-                    }
+                    var randomPoints = AstroidBelt.buildRandomPoints();
 
                     var map = AstroidBelt.getTexture();
 
@@ -439,42 +477,14 @@ function init() {
                     map.anisotropy = 16;
 
                     var materials = [
-                        new THREE.MeshLambertMaterial( { ambient: 0xbbbbbb, map: map } ),
-                        new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: true, transparent: true, opacity: 0.1 } )
+                        new THREE.MeshLambertMaterial({ ambient: 0xbbbbbb, map: map }),
+                        new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.1 })
                     ];
 
-                    // var texture = AstroidBelt.getTexture();
+                    // Random convex mesh to represent an irregular, rock-like shape based on random points within a sphere where radius = n(random)
+                    var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), materials);
 
-                    // var astroidMaterial = new THREE.MeshLambertMaterial({
-                    //                           ambient: 0xbbbbbb,
-                    //                           map: texture,
-                    //                           side: THREE.DoubleSide
-                    //                         });
-
-                    // texture.wrapS = THREE.RepeatWrapping;
-                    // texture.wrapT = THREE.RepeatWrapping;
-
-                    // texture.anisotropy = 16;
-
-                    var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(points), materials);
-
-                    object.position.set(-500, 0, 0);
-
-                    AstroidBelt.addAstroid(object);
-
-                    object = new THREE.AxisHelper(50);
-                    object.position.set(400, 0, 0);
-
-                    AstroidBelt.addAstroid(object);
-
-                    object = new THREE.ArrowHelper(
-                                new THREE.Vector3(0, 1, 0),
-                                new THREE.Vector3( 0, 0, 0 ),
-                                50
-                            );
-
-                    object.position.set(300, 0, 0);
-
+                    AstroidBelt.positionAstroid(object, index);
                     AstroidBelt.addAstroid(object);
 
                     Scene.astroids.push(object);
@@ -483,10 +493,45 @@ function init() {
                 });
             },
 
+            buildBelt: function() {
+                var astroids = SolarSystem.AstroidBelt.astroidCount;
+
+                // AstroidBelt.buildAstroid(i);
+                for (var i = 0; i < astroids; i++) {
+                    $.when(AstroidBelt.buildAstroid(i)).done(function(astroid) {
+                        // console.log("Astroid: ", astroid);
+                    });
+                }
+            },
+
             addAstroid: function(astroid) {
                 setTimeout(function() {
                     Scene.scene.add(astroid);
-                }, 300);
+                }, 150);
+            }
+        };
+
+        var SolarSystemBuilder = {
+            buildAstroidBelt: function() {
+                return $.Deferred(function(promise) {
+                    AstroidBelt.buildBelt();
+
+                    promise.resolve();
+                });
+            },
+
+            buildPlanets: function() {
+                return $.Deferred(function(promise) {
+                    var promises = new Array();
+
+                    for (var i = 0; i < planets.length; i++) {
+                        var planetBuildPromise = PlanetBuilder.build(planets[i]);
+
+                        promises.push(planetBuildPromise);
+                    }
+
+                    promise.resolve(promises);
+                });
             }
         };
 
@@ -494,15 +539,16 @@ function init() {
 
         var startFor = new Date().getTime();
         var planets = SolarSystem.Planets;
+        // var astroids = SolarSystem.AstroidBelt.astroidCount;
 
-        for (var i = 0; i < planets.length; i++) {
-            $.when(PlanetBuilder.build(planets[i])).done(function(planet) {
-                // console.log('Planet builder done: ', planet);
+        // $.when(SolarSystemBuilder.buildAstroidBelt()).done(function() {
+        //     console.log('POW POW!!!!!!!!!!!!')
+        // });
+
+        $.when(SolarSystemBuilder.buildPlanets()).done(function() {
+            $.when(SolarSystemBuilder.buildAstroidBelt()).done(function() {
+                console.log('POW POW!!!!!!!!!!!!')
             });
-        }
-
-        $.when(AstroidBelt.build()).done(function(astroid) {
-            console.log("Astroid: ", astroid);
         });
 
         var endFor = new Date().getTime();
@@ -527,30 +573,6 @@ function getPlanetRadian(planet) {
     return planetRadian;
 }
 
-var count     = 0,
-    year      = 0,
-    dayOfYear = 0;
-
-function createTime() {
-    if (count !== 0 && count % 365 === 0) {
-        dayOfYear = 1;
-        year++;
-
-        // Jupiter ~ 11 years (11.88 years)
-        if (year % 11 === 0) {
-            console.log('\n1 full orbit for Jupiter: ', year);
-        }
-    } else {
-        dayOfYear++;
-    }
-}
-
-setInterval(function() {
-    createTime();
-
-    count++;
-}, 100);
-
 function onWindowResize() {
     Scene.camera.aspect = window.innerWidth / window.innerHeight;
     Scene.camera.updateProjectionMatrix();
@@ -568,7 +590,6 @@ function animate() {
 function positionPlanets() {
     var degreesToRadianRatio = 0.0174532925,
         planets = Scene.planets,
-        astroids = Scene.astroids,
         timer   = Date.now() * 0.00002;
 
     for (var i = 0; i < planets.length; i++) {
@@ -583,24 +604,6 @@ function positionPlanets() {
                     * degreesToRadianRatio);
 
         Scene.planets[i].position.set(
-            posX,
-            0,
-            posY
-        );
-    }
-
-    for (var i = 0; i < astroids.length; i++) {
-        var posX = getOrbitAmplitute(SolarSystem.Planets[3].meanDistanceFromSun)
-                    * Math.cos(count
-                    * getPlanetRadian(SolarSystem.Planets[3])
-                    * degreesToRadianRatio);
-
-        var posY = getOrbitAmplitute(SolarSystem.Planets[3].meanDistanceFromSun)
-                    * Math.sin(count
-                    * getPlanetRadian(SolarSystem.Planets[3])
-                    * degreesToRadianRatio);
-
-        Scene.astroids[i].position.set(
             posX,
             0,
             posY
