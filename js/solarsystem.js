@@ -113,6 +113,7 @@ function init() {
     return $.Deferred(function(promise) {
         Scene = {
             planets: [],
+            astroids: [],
 
             setContainer: function() {
                 Scene.container = document.createElement('div');
@@ -360,15 +361,15 @@ function init() {
                                     planetMaterial
                                  );
 
+                    // Attempt at adding Saturns axis tilt
                     if (planet.name = 'Saturn') {
-
                         var quaternion = new THREE.Quaternion();
-                        quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
+                        quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 2);
 
-                        var vector = new THREE.Vector3( 10, 0, 0 );
-                        vector.applyQuaternion( quaternion );
+                        var vector = new THREE.Vector3(10, 0, 0);
+                        vector.applyQuaternion(quaternion);
 
-                        thisPlanet.add( vector );
+                        thisPlanet.add(vector);
                     }
 
                     thisPlanet.name = planet.name;
@@ -399,6 +400,96 @@ function init() {
             }
         };
 
+        var AstroidBelt = {
+            getTexture: function() {
+                return new THREE.ImageUtils.loadTexture('../textures/crust.png');
+            },
+
+            getRandomPointInSphere: function(radius) {
+                return new THREE.Vector3(
+                    ( Math.random() - 0.5 ) * 2 * radius,
+                    ( Math.random() - 0.5 ) * 2 * radius,
+                    ( Math.random() - 0.5 ) * 2 * radius
+                );
+            },
+
+            build: function() {
+                return $.Deferred(function(promise) {
+                    var points = [
+                        new THREE.Vector3( 50, 50, 50 ),
+                        new THREE.Vector3( 50, 50, -50 ),
+                        new THREE.Vector3( -50, 50, -50 ),
+                        new THREE.Vector3( -50, 50, 50 ),
+                        new THREE.Vector3( 50, -50, 50 ),
+                        new THREE.Vector3( 50, -50, -50 ),
+                        new THREE.Vector3( -50, -50, -50 ),
+                        new THREE.Vector3( -50, -50, 50 ),
+                    ];
+
+                    // Random convex mesh to represent rock-like shapes
+                    points = [];
+                    for (var i = 0; i < 30; i ++) {
+
+                        points.push(AstroidBelt.getRandomPointInSphere(50));
+                    }
+
+                    var map = AstroidBelt.getTexture();
+
+                    map.wrapS = map.wrapT = THREE.RepeatWrapping;
+                    map.anisotropy = 16;
+
+                    var materials = [
+                        new THREE.MeshLambertMaterial( { ambient: 0xbbbbbb, map: map } ),
+                        new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: true, transparent: true, opacity: 0.1 } )
+                    ];
+
+                    // var texture = AstroidBelt.getTexture();
+
+                    // var astroidMaterial = new THREE.MeshLambertMaterial({
+                    //                           ambient: 0xbbbbbb,
+                    //                           map: texture,
+                    //                           side: THREE.DoubleSide
+                    //                         });
+
+                    // texture.wrapS = THREE.RepeatWrapping;
+                    // texture.wrapT = THREE.RepeatWrapping;
+
+                    // texture.anisotropy = 16;
+
+                    var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(points), materials);
+
+                    object.position.set(-500, 0, 0);
+
+                    AstroidBelt.addAstroid(object);
+
+                    object = new THREE.AxisHelper(50);
+                    object.position.set(400, 0, 0);
+
+                    AstroidBelt.addAstroid(object);
+
+                    object = new THREE.ArrowHelper(
+                                new THREE.Vector3(0, 1, 0),
+                                new THREE.Vector3( 0, 0, 0 ),
+                                50
+                            );
+
+                    object.position.set(300, 0, 0);
+
+                    AstroidBelt.addAstroid(object);
+
+                    Scene.astroids.push(object);
+
+                    promise.resolve(object);
+                });
+            },
+
+            addAstroid: function(astroid) {
+                setTimeout(function() {
+                    Scene.scene.add(astroid);
+                }, 300);
+            }
+        };
+
         SunBuilder.build();
 
         var startFor = new Date().getTime();
@@ -409,6 +500,10 @@ function init() {
                 // console.log('Planet builder done: ', planet);
             });
         }
+
+        $.when(AstroidBelt.build()).done(function(astroid) {
+            console.log("Astroid: ", astroid);
+        });
 
         var endFor = new Date().getTime();
 
@@ -473,6 +568,7 @@ function animate() {
 function positionPlanets() {
     var degreesToRadianRatio = 0.0174532925,
         planets = Scene.planets,
+        astroids = Scene.astroids,
         timer   = Date.now() * 0.00002;
 
     for (var i = 0; i < planets.length; i++) {
@@ -487,6 +583,24 @@ function positionPlanets() {
                     * degreesToRadianRatio);
 
         Scene.planets[i].position.set(
+            posX,
+            0,
+            posY
+        );
+    }
+
+    for (var i = 0; i < astroids.length; i++) {
+        var posX = getOrbitAmplitute(SolarSystem.Planets[3].meanDistanceFromSun)
+                    * Math.cos(count
+                    * getPlanetRadian(SolarSystem.Planets[3])
+                    * degreesToRadianRatio);
+
+        var posY = getOrbitAmplitute(SolarSystem.Planets[3].meanDistanceFromSun)
+                    * Math.sin(count
+                    * getPlanetRadian(SolarSystem.Planets[3])
+                    * degreesToRadianRatio);
+
+        Scene.astroids[i].position.set(
             posX,
             0,
             posY
