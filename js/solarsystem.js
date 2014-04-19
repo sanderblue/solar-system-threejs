@@ -439,7 +439,7 @@ function init() {
                 var points = [];
 
                 for (var i = 0; i < 8; i ++) {
-                    var radius = Math.random(); // provides a workable number no matter what Math.random() returns
+                    var radius = Math.random();
 
                     points.push(AstroidBelt.getRandomPointInSphere(radius));
                 }
