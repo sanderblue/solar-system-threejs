@@ -1,40 +1,24 @@
 <html>
 	<head>
 		<title>The Solar System</title>
-		<style>
-
-			canvas {
-				width: 100%;
-				height: 100%;
-			}
-
-			body {
-				color: #808080;
-				font-family:Monospace;
-				font-size:13px;
-				text-align:center;
-				background: #000;
-
-				background-color: #fff;
-				margin: 0px;
-				overflow: hidden;
-			}
-
-			#info {
-				position: absolute;
-				top: 0px; width: 100%;
-				padding: 5px;
-			}
-
-			a {
-
-				color: #0080ff;
-			}
-
-		</style>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
 	<body>
-        <!-- <div id="container"></div> -->
+        <input id="zoom" type="range" step="1" max="6500"/>
+        <div id="planets" class="planet-list-holder">
+            <ul class="planet-list">
+                <li>Mercury</li>
+                <li>Venus</li>
+                <li>Earth</li>
+                <li>Mars</li>
+                <li>Jupiter</li>
+                <li>Saturn</li>
+                <li>Uranus</li>
+                <li>Neptune</li>
+            </ul>
+        </div>
+
+        <div id="solar-system"></div>
 
         <script type="text/javascript" src="js/lib/jquery.js"></script>
         <script type="text/javascript" src="js/lib/three.min.js"></script>
