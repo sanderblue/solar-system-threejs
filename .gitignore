@@ -1,2 +1,5 @@
 .DS_Store
+.sass-cache
+.sass-cache/*
 logs
+node_modules
