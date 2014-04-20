@@ -6,8 +6,7 @@ var SolarSystem,
     Zoom,
     Scene;
 
-
-Zoom = 1800;
+Zoom = 1700;
 
 SolarSystem = {
     Parent: {
@@ -105,14 +104,61 @@ SolarSystem = {
             texture: null,
             rings: [60, 67, 71] // Neptune has 9 rings (3 major)
         }
-    ]
+    ],
+    AstroidBelt: {
+        primary: [
+            {
+                name: 'Ceres',
+                radius: 0.475,
+                earthDaysToOrbitSun: 1680,
+            },
+            {
+                name: 'Vesta',
+                radius: 0.262,
+                earthDaysToOrbitSun: 1325,
+            },
+            {
+                name: 'Pallas',
+                radius: 0.225,
+                earthDaysToOrbitSun: 1686
+            },
+            {
+                name: 'Hygiea',
+                radius: 0.2,
+                earthDaysToOrbitSun: 2031
+            },
+        ],
+        secondary: [],
+        totalCount: 400, // true number is estimated in the billions within the main astroid belt
+        meanDistanceFromSun: 373
+    }
 };
+
+var count     = 0,
+    year      = 0,
+    dayOfYear = 0;
+
+function createTime() {
+   if (count !== 0 && count % 365 === 0) {
+        dayOfYear = 1;
+        year++;
+    } else  {
+        dayOfYear++;
+    }
+}
+
+setInterval(function() {
+    createTime();
+
+    count++;
+}, 150);
 
 function init() {
 
     return $.Deferred(function(promise) {
         Scene = {
             planets: [],
+            astroids: [],
 
             setContainer: function() {
                 Scene.container = document.createElement('div');
@@ -140,7 +186,7 @@ function init() {
             setCamera: function() {
                 Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000);
 
-                Scene.camera.position.set(1000, 400);
+                Scene.camera.position.set(0, 300, 100);
             },
 
             setCameraControls: function() {
@@ -194,7 +240,7 @@ function init() {
                                       map: texture,
                                       side: THREE.DoubleSide,
                                       transparent: true,
-                                      opacity: 0.8
+                                      opacity: 0.7
                                     });
 
                 texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
@@ -328,6 +374,12 @@ function init() {
                 return new THREE.ImageUtils.loadTexture('../textures/' + planet.name.toLowerCase() + '.jpg');
             },
 
+            addMoons: function(planet) {
+                return $.Deferred(function(promise) {
+
+                });
+            },
+
             build: function(planet) {
                 return $.Deferred(function(promise) {
                     // Create our orbit line geometry first
@@ -360,15 +412,15 @@ function init() {
                                     planetMaterial
                                  );
 
+                    // Attempt at adding Saturns axis tilt
                     if (planet.name = 'Saturn') {
-
                         var quaternion = new THREE.Quaternion();
-                        quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
+                        quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 2);
 
-                        var vector = new THREE.Vector3( 10, 0, 0 );
-                        vector.applyQuaternion( quaternion );
+                        var vector = new THREE.Vector3(10, 0, 0);
+                        vector.applyQuaternion(quaternion);
 
-                        thisPlanet.add( vector );
+                        thisPlanet.add(vector);
                     }
 
                     thisPlanet.name = planet.name;
@@ -395,7 +447,118 @@ function init() {
             addPlanet: function(planet) {
                 setTimeout(function() {
                     Scene.scene.add(planet);
-                }, 300);
+                }, 150);
+            }
+        };
+
+        var AstroidBelt = {
+            getTexture: function() {
+                return new THREE.ImageUtils.loadTexture('../textures/crust_tiny.jpg');
+            },
+
+            getRandomPointInSphere: function(radius) {
+                return new THREE.Vector3(
+                    ( Math.random() - 0.5 ) * 1.5 * radius,
+                    ( Math.random() - 0.5 ) * 1.5 * radius,
+                    ( Math.random() - 0.5 ) * 1.5 * radius
+                );
+            },
+
+            buildRandomPoints: function() {
+                var points = [];
+
+                for (var i = 0; i < 4; i ++) {
+                    var radius = Math.random() * 2.1;
+
+                    points.push(AstroidBelt.getRandomPointInSphere(radius));
+                }
+
+                return points;
+            },
+
+            positionAstroid: function(astroid, count) {
+                var degreesToRadianRatio = 0.0174532925;
+                    amplitude = SolarSystem.AstroidBelt.meanDistanceFromSun + Math.random() * 120; // randomize the amplitudes to spread them out
+
+                var posX = getOrbitAmplitute(amplitude)
+                            * Math.cos(count + 50
+                            * getAstroidRadian()
+                            * degreesToRadianRatio);
+
+                var posY = getOrbitAmplitute(amplitude)
+                            * Math.sin(count + 50
+                            * getAstroidRadian()
+                            * degreesToRadianRatio);
+
+                astroid.position.set(
+                    posX,
+                    0,
+                    posY
+                );
+            },
+
+            buildAstroid: function(index) {
+                return $.Deferred(function(promise) {
+                    var randomPoints = AstroidBelt.buildRandomPoints();
+
+                    var map = AstroidBelt.getTexture();
+
+                    map.wrapS = map.wrapT = THREE.RepeatWrapping;
+                    map.anisotropy = 2;
+
+                    var materials = [
+                        new THREE.MeshLambertMaterial({ ambient: 0xbbbbbb, map: map }),
+                        new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.1 })
+                    ];
+
+                    // Random convex mesh to represent an irregular, rock-like shape based on random points within a sphere where radius = n(random)
+                    var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), materials);
+
+                    AstroidBelt.positionAstroid(object, index);
+                    AstroidBelt.addAstroid(object);
+
+                    Scene.astroids.push(object);
+
+                    promise.resolve(object);
+                });
+            },
+
+            buildBelt: function() {
+                var astroids = SolarSystem.AstroidBelt.totalCount;
+
+                for (var i = 0; i < astroids; i++) {
+                    AstroidBelt.buildAstroid(i);
+                }
+            },
+
+            addAstroid: function(astroid) {
+                setTimeout(function() {
+                    Scene.scene.add(astroid);
+                }, 150);
+            }
+        };
+
+        var SolarSystemBuilder = {
+            buildAstroidBelt: function() {
+                return $.Deferred(function(promise) {
+                    AstroidBelt.buildBelt();
+
+                    promise.resolve();
+                });
+            },
+
+            buildPlanets: function() {
+                return $.Deferred(function(promise) {
+                    var promises = new Array();
+
+                    for (var i = 0; i < planets.length; i++) {
+                        var planetBuildPromise = PlanetBuilder.build(planets[i]);
+
+                        promises.push(planetBuildPromise);
+                    }
+
+                    promise.resolve(promises);
+                });
             }
         };
 
@@ -404,11 +567,11 @@ function init() {
         var startFor = new Date().getTime();
         var planets = SolarSystem.Planets;
 
-        for (var i = 0; i < planets.length; i++) {
-            $.when(PlanetBuilder.build(planets[i])).done(function(planet) {
-                // console.log('Planet builder done: ', planet);
+        $.when(SolarSystemBuilder.buildPlanets()).done(function() {
+            $.when(SolarSystemBuilder.buildAstroidBelt()).done(function() {
+                console.log('POW POW!!!!!!!!!!!!')
             });
-        }
+        });
 
         var endFor = new Date().getTime();
 
@@ -432,29 +595,9 @@ function getPlanetRadian(planet) {
     return planetRadian;
 }
 
-var count     = 0,
-    year      = 0,
-    dayOfYear = 0;
-
-function createTime() {
-    if (count !== 0 && count % 365 === 0) {
-        dayOfYear = 1;
-        year++;
-
-        // Jupiter ~ 11 years (11.88 years)
-        if (year % 11 === 0) {
-            console.log('\n1 full orbit for Jupiter: ', year);
-        }
-    } else {
-        dayOfYear++;
-    }
+function getAstroidRadian() {
+    return 360 / SolarSystem.AstroidBelt.primary[0].earthDaysToOrbitSun; // Using Ceres just as a reference point
 }
-
-setInterval(function() {
-    createTime();
-
-    count++;
-}, 100);
 
 function onWindowResize() {
     Scene.camera.aspect = window.innerWidth / window.innerHeight;
@@ -495,12 +638,11 @@ function positionPlanets() {
 }
 
 function render() {
-    var timer = Date.now() * 0.00002;
-
+    // var timer = Date.now() * 0.00002;
     // camera.position.x = Math.cos(timer) * Zoom;
     // camera.position.z = Math.sin(timer) * Zoom;
 
-    Scene.Sun.rotation.y = Math.cos(timer);
+    // Scene.Sun.rotation.y = Math.cos(timer);
 
     positionPlanets();
 
