@@ -162,9 +162,9 @@ function init() {
             astroids: [],
 
             setContainer: function() {
-                Scene.container = document.createElement('div');
+                Scene.container = document.getElementById('solar-system');
 
-                document.body.appendChild(Scene.container);
+                // document.body.appendChild(Scene.container);
             },
 
             setScene: function() {
@@ -204,10 +204,16 @@ function init() {
 
             setStats: function() {
                 Scene.stats = new Stats();
-                Scene.stats.domElement.style.position = 'absolute';
-                Scene.stats.domElement.style.top = '0px';
+                // Scene.stats.domElement.style.position = 'absolute';
+                // Scene.stats.domElement.style.top = '0px';
 
-                Scene.container.appendChild(Scene.stats.domElement);
+                // Scene.container.appendChild(Scene.stats.domElement);
+            },
+
+            setCameraPosition: function() {
+                Scene.camera.position.x = Zoom;
+                Scene.camera.position.z = Zoom;
+                Scene.camera.lookAt(Scene.scene.position);
             },
 
             init: function() {
@@ -215,9 +221,10 @@ function init() {
                 Scene.setScene();
                 Scene.setLights();
                 Scene.setCamera();
-                Scene.setCameraControls();
+                // Scene.setCameraControls();
                 Scene.setRender();
-                Scene.setStats();
+                // Scene.setStats();
+                Scene.setCameraPosition();
             }
         };
 
@@ -611,7 +618,7 @@ function animate() {
     requestAnimationFrame(animate);
 
     render();
-    Scene.stats.update();
+    // Scene.stats.update();
 }
 
 function positionPlanets() {
@@ -647,14 +654,18 @@ function render() {
     // Scene.Sun.rotation.y = Math.cos(timer);
 
     positionPlanets();
-
-    Scene.camera.position.x = Zoom;
-    Scene.camera.position.z = Zoom;
-    Scene.camera.lookAt(Scene.scene.position);
-
     Scene.renderer.render(Scene.scene, Scene.camera);
 }
 
 $.when(init()).done(function(scene) {
     animate();
+});
+
+$('#zoom').val(Zoom);
+
+// User Event Listeners
+$('#zoom').on('input', function(e) {
+    // console.log('changed', e.target.value)
+    Scene.camera.position.x = e.target.value;
+    Scene.camera.position.z = e.target.value;
 });
