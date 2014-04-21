@@ -1,21 +1,22 @@
 <html>
 	<head>
 		<title>The Solar System</title>
+        <link rel="stylesheet" type="text/css" href="icons/style.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
 	<body>
-        <input id="zoom" type="range" step="1" max="6500"/>
-        <div id="planets" class="planet-list-holder">
-            <ul class="planet-list">
-                <li>Mercury</li>
-                <li>Venus</li>
-                <li>Earth</li>
-                <li>Mars</li>
-                <li>Jupiter</li>
-                <li>Saturn</li>
-                <li>Uranus</li>
-                <li>Neptune</li>
-            </ul>
+        <div class="container">
+            <div class="control-panel">
+                <div class="zoom-control">
+                    <input id="zoom" type="range" step="1" max="6500"/>
+                </div>
+                <div class="planet-list-holder">
+                <span class="icon-font- icon-camera"></span>
+                    <ul id="planets" class="planet-list">
+                        <!-- list items built with js -->
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <div id="solar-system"></div>

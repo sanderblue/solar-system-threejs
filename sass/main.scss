@@ -1,41 +1,77 @@
+@import "bourbon/bourbon";
+@import "neat/neat";
 
+@import "icons";
 @import "fonts";
+
+$base_font_color: #BDBDBD;
+$base_font_family: Monospace;
+$base_link_color: #0080ff;
+
+html {
+    -webkit-font-smoothing: antialiased;
+}
 
 canvas {
     width: 100%;
     height: 100%;
+    -webkit-font-smoothing: antialiased
 }
 
 body {
-    color: #808080;
-    font-family: Monospace;
+    color: $base_font_color;
+    font-family: $base_font_family;
     font-size: 13px;
-    text-align: center;
     background: #000;
     background-color: #000;
     margin: 0px;
     overflow: hidden;
+    z-index: 0;
+    -webkit-font-smoothing: antialiased;
 }
 
-#info {
-    position: absolute;
-    top: 0px; width: 100%;
-    padding: 5px;
-    display: none;
+a { color: $base_link_color; }
+
+.container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    padding: 15px;
+    background: transparent;
 }
 
-a {
-    color: #0080ff;
-}
-
-.planet-list-holder {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: rgba(50, 50, 50, 0.15);
+.control-panel {
+    display: inline-block;
+    background: rgba(30, 30, 30, 0.5);
     padding: 20px;
+    z-index: 1;
+
+    i {
+        color: $base_font_color;
+    }
+}
+
+.zoom-control {
+    padding-bottom: 10px;
+    border-bottom: 1px solid darken($base_font_color, 10%);
 }
 
 .planet-list {
     list-style: none;
+    padding: 10px 0 0 0;
+    margin: 0;
+
+    .planet {
+
+        @include transition(color .25s ease);
+
+        &:hover {
+            cursor: pointer;
+            color: lighten($base_font_color, 15%);
+        }
+    }
 }

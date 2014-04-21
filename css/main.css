@@ -1,41 +1,121 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
 
-/*@import "fonts";*/
+/*
+ *  Font Faces
+ */
+@font-face {
+  font-family: OpenSansBold;
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/open-sans/heavy/OpenSans-Bold-webfont.eot");
+  src: url("../fonts/open-sans/heavy/OpenSans-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/heavy/OpenSans-Bold-webfont.woff") format("woff"), url("../fonts/open-sans/heavy/OpenSans-Bold-webfont.ttf") format("truetype"), url("../fonts/open-sans/heavy/OpenSans-Bold-webfont.svg#OpenSansBold") format("svg"); }
+@font-face {
+  font-family: OpenSansRegular;
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/open-sans/regular/OpenSans-Regular-webfont.eot");
+  src: url("../fonts/open-sans/regular/OpenSans-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/regular/OpenSans-Regular-webfont.woff") format("woff"), url("../fonts/open-sans/regular/OpenSans-Regular-webfont.ttf") format("truetype"), url("../fonts/open-sans/regular/OpenSans-Regular-webfont.svg#OpenSansRegular") format("svg"); }
+@font-face {
+  font-family: OpenSansLight;
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/open-sans/light/OpenSans-Light-webfont.eot");
+  src: url("../fonts/open-sans/light/OpenSans-Light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/light/OpenSans-Light-webfont.woff") format("woff"), url("../fonts/open-sans/light/OpenSans-Light-webfont.ttf") format("truetype"), url("../fonts/open-sans/light/OpenSans-Light-webfont.svg#OpenSansLight") format("svg"); }
+@font-face {
+  font-family: OpenSansBoldItalic;
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/open-sans/heavy-italic/OpenSans-BoldItalic-webfont.eot");
+  src: url("../fonts/open-sans/heavy-italic/OpenSans-BoldItalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/heavy-italic/OpenSans-BoldItalic-webfont.woff") format("woff"), url("../fonts/open-sans/heavy-italic/OpenSans-BoldItalic-webfont.ttf") format("truetype"), url("../fonts/open-sans/heavy-italic/OpenSans-BoldItalic-webfont.svg#OpenSansBoldItalic") format("svg"); }
+@font-face {
+  font-family: OpenSansRegularItalic;
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/open-sans/regular-italic/OpenSans-RegularItalic-webfont.eot");
+  src: url("../fonts/open-sans/regular-italic/OpenSans-RegularItalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/regular-italic/OpenSans-RegularItalic-webfont.woff") format("woff"), url("../fonts/open-sans/regular-italic/OpenSans-RegularItalic-webfont.ttf") format("truetype"), url("../fonts/open-sans/regular-italic/OpenSans-RegularItalic-webfont.svg#OpenSansRegularItalic") format("svg"); }
+@font-face {
+  font-family: OpenSansLightItalic;
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/open-sans/light-italic/OpenSans-LightItalic-webfont.eot");
+  src: url("../fonts/open-sans/light-italic/OpenSans-LightItalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/light-italic/OpenSans-LightItalic-webfont.woff") format("woff"), url("../fonts/open-sans/light-italic/OpenSans-LightItalic-webfont.ttf") format("truetype"), url("../fonts/open-sans/light-italic/OpenSans-LightItalic-webfont.svg#OpenSansLightItalic") format("svg"); }
+@font-face {
+  font-family: GloberBold;
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/glober/heavy/glober_bold-webfont.eot");
+  src: url("../fonts/glober/heavy/glober_bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/glober/heavy/glober_bold-webfont.woff") format("woff"), url("../fonts/glober/heavy/glober_bold-webfont.ttf") format("truetype"), url("../fonts/glober/heavy/glober_bold-webfont.svg#GloberBold") format("svg"); }
+@font-face {
+  font-family: GloberLight;
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/glober/light/glober_thin-webfont.eot");
+  src: url("../fonts/glober/light/glober_thin-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/glober/light/glober_thin-webfont.woff") format("woff"), url("../fonts/glober/light/glober_thin-webfont.ttf") format("truetype"), url("../fonts/glober/light/glober_thin-webfont.svg#GloberLight") format("svg"); }
+/*
+ *  Font Families
+ */
+/*
+ *  Font Variables
+ */
+/*
+ *  Font Sizes
+ */
+html {
+  -webkit-font-smoothing: antialiased; }
 
 canvas {
-    width: 100%;
-    height: 100%;
-}
+  width: 100%;
+  height: 100%;
+  -webkit-font-smoothing: antialiased; }
 
 body {
-    color: #808080;
-    font-family: Monospace;
-    font-size: 13px;
-    text-align: center;
-    background: #000;
-    background-color: #000;
-    margin: 0px;
-    overflow: hidden;
-}
-
-#info {
-    position: absolute;
-    top: 0px; width: 100%;
-    padding: 5px;
-    display: none;
-}
+  color: #bdbdbd;
+  font-family: Monospace;
+  font-size: 13px;
+  background: #000;
+  background-color: #000;
+  margin: 0px;
+  overflow: hidden;
+  z-index: 0;
+  -webkit-font-smoothing: antialiased; }
 
 a {
-    color: #0080ff;
-}
+  color: #0080ff; }
 
-.planet-list-holder {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: rgba(50, 50, 50, 0.15);
-    padding: 20px;
-}
+.container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+  background: transparent; }
+
+.control-panel {
+  display: inline-block;
+  background: rgba(30, 30, 30, 0.5);
+  padding: 20px;
+  z-index: 1; }
+  .control-panel i {
+    color: #bdbdbd; }
+
+.zoom-control {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #a4a4a4; }
 
 .planet-list {
-    list-style: none;
-}
+  list-style: none;
+  padding: 10px 0 0 0;
+  margin: 0; }
+  .planet-list .planet {
+    -webkit-transition: color 0.25s ease;
+    -moz-transition: color 0.25s ease;
+    transition: color 0.25s ease; }
+    .planet-list .planet:hover {
+      cursor: pointer;
+      color: #e3e3e3; }

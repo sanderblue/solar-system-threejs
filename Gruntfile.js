@@ -7,14 +7,14 @@ module.exports = function(grunt) {
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
             },
             build: {
-                src: 'src/<%= pkg.name %>.js',
-                dest: 'build/<%= pkg.name %>.min.js'
+                src: 'js/build/<%= pkg.name %>.js',
+                dest: 'js/build/<%= pkg.name %>.min.js'
             }
         },
         sass: {
             primary: {
                 files: {
-                    "css/main.css": "sass/*.scss"
+                    "css/main.css": "sass/main.scss"
                 }
             }
         },
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
         },
         watch: {
             css: {
-                files: ['sass/*.scss', 'sass/*.scss'],
+                files: ['sass/*.scss'],
                 tasks: ['sass:primary']
             }
 

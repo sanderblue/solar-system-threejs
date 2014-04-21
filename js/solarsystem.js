@@ -210,10 +210,12 @@ function init() {
                 // Scene.container.appendChild(Scene.stats.domElement);
             },
 
-            setCameraPosition: function() {
+            setCameraPosition: function(target) {
+                Scene.camera.focalPoint = target;
                 Scene.camera.position.x = Zoom;
                 Scene.camera.position.z = Zoom;
-                Scene.camera.lookAt(Scene.scene.position);
+
+                Scene.camera.lookAt(target);
             },
 
             init: function() {
@@ -224,7 +226,7 @@ function init() {
                 // Scene.setCameraControls();
                 Scene.setRender();
                 // Scene.setStats();
-                Scene.setCameraPosition();
+                // Scene.setCameraPosition(Scene.scene.position);
             }
         };
 
@@ -421,7 +423,7 @@ function init() {
                                  );
 
                     // Attempt at adding Saturns axis tilt
-                    if (planet.name = 'Saturn') {
+                    if (planet.name == 'Saturn') {
                         var quaternion = new THREE.Quaternion();
                         quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 2);
 
@@ -572,6 +574,8 @@ function init() {
 
         SunBuilder.build();
 
+        Scene.camera.focalPoint = Scene.Sun.position;
+
         var startFor = new Date().getTime();
         var planets = SolarSystem.Planets;
 
@@ -646,26 +650,56 @@ function positionPlanets() {
 }
 
 function render() {
-    // var timer = Date.now() * 0.00002;
-
-    // camera.position.x = Math.cos(timer) * Zoom;
-    // camera.position.z = Math.sin(timer) * Zoom;
-
-    // Scene.Sun.rotation.y = Math.cos(timer);
-
     positionPlanets();
     Scene.renderer.render(Scene.scene, Scene.camera);
+    Scene.setCameraPosition(Scene.camera.focalPoint);
 }
 
 $.when(init()).done(function(scene) {
+    $('#zoom').val(Zoom);
+
+    Scene.camera.focalPoint = Scene.Sun.position;
     animate();
 });
 
-$('#zoom').val(Zoom);
-
 // User Event Listeners
 $('#zoom').on('input', function(e) {
-    // console.log('changed', e.target.value)
-    Scene.camera.position.x = e.target.value;
-    Scene.camera.position.z = e.target.value;
+    Zoom = e.target.value;
+});
+
+var UIController = {
+    buildPlanetList: function() {
+        return $.Deferred(function(promise) {
+            var listElement = $('#planets');
+
+            listElement.children().remove();
+
+            for (var i = 0; i < Scene.planets.length; i++) {
+                var id = Scene.planets[i].id;
+
+                listElement.append('<li id="planet-'+ id +'" class="planet" data-id="'+ id +'">'+ Scene.planets[i].name +'</li>');
+            }
+
+            promise.resolve();
+        });
+    },
+
+    findPlanet: function(id) {
+        var planets = Scene.planets;
+
+        for (var i = 0; i < planets.length; i++) {
+            if (planets[i].id == id) {
+                return planets[i];
+            }
+        }
+    }
+};
+
+$.when(UIController.buildPlanetList()).done(function() {
+    $('.planet').on('click', function() {
+        var id = $(this).data('id');
+        var matchedPlanet = UIController.findPlanet(id);
+
+        Scene.camera.focalPoint = matchedPlanet.position;
+    });
 });
