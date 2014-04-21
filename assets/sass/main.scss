@@ -32,6 +32,8 @@ body {
 
 a { color: $base_link_color; }
 
+h1,h2,h3,h4,h5,h6 { margin: 0; }
+
 .container {
     position: fixed;
     top: 0;
@@ -49,6 +51,7 @@ a { color: $base_link_color; }
     background: rgba(30, 30, 30, 0.5);
     padding: 20px;
     z-index: 1;
+    text-align: center;
 
     i {
         color: $base_font_color;
@@ -56,18 +59,27 @@ a { color: $base_link_color; }
 }
 
 .zoom-control {
-    padding-bottom: 10px;
-    border-bottom: 1px solid darken($base_font_color, 10%);
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(110, 110, 110, 0.3);
+}
+
+.zoom-control {
+    .control-panel-header { margin-top: 5px; }
+}
+
+.planet-list-holder {
+    .control-panel-header { margin-top: 15px; }
 }
 
 .planet-list {
     list-style: none;
-    padding: 10px 0 0 0;
+    padding: 15px 0 0 0;
     margin: 0;
+    text-align: center;
 
     .planet {
-
         @include transition(color .25s ease);
+        line-height: 16px;
 
         &:hover {
             cursor: pointer;
@@ -75,3 +87,5 @@ a { color: $base_link_color; }
         }
     }
 }
+
+.control-panel-header { font-size: 16px; }

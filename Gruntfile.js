@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         sass: {
             primary: {
                 files: {
-                    "css/main.css": "sass/main.scss"
+                    "assets/css/main.css": "assets/sass/main.scss"
                 }
             }
         },
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
         },
         watch: {
             css: {
-                files: ['sass/*.scss'],
+                files: ['assets/sass/*.scss'],
                 tasks: ['sass:primary']
             }
 

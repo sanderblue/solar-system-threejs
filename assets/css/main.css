@@ -85,6 +85,9 @@ body {
 a {
   color: #0080ff; }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0; }
+
 .container {
   position: fixed;
   top: 0;
@@ -100,22 +103,34 @@ a {
   display: inline-block;
   background: rgba(30, 30, 30, 0.5);
   padding: 20px;
-  z-index: 1; }
+  z-index: 1;
+  text-align: center; }
   .control-panel i {
     color: #bdbdbd; }
 
 .zoom-control {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #a4a4a4; }
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(110, 110, 110, 0.3); }
+
+.zoom-control .control-panel-header {
+  margin-top: 5px; }
+
+.planet-list-holder .control-panel-header {
+  margin-top: 15px; }
 
 .planet-list {
   list-style: none;
-  padding: 10px 0 0 0;
-  margin: 0; }
+  padding: 15px 0 0 0;
+  margin: 0;
+  text-align: center; }
   .planet-list .planet {
     -webkit-transition: color 0.25s ease;
     -moz-transition: color 0.25s ease;
-    transition: color 0.25s ease; }
+    transition: color 0.25s ease;
+    line-height: 16px; }
     .planet-list .planet:hover {
       cursor: pointer;
       color: #e3e3e3; }
+
+.control-panel-header {
+  font-size: 16px; }

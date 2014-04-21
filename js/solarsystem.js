@@ -152,7 +152,7 @@ setInterval(function() {
     createTime();
 
     count++;
-}, 150);
+}, 300);
 
 function init() {
 
@@ -640,6 +640,8 @@ function positionPlanets() {
                     * Math.sin(count
                     * getPlanetRadian(SolarSystem.Planets[i])
                     * degreesToRadianRatio);
+
+        Scene.planets[i].rotation.y += 0.0009;
 
         Scene.planets[i].position.set(
             posX,
