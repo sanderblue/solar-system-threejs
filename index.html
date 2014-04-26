@@ -1,48 +1,35 @@
 <html>
 	<head>
 		<title>The Solar System</title>
-		<style>
-
-			canvas {
-				width: 100%;
-				height: 100%;
-			}
-
-			body {
-				color: #808080;
-				font-family:Monospace;
-				font-size:13px;
-				text-align:center;
-				background: #000;
-
-				background-color: #fff;
-				margin: 0px;
-				overflow: hidden;
-			}
-
-			#info {
-				position: absolute;
-				top: 0px; width: 100%;
-				padding: 5px;
-			}
-
-			a {
-
-				color: #0080ff;
-			}
-
-		</style>
+        <link rel="stylesheet" type="text/css" href="assets/icons/style.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 	</head>
 	<body>
-        <!-- <div id="container"></div> -->
+        <div class="container">
+            <div class="control-panel">
+                <div class="zoom-control">
+                    <h3 class="control-panel-header">Zoom</h3>
+                    <input id="zoom" type="range" step="1" max="6500"/>
+                </div>
+                <div class="planet-list-holder">
+                    <h3 class="control-panel-header"><span class="icon-font- icon-camera"></span> Camera Views</h3>
+                    <ul id="planets" class="planet-list">
+                        <!-- list items built with js -->
+                    </ul>
+                    <div id="reset-camera" class="reset-camera">Reset Camera</div>
+                </div>
+            </div>
+        </div>
 
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="js/lib/three.min.js"></script>
-        <script src="js/lib/OrbitControls.js"></script>
-        <script src="js/lib/convexgeometry.js"></script>
-        <script src="js/lib/detector.js"></script>
-        <script src="js/lib/stats.js"></script>
-        <script src="js/solarsystem.js"></script>
+        <div id="solar-system"></div>
+
+        <script type="text/javascript" src="js/lib/jquery.js"></script>
+        <script type="text/javascript" src="js/lib/three.min.js"></script>
+        <script type="text/javascript" src="js/lib/OrbitControls.js"></script>
+        <script type="text/javascript" src="js/lib/convexgeometry.js"></script>
+        <script type="text/javascript" src="js/lib/detector.js"></script>
+        <script type="text/javascript" src="js/lib/stats.js"></script>
+        <script type="text/javascript" src="js/solarsystem.js"></script>
 
         <script>
             (function(i, s, o, g, r, a, m) {

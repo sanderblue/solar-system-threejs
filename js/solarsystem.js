@@ -152,7 +152,7 @@ setInterval(function() {
     createTime();
 
     count++;
-}, 150);
+}, 380);
 
 function init() {
 
@@ -162,9 +162,9 @@ function init() {
             astroids: [],
 
             setContainer: function() {
-                Scene.container = document.createElement('div');
+                Scene.container = document.getElementById('solar-system');
 
-                document.body.appendChild(Scene.container);
+                // document.body.appendChild(Scene.container);
             },
 
             setScene: function() {
@@ -204,10 +204,18 @@ function init() {
 
             setStats: function() {
                 Scene.stats = new Stats();
-                Scene.stats.domElement.style.position = 'absolute';
-                Scene.stats.domElement.style.top = '0px';
+                // Scene.stats.domElement.style.position = 'absolute';
+                // Scene.stats.domElement.style.top = '0px';
 
-                Scene.container.appendChild(Scene.stats.domElement);
+                // Scene.container.appendChild(Scene.stats.domElement);
+            },
+
+            setCameraPosition: function(target) {
+                Scene.camera.focalPoint = target;
+                Scene.camera.position.x = Zoom;
+                Scene.camera.position.z = Zoom;
+
+                Scene.camera.lookAt(target);
             },
 
             init: function() {
@@ -215,9 +223,10 @@ function init() {
                 Scene.setScene();
                 Scene.setLights();
                 Scene.setCamera();
-                Scene.setCameraControls();
+                // Scene.setCameraControls();
                 Scene.setRender();
-                Scene.setStats();
+                // Scene.setStats();
+                // Scene.setCameraPosition(Scene.scene.position);
             }
         };
 
@@ -414,7 +423,7 @@ function init() {
                                  );
 
                     // Attempt at adding Saturns axis tilt
-                    if (planet.name = 'Saturn') {
+                    if (planet.name == 'Saturn') {
                         var quaternion = new THREE.Quaternion();
                         quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 2);
 
@@ -565,6 +574,8 @@ function init() {
 
         SunBuilder.build();
 
+        Scene.camera.focalPoint = Scene.Sun.position;
+
         var startFor = new Date().getTime();
         var planets = SolarSystem.Planets;
 
@@ -611,13 +622,13 @@ function animate() {
     requestAnimationFrame(animate);
 
     render();
-    Scene.stats.update();
+    // Scene.stats.update();
 }
 
 function positionPlanets() {
     var degreesToRadianRatio = 0.0174532925,
-        planets = Scene.planets,
-        timer   = Date.now() * 0.00002;
+        planets = Scene.planets
+    ;
 
     for (var i = 0; i < planets.length; i++) {
         var posX = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
@@ -630,6 +641,8 @@ function positionPlanets() {
                     * getPlanetRadian(SolarSystem.Planets[i])
                     * degreesToRadianRatio);
 
+        Scene.planets[i].rotation.y += 0.0021;
+
         Scene.planets[i].position.set(
             posX,
             0,
@@ -639,22 +652,66 @@ function positionPlanets() {
 }
 
 function render() {
-    // var timer = Date.now() * 0.00002;
-
-    // camera.position.x = Math.cos(timer) * Zoom;
-    // camera.position.z = Math.sin(timer) * Zoom;
-
-    // Scene.Sun.rotation.y = Math.cos(timer);
-
     positionPlanets();
-
-    Scene.camera.position.x = Zoom;
-    Scene.camera.position.z = Zoom;
-    Scene.camera.lookAt(Scene.scene.position);
-
     Scene.renderer.render(Scene.scene, Scene.camera);
+    Scene.setCameraPosition(Scene.camera.focalPoint);
 }
 
 $.when(init()).done(function(scene) {
+    $('#zoom').val(Zoom);
+
+    Scene.camera.focalPoint = Scene.Sun.position;
     animate();
+});
+
+// User Event Listeners
+$('#zoom').on('input', function(e) {
+    Zoom = e.target.value;
+});
+
+var UIController = {
+    buildPlanetList: function() {
+        return $.Deferred(function(promise) {
+            var listElement = $('#planets');
+
+            listElement.children().remove();
+
+            for (var i = 0; i < Scene.planets.length; i++) {
+                var id = Scene.planets[i].id;
+
+                listElement.append('<li id="planet-'+ id +'" class="planet" data-id="'+ id +'">'+ Scene.planets[i].name +'</li>');
+            }
+
+            promise.resolve();
+        });
+    },
+
+    findPlanet: function(id) {
+        var planets = Scene.planets;
+
+        for (var i = 0; i < planets.length; i++) {
+            if (planets[i].id == id) {
+                return planets[i];
+            }
+        }
+    },
+
+    initResetView: function() {
+        var resetButton = $('#reset-camera');
+
+        resetButton.on('click', function() {
+            Scene.camera.focalPoint = Scene.Sun.position;
+        });
+    }
+};
+
+$.when(UIController.buildPlanetList()).done(function() {
+    $('.planet').on('click', function() {
+        var id = $(this).data('id');
+        var matchedPlanet = UIController.findPlanet(id);
+
+        Scene.camera.focalPoint = matchedPlanet.position;
+    });
+
+    UIController.initResetView();
 });
