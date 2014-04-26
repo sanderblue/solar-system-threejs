@@ -152,7 +152,7 @@ setInterval(function() {
     createTime();
 
     count++;
-}, 300);
+}, 380);
 
 function init() {
 
@@ -627,8 +627,8 @@ function animate() {
 
 function positionPlanets() {
     var degreesToRadianRatio = 0.0174532925,
-        planets = Scene.planets,
-        timer   = Date.now() * 0.00002;
+        planets = Scene.planets
+    ;
 
     for (var i = 0; i < planets.length; i++) {
         var posX = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
@@ -641,7 +641,7 @@ function positionPlanets() {
                     * getPlanetRadian(SolarSystem.Planets[i])
                     * degreesToRadianRatio);
 
-        Scene.planets[i].rotation.y += 0.0009;
+        Scene.planets[i].rotation.y += 0.0021;
 
         Scene.planets[i].position.set(
             posX,
@@ -694,6 +694,14 @@ var UIController = {
                 return planets[i];
             }
         }
+    },
+
+    initResetView: function() {
+        var resetButton = $('#reset-camera');
+
+        resetButton.on('click', function() {
+            Scene.camera.focalPoint = Scene.Sun.position;
+        });
     }
 };
 
@@ -704,4 +712,6 @@ $.when(UIController.buildPlanetList()).done(function() {
 
         Scene.camera.focalPoint = matchedPlanet.position;
     });
+
+    UIController.initResetView();
 });

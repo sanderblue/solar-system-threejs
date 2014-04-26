@@ -109,20 +109,26 @@ h1, h2, h3, h4, h5, h6 {
     color: #bdbdbd; }
 
 .zoom-control {
-  padding-bottom: 15px;
-  border-bottom: 1px solid rgba(110, 110, 110, 0.3); }
-
-.zoom-control .control-panel-header {
-  margin-top: 5px; }
+  padding-bottom: 15px; }
+  .zoom-control .control-panel-header {
+    margin-top: 5px; }
+  .zoom-control input {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg); }
 
 .planet-list-holder .control-panel-header {
   margin-top: 15px; }
 
 .planet-list {
   list-style: none;
-  padding: 15px 0 0 0;
-  margin: 0;
-  text-align: center; }
+  padding: 15px 0 15px 0;
+  margin: 10px auto;
+  text-align: center;
+  border-top: 1px solid rgba(110, 110, 110, 0.3);
+  border-bottom: 1px solid rgba(110, 110, 110, 0.3); }
   .planet-list .planet {
     -webkit-transition: color 0.25s ease;
     -moz-transition: color 0.25s ease;
@@ -134,3 +140,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .control-panel-header {
   font-size: 16px; }
+
+.reset-camera:hover {
+  cursor: pointer; }
