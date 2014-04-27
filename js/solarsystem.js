@@ -4,8 +4,9 @@ if (!Detector.webgl) {
 
 var SolarSystem,
     Zoom,
-    Scene;
-
+    Scene,
+    ms
+;
 
 Zoom = 1600;
 
@@ -150,7 +151,7 @@ function createTime() {
         dayOfYear++;
     }
 
-    if (count !== 0 && count % 359 === 0) {
+    if (count !== 0 && count % 360 === 0) {
         degree = 1;
     } else {
         degree++;
@@ -164,9 +165,14 @@ setInterval(function() {
 }, 1000);
 
 setInterval(function() {
-    var ms = new Date().getMilliseconds();
+    ms = new Date().getMilliseconds();
 
-    currentTime =  ms; // parseFloat(Number(dayOfYear + '.' + ms));
+    if (currentTime < ms && currentTime < 999) {
+        currentTime =  ms;
+    } else {
+        currentTime = ms;
+    }
+
 }, 10);
 
 function init() {
@@ -639,30 +645,11 @@ function animate() {
     // Scene.stats.update();
 }
 
+
 function positionPlanets() {
     var degreesToRadianRatio = 0.0174532925,
         planets = Scene.planets
     ;
-
-    // posX = Cos(angle) * radius
-
-    // var blah = Math.cos(dayOfYear // parseFloat(dayOfYear + '.' + currentTime)
-    //                 * getPlanetRadian(SolarSystem.Planets[2])
-    //                 * degreesToRadianRatio);
-
-    var dayAndTime = parseFloat(Number(degree + '.' + currentTime).toFixed(2));
-
-
-    var radian1 = degree * degreesToRadianRatio;
-    var radian2 = parseFloat(Number(dayAndTime* degreesToRadianRatio).toFixed(10));
-
-    var x1 = Math.cos(radian1) * 150;
-    var x2 = parseFloat(Number(Math.cos(radian2) * 150).toFixed(10));
-
-    if (degree < 12) {
-        // ConsoleController.report('1', degree, x1, parseFloat(degree + '.' + currentTime), radian1);
-        ConsoleController.report('2', degree, dayAndTime, new Date().getMilliseconds(), radian2, x2);
-    }
 
     for (var i = 0; i < planets.length; i++) {
         var posX = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
@@ -679,10 +666,6 @@ function positionPlanets() {
                     * degreesToRadianRatio);
 
         Scene.planets[i].rotation.y += 0.0021;
-
-        if (i === 1) {
-            // console.log(parseInt(posX))
-        }
 
         Scene.planets[i].position.set(
             parseInt(posX),
