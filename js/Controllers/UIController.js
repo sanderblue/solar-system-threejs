@@ -22,7 +22,7 @@ var UIController = {
         resetButton.on('click', function() {
             Scene.camera.focalPoint = Scene.Sun.position;
         });
-    }
+    },
 
     buildPlanetList: function() {
         return $.Deferred(function(promise) {

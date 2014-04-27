@@ -152,7 +152,7 @@ setInterval(function() {
     createTime();
 
     count++;
-}, 380);
+}, 1000);
 
 function init() {
 
@@ -603,8 +603,7 @@ function getOrbitAmplitute(distanceFromSun) {
 // Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
 // This ratio helps create an accurate representation of each planet's location along its orbit circumference.
 function getPlanetRadian(planet) {
-    var planetRadian = 360 / planet.earthDaysToOrbitSun;
-    return planetRadian;
+    return 360 / planet.earthDaysToOrbitSun;
 }
 
 function getAstroidRadian() {
@@ -627,7 +626,8 @@ function animate() {
 
 function positionPlanets() {
     var degreesToRadianRatio = 0.0174532925,
-        planets = Scene.planets
+        planets = Scene.planets,
+        ms      = new Date().getMilliseconds()
     ;
 
     for (var i = 0; i < planets.length; i++) {
@@ -644,9 +644,9 @@ function positionPlanets() {
         Scene.planets[i].rotation.y += 0.0021;
 
         Scene.planets[i].position.set(
-            posX,
+            parseFloat(posX + '.' + ms),
             0,
-            posY
+            parseFloat(posY + '.' + ms)
         );
     }
 }
