@@ -25,10 +25,8 @@ var ConsoleController = {
 
     turnOnConsole: function() {
         if (typeof console !== 'undefined') {
-            var logData = '\n' + Scene.planets[2].position;
-
             ConsoleController.interval = setInterval(function() {
-                console.log(Scene.planets[2].position);
+                console.log('test') //Scene.planets[2].position);
             }, 100);
         }
     },
@@ -49,6 +47,22 @@ var ConsoleController = {
 
     showPlanetPosition: function(planet) {
 
+    },
+
+    /*
+     * @arg columnated (boolean)
+     *
+     * If columnated = true, return each item with line break per item.
+     */
+    report: function(columnated) {
+        if (typeof columnated === 'boolean') {
+            for (var i = 0; i < arguments.length; i++) {
+                console.log(arguments[i]);
+            }
+            return;
+        }
+
+        console.log('\n', arguments);
     }
 };
 

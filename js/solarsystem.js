@@ -138,15 +138,22 @@ SolarSystem = {
 var count       = 0,
     year        = 0,
     dayOfYear   = 0,
-    currentTime = 0
+    currentTime = 0,
+    degree      = 0
 ;
 
 function createTime() {
-   if (count !== 0 && count % 365 === 0) {
+    if (count !== 0 && count % 365 === 0) {
         dayOfYear = 1;
         year++;
     } else  {
         dayOfYear++;
+    }
+
+    if (count !== 0 && count % 359 === 0) {
+        degree = 1;
+    } else {
+        degree++;
     }
 }
 
@@ -637,27 +644,50 @@ function positionPlanets() {
         planets = Scene.planets
     ;
 
+    // posX = Cos(angle) * radius
+
+    // var blah = Math.cos(dayOfYear // parseFloat(dayOfYear + '.' + currentTime)
+    //                 * getPlanetRadian(SolarSystem.Planets[2])
+    //                 * degreesToRadianRatio);
+
+    var dayAndTime = parseFloat(Number(degree + '.' + currentTime).toFixed(2));
+
+
+    var radian1 = degree * degreesToRadianRatio;
+    var radian2 = parseFloat(Number(dayAndTime* degreesToRadianRatio).toFixed(10));
+
+    var x1 = Math.cos(radian1) * 150;
+    var x2 = parseFloat(Number(Math.cos(radian2) * 150).toFixed(10));
+
+    if (degree < 12) {
+        // ConsoleController.report('1', degree, x1, parseFloat(degree + '.' + currentTime), radian1);
+        ConsoleController.report('2', degree, dayAndTime, new Date().getMilliseconds(), radian2, x2);
+    }
+
     for (var i = 0; i < planets.length; i++) {
         var posX = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
-                    * Math.cos(parseFloat(dayOfYear + '.' + currentTime)
-                    * getPlanetRadian(SolarSystem.Planets[i])
-                    * degreesToRadianRatio);
+                    * Math.cos(
+                        (
+                            dayOfYear * getPlanetRadian(SolarSystem.Planets[i])
+                        )
+                        * degreesToRadianRatio
+                    );
 
         var posY = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
-                    * Math.sin(parseFloat(dayOfYear + '.' + currentTime)
+                    * Math.sin(dayOfYear
                     * getPlanetRadian(SolarSystem.Planets[i])
                     * degreesToRadianRatio);
 
         Scene.planets[i].rotation.y += 0.0021;
 
         if (i === 1) {
-            // console.log(parseFloat(posX + '.' + currentTime))
+            // console.log(parseInt(posX))
         }
 
         Scene.planets[i].position.set(
-            parseFloat(posX + '.' + currentTime),
+            parseInt(posX),
             0,
-            parseFloat(posY + '.' + currentTime)
+            parseInt(posY)
         );
     }
 }
