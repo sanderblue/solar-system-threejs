@@ -9,7 +9,7 @@
             <div class="control-panel">
                 <div class="zoom-control">
                     <h3 class="control-panel-header">Zoom</h3>
-                    <input id="zoom" type="range" step="1" max="6500"/>
+                    <input id="zoom" type="range" step="1" max="10000"/>
                 </div>
                 <div class="planet-list-holder">
                     <h3 class="control-panel-header"><span class="icon-font- icon-camera"></span> Camera Views</h3>
@@ -30,10 +30,11 @@
         <script type="text/javascript" src="js/lib/convexgeometry.js"></script>
         <script type="text/javascript" src="js/lib/detector.js"></script>
         <script type="text/javascript" src="js/lib/stats.js"></script>
-        <script type="text/javascript" src="js/Controllers/DateController.js"></script>
-        <!-- <script type="text/javascript" src="js/Controllers/ConsoleController.js"></script>
+        <script type="text/javascript" src="js/Extensions/Date.js"></script>
+        <script type="text/javascript" src="js/Controllers/TimeController.js"></script>
+        <script type="text/javascript" src="js/Controllers/ConsoleController.js"></script>
         <script type="text/javascript" src="js/solarsystem.js"></script>
-        <script type="text/javascript" src="js/Controllers/UIController.js"></script> -->
+        <script type="text/javascript" src="js/Controllers/UIController.js"></script>
 
         <script>
             (function(i, s, o, g, r, a, m) {
@@ -47,25 +48,6 @@
 
             ga('create', 'UA-41944984-1', 'sanderblue.com');
             ga('send', 'pageview');
-
-            var timeStringToDecimal = function (time) {
-                var hoursMinutes = time.split(/[.: ]/).slice(0, 3),
-                    hours        = parseInt(hoursMinutes[0], 10),
-                    minutes      = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0
-                ;
-
-                console.log(hoursMinutes);
-
-                return hours + minutes / 60;
-            };
-
-            var today = new Date();
-            var d_o_y = today.getDOY();
-
-            var d_o_y_decimal = [d_o_y + timeStringToDecimal(today.toTimeString()) / 24];
-            console.log(d_o_y);
-            console.log(d_o_y_decimal);
-            // return;
         </script>
 	</body>
 </html>
