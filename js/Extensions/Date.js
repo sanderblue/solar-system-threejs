@@ -13,3 +13,7 @@ Date.prototype.timeStringToDecimal = function () {
 
     return hours + minutes / 60;
 };
+
+Date.prototype.getDOYwithTimeAsDecimal = function() {
+   return this.getDOY() + this.timeStringToDecimal() / 24;
+};

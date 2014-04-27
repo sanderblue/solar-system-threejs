@@ -4,24 +4,14 @@ var TimeController = {
     dayInterval: 1000,
 
     createTime: function() {
-        var today       = new Date(),
-            timeDecimal = today.timeStringToDecimal(),
-            dayOfYear   = today.getDOY()
-        ;
-
-        TimeController.dayWithTimeAsDecimal = dayOfYear + timeDecimal / 24;
-
-        console.log(TimeController.dayWithTimeAsDecimal)
+        TimeController.dayWithTimeAsDecimal = new Date().getDOYwithTimeAsDecimal();
     },
 
     startTime: function() {
         TimeController.dayIntervalObj = setInterval(function() {
-            var today       = new Date(),
-                timeDecimal = today.timeStringToDecimal(),
-                dayOfYear   = today.getDOY()
-            ;
 
-            TimeController.dayWithTimeAsDecimal = dayOfYear + timeDecimal / 24
+            TimeController.dayWithTimeAsDecimal = new Date().getDOYwithTimeAsDecimal();
+
         }, TimeController.dayInterval);
     },
 
