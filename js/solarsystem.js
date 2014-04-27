@@ -135,9 +135,11 @@ SolarSystem = {
     }
 };
 
-var count     = 0,
-    year      = 0,
-    dayOfYear = 0;
+var count       = 0,
+    year        = 0,
+    dayOfYear   = 0,
+    currentTime = 0
+;
 
 function createTime() {
    if (count !== 0 && count % 365 === 0) {
@@ -153,6 +155,12 @@ setInterval(function() {
 
     count++;
 }, 1000);
+
+setInterval(function() {
+    var ms = new Date().getMilliseconds();
+
+    currentTime =  ms; // parseFloat(Number(dayOfYear + '.' + ms));
+}, 10);
 
 function init() {
 
@@ -626,27 +634,30 @@ function animate() {
 
 function positionPlanets() {
     var degreesToRadianRatio = 0.0174532925,
-        planets = Scene.planets,
-        ms      = new Date().getMilliseconds()
+        planets = Scene.planets
     ;
 
     for (var i = 0; i < planets.length; i++) {
         var posX = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
-                    * Math.cos(count
+                    * Math.cos(parseFloat(dayOfYear + '.' + currentTime)
                     * getPlanetRadian(SolarSystem.Planets[i])
                     * degreesToRadianRatio);
 
         var posY = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
-                    * Math.sin(count
+                    * Math.sin(parseFloat(dayOfYear + '.' + currentTime)
                     * getPlanetRadian(SolarSystem.Planets[i])
                     * degreesToRadianRatio);
 
         Scene.planets[i].rotation.y += 0.0021;
 
+        if (i === 1) {
+            // console.log(parseFloat(posX + '.' + currentTime))
+        }
+
         Scene.planets[i].position.set(
-            parseFloat(posX + '.' + ms),
+            parseFloat(posX + '.' + currentTime),
             0,
-            parseFloat(posY + '.' + ms)
+            parseFloat(posY + '.' + currentTime)
         );
     }
 }

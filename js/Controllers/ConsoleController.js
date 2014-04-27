@@ -29,7 +29,7 @@ var ConsoleController = {
 
             ConsoleController.interval = setInterval(function() {
                 console.log(Scene.planets[2].position);
-            }, 1000);
+            }, 100);
         }
     },
 
