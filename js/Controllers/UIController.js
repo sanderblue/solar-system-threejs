@@ -58,7 +58,7 @@ var UIController = {
     }
 };
 
-$.when(window.SolarSystemFactory.init()).done(function(scene) {
+$.when(SolarSystemFactory.init()).done(function(scene) {
     $('#zoom').val(Zoom);
     $('#tilt').val(Tilt);
 
