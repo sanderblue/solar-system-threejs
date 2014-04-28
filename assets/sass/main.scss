@@ -48,55 +48,81 @@ h1,h2,h3,h4,h5,h6 { margin: 0; }
 
 .control-panel {
     display: inline-block;
-    background: rgba(30, 30, 30, 0.5);
-    padding: 20px;
+    background: rgba(30, 30, 30, 0.55);
+    padding: 17px;
     z-index: 1;
     text-align: center;
+    min-width: 240px;
 
     i {
         color: $base_font_color;
     }
 }
 
-.zoom-control {
+.zoom-tilt-controls {
     padding-bottom: 15px;
 
-    .control-panel-header { margin-top: 5px; }
+    .control-panel-secondary-header {
+        font-size: 14px;
+        padding: 5px 0;
+    }
 
-    input {
-        -webkit-transform: rotate(180deg);
-        -moz-transform: rotate(180deg);
-        -o-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
-        transform: rotate(180deg);
+    .range-holder {
+        line-height: 18px;
+
+        span,
+        input { vertical-align: middle; }
+    }
+    .zoom-range,
+    .tilt-range {
+        display: inline-block;
+        width: auto;
+    }
+
+    .zoom-range {
+        @include transform(rotate(180deg));
+    }
+
+    .tilt-range {
+        // @include transform(rotate(180deg));
     }
 }
 
 .planet-list-holder {
-    .control-panel-header { margin-top: 15px; }
+    padding: 15px 0 15px 0;
+    border-top: 1px solid rgba(110, 110, 110, 0.3);
+    border-bottom: 1px solid rgba(110, 110, 110, 0.3);
+    margin-bottom: 15px;
 }
 
 .planet-list {
     list-style: none;
-    padding: 15px 0 15px 0;
-    margin: 10px auto;
     text-align: center;
-    border-top: 1px solid rgba(110, 110, 110, 0.3);
-    border-bottom: 1px solid rgba(110, 110, 110, 0.3);
+    padding: 0;
+    margin: 0;
 
     .planet {
         @include transition(color .25s ease);
-        line-height: 16px;
+        line-height: 18px;
 
         &:hover {
             cursor: pointer;
-            color: lighten($base_font_color, 15%);
+            color: lighten($base_font_color, 20%);
         }
     }
 }
 
-.control-panel-header { font-size: 16px; }
+.control-panel-header {
+    font-size: 16px;
+    padding: 5px 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(110, 110, 110, 0.3);
+}
 
-.reset-camera {
-    &:hover { cursor: pointer; }
+.reset-camera,
+.toggle-logger {
+    &:hover {
+        cursor: pointer;
+        color: lighten($base_font_color, 20%);
+    }
 }

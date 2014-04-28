@@ -4,9 +4,14 @@ if (!Detector.webgl) {
 
 var SolarSystem,
     Zoom,
-    Scene;
+    Tilt,
+    Scene,
+    Scale
+;
 
-Zoom = 1500;
+Scale = 2.25;
+Zoom = 5200;
+Tilt = 500;
 
 SolarSystem = {
     Parent: {
@@ -19,9 +24,9 @@ SolarSystem = {
         {
             id: 1,
             name: 'Mercury',
-            radius: 2.45,
-            diameter: 4.9,
-            meanDistanceFromSun: 57.9,
+            radius: 2.44,
+            diameter: 4.88,
+            meanDistanceFromSun: 57.9 * Scale,
             earthDaysToOrbitSun: 88,
             moons: [],
             texture: null,
@@ -32,7 +37,7 @@ SolarSystem = {
             name: 'Venus',
             radius: 6.05,
             diameter: 12.1,
-            meanDistanceFromSun: 108.2,
+            meanDistanceFromSun: 108.2 * Scale,
             earthDaysToOrbitSun: 224.7,
             moons: [],
             texture: null,
@@ -43,7 +48,7 @@ SolarSystem = {
             name: 'Earth',
             radius: 6.35,
             diameter: 12.7,
-            meanDistanceFromSun: 149.5,
+            meanDistanceFromSun: 149.5 * Scale,
             earthDaysToOrbitSun: 364.25,
             moons: [],
             texture: null,
@@ -54,7 +59,7 @@ SolarSystem = {
             name: 'Mars',
             radius: 3.4,
             diameter: 6.8,
-            meanDistanceFromSun: 227.9,
+            meanDistanceFromSun: 227.9 * Scale,
             earthDaysToOrbitSun: 687,
             moons: [],
             texture: null,
@@ -65,7 +70,7 @@ SolarSystem = {
             name: 'Jupiter',
             radius: 71.5,
             diameter: 143,
-            meanDistanceFromSun: 778.3,
+            meanDistanceFromSun: 778.3 * Scale,
             earthDaysToOrbitSun: 4329,
             moons: [],
             texture: null,
@@ -76,7 +81,7 @@ SolarSystem = {
             name: 'Saturn',
             radius: 60,
             diameter: 120,
-            meanDistanceFromSun: 1429.4,
+            meanDistanceFromSun: 1429.4 * Scale,
             earthDaysToOrbitSun: 10753,
             moons: [],
             texture: null,
@@ -87,7 +92,7 @@ SolarSystem = {
             name: 'Uranus',
             radius: 25.6,
             diamter: 51.2,
-            meanDistanceFromSun: 2871,
+            meanDistanceFromSun: 2871 * Scale,
             earthDaysToOrbitSun: 30714,
             moons: [],
             texture: null,
@@ -98,7 +103,7 @@ SolarSystem = {
             name: 'Neptune',
             radius: 24.3,
             diameter: 48.6,
-            meanDistanceFromSun: 4504.3,
+            meanDistanceFromSun: 4504.3 * Scale,
             earthDaysToOrbitSun: 60025,
             moons: [],
             texture: null,
@@ -129,29 +134,10 @@ SolarSystem = {
             },
         ],
         secondary: [],
-        totalCount: 400, // true number is estimated in the billions within the main astroid belt
-        meanDistanceFromSun: 373
+        totalCount: 1500, // true number is estimated in the billions within the main astroid belt
+        meanDistanceFromSun: 373 * Scale
     }
 };
-
-var count     = 0,
-    year      = 0,
-    dayOfYear = 0;
-
-function createTime() {
-   if (count !== 0 && count % 365 === 0) {
-        dayOfYear = 1;
-        year++;
-    } else  {
-        dayOfYear++;
-    }
-}
-
-setInterval(function() {
-    createTime();
-
-    count++;
-}, 380);
 
 function init() {
 
@@ -168,25 +154,25 @@ function init() {
 
             setScene: function() {
                 Scene.scene = new THREE.Scene();
-                Scene.scene.add(new THREE.AxisHelper(20));
+                // Scene.scene.add(new THREE.AxisHelper(20));
             },
 
             setLights: function() {
-                Scene.ambientLight1 = new THREE.DirectionalLight(0xffffff);
-                Scene.ambientLight2 = new THREE.DirectionalLight(0xffffff);
+                var directionalLightFromTop    = new THREE.DirectionalLight(0xffffff, 0.22),
+                    directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, 0.22)
+                ;
 
-                Scene.ambientLight1.position.set(0, 1, 0);
-                Scene.ambientLight2.position.set(0, 0, 30);
+                directionalLightFromTop.position.set(0, 1800, 0);
+                directionalLightFromBottom.position.set(0, -1800, 0);
 
-                Scene.scene.add(new THREE.AmbientLight(0x404040));
-                Scene.scene.add(Scene.ambientLight1);
-                Scene.scene.add(Scene.ambientLight2);
+                Scene.scene.add(directionalLightFromTop);
+                Scene.scene.add(directionalLightFromBottom);
             },
 
             setCamera: function() {
-                Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000);
+                Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200000);
 
-                Scene.camera.position.set(0, 300, 100);
+                Scene.camera.position.set(0, Tilt, 0);
             },
 
             setCameraControls: function() {
@@ -211,7 +197,8 @@ function init() {
 
             setCameraPosition: function(target) {
                 Scene.camera.focalPoint = target;
-                Scene.camera.position.x = Zoom;
+                // Scene.camera.position.x = Zoom;
+                Scene.camera.position.y = Tilt;
                 Scene.camera.position.z = Zoom;
 
                 Scene.camera.lookAt(target);
@@ -232,42 +219,41 @@ function init() {
         Scene.init();
 
         var SunBuilder = {
-            buildSunLight: function() {
-                var SunLight = new THREE.AmbientLight(0xffffff);
-                SunLight.position.set(0, 0, 0);
-
-                Scene.scene.add(SunLight);
-            },
-
             getTexture: function() {
-                return new THREE.ImageUtils.loadTexture('../textures/sun.jpg');
+                return new THREE.ImageUtils.loadTexture('../textures/sun_large.jpg');
             },
             build: function() {
                 var texture = SunBuilder.getTexture();
+
                 var material = new THREE.MeshLambertMaterial({
-                                      ambient: 0xbbbbbb,
+                                      ambient: 0xffffff,
+                                      emissive: 0xffffff,
                                       map: texture,
                                       side: THREE.DoubleSide,
                                       transparent: true,
-                                      opacity: 0.7
+                                      opacity: 0.9
                                     });
 
                 texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-                texture.anisotropy = 16;
+                texture.anisotropy = 32;
 
-                var Sun = new THREE.Mesh(
-                        new THREE.SphereGeometry(
-                          SolarSystem.Parent.radius,
-                          SolarSystem.Parent.radius / 3.75,
-                          SolarSystem.Parent.radius / 7.5
-                        ),
-                        material
-                      );
+                var sunGeometry = new THREE.SphereGeometry(
+                                        SolarSystem.Parent.radius,
+                                        SolarSystem.Parent.radius / 3.5,
+                                        SolarSystem.Parent.radius / 7
+                                    );
 
-                Sun.position.set(0, 0, 0);
+                var Sun = new THREE.Mesh(sunGeometry, material);
+
+                var pointLight = new THREE.PointLight(0xffffff, 1.95);
+
+                Sun.scale.x = Sun.scale.y = Sun.scale.z = 1;
 
                 Scene.Sun = Sun;
 
+                Sun.position.set(0, 0, 0);
+
+                Scene.scene.add(pointLight);
                 Scene.scene.add(Sun);
             }
         };
@@ -275,7 +261,7 @@ function init() {
         var RingBuilder = {
             buildRing: function(amplitude) {
                 return $.Deferred(function(promise) {
-                    var resolution = 200, // segments in the line
+                    var resolution = 400, // segments in the line
                         size       = 360 / resolution;
 
                     var material = new THREE.LineBasicMaterial({
@@ -323,7 +309,7 @@ function init() {
                     var size = 360 / resolution;
 
                     var material = new THREE.LineBasicMaterial({
-                                            color: 0xe6e6e6,
+                                            color: 0x6E6E6E,
                                             opacity: 0.1
                                         });
 
@@ -456,7 +442,7 @@ function init() {
             addPlanet: function(planet) {
                 setTimeout(function() {
                     Scene.scene.add(planet);
-                }, 150);
+                }, 100);
             }
         };
 
@@ -467,18 +453,17 @@ function init() {
 
             getRandomPointInSphere: function(radius) {
                 return new THREE.Vector3(
-                    ( Math.random() - 0.5 ) * 1.5 * radius,
-                    ( Math.random() - 0.5 ) * 1.5 * radius,
-                    ( Math.random() - 0.5 ) * 1.5 * radius
+                    ( Math.random() - 0.5 ) * 1.55 * radius,
+                    ( Math.random() - 0.5 ) * 1.55* radius,
+                    ( Math.random() - 0.5 ) * 1.55 * radius
                 );
             },
 
             buildRandomPoints: function() {
                 var points = [];
 
-                for (var i = 0; i < 5; i ++) {
-                    var radius = Math.random() * 2.125;
-
+                for (var i = 0; i < 4; i ++) {
+                    var radius = Math.random() * 2.33;
                     points.push(AstroidBelt.getRandomPointInSphere(radius));
                 }
 
@@ -486,16 +471,19 @@ function init() {
             },
 
             positionAstroid: function(astroid, count) {
-                var degreesToRadianRatio = 0.0174532925;
-                    amplitude = SolarSystem.AstroidBelt.meanDistanceFromSun + Math.random() * 120; // randomize the amplitudes to spread them out
+                var degreesToRadianRatio = 0.0174532925,
+                    randomNumA = new Date().getMilliseconds() - (new Date().getMilliseconds() / 2.1),
+                    randomNumB = Math.random() * randomNumA,
+                    amplitude = SolarSystem.AstroidBelt.meanDistanceFromSun + randomNumB // randomize the amplitudes to spread them out
+                ;
 
                 var posX = getOrbitAmplitute(amplitude)
-                            * Math.cos(count + 50
+                            * Math.cos(count + 50 * Math.random()
                             * getAstroidRadian()
                             * degreesToRadianRatio);
 
                 var posY = getOrbitAmplitute(amplitude)
-                            * Math.sin(count + 50
+                            * Math.sin(count + 50 * Math.random()
                             * getAstroidRadian()
                             * degreesToRadianRatio);
 
@@ -541,9 +529,7 @@ function init() {
             },
 
             addAstroid: function(astroid) {
-                setTimeout(function() {
-                    Scene.scene.add(astroid);
-                }, 150);
+                Scene.scene.add(astroid);
             }
         };
 
@@ -580,7 +566,7 @@ function init() {
 
         $.when(SolarSystemBuilder.buildPlanets()).done(function() {
             $.when(SolarSystemBuilder.buildAstroidBelt()).done(function() {
-                console.log('POW POW!!!!!!!!!!!!')
+                TimeController.createTime();
             });
         });
 
@@ -595,15 +581,13 @@ function init() {
 }
 
 function getOrbitAmplitute(distanceFromSun) {
-    var orbitAmplitude = (SolarSystem.Parent.radius + distanceFromSun);
-    return orbitAmplitude;
+    return SolarSystem.Parent.radius + distanceFromSun;
 };
 
 // Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
 // This ratio helps create an accurate representation of each planet's location along its orbit circumference.
 function getPlanetRadian(planet) {
-    var planetRadian = 360 / planet.earthDaysToOrbitSun;
-    return planetRadian;
+    return 360 / planet.earthDaysToOrbitSun;
 }
 
 function getAstroidRadian() {
@@ -624,30 +608,79 @@ function animate() {
     // Scene.stats.update();
 }
 
+
 function positionPlanets() {
     var degreesToRadianRatio = 0.0174532925,
-        planets = Scene.planets
+        planets = Scene.planets,
+        dayOnEarth = TimeController.dayWithTimeAsDecimal,
+        count = 1
     ;
 
     for (var i = 0; i < planets.length; i++) {
+        // Mercury
+        if (i === 0) {
+            count = dayOnEarth + 48;
+        }
+
+        // Venus
+        if (i === 1) {
+            count = dayOnEarth + 155;
+        }
+
+        // Earth
+        if (i === 2) {
+            count = dayOnEarth;
+        }
+
+        // Mars
+        if (i === 3) {
+            count = dayOnEarth + 71;
+        }
+
+        // Jupiter
+        if (i === 4) {
+            count = dayOnEarth + 2692;
+        }
+
+        // Saturn
+        if (i === 5) {
+            count = dayOnEarth + 13753;
+        }
+
+        // Uranus
+        if (i === 6) {
+            count = dayOnEarth + 29654;
+        }
+
+        // Neptune
+        if (i === 7) {
+            count = dayOnEarth + 62885;
+        }
+
         var posX = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
-                    * Math.cos(count
-                    * getPlanetRadian(SolarSystem.Planets[i])
-                    * degreesToRadianRatio);
+                    * Math.cos(
+                        count
+                        * getPlanetRadian(SolarSystem.Planets[i])
+                        * degreesToRadianRatio
+                    );
 
         var posY = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
-                    * Math.sin(count
-                    * getPlanetRadian(SolarSystem.Planets[i])
-                    * degreesToRadianRatio);
+                    * Math.sin(
+                        count
+                        * getPlanetRadian(SolarSystem.Planets[i])
+                        * degreesToRadianRatio
+                    );
 
-        Scene.planets[i].rotation.y += 0.0021;
+        Scene.planets[i].rotation.y += 0.00041;
 
         Scene.planets[i].position.set(
-            posX,
+            parseFloat(posX),
             0,
-            posY
+            parseFloat(posY)
         );
     }
+
+    Scene.Sun.rotation.y += 0.0003;
 }
 
 function render() {
@@ -664,59 +697,8 @@ function render() {
 
 $.when(init()).done(function(scene) {
     $('#zoom').val(Zoom);
+    $('#tilt').val(Tilt);
 
     Scene.camera.focalPoint = Scene.Sun.position;
     animate();
-});
-
-// User Event Listeners
-$('#zoom').on('input', function(e) {
-    Zoom = e.target.value;
-});
-
-var UIController = {
-    buildPlanetList: function() {
-        return $.Deferred(function(promise) {
-            var listElement = $('#planets');
-
-            listElement.children().remove();
-
-            for (var i = 0; i < Scene.planets.length; i++) {
-                var id = Scene.planets[i].id;
-
-                listElement.append('<li id="planet-'+ id +'" class="planet" data-id="'+ id +'">'+ Scene.planets[i].name +'</li>');
-            }
-
-            promise.resolve();
-        });
-    },
-
-    findPlanet: function(id) {
-        var planets = Scene.planets;
-
-        for (var i = 0; i < planets.length; i++) {
-            if (planets[i].id == id) {
-                return planets[i];
-            }
-        }
-    },
-
-    initResetView: function() {
-        var resetButton = $('#reset-camera');
-
-        resetButton.on('click', function() {
-            Scene.camera.focalPoint = Scene.Sun.position;
-        });
-    }
-};
-
-$.when(UIController.buildPlanetList()).done(function() {
-    $('.planet').on('click', function() {
-        var id = $(this).data('id');
-        var matchedPlanet = UIController.findPlanet(id);
-
-        Scene.camera.focalPoint = matchedPlanet.position;
-    });
-
-    UIController.initResetView();
 });
