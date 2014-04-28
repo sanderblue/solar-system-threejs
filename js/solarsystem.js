@@ -6,15 +6,12 @@ var SolarSystem,
     Zoom,
     Tilt,
     Scene,
-    Scale,
-    DayCount,
-    ms
+    Scale
 ;
 
-Scale = 2;
-Zoom = 9000;
-Tilt = 900;
-DayCount = 3000;
+Scale = 2.25;
+Zoom = 5200;
+Tilt = 500;
 
 SolarSystem = {
     Parent: {
@@ -137,7 +134,7 @@ SolarSystem = {
             },
         ],
         secondary: [],
-        totalCount: 1700, // true number is estimated in the billions within the main astroid belt
+        totalCount: 1500, // true number is estimated in the billions within the main astroid belt
         meanDistanceFromSun: 373 * Scale
     }
 };
@@ -445,7 +442,7 @@ function init() {
             addPlanet: function(planet) {
                 setTimeout(function() {
                     Scene.scene.add(planet);
-                }, 150);
+                }, 100);
             }
         };
 
@@ -466,7 +463,7 @@ function init() {
                 var points = [];
 
                 for (var i = 0; i < 4; i ++) {
-                    var radius = Math.random() * 2.35;
+                    var radius = Math.random() * 2.33;
 
                     points.push(AstroidBelt.getRandomPointInSphere(radius));
                 }
@@ -653,12 +650,12 @@ function positionPlanets() {
 
         // Uranus
         if (i === 6) {
-            count = 29714;
+            count = dayOnEarth + 29654;
         }
 
         // Neptune
         if (i === 7) {
-            count = 63025;
+            count = dayOnEarth + 62885;
         }
 
         var posX = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
@@ -675,7 +672,7 @@ function positionPlanets() {
                         * degreesToRadianRatio
                     );
 
-        Scene.planets[i].rotation.y += 0.000772;
+        Scene.planets[i].rotation.y += 0.00041;
 
         Scene.planets[i].position.set(
             parseFloat(posX),
