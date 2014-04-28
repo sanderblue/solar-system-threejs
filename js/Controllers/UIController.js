@@ -5,6 +5,10 @@ var UIController = {
             Zoom = e.target.value;
         });
 
+        $('#tilt').on('input', function(e) {
+            Tilt = e.target.value;
+        });
+
         $('.planet').on('click', function() {
             var id = $(this).data('id'),
                 matchedPlanet = UIController.findPlanet(id)
