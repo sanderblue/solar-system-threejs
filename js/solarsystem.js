@@ -7,12 +7,14 @@ var SolarSystem,
     Tilt,
     Scene,
     Scale,
+    DayCount,
     ms
 ;
 
 Scale = 2;
-Zoom = 3500;
-Tilt = 500;
+Zoom = 9000;
+Tilt = 900;
+DayCount = 3000;
 
 SolarSystem = {
     Parent: {
@@ -159,12 +161,12 @@ function init() {
             },
 
             setLights: function() {
-                var directionalLightFromTop    = new THREE.DirectionalLight(0xffffff, 0.21),
-                    directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, 0.21)
+                var directionalLightFromTop    = new THREE.DirectionalLight(0xffffff, 0.22),
+                    directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, 0.22)
                 ;
 
-                directionalLightFromTop.position.set(0, 2000, 0);
-                directionalLightFromBottom.position.set(0, -2000, 0);
+                directionalLightFromTop.position.set(0, 1800, 0);
+                directionalLightFromBottom.position.set(0, -1800, 0);
 
                 Scene.scene.add(directionalLightFromTop);
                 Scene.scene.add(directionalLightFromBottom);
@@ -614,22 +616,64 @@ function animate() {
 function positionPlanets() {
     var degreesToRadianRatio = 0.0174532925,
         planets = Scene.planets,
-        num = 0
+        dayOnEarth = TimeController.dayWithTimeAsDecimal,
+        count = 1
     ;
 
     for (var i = 0; i < planets.length; i++) {
+        // Mercury
+        if (i === 0) {
+            count = dayOnEarth + 48;
+        }
+
+        // Venus
+        if (i === 1) {
+            count = dayOnEarth + 155;
+        }
+
+        // Earth
+        if (i === 2) {
+            count = dayOnEarth;
+        }
+
+        // Mars
+        if (i === 3) {
+            count = dayOnEarth + 71;
+        }
+
+        // Jupiter
+        if (i === 4) {
+            count = dayOnEarth + 2692;
+        }
+
+        // Saturn
+        if (i === 5) {
+            count = dayOnEarth + 13753;
+        }
+
+        // Uranus
+        if (i === 6) {
+            count = 29714;
+        }
+
+        // Neptune
+        if (i === 7) {
+            count = 63025;
+        }
+
         var posX = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
                     * Math.cos(
-                        (
-                            TimeController.dayWithTimeAsDecimal * getPlanetRadian(SolarSystem.Planets[i])
-                        )
+                        count
+                        * getPlanetRadian(SolarSystem.Planets[i])
                         * degreesToRadianRatio
                     );
 
         var posY = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
-                    * Math.sin(TimeController.dayWithTimeAsDecimal
-                    * getPlanetRadian(SolarSystem.Planets[i])
-                    * degreesToRadianRatio);
+                    * Math.sin(
+                        count
+                        * getPlanetRadian(SolarSystem.Planets[i])
+                        * degreesToRadianRatio
+                    );
 
         Scene.planets[i].rotation.y += 0.000772;
 
