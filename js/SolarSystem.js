@@ -451,7 +451,7 @@ SolarSystemFactory = {
 
             var AstroidBelt = {
                 getTexture: function() {
-                    return new THREE.ImageUtils.loadTexture('../textures/crust_tiny.jpg');
+                    return new THREE.ImageUtils.loadTexture('textures/crust_tiny.jpg');
                 },
 
                 getRandomPointInSphere: function(radius) {
