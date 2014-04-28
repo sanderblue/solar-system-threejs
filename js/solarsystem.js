@@ -2,6 +2,8 @@ if (!Detector.webgl) {
   Detector.addGetWebGLMessage();
 }
 
+window.SolarSystemFactory = {};
+
 var SolarSystem,
     Zoom,
     Tilt,
@@ -140,7 +142,7 @@ SolarSystem = {
     }
 };
 
-var SolarSystemFactory = {
+SolarSystemFactory = {
     init: function() {
         return $.Deferred(function(promise) {
             Scene = {
