@@ -104,7 +104,8 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(30, 30, 30, 0.5);
   padding: 20px;
   z-index: 1;
-  text-align: center; }
+  text-align: center;
+  min-width: 250px; }
   .control-panel i {
     color: #bdbdbd; }
 
@@ -112,6 +113,10 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 15px; }
   .zoom-control .control-panel-header {
     margin-top: 5px; }
+  .zoom-control .zoom-range,
+  .zoom-control .tilt-range {
+    display: block;
+    width: 100%; }
   .zoom-control .zoom-range {
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);

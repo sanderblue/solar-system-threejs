@@ -15,6 +15,7 @@ var UIController = {
             ;
 
             Scene.camera.focalPoint = matchedPlanet.position;
+            Scene.camera.position.x = matchedPlanet.position.x + 10;
         });
 
         UIController.initResetView();
@@ -25,6 +26,8 @@ var UIController = {
 
         resetButton.on('click', function() {
             Scene.camera.focalPoint = Scene.Sun.position;
+            Zoom = 3500;
+            Tilt = 500;
         });
     },
 

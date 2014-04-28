@@ -52,6 +52,7 @@ h1,h2,h3,h4,h5,h6 { margin: 0; }
     padding: 20px;
     z-index: 1;
     text-align: center;
+    min-width: 250px;
 
     i {
         color: $base_font_color;
@@ -62,6 +63,12 @@ h1,h2,h3,h4,h5,h6 { margin: 0; }
     padding-bottom: 15px;
 
     .control-panel-header { margin-top: 5px; }
+
+    .zoom-range,
+    .tilt-range {
+        display: block;
+        width: 100%;
+    }
 
     .zoom-range {
         @include transform(rotate(180deg));

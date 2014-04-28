@@ -11,8 +11,8 @@ var SolarSystem,
 ;
 
 Scale = 2;
-Zoom = 2600;
-Tilt = 600;
+Zoom = 3500;
+Tilt = 500;
 
 SolarSystem = {
     Parent: {
@@ -198,7 +198,7 @@ function init() {
 
             setCameraPosition: function(target) {
                 Scene.camera.focalPoint = target;
-                Scene.camera.position.x = Zoom;
+                // Scene.camera.position.x = Zoom;
                 Scene.camera.position.y = Tilt;
                 Scene.camera.position.z = Zoom;
 
@@ -454,9 +454,9 @@ function init() {
 
             getRandomPointInSphere: function(radius) {
                 return new THREE.Vector3(
-                    ( Math.random() - 0.5 ) * 1.575 * radius,
-                    ( Math.random() - 0.5 ) * 1.575* radius,
-                    ( Math.random() - 0.5 ) * 1.575 * radius
+                    ( Math.random() - 0.5 ) * 1.55 * radius,
+                    ( Math.random() - 0.5 ) * 1.55* radius,
+                    ( Math.random() - 0.5 ) * 1.55 * radius
                 );
             },
 
@@ -464,7 +464,7 @@ function init() {
                 var points = [];
 
                 for (var i = 0; i < 4; i ++) {
-                    var radius = Math.random() * 2.375;
+                    var radius = Math.random() * 2.35;
 
                     points.push(AstroidBelt.getRandomPointInSphere(radius));
                 }
@@ -474,9 +474,10 @@ function init() {
 
             positionAstroid: function(astroid, count) {
                 var degreesToRadianRatio = 0.0174532925,
-                    ms = new Date().getMilliseconds() - (new Date().getMilliseconds() / 2);
-                    randomNumber = Math.random() * ms,
-                    amplitude = SolarSystem.AstroidBelt.meanDistanceFromSun + randomNumber; // randomize the amplitudes to spread them out
+                    randomNumA = new Date().getMilliseconds() - (new Date().getMilliseconds() / 2.1),
+                    randomNumB = Math.random() * randomNumA,
+                    amplitude = SolarSystem.AstroidBelt.meanDistanceFromSun + randomNumB // randomize the amplitudes to spread them out
+                ;
 
                 var posX = getOrbitAmplitute(amplitude)
                             * Math.cos(count + 50 * Math.random()
@@ -639,7 +640,7 @@ function positionPlanets() {
         );
     }
 
-    Scene.Sun.rotation.y += 0.00021;
+    Scene.Sun.rotation.y += 0.0003;
 }
 
 function render() {
@@ -654,7 +655,4 @@ $.when(init()).done(function(scene) {
 
     Scene.camera.focalPoint = Scene.Sun.position;
     animate();
-
-    console.log(Scene.planets[4].position);
-    console.log(Scene.planets[5].position);
 });
