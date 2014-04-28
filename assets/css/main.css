@@ -105,47 +105,58 @@ h1, h2, h3, h4, h5, h6 {
   padding: 17px;
   z-index: 1;
   text-align: center;
-  min-width: 225px; }
+  min-width: 240px; }
   .control-panel i {
     color: #bdbdbd; }
 
-.zoom-control {
+.zoom-tilt-controls {
   padding-bottom: 15px; }
-  .zoom-control .control-panel-header {
-    margin-top: 5px; }
-  .zoom-control .zoom-range,
-  .zoom-control .tilt-range {
-    display: block;
-    width: 100%; }
-  .zoom-control .zoom-range {
+  .zoom-tilt-controls .control-panel-secondary-header {
+    font-size: 14px;
+    padding: 5px 0; }
+  .zoom-tilt-controls .range-holder {
+    line-height: 18px; }
+    .zoom-tilt-controls .range-holder span,
+    .zoom-tilt-controls .range-holder input {
+      vertical-align: middle; }
+  .zoom-tilt-controls .zoom-range,
+  .zoom-tilt-controls .tilt-range {
+    display: inline-block;
+    width: auto; }
+  .zoom-tilt-controls .zoom-range {
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
     -ms-transform: rotate(180deg);
     -o-transform: rotate(180deg);
     transform: rotate(180deg); }
 
-.planet-list-holder .control-panel-header {
-  margin-top: 15px; }
+.planet-list-holder {
+  padding: 15px 0 15px 0;
+  border-top: 1px solid rgba(110, 110, 110, 0.3);
+  border-bottom: 1px solid rgba(110, 110, 110, 0.3);
+  margin-bottom: 15px; }
 
 .planet-list {
   list-style: none;
-  padding: 15px 0 15px 0;
-  margin: 10px auto;
   text-align: center;
-  border-top: 1px solid rgba(110, 110, 110, 0.3);
-  border-bottom: 1px solid rgba(110, 110, 110, 0.3); }
+  padding: 0;
+  margin: 0; }
   .planet-list .planet {
     -webkit-transition: color 0.25s ease;
     -moz-transition: color 0.25s ease;
     transition: color 0.25s ease;
-    line-height: 16px; }
+    line-height: 18px; }
     .planet-list .planet:hover {
       cursor: pointer;
-      color: #e3e3e3; }
+      color: #f0f0f0; }
 
 .control-panel-header {
-  font-size: 16px; }
+  font-size: 16px;
+  padding: 5px 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(110, 110, 110, 0.3); }
 
 .reset-camera:hover,
 .toggle-logger:hover {
-  cursor: pointer; }
+  cursor: pointer;
+  color: #f0f0f0; }

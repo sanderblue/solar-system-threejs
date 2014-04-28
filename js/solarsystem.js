@@ -232,16 +232,16 @@ function init() {
                                       map: texture,
                                       side: THREE.DoubleSide,
                                       transparent: true,
-                                      opacity: 0.88
+                                      opacity: 0.9
                                     });
 
                 texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-                texture.anisotropy = 24;
+                texture.anisotropy = 32;
 
                 var sunGeometry = new THREE.SphereGeometry(
                                         SolarSystem.Parent.radius,
-                                        SolarSystem.Parent.radius / 2.5,
-                                        SolarSystem.Parent.radius / 5
+                                        SolarSystem.Parent.radius / 3.5,
+                                        SolarSystem.Parent.radius / 7
                                     );
 
                 var Sun = new THREE.Mesh(sunGeometry, material);
