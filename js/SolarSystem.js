@@ -223,7 +223,7 @@ SolarSystemFactory = {
 
             var SunBuilder = {
                 getTexture: function() {
-                    return new THREE.ImageUtils.loadTexture('../textures/sun_large.jpg');
+                    return new THREE.ImageUtils.loadTexture('textures/sun_large.jpg');
                 },
                 build: function() {
                     var texture = SunBuilder.getTexture();
