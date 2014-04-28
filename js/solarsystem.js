@@ -634,9 +634,9 @@ function positionPlanets() {
         Scene.planets[i].rotation.y += 0.000772;
 
         Scene.planets[i].position.set(
-            parseInt(posX),
+            parseFloat(posX),
             0,
-            parseInt(posY)
+            parseFloat(posY)
         );
     }
 

@@ -101,11 +101,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .control-panel {
   display: inline-block;
-  background: rgba(30, 30, 30, 0.5);
-  padding: 20px;
+  background: rgba(30, 30, 30, 0.55);
+  padding: 17px;
   z-index: 1;
   text-align: center;
-  min-width: 250px; }
+  min-width: 225px; }
   .control-panel i {
     color: #bdbdbd; }
 
