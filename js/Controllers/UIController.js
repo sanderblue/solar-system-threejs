@@ -58,6 +58,15 @@ var UIController = {
     }
 };
 
-$.when(UIController.buildPlanetList()).done(function() {
-    UIController.initEventListeners();
+$.when(init()).done(function(scene) {
+    $('#zoom').val(Zoom);
+    $('#tilt').val(Tilt);
+
+    Scene.camera.focalPoint = Scene.Sun.position;
+
+    animate();
+
+    $.when(UIController.buildPlanetList()).done(function() {
+        UIController.initEventListeners();
+    });
 });

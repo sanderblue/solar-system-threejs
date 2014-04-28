@@ -12,6 +12,7 @@ var SolarSystem,
 Scale = 2.25;
 Zoom = 5200;
 Tilt = 500;
+DoneBuilding = false;
 
 SolarSystem = {
     Parent: {
@@ -694,11 +695,3 @@ function render() {
     Scene.renderer.render(Scene.scene, Scene.camera);
     Scene.setCameraPosition(Scene.camera.focalPoint);
 }
-
-$.when(init()).done(function(scene) {
-    $('#zoom').val(Zoom);
-    $('#tilt').val(Tilt);
-
-    Scene.camera.focalPoint = Scene.Sun.position;
-    animate();
-});
