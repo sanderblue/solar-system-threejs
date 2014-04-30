@@ -2,27 +2,27 @@ define(['jquery', 'threejs', 'SolarSystem', 'Date', 'Time', 'UI'], function($) {
 
     /**** Initialize all the Solar System magic here!! ****/
 
-    Initializer = {
+    var Initializer = {
         getOrbitAmplitute: function(distanceFromSun) {
             return SolarSystem.Parent.radius + distanceFromSun;
-        };
+        },
 
         // Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
         // This ratio helps create an accurate representation of each planet's location along its orbit circumference.
         getPlanetRadian: function(planet) {
             return 360 / planet.earthDaysToOrbitSun;
-        }
+        },
 
         getAstroidRadian: function() {
             return 360 / SolarSystem.AstroidBelt.primary[0].earthDaysToOrbitSun; // Using Ceres just as a reference point
-        }
+        },
 
         onWindowResize: function() {
             Scene.camera.aspect = window.innerWidth / window.innerHeight;
             Scene.camera.updateProjectionMatrix();
 
             Scene.renderer.setSize(window.innerWidth, window.innerHeight);
-        }
+        },
 
         animate: function() {
             requestAnimationFrame(animate);
@@ -111,5 +111,5 @@ define(['jquery', 'threejs', 'SolarSystem', 'Date', 'Time', 'UI'], function($) {
             Scene.setCameraPosition(Scene.camera.focalPoint);
         }
     };
-
+    sdlfkjsdlkfjlksjdf
 });
