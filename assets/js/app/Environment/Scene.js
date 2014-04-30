@@ -32,7 +32,7 @@ define([], function() {
         setCamera: function() {
             Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200000);
 
-            Scene.camera.position.set(0, Tilt, 0);
+            Scene.camera.position.set(0, this.tilt, 0);
         },
 
         setCameraControls: function() {
@@ -74,8 +74,6 @@ define([], function() {
                 Scene.setRender();
                 // Scene.setStats();
                 // Scene.setCameraPosition(Scene.scene.position);
-
-                window.addEventListener('resize', onWindowResize, false);
 
                 promise.resolve();
             });

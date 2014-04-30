@@ -119,12 +119,6 @@ define(
             }
         },
 
-        // Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
-        // This ratio helps create an accurate representation of each planet's location along its orbit circumference.
-        getPlanetRadian: function(planet) {
-            return 360 / planet.earthDaysToOrbitSun;
-        },
-
         onWindowResize: function() {
             Scene.camera.aspect = window.innerWidth / window.innerHeight;
             Scene.camera.updateProjectionMatrix();
@@ -136,8 +130,12 @@ define(
             $.when(Scene.init()).done(function() {
 
             });
+
+            window.addEventListener('resize', this.onWindowResize, false);
         }
     };
+
+    Initializer.init();
 
     // Scene.camera.focalPoint = Scene.Sun.position;
 
