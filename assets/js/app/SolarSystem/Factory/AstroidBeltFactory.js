@@ -7,9 +7,15 @@ define([], function() {
         getRandomPointInSphere: function(radius) {
             return new THREE.Vector3(
                 ( Math.random() - 0.5 ) * 1.55 * radius,
-                ( Math.random() - 0.5 ) * 1.55* radius,
+                ( Math.random() - 0.5 ) * 1.55 * radius,
                 ( Math.random() - 0.5 ) * 1.55 * radius
             );
+        },
+
+        // Gets an astroid's current radian conversion ratio based on each astroid's earth days to orbit the Sun.
+        // This ratio helps create an accurate representation of each astroid's location along its orbit.
+        getAstroidRadian: function() {
+            return 360 / SolarSystem.AstroidBelt.primary[0].earthDaysToOrbitSun; // Using Ceres just as a reference point
         },
 
         buildRandomPoints: function() {

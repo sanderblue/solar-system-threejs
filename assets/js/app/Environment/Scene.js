@@ -1,84 +1,86 @@
 define([], function() {
 
-        var Scene = {
-            planets: [],
-            astroids: [],
+    var Scene = {
+        planets: [],
+        astroids: [],
+        zoom: 5200,
+        tilt: 500,
 
-            setContainer: function() {
-                Scene.container = document.getElementById('solar-system');
+        setContainer: function() {
+            Scene.container = document.getElementById('solar-system');
 
-                // document.body.appendChild(Scene.container);
-            },
+            // document.body.appendChild(Scene.container);
+        },
 
-            setScene: function() {
-                Scene.scene = new THREE.Scene();
-                // Scene.scene.add(new THREE.AxisHelper(20));
-            },
+        setScene: function() {
+            Scene.scene = new THREE.Scene();
+            // Scene.scene.add(new THREE.AxisHelper(20));
+        },
 
-            setLights: function() {
-                var directionalLightFromTop    = new THREE.DirectionalLight(0xffffff, 0.22),
-                    directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, 0.22)
-                ;
+        setLights: function() {
+            var directionalLightFromTop    = new THREE.DirectionalLight(0xffffff, 0.22),
+                directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, 0.22)
+            ;
 
-                directionalLightFromTop.position.set(0, 1800, 0);
-                directionalLightFromBottom.position.set(0, -1800, 0);
+            directionalLightFromTop.position.set(0, 1800, 0);
+            directionalLightFromBottom.position.set(0, -1800, 0);
 
-                Scene.scene.add(directionalLightFromTop);
-                Scene.scene.add(directionalLightFromBottom);
-            },
+            Scene.scene.add(directionalLightFromTop);
+            Scene.scene.add(directionalLightFromBottom);
+        },
 
-            setCamera: function() {
-                Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200000);
+        setCamera: function() {
+            Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200000);
 
-                Scene.camera.position.set(0, Tilt, 0);
-            },
+            Scene.camera.position.set(0, Tilt, 0);
+        },
 
-            setCameraControls: function() {
-                Scene.controls = new THREE.OrbitControls(Scene.camera);
-                Scene.controls.addEventListener('change', render);
-            },
+        setCameraControls: function() {
+            Scene.controls = new THREE.OrbitControls(Scene.camera);
+            Scene.controls.addEventListener('change', render);
+        },
 
-            setRender: function() {
-                Scene.renderer = new THREE.WebGLRenderer({ antialias: true });
-                Scene.renderer.setSize(window.innerWidth, window.innerHeight);
+        setRender: function() {
+            Scene.renderer = new THREE.WebGLRenderer({ antialias: true });
+            Scene.renderer.setSize(window.innerWidth, window.innerHeight);
 
-                Scene.container.appendChild(Scene.renderer.domElement);
-            },
+            Scene.container.appendChild(Scene.renderer.domElement);
+        },
 
-            setStats: function() {
-                Scene.stats = new Stats();
-                // Scene.stats.domElement.style.position = 'absolute';
-                // Scene.stats.domElement.style.top = '0px';
+        setStats: function() {
+            Scene.stats = new Stats();
+            // Scene.stats.domElement.style.position = 'absolute';
+            // Scene.stats.domElement.style.top = '0px';
 
-                // Scene.container.appendChild(Scene.stats.domElement);
-            },
+            // Scene.container.appendChild(Scene.stats.domElement);
+        },
 
-            setCameraPosition: function(target) {
-                Scene.camera.focalPoint = target;
-                // Scene.camera.position.x = Zoom;
-                Scene.camera.position.y = Tilt;
-                Scene.camera.position.z = Zoom;
+        setCameraPosition: function(target) {
+            Scene.camera.focalPoint = target;
+            // Scene.camera.position.x = Zoom;
+            Scene.camera.position.y = Tilt;
+            Scene.camera.position.z = Zoom;
 
-                Scene.camera.lookAt(target);
-            },
+            Scene.camera.lookAt(target);
+        },
 
-            init: function() {
-                return $.Deferred(function(promise) {
-                    Scene.setContainer();
-                    Scene.setScene();
-                    Scene.setLights();
-                    Scene.setCamera();
-                    // Scene.setCameraControls();
-                    Scene.setRender();
-                    // Scene.setStats();
-                    // Scene.setCameraPosition(Scene.scene.position);
+        init: function() {
+            return $.Deferred(function(promise) {
+                Scene.setContainer();
+                Scene.setScene();
+                Scene.setLights();
+                Scene.setCamera();
+                // Scene.setCameraControls();
+                Scene.setRender();
+                // Scene.setStats();
+                // Scene.setCameraPosition(Scene.scene.position);
 
-                    window.addEventListener('resize', onWindowResize, false);
+                window.addEventListener('resize', onWindowResize, false);
 
-                    promise.resolve();
-                });
-            }
-        };
+                promise.resolve();
+            });
+        }
+    };
 
-        return Scene;
+    return Scene;
 });

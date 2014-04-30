@@ -11,12 +11,24 @@ require.config({
         'stats'          : 'libs/threejs/extensions/stats',
         'convexgeometry' : 'libs/threejs/extensions/convexgeometry',
 
-        // Modules
-        'main'        : 'app/main', // loads all the main modules
+        // Main
+        'main'        : 'app/main',
+        'Scene'       : 'app/Environment/Scene',
         'SolarSystem' : 'app/SolarSystem/SolarSystem',
+
+        // Factories
+        'SolarSystemFactory' : 'app/SolarSystem/Factory/SolarSystemFactory',
+        'SunFactory'         : 'app/SolarSystem/Factory/SunFactory',
+        'PlanetFactory'      : 'app/SolarSystem/Factory/PlanetFactory',
+        'AstroidBeltFactory' : 'app/SolarSystem/Factory/AstroidBeltFactory',
+        'RingFactory'        : 'app/SolarSystem/Factory/RingFactory',
+
+        // Controllers
         'Console'     : 'app/Controllers/ConsoleController',
         'Time'        : 'app/Controllers/TimeController',
         'UI'          : 'app/Controllers/UIController',
+
+        // Extensions
         'Date'        : 'app/Extensions/Date'
 
     },
@@ -29,6 +41,9 @@ require.config({
         },
         'stats': {
             deps: ['detector']
+        },
+        'convexgeometry': {
+            deps: ['stats']
         },
         'main': {
             deps: ['jquery', 'threejs']

@@ -1,4 +1,4 @@
-define([], function() {
+define(['jquery', 'threejs', 'SolarSystem'], function($, THREE, SolarSystem) {
 
     var PlanetFactory = {
         OrbitBuilder: {
@@ -6,12 +6,14 @@ define([], function() {
                 return 360 / planet.earthDaysToOrbitSun;
             },
 
+            // Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
+            // This ratio helps create an accurate representation of each planet's location along its orbit circumference.
             getOrbitAmplitute: function(distance) {
-                return Number(SolarSystem.Parent.radius + distance);
+                return SolarSystem.Parent.radius + distance;
             },
 
             build: function(planet) {
-                var resolution = 200; // segments in the line
+                var resolution = 270; // segments in the line
                 var size = 360 / resolution;
 
                 var material = new THREE.LineBasicMaterial({
