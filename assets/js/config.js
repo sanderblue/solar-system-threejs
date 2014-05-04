@@ -1,6 +1,6 @@
 require.config({
     baseUrl: "assets/js",
-    urlArgs: "bust=" + (new Date()).getTime(), // bust cache for development purposes ("bust=v2" for production)
+    urlArgs: { 'bust': Date.now() }, // bust cache for development purposes ("bust=v2" for production)
     paths: {
         // Core
         'requirejs'   : 'libs/requirejs/require',
@@ -30,7 +30,10 @@ require.config({
         'UI'          : 'app/Controllers/UIController',
 
         // Extensions
-        'Date'        : 'app/Extensions/Date'
+        'Date'        : 'app/Extensions/Date',
+
+        // Utilities
+        'TimerUtil' : 'app/Utilities/TimerUtil'
 
     },
     shim: {
@@ -50,7 +53,7 @@ require.config({
             deps: ['jquery', 'threejs']
         },
         'SolarSystem': {
-            deps: ['jquery', 'threejs', 'detector', 'convexgeometry', 'Time']
+            deps: ['jquery', 'threejs', 'detector', 'convexgeometry', 'Time', 'TimerUtil']
         },
         'SolarSystemFactory': {
             deps: ['Scene', 'SolarSystem']

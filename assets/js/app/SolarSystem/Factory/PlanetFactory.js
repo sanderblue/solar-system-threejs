@@ -1,15 +1,15 @@
-define(['jquery', 'SolarSystem'], function($, SolarSystem) {
+define(['jquery', 'Scene', 'SolarSystem', 'RingFactory', 'TimerUtil'], function($, Scene, SolarSystem, RingFactory, TimerUtil) {
 
     var PlanetFactory = {
         OrbitBuilder: {
-            getPlanetRadian: function(planet) {
-                return 360 / planet.earthDaysToOrbitSun;
+            getOrbitAmplitute: function(distance) {
+                return SolarSystem.parent.radius + distance;
             },
 
             // Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
             // This ratio helps create an accurate representation of each planet's location along its orbit circumference.
-            getOrbitAmplitute: function(distance) {
-                return SolarSystem.Parent.radius + distance;
+            getPlanetRadian: function(planet) {
+                return 360 / planet.earthDaysToOrbitSun;
             },
 
             build: function(planet) {
@@ -26,7 +26,7 @@ define(['jquery', 'SolarSystem'], function($, SolarSystem) {
                 // Build the orbit line
                 for(var i = 0; i <= resolution; i++) {
                     var segment = ( i * size ) * Math.PI / 180,
-                        orbitAmplitude = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+                        orbitAmplitude = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
 
                     orbitLine.vertices.push(
                         new THREE.Vector3(
@@ -50,7 +50,7 @@ define(['jquery', 'SolarSystem'], function($, SolarSystem) {
                     var amplitudes = planet.rings;
 
                     for (var i = 0; i < amplitudes.length; i++) {
-                        $.when(RingBuilder.buildRing(amplitudes[i])).done(function(response) {
+                        $.when(RingFactory.buildRing(amplitudes[i])).done(function(response) {
                             thisPlanet.add(response.line);
                         });
                     }
@@ -74,7 +74,7 @@ define(['jquery', 'SolarSystem'], function($, SolarSystem) {
         },
 
         getTexture: function(planet) {
-            return new THREE.ImageUtils.loadTexture('../textures/' + planet.name.toLowerCase() + '.jpg');
+            return new THREE.ImageUtils.loadTexture('../assets/textures/' + planet.name.toLowerCase() + '.jpg');
         },
 
         addMoons: function(planet) {
@@ -85,15 +85,17 @@ define(['jquery', 'SolarSystem'], function($, SolarSystem) {
 
         build: function(planet) {
             return $.Deferred(function(promise) {
+                var startTime = new Date().getTime();
+
                 // Create our orbit line geometry first
-                PlanetBuilder.OrbitBuilder.build(planet);
+                PlanetFactory.OrbitBuilder.build(planet);
 
                 var thisPlanet = new THREE.Object3D({
                                     id: planet.id,
                                     name: planet.name
                                 });
 
-                var texture = PlanetBuilder.getTexture(planet);
+                var texture = PlanetFactory.getTexture(planet);
 
                 var planetMaterial = new THREE.MeshLambertMaterial({
                                           ambient: 0xbbbbbb,
@@ -128,10 +130,10 @@ define(['jquery', 'SolarSystem'], function($, SolarSystem) {
 
                 thisPlanet.name = planet.name;
 
-                $.when(PlanetBuilder.buildRings(thisPlanet, planet)).done(function(response) {
-                    PlanetBuilder.addPlanet(thisPlanet);
+                $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
+                    PlanetFactory.addPlanet(thisPlanet);
 
-                    var posX = PlanetBuilder.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+                    var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
 
                     thisPlanet.position.set(
                         posX, // x
@@ -139,8 +141,14 @@ define(['jquery', 'SolarSystem'], function($, SolarSystem) {
                         0     // z
                     );
 
-                    PlanetBuilder.addPlanet(thisPlanet);
+                    PlanetFactory.addPlanet(thisPlanet);
                     Scene.planets.push(thisPlanet);
+
+                    var endTime = new Date().getTime();
+
+                    var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime('ms', startTime, endTime) + ' milliseconds';
+
+                    console.log(builderStatement);
 
                     promise.resolve(thisPlanet);
                 });

@@ -1,41 +1,63 @@
-define(['Scene', 'SolarSystem', 'SunFactory', 'PlanetFactory', 'AstroidBeltFactory'], function(Scene, SolarSystem, SunFactory) {
+define(
+    [
+        'Scene',
+        'SolarSystem',
+        'SunFactory',
+        'PlanetFactory',
+        'AstroidBeltFactory',
+        'TimerUtil'
+    ],
+    function(Scene, SolarSystem, SunFactory, PlanetFactory, AstroidBeltFactory, TimerUtil) {
 
-    var SolarSystemBuilder = {
-        buildParent: function() {
-            return $.Deferred(function(promise) {
+        var SolarSystemBuilder = {
+            buildParent: function() {
+                return $.Deferred(function(promise) {
 
-                SunFactory.build();
+                    SunFactory.build();
 
-                promise.resolve();
-            });
-        },
+                    promise.resolve();
+                });
+            },
 
-        buildAstroidBelt: function() {
-            return $.Deferred(function(promise) {
-                AstroidBelt.buildBelt();
+            buildAstroidBelt: function() {
+                return $.Deferred(function(promise) {
+                    AstroidBeltFactory.buildBelt();
 
-                promise.resolve();
-            });
-        },
+                    promise.resolve();
+                });
+            },
 
-        buildPlanets: function() {
-            return $.Deferred(function(promise) {
-                var promises = new Array();
+            buildPlanets: function() {
+                return $.Deferred(function(promise) {
+                    var planets = SolarSystem.planets;
 
-                for (var i = 0; i < planets.length; i++) {
-                    var planetBuildPromise = PlanetBuilder.build(planets[i]);
+                    for (var i = 0; i < planets.length; i++) {
+                        var planetBuildPromise = PlanetFactory.build(planets[i]);
+                    }
 
-                    promises.push(planetBuildPromise);
-                }
+                    console.log('Done building planets.');
 
-                promise.resolve(promises);
-            });
-        },
+                    promise.resolve();
+                });
+            },
 
-        build: function() {
-            SolarSystemBuilder.buildParent();
-        }
-    };
+            build: function() {
+                var promise1 = SolarSystemBuilder.buildParent(),
+                    promise2 = SolarSystemBuilder.buildAstroidBelt(),
+                    promise3 = SolarSystemBuilder.buildPlanets()
+                ;
 
-    return SolarSystemBuilder;
-});
+                $.when(
+                    promise1,
+                    promise2,
+                    promise3
+                )
+                .done(function() {
+                    console.log('Solar System Factory done building.');
+                });
+            }
+        };
+
+        return SolarSystemBuilder;
+    }
+);

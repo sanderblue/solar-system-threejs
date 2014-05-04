@@ -126,17 +126,9 @@ define(
 
         init: function() {
             $.when(Scene.init()).done(function() {
-                console.log('Done building scene.', Scene.scene);
+                console.log('Done building scene.');
 
-                var promise1 = SolarSystemFactory.build();
-
-                $.when(promise1).done(function() {
-                    console.log('Done building sun.')
-                });
-
-                //     promise2 = ,
-                //     promise3 =
-                // ;
+                SolarSystemFactory.build();
             });
 
             window.addEventListener('resize', this.onWindowResize, false);
