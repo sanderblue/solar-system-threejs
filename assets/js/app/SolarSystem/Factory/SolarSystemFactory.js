@@ -42,18 +42,20 @@ define(
             },
 
             build: function() {
-                var promise1 = SolarSystemBuilder.buildParent(),
-                    promise2 = SolarSystemBuilder.buildAstroidBelt(),
-                    promise3 = SolarSystemBuilder.buildPlanets()
-                ;
+                var startTime = new Date().getTime();
 
                 $.when(
-                    promise1,
-                    promise2,
-                    promise3
+                    SolarSystemBuilder.buildParent(),
+                    SolarSystemBuilder.buildAstroidBelt(),
+                    SolarSystemBuilder.buildPlanets()
                 )
                 .done(function() {
-                    console.log('Solar System Factory done building.');
+
+                    var endTime = new Date().getTime();
+
+                    // console.log(TimerUtil.getElapsedTime('ms', startTime, endTime));
+
+                    console.log('Solar System Factory done building in ' +  TimerUtil.getElapsedTime('ms', startTime, endTime) + ' milliseconds.');
                 });
             }
         };

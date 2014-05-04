@@ -3,7 +3,7 @@ define(['jquery', 'Scene', 'SolarSystem', 'RingFactory', 'TimerUtil'], function(
     var PlanetFactory = {
         OrbitBuilder: {
             getOrbitAmplitute: function(distance) {
-                return SolarSystem.parent.radius + distance;
+                return SolarSystem.parent.radius + distance * SolarSystem.orbitScale;
             },
 
             // Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.

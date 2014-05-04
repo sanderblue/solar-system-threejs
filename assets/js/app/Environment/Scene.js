@@ -3,9 +3,10 @@ define([], function() {
     var Scene = {
         planets: [],
         astroids: [],
-        zoom: 5200,
+        zoom: 2500,
         tilt: 500,
         scene: null,
+        camera: null,
 
         setContainer: function() {
             Scene.container = document.getElementById('solar-system');

@@ -4,7 +4,8 @@ define(function() {
         // TODO: Make these accessible to the user to change and manipulate
         dayWithTimeAsDecimal: 1,
         dayIntervalObj: null,
-        dayInterval: 1000,
+        dayInterval: 2000,
+        pseudoDayCount: 1,
 
         createTime: function() {
             TimeController.dayWithTimeAsDecimal = new Date().getDOYwithTimeAsDecimal();
@@ -12,8 +13,11 @@ define(function() {
 
         startTime: function() {
             TimeController.dayIntervalObj = setInterval(function() {
+                TimeController.pseudoDayCount++;
 
-                TimeController.dayWithTimeAsDecimal = new Date().getDOYwithTimeAsDecimal();
+                TimeController.dayWithTimeAsDecimal = new Date().getDOYwithTimeAsDecimal() + TimeController.pseudoDayCount + ms;
+
+                // console.log('Day ', TimeController.dayWithTimeAsDecimal);
 
             }, TimeController.dayInterval);
         },

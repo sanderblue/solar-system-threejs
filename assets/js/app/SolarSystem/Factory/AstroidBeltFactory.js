@@ -25,7 +25,7 @@ define(
             },
 
             getOrbitAmplitute: function(distance) {
-                return SolarSystem.parent.radius + distance;
+                return SolarSystem.parent.radius + distance * SolarSystem.orbitScale;
             },
 
             buildRandomPoints: function() {
