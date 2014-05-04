@@ -35,8 +35,6 @@ define(
                         var planetBuildPromise = PlanetFactory.build(planets[i]);
                     }
 
-                    console.log('Done building planets.');
-
                     promise.resolve();
                 });
             },
@@ -55,7 +53,7 @@ define(
 
                     // console.log(TimerUtil.getElapsedTime('ms', startTime, endTime));
 
-                    console.log('Solar System Factory done building in ' +  TimerUtil.getElapsedTime('ms', startTime, endTime) + ' milliseconds.');
+                    console.log('Solar System Factory done building in ' +  TimerUtil.getElapsedTime('ms', startTime, endTime) / 1000 + ' seconds.');
                 });
             }
         };

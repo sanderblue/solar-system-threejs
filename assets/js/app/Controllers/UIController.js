@@ -1,4 +1,4 @@
-define(['jquery'], function($) {
+define(['jquery', 'Scene'], function($, Scene) {
 
     var UIController = {
         initEventListeners: function() {
@@ -57,10 +57,14 @@ define(['jquery'], function($) {
                     return planets[i];
                 }
             }
+        },
+
+        init: function() {
+            $.when(UIController.buildPlanetList()).done(function() {
+                UIController.initEventListeners();
+            });
         }
     };
-});
 
-// $.when(UIController.buildPlanetList()).done(function() {
-//     UIController.initEventListeners();
-// });
+    return UIController;
+});

@@ -8,9 +8,10 @@ define(
         'PlanetFactory',
         'AstroidBeltFactory',
         'RingFactory',
-        'Time'
+        'Time',
+        'UI'
     ],
-    function($, Scene, SolarSystem, SolarSystemFactory, SunFactory, PlanetFactory, AstroidBeltFactory, RingFactory, TimeController) {
+    function($, Scene, SolarSystem, SolarSystemFactory, SunFactory, PlanetFactory, AstroidBeltFactory, RingFactory, TimeController, UIController) {
 
         var MainController = {
             animate: function() {
@@ -27,9 +28,9 @@ define(
                 ;
 
                 for (var i = 0; i < planets.length; i++) {
-                    var ms1 = new Date().getMilliseconds(),
-                        dayOnEarth = TimeController.dayWithTimeAsDecimal
-                    ;
+                    var dayOnEarth = new Date().getDOYwithTimeAsDecimal() + TimeController.getStopWatchValue();
+
+                    // console.log(dayOnEarth);
 
                     // Mercury
                     if (i === 0) {
@@ -125,7 +126,9 @@ define(
 
                 $.when(Scene.init()).done(function() {
                     SolarSystemFactory.build();
-                    // TimeController.startTime();
+                    UIController.init();
+
+                    TimeController.start();
 
                     MainController.animate();
                 });
