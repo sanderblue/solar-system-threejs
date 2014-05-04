@@ -59,8 +59,8 @@ define([], function() {
         setCameraPosition: function(target) {
             Scene.camera.focalPoint = target;
             // Scene.camera.position.x = Zoom;
-            Scene.camera.position.y = Tilt;
-            Scene.camera.position.z = Zoom;
+            Scene.camera.position.y = Scene.tilt;
+            Scene.camera.position.z = Scene.zoom;
 
             Scene.camera.lookAt(target);
         },

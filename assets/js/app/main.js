@@ -7,9 +7,10 @@ define(
         'SunFactory',
         'PlanetFactory',
         'AstroidBeltFactory',
-        'RingFactory'
+        'RingFactory',
+        'Time'
     ],
-    function($, Scene, SolarSystem, SolarSystemFactory, SunFactory, PlanetFactory, AstroidBeltFactory, RingFactory) {
+    function($, Scene, SolarSystem, SolarSystemFactory, SunFactory, PlanetFactory, AstroidBeltFactory, RingFactory, TimeController) {
 
     /**** Initialize all the Solar System magic here!! ****/
 
@@ -23,9 +24,9 @@ define(
 
     var MainController = {
         animate: function() {
-            requestAnimationFrame(animate);
+            requestAnimationFrame(MainController.animate);
 
-            render();
+            MainController.render();
             // Scene.stats.update();
         },
 
@@ -77,17 +78,17 @@ define(
                     count = dayOnEarth + 62885;
                 }
 
-                var posX = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
+                var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(SolarSystem.planets[i].meanDistanceFromSun)
                             * Math.cos(
                                 count
-                                * getPlanetRadian(SolarSystem.Planets[i])
+                                * PlanetFactory.OrbitBuilder.getPlanetRadian(SolarSystem.planets[i])
                                 * degreesToRadianRatio
                             );
 
-                var posY = getOrbitAmplitute(SolarSystem.Planets[i].meanDistanceFromSun)
+                var posY = PlanetFactory.OrbitBuilder.getOrbitAmplitute(SolarSystem.planets[i].meanDistanceFromSun)
                             * Math.sin(
                                 count
-                                * getPlanetRadian(SolarSystem.Planets[i])
+                                * PlanetFactory.OrbitBuilder.getPlanetRadian(SolarSystem.planets[i])
                                 * degreesToRadianRatio
                             );
 
@@ -104,7 +105,7 @@ define(
         },
 
         render: function() {
-            positionPlanets();
+            MainController.positionPlanets();
             Scene.renderer.render(Scene.scene, Scene.camera);
             Scene.setCameraPosition(Scene.camera.focalPoint);
         }
@@ -125,10 +126,14 @@ define(
         },
 
         init: function() {
+            this.checkBrowserCompatibility();
+
             $.when(Scene.init()).done(function() {
                 console.log('Done building scene.');
 
                 SolarSystemFactory.build();
+
+                MainController.animate();
             });
 
             window.addEventListener('resize', this.onWindowResize, false);
