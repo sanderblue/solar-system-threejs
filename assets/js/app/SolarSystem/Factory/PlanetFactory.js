@@ -1,4 +1,4 @@
-define(['jquery', 'threejs', 'SolarSystem'], function($, THREE, SolarSystem) {
+define(['jquery', 'SolarSystem'], function($, SolarSystem) {
 
     var PlanetFactory = {
         OrbitBuilder: {
@@ -148,9 +148,7 @@ define(['jquery', 'threejs', 'SolarSystem'], function($, THREE, SolarSystem) {
         },
 
         addPlanet: function(planet) {
-            setTimeout(function() {
-                Scene.scene.add(planet);
-            }, 100);
+            Scene.scene.add(planet);
         }
     };
 

@@ -1,5 +1,6 @@
 require.config({
     baseUrl: "assets/js",
+    urlArgs: "bust=" + (new Date()).getTime(), // bust cache for development purposes ("bust=v2" for production)
     paths: {
         // Core
         'requirejs'   : 'libs/requirejs/require',
@@ -50,6 +51,9 @@ require.config({
         },
         'SolarSystem': {
             deps: ['jquery', 'threejs', 'detector', 'convexgeometry', 'Time']
+        },
+        'SolarSystemFactory': {
+            deps: ['Scene', 'SolarSystem']
         },
         'Time': {
             deps: ['Date']

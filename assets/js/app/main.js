@@ -1,26 +1,24 @@
 define(
     [
         'jquery',
-        'threejs',
         'Scene',
         'SolarSystem',
+        'SolarSystemFactory',
         'SunFactory',
         'PlanetFactory',
         'AstroidBeltFactory',
         'RingFactory'
     ],
-    function($, THREE, Scene, SolarSystem, SunFactory, PlanetFactory, AstroidBeltFactory, RingFactory) {
+    function($, Scene, SolarSystem, SolarSystemFactory, SunFactory, PlanetFactory, AstroidBeltFactory, RingFactory) {
 
     /**** Initialize all the Solar System magic here!! ****/
 
-    console.log('jquery: ', $);
-    console.log('threejs: ', THREE);
-    console.log('Scene: ', Scene);
-    console.log('SolarSystem: ', SunFactory);
-    console.log('SolarSystem: ', SolarSystem);
-    console.log('PlanetFactory: ', PlanetFactory);
-    console.log('AstroidBeltFactory: ', AstroidBeltFactory);
-    console.log('RingFactory: ', RingFactory);
+    // console.log('Scene: ', Scene);
+    // console.log('SolarSystem: ', SunFactory);
+    // console.log('SolarSystemFactory: ', SolarSystemFactory);
+    // console.log('PlanetFactory: ', PlanetFactory);
+    // console.log('AstroidBeltFactory: ', AstroidBeltFactory);
+    // console.log('RingFactory: ', RingFactory);
 
 
     var MainController = {
@@ -128,7 +126,17 @@ define(
 
         init: function() {
             $.when(Scene.init()).done(function() {
+                console.log('Done building scene.', Scene.scene);
 
+                var promise1 = SolarSystemFactory.build();
+
+                $.when(promise1).done(function() {
+                    console.log('Done building sun.')
+                });
+
+                //     promise2 = ,
+                //     promise3 =
+                // ;
             });
 
             window.addEventListener('resize', this.onWindowResize, false);

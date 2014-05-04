@@ -1,6 +1,15 @@
-define([], function() {
+define(['Scene', 'SolarSystem', 'SunFactory', 'PlanetFactory', 'AstroidBeltFactory'], function(Scene, SolarSystem, SunFactory) {
 
     var SolarSystemBuilder = {
+        buildParent: function() {
+            return $.Deferred(function(promise) {
+
+                SunFactory.build();
+
+                promise.resolve();
+            });
+        },
+
         buildAstroidBelt: function() {
             return $.Deferred(function(promise) {
                 AstroidBelt.buildBelt();
@@ -21,6 +30,10 @@ define([], function() {
 
                 promise.resolve(promises);
             });
+        },
+
+        build: function() {
+            SolarSystemBuilder.buildParent();
         }
     };
 

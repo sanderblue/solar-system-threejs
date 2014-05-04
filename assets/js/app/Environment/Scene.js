@@ -5,6 +5,7 @@ define([], function() {
         astroids: [],
         zoom: 5200,
         tilt: 500,
+        scene: null,
 
         setContainer: function() {
             Scene.container = document.getElementById('solar-system');

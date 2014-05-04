@@ -1,42 +1,45 @@
-define([], function() {
-
+define(['Scene', 'SolarSystem'], function(Scene, SolarSystem) {
     var SunFactory = {
         getTexture: function() {
-            return new THREE.ImageUtils.loadTexture('../textures/sun_large.jpg');
+            return new THREE.ImageUtils.loadTexture('../assets/textures/sun_large.jpg');
         },
         build: function() {
-            var texture = SunBuilder.getTexture();
+            console.log('sdfsdf', SolarSystem);
 
-            var material = new THREE.MeshLambertMaterial({
-                                  ambient: 0xffffff,
-                                  emissive: 0xffffff,
-                                  map: texture,
-                                  side: THREE.DoubleSide,
-                                  transparent: true,
-                                  opacity: 0.9
-                                });
+            return $.Deferred(function(promise) {
+                var texture = SunFactory.getTexture();
 
-            texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-            texture.anisotropy = 32;
+                var material = new THREE.MeshLambertMaterial({
+                                      ambient: 0xffffff,
+                                      emissive: 0xffffff,
+                                      map: texture,
+                                      side: THREE.DoubleSide,
+                                      transparent: true,
+                                      opacity: 0.9
+                                    });
 
-            var sunGeometry = new THREE.SphereGeometry(
-                                    SolarSystem.Parent.radius,
-                                    SolarSystem.Parent.radius / 3.5,
-                                    SolarSystem.Parent.radius / 7
-                                );
+                texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+                texture.anisotropy = 32;
 
-            var Sun = new THREE.Mesh(sunGeometry, material);
+                var sunGeometry = new THREE.SphereGeometry(
+                                        SolarSystem.parent.radius,
+                                        SolarSystem.parent.radius / 3.5,
+                                        SolarSystem.parent.radius / 7
+                                    );
 
-            var pointLight = new THREE.PointLight(0xffffff, 1.95);
+                var Sun = new THREE.Mesh(sunGeometry, material);
 
-            Sun.scale.x = Sun.scale.y = Sun.scale.z = 1;
+                var pointLight = new THREE.PointLight(0xffffff, 1.95);
 
-            Scene.Sun = Sun;
+                Sun.scale.x = Sun.scale.y = Sun.scale.z = 1;
 
-            Sun.position.set(0, 0, 0);
+                Scene.Sun = Sun;
 
-            Scene.scene.add(pointLight);
-            Scene.scene.add(Sun);
+                Sun.position.set(0, 0, 0);
+
+                Scene.scene.add(pointLight);
+                Scene.scene.add(Sun);
+            });
         }
     };
 
