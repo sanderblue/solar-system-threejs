@@ -40,20 +40,29 @@ define(
                 return points;
             },
 
+            getRandomNumber: function() {
+                var randomNumA = new Date().getMilliseconds() - (new Date().getMilliseconds() / 2.1),
+                    randomNumB = Math.random() * randomNumA;
+
+                if (randomNumB > 250) {
+                    return parseFloat(randomNumB - 100 * Math.PI / 2);
+                }
+
+                return randomNumB;
+            },
+
             positionAstroid: function(astroid, count) {
                 var degreesToRadianRatio = 0.0174532925,
-                    randomNumA = new Date().getMilliseconds() - (new Date().getMilliseconds() / 2.1),
-                    randomNumB = Math.random() * randomNumA,
-                    amplitude = SolarSystem.astroidBelt.meanDistanceFromSun + randomNumB // randomize the amplitudes to spread them out
+                    amplitude = SolarSystem.astroidBelt.meanDistanceFromSun + AstroidBelt.getRandomNumber() // randomize the amplitudes to spread them out
                 ;
 
                 var posX = AstroidBelt.getOrbitAmplitute(amplitude)
-                            * Math.cos(count + 50 * Math.random()
+                            * Math.cos(count + 25 * Math.random()
                             * AstroidBelt.getAstroidRadian()
                             * degreesToRadianRatio);
 
                 var posY = AstroidBelt.getOrbitAmplitute(amplitude)
-                            * Math.sin(count + 50 * Math.random()
+                            * Math.sin(count + 25 * Math.random()
                             * AstroidBelt.getAstroidRadian()
                             * degreesToRadianRatio);
 

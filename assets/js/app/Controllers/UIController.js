@@ -4,11 +4,11 @@ define(['jquery', 'Scene'], function($, Scene) {
         initEventListeners: function() {
             // User Event Listeners
             $('#zoom').on('input', function(e) {
-                Zoom = e.target.value;
+                Scene.zoom = e.target.value;
             });
 
             $('#tilt').on('input', function(e) {
-                Tilt = e.target.value;
+                Scene.tilt = e.target.value;
             });
 
             $('.planet').on('click', function() {

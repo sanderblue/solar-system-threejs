@@ -3,8 +3,8 @@ define([], function() {
     var Scene = {
         planets: [],
         astroids: [],
-        zoom: 2000,
-        tilt: 500,
+        zoom: 3200,
+        tilt: 400,
         scene: null,
         camera: null,
 

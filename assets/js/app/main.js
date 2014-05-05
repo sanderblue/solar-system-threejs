@@ -99,8 +99,6 @@ define(
             },
 
             render: function() {
-                Scene.camera.focalPoint = Scene.Sun.position;
-
                 MainController.positionPlanets();
                 Scene.renderer.render(Scene.scene, Scene.camera);
                 Scene.setCameraPosition(Scene.camera.focalPoint);
@@ -125,15 +123,19 @@ define(
                 this.checkBrowserCompatibility();
 
                 $.when(Scene.init()).done(function() {
+
                     SolarSystemFactory.build();
+
                     UIController.init();
 
                     TimeController.start();
 
+                    Scene.camera.focalPoint = Scene.Sun.position;
+
                     MainController.animate();
                 });
 
-                window.addEventListener('resize', this.onWindowResize, false);
+                window.addEventListener('resize', Initializer.onWindowResize, false);
             }
         };
 
