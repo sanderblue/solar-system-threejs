@@ -2,16 +2,12 @@ define(
     [
         'jquery',
         'Scene',
-        'SolarSystem',
-        'SolarSystemFactory',
-        'SunFactory',
+        'Initializer',
         'PlanetFactory',
-        'AstroidBeltFactory',
-        'RingFactory',
-        'Time',
-        'UI'
+        'SolarSystem',
+        'Time'
     ],
-    function($, Scene, SolarSystem, SolarSystemFactory, SunFactory, PlanetFactory, AstroidBeltFactory, RingFactory, TimeController, UIController) {
+    function($, Scene, Initializer, PlanetFactory, SolarSystem, TimeController) {
 
         var MainController = {
             animate: function() {
@@ -100,45 +96,22 @@ define(
 
             render: function() {
                 MainController.positionPlanets();
-                Scene.renderer.render(Scene.scene, Scene.camera);
-                Scene.setCameraPosition(Scene.camera.focalPoint);
-            }
-        };
+                MainController.setCamera();
 
-        var Initializer = {
-            checkBrowserCompatibility: function() {
-                if (!Detector.webgl) {
-                    Detector.addGetWebGLMessage();
-                }
+                Scene.renderer.render(Scene.scene, Scene.camera);
             },
 
-            onWindowResize: function() {
-                Scene.camera.aspect = window.innerWidth / window.innerHeight;
-                Scene.camera.updateProjectionMatrix();
-
-                Scene.renderer.setSize(window.innerWidth, window.innerHeight);
+            setCamera: function() {
+                Scene.setCameraPosition(Scene.camera.focalPoint);
             },
 
             init: function() {
-                this.checkBrowserCompatibility();
-
-                $.when(Scene.init()).done(function() {
-
-                    SolarSystemFactory.build();
-
-                    UIController.init();
-
-                    TimeController.start();
-
-                    Scene.camera.focalPoint = Scene.Sun.position;
-
+                $.when(Initializer.init()).done(function() {
                     MainController.animate();
                 });
-
-                window.addEventListener('resize', Initializer.onWindowResize, false);
             }
         };
 
-        Initializer.init();
+        MainController.init();
     }
 );
