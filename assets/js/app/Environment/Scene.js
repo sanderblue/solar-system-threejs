@@ -3,10 +3,13 @@ define(function() {
     var Scene = {
         planets: [],
         astroids: [],
-        zoom: 600,
-        tilt: -1200,
+        tilt: 120,
         scene: null,
         camera: null,
+        zoom: {
+            x: 0,
+            y: -1420
+        },
 
         setContainer: function() {
             Scene.container = document.getElementById('solar-system');
@@ -20,12 +23,12 @@ define(function() {
         },
 
         setLights: function() {
-            var directionalLightFromTop    = new THREE.DirectionalLight(0xffffff, 0.22),
-                directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, 0.22)
+            var directionalLightFromTop    = new THREE.DirectionalLight(0xffffff, 0.28),
+                directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, 0.28)
             ;
 
-            directionalLightFromTop.position.set(0, 1800, 0);
-            directionalLightFromBottom.position.set(0, -1800, 0);
+            directionalLightFromTop.position.set(0, 1500, 0);
+            directionalLightFromBottom.position.set(0, -1500, 0);
 
             Scene.scene.add(directionalLightFromTop);
             Scene.scene.add(directionalLightFromBottom);
@@ -58,9 +61,9 @@ define(function() {
         setCameraPosition: function(target) {
             Scene.camera.focalPoint = target;
 
-            Scene.camera.position.x = 0;
-            Scene.camera.position.y = -3800;
-            Scene.camera.position.z = 800;
+            Scene.camera.position.x = Scene.zoom.x;
+            Scene.camera.position.y = Scene.zoom.y;
+            Scene.camera.position.z = Scene.tilt;
 
             Scene.camera.lookAt(target);
         },

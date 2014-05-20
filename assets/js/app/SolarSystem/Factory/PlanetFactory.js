@@ -88,11 +88,13 @@ define(
                 return new THREE.ImageUtils.loadTexture(texturePath);
             },
 
-            addMoons: function(planet) {
+            addMoons: function(planet, planetObj) {
                 return $.Deferred(function(promise) {
 
+                    console.log(planet.moons)
+
                     for (var i = 0; i < planet.moons.length; i++) {
-                        PlanetBuilder.buildMoon(planet, planet.moons[i]);
+                        MoonFactory.buildMoon(planet, planet.moons[i], planetObj);
                     }
 
                     promise.resolve();
@@ -132,6 +134,10 @@ define(
                                     planetMaterial
                                  );
 
+                    // We need to flip the planet's axis so the text renders as a vertical canvas
+                    thisPlanet.rotation.x = Math.PI / 2;
+                    thisPlanet.name       = planet.name;
+
                     // Attempt at adding Saturns axis tilt
                     if (planet.name == 'Saturn') {
                         var quaternion = new THREE.Quaternion();
@@ -143,34 +149,58 @@ define(
                         thisPlanet.add(vector);
                     }
 
-                    // We need to flip the planet's axis so the text renders as a vertical canvas
-                    thisPlanet.rotation.x = Math.PI / 2;
+                    if (planet.name == 'Earth') {
+                        $.when(PlanetFactory.addMoons(planet, thisPlanet)).done(function() {
+                            $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
+                                PlanetFactory.addPlanet(thisPlanet);
 
-                    thisPlanet.name = planet.name;
+                                var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
 
-                    $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
-                        PlanetFactory.addPlanet(thisPlanet);
+                                thisPlanet.position.set(
+                                    posX, // x
+                                    0,    // y
+                                    0     // z
+                                );
 
-                        var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+                                PlanetFactory.addPlanet(thisPlanet);
 
-                        thisPlanet.position.set(
-                            posX, // x
-                            0,    // y
-                            0     // z
-                        );
+                                Scene.planets.push(thisPlanet);
 
-                        PlanetFactory.addPlanet(thisPlanet);
+                                var endTime = new Date().getTime();
 
-                        Scene.planets.push(thisPlanet);
+                                var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime('ms', startTime, endTime) + ' milliseconds';
 
-                        var endTime = new Date().getTime();
+                                console.log(builderStatement);
 
-                        var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime('ms', startTime, endTime) + ' milliseconds';
+                                promise.resolve(thisPlanet);
+                            });
+                        });
 
-                        console.log(builderStatement);
+                    } else {
+                        $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
+                            PlanetFactory.addPlanet(thisPlanet);
 
-                        promise.resolve(thisPlanet);
-                    });
+                            var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+
+                            thisPlanet.position.set(
+                                posX, // x
+                                0,    // y
+                                0     // z
+                            );
+
+                            PlanetFactory.addPlanet(thisPlanet);
+
+                            Scene.planets.push(thisPlanet);
+
+                            var endTime = new Date().getTime();
+
+                            var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime('ms', startTime, endTime) + ' milliseconds';
+
+                            console.log(builderStatement);
+
+                            promise.resolve(thisPlanet);
+                        });
+                    }
                 });
             },
 

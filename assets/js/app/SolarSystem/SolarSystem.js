@@ -51,8 +51,15 @@ define(function() {
                 diameter: 12.7,
                 meanDistanceFromSun: 149.5,
                 earthDaysToOrbitSun: 364.25,
-                moons: [],
                 texture: null,
+                moons: [
+                    {
+                        name: "Moon",
+                        radius: 1.7,
+                        orbitPeriod: 27,
+                        distanceFromParent: 0.384
+                    }
+                ],
                 rings: []
             },
             {
