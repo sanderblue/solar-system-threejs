@@ -24,6 +24,7 @@ require.config({
         'PlanetFactory'      : 'app/SolarSystem/Factory/PlanetFactory',
         'AstroidBeltFactory' : 'app/SolarSystem/Factory/AstroidBeltFactory',
         'RingFactory'        : 'app/SolarSystem/Factory/RingFactory',
+        'MoonFactory'        : 'app/SolarSystem/Factory/MoonFactory',
 
         // Controllers
         'Console'     : 'app/Controllers/ConsoleController',
@@ -38,7 +39,7 @@ require.config({
 
     },
     shim: {
-        'jquery': {
+        'jqsuery': {
             exports: ['$', 'jQuery']
         },
         'detector': {
