@@ -3,8 +3,8 @@ define([], function() {
     var Scene = {
         planets: [],
         astroids: [],
-        zoom: 3200,
-        tilt: 400,
+        zoom: 600,
+        tilt: -1200,
         scene: null,
         camera: null,
 
@@ -16,7 +16,7 @@ define([], function() {
 
         setScene: function() {
             Scene.scene = new THREE.Scene();
-            // Scene.scene.add(new THREE.AxisHelper(20));
+            Scene.scene.add(new THREE.AxisHelper(5000));
         },
 
         setLights: function() {
@@ -33,8 +33,6 @@ define([], function() {
 
         setCamera: function() {
             Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200000);
-
-            Scene.camera.position.set(0, this.tilt, 0);
         },
 
         setCameraControls: function() {
@@ -61,8 +59,8 @@ define([], function() {
             Scene.camera.focalPoint = target;
 
             Scene.camera.position.x = 0;
-            Scene.camera.position.y = Scene.tilt;
-            Scene.camera.position.z = Scene.zoom;
+            Scene.camera.position.y = -3800;
+            Scene.camera.position.z = 800;
 
             Scene.camera.lookAt(target);
         },

@@ -13,6 +13,7 @@ define(function() {
      */
 
     var SolarSystem = {
+        buildEnabled: true, // toggle factories on/off
         orbitScale: 2.25,
         parent: {
             name: 'Sun',

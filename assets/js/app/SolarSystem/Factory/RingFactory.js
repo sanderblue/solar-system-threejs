@@ -19,13 +19,16 @@ define([], function() {
                     ringLine.vertices.push(
                         new THREE.Vector3(
                             Math.cos(segment) * amplitude,
-                            0,
-                            Math.sin(segment) * amplitude
+                            Math.sin(segment) * amplitude,
+                            0
                         )
                     );
                 }
 
                 var ringLine = new THREE.Line(ringLine, material);
+
+                // We need to flip the planet's ring axis so the text renders as a vertical canvas
+                ringLine.rotation.x = Math.PI / 2;
 
                 var responseObject = {
                     line: ringLine

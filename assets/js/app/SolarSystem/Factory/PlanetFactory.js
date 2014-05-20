@@ -31,8 +31,8 @@ define(['jquery', 'Scene', 'SolarSystem', 'RingFactory', 'TimerUtil'], function(
                     orbitLine.vertices.push(
                         new THREE.Vector3(
                             Math.cos(segment) * orbitAmplitude,
-                            0,
-                            Math.sin(segment) * orbitAmplitude
+                            Math.sin(segment) * orbitAmplitude,
+                            0
                         )
                     );
                 }
@@ -74,7 +74,9 @@ define(['jquery', 'Scene', 'SolarSystem', 'RingFactory', 'TimerUtil'], function(
         },
 
         getTexture: function(planet) {
-            return new THREE.ImageUtils.loadTexture('../assets/textures/' + planet.name.toLowerCase() + '.jpg');
+            var texturePath = '../assets/textures/' + planet.name.toLowerCase() + '.jpg';
+
+            return new THREE.ImageUtils.loadTexture(texturePath);
         },
 
         addMoons: function(planet) {
@@ -97,16 +99,15 @@ define(['jquery', 'Scene', 'SolarSystem', 'RingFactory', 'TimerUtil'], function(
 
                 var texture = PlanetFactory.getTexture(planet);
 
+                texture.wrapS      = THREE.RepeatWrapping;
+                texture.wrapT      = THREE.RepeatWrapping;
+                texture.anisotropy = 4;
+
                 var planetMaterial = new THREE.MeshLambertMaterial({
                                           ambient: 0xbbbbbb,
                                           map: texture,
                                           side: THREE.DoubleSide
                                         });
-
-                texture.wrapS = THREE.RepeatWrapping;
-                texture.wrapT = THREE.RepeatWrapping;
-
-                texture.anisotropy = 16;
 
                 thisPlanet = new THREE.Mesh(
                             new THREE.SphereGeometry(
@@ -120,13 +121,16 @@ define(['jquery', 'Scene', 'SolarSystem', 'RingFactory', 'TimerUtil'], function(
                 // Attempt at adding Saturns axis tilt
                 if (planet.name == 'Saturn') {
                     var quaternion = new THREE.Quaternion();
-                    quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 2);
+                    quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1), Math.PI / 2);
 
                     var vector = new THREE.Vector3(10, 0, 0);
                     vector.applyQuaternion(quaternion);
 
                     thisPlanet.add(vector);
                 }
+
+                // We need to flip the planet's axis so the text renders as a vertical canvas
+                thisPlanet.rotation.x = Math.PI / 2;
 
                 thisPlanet.name = planet.name;
 
@@ -142,6 +146,7 @@ define(['jquery', 'Scene', 'SolarSystem', 'RingFactory', 'TimerUtil'], function(
                     );
 
                     PlanetFactory.addPlanet(thisPlanet);
+
                     Scene.planets.push(thisPlanet);
 
                     var endTime = new Date().getTime();

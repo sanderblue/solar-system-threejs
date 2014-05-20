@@ -68,8 +68,8 @@ define(
 
                 astroid.position.set(
                     posX,
-                    0,
-                    posY
+                    posY,
+                    0
                 );
             },
 

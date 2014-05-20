@@ -68,35 +68,35 @@ define(
                         count = dayOnEarth + 62885;
                     }
 
-                    var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(SolarSystem.planets[i].meanDistanceFromSun)
+                    var posY = PlanetFactory.OrbitBuilder.getOrbitAmplitute(SolarSystem.planets[i].meanDistanceFromSun)
                                 * Math.cos(
                                     count
                                     * PlanetFactory.OrbitBuilder.getPlanetRadian(SolarSystem.planets[i])
                                     * degreesToRadianRatio
                                 );
 
-                    var posY = PlanetFactory.OrbitBuilder.getOrbitAmplitute(SolarSystem.planets[i].meanDistanceFromSun)
+                    var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(SolarSystem.planets[i].meanDistanceFromSun)
                                 * Math.sin(
                                     count
                                     * PlanetFactory.OrbitBuilder.getPlanetRadian(SolarSystem.planets[i])
                                     * degreesToRadianRatio
                                 );
 
-                    Scene.planets[i].rotation.y += 0.00041;
+                    Scene.planets[i].rotation.y += 0.008;
 
                     Scene.planets[i].position.set(
                         parseFloat(posX),
-                        0,
-                        parseFloat(posY)
+                        parseFloat(posY),
+                        0
                     );
                 }
 
-                Scene.Sun.rotation.y += 0.0003;
+                Scene.Sun.rotation.z += 0.0003;
             },
 
             render: function() {
                 MainController.positionPlanets();
-                MainController.setCamera();
+                // MainController.setCamera();
 
                 Scene.renderer.render(Scene.scene, Scene.camera);
             },
@@ -108,6 +108,7 @@ define(
             init: function() {
                 $.when(Initializer.init()).done(function() {
                     MainController.animate();
+                    MainController.setCamera();
                 });
             }
         };
