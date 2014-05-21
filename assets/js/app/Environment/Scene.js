@@ -3,12 +3,12 @@ define(function() {
     var Scene = {
         planets: [],
         astroids: [],
-        tilt: 120,
+        tilt: 170,
         scene: null,
         camera: null,
         zoom: {
             x: 0,
-            y: -1420
+            y: -1350
         },
 
         setContainer: function() {
@@ -35,7 +35,7 @@ define(function() {
         },
 
         setCamera: function() {
-            Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200000);
+            Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200000 * 10);
         },
 
         setCameraControls: function() {

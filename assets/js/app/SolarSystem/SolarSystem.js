@@ -14,7 +14,7 @@ define(function() {
 
     var SolarSystem = {
         buildEnabled: true, // toggle factories on/off
-        orbitScale: 2.25,
+        orbitScale: 1,
         parent: {
             name: 'Sun',
             radius: 700,
@@ -27,7 +27,7 @@ define(function() {
                 name: 'Mercury',
                 radius: 2.44,
                 diameter: 4.88,
-                meanDistanceFromSun: 57.9,
+                meanDistanceFromSun: 57.9, // 1:100000
                 earthDaysToOrbitSun: 88,
                 moons: [],
                 texture: null,
@@ -38,7 +38,7 @@ define(function() {
                 name: 'Venus',
                 radius: 6.05,
                 diameter: 12.1,
-                meanDistanceFromSun: 108.2,
+                meanDistanceFromSun: 108.2, // 1:100000
                 earthDaysToOrbitSun: 224.7,
                 moons: [],
                 texture: null,
@@ -49,15 +49,15 @@ define(function() {
                 name: 'Earth',
                 radius: 6.35,
                 diameter: 12.7,
-                meanDistanceFromSun: 149.5,
+                meanDistanceFromSun: 149.5, // 1:100000
                 earthDaysToOrbitSun: 364.25,
                 texture: null,
                 moons: [
                     {
                         name: "Moon",
-                        radius: 1.7,
+                        radius: 1.737,
                         orbitPeriod: 27,
-                        distanceFromParent: 0.384
+                        distanceFromParent: 38.44 // 1:10000
                     }
                 ],
                 rings: []
@@ -69,7 +69,20 @@ define(function() {
                 diameter: 6.8,
                 meanDistanceFromSun: 227.9,
                 earthDaysToOrbitSun: 687,
-                moons: [],
+                moons: [
+                    {
+                        name: "Phobos",
+                        radius: 0.68, // 1:1000
+                        orbitPeriod: 0.3189,
+                        distanceFromParent: 9.378 // 1:1000
+                    },
+                    {
+                        name: "Deimos",
+                        radius: 1.2,
+                        orbitPeriod: 1.263,
+                        distanceFromParent: 23.46 // 1:1000
+                    }
+                ],
                 texture: null,
                 rings: []
             },

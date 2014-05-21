@@ -90,9 +90,6 @@ define(
 
             addMoons: function(planet, planetObj) {
                 return $.Deferred(function(promise) {
-
-                    console.log(planet.moons)
-
                     for (var i = 0; i < planet.moons.length; i++) {
                         MoonFactory.buildMoon(planet, planet.moons[i], planetObj);
                     }
@@ -139,7 +136,7 @@ define(
                     thisPlanet.name       = planet.name;
 
                     // Attempt at adding Saturns axis tilt
-                    if (planet.name == 'Saturn') {
+                    if (planet.name === 'Saturn') {
                         var quaternion = new THREE.Quaternion();
                         quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1), Math.PI / 2);
 
@@ -149,7 +146,7 @@ define(
                         thisPlanet.add(vector);
                     }
 
-                    if (planet.name == 'Earth') {
+                    if (planet.name === 'Earth' || planet.name === 'Mars') {
                         $.when(PlanetFactory.addMoons(planet, thisPlanet)).done(function() {
                             $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
                                 PlanetFactory.addPlanet(thisPlanet);
