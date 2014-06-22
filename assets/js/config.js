@@ -1,6 +1,6 @@
 require.config({
     baseUrl: "assets/js",
-    urlArgs: 'bust=' + new Date().getTime().toString(), // bust cache for development purposes ("bust=v2" for production)
+    // urlArgs: 'bust=' + new Date().getTime().toString(), // bust cache for development purposes ("bust=v2" for production)
     paths: {
         // Core
         'requirejs'   : 'libs/requirejs/require',
@@ -14,7 +14,7 @@ require.config({
 
         // Main
         'main'        : 'app/main',
-        'AppConfig'   : 'app/AppConfig',
+        'App'         : 'app/App',
         'Initializer' : 'app/SolarSystem/Init/Initializer',
         'Scene'       : 'app/Environment/Scene',
         'SolarSystem' : 'app/SolarSystem/SolarSystem',
@@ -28,9 +28,15 @@ require.config({
         'MoonFactory'        : 'app/SolarSystem/Factory/MoonFactory',
 
         // Controllers
-        'Console'     : 'app/Controllers/ConsoleController',
-        'Time'        : 'app/Controllers/TimeController',
-        'UI'          : 'app/Controllers/UIController',
+        'OrbitController' : 'app/Controllers/OrbitController',
+        'Console'         : 'app/Controllers/ConsoleController',
+        'Time'            : 'app/Controllers/TimeController',
+        'UI'              : 'app/Controllers/UIController',
+
+        // Modules
+        'Modules'                  : 'app/Modules/Modules',
+        'MissingArgumentException' : 'app/Modules/Error/MissingArgumentException',
+        'InvalidArgumentException' : 'app/Modules/Error/InvalidArgumentException',
 
         // Extensions
         'Date'        : 'app/Extensions/Date',
@@ -53,7 +59,7 @@ require.config({
             deps: ['stats']
         },
         'main': {
-            deps: ['jquery', 'threejs', 'AppConfig']
+            deps: ['jquery', 'threejs', 'App', 'Modules']
         },
         'Initializer': {
             deps: ['Scene']
@@ -69,8 +75,10 @@ require.config({
         },
         'UI': {
             deps: ['SolarSystem', 'Time']
+        },
+        'Modules': {
+            deps: ['MissingArgumentException', 'InvalidArgumentException']
         }
-
     }
 });
 

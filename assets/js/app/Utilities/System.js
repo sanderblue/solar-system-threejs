@@ -10,8 +10,8 @@ define(function() {
      * @param args (any type)
      * @param split (boolean)
      */
-    System.log = function(args, split) {
-        if (!AppConfig.logger.enabled) {
+    System.log = function(args, split, force) {
+        if (!App.config.logger.enabled && !force) {
             return;
         }
 

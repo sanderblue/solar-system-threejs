@@ -1,14 +1,15 @@
 define(
     [
         'jquery',
-        'AppConfig',
+        'App',
         'Scene',
         'Initializer',
         'PlanetFactory',
         'SolarSystem',
-        'Time'
+        'Time',
+        'Modules'
     ],
-    function($, AppConfig, Scene, Initializer, PlanetFactory, SolarSystem, TimeController) {
+    function($, App, Scene, Initializer, PlanetFactory, SolarSystem, TimeController) {
 
         var MainController = {
             animate: function() {
@@ -83,7 +84,7 @@ define(
                                     * degreesToRadianRatio
                                 );
 
-                    Scene.planets[i].rotation.y += 0.008;
+                    // Scene.planets[i].rotation.y += 0.008;
 
                     Scene.planets[i].position.set(
                         parseFloat(posX),
@@ -107,10 +108,12 @@ define(
             },
 
             init: function() {
-                // $.when(Initializer.init()).done(function() {
-                //     // MainController.animate();
-                //     // MainController.setCamera();
-                // });
+                if (App.config.buildEnabled) {
+                    $.when(Initializer.init()).done(function() {
+                        MainController.animate();
+                        MainController.setCamera();
+                    });
+                }
             }
         };
 

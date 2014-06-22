@@ -3,12 +3,13 @@ define(function() {
     var Scene = {
         planets: [],
         astroids: [],
-        tilt: 170,
+        tilt: 40,
         scene: null,
         camera: null,
+        brightness: 1.5,
         zoom: {
             x: 0,
-            y: -2750
+            y: -1050
         },
 
         setContainer: function() {
@@ -23,8 +24,8 @@ define(function() {
         },
 
         setLights: function() {
-            var directionalLightFromTop    = new THREE.DirectionalLight(0xffffff, 0.28),
-                directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, 0.28)
+            var directionalLightFromTop    = new THREE.DirectionalLight(0xffffff, Scene.brightness),
+                directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, Scene.brightness)
             ;
 
             directionalLightFromTop.position.set(0, 1500, 0);

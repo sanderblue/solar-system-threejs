@@ -1,4 +1,4 @@
-define(['jquery', 'Scene', 'System'], function($, Scene, System) {
+define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, System, OrbitController) {
 
     var MoonFactory = {
         getMoonTexture: function(moon) {
@@ -7,11 +7,12 @@ define(['jquery', 'Scene', 'System'], function($, Scene, System) {
         },
 
         buildMoon: function(planet, moon, planetObj) {
+            var Controller = new OrbitController();
             var thisMoon = new THREE.Object3D({
                                 name: moon.name
                             });
 
-            System.log(planet, moon)
+            // System.log([planet, moon], false)
 
             var texture = MoonFactory.getMoonTexture();
 
@@ -35,9 +36,12 @@ define(['jquery', 'Scene', 'System'], function($, Scene, System) {
                             material
                         );
 
-            planetObj.add(thisMoon);
+            Controller.positionObject(thisMoon, planetObj);
 
             thisMoon.position.x = planet.radius + moon.distanceFromParent;
+            thisMoon.rotation.x = planet.radius + moon.distanceFromParent * Math.PI / 3;
+
+            planetObj.add(thisMoon);
         }
     };
 

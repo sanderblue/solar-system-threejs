@@ -30,11 +30,8 @@ define(
                 this.checkBrowserCompatibility();
 
                 return $.when(Scene.init()).done(function() {
-
                     SolarSystemFactory.build();
-
                     UIController.init();
-
                     TimeController.start();
 
                     Scene.camera.focalPoint = Scene.Sun.position;
