@@ -1,13 +1,14 @@
 define(
     [
         'jquery',
+        'AppConfig',
         'Scene',
         'Initializer',
         'PlanetFactory',
         'SolarSystem',
         'Time'
     ],
-    function($, Scene, Initializer, PlanetFactory, SolarSystem, TimeController) {
+    function($, AppConfig, Scene, Initializer, PlanetFactory, SolarSystem, TimeController) {
 
         var MainController = {
             animate: function() {
@@ -106,10 +107,10 @@ define(
             },
 
             init: function() {
-                $.when(Initializer.init()).done(function() {
-                    MainController.animate();
-                    MainController.setCamera();
-                });
+                // $.when(Initializer.init()).done(function() {
+                //     // MainController.animate();
+                //     // MainController.setCamera();
+                // });
             }
         };
 

@@ -1,4 +1,4 @@
-define(['jquery', 'Scene'], function($, Scene) {
+define(['jquery', 'Scene', 'System'], function($, Scene, System) {
 
     var MoonFactory = {
         getMoonTexture: function(moon) {
@@ -11,7 +11,7 @@ define(['jquery', 'Scene'], function($, Scene) {
                                 name: moon.name
                             });
 
-            console.log(planet, moon)
+            System.log(planet, moon)
 
             var texture = MoonFactory.getMoonTexture();
 

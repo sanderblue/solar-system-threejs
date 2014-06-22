@@ -5,14 +5,14 @@ define(
         'SunFactory',
         'PlanetFactory',
         'AstroidBeltFactory',
-        'TimerUtil'
+        'TimerUtil',
+        'System'
     ],
-    function(Scene, SolarSystem, SunFactory, PlanetFactory, AstroidBeltFactory, TimerUtil) {
+    function(Scene, SolarSystem, SunFactory, PlanetFactory, AstroidBeltFactory, TimerUtil, System) {
 
         var SolarSystemBuilder = {
             buildParent: function() {
                 return $.Deferred(function(promise) {
-
                     SunFactory.build();
 
                     promise.resolve();
@@ -53,7 +53,7 @@ define(
 
                     // console.log(TimerUtil.getElapsedTime('ms', startTime, endTime));
 
-                    console.log('Solar System Factory done building in ' +  TimerUtil.getElapsedTime('ms', startTime, endTime) / 1000 + ' seconds.');
+                    System.log('Solar System Factory done building in ' +  TimerUtil.getElapsedTime('ms', startTime, endTime) / 1000 + ' seconds.');
                 });
             }
         };

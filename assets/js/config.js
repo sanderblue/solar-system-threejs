@@ -14,6 +14,7 @@ require.config({
 
         // Main
         'main'        : 'app/main',
+        'AppConfig'   : 'app/AppConfig',
         'Initializer' : 'app/SolarSystem/Init/Initializer',
         'Scene'       : 'app/Environment/Scene',
         'SolarSystem' : 'app/SolarSystem/SolarSystem',
@@ -35,8 +36,8 @@ require.config({
         'Date'        : 'app/Extensions/Date',
 
         // Utilities
+        'System'    : 'app/Utilities/System',
         'TimerUtil' : 'app/Utilities/TimerUtil'
-
     },
     shim: {
         'jqsuery': {
@@ -52,7 +53,7 @@ require.config({
             deps: ['stats']
         },
         'main': {
-            deps: ['jquery', 'threejs']
+            deps: ['jquery', 'threejs', 'AppConfig']
         },
         'Initializer': {
             deps: ['Scene']

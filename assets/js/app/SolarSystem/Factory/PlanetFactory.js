@@ -5,9 +5,10 @@ define(
         'SolarSystem',
         'RingFactory',
         'MoonFactory',
-        'TimerUtil'
+        'TimerUtil',
+        'System'
     ],
-    function($, Scene, SolarSystem, RingFactory, MoonFactory, TimerUtil) {
+    function($, Scene, SolarSystem, RingFactory, MoonFactory, TimerUtil, System) {
 
         var PlanetFactory = {
             OrbitBuilder: {
@@ -167,7 +168,7 @@ define(
 
                                 var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime('ms', startTime, endTime) + ' milliseconds';
 
-                                console.log(builderStatement);
+                                System.log(builderStatement);
 
                                 promise.resolve(thisPlanet);
                             });
@@ -193,7 +194,7 @@ define(
 
                             var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime('ms', startTime, endTime) + ' milliseconds';
 
-                            console.log(builderStatement);
+                            System.log(builderStatement);
 
                             promise.resolve(thisPlanet);
                         });

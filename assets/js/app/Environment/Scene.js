@@ -8,7 +8,7 @@ define(function() {
         camera: null,
         zoom: {
             x: 0,
-            y: -1350
+            y: -2750
         },
 
         setContainer: function() {
@@ -19,7 +19,7 @@ define(function() {
 
         setScene: function() {
             Scene.scene = new THREE.Scene();
-            Scene.scene.add(new THREE.AxisHelper(5000));
+            // Scene.scene.add(new THREE.AxisHelper(5000));
         },
 
         setLights: function() {
