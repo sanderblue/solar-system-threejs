@@ -9,7 +9,7 @@ define(function() {
         brightness: 1.5,
         zoom: {
             x: 0,
-            y: -1050
+            y: -1250
         },
 
         setContainer: function() {

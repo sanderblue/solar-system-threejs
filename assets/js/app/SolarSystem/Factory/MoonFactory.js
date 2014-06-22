@@ -7,7 +7,7 @@ define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, Syst
         },
 
         buildMoon: function(planet, moon, planetObj) {
-            var Controller = new OrbitController();
+            var Controller = new OrbitController({ interval: 1 });
             var thisMoon = new THREE.Object3D({
                                 name: moon.name
                             });
@@ -36,10 +36,9 @@ define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, Syst
                             material
                         );
 
-            Controller.positionObject(thisMoon, planetObj);
-
-            thisMoon.position.x = planet.radius + moon.distanceFromParent;
-            thisMoon.rotation.x = planet.radius + moon.distanceFromParent * Math.PI / 3;
+            if (App.config.moonOrbitsEnabled) {
+                Controller.positionObject(thisMoon, moon, planet);
+            }
 
             planetObj.add(thisMoon);
         }
