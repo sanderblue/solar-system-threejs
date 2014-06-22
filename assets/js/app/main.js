@@ -11,6 +11,8 @@ define(
     ],
     function($, App, Scene, Initializer, PlanetFactory, SolarSystem, TimeController) {
 
+        var TimeCtrl = new TimeController();
+
         var MainController = {
             animate: function() {
                 requestAnimationFrame(MainController.animate);
@@ -26,7 +28,7 @@ define(
                 ;
 
                 for (var i = 0; i < planets.length; i++) {
-                    var dayOnEarth = new Date().getDOYwithTimeAsDecimal() + TimeController.getStopWatchValue();
+                    var dayOnEarth = new Date().getDOYwithTimeAsDecimal() + TimeCtrl.getStopWatchValue();
 
                     // console.log(dayOnEarth);
 
