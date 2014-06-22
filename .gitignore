@@ -3,3 +3,7 @@
 logs
 node_modules
 node_modules/*
+sass/bourbon
+sass/bourbon/*
+sass/neat
+sass/neat/*
