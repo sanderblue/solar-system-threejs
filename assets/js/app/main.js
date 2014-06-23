@@ -72,14 +72,14 @@ define(
                         count = dayOnEarth + 62885;
                     }
 
-                    var posY = PlanetFactory.OrbitBuilder.getOrbitAmplitute(SolarSystem.planets[i].meanDistanceFromSun)
+                    var posY = PlanetFactory.OrbitBuilder.getOrbitAmplitute(SolarSystem.planets[i].distanceFromParent)
                                 * Math.cos(
                                     count
                                     * PlanetFactory.OrbitBuilder.getPlanetRadian(SolarSystem.planets[i])
                                     * degreesToRadianRatio
                                 );
 
-                    var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(SolarSystem.planets[i].meanDistanceFromSun)
+                    var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(SolarSystem.planets[i].distanceFromParent)
                                 * Math.sin(
                                     count
                                     * PlanetFactory.OrbitBuilder.getPlanetRadian(SolarSystem.planets[i])

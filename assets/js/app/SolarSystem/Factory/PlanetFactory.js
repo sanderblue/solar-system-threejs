@@ -19,7 +19,7 @@ define(
                 // Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
                 // This ratio helps create an accurate representation of each planet's location along its orbit circumference.
                 getPlanetRadian: function(planet) {
-                    return 360 / planet.earthDaysToOrbitSun;
+                    return 360 / planet.orbitDuration;
                 },
 
                 build: function(planet) {
@@ -36,7 +36,7 @@ define(
                     // Build the orbit line
                     for(var i = 0; i <= resolution; i++) {
                         var segment = ( i * size ) * Math.PI / 180,
-                            orbitAmplitude = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+                            orbitAmplitude = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.distanceFromParent);
 
                         orbitLine.vertices.push(
                             new THREE.Vector3(
@@ -152,7 +152,7 @@ define(
                             $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
                                 PlanetFactory.addPlanet(thisPlanet);
 
-                                var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+                                var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.distanceFromParent);
 
                                 thisPlanet.position.set(
                                     posX, // x
@@ -178,7 +178,7 @@ define(
                         $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
                             PlanetFactory.addPlanet(thisPlanet);
 
-                            var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.meanDistanceFromSun);
+                            var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.distanceFromParent);
 
                             thisPlanet.position.set(
                                 posX, // x

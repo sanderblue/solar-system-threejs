@@ -21,7 +21,7 @@ define(
             // Gets an astroid's current radian conversion ratio based on each astroid's earth days to orbit the Sun.
             // This ratio helps create an accurate representation of each astroid's location along its orbit.
             getAstroidRadian: function() {
-                return 360 / SolarSystem.astroidBelt.primary[0].earthDaysToOrbitSun; // Using Ceres just as a reference point
+                return 360 / SolarSystem.astroidBelt.primary[0].orbitDuration; // Using Ceres just as a reference point
             },
 
             getOrbitAmplitute: function(distance) {
@@ -53,7 +53,7 @@ define(
 
             positionAstroid: function(astroid, count) {
                 var degreesToRadianRatio = 0.0174532925,
-                    amplitude = SolarSystem.astroidBelt.meanDistanceFromSun + AstroidBelt.getRandomNumber() // randomize the amplitudes to spread them out
+                    amplitude = SolarSystem.astroidBelt.distanceFromParent + AstroidBelt.getRandomNumber() // randomize the amplitudes to spread them out
                 ;
 
                 var posX = AstroidBelt.getOrbitAmplitute(amplitude)

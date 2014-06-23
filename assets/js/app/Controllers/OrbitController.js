@@ -4,7 +4,7 @@ define(['Time', 'PlanetFactory'], function(TimeController, PlanetFactory) {
         this.options = options;
     };
 
-    OrbitController.prototype.positionObject = function(threeObject, object, parent) {
+    OrbitController.prototype.positionObject = function(Object3D, object, parent) {
         var method = 'OrbitController::positionObject()';
 
         for (var i = 0; i <= arguments.length - 1; i++) {
@@ -30,20 +30,20 @@ define(['Time', 'PlanetFactory'], function(TimeController, PlanetFactory) {
             var posX = (parent.radius + object.distanceFromParent)
                         * Math.sin(
                             count
-                            * (360 / object.orbitPeriod)
+                            * (360 / object.orbitDuration)
                             * degreesToRadianRatio
                         );
 
             var posY = (parent.radius + object.distanceFromParent)
                         * Math.cos(
                             count
-                            * (360 / object.orbitPeriod)
+                            * (360 / object.orbitDuration)
                             * degreesToRadianRatio
                         );
 
             // threeObject.rotation.y += 0.008;
 
-            threeObject.position.set(
+            Object3D.position.set(
                 parseFloat(posX),
                 0,
                 parseFloat(posY)
