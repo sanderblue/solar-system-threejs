@@ -6,12 +6,7 @@ define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, Syst
             // return new THREE.ImageUtils.loadTexture('../assets/textures/'+ moon.name.toLowerCase() +'.jpg');
         },
 
-        buildMoon: function(planet, moon, planetObj) {
-            var Controller = new OrbitController({ interval: 1 });
-            var thisMoon = new THREE.Object3D({
-                                name: moon.name
-                            });
-
+        buildMoon: function(parent, moon, planetObj) {
             // System.log([planet, moon], false)
 
             var texture = MoonFactory.getMoonTexture();
@@ -36,8 +31,10 @@ define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, Syst
                             material
                         );
 
+            var Controller = new OrbitController(thisMoon, moon, parent, { interval: 1 });
+
             if (App.config.moonOrbitsEnabled) {
-                Controller.positionObject(thisMoon, moon, planet);
+                Controller.positionObject();
             }
 
             planetObj.add(thisMoon);

@@ -1,11 +1,16 @@
 define(['Time', 'PlanetFactory'], function(TimeController, PlanetFactory) {
 
-    var OrbitController = function(options) {
-        this.options = options;
+    var OrbitController = function(object3d, object, parent, options) {
+        this.object3d = object3d;
+        this.object   = object;
+        this.parent   = parent;
+        this.options  = options;
     };
 
-    OrbitController.prototype.positionObject = function(Object3D, object, parent) {
+    OrbitController.prototype.positionObject = function() {
         var method = 'OrbitController::positionObject()';
+
+        console.log('OrbitController', this)
 
         for (var i = 0; i <= arguments.length - 1; i++) {
             if (!arguments[i]) {
@@ -27,23 +32,23 @@ define(['Time', 'PlanetFactory'], function(TimeController, PlanetFactory) {
 
             count = dayOnEarth;
 
-            var posX = (parent.radius + object.distanceFromParent)
+            var posX = (self.parent.radius + self.object.distanceFromParent)
                         * Math.sin(
                             count
-                            * (360 / object.orbitDuration)
+                            * (360 / self.object.orbitDuration)
                             * degreesToRadianRatio
                         );
 
-            var posY = (parent.radius + object.distanceFromParent)
+            var posY = (self.parent.radius + self.object.distanceFromParent)
                         * Math.cos(
                             count
-                            * (360 / object.orbitDuration)
+                            * (360 / self.object.orbitDuration)
                             * degreesToRadianRatio
                         );
 
             // threeObject.rotation.y += 0.008;
 
-            Object3D.position.set(
+            self.object3d.position.set(
                 parseFloat(posX),
                 0,
                 parseFloat(posY)
