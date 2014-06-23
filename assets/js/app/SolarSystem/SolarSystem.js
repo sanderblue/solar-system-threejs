@@ -58,7 +58,7 @@ define(function() {
                         radius: 1.737,
                         orbitDuration: 27,
                         distanceFromParent: 38.44, // 1:10000
-                        axis: 23
+                        axisTilt: 23
                     }
                 ],
                 rings: []

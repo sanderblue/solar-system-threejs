@@ -33,6 +33,9 @@ define(['Scene', 'SolarSystem'], function(Scene, SolarSystem) {
 
                 Scene.Sun = Sun;
 
+                // Flip axis
+                Sun.rotation.x = Math.PI / 2;
+
                 Sun.position.set(0, 0, 0);
 
                 Scene.scene.add(pointLight);

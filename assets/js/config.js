@@ -78,6 +78,9 @@ require.config({
         },
         'Modules': {
             deps: ['MissingArgumentException', 'InvalidArgumentException']
+        },
+        'Scene': {
+            deps: ['threejs']
         }
     }
 });

@@ -95,7 +95,7 @@ define(
                     );
                 }
 
-                Scene.Sun.rotation.z += 0.0003;
+                Scene.Sun.rotation.y += 0.00025;
             },
 
             render: function() {

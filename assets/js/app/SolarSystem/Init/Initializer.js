@@ -35,8 +35,6 @@ define(
                     SolarSystemFactory.build();
                     UIController.init();
                     TimeCtrl.start();
-
-                    Scene.camera.focalPoint = Scene.Sun.position;
                 });
             }
         };

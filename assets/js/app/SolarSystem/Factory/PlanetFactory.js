@@ -46,6 +46,7 @@ define(
                             )
                         );
                     }
+
                     var orbitLine = new THREE.Line(orbitLine, material);
 
                     Scene.scene.add(orbitLine);
@@ -101,7 +102,9 @@ define(
 
             build: function(planet) {
                 return $.Deferred(function(promise) {
-                    var startTime = new Date().getTime();
+                    var startTime            = new Date().getTime(),
+                        degreesToRadianRatio = 0.0174532925
+                    ;
 
                     // Create our orbit line geometry first
                     PlanetFactory.OrbitBuilder.build(planet);
@@ -136,18 +139,13 @@ define(
                     thisPlanet.rotation.x = Math.PI / 2;
                     thisPlanet.name       = planet.name;
 
-                    // Attempt at adding Saturns axis tilt
                     if (planet.name === 'Saturn') {
-                        var quaternion = new THREE.Quaternion();
-                        quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1), Math.PI / 2);
-
-                        var vector = new THREE.Vector3(10, 0, 0);
-                        vector.applyQuaternion(quaternion);
-
-                        thisPlanet.add(vector);
+                        thisPlanet.rotation.z = degreesToRadianRatio * 12;
                     }
 
                     if (planet.name === 'Earth' || planet.name === 'Mars') {
+                        thisPlanet.rotation.x = Math.PI / 2;
+
                         $.when(PlanetFactory.addMoons(planet, thisPlanet)).done(function() {
                             $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
                                 PlanetFactory.addPlanet(thisPlanet);

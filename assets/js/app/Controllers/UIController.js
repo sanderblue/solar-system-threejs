@@ -15,6 +15,8 @@ define(['jquery', 'Scene'], function($, Scene) {
                 var id = $(this).data('id'),
                     matchedPlanet = UIController.findPlanet(id)
                 ;
+
+                Scene.setCameraFocalPoint(matchedPlanet.position);
             });
 
             UIController.initResetView();
