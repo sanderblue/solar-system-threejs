@@ -9,6 +9,19 @@ define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, Syst
         buildMoon: function(parent, moon, planetObj) {
             // System.log([planet, moon], false)
 
+            // USE A MOON CENTROID AND MAKE object.rotation angle different and add the moon object to that so it rotates at an angle
+
+            // var moonCentroid = new THREE.Mesh(
+            //             new THREE.SphereGeometry(
+            //                     100,
+            //                     10,
+            //                     8
+            //                 ),
+            //                 material
+            //             );
+
+            // moonCentroid.position = parent.position;
+
             var texture = MoonFactory.getMoonTexture();
 
             var material = new THREE.MeshLambertMaterial({
@@ -38,6 +51,7 @@ define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, Syst
             }
 
             planetObj.add(thisMoon);
+            // planetObj.add(moonCentroid);
         }
     };
 

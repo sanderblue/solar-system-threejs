@@ -30,7 +30,7 @@ define(['Time', 'PlanetFactory'], function(TimeController, PlanetFactory) {
 
         // this.object3d.setRotationFromAxisAngle(this.Object3d.position, (3 * Math.PI) / 4);
 
-        console.log('Quaternion: ', this.object3d);
+        // console.log('Quaternion: ', this.object3d);
 
         // this.object3d.setRotationFromAxisAngle(this.object3d.position.x, this.object3d.position.y, this.object3d.position.z, (3 * Math.PI) / 4);
 
