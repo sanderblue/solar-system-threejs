@@ -34,7 +34,7 @@ define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, Syst
             var Controller = new OrbitController(thisMoon, moon, parent, { interval: 1 });
 
             if (App.config.moonOrbitsEnabled) {
-                Controller.positionObject();
+                Controller.positionObject(thisMoon);
             }
 
             planetObj.add(thisMoon);

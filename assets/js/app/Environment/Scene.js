@@ -11,8 +11,8 @@ define(function() {
         cameraData: {
             radius: 1, // doesn't really mean anything
             diameter: 2, // doesn't really mean anything
-            distanceFromParent: 2000,
-            defaultPosition: new THREE.Vector3(0, -1700, 100),
+            distanceFromParent: 2000, //
+            defaultPosition: new THREE.Vector3(0, -1650, 10),
             defaultFocalPoint: new THREE.Vector3(0, 0, 0),
             orbitDuration: 364.25,
             dayOfOrbit: 1,
@@ -39,33 +39,33 @@ define(function() {
             },
 
             build: function() {
-                var resolution = 270; // segments in the line
-                var size = 360 / resolution;
+                // var resolution = 270; // segments in the line
+                // var size = 360 / resolution;
 
-                var material = new THREE.LineBasicMaterial({
-                                        color: 0x6E6E6E,
-                                        opacity: 0.1
-                                    });
+                // var material = new THREE.LineBasicMaterial({
+                //                         color: 0x6E6E6E,
+                //                         opacity: 0.1
+                //                     });
 
-                var orbitLine = new THREE.Geometry();
+                // var orbitLine = new THREE.Geometry();
 
-                // Build the orbit line
-                for(var i = 0; i <= resolution; i++) {
-                    var segment = ( i * size ) * Math.PI / 180,
-                        orbitAmplitude = Scene.OrbitBuilder.getOrbitAmplitute(Scene.cameraData.distanceFromParent);
+                // // Build the orbit line
+                // for(var i = 0; i <= resolution; i++) {
+                //     var segment = ( i * size ) * Math.PI / 180,
+                //         orbitAmplitude = Scene.OrbitBuilder.getOrbitAmplitute(Scene.cameraData.distanceFromParent);
 
-                    orbitLine.vertices.push(
-                        new THREE.Vector3(
-                            Math.cos(segment) * orbitAmplitude,
-                            Math.sin(segment) * orbitAmplitude,
-                            0
-                        )
-                    );
-                }
+                //     orbitLine.vertices.push(
+                //         new THREE.Vector3(
+                //             Math.cos(segment) * orbitAmplitude,
+                //             Math.sin(segment) * orbitAmplitude,
+                //             0
+                //         )
+                //     );
+                // }
 
-                var orbitLine = new THREE.Line(orbitLine, material);
+                // var orbitLine = new THREE.Line(orbitLine, material);
 
-                Scene.scene.add(orbitLine);
+                // Scene.scene.add(orbitLine);
             }
         },
 

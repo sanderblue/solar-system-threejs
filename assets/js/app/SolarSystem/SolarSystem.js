@@ -11,10 +11,9 @@ define(function() {
      * }
      *
      */
-
     var SolarSystem = {
         buildEnabled: true, // toggle factories on/off
-        orbitScale: 1,
+        orbitScale: 2,
         parent: {
             name: 'Sun',
             radius: 700,
