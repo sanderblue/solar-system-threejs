@@ -12,7 +12,7 @@ define(function() {
             radius: 1, // doesn't really mean anything
             diameter: 2, // doesn't really mean anything
             distanceFromParent: 2000, //
-            defaultPosition: new THREE.Vector3(0, -1650, 10),
+            defaultPosition: new THREE.Vector3(0, -2250, 100),
             defaultFocalPoint: new THREE.Vector3(0, 0, 0),
             orbitDuration: 364.25,
             dayOfOrbit: 1,
@@ -152,9 +152,9 @@ define(function() {
                 Scene.camera.rotation.z = Math.PI; // Flips the camera axis orientation to match our universal setup
             }
 
-            setTimeout(function() {
-                console.log(Scene.camera.position, Scene.planets[5].position)
-            }, 3000);
+            // setTimeout(function() {
+            //     console.log(Scene.camera.position, Scene.planets[5].position)
+            // }, 3000);
         },
 
         setCameraFocalPoint: function(target) {

@@ -13,7 +13,7 @@ define(function() {
      */
     var SolarSystem = {
         buildEnabled: true, // toggle factories on/off
-        orbitScale: 2,
+        orbitScale: 1,
         parent: {
             name: 'Sun',
             radius: 700,
@@ -57,7 +57,7 @@ define(function() {
                         radius: 1.737,
                         orbitDuration: 27,
                         distanceFromParent: 38.44, // 1:10000
-                        axisTilt: 23
+                        axisTilt: 2 / 180 * Math.PI // radians
                     }
                 ],
                 rings: []
@@ -74,13 +74,15 @@ define(function() {
                         name: "Phobos",
                         radius: 0.68, // 1:1000
                         orbitDuration: 0.3189,
-                        distanceFromParent: 9.378 // 1:1000
+                        distanceFromParent: 9.378, // 1:1000
+                        axisTilt: 10 / 180 * Math.PI // radians
                     },
                     {
                         name: "Deimos",
                         radius: 1.2,
                         orbitDuration: 1.263,
-                        distanceFromParent: 23.46 // 1:1000
+                        distanceFromParent: 23.46, // 1:1000
+                        axisTilt: 170 / 180 * Math.PI // radians
                     }
                 ],
                 texture: null,
@@ -95,7 +97,44 @@ define(function() {
                 orbitDuration: 4329,
                 moons: [],
                 texture: null,
-                rings: []
+                rings: [],
+                moons: [
+                    {
+                        name: "Io",
+                        radius: 1.8216, // 1:1000
+                        orbitDuration: 1.769,
+                        distanceFromParent: 67.09, // 1:1000
+                        axisTilt: 0.05 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: "Europa",
+                        radius: 1.56,
+                        orbitDuration: 3.551,
+                        distanceFromParent: 42.17, // 1:1000
+                        axisTilt: 0.47 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: "Callisto",
+                        radius: 2.41,
+                        orbitDuration: 16.689,
+                        distanceFromParent: 1882.7, // 1:1000 (1,882,700)
+                        axisTilt: 0.192 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: "Ganymede",
+                        radius: 2.6341,
+                        orbitDuration: 7.154,
+                        distanceFromParent: 1070.4, // 1:1000 (1,070,400)
+                        axisTilt: 0.2 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: "Amalthea",
+                        radius: 1, // 83.5 km
+                        orbitDuration: 0.498,
+                        distanceFromParent: 181.365, // 1:1000
+                        axisTilt: 0.374 / 180 * Math.PI // radians
+                    }
+                ],
             },
             {
                 id: 6,
@@ -106,7 +145,8 @@ define(function() {
                 orbitDuration: 10753,
                 moons: [],
                 texture: null,
-                rings: [160, 180, 185, 195, 210, 220, 225, 240]
+                rings: [160, 180, 185, 195, 210, 220, 225, 240],
+                moons: []
             },
             {
                 id: 7,
@@ -117,7 +157,8 @@ define(function() {
                 orbitDuration: 30714,
                 moons: [],
                 texture: null,
-                rings: [65, 69, 72]
+                rings: [65, 69, 72],
+                moons: []
             },
             {
                 id: 8,
@@ -128,7 +169,8 @@ define(function() {
                 orbitDuration: 60025,
                 moons: [],
                 texture: null,
-                rings: [60, 67, 71] // Neptune has 9 rings (3 major)
+                rings: [60, 67, 71], // Neptune has 9 rings (3 major)
+                moons: []
             }
         ],
         astroidBelt: {

@@ -28,18 +28,14 @@ define(['Time', 'PlanetFactory'], function(TimeController, PlanetFactory) {
             }
         }
 
-        // this.object3d.setRotationFromAxisAngle(this.Object3d.position, (3 * Math.PI) / 4);
-
-        // console.log('Quaternion: ', this.object3d);
-
-        // this.object3d.setRotationFromAxisAngle(this.object3d.position.x, this.object3d.position.y, this.object3d.position.z, (3 * Math.PI) / 4);
-
         var TimeCtrl = new TimeController();
 
         var self = this,
             degreesToRadianRatio = 0.0174532925,
             count = 1
         ;
+
+        console.log(self.parent.radius + self.object.distanceFromParent)
 
         setInterval(function() {
             var dayOnEarth = new Date().getDOYwithTimeAsDecimal() + TimeCtrl.getStopWatchValue();
@@ -59,19 +55,6 @@ define(['Time', 'PlanetFactory'], function(TimeController, PlanetFactory) {
                             * (360 / self.object.orbitDuration)
                             * degreesToRadianRatio
                         );
-
-            // threeObject.rotation.y += 0.008;
-
-            // if (this.object3d) {
-            //     var quaternion = new THREE.Quaternion(
-            //         this.object3d.position.x,
-            //         this.object3d.position.y,
-            //         this.object3d.position.z,
-            //         (3 * Math.PI) / 2
-            //     );
-
-            //     this.object3d.setRotationFromQuaternion(quaternion);
-            // }
 
             self.object3d.position.set(
                 parseFloat(posX),
