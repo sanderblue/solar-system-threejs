@@ -1,4 +1,6 @@
-define(['Camera'], function(Camera) {
+define(['Camera', 'Time'], function(Camera) {
+
+    window.focalPoint = Camera.defaultFocalPoint;
 
     var Scene = {
         planets: [],
@@ -6,7 +8,7 @@ define(['Camera'], function(Camera) {
         tilt: 200,
         scene: null,
         camera: null,
-        brightness: 1.5,
+        brightness: 0.15,
         currentRadian: 0.0174532925 * 360,
         OrbitBuilder: {
             getOrbitAmplitute: function() {
@@ -94,55 +96,34 @@ define(['Camera'], function(Camera) {
         },
 
         setStats: function() {
-            Scene.stats = new Stats();
+            // Scene.stats = new Stats();
             // Scene.stats.domElement.style.position = 'absolute';
             // Scene.stats.domElement.style.top = '0px';
 
             // Scene.container.appendChild(Scene.stats.domElement);
         },
 
-        setCameraPosition: function(vector3) {
-            Scene.camera.position.x = vector3.x;
-            Scene.camera.position.y = vector3.y;
-            Scene.camera.position.z = vector3.z;
+        setCameraPosition: function(object3d, vector3, rotateZ) {
+            if (object3d) {
+                // object3d.rotation.order = 'YXZ';
 
-            console.log('position: ', vector3)
+                Scene.camera.position.x = object3d.geometry.radius * 6; // zoom
+                Scene.camera.position.y = object3d.geometry.radius * 1.8;
+                Scene.camera.position.z = 10;
 
-            var dayOnEarth = new Date().getDOYwithTimeAsDecimal();
-            var degreesToRadianRatio = 0.0174532925;
-
-            var posY = Scene.OrbitBuilder.getOrbitAmplitute()
-                        * Math.cos(
-                            dayOnEarth
-                            * Scene.OrbitBuilder.getPlanetRadian()
-                            * degreesToRadianRatio
-                        );
-
-            var posX = Scene.OrbitBuilder.getOrbitAmplitute()
-                        * Math.sin(
-                            dayOnEarth
-                            * Scene.OrbitBuilder.getPlanetRadian()
-                            * degreesToRadianRatio
-                        );
-
-            // Scene.camera.position.x = Scene.cameraData.defaultPosition.x;
-            // Scene.camera.position.y = Scene.cameraData.defaultPosition.y;
-            // Scene.camera.position.z = Scene.cameraData.defaultPosition.z;
-
-            if (Scene.camera.position.y > 0) {
-                Scene.camera.rotation.z = Math.PI; // Flips the camera axis orientation to match our universal setup
+                object3d.add(Scene.camera);
+            } else {
+                Scene.camera.position.y = vector3.y;
+                Scene.camera.position.x = vector3.x;
+                Scene.camera.position.z = vector3.z;
             }
-
-            // setTimeout(function() {
-            //     console.log(Scene.camera.position, Scene.planets[5].position)
-            // }, 3000);
         },
 
         setCameraFocalPoint: function(target) {
             var focalPoint = target;
 
             Scene.camera.focalPoint = focalPoint;
-            Scene.camera.lookAt(focalPoint);
+            Scene.camera.lookAt(window.focalPoint);
         },
 
         init: function() {
@@ -157,12 +138,12 @@ define(['Camera'], function(Camera) {
                 Scene.setRender();
                 // Scene.setStats();
 
-                console.log(Camera.defaultPosition);
+                // console.log(Camera.defaultPosition);
 
                 $.when(
-                    Scene.setCameraPosition(Camera.defaultPosition)
+                    Scene.setCameraPosition(null, Camera.defaultPosition, false)
                 ).done(function() {
-                    Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
+                    Scene.setCameraFocalPoint(window.focalPoint);
                 });
 
                 promise.resolve();

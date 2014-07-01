@@ -1,4 +1,4 @@
-define(['Time', 'PlanetFactory'], function(TimeController, PlanetFactory) {
+define(['TimeController', 'PlanetFactory'], function(TimeController, PlanetFactory) {
 
     var OrbitController = function(object3d, object, parent, options) {
         for (var i = 0; i <= arguments.length - 1; i++) {

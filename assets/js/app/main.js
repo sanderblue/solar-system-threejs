@@ -6,10 +6,16 @@ define(
         'Initializer',
         'PlanetFactory',
         'SolarSystem',
-        'Time',
+        'TimeController',
         'Modules'
     ],
     function($, App, Scene, Initializer, PlanetFactory, SolarSystem, TimeController) {
+
+        window.TestPosition = {
+            x: 0,
+            y: 0,
+            z: 0
+        };
 
         var TimeCtrl = new TimeController();
 
@@ -86,7 +92,9 @@ define(
                                     * degreesToRadianRatio
                                 );
 
-                    // Scene.planets[i].rotation.y += 0.008;
+                    Scene.setCameraFocalPoint(window.focalPoint);
+
+                    Scene.planets[i].rotation.y += 0.0008;
 
                     Scene.planets[i].position.set(
                         parseFloat(posX),
@@ -105,15 +113,14 @@ define(
                 Scene.renderer.render(Scene.scene, Scene.camera);
             },
 
-            setCamera: function() {
-                Scene.setCameraPosition(Scene.camera.focalPoint);
-            },
+            // setCamera: function() {
+            //     Scene.setCameraPosition(Scene.camera.focalPoint);
+            // },
 
             init: function() {
                 if (App.config.buildEnabled) {
                     $.when(Initializer.init()).done(function() {
                         MainController.animate();
-                        MainController.setCamera();
                     });
                 }
             }

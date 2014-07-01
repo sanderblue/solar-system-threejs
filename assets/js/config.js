@@ -16,6 +16,7 @@ require.config({
         'main'        : 'app/main',
         'App'         : 'app/App',
         'Initializer' : 'app/SolarSystem/Init/Initializer',
+        'Time'        : 'app/Environment/Time',
         'Scene'       : 'app/Environment/Scene',
         'Camera'      : 'app/Environment/Camera',
         'SolarSystem' : 'app/SolarSystem/SolarSystem',
@@ -31,7 +32,7 @@ require.config({
         // Controllers
         'OrbitController' : 'app/Controllers/OrbitController',
         'Console'         : 'app/Controllers/ConsoleController',
-        'Time'            : 'app/Controllers/TimeController',
+        'TimeController'  : 'app/Controllers/TimeController',
         'UI'              : 'app/Controllers/UIController',
 
         // Modules
@@ -60,7 +61,7 @@ require.config({
             deps: ['stats']
         },
         'main': {
-            deps: ['jquery', 'threejs', 'App', 'Modules']
+            deps: ['jquery', 'threejs', 'Time', 'App', 'Modules']
         },
         'Initializer': {
             deps: ['Scene']
