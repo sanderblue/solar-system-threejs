@@ -35,7 +35,7 @@ define(['Time', 'PlanetFactory'], function(TimeController, PlanetFactory) {
             count = 1
         ;
 
-        console.log(self.parent.radius + self.object.distanceFromParent)
+        // console.log(self.parent.radius + self.object.distanceFromParent)
 
         setInterval(function() {
             var dayOnEarth = new Date().getDOYwithTimeAsDecimal() + TimeCtrl.getStopWatchValue();

@@ -3,14 +3,9 @@ define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, Syst
     var MoonFactory = {
         getMoonTexture: function(moon) {
             return new THREE.ImageUtils.loadTexture('../assets/textures/moon.jpg');
-            // return new THREE.ImageUtils.loadTexture('../assets/textures/'+ moon.name.toLowerCase() +'.jpg');
         },
 
         buildMoon: function(parent, moon, planetObj) {
-            // System.log([planet, moon], false)
-
-            // USE A MOON CENTROID AND MAKE object.rotation angle different and add the moon object to that so it rotates at an angle
-
             var texture = MoonFactory.getMoonTexture();
 
             var material = new THREE.MeshLambertMaterial({
@@ -44,7 +39,7 @@ define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, Syst
 
             moonCentroid.rotation.x = moon.axisTilt;
 
-            console.log(thisMoon, moonCentroid)
+            // console.log(thisMoon, moonCentroid)
 
             var Controller = new OrbitController(thisMoon, moon, parent, { interval: 1 });
 

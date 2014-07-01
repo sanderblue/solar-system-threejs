@@ -1,4 +1,4 @@
-define(function() {
+define(['Camera'], function(Camera) {
 
     var Scene = {
         planets: [],
@@ -8,34 +8,13 @@ define(function() {
         camera: null,
         brightness: 1.5,
         currentRadian: 0.0174532925 * 360,
-        cameraData: {
-            radius: 1, // doesn't really mean anything
-            diameter: 2, // doesn't really mean anything
-            distanceFromParent: 2000, //
-            defaultPosition: new THREE.Vector3(0, -4600, 400),
-            defaultFocalPoint: new THREE.Vector3(0, 0, 0),
-            orbitDuration: 364.25,
-            dayOfOrbit: 1,
-            parent: {
-                name: 'Sun',
-                radius: 700,
-                diameter: 1400,
-                texture: null,
-                orbitDuration: 364.25,
-                position: {
-                    x: 0,
-                    y: 0
-                }
-            }
-        },
-
         OrbitBuilder: {
             getOrbitAmplitute: function() {
-                return Scene.cameraData.parent.radius + Scene.cameraData.distanceFromParent;
+                return Camera.parent.radius + Camera.distanceFromParent;
             },
 
             getPlanetRadian: function() {
-                return 360 / Scene.cameraData.orbitDuration;
+                return 360 / Camera.orbitDuration;
             },
 
             build: function() {
@@ -122,10 +101,12 @@ define(function() {
             // Scene.container.appendChild(Scene.stats.domElement);
         },
 
-        setCameraPosition: function() {
-            Scene.camera.position.x = Scene.cameraData.defaultPosition.x;
-            Scene.camera.position.y = Scene.cameraData.defaultPosition.y;
-            Scene.camera.position.z = Scene.cameraData.defaultPosition.z;
+        setCameraPosition: function(vector3) {
+            Scene.camera.position.x = vector3.x;
+            Scene.camera.position.y = vector3.y;
+            Scene.camera.position.z = vector3.z;
+
+            console.log('position: ', vector3)
 
             var dayOnEarth = new Date().getDOYwithTimeAsDecimal();
             var degreesToRadianRatio = 0.0174532925;
@@ -144,9 +125,9 @@ define(function() {
                             * degreesToRadianRatio
                         );
 
-            Scene.camera.position.x = Scene.cameraData.defaultPosition.x;
-            Scene.camera.position.y = Scene.cameraData.defaultPosition.y;
-            Scene.camera.position.z = Scene.cameraData.defaultPosition.z;
+            // Scene.camera.position.x = Scene.cameraData.defaultPosition.x;
+            // Scene.camera.position.y = Scene.cameraData.defaultPosition.y;
+            // Scene.camera.position.z = Scene.cameraData.defaultPosition.z;
 
             if (Scene.camera.position.y > 0) {
                 Scene.camera.rotation.z = Math.PI; // Flips the camera axis orientation to match our universal setup
@@ -158,7 +139,7 @@ define(function() {
         },
 
         setCameraFocalPoint: function(target) {
-            var focalPoint = target ? target : Scene.cameraData.defaultFocalPoint;
+            var focalPoint = target;
 
             Scene.camera.focalPoint = focalPoint;
             Scene.camera.lookAt(focalPoint);
@@ -166,6 +147,7 @@ define(function() {
 
         init: function() {
             return $.Deferred(function(promise) {
+
                 Scene.setContainer();
                 Scene.setScene();
                 // Scene.setAxisHelpers();
@@ -175,10 +157,12 @@ define(function() {
                 Scene.setRender();
                 // Scene.setStats();
 
+                console.log(Camera.defaultPosition);
+
                 $.when(
-                    Scene.setCameraPosition()
+                    Scene.setCameraPosition(Camera.defaultPosition)
                 ).done(function() {
-                    Scene.setCameraFocalPoint();
+                    Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
                 });
 
                 promise.resolve();

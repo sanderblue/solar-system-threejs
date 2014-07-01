@@ -17,6 +17,7 @@ require.config({
         'App'         : 'app/App',
         'Initializer' : 'app/SolarSystem/Init/Initializer',
         'Scene'       : 'app/Environment/Scene',
+        'Camera'      : 'app/Environment/Camera',
         'SolarSystem' : 'app/SolarSystem/SolarSystem',
 
         // Factories
@@ -79,8 +80,11 @@ require.config({
         'Modules': {
             deps: ['MissingArgumentException', 'InvalidArgumentException']
         },
-        'Scene': {
+        'Camera': {
             deps: ['threejs']
+        },
+        'Scene': {
+            deps: ['Camera']
         }
     }
 });

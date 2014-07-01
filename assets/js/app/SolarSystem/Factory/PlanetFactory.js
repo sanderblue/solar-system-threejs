@@ -143,6 +143,7 @@ define(
                         thisPlanet.rotation.z = degreesToRadianRatio * 12;
                     }
 
+
                     thisPlanet.rotation.x = Math.PI / 2;
 
                     $.when(PlanetFactory.addMoons(planet, thisPlanet)).done(function() {

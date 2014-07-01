@@ -11,9 +11,11 @@ define(
     ], function($, Scene, SolarSystem, SolarSystemFactory, SunFactory, TimeController, UIController) {
 
         var Initializer = {
-            checkBrowserCompatibility: function() {
+            isBrowserCompatible: function() {
                 if (!Detector.webgl) {
                     Detector.addGetWebGLMessage();
+
+                    return false;
                 }
             },
 
@@ -27,7 +29,9 @@ define(
             init: function() {
                 window.addEventListener('resize', Initializer.onWindowResize, false);
 
-                this.checkBrowserCompatibility();
+                // if (!Initializer.isBrowserCompatible()) {
+                //     return;
+                // }
 
                 return $.when(Scene.init()).done(function() {
                     var TimeCtrl = new TimeController();
