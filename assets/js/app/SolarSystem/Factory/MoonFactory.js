@@ -27,8 +27,8 @@ define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, Syst
             thisMoon = new THREE.Mesh(
                         new THREE.SphereGeometry(
                                 moon.radius,
-                                12,
-                                7
+                                16,
+                                9
                             ),
                             material
                         );

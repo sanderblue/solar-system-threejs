@@ -143,60 +143,33 @@ define(
                         thisPlanet.rotation.z = degreesToRadianRatio * 12;
                     }
 
-                    // if (planet.name === 'Earth' || planet.name === 'Mars') {
-                        thisPlanet.rotation.x = Math.PI / 2;
+                    thisPlanet.rotation.x = Math.PI / 2;
 
-                        $.when(PlanetFactory.addMoons(planet, thisPlanet)).done(function() {
-                            $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
-                                PlanetFactory.addPlanet(thisPlanet);
+                    $.when(PlanetFactory.addMoons(planet, thisPlanet)).done(function() {
+                        $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
+                            PlanetFactory.addPlanet(thisPlanet);
 
-                                var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.distanceFromParent);
+                            var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.distanceFromParent);
 
-                                thisPlanet.position.set(
-                                    posX, // x
-                                    0,    // y
-                                    0     // z
-                                );
+                            thisPlanet.position.set(
+                                posX, // x
+                                0,    // y
+                                0     // z
+                            );
 
-                                PlanetFactory.addPlanet(thisPlanet);
+                            PlanetFactory.addPlanet(thisPlanet);
 
-                                Scene.planets.push(thisPlanet);
+                            Scene.planets.push(thisPlanet);
 
-                                var endTime = new Date().getTime();
+                            var endTime = new Date().getTime();
 
-                                var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime('ms', startTime, endTime) + ' milliseconds';
+                            var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime('ms', startTime, endTime) + ' milliseconds';
 
-                                System.log(builderStatement);
+                            System.log(builderStatement);
 
-                                promise.resolve(thisPlanet);
-                            });
+                            promise.resolve(thisPlanet);
                         });
-
-                    // } else {
-                    //     $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
-                    //         PlanetFactory.addPlanet(thisPlanet);
-
-                    //         var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.distanceFromParent);
-
-                    //         thisPlanet.position.set(
-                    //             posX, // x
-                    //             0,    // y
-                    //             0     // z
-                    //         );
-
-                    //         PlanetFactory.addPlanet(thisPlanet);
-
-                    //         Scene.planets.push(thisPlanet);
-
-                    //         var endTime = new Date().getTime();
-
-                    //         var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime('ms', startTime, endTime) + ' milliseconds';
-
-                    //         System.log(builderStatement);
-
-                    //         promise.resolve(thisPlanet);
-                    //     });
-                    // }
+                    });
                 });
             },
 

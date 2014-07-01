@@ -5,15 +5,15 @@ define(function() {
      *
      * Units of measurement = kilometers (km)
      *
-     * Initial Scales: {
+     * Initial Scales:
      *     Planets = 1:1000
      *     Orbit Amplitudes = 1:100000 (multiplied by orbitScale)
-     * }
+     *     Moons = 1:1000
      *
      */
     var SolarSystem = {
         buildEnabled: true, // toggle factories on/off
-        orbitScale: 1,
+        orbitScale: 3,
         parent: {
             name: 'Sun',
             radius: 700,
@@ -53,7 +53,7 @@ define(function() {
                 texture: null,
                 moons: [
                     {
-                        name: "Moon",
+                        name: 'Moon',
                         radius: 1.737,
                         orbitDuration: 27,
                         distanceFromParent: 38.44, // 1:10000
@@ -71,14 +71,14 @@ define(function() {
                 orbitDuration: 687,
                 moons: [
                     {
-                        name: "Phobos",
+                        name: 'Phobos',
                         radius: 0.68, // 1:1000
                         orbitDuration: 0.3189,
                         distanceFromParent: 9.378, // 1:1000
                         axisTilt: 10 / 180 * Math.PI // radians
                     },
                     {
-                        name: "Deimos",
+                        name: 'Deimos',
                         radius: 1.2,
                         orbitDuration: 1.263,
                         distanceFromParent: 23.46, // 1:1000
@@ -100,35 +100,35 @@ define(function() {
                 rings: [],
                 moons: [
                     {
-                        name: "Io",
+                        name: 'Io',
                         radius: 1.8216, // 1:1000
                         orbitDuration: 1.769,
-                        distanceFromParent: 67.09, // 1:1000
-                        axisTilt: 0.05 / 180 * Math.PI // radians
+                        distanceFromParent: 67.09,
+                        axisTilt: 2.21 / 180 * Math.PI // radians
                     },
                     {
-                        name: "Europa",
+                        name: 'Europa',
                         radius: 1.56,
                         orbitDuration: 3.551,
-                        distanceFromParent: 42.17, // 1:1000
+                        distanceFromParent: 42.17,
                         axisTilt: 0.47 / 180 * Math.PI // radians
                     },
                     {
-                        name: "Callisto",
+                        name: 'Callisto',
                         radius: 2.41,
                         orbitDuration: 16.689,
-                        distanceFromParent: 1882.7, // 1:1000 (1,882,700)
+                        distanceFromParent: 188.27, // 1:10000 (1,882,700)
                         axisTilt: 0.192 / 180 * Math.PI // radians
                     },
                     {
-                        name: "Ganymede",
+                        name: 'Ganymede',
                         radius: 2.6341,
                         orbitDuration: 7.154,
-                        distanceFromParent: 1070.4, // 1:1000 (1,070,400)
+                        distanceFromParent: 107.04, // 1:10000 (1,070,400)
                         axisTilt: 0.2 / 180 * Math.PI // radians
                     },
                     {
-                        name: "Amalthea",
+                        name: 'Amalthea',
                         radius: 1, // 83.5 km
                         orbitDuration: 0.498,
                         distanceFromParent: 181.365, // 1:1000
@@ -146,7 +146,64 @@ define(function() {
                 moons: [],
                 texture: null,
                 rings: [160, 180, 185, 195, 210, 220, 225, 240],
-                moons: []
+                moons: [
+                    {
+                        name: 'Titan',
+                        radius: 2.576,
+                        orbitDuration: 15.945,
+                        distanceFromParent: 122.187, // 1:10000 (1,221,870)
+                        axisTilt: 0.34854 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Rhea',
+                        radius: 0.7638,
+                        orbitDuration: 4.518212,
+                        distanceFromParent: 52.7108, // 1:10000 (527,108)
+                        axisTilt: 0.345 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Iapetus',
+                        radius: 0.7345,
+                        orbitDuration: 79.322,
+                        distanceFromParent: 356.082, // 1:10000 (3,560,820)
+                        axisTilt: 17.28 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Dione',
+                        radius: 0.5614,
+                        orbitDuration: 2.737,
+                        distanceFromParent: 356.082, // 1:10000 (3,560,820)
+                        axisTilt: 0.019 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Tethys',
+                        radius: 0.5311,
+                        orbitDuration: 1.889,
+                        distanceFromParent: 29.4619, // 1:10000 (294,619)
+                        axisTilt: 0.019 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Enceladus',
+                        radius: 0.2521,
+                        orbitDuration: 1.37,
+                        distanceFromParent: 37.7396, // 1:10000 (377,396)
+                        axisTilt: 0.019 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Mimas',
+                        radius: 0.4156,
+                        orbitDuration: 0.942,
+                        distanceFromParent: 18.9176, // 1:10000 (189,176)
+                        axisTilt: 1.574 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Hyperion',
+                        radius: 0.135,
+                        orbitDuration: 21.276,
+                        distanceFromParent: 148.1009, // 1:10000 (1,481,009)
+                        axisTilt: 0.43 / 180 * Math.PI // radians
+                    }
+                ]
             },
             {
                 id: 7,
