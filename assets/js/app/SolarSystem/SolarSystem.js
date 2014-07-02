@@ -11,9 +11,12 @@ define(function() {
      *     Moons = 1:1000
      *
      */
+
+    var orbitScale = 2.2;
+
     var SolarSystem = {
         buildEnabled: true, // toggle factories on/off
-        orbitScale: 3,
+        orbitScale: orbitScale,
         parent: {
             name: 'Sun',
             radius: 700,
@@ -26,7 +29,7 @@ define(function() {
                 name: 'Mercury',
                 radius: 2.44,
                 diameter: 4.88,
-                distanceFromParent: 57.9, // 1:100000
+                distanceFromParent: 57.9 * orbitScale, // 1:100000
                 orbitDuration: 88,
                 moons: [],
                 texture: null,
@@ -37,7 +40,7 @@ define(function() {
                 name: 'Venus',
                 radius: 6.05,
                 diameter: 12.1,
-                distanceFromParent: 108.2, // 1:100000
+                distanceFromParent: 108.2 * orbitScale, // 1:100000
                 orbitDuration: 224.7,
                 moons: [],
                 texture: null,
@@ -48,7 +51,7 @@ define(function() {
                 name: 'Earth',
                 radius: 6.35,
                 diameter: 12.7,
-                distanceFromParent: 149.5, // 1:100000
+                distanceFromParent: 149.5 * orbitScale, // 1:100000
                 orbitDuration: 364.25,
                 texture: null,
                 moons: [
@@ -67,7 +70,7 @@ define(function() {
                 name: 'Mars',
                 radius: 3.4,
                 diameter: 6.8,
-                distanceFromParent: 227.9,
+                distanceFromParent: 227.9 * orbitScale,
                 orbitDuration: 687,
                 moons: [
                     {
@@ -93,7 +96,7 @@ define(function() {
                 name: 'Jupiter',
                 radius: 71.5,
                 diameter: 143,
-                distanceFromParent: 778.3,
+                distanceFromParent: 778.3 * orbitScale,
                 orbitDuration: 4329,
                 moons: [],
                 texture: null,
@@ -141,7 +144,7 @@ define(function() {
                 name: 'Saturn',
                 radius: 60,
                 diameter: 120,
-                distanceFromParent: 1429.4,
+                distanceFromParent: 1429.4 * orbitScale,
                 orbitDuration: 10753,
                 moons: [],
                 texture: null,
@@ -210,7 +213,7 @@ define(function() {
                 name: 'Uranus',
                 radius: 25.6,
                 diamter: 51.2,
-                distanceFromParent: 2871,
+                distanceFromParent: 2871 * orbitScale,
                 orbitDuration: 30714,
                 moons: [],
                 texture: null,
@@ -222,7 +225,7 @@ define(function() {
                 name: 'Neptune',
                 radius: 24.3,
                 diameter: 48.6,
-                distanceFromParent: 4504.3,
+                distanceFromParent: 4504.3 * orbitScale,
                 orbitDuration: 60025,
                 moons: [],
                 texture: null,
@@ -255,7 +258,7 @@ define(function() {
             ],
             secondary: [],
             totalCount: 1500, // true number is estimated in the billions within the main astroid belt
-            distanceFromParent: 373
+            distanceFromParent: 373 * orbitScale
         }
     };
 
