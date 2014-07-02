@@ -5,54 +5,13 @@ define(
         'SolarSystem',
         'RingFactory',
         'MoonFactory',
+        'OrbitFactory',
         'TimerUtil',
         'System'
     ],
-    function($, Scene, SolarSystem, RingFactory, MoonFactory, TimerUtil, System) {
+    function($, Scene, SolarSystem, RingFactory, MoonFactory, OrbitFactory, TimerUtil, System) {
 
         var PlanetFactory = {
-            OrbitBuilder: {
-                getOrbitAmplitute: function(distance) {
-                    return SolarSystem.parent.radius + distance * SolarSystem.orbitScale;
-                },
-
-                // Gets a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
-                // This ratio helps create an accurate representation of each planet's location along its orbit circumference.
-                getPlanetRadian: function(planet) {
-                    return 360 / planet.orbitDuration;
-                },
-
-                build: function(planet) {
-                    var resolution = 270; // segments in the line
-                    var size = 360 / resolution;
-
-                    var material = new THREE.LineBasicMaterial({
-                                            color: 0x6E6E6E,
-                                            opacity: 0.1
-                                        });
-
-                    var orbitLine = new THREE.Geometry();
-
-                    // Build the orbit line
-                    for(var i = 0; i <= resolution; i++) {
-                        var segment = ( i * size ) * Math.PI / 180,
-                            orbitAmplitude = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.distanceFromParent);
-
-                        orbitLine.vertices.push(
-                            new THREE.Vector3(
-                                Math.cos(segment) * orbitAmplitude,
-                                Math.sin(segment) * orbitAmplitude,
-                                0
-                            )
-                        );
-                    }
-
-                    var orbitLine = new THREE.Line(orbitLine, material);
-
-                    Scene.scene.add(orbitLine);
-                }
-            },
-
             buildRings: function(thisPlanet, planet) {
                 return $.Deferred(function(promise) {
                     var hasRings = Boolean(planet.rings.length);
@@ -100,6 +59,28 @@ define(
                 });
             },
 
+            /**
+             * Builds a planet's core.
+             *
+             * @param planet [THREE Object]
+             */
+            buildCore: function(planet) {
+                var core = new THREE.Mesh(
+                        new THREE.SphereGeometry(
+                                3,
+                                1,
+                                1
+                            )
+                        );
+
+                planet.add(core);
+            },
+
+            /**
+             * Builds a representation of a planet as a Three.js mesh based on a planet's data.
+             *
+             * @param planet [Object]
+             */
             build: function(planet) {
                 return $.Deferred(function(promise) {
                     var startTime            = new Date().getTime(),
@@ -107,7 +88,7 @@ define(
                     ;
 
                     // Create our orbit line geometry first
-                    PlanetFactory.OrbitBuilder.build(planet);
+                    OrbitFactory.build(planet);
 
                     var thisPlanet = new THREE.Object3D({
                                         id: planet.id,
@@ -146,11 +127,13 @@ define(
 
                     thisPlanet.rotation.x = Math.PI / 2;
 
+                    PlanetFactory.buildCore(thisPlanet);
+
                     $.when(PlanetFactory.addMoons(planet, thisPlanet)).done(function() {
                         $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
                             PlanetFactory.addPlanet(thisPlanet);
 
-                            var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(planet.distanceFromParent);
+                            var posX = OrbitFactory.getOrbitAmplitute(planet.distanceFromParent);
 
                             thisPlanet.position.set(
                                 posX, // x

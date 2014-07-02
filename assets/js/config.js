@@ -28,6 +28,7 @@ require.config({
         'AstroidBeltFactory' : 'app/SolarSystem/Factory/AstroidBeltFactory',
         'RingFactory'        : 'app/SolarSystem/Factory/RingFactory',
         'MoonFactory'        : 'app/SolarSystem/Factory/MoonFactory',
+        'OrbitFactory'       : 'app/SolarSystem/Factory/OrbitFactory',
 
         // Controllers
         'OrbitController' : 'app/Controllers/OrbitController',
@@ -61,7 +62,7 @@ require.config({
             deps: ['stats']
         },
         'main': {
-            deps: ['jquery', 'threejs', 'Time', 'App', 'Modules']
+            deps: ['jquery', 'threejs', 'Time', 'App', 'Modules', 'OrbitFactory']
         },
         'Initializer': {
             deps: ['Scene']
@@ -86,6 +87,9 @@ require.config({
         },
         'Scene': {
             deps: ['Camera']
+        },
+        'OrbitFactory': {
+            deps: ['threejs']
         }
     }
 });

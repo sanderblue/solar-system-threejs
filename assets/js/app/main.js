@@ -5,11 +5,12 @@ define(
         'Scene',
         'Initializer',
         'PlanetFactory',
+        'OrbitFactory',
         'SolarSystem',
         'TimeController',
         'Modules'
     ],
-    function($, App, Scene, Initializer, PlanetFactory, SolarSystem, TimeController) {
+    function($, App, Scene, Initializer, PlanetFactory, OrbitFactory, SolarSystem, TimeController) {
 
         window.TestPosition = {
             x: 0,
@@ -78,17 +79,17 @@ define(
                         count = dayOnEarth + 62885;
                     }
 
-                    var posY = PlanetFactory.OrbitBuilder.getOrbitAmplitute(SolarSystem.planets[i].distanceFromParent)
+                    var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.planets[i].distanceFromParent)
                                 * Math.cos(
                                     count
-                                    * PlanetFactory.OrbitBuilder.getPlanetRadian(SolarSystem.planets[i])
+                                    * OrbitFactory.getPlanetRadian(SolarSystem.planets[i])
                                     * degreesToRadianRatio
                                 );
 
-                    var posX = PlanetFactory.OrbitBuilder.getOrbitAmplitute(SolarSystem.planets[i].distanceFromParent)
+                    var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.planets[i].distanceFromParent)
                                 * Math.sin(
                                     count
-                                    * PlanetFactory.OrbitBuilder.getPlanetRadian(SolarSystem.planets[i])
+                                    * OrbitFactory.getPlanetRadian(SolarSystem.planets[i])
                                     * degreesToRadianRatio
                                 );
 
