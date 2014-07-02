@@ -37,8 +37,6 @@ define(
                 for (var i = 0; i < planets.length; i++) {
                     var dayOnEarth = new Date().getDOYwithTimeAsDecimal() + TimeCtrl.getStopWatchValue();
 
-                    // console.log(dayOnEarth);
-
                     // Mercury
                     if (i === 0) {
                         count = dayOnEarth + 48;
@@ -115,21 +113,13 @@ define(
 
             render: function() {
                 MainController.positionPlanets();
-                // MainController.setCamera();
 
                 Scene.renderer.render(Scene.scene, Scene.camera);
             },
 
-            // setCamera: function() {
-            //     Scene.setCameraPosition(Scene.camera.focalPoint);
-            // },
-
             init: function() {
                 if (App.config.buildEnabled) {
                     $.when(Initializer.init()).done(function() {
-
-                        console.log(Scene)
-
                         MainController.animate();
                     });
                 }

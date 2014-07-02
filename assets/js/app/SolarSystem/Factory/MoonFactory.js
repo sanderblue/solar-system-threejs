@@ -39,8 +39,6 @@ define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, Syst
 
             moonCentroid.rotation.x = moon.axisTilt;
 
-            // console.log(thisMoon, moonCentroid)
-
             var MoonController = new OrbitController(thisMoon, moon, parent, { interval: 1 });
 
             if (App.config.moonOrbitsEnabled) {

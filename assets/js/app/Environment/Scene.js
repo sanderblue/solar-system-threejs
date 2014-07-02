@@ -11,45 +11,6 @@ define(['Camera', 'Time'], function(Camera) {
         camera: null,
         brightness: 0.15,
         currentRadian: 0.0174532925 * 360,
-        OrbitBuilder: {
-            getOrbitAmplitute: function() {
-                return Camera.parent.radius + Camera.distanceFromParent;
-            },
-
-            getPlanetRadian: function() {
-                return 360 / Camera.orbitDuration;
-            },
-
-            build: function() {
-                // var resolution = 270; // segments in the line
-                // var size = 360 / resolution;
-
-                // var material = new THREE.LineBasicMaterial({
-                //                         color: 0x6E6E6E,
-                //                         opacity: 0.1
-                //                     });
-
-                // var orbitLine = new THREE.Geometry();
-
-                // // Build the orbit line
-                // for(var i = 0; i <= resolution; i++) {
-                //     var segment = ( i * size ) * Math.PI / 180,
-                //         orbitAmplitude = Scene.OrbitBuilder.getOrbitAmplitute(Scene.cameraData.distanceFromParent);
-
-                //     orbitLine.vertices.push(
-                //         new THREE.Vector3(
-                //             Math.cos(segment) * orbitAmplitude,
-                //             Math.sin(segment) * orbitAmplitude,
-                //             0
-                //         )
-                //     );
-                // }
-
-                // var orbitLine = new THREE.Line(orbitLine, material);
-
-                // Scene.scene.add(orbitLine);
-            }
-        },
 
         setContainer: function() {
             Scene.container = document.getElementById('solar-system');
@@ -62,8 +23,6 @@ define(['Camera', 'Time'], function(Camera) {
         },
 
         setAxisHelpers: function() {
-            Scene.OrbitBuilder.build();
-
             Scene.scene.add(new THREE.AxisHelper(7000));
             // Scene.scene.add(new THREE.GridHelper(4000, 400));
         },
@@ -106,10 +65,6 @@ define(['Camera', 'Time'], function(Camera) {
 
         setCameraPosition: function(object3D, parentObject3D, vector3, rotateZ) {
             if (object3D && parentObject3D) {
-                // object3d.rotation.order = 'YXZ';
-
-                console.log(object3D)
-
                 Scene.camera.position.x = parentObject3D.geometry.radius * 6.3; // zoom
                 Scene.camera.position.y = parentObject3D.geometry.radius * 1.8;
                 Scene.camera.position.z = 10;
@@ -140,8 +95,6 @@ define(['Camera', 'Time'], function(Camera) {
                 // Scene.setCameraControls();
                 Scene.setRender();
                 // Scene.setStats();
-
-                // console.log(Camera.defaultPosition);
 
                 $.when(
                     Scene.setCameraPosition(null, null, Camera.defaultPosition, false)
