@@ -97,6 +97,12 @@ define(
 
                     Scene.planets[i].rotation.y += 0.0008;
 
+                    Scene.planetCores[i].position.set(
+                        parseFloat(posX),
+                        parseFloat(posY),
+                        0
+                    );
+
                     Scene.planets[i].position.set(
                         parseFloat(posX),
                         parseFloat(posY),
@@ -121,6 +127,9 @@ define(
             init: function() {
                 if (App.config.buildEnabled) {
                     $.when(Initializer.init()).done(function() {
+
+                        console.log(Scene)
+
                         MainController.animate();
                     });
                 }

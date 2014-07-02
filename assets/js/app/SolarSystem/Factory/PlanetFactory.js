@@ -65,15 +65,28 @@ define(
              * @param planet [THREE Object]
              */
             buildCore: function(planet) {
-                var core = new THREE.Mesh(
-                        new THREE.SphereGeometry(
-                                3,
-                                1,
-                                1
-                            )
-                        );
+                var texture = new THREE.ImageUtils.loadTexture('../assets/textures/crust_tiny.jpg');
 
-                planet.add(core);
+                texture.wrapS      = THREE.RepeatWrapping;
+                texture.wrapT      = THREE.RepeatWrapping;
+                texture.anisotropy = 4;
+
+                var material = new THREE.MeshLambertMaterial({
+                                          ambient: 0xbbbbbb,
+                                          map: texture,
+                                          side: THREE.DoubleSide
+                                        });
+
+                var core = new THREE.Object3D();
+
+                core.name = planet.name;
+
+                // We need to flip the core's axis
+                core.rotation.x = Math.PI / 2;
+
+                Scene.planetCores.push(core);
+
+                Scene.scene.add(core);
             },
 
             /**

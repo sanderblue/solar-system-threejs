@@ -4,6 +4,7 @@ define(['Camera', 'Time'], function(Camera) {
 
     var Scene = {
         planets: [],
+        planetCores: [],
         astroids: [],
         tilt: 200,
         scene: null,
@@ -103,15 +104,17 @@ define(['Camera', 'Time'], function(Camera) {
             // Scene.container.appendChild(Scene.stats.domElement);
         },
 
-        setCameraPosition: function(object3d, vector3, rotateZ) {
-            if (object3d) {
+        setCameraPosition: function(object3D, parentObject3D, vector3, rotateZ) {
+            if (object3D && parentObject3D) {
                 // object3d.rotation.order = 'YXZ';
 
-                Scene.camera.position.x = object3d.geometry.radius * 6; // zoom
-                Scene.camera.position.y = object3d.geometry.radius * 1.8;
+                console.log(object3D)
+
+                Scene.camera.position.x = parentObject3D.geometry.radius * 6.3; // zoom
+                Scene.camera.position.y = parentObject3D.geometry.radius * 1.8;
                 Scene.camera.position.z = 10;
 
-                object3d.add(Scene.camera);
+                object3D.add(Scene.camera);
             } else {
                 Scene.camera.position.y = vector3.y;
                 Scene.camera.position.x = vector3.x;
@@ -141,7 +144,7 @@ define(['Camera', 'Time'], function(Camera) {
                 // console.log(Camera.defaultPosition);
 
                 $.when(
-                    Scene.setCameraPosition(null, Camera.defaultPosition, false)
+                    Scene.setCameraPosition(null, null, Camera.defaultPosition, false)
                 ).done(function() {
                     Scene.setCameraFocalPoint(window.focalPoint);
                 });

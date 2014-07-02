@@ -41,10 +41,10 @@ define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, Syst
 
             // console.log(thisMoon, moonCentroid)
 
-            var Controller = new OrbitController(thisMoon, moon, parent, { interval: 1 });
+            var MoonController = new OrbitController(thisMoon, moon, parent, { interval: 1 });
 
             if (App.config.moonOrbitsEnabled) {
-                Controller.positionObject(thisMoon);
+                MoonController.positionObject(thisMoon);
             }
 
             planetObj.add(moonCentroid);
