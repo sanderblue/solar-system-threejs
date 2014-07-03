@@ -93,7 +93,7 @@ define(
 
                     Scene.setCameraFocalPoint(window.focalPoint);
 
-                    Scene.planets[i].rotation.y += 0.0008;
+                    Scene.planets[i].rotation.y += 0.0007;
 
                     Scene.planetCores[i].position.set(
                         parseFloat(posX),

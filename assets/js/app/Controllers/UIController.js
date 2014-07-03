@@ -16,15 +16,15 @@ define(['jquery', 'Scene'], function($, Scene) {
                     matchedPlanet = UIController.findPlanet(id)
                 ;
 
-                for (var i = 0; i < Scene.planetCores.length; i++) {
-                    if (Scene.planetCores[i].name  === matchedPlanet.name) {
-                        var core = Scene.planetCores[i];
-                        break;
-                    }
-                }
+                // for (var i = 0; i < Scene.planetCores.length; i++) {
+                //     if (Scene.planetCores[i].name  === matchedPlanet.name) {
+                //         var core = Scene.planetCores[i];
+                //         break;
+                //     }
+                // }
 
-                Scene.setCameraPosition(core, matchedPlanet, matchedPlanet.position, true);
-                Scene.setCameraFocalPoint(core.position);
+                Scene.setCameraPosition(matchedPlanet, matchedPlanet, matchedPlanet.position, true);
+                Scene.setCameraFocalPoint(matchedPlanet.position);
             });
 
             UIController.initResetView();
