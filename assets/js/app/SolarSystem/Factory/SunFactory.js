@@ -21,7 +21,7 @@ define(['Scene', 'SolarSystem'], function(Scene, SolarSystem) {
 
                 var sunGeometry = new THREE.SphereGeometry(
                                         SolarSystem.parent.radius,
-                                        SolarSystem.parent.radius / 8.5,
+                                        SolarSystem.parent.radius / 9,
                                         SolarSystem.parent.radius / 5
                                     );
 

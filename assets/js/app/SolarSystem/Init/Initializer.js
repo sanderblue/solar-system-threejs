@@ -6,7 +6,7 @@ define(
         'SolarSystemFactory',
         'SunFactory',
         'TimeController',
-        'UI'
+        'UIController'
 
     ], function($, Scene, SolarSystem, SolarSystemFactory, SunFactory, TimeController, UIController) {
 

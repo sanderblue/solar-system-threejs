@@ -3,6 +3,7 @@ define(['Camera', 'Time'], function(Camera) {
     window.focalPoint = Camera.defaultFocalPoint;
 
     var Scene = {
+        Sun: null,
         planets: [],
         planetCores: [],
         astroids: [],
@@ -63,25 +64,31 @@ define(['Camera', 'Time'], function(Camera) {
             // Scene.container.appendChild(Scene.stats.domElement);
         },
 
-        setCameraPosition: function(object3D, parentObject3D, vector3, rotateZ) {
+        setCameraPosition: function(object3D, parentObject3D, vector3, reset) {
             if (object3D && parentObject3D) {
                 Scene.camera.position.x = parentObject3D.geometry.radius * 6.3; // zoom
                 Scene.camera.position.y = parentObject3D.geometry.radius * 1;
                 Scene.camera.position.z = 2;
 
                 object3D.add(Scene.camera);
-            } else {
-                Scene.camera.position.y = vector3.y;
-                Scene.camera.position.x = vector3.x;
-                Scene.camera.position.z = vector3.z;
+
+                return;
             }
+
+            if (reset) {
+                Scene.scene.add(Scene.camera);
+            }
+
+            Scene.camera.position.y = vector3.y;
+            Scene.camera.position.x = vector3.x;
+            Scene.camera.position.z = vector3.z;
         },
 
         setCameraFocalPoint: function(target) {
             var focalPoint = target;
 
             Scene.camera.focalPoint = focalPoint;
-            Scene.camera.lookAt(window.focalPoint);
+            Scene.camera.lookAt(focalPoint);
         },
 
         init: function() {

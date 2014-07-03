@@ -35,7 +35,7 @@ require.config({
         'OrbitController' : 'app/Controllers/OrbitController',
         'Console'         : 'app/Controllers/ConsoleController',
         'TimeController'  : 'app/Controllers/TimeController',
-        'UI'              : 'app/Controllers/UIController',
+        'UIController'    : 'app/Controllers/UIController',
 
         // Modules
         'Modules'                  : 'app/Modules/Modules',
@@ -77,8 +77,8 @@ require.config({
         'Time': {
             deps: ['Date']
         },
-        'UI': {
-            deps: ['SolarSystem', 'Time']
+        'UIController': {
+            deps: ['SolarSystem', 'Time', 'Scene']
         },
         'Modules': {
             deps: ['MissingArgumentException', 'InvalidArgumentException']

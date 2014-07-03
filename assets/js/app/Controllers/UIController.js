@@ -1,77 +1,83 @@
-define(['jquery', 'Scene'], function($, Scene) {
+define(
+    [
+        'jquery',
+        'Scene',
+        'Camera'
+    ],
+    function($, Scene, Camera) {
 
-    var UIController = {
-        initEventListeners: function() {
-            // User Event Listeners
-            $('#zoom').on('input', function(e) {
-                Scene.zoom = e.target.value;
-            });
+        var UIController = {
+            initEventListeners: function() {
+                // User Event Listeners
+                $('#zoom').on('input', function(e) {
+                    Scene.zoom = e.target.value;
+                });
 
-            $('#tilt').on('input', function(e) {
-                Scene.tilt = e.target.value;
-            });
+                $('#tilt').on('input', function(e) {
+                    Scene.tilt = e.target.value;
+                });
 
-            $('.planet').on('click', function() {
-                var id = $(this).data('id'),
-                    matchedPlanet = UIController.findPlanet(id)
-                ;
+                $('.planet').on('click', function() {
+                    var id = $(this).data('id'),
+                        matchedPlanet = UIController.findPlanet(id)
+                    ;
 
-                // for (var i = 0; i < Scene.planetCores.length; i++) {
-                //     if (Scene.planetCores[i].name  === matchedPlanet.name) {
-                //         var core = Scene.planetCores[i];
-                //         break;
-                //     }
-                // }
+                    // for (var i = 0; i < Scene.planetCores.length; i++) {
+                    //     if (Scene.planetCores[i].name  === matchedPlanet.name) {
+                    //         var core = Scene.planetCores[i];
+                    //         break;
+                    //     }
+                    // }
 
-                Scene.setCameraPosition(matchedPlanet, matchedPlanet, matchedPlanet.position, true);
-                Scene.setCameraFocalPoint(matchedPlanet.position);
-            });
+                    Scene.setCameraPosition(matchedPlanet, matchedPlanet, matchedPlanet.position, true);
+                    Scene.setCameraFocalPoint(matchedPlanet.position);
+                });
 
-            UIController.initResetView();
-        },
+                UIController.initResetView();
+            },
 
-        initResetView: function() {
-            var resetButton = $('#reset-camera');
+            initResetView: function() {
+                var resetButton = $('#reset-camera');
 
-            resetButton.on('click', function() {
-                Scene.camera.focalPoint = Scene.Sun.position;
-                Zoom = 3500;
-                Tilt = 500;
-            });
-        },
+                resetButton.on('click', function() {
+                    Scene.setCameraPosition(null, null, Camera.defaultPosition, true);
+                    Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
+                });
+            },
 
-        buildPlanetList: function() {
-            return $.Deferred(function(promise) {
-                var listElement = $('#planets');
+            buildPlanetList: function() {
+                return $.Deferred(function(promise) {
+                    var listElement = $('#planets');
 
-                listElement.children().remove();
+                    listElement.children().remove();
 
-                for (var i = 0; i < Scene.planets.length; i++) {
-                    var id = Scene.planets[i].id;
+                    for (var i = 0; i < Scene.planets.length; i++) {
+                        var id = Scene.planets[i].id;
 
-                    listElement.append('<li id="planet-'+ id +'" class="planet" data-id="'+ id +'">'+ Scene.planets[i].name +'</li>');
+                        listElement.append('<li id="planet-'+ id +'" class="planet" data-id="'+ id +'">'+ Scene.planets[i].name +'</li>');
+                    }
+
+                    promise.resolve();
+                });
+            },
+
+            findPlanet: function(id) {
+                var planets = Scene.planets;
+
+                for (var i = 0; i < planets.length; i++) {
+                    if (planets[i].id == id) {
+                        return planets[i];
+                    }
                 }
+            },
 
-                promise.resolve();
-            });
-        },
-
-        findPlanet: function(id) {
-            var planets = Scene.planets;
-
-            for (var i = 0; i < planets.length; i++) {
-                if (planets[i].id == id) {
-                    return planets[i];
-                }
+            init: function() {
+                $.when(UIController.buildPlanetList()).done(function() {
+                    UIController.initEventListeners();
+                });
             }
-        },
+        };
 
-        init: function() {
-            $.when(UIController.buildPlanetList()).done(function() {
-                UIController.initEventListeners();
-            });
-        }
-    };
-
-    return UIController;
-});
+        return UIController;
+    }
+);
