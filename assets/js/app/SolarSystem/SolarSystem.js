@@ -103,39 +103,67 @@ define(function() {
                 rings: [],
                 moons: [
                     {
+                        name: 'Amalthea',
+                        radius: 0.835, // 83.5 km
+                        orbitDuration: 0.498, // (0.498)
+                        distanceFromParent: 18.1366, // 1:10000 (181,366)
+                        axisTilt: 0.374 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Thebe',
+                        radius: 0.493, // 49.3 km
+                        orbitDuration: 0.675,
+                        distanceFromParent: 22.1889, // (221,889)
+                        axisTilt: 1.076 / 180 * Math.PI // radians
+                    },
+                    {
                         name: 'Io',
                         radius: 1.8216, // 1:1000
                         orbitDuration: 1.769,
-                        distanceFromParent: 67.09,
+                        distanceFromParent: 42.1700, // 1:10000
                         axisTilt: 2.21 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Europa',
-                        radius: 1.56,
+                        radius: 1.8, //  (1,561)
                         orbitDuration: 3.551,
-                        distanceFromParent: 42.17,
+                        distanceFromParent: 67.1034, // 1:10000
                         axisTilt: 0.47 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Ganymede',
+                        radius: 2.6341,
+                        orbitDuration: 7.155,
+                        distanceFromParent: 107.0412, // 1:10000 (1,070,412)
+                        axisTilt: 0.2 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Callisto',
                         radius: 2.41,
                         orbitDuration: 16.689,
-                        distanceFromParent: 188.27, // 1:10000 (1,882,700)
+                        distanceFromParent: 188.2709, // 1:10000 (1,882,709)
                         axisTilt: 0.192 / 180 * Math.PI // radians
                     },
                     {
-                        name: 'Ganymede',
-                        radius: 2.6341,
-                        orbitDuration: 7.154,
-                        distanceFromParent: 107.04, // 1:10000 (1,070,400)
-                        axisTilt: 0.2 / 180 * Math.PI // radians
+                        name: 'Himalia',
+                        radius: 1.45, // 85 km
+                        orbitDuration: 250.23,
+                        distanceFromParent: 1145.1971, // 1:10000 (11,451,971)
+                        axisTilt: 30.486 / 180 * Math.PI // radians
                     },
                     {
-                        name: 'Amalthea',
-                        radius: 1, // 83.5 km
-                        orbitDuration: 0.498,
-                        distanceFromParent: 181.365, // 1:1000
-                        axisTilt: 0.374 / 180 * Math.PI // radians
+                        name: 'Lysithea',
+                        radius: 1.36, // 36 km
+                        orbitDuration: 259.89,
+                        distanceFromParent: 1174.056, // 1:10000 (11,740,560)
+                        axisTilt: 27.006 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Elara',
+                        radius: 1.43, // 43 km
+                        orbitDuration: 257.62,
+                        distanceFromParent: 1177.8034, // 1:10000 (11,778,034)
+                        axisTilt: 29.691 / 180 * Math.PI // radians
                     }
                 ],
             },

@@ -35,21 +35,24 @@ define(['TimeController', 'PlanetFactory'], function(TimeController, PlanetFacto
             count = 1
         ;
 
-        // console.log(self.parent.radius + self.object.distanceFromParent)
+        // console.log(this)
+        if (this.parent.name == 'Jupiter') {
+            console.log(this.parent.diameter, this.parent.radius + this.object.distanceFromParent)
+        }
 
         setInterval(function() {
             var dayOnEarth = new Date().getDOYwithTimeAsDecimal() + TimeCtrl.getStopWatchValue();
 
             count = dayOnEarth;
 
-            var posX = (self.parent.radius + self.object.distanceFromParent)
+            var posX = (self.parent.diameter + self.object.distanceFromParent)
                         * Math.sin(
                             count
                             * (360 / self.object.orbitDuration)
                             * degreesToRadianRatio
                         );
 
-            var posY = (self.parent.radius + self.object.distanceFromParent)
+            var posY = (self.parent.diameter + self.object.distanceFromParent)
                         * Math.cos(
                             count
                             * (360 / self.object.orbitDuration)
