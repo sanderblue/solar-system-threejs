@@ -75,17 +75,17 @@ define(function() {
                 moons: [
                     {
                         name: 'Phobos',
-                        radius: 0.68, // 1:1000
-                        orbitDuration: 0.3189,
+                        radius: 0.267, // (11.2667)
+                        orbitDuration: 0.3189 * 3,
                         distanceFromParent: 9.378, // 1:1000
-                        axisTilt: 10 / 180 * Math.PI // radians
+                        axisTilt: 26.04 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Deimos',
-                        radius: 1.2,
-                        orbitDuration: 1.263,
+                        radius: 0.211, // (6.2)
+                        orbitDuration: 1.263 * 3,
                         distanceFromParent: 23.46, // 1:1000
-                        axisTilt: 170 / 180 * Math.PI // radians
+                        axisTilt: 27.58 / 180 * Math.PI // radians
                     }
                 ],
                 texture: null,
