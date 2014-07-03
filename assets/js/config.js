@@ -8,9 +8,10 @@ require.config({
         'threejs'     : 'libs/threejs/three.min',
 
         // Three.js Extensions
-        'detector'       : 'libs/threejs/extensions/detector',
-        'stats'          : 'libs/threejs/extensions/stats',
-        'convexgeometry' : 'libs/threejs/extensions/convexgeometry',
+        'detector'            : 'libs/threejs/extensions/detector',
+        'stats'               : 'libs/threejs/extensions/stats',
+        'convexgeometry'      : 'libs/threejs/extensions/convexgeometry',
+        'AdditiveBlendShader' : 'app/Modules/ThreeJS/AdditiveBlendShader',
 
         // Main
         'main'        : 'app/main',
@@ -62,7 +63,7 @@ require.config({
             deps: ['stats']
         },
         'main': {
-            deps: ['jquery', 'threejs', 'Time', 'App', 'Modules', 'OrbitFactory']
+            deps: ['jquery', 'threejs', 'AdditiveBlendShader', 'Time', 'App', 'Modules', 'OrbitFactory']
         },
         'Initializer': {
             deps: ['Scene']
