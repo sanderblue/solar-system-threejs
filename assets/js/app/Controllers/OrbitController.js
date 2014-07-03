@@ -35,11 +35,6 @@ define(['TimeController', 'PlanetFactory'], function(TimeController, PlanetFacto
             count = 1
         ;
 
-        // console.log(this)
-        if (this.parent.name == 'Jupiter') {
-            console.log(this.parent.diameter, this.parent.radius + this.object.distanceFromParent)
-        }
-
         setInterval(function() {
             var dayOnEarth = new Date().getDOYwithTimeAsDecimal() + TimeCtrl.getStopWatchValue();
 

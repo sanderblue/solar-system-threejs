@@ -12,7 +12,7 @@ define(function() {
      *
      */
 
-    var orbitScale = 2.2;
+    var orbitScale = 2.63;
 
     var SolarSystem = {
         buildEnabled: true, // toggle factories on/off
@@ -246,7 +246,64 @@ define(function() {
                 moons: [],
                 texture: null,
                 rings: [65, 69, 72],
-                moons: []
+                moons: [
+                    {
+                        name: 'Cressida',
+                        radius: 0.80 + 0.04, // (80 ±4 km)
+                        orbitDuration: 0.464, // (0.335)
+                        distanceFromParent: 6.1780, // 1:10000 (61,780)
+                        axisTilt: 0.006 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Juliet',
+                        radius: 0.468 + 0.04, // (46.8 ±4 km)
+                        orbitDuration: 0.493, // (0.493)
+                        distanceFromParent: 6.4350, // 1:10000 (64,350)
+                        axisTilt: 0.065 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Puck',
+                        radius: 0.81 + 0.02, // (81 ± 2 km)
+                        orbitDuration: 0.762, // (0.762)
+                        distanceFromParent: 8.6010, // 1:10000 (86,010)
+                        axisTilt: 0.3192 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Miranda',
+                        radius: 1.2358 + 0.007, // (235.8 ±0.7 km)
+                        orbitDuration: 1.413, // (1.413479)
+                        distanceFromParent: 12.9390, // 1:10000 (129,390)
+                        axisTilt: 4.232 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Ariel',
+                        radius: (1.1578 * 1.2) + 0.12, // (1157.8 ±1.2 km)
+                        orbitDuration: 2.520, // (2.520379)
+                        distanceFromParent: 19.1020, // 1:10000 (191,020)
+                        axisTilt: 0.26 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Umbriel',
+                        radius: (1.1694 * 1.56) + 0.56, // (1169.4 ±5.6 km)
+                        orbitDuration: 4.144, // (4.144177)
+                        distanceFromParent: 26.6300, // 1:10000 (266,300)
+                        axisTilt: 0.205/ 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Titania',
+                        radius: (1.5768 * 1.2) + 0.12, // (1576.8 ±1.2 km)
+                        orbitDuration: 8.706, // (8.705872)
+                        distanceFromParent: 43.5910, // 1:10000 (435,910)
+                        axisTilt: 0.34 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Oberon',
+                        radius: (1.5228 * 1.52) + 0.052, // (1522.8 ±5.2 km)
+                        orbitDuration: 13.463, // (13.463239)
+                        distanceFromParent: 58.3520, // 1:10000 (583,520)
+                        axisTilt: 0.058 / 180 * Math.PI // radians
+                    }
+                ]
             },
             {
                 id: 8,
@@ -258,7 +315,43 @@ define(function() {
                 moons: [],
                 texture: null,
                 rings: [60, 67, 71], // Neptune has 9 rings (3 major)
-                moons: []
+                moons: [
+                   {
+                       name: 'Despina',
+                       radius: 0.75 + 0.03, // (75 ±3 km)
+                       orbitDuration: 0.335, // (0.335)
+                       distanceFromParent: 5.2526, // 1:10000 (52,526)
+                       axisTilt: 0.068 / 180 * Math.PI // radians
+                   },
+                   {
+                       name: 'Galatea',
+                       radius: 0.88 + 0.04, // (88 ±4 km)
+                       orbitDuration: 0.429, // (0.335)
+                       distanceFromParent: 6.1953, // 1:10000 (61,953)
+                       axisTilt: 0.034 / 180 * Math.PI // radians
+                   },
+                   {
+                       name: 'Larissa',
+                       radius: 0.97 + 0.03, // (97 ±3 km)
+                       orbitDuration: 0.555, // (0.335)
+                       distanceFromParent: 7.3548, // 1:10000 (73,548)
+                       axisTilt: 0.205 / 180 * Math.PI // radians
+                   },
+                   {
+                       name: 'Proteus',
+                       radius: 1.210 + 0.05, // (210 ±5 km)
+                       orbitDuration: 1.122, // (0.335)
+                       distanceFromParent: 11.7646, // 1:10000 (117,646)
+                       axisTilt: 0.075 / 180 * Math.PI // radians
+                   },
+                   {
+                       name: 'Tritan',
+                       radius: 1.3534 + 0.09, // (1353.4 ±0.9 km)
+                       orbitDuration: -5.876854, // (-5.876854 retrograde)
+                       distanceFromParent: 35.4759, // 1:10000 (354,759)
+                       axisTilt: 129.812 / 180 * Math.PI // radians
+                   }
+                ]
             }
         ],
         astroidBelt: {
