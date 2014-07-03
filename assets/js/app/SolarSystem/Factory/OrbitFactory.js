@@ -34,12 +34,13 @@ define(
              * @param planet [Object]
              */
             build: function(planet) {
-                var resolution = 270; // segments in the line
-                var size = 360 / resolution;
+                var resolution = 540, // segments in the line
+                    size       = 360 / resolution
+                ;
 
                 var material = new THREE.LineBasicMaterial({
-                                        color: 0xbdbdbd,
-                                        opacity: 0.1
+                                        color: 0x848484,
+                                        linewidth: 0.5
                                     });
 
                 var orbitLine = new THREE.Geometry();

@@ -13,7 +13,7 @@ define(['Scene', 'SolarSystem'], function(Scene, SolarSystem) {
                                       map: texture,
                                       side: THREE.DoubleSide,
                                       transparent: true,
-                                      opacity: 0.9
+                                      opacity: 1
                                     });
 
                 texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
@@ -21,8 +21,8 @@ define(['Scene', 'SolarSystem'], function(Scene, SolarSystem) {
 
                 var sunGeometry = new THREE.SphereGeometry(
                                         SolarSystem.parent.radius,
-                                        SolarSystem.parent.radius / 3.5,
-                                        SolarSystem.parent.radius / 7
+                                        SolarSystem.parent.radius / 8.5,
+                                        SolarSystem.parent.radius / 5
                                     );
 
                 var Sun = new THREE.Mesh(sunGeometry, material);

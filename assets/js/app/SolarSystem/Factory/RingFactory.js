@@ -7,7 +7,7 @@ define(function() {
                     size       = 360 / resolution;
 
                 var material = new THREE.LineBasicMaterial({
-                                    color: 0xe6e6e6,
+                                    color: 0x585858,
                                     opacity: 0.1
                                   });
 
