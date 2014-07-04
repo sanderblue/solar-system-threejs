@@ -122,7 +122,7 @@ define(
 
                     thisPlanet = new THREE.Mesh(
                                 new THREE.SphereGeometry(
-                                        planet.diameter,
+                                        planet.radius,
                                         200,
                                         120
                                     ),

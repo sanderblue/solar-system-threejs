@@ -25,7 +25,7 @@ define(
              * @return float [semi-major axis]
              */
             getOrbitAmplitute: function(distance) {
-                return SolarSystem.parent.radius + distance * SolarSystem.orbitScale;
+                return SolarSystem.parent.radius + distance;
             },
 
             /**

@@ -40,14 +40,14 @@ define(['TimeController', 'PlanetFactory'], function(TimeController, PlanetFacto
 
             count = dayOnEarth;
 
-            var posX = (self.parent.diameter + self.object.distanceFromParent)
+            var posX = (self.parent.radius + self.object.distanceFromParent)
                         * Math.sin(
                             count
                             * (360 / self.object.orbitDuration)
                             * degreesToRadianRatio
                         );
 
-            var posY = (self.parent.diameter + self.object.distanceFromParent)
+            var posY = (self.parent.radius + self.object.distanceFromParent)
                         * Math.cos(
                             count
                             * (360 / self.object.orbitDuration)

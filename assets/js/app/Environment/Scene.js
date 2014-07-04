@@ -10,7 +10,7 @@ define(['Camera', 'Time'], function(Camera) {
         tilt: 200,
         scene: null,
         camera: null,
-        brightness: 0.15,
+        brightness: 0.165,
         currentRadian: 0.0174532925 * 360,
 
         setContainer: function() {
@@ -41,7 +41,7 @@ define(['Camera', 'Time'], function(Camera) {
         },
 
         setCamera: function() {
-            Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500000 * 10);
+            Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 5000000 * 10);
         },
 
         setCameraControls: function() {
@@ -66,7 +66,7 @@ define(['Camera', 'Time'], function(Camera) {
 
         setCameraPosition: function(object3D, parentObject3D, vector3, reset) {
             if (object3D && parentObject3D) {
-                Scene.camera.position.x = parentObject3D.geometry.radius * 6.3; // zoom
+                Scene.camera.position.x = parentObject3D.geometry.radius * 8.3; // zoom
                 Scene.camera.position.y = parentObject3D.geometry.radius * 1;
                 Scene.camera.position.z = 2;
 

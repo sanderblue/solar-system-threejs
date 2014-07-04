@@ -12,9 +12,9 @@ define(
 
             getRandomPointInSphere: function(radius) {
                 return new THREE.Vector3(
-                    ( Math.random() - 0.5 ) * 1.55 * radius,
-                    ( Math.random() - 0.5 ) * 1.55 * radius,
-                    ( Math.random() - 0.5 ) * 1.55 * radius
+                    Math.random() * radius,
+                    Math.random() * radius,
+                    Math.random() * radius
                 );
             },
 
@@ -25,14 +25,16 @@ define(
             },
 
             getOrbitAmplitute: function(distance) {
-                return SolarSystem.parent.radius + distance * SolarSystem.orbitScale;
+                return SolarSystem.parent.radius + distance;
             },
 
             buildRandomPoints: function() {
                 var points = [];
 
-                for (var i = 0; i < 4; i ++) {
-                    var radius = Math.random() * 2.33;
+                for (var i = 0; i < 7; i ++) {
+                    var radius = (Math.random() + 1150) * SolarSystem.celestialScale;
+
+                    // console.log(radius)
 
                     points.push(AstroidBelt.getRandomPointInSphere(radius));
                 }
@@ -53,7 +55,7 @@ define(
 
             positionAstroid: function(astroid, count) {
                 var degreesToRadianRatio = 0.0174532925,
-                    amplitude = SolarSystem.astroidBelt.distanceFromParent + AstroidBelt.getRandomNumber() // randomize the amplitudes to spread them out
+                    amplitude = SolarSystem.astroidBelt.distanceFromParent + AstroidBelt.getRandomNumber() * 65 // randomize the amplitudes to spread them out
                 ;
 
                 var posX = AstroidBelt.getOrbitAmplitute(amplitude)
@@ -62,7 +64,7 @@ define(
                             * degreesToRadianRatio);
 
                 var posY = AstroidBelt.getOrbitAmplitute(amplitude)
-                            * Math.sin(count + 25 * Math.random()
+                            * Math.sin(count + 45 * Math.random()
                             * AstroidBelt.getAstroidRadian()
                             * degreesToRadianRatio);
 
