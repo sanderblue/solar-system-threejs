@@ -29,7 +29,7 @@ define(function() {
                 name: 'Mercury',
                 radius: 2.44,
                 diameter: 4.88,
-                distanceFromParent: 57.9 * orbitScale, // 1:100000
+                distanceFromParent: 579.09050, // 1:100000 (57,909,050 km)
                 orbitDuration: 88,
                 moons: [],
                 texture: null,
@@ -40,7 +40,7 @@ define(function() {
                 name: 'Venus',
                 radius: 6.05,
                 diameter: 12.1,
-                distanceFromParent: 108.2 * orbitScale, // 1:100000
+                distanceFromParent: 1082.08000, // 1:100000 (108,208,000 km)
                 orbitDuration: 224.7,
                 moons: [],
                 texture: null,
@@ -51,7 +51,7 @@ define(function() {
                 name: 'Earth',
                 radius: 6.35,
                 diameter: 12.7,
-                distanceFromParent: 149.5 * orbitScale, // 1:100000
+                distanceFromParent: 1495.98261, // 1:100000 (149,598,261 km)
                 orbitDuration: 364.25,
                 texture: null,
                 moons: [
@@ -70,7 +70,7 @@ define(function() {
                 name: 'Mars',
                 radius: 3.4,
                 diameter: 6.8,
-                distanceFromParent: 227.9 * orbitScale,
+                distanceFromParent: 2279.39100, // 1:100000 (227,939,100 km)
                 orbitDuration: 687,
                 moons: [
                     {
@@ -96,7 +96,7 @@ define(function() {
                 name: 'Jupiter',
                 radius: 71.5,
                 diameter: 143,
-                distanceFromParent: 778.3 * orbitScale,
+                distanceFromParent: 7785.47200, // 1:100000 (778,547,200 km)
                 orbitDuration: 4329,
                 moons: [],
                 texture: null,
@@ -172,7 +172,7 @@ define(function() {
                 name: 'Saturn',
                 radius: 60,
                 diameter: 120,
-                distanceFromParent: 1429.4 * orbitScale,
+                distanceFromParent: 14334.49370, // 1:100000 (1433449370 km)
                 orbitDuration: 10753,
                 moons: [],
                 texture: null,
@@ -241,7 +241,7 @@ define(function() {
                 name: 'Uranus',
                 radius: 25.6,
                 diamter: 51.2,
-                distanceFromParent: 2871 * orbitScale,
+                distanceFromParent: 28766.79082, // (2,876,679,082 km)
                 orbitDuration: 30714,
                 moons: [],
                 texture: null,
@@ -310,7 +310,7 @@ define(function() {
                 name: 'Neptune',
                 radius: 24.3,
                 diameter: 48.6,
-                distanceFromParent: 4504.3 * orbitScale,
+                distanceFromParent: 45034.43661, // (4,503,443,661 km)
                 orbitDuration: 60025,
                 moons: [],
                 texture: null,
@@ -378,8 +378,8 @@ define(function() {
                 },
             ],
             secondary: [],
-            totalCount: 1500, // true number is estimated in the billions within the main astroid belt
-            distanceFromParent: 373 * orbitScale
+            totalCount: 2000, // true number is estimated in the billions within the main astroid belt
+            distanceFromParent: 3730.1245
         }
     };
 
