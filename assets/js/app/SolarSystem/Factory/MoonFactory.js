@@ -37,7 +37,7 @@ define(['jquery', 'Scene', 'System', 'OrbitController'], function($, Scene, Syst
                             material
                         );
 
-            moonCentroid.rotation.x = moon.axisTilt;
+            moonCentroid.rotation.x = moon.inclination;
 
             var MoonController = new OrbitController(thisMoon, moon, parent, { interval: 1 });
 
