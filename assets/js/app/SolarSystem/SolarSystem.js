@@ -157,6 +157,13 @@ define(function() {
                         axisTilt: 45.762 / 180 * Math.PI // radians
                     },
                     {
+                        name: 'Leda',
+                        radius: 16 * celestialScale + 6, // 8 km
+                        orbitDuration: 240.82,
+                        distanceFromParent: 11187781 * moonOrbitScale / 1.6, // 11,187,781 km
+                        axisTilt: 27.562 / 180 * Math.PI // radians
+                    },
+                    {
                         name: 'Himalia',
                         radius: 85 * celestialScale + 6, // 85 km
                         orbitDuration: 250.23,
@@ -174,7 +181,14 @@ define(function() {
                         name: 'Elara',
                         radius: 43 * celestialScale + 6, // 43 km
                         orbitDuration: 257.62,
-                        distanceFromParent: 11778034 * moonOrbitScale / 1.6, // 1:10000 (11,778,034)
+                        distanceFromParent: 11778034 * moonOrbitScale / 1.6, // 11,778,034 km
+                        axisTilt: 29.691 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Carpo',
+                        radius: 13 * celestialScale + 6, // 3 km
+                        orbitDuration: 257.62,
+                        distanceFromParent: 17144873 * moonOrbitScale / 1.8, // 17,144,873 km
                         axisTilt: 29.691 / 180 * Math.PI // radians
                     }
                 ],
@@ -192,59 +206,80 @@ define(function() {
                 moons: [
                     {
                         name: 'Titan',
-                        radius: 2.576,
+                        radius: 2576 * celestialScale, // 2576 ±2 km
                         orbitDuration: 15.945,
-                        distanceFromParent: 122.187, // 1:10000 (1,221,870)
+                        distanceFromParent: 1221870 * moonOrbitScale, // 1,221,870 km
                         axisTilt: 0.34854 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Rhea',
-                        radius: 0.7638,
+                        radius: 763.8 * celestialScale, // 763.8 ±1.0 km
                         orbitDuration: 4.518212,
-                        distanceFromParent: 52.7108, // 1:10000 (527,108)
+                        distanceFromParent: 527108 * moonOrbitScale, // 527,108 km
                         axisTilt: 0.345 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Iapetus',
-                        radius: 0.7345,
+                        radius: 734.5 * celestialScale, // 734.5 ±2.8 km
                         orbitDuration: 79.322,
-                        distanceFromParent: 356.082, // 1:10000 (3,560,820)
+                        distanceFromParent: 3560820 * moonOrbitScale, // 3,560,820 km
                         axisTilt: 17.28 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Dione',
-                        radius: 0.5614,
+                        radius: 561.4 * celestialScale, // 561.4 ±0.4 km
                         orbitDuration: 2.737,
-                        distanceFromParent: 356.082, // 1:10000 (3,560,820)
+                        distanceFromParent: 377396 * moonOrbitScale, // 377396 km
                         axisTilt: 0.019 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Tethys',
-                        radius: 0.5311,
-                        orbitDuration: 1.889,
-                        distanceFromParent: 29.4619, // 1:10000 (294,619)
-                        axisTilt: 0.019 / 180 * Math.PI // radians
+                        radius: 531.1 * celestialScale, // 531.1 ±0.6 km
+                        orbitDuration: 1.887802,
+                        distanceFromParent: 294619 * moonOrbitScale, // 294619 km
+                        axisTilt: 1.12 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Enceladus',
-                        radius: 0.2521,
-                        orbitDuration: 1.37,
-                        distanceFromParent: 37.7396, // 1:10000 (377,396)
+                        radius: 252.1 * celestialScale + 3, // 252.1 ±0.2 km
+                        orbitDuration: 1.370218,
+                        distanceFromParent: 237948 * moonOrbitScale, // 237948 km
                         axisTilt: 0.019 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Mimas',
-                        radius: 0.4156,
+                        radius: 198.2 * celestialScale + 3, // 198.2±0.4 km
                         orbitDuration: 0.942,
-                        distanceFromParent: 18.9176, // 1:10000 (189,176)
+                        distanceFromParent: 189176 * moonOrbitScale, // 189,176 km
                         axisTilt: 1.574 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Hyperion',
-                        radius: 0.135,
+                        radius: 135 * celestialScale + 2.75, // 135 ±4 km
                         orbitDuration: 21.276,
-                        distanceFromParent: 148.1009, // 1:10000 (1,481,009)
+                        distanceFromParent: 1481009 * moonOrbitScale, // 1,481,009 km
                         axisTilt: 0.43 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Pheobe',
+                        radius: 106.5 * celestialScale + 2.5, // 106.5 ±0.7 km
+                        orbitDuration: 550.564636,
+                        distanceFromParent: 12955759 * moonOrbitScale, // 12,955,759 km
+                        axisTilt: 173.04 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Calypso',
+                        radius: 10.7 * celestialScale + 2.4, // 10.7 ±0.7 km
+                        orbitDuration: 1.887802,
+                        distanceFromParent: 294619 * moonOrbitScale, // 294,619 km
+                        axisTilt: 1.56 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Telesto',
+                        radius: 17.6 * celestialScale + 2.45, // 17.6±0.4 km
+                        orbitDuration: 2.736915,
+                        distanceFromParent: 377396 * moonOrbitScale, // 377,396 km
+                        axisTilt: 0.199 / 180 * Math.PI // radians
                     }
                 ]
             },
@@ -261,58 +296,72 @@ define(function() {
                 moons: [
                     {
                         name: 'Cressida',
-                        radius: 0.80 + 0.04, // (80 ±4 km)
-                        orbitDuration: 0.464, // (0.335)
-                        distanceFromParent: 6.1780, // 1:10000 (61,780)
-                        axisTilt: 0.006 / 180 * Math.PI // radians
+                        radius: 39.8 * celestialScale + 2.5, // 39.8 ±2 km
+                        orbitDuration: 0.46357,
+                        distanceFromParent: 61,766.730 * moonOrbitScale, // 61,766.730 ±0.046 km
+                        axisTilt: 0.046 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Juliet',
-                        radius: 0.468 + 0.04, // (46.8 ±4 km)
-                        orbitDuration: 0.493, // (0.493)
-                        distanceFromParent: 6.4350, // 1:10000 (64,350)
-                        axisTilt: 0.065 / 180 * Math.PI // radians
+                        radius: 46.8 * celestialScale + 2.6, // 46.8 ±4 km
+                        orbitDuration: 0.49307,
+                        distanceFromParent: 64,358.222 * moonOrbitScale, // 64,358.222 ±0.048 km
+                        axisTilt: 0.10546 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Portia',
+                        radius: 67.6 * celestialScale + 2.7, // 67.6 ±4 km
+                        orbitDuration: 0.513196,
+                        distanceFromParent: 66097.265 * moonOrbitScale, // 66,097.265 ±0.050 km
+                        axisTilt: 0.09808 / 180 * Math.PI // radians
+                    },
+                    {
+                        name: 'Belinda',
+                        radius: 40.3 * celestialScale + 2.47, // 40.3 ±8 km
+                        orbitDuration: 0.62353,
+                        distanceFromParent: 75255.613 * moonOrbitScale, // 75,255.613 ± 0.057 km
+                        axisTilt: 0.0306 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Puck',
                         radius: 0.81 + 0.02, // (81 ± 2 km)
-                        orbitDuration: 0.762, // (0.762)
+                        orbitDuration: 0.762,
                         distanceFromParent: 8.6010, // 1:10000 (86,010)
                         axisTilt: 0.3192 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Miranda',
-                        radius: 1.2358 + 0.007, // (235.8 ±0.7 km)
-                        orbitDuration: 1.413, // (1.413479)
-                        distanceFromParent: 12.9390, // 1:10000 (129,390)
+                        radius: 235.8 * celestialScale + 0.3, // 235.8 ±0.7 km
+                        orbitDuration: 1.4135,
+                        distanceFromParent: 129390 * moonOrbitScale, // 129,390 km
                         axisTilt: 4.232 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Ariel',
-                        radius: (1.1578 * 1.2) + 0.12, // (1157.8 ±1.2 km)
+                        radius: 578.9 * celestialScale + 0.125, // 578.9 ±0.6 km
                         orbitDuration: 2.520, // (2.520379)
-                        distanceFromParent: 19.1020, // 1:10000 (191,020)
+                        distanceFromParent: 191020 * moonOrbitScale, // 191,020 km
                         axisTilt: 0.26 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Umbriel',
-                        radius: (1.1694 * 1.56) + 0.56, // (1169.4 ±5.6 km)
+                        radius: 584.7 * celestialScale + 0.133, // 584.7 ±2.8 km
                         orbitDuration: 4.144, // (4.144177)
-                        distanceFromParent: 26.6300, // 1:10000 (266,300)
-                        axisTilt: 0.205/ 180 * Math.PI // radians
+                        distanceFromParent: 266000 * moonOrbitScale, // 266,000 km
+                        axisTilt: 0.128 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Titania',
-                        radius: (1.5768 * 1.2) + 0.12, // (1576.8 ±1.2 km)
-                        orbitDuration: 8.706, // (8.705872)
-                        distanceFromParent: 43.5910, // 1:10000 (435,910)
+                        radius: 788.4 * celestialScale + 0.16, // 788.4 ±0.6 km
+                        orbitDuration: 8.7062,
+                        distanceFromParent: 435910 * moonOrbitScale, // 435,910 km
                         axisTilt: 0.34 / 180 * Math.PI // radians
                     },
                     {
                         name: 'Oberon',
-                        radius: (1.5228 * 1.52) + 0.052, // (1522.8 ±5.2 km)
-                        orbitDuration: 13.463, // (13.463239)
-                        distanceFromParent: 58.3520, // 1:10000 (583,520)
+                        radius: 761.4 * celestialScale + 0.15, // 761.4 ±2.6 km
+                        orbitDuration: 13.4632,
+                        distanceFromParent: 583520 * moonOrbitScale, // 583,520 km
                         axisTilt: 0.058 / 180 * Math.PI // radians
                     }
                 ]
