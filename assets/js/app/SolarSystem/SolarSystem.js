@@ -407,7 +407,7 @@ define(function() {
                     },
                     {
                         name: 'Proteus',
-                        radius: 210 * celestialScale + 3.210, // 210 ±7 km
+                        radius: 210 * celestialScale + 3.1, // 210 ±7 km
                         orbitDuration: 1.1223,
                         distanceFromParent: 117647 * moonOrbitScale, // 117647 ±1 km
                         axisTilt: 0.524 / 180 * Math.PI
@@ -460,7 +460,7 @@ define(function() {
                 },
             ],
             secondary: [],
-            totalCount: 1500, // true number is estimated in the billions within the main astroid belt
+            totalCount: 1400, // true number is estimated in the billions within the main astroid belt
             distanceFromParent: 450000000 * orbitScale // 450,000,000 km
         }
     };
