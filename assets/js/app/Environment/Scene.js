@@ -41,7 +41,7 @@ define(['Camera', 'Time'], function(Camera) {
         },
 
         setCamera: function() {
-            Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 5000000 * 10);
+            Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 5000000000);
         },
 
         setCameraControls: function() {

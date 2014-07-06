@@ -288,11 +288,11 @@ define(function() {
                 name: 'Uranus',
                 radius: 25362 * celestialScale, // 25362 ±7 km
                 diamter: 51.2,
-                distanceFromParent: 2876679082, // 2,876,679,082 km
-                orbitDuration: 30714,
+                distanceFromParent: 2876679082 * orbitScale, // 2,876,679,082 km
+                orbitDuration: 30687.15,
                 moons: [],
                 texture: null,
-                rings: [65, 69, 72],
+                rings: [],
                 moons: [
                     {
                         name: 'Cressida',
@@ -460,7 +460,7 @@ define(function() {
                 },
             ],
             secondary: [],
-            totalCount: 1800, // true number is estimated in the billions within the main astroid belt
+            totalCount: 1500, // true number is estimated in the billions within the main astroid belt
             distanceFromParent: 450000000 * orbitScale // 450,000,000 km
         }
     };

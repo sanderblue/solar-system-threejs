@@ -93,7 +93,12 @@ define(
 
                     Scene.setCameraFocalPoint(window.focalPoint);
 
-                    // Scene.planets[i].rotation.y += 0.0005;
+                    Scene.planets[i].rotation.y += 0.0005;
+
+                    // Uranus
+                    // if (i === 6) {
+                    //     console.log(count, dayOnEarth)
+                    // }
 
                     Scene.planetCores[i].position.set(
                         parseFloat(posX),

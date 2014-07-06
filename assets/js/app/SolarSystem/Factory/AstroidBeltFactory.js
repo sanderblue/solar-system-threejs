@@ -34,8 +34,6 @@ define(
                 for (var i = 0; i < 7; i ++) {
                     var radius = (Math.random() + 1150) * SolarSystem.celestialScale;
 
-                    // console.log(radius)
-
                     points.push(AstroidBelt.getRandomPointInSphere(radius));
                 }
 
