@@ -38,6 +38,7 @@ define(function() {
                 diameter: 4.88,
                 distanceFromParent: 57909050 * orbitScale, // 57,909,050 km
                 orbitDuration: 88,
+                inclination: 7.005 / 180 * Math.PI,
                 moons: [],
                 texture: null,
                 rings: []
@@ -49,6 +50,7 @@ define(function() {
                 diameter: 12.1,
                 distanceFromParent: 108208000 * orbitScale, // 108,208,000 km
                 orbitDuration: 224.7,
+                inclination: 3.395 / 180 * Math.PI,
                 moons: [],
                 rings: []
             },
@@ -59,6 +61,7 @@ define(function() {
                 diameter: 12.7,
                 distanceFromParent: 149598261 * orbitScale, // 149,598,261 km
                 orbitDuration: 364.25,
+                inclination: 1.57869 / 180 * Math.PI,
                 moons: [
                     {
                         name: 'Moon',
@@ -77,6 +80,7 @@ define(function() {
                 diameter: 6.8,
                 distanceFromParent: 227939100 * orbitScale, // 227,939,100 km
                 orbitDuration: 687,
+                inclination: 1.67 / 180 * Math.PI,
                 moons: [
                     {
                         name: 'Phobos',
@@ -103,6 +107,7 @@ define(function() {
                 diameter: 143,
                 distanceFromParent: 778547200 * orbitScale, // 778,547,200 km
                 orbitDuration: 4329,
+                inclination: 1.305 / 180 * Math.PI,
                 moons: [],
                 texture: null,
                 rings: [],
@@ -200,6 +205,7 @@ define(function() {
                 diameter: 120,
                 distanceFromParent: 1433449370 * orbitScale, // 1,433,449,370 km
                 orbitDuration: 10753,
+                inclination: 2.48524 / 180 * Math.PI,
                 moons: [],
                 texture: null,
                 rings: [160, 180, 185, 195, 210, 220, 225, 240],
@@ -290,6 +296,7 @@ define(function() {
                 diamter: 51.2,
                 distanceFromParent: 2876679082 * orbitScale, // 2,876,679,082 km
                 orbitDuration: 30687.15,
+                inclination: 1.02 / 180 * Math.PI,
                 moons: [],
                 texture: null,
                 rings: [],
@@ -373,6 +380,7 @@ define(function() {
                 diameter: 48.6,
                 distanceFromParent: 4503443661 * orbitScale, // 4,503,443,661 km
                 orbitDuration: 60025,
+                inclination: 1.768 / 180 * Math.PI,
                 moons: [],
                 texture: null,
                 rings: [60, 67, 71], // Neptune has 9 rings (3 major)

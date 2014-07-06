@@ -3,6 +3,7 @@ define(['Scene', 'SolarSystem'], function(Scene, SolarSystem) {
         getTexture: function() {
             return new THREE.ImageUtils.loadTexture('../assets/textures/sun_large.jpg');
         },
+
         build: function() {
             return $.Deferred(function(promise) {
                 var texture = SunFactory.getTexture();

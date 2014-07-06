@@ -129,6 +129,17 @@ define(
                                     planetMaterial
                                  );
 
+                    var orbitCentroid = new THREE.Mesh(
+                                new THREE.SphereGeometry(
+                                        1,
+                                        1,
+                                        1
+                                    ),
+                                    planetMaterial
+                                );
+
+                    orbitCentroid.rotation.y = planet.inclination;
+
                     // We need to flip the planet's axis so the text renders as a vertical canvas
                     thisPlanet.rotation.x = Math.PI / 2;
                     thisPlanet.name       = planet.name;
@@ -141,8 +152,6 @@ define(
 
                     $.when(PlanetFactory.addMoons(planet, thisPlanet)).done(function() {
                         $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
-                            PlanetFactory.addPlanet(thisPlanet);
-
                             var posX = OrbitFactory.getOrbitAmplitute(planet.distanceFromParent);
 
                             thisPlanet.position.set(
@@ -151,7 +160,7 @@ define(
                                 0     // z
                             );
 
-                            PlanetFactory.addPlanet(thisPlanet);
+                            PlanetFactory.addPlanet(thisPlanet, orbitCentroid);
 
                             Scene.planets.push(thisPlanet);
 
@@ -167,8 +176,9 @@ define(
                 });
             },
 
-            addPlanet: function(planet) {
-                Scene.scene.add(planet);
+            addPlanet: function(planet, orbitCentroid) {
+                Scene.scene.add(orbitCentroid);
+                orbitCentroid.add(planet);
             }
         };
 
