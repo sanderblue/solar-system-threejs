@@ -48,7 +48,6 @@ define(
                     SolarSystemBuilder.buildPlanets()
                 )
                 .done(function() {
-
                     var endTime = new Date().getTime();
 
                     System.log('Solar System Factory done building in ' +  TimerUtil.getElapsedTime('ms', startTime, endTime) / 1000 + ' seconds.');

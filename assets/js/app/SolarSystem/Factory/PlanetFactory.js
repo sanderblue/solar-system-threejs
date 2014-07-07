@@ -12,37 +12,6 @@ define(
     function($, Scene, SolarSystem, RingFactory, MoonFactory, OrbitFactory, TimerUtil, System) {
 
         var PlanetFactory = {
-            buildRings: function(thisPlanet, planet) {
-                return $.Deferred(function(promise) {
-                    var hasRings = Boolean(planet.rings.length);
-
-                    if (hasRings) {
-                        var amplitudes = planet.rings;
-
-                        for (var i = 0; i < amplitudes.length; i++) {
-                            $.when(RingFactory.buildRing(amplitudes[i])).done(function(response) {
-                                thisPlanet.add(response.line);
-                            });
-                        }
-
-                        var promiseObject = {
-                            planet: planet,
-                            thisPlanet: thisPlanet
-                        };
-
-                        promise.resolve(promiseObject);
-
-                    } else {
-                        var promiseObject = {
-                            planet: planet,
-                            thisPlanet: thisPlanet
-                        };
-
-                        promise.resolve(promiseObject);
-                    }
-                });
-            },
-
             getTexture: function(planet) {
                 var texturePath = '../assets/textures/' + planet.name.toLowerCase() + '.jpg';
 
@@ -141,17 +110,14 @@ define(
                     orbitCentroid.rotation.y = planet.inclination;
 
                     // We need to flip the planet's axis so the text renders as a vertical canvas
+                    // thisPlanet.rotation.x = planet.axialTilt;
                     thisPlanet.rotation.x = Math.PI / 2;
                     thisPlanet.name       = planet.name;
-
-                    if (planet.name === 'Saturn') {
-                        thisPlanet.rotation.z = degreesToRadianRatio * 12;
-                    }
 
                     PlanetFactory.buildCore(thisPlanet);
 
                     $.when(PlanetFactory.addMoons(planet, thisPlanet)).done(function() {
-                        $.when(PlanetFactory.buildRings(thisPlanet, planet)).done(function(response) {
+                        $.when(RingFactory.buildRings(thisPlanet, planet)).done(function(response) {
                             var posX = OrbitFactory.getOrbitAmplitute(planet.distanceFromParent);
 
                             thisPlanet.position.set(

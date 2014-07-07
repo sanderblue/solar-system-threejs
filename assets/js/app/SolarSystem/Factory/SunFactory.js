@@ -28,7 +28,7 @@ define(['Scene', 'SolarSystem'], function(Scene, SolarSystem) {
 
                 var Sun = new THREE.Mesh(sunGeometry, material);
 
-                var pointLight = new THREE.PointLight(0xffffff, 1.85);
+                var pointLight = new THREE.PointLight(0xffffff, 1.2);
 
                 Sun.scale.x = Sun.scale.y = Sun.scale.z = 1;
 

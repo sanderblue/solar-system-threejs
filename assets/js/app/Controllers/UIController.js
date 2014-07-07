@@ -10,7 +10,9 @@ define(
             initEventListeners: function() {
                 // User Event Listeners
                 $('#zoom').on('input', function(e) {
-                    Scene.zoom = e.target.value;
+                    console.log(Scene.camera.position)
+
+                    Scene.camera.position.y = Scene.camera.position.y + 1000
                 });
 
                 $('#tilt').on('input', function(e) {

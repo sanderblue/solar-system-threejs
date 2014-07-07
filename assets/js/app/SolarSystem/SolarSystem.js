@@ -11,12 +11,11 @@ define(function() {
      *
      */
     var sunScale       = 1 * Math.pow(10, -2.4),
-        celestialScale = 1 * Math.pow(10, -2),   // 1:100
-        orbitScale     = 1 * Math.pow(10, -4),   // 1:10000
-        moonOrbitScale = 1 * Math.pow(10, -3)    // 1:100
+        celestialScale = 1 * Math.pow(10, -2),
+        moonOrbitScale = 1 * Math.pow(10, -2.35),
+        orbitScale     = 1 * Math.pow(10, -4),
+        axialTiltOffset = 180
     ;
-
-    console.log(4 * celestialScale + 6)
 
     var SolarSystem = {
         buildEnabled: true, // toggle factories on/off
@@ -38,7 +37,8 @@ define(function() {
                 diameter: 4.88,
                 distanceFromParent: 57909050 * orbitScale, // 57,909,050 km
                 orbitDuration: 88,
-                inclination: 7.005 / 180 * Math.PI,
+                inclination: 6.34 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 26.73 / 180 * Math.PI / 2,
                 moons: [],
                 texture: null,
                 rings: []
@@ -50,7 +50,8 @@ define(function() {
                 diameter: 12.1,
                 distanceFromParent: 108208000 * orbitScale, // 108,208,000 km
                 orbitDuration: 224.7,
-                inclination: 3.395 / 180 * Math.PI,
+                inclination: 2.19 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 177.36 / 180 * Math.PI / 2,
                 moons: [],
                 rings: []
             },
@@ -62,6 +63,7 @@ define(function() {
                 distanceFromParent: 149598261 * orbitScale, // 149,598,261 km
                 orbitDuration: 364.25,
                 inclination: 1.57869 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 23.5 / 180 * Math.PI / 2,
                 moons: [
                     {
                         name: 'Moon',
@@ -81,17 +83,18 @@ define(function() {
                 distanceFromParent: 227939100 * orbitScale, // 227,939,100 km
                 orbitDuration: 687,
                 inclination: 1.67 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 25.19 / 180 * Math.PI / 2,
                 moons: [
                     {
                         name: 'Phobos',
-                        radius: (11.2667 * celestialScale) + 0.75, // 11.2667 km (0.75 is to increase the size so it's somewhat visible)
+                        radius: 11.2667 * celestialScale + 0.75, // 11.2667 km (0.75 is to increase the size so it's somewhat visible)
                         orbitDuration: 0.3189 * 2.5, // slow it down so it's somewhat noticeable
                         distanceFromParent: 9376 * moonOrbitScale, // 9,376 km
                         inclination: 26.04 / 180 * Math.PI
                     },
                     {
                         name: 'Deimos',
-                        radius: (6.2 * celestialScale) + 0.75, // 6.2 ±0.18 km (0.75 is to increase the size so it's somewhat visible)
+                        radius: 6.2 * celestialScale + 0.65, // 6.2 ±0.18 km (0.65 is to increase the size so it's somewhat visible)
                         orbitDuration: 1.263 * 2.5, // slow it down so it's somewhat noticeable and has the same time scale as Phobos
                         distanceFromParent: 23463 * moonOrbitScale, // 23463.2 km
                         inclination: 27.58 / 180 * Math.PI
@@ -108,6 +111,7 @@ define(function() {
                 distanceFromParent: 778547200 * orbitScale, // 778,547,200 km
                 orbitDuration: 4329,
                 inclination: 1.305 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 3.13 / 180 * Math.PI,
                 moons: [],
                 texture: null,
                 rings: [],
@@ -206,9 +210,66 @@ define(function() {
                 distanceFromParent: 1433449370 * orbitScale, // 1,433,449,370 km
                 orbitDuration: 10753,
                 inclination: 2.48524 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 26.73 / 180 * Math.PI,
                 moons: [],
                 texture: null,
-                rings: [160, 180, 185, 195, 210, 220, 225, 240],
+                rings: [
+                    {
+                        name: 'D Ring',
+                        distanceFromParent: 70705 * moonOrbitScale, // 66,900 – 74,510 km (70,705 mean)
+                        width: 7500
+                    },
+                    {
+                        name: 'C Ring',
+                        distanceFromParent: 83329 * moonOrbitScale, // 74,658 – 92,000 km (83,329 mean)
+                        width: 17500
+                    },
+                    {
+                        name: 'B Ring',
+                        distanceFromParent: 104790 * moonOrbitScale, // 92,000 – 117,580 km (104,790 mean)
+                        width: 25500
+                    },
+                    {
+                        name: 'Cassini Division',
+                        distanceFromParent: 119875 * moonOrbitScale, // 117,580 – 122,170 km (119,875 mean)
+                        width: 4700
+                    },
+                    {
+                        name: 'A Ring',
+                        distanceFromParent: 129473 * moonOrbitScale, // 122,170 – 136,775 km (129,473 mean)
+                        width: 14600
+                    },
+                    {
+                        name: 'Roche Division',
+                        distanceFromParent: 138078 * moonOrbitScale, // 136,775 – 139,380 km (138,078 mean)
+                        width: 2600
+                    },
+                    {
+                        name: 'F Ring',
+                        distanceFromParent: 140180 * moonOrbitScale, // 140,180 km (140,180 mean)
+                        width: 500
+                    },
+                    {
+                        name: 'Janus/Epimetheus Ring',
+                        distanceFromParent: 151500 * moonOrbitScale, // 149,000 – 154,000 km (151,500 mean)
+                        width: 5000
+                    },
+                    {
+                        name: 'G Ring',
+                        distanceFromParent: 170500 * moonOrbitScale, // 166,000 – 175,000 km (170,500 mean)
+                        width: 9000
+                    },
+                    {
+                        name: 'Pallene Ring',
+                        distanceFromParent: 212250 * moonOrbitScale, // 211,000 – 213,500 km (212,250 mean)
+                        width: 2500
+                    },
+                    {
+                        name: 'E Ring',
+                        distanceFromParent: 330000 * moonOrbitScale, // 180,000 - 480,000 km (138,078 mean)
+                        width: 300000 // 300,000 km
+                    }
+                ],
                 moons: [
                     {
                         name: 'Titan',
@@ -297,9 +358,56 @@ define(function() {
                 distanceFromParent: 2876679082 * orbitScale, // 2,876,679,082 km
                 orbitDuration: 30687.15,
                 inclination: 1.02 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 97.77 / 180 * Math.PI,
                 moons: [],
                 texture: null,
-                rings: [],
+                rings: [
+                    {
+                        name: 'ζcc',
+                        distanceFromParent: 30865 * moonOrbitScale, // 26,840 – 34,890 km (30,865 mean)
+                        width: 8000
+                    },
+                    {
+                        name: 'ζc',
+                        distanceFromParent: 36370 * moonOrbitScale, // 34,890 – 37,850 km (36,370 mean)
+                        width: 7500
+                    },
+                    {
+                        name: '1986U2R',
+                        distanceFromParent: 38250 * moonOrbitScale, // 37,000 – 39,500 km (38,250 mean)
+                        width: 2500
+                    },
+                    {
+                        name: 'ζ',
+                        distanceFromParent: 39600 * moonOrbitScale, // 37,850 – 41,350 km (39,600 mean)
+                        width: 3500
+                    },
+                    {
+                        name: 'α',
+                        distanceFromParent: 44718 * moonOrbitScale,
+                        width: 7.1
+                    },
+                    {
+                        name: 'η',
+                        distanceFromParent: 47175 * moonOrbitScale,
+                        width: 2.19
+                    },
+                    {
+                        name: 'λ',
+                        distanceFromParent: 50023 * moonOrbitScale,
+                        width: 2
+                    },
+                    {
+                        name: 'ν',
+                        distanceFromParent: 68000 * moonOrbitScale, // 66,100 – 69,900 km (39,600 mean)
+                        width: 3800
+                    },
+                    {
+                        name: 'μ',
+                        distanceFromParent: 94500 * moonOrbitScale, // 86,000 – 103,000 km (94,500 mean)
+                        width: 17000
+                    }
+                ],
                 moons: [
                     {
                         name: 'Cressida',
@@ -381,9 +489,10 @@ define(function() {
                 distanceFromParent: 4503443661 * orbitScale, // 4,503,443,661 km
                 orbitDuration: 60025,
                 inclination: 1.768 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 28.32 / 180 * Math.PI,
                 moons: [],
                 texture: null,
-                rings: [60, 67, 71], // Neptune has 9 rings (3 major)
+                rings: [],
                 moons: [
                     {
                         name: 'Thalassa',
