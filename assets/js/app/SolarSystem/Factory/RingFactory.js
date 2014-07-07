@@ -10,7 +10,7 @@ define(function() {
 
                     for (var i = 0; i < rings.length; i++) {
                         $.when(
-                            RingFactory.buildRing(planet, rings[i].distanceFromParent)
+                            RingFactory.buildRing(planet, rings[i])
                         )
                         .done(function(response) {
                             response.centroid.add(response.line);
@@ -37,15 +37,19 @@ define(function() {
             });
         },
 
-        buildRing: function(planet, amplitude) {
+        buildRing: function(planet, ring) {
             return $.Deferred(function(promise) {
-                var resolution = 540, // segments in the line
+                var resolution = 720, // segments in the line
                     size       = 360 / resolution;
 
                 var material = new THREE.LineBasicMaterial({
-                                    color: 0x353535,
-                                    linewidth: 0.7
+                                    color: ring.color,
+                                    linewidth: ring.width * 0.00001,
                                   });
+
+                if (material.linewidth > 1) {
+                    material.linewidth = 0.8;
+                }
 
                 var ringLine = new THREE.Geometry();
 
@@ -54,8 +58,8 @@ define(function() {
 
                     ringLine.vertices.push(
                         new THREE.Vector3(
-                            Math.cos(segment) * (amplitude + planet.radius),
-                            Math.sin(segment) * (amplitude + planet.radius),
+                            Math.cos(segment) * (ring.distanceFromParent + planet.radius),
+                            Math.sin(segment) * (ring.distanceFromParent + planet.radius),
                             0
                         )
                     );
@@ -73,9 +77,6 @@ define(function() {
                             );
 
                 ringCentroid.rotation.x = planet.axialTilt;
-
-                // We need to flip the planet's ring axis so the text renders as a vertical canvas
-                // ringLine.rotation.x = Math.PI / 2;
 
                 var responseObject = {
                     line: ringLine,

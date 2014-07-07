@@ -38,7 +38,7 @@ define(function() {
                 distanceFromParent: 57909050 * orbitScale, // 57,909,050 km
                 orbitDuration: 88,
                 inclination: 6.34 / 180 * Math.PI,
-                axialTilt: axialTiltOffset + 26.73 / 180 * Math.PI / 2,
+                axialTilt: axialTiltOffset + 26.73 / 180 * Math.PI,
                 moons: [],
                 texture: null,
                 rings: []
@@ -51,7 +51,7 @@ define(function() {
                 distanceFromParent: 108208000 * orbitScale, // 108,208,000 km
                 orbitDuration: 224.7,
                 inclination: 2.19 / 180 * Math.PI,
-                axialTilt: axialTiltOffset + 177.36 / 180 * Math.PI / 2,
+                axialTilt: axialTiltOffset + 177.36 / 180 * Math.PI,
                 moons: [],
                 rings: []
             },
@@ -63,7 +63,7 @@ define(function() {
                 distanceFromParent: 149598261 * orbitScale, // 149,598,261 km
                 orbitDuration: 364.25,
                 inclination: 1.57869 / 180 * Math.PI,
-                axialTilt: axialTiltOffset + 23.5 / 180 * Math.PI / 2,
+                axialTilt: axialTiltOffset + 23.5 / 180 * Math.PI,
                 moons: [
                     {
                         name: 'Moon',
@@ -83,7 +83,7 @@ define(function() {
                 distanceFromParent: 227939100 * orbitScale, // 227,939,100 km
                 orbitDuration: 687,
                 inclination: 1.67 / 180 * Math.PI,
-                axialTilt: axialTiltOffset + 25.19 / 180 * Math.PI / 2,
+                axialTilt: axialTiltOffset + 25.19 / 180 * Math.PI,
                 moons: [
                     {
                         name: 'Phobos',
@@ -114,7 +114,32 @@ define(function() {
                 axialTilt: axialTiltOffset + 3.13 / 180 * Math.PI,
                 moons: [],
                 texture: null,
-                rings: [],
+                rings: [
+                    {
+                        name: 'Halo Ring',
+                        distanceFromParent: 107250 * moonOrbitScale, // 92,000 – 122,500 km (107250 mean)
+                        width: 30500,
+                        color: 0x706D67
+                    },
+                    {
+                        name: 'Main Ring',
+                        distanceFromParent: 125750 * moonOrbitScale, // 122,500 – 129,000 km (125,750 mean)
+                        width: 6500,
+                        color: 0x848176
+                    },
+                    {
+                        name: 'Amalthea Gossamer Ring',
+                        distanceFromParent: 155500 * moonOrbitScale, // 129,000 – 182,000 km (155,500 mean)
+                        width: 53000,
+                        color: 0x868375
+                    },
+                    {
+                        name: 'Thebe Gossamer Ring',
+                        distanceFromParent: 177500 * moonOrbitScale, // 129,000 – 226,000 km (177,500 mean)
+                        width: 97000,
+                        color: 0x7C786A
+                    },
+                ],
                 moons: [
                     {
                         name: 'Amalthea',
@@ -217,57 +242,68 @@ define(function() {
                     {
                         name: 'D Ring',
                         distanceFromParent: 70705 * moonOrbitScale, // 66,900 – 74,510 km (70,705 mean)
-                        width: 7500
+                        width: 7500,
+                        color: 0x706D67
                     },
                     {
                         name: 'C Ring',
                         distanceFromParent: 83329 * moonOrbitScale, // 74,658 – 92,000 km (83,329 mean)
-                        width: 17500
+                        width: 17500,
+                        color: 0x706D67
                     },
                     {
                         name: 'B Ring',
                         distanceFromParent: 104790 * moonOrbitScale, // 92,000 – 117,580 km (104,790 mean)
-                        width: 25500
+                        width: 25500,
+                        color: 0x756A4C
                     },
                     {
                         name: 'Cassini Division',
                         distanceFromParent: 119875 * moonOrbitScale, // 117,580 – 122,170 km (119,875 mean)
-                        width: 4700
+                        width: 4700,
+                        color: 0x72674D
                     },
                     {
                         name: 'A Ring',
                         distanceFromParent: 129473 * moonOrbitScale, // 122,170 – 136,775 km (129,473 mean)
-                        width: 14600
+                        width: 14600,
+                        color: 0x6B624B
                     },
                     {
                         name: 'Roche Division',
                         distanceFromParent: 138078 * moonOrbitScale, // 136,775 – 139,380 km (138,078 mean)
-                        width: 2600
+                        width: 2600,
+                        color: 0x615E58
                     },
                     {
                         name: 'F Ring',
                         distanceFromParent: 140180 * moonOrbitScale, // 140,180 km (140,180 mean)
-                        width: 500
+                        width: 500,
+                        color: 0x6E6758
                     },
                     {
                         name: 'Janus/Epimetheus Ring',
                         distanceFromParent: 151500 * moonOrbitScale, // 149,000 – 154,000 km (151,500 mean)
-                        width: 5000
+                        width: 5000,
+                        color: 0x615E58
                     },
                     {
                         name: 'G Ring',
                         distanceFromParent: 170500 * moonOrbitScale, // 166,000 – 175,000 km (170,500 mean)
-                        width: 9000
+                        width: 9000,
+                        color: 0x6B675D
                     },
                     {
                         name: 'Pallene Ring',
                         distanceFromParent: 212250 * moonOrbitScale, // 211,000 – 213,500 km (212,250 mean)
-                        width: 2500
+                        width: 2500,
+                        color: 0x706C60
                     },
                     {
                         name: 'E Ring',
                         distanceFromParent: 330000 * moonOrbitScale, // 180,000 - 480,000 km (138,078 mean)
-                        width: 300000 // 300,000 km
+                        width: 300000, // 300,000 km
+                        color: 0x615E58
                     }
                 ],
                 moons: [
@@ -365,47 +401,56 @@ define(function() {
                     {
                         name: 'ζcc',
                         distanceFromParent: 30865 * moonOrbitScale, // 26,840 – 34,890 km (30,865 mean)
-                        width: 8000
+                        width: 8000,
+                        color: 0x6E6E6E
                     },
                     {
                         name: 'ζc',
                         distanceFromParent: 36370 * moonOrbitScale, // 34,890 – 37,850 km (36,370 mean)
-                        width: 7500
+                        width: 7500,
+                        color: 0xBDBDBD
                     },
                     {
                         name: '1986U2R',
                         distanceFromParent: 38250 * moonOrbitScale, // 37,000 – 39,500 km (38,250 mean)
-                        width: 2500
+                        width: 2500,
+                        color: 0xA4A4A4
                     },
                     {
                         name: 'ζ',
                         distanceFromParent: 39600 * moonOrbitScale, // 37,850 – 41,350 km (39,600 mean)
-                        width: 3500
+                        width: 3500,
+                        color: 0xA4A4A4
                     },
                     {
                         name: 'α',
                         distanceFromParent: 44718 * moonOrbitScale,
-                        width: 7.1
+                        width: 7.1,
+                        color: 0x9A9A9A
                     },
                     {
                         name: 'η',
                         distanceFromParent: 47175 * moonOrbitScale,
-                        width: 2.19
+                        width: 2.19,
+                        color: 0x8E8E8E
                     },
                     {
                         name: 'λ',
                         distanceFromParent: 50023 * moonOrbitScale,
-                        width: 2
+                        width: 2,
+                        color: 0xAEAEAE
                     },
                     {
                         name: 'ν',
                         distanceFromParent: 68000 * moonOrbitScale, // 66,100 – 69,900 km (39,600 mean)
-                        width: 3800
+                        width: 3800,
+                        color: 0xB5A6A6
                     },
                     {
                         name: 'μ',
                         distanceFromParent: 94500 * moonOrbitScale, // 86,000 – 103,000 km (94,500 mean)
-                        width: 17000
+                        width: 17000,
+                        color: 0xC4ADAD
                     }
                 ],
                 moons: [
@@ -492,7 +537,38 @@ define(function() {
                 axialTilt: axialTiltOffset + 28.32 / 180 * Math.PI,
                 moons: [],
                 texture: null,
-                rings: [],
+                rings: [
+                    {
+                        name: 'Galle',
+                        distanceFromParent: 41900 * moonOrbitScale, // 40,900 – 42,900 km (41,900 mean)
+                        width: 2000,
+                        color: 0xBDBDBD
+                    },
+                    {
+                        name: 'Le Verrier',
+                        distanceFromParent: 53200 * moonOrbitScale,
+                        width: 113,
+                        color: 0x757B8A
+                    },
+                    {
+                        name: 'Lassell',
+                        distanceFromParent: 55200 * moonOrbitScale, // 53,200 – 57,200 km (55200 mean)
+                        width: 4000,
+                        color: 0x676F82
+                    },
+                    {
+                        name: 'Arago',
+                        distanceFromParent: 57200 * moonOrbitScale,
+                        width: 100,
+                        color: 0xC4ADAD
+                    },
+                    {
+                        name: 'Adams',
+                        distanceFromParent: 62932 * moonOrbitScale,
+                        width: 50,
+                        color: 0x626D8A
+                    }
+                ],
                 moons: [
                     {
                         name: 'Thalassa',
