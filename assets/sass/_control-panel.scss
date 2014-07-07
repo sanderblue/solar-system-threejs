@@ -1,0 +1,92 @@
+$orbit_control_line: 1px solid rgba(13, 226, 241, 0.9);
+
+.control-panel {
+    display: inline-block;
+    background: rgba(30, 30, 30, 0.1); // transparent for now
+    min-width: 200px;
+    max-width: 200px;
+
+    .control-panel-item {
+        @include transition (background-color 1.0s ease);
+        position: relative;
+        background-color: rgba(70, 70, 70, 0.2);
+        margin: 6px 0;
+        border-top: 1px solid rgba(240, 240, 240, 0.25);
+
+        &:hover { cursor: pointer; }
+
+        &:before,
+        &:after {
+            @include font-18();
+            content: '•';
+            position: absolute;
+            line-height: 0;
+            top: 0;
+        }
+
+        &:before { left: 0; }
+        &:after  { right: 0; }
+
+        &.active {
+            background-color: rgba(70, 70, 70, 0.6);
+        }
+    }
+
+    .control-item-name { padding: 10px; }
+
+    .control-panel-subitems {
+        @include transition (opacity 1.0s ease);
+        opacity: 0;
+        display: none;
+        padding: 0 20px 20px 20px;
+
+        &.active {
+            opacity: 1;
+        }
+
+        .subitem {
+            margin: 10px 0;
+
+            // &:before {
+            //     content: '+';
+            //     position: absolute;
+            //     top: 0;
+            //     left: 0;
+            // }
+        }
+    }
+
+    .orbit-control-circle {
+        @include border-top-radius(50%);
+        @include border-bottom-radius(50%);
+        @include border-left-radius(50%);
+        @include border-right-radius(50%);
+        border: $orbit_control_line;
+        height: 160px;
+        width: 160px;
+        padding: 12px;
+        margin: 0 auto;
+
+        .orbit-control-degree-markers {
+            @include border-top-radius(50%);
+            @include border-bottom-radius(50%);
+            @include border-left-radius(50%);
+            @include border-right-radius(50%);
+            border: $orbit_control_line;
+            height: 130px;
+            width: 130px;
+            margin: 0 auto;
+
+            .orbit-control-centroid {
+                @include border-top-radius(50%);
+                @include border-bottom-radius(50%);
+                @include border-left-radius(50%);
+                @include border-right-radius(50%);
+                height: 10px;
+                width: 10px;
+                margin: 46% auto;
+                background-color: rgba(66, 241, 13, 0.8);
+            }
+        }
+    }
+}

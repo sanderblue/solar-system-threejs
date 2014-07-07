@@ -8,31 +8,29 @@ define(
 
         var UIController = {
             initEventListeners: function() {
-                // User Event Listeners
-                $('#zoom').on('input', function(e) {
-                    console.log(Scene.camera.position)
+                var controlPanelItems = $('.control-item-name');
 
-                    Scene.camera.position.y = Scene.camera.position.y + 1000
-                });
-
-                $('#tilt').on('input', function(e) {
-                    Scene.tilt = e.target.value;
-                });
-
-                $('.planet').on('click', function() {
-                    var id = $(this).data('id'),
-                        matchedPlanet = UIController.findPlanet(id)
+                controlPanelItems.on('click', function() {
+                    var subMenus    = $('.control-panel-subitems'),
+                        thisSubMenu = $(this).parent().find('.control-panel-subitems'),
+                        isActive    = $(this).hasClass('active')
                     ;
 
-                    // for (var i = 0; i < Scene.planetCores.length; i++) {
-                    //     if (Scene.planetCores[i].name  === matchedPlanet.name) {
-                    //         var core = Scene.planetCores[i];
-                    //         break;
-                    //     }
-                    // }
+                    if (isActive) {
+                        thisSubMenu.slideUp();
+                        return;
+                    }
 
-                    Scene.setCameraPosition(matchedPlanet, matchedPlanet, matchedPlanet.position, true);
-                    Scene.setCameraFocalPoint(matchedPlanet.position);
+                    console.log(thisSubMenu)
+
+                    $(subMenus).parent().removeClass('active');
+                    $(controlPanelItems).removeClass('active');
+
+                    $(this).parent().addClass('active');
+                    $(thisSubMenu).addClass('active');
+
+                    subMenus.slideUp();
+                    thisSubMenu.slideDown();
                 });
 
                 UIController.initResetView();

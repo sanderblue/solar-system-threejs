@@ -8,28 +8,78 @@
 	</head>
 	<body>
         <div class="container">
-            <div class="control-panel">
-                <div class="zoom-tilt-controls">
-                    <h3 class="control-panel-header">Control Panel</h3>
-                    <div class="range-holder">
-                        <span>Zoom</span>
-                        <input id="zoom" class="zoom-range"type="range" step="1" min="-2000" max="18000"/>
-                    </div>
-                    <div class="range-holder">
-                        <span>Tilt</span>
-                        <input id="tilt" class="tilt-range" type="range" step="1" min="-9000" max="9000"/>
-                    </div>
-                </div>
-                <div class="planet-list-holder">
-                    <h3 class="control-panel-secondary-header">
-                        <span class="icon-font- icon-camera"></span> Camera Views
-                    </h3>
-                    <ul id="planets" class="planet-list">
-                        <!-- list items built with js -->
-                    </ul>
-                </div>
-                <div id="reset-camera" class="reset-camera">Reset Camera</div>
-                <div id="toggle-logger" class="toggle-logger" data-setting="0">Toggle Console</div>
+            <div id="control-panel" class="control-panel">
+                <ul class="control-panel-items">
+                    <li class="control-panel-item control-camera">
+                        <div class="control-item-name">Camera Control</div>
+                        <div id="camera-control" class="control-panel-subitems">
+                            <div class="orbit-control-circle camera-orbit">
+                                <div class="orbit-control-degree-markers">
+                                    <div class="orbit-control-centroid"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="control-panel-item control-zoom">
+                        <div class="control-item-name">Zoom</div>
+
+                        <div id="zoom-control" class="control-panel-subitems">
+                            <input id="zoom-controller" class="zoom-range" type="range" step="1" min="0" max="18000"/>
+                        </div>
+                    </li>
+                    <li class="control-panel-item control-planets">
+                        <div class="control-item-name">Planets</div>
+                        <div id="planets-list" class="control-panel-subitems">
+                            <ul>
+                                <li class="subitem">Mercury</li>
+                                <li class="subitem">Venus</li>
+                                <li class="subitem">Earth</li>
+                                <li class="subitem">Mars</li>
+                                <li class="subitem">Jupiter</li>
+                                <li class="subitem">Saturn</li>
+                                <li class="subitem">Uranus</li>
+                                <li class="subitem">Neptune</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="control-panel-item control-moons">
+                        <div class="control-item-name">Moons</div>
+                        <div id="moons-list" class="control-panel-subitems">
+                            <ul>
+                                <li class="subitem">Full Moon</li>
+                                <li class="subitem">Half Moon</li>
+                                <li class="subitem">Cresent Moon</li>
+                                <li class="subitem">Sad Moon</li>
+                                <li class="subitem">Happy Moon</li>
+                                <li class="subitem">New Moon</li>
+                                <li class="subitem">Confused Moon</li>
+                                <li class="subitem">No More Ideas Moon</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="control-panel-item control-astroids">
+                        <div class="control-item-name">Astroids</div>
+                        <div id="astroids-list" class="control-panel-subitems">
+                            <ul>
+                                <li class="subitem">Ceres</li>
+                                <li class="subitem">Vesta</li>
+                                <li class="subitem">Pallas</li>
+                                <li class="subitem">Hygiea</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="control-panel-item control-rings">
+                        <div class="control-item-name">Rings</div>
+                        <div id="rings-list" class="control-panel-subitems">
+                            <ul>
+                                <li>Jupiter</li>
+                                <li>Saturn</li>
+                                <li>Uranus</li>
+                                <li>Neptunes</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
 

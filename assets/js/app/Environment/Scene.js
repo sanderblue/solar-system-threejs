@@ -66,7 +66,7 @@ define(['Camera', 'Time'], function(Camera) {
 
         setCameraPosition: function(object3D, parentObject3D, vector3, reset) {
             if (object3D && parentObject3D) {
-                Scene.camera.position.x = parentObject3D.geometry.radius * 7.5; // zoom
+                Scene.camera.position.x = parentObject3D.geometry.radius * 5.5; // zoom
                 Scene.camera.position.y = parentObject3D.geometry.radius * 1;
                 Scene.camera.position.z = 2;
 
@@ -86,6 +86,8 @@ define(['Camera', 'Time'], function(Camera) {
 
         setCameraFocalPoint: function(target) {
             var focalPoint = target;
+
+            // window.focalPoint = target;
 
             Scene.camera.focalPoint = focalPoint;
             Scene.camera.lookAt(focalPoint);

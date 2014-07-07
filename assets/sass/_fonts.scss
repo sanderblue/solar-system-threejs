@@ -12,6 +12,8 @@
 @include font-face(GloberBold, '../fonts/glober/heavy/glober_bold-webfont');
 @include font-face(GloberLight, '../fonts/glober/light/glober_thin-webfont');
 
+@include font-face(Bebas, '../fonts/bebas-neue/BebasNeue');
+
 
 /*
  *  Font Families
@@ -53,6 +55,11 @@
 
 @mixin GloberLight() {
     font-family: 'GloberLight', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin Bebas() {
+    font-family: 'Bebas', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 

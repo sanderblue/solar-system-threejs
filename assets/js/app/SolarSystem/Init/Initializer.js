@@ -37,7 +37,6 @@ define(
                     var TimeCtrl = new TimeController();
 
                     SolarSystemFactory.build();
-                    UIController.init();
                     TimeCtrl.start();
                 });
             }

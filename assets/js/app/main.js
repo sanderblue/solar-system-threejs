@@ -4,19 +4,14 @@ define(
         'App',
         'Scene',
         'Initializer',
+        'UIController',
         'PlanetFactory',
         'OrbitFactory',
         'SolarSystem',
         'TimeController',
         'Modules'
     ],
-    function($, App, Scene, Initializer, PlanetFactory, OrbitFactory, SolarSystem, TimeController) {
-
-        window.TestPosition = {
-            x: 0,
-            y: 0,
-            z: 0
-        };
+    function($, App, Scene, Initializer, UIController, PlanetFactory, OrbitFactory, SolarSystem, TimeController) {
 
         var TimeCtrl = new TimeController();
 
@@ -93,12 +88,7 @@ define(
 
                     Scene.setCameraFocalPoint(window.focalPoint);
 
-                    Scene.planets[i].rotation.y += 0.0005;
-
-                    // Uranus
-                    // if (i === 6) {
-                    //     console.log(count, dayOnEarth)
-                    // }
+                    Scene.planets[i].rotation.y += 0.0006;
 
                     Scene.planetCores[i].position.set(
                         parseFloat(posX),
@@ -123,6 +113,8 @@ define(
             },
 
             init: function() {
+                UIController.init();
+
                 if (App.config.buildEnabled) {
                     $.when(Initializer.init()).done(function() {
                         MainController.animate();

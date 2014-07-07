@@ -63,7 +63,7 @@ require.config({
             deps: ['stats']
         },
         'main': {
-            deps: ['jquery', 'threejs', 'AdditiveBlendShader', 'Time', 'App', 'Modules', 'OrbitFactory']
+            deps: ['jquery', 'threejs', 'AdditiveBlendShader', 'Time', 'App', 'Modules', 'OrbitFactory', 'UIController']
         },
         'Initializer': {
             deps: ['Scene']
