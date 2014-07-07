@@ -34,18 +34,6 @@ define(
              * @param planet [THREE Object]
              */
             buildCore: function(planet) {
-                var texture = new THREE.ImageUtils.loadTexture('../assets/textures/crust_tiny.jpg');
-
-                texture.wrapS      = THREE.RepeatWrapping;
-                texture.wrapT      = THREE.RepeatWrapping;
-                texture.anisotropy = 4;
-
-                var material = new THREE.MeshLambertMaterial({
-                                          ambient: 0xbbbbbb,
-                                          map: texture,
-                                          side: THREE.DoubleSide
-                                        });
-
                 var core = new THREE.Object3D();
 
                 core.name = planet.name;
@@ -83,11 +71,21 @@ define(
                     texture.wrapT      = THREE.RepeatWrapping;
                     texture.anisotropy = 4;
 
-                    var planetMaterial = new THREE.MeshLambertMaterial({
+                    var planetMaterial = new THREE.MeshPhongMaterial({
                                               ambient: 0xbbbbbb,
                                               map: texture,
                                               side: THREE.DoubleSide
                                             });
+
+                    if (planet.name === 'Mercury' || planet.name === 'Venus' || planet.name === 'Earth' || planet.name === 'Mars') {
+                        planetMaterial = new THREE.MeshPhongMaterial({
+                            ambient     : 0xbbbbbb,
+                            map         : THREE.ImageUtils.loadTexture('../assets/textures/' + planet.name.toLowerCase() + '.jpg'),
+                            bumpMap     : THREE.ImageUtils.loadTexture('../assets/textures/' + planet.name.toLowerCase() + '_topo.jpg'),
+                            bumpScale   : 1.4,
+                            // specular    : new THREE.Color('grey'),
+                        });
+                    }
 
                     thisPlanet = new THREE.Mesh(
                                 new THREE.SphereGeometry(
