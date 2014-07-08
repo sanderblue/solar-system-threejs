@@ -17,7 +17,8 @@ $orbit_control_line: 1px solid rgba(13, 226, 241, 0.9);
 
         &:before,
         &:after {
-            @include font-18();
+            @include font-18(); 
+            
             content: '•';
             position: absolute;
             line-height: 0;
