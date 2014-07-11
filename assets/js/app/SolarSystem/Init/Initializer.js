@@ -36,7 +36,13 @@ define(
                 return $.when(Scene.init()).done(function() {
                     var TimeCtrl = new TimeController();
 
-                    SolarSystemFactory.build();
+                    $.when(
+                        SolarSystemFactory.build()
+                    )
+                    .done(function() {
+                        UIController.init();
+                    });
+
                     TimeCtrl.start();
                 });
             }

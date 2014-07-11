@@ -1,7 +1,7 @@
 define(function() {
 
     var Config = {
-        buildEnabled: false,
+        buildEnabled: true,
         moonOrbitsEnabled: true,
         logger: {
             enabled: false

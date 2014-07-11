@@ -33,6 +33,22 @@ define(
                     thisSubMenu.slideDown();
                 });
 
+                $('.planet').on('click', function() {
+                    var id = $(this).data('id'),
+                        matchedPlanet = UIController.findPlanet(id)
+                    ;
+
+                    // for (var i = 0; i < Scene.planetCores.length; i++) {
+                    //     if (Scene.planetCores[i].name  === matchedPlanet.name) {
+                    //         var core = Scene.planetCores[i];
+                    //         break;
+                    //     }
+                    // }
+
+                    Scene.setCameraPosition(matchedPlanet, matchedPlanet, matchedPlanet.position, true);
+                    Scene.setCameraFocalPoint(matchedPlanet.position);
+                });
+
                 UIController.initResetView();
             },
 
@@ -50,6 +66,8 @@ define(
                     var listElement = $('#planets');
 
                     listElement.children().remove();
+
+                    console.log(Scene.planets )
 
                     for (var i = 0; i < Scene.planets.length; i++) {
                         var id = Scene.planets[i].id;

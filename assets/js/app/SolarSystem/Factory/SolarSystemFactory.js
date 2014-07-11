@@ -42,7 +42,7 @@ define(
             build: function() {
                 var startTime = new Date().getTime();
 
-                $.when(
+                return $.when(
                     SolarSystemBuilder.buildParent(),
                     SolarSystemBuilder.buildAstroidBelt(),
                     SolarSystemBuilder.buildPlanets()

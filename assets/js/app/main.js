@@ -115,16 +115,48 @@ define(
             init: function() {
                 UIController.init();
 
+                window.testposition = 0;
+
                 function rotateAnnotationCropper(offsetSelector, xCoordinate, yCoordinate, cropper){
-                    //alert(offsetSelector.left);
-
-                    var x = xCoordinate - offsetSelector.offset().left - offsetSelector.width()/2;
-                    var y = -1*(yCoordinate - offsetSelector.offset().top - offsetSelector.height()/2);
-                    var theta = Math.atan2(y,x)*(180/Math.PI);
-
-
+                    var x       = xCoordinate - offsetSelector.offset().left - offsetSelector.width()/2;
+                    var y       = -1*(yCoordinate - offsetSelector.offset().top - offsetSelector.height()/2);
+                    var theta   = Math.atan2(y,x)*(180/Math.PI);
                     var cssDegs = convertThetaToCssDegs(theta);
-                    var rotate = 'rotate(' +cssDegs + 'deg)';
+                    var rotate  = 'rotate(' + cssDegs + 'deg)';
+
+                    window.testposition = cssDegs;
+
+                    if (Math.ceil(cssDegs) < 0) {
+                        window.testposition = 270 - Math.abs(cssDegs) + 90;
+                    }
+
+                    var degreesToRadianRatio = 0.0174532925;
+
+                    var posX = OrbitFactory.getOrbitAmplitute(70)
+                                * Math.cos(
+                                    window.testposition
+                                    * OrbitFactory.getPlanetRadian(SolarSystem.planets[2].moons[0])
+                                    * degreesToRadianRatio
+                                );
+
+                    var posY = OrbitFactory.getOrbitAmplitute(70)
+                                * Math.sin(
+                                    window.testposition
+                                    * OrbitFactory.getPlanetRadian(SolarSystem.planets[2].moons[0])
+                                    * degreesToRadianRatio
+                                );
+
+                    Scene.setCameraPosition(
+                        null,
+                        null,
+                        new THREE.Vector3(
+                            parseFloat(posX),
+                            20,
+                            parseFloat(posY)
+                        ),
+                        null
+                    );
+
                     cropper.css({'-moz-transform': rotate, 'transform' : rotate, '-webkit-transform': rotate, '-ms-transform': rotate});
                     $('body').on('mouseup', function(event){ $('body').unbind('mousemove')});
 
@@ -135,12 +167,9 @@ define(
                     return cssDegs;
                 }
 
-                console.log($('#marker'));
-
                 $(document).ready(function(){
                     $('#marker').on('mousedown', function(){
                         $('body').on('mousemove', function(event){
-                            console.log(event)
                             rotateAnnotationCropper($('#innerCircle').parent(), event.pageX,event.pageY, $('#marker'));
                         });
                     });
