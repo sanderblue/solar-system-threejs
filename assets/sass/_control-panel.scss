@@ -1,4 +1,13 @@
 $orbit_control_line: 1px solid rgba(13, 226, 241, 0.9);
+$orbit_camera_indicator_color: rgba(13, 100, 241, 0.8);
+
+canvas {
+    display: block;
+}
+
+input {
+    width: 200px;
+}
 
 .control-panel {
     display: inline-block;
@@ -31,62 +40,53 @@ $orbit_control_line: 1px solid rgba(13, 226, 241, 0.9);
             background-color: rgba(70, 70, 70, 0.6);
         }
     }
+}
 
-    .control-item-name { padding: 10px; }
+div#dynamic-container{
+    width: 175px;
+    height: 175px;
+    background-color: transparent;
+    position: relative;
+    margin: 0 auto;
+}
 
-    .control-panel-subitems {
-        @include transition (opacity 1.0s ease);
-        opacity: 0;
-        display: none;
-        padding: 0 20px 20px 20px;
+div#innerCircle{
+    width: 160px;
+    height: 160px;
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    background-color: transparent;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border: 1px solid $orbit_camera_indicator_color;
+}
 
-        &.active {
-            opacity: 1;
-        }
+$radian: 85px;
 
-        .subitem {
-            margin: 10px 0;
+div#marker{
+    width: 10px;
+    height: 10px;
+    background: blue;
+    position: absolute;
+    left: 85px;
+    cursor: crosshair;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
 
-            &:before {
-                // content: '+';
-                // position: absolute;
-                // top: 0;
-                // left: 0;
-            }
-        }
-    }
+    -moz-transform: rotate(0deg);
+    -moz-transform-origin: 5px $radian;
 
-    .orbit-control-circle {
-        @include border-top-radius(50%);
-        @include border-bottom-radius(50%);
-        @include border-left-radius(50%);
-        @include border-right-radius(50%);
-        border: $orbit_control_line;
-        height: 160px;
-        width: 160px;
-        padding: 12px;
-        margin: 0 auto;
+    transform: rotate(0deg);
+    transform-origin: 5px $radian;
 
-        .orbit-control-degree-markers {
-            @include border-top-radius(50%);
-            @include border-bottom-radius(50%);
-            @include border-left-radius(50%);
-            @include border-right-radius(50%);
-            border: $orbit_control_line;
-            height: 130px;
-            width: 130px;
-            margin: 0 auto;
+    -ms-transform: rotate(0deg);
+    -ms-transform-origin: 5px $radian;
 
-            .orbit-control-centroid {
-                @include border-top-radius(50%);
-                @include border-bottom-radius(50%);
-                @include border-left-radius(50%);
-                @include border-right-radius(50%);
-                height: 10px;
-                width: 10px;
-                margin: 46% auto;
-                background-color: rgba(66, 241, 13, 0.8);
-            }
-        }
-    }
+    -webkit-transform: rotate(0deg);
+    -webkit-transform-origin: 5px $radian;
+
+    z-index: 17;
 }
