@@ -122,12 +122,23 @@ div#innerCircle {
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
-  border: 1px solid rgba(13, 100, 241, 0.8); }
+  border: 1px solid rgba(98, 190, 208, 0.95); }
+  div#innerCircle .compass-circle {
+    box-sizing: border-box;
+    width: 120px;
+    height: 120px;
+    top: 18px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border: 1px solid rgba(98, 190, 208, 0.95);
+    margin: 0 auto;
+    position: relative; }
 
 div#marker {
   width: 10px;
   height: 10px;
-  background: blue;
+  background: rgba(230, 226, 241, 0.8);
   position: absolute;
   left: 85px;
   cursor: crosshair;

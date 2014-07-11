@@ -1,5 +1,5 @@
-$orbit_control_line: 1px solid rgba(13, 226, 241, 0.9);
-$orbit_camera_indicator_color: rgba(13, 100, 241, 0.8);
+$camera_position_indicator: rgba(230, 226, 241, 0.8);
+$orbit_control_line: 1px solid rgba(98, 190, 208, 0.95);
 
 canvas {
     display: block;
@@ -60,7 +60,20 @@ div#innerCircle{
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
-    border: 1px solid $orbit_camera_indicator_color;
+    border: $orbit_control_line;
+
+    .compass-circle {
+        box-sizing: border-box;
+        width: 120px;
+        height: 120px;
+        top: 18px;
+        border-radius: 50%;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border: $orbit_control_line;
+        margin: 0 auto;
+        position: relative;
+    }
 }
 
 $radian: 85px;
@@ -68,7 +81,7 @@ $radian: 85px;
 div#marker{
     width: 10px;
     height: 10px;
-    background: blue;
+    background: $camera_position_indicator;
     position: absolute;
     left: 85px;
     cursor: crosshair;
