@@ -1,6 +1,8 @@
 .DS_Store
 .sass-cache/*
 logs
+mockups
+mockups/*
 node_modules
 node_modules/*
 sass/bourbon
