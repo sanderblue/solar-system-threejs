@@ -1,45 +1,29 @@
 define(function() {
 
-    var Accordian = function(options) {
-        // this.options = {
-        //     container: document.getElementById('accordian')
-        //     accordianItemSelector:
-        // };
-
-        // if (options) {
-        //     this.options = {};
-
-        //     for (var attrname in obj1) {
-        //         this.options[attrname] = obj1[attrname];
-        //     }
-
-        //     for (var attrname in obj2) {
-        //         this.options[attrname] = obj2[attrname];
-        //     }
-        // }
-
-        this.container              = document.getElementById('accordian');
-        this.accordianItemClassName = 'accordian-item';
-
-        this.initEventListeners();
+    var Accordian = function() {
+        this.init();
     };
 
-    Accordian.prototype.initEventListeners = function() {
-        var accordianItems = this.container.getElementsByClassName(this.accordianItemClassName),
-            clickHandler   = this.clickHandler
+    Accordian.prototype.init = function() {
+        var accordianItems = $('.accordian-item'),
+            itemLabels     = accordianItems.find('.accordian-item-label')
         ;
 
-        for (var i = 0; i < accordianItems.length; i++) {
-            accordianItems[i].addEventListener('click', clickHandler, false);
-        }
+        itemLabels.on('click', function() {
+            var menuContainer = $(this).parent(),
+                submenu       = menuContainer.find('.accordian-submenu').first()
+            ;
 
-        console.log(accordianItems.length);
-    };
+            if (menuContainer.hasClass('active')) {
+                menuContainer.removeClass('active');
+                submenu.slideUp();
 
-    Accordian.prototype.clickHandler = function() {
-        var submenu = this.parentElement.querySelector('.accordian-submenu');
+                return;
+            }
 
-        submenu.setAttribute('class', 'accordian-submenu active');
+            menuContainer.addClass('active');
+            submenu.slideToggle();
+        });
     };
 
     return Accordian;

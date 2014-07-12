@@ -99,7 +99,12 @@ ul {
   .accordian .accordian-item {
     font-family: 'Rajdhani-Semibold', sans-serif;
     -webkit-font-smoothing: antialiased;
-    -webkit-font-smoothing: antialiased; }
+    -webkit-font-smoothing: antialiased;
+    -webkit-transition: background 0.25s ease;
+    -moz-transition: background 0.25s ease;
+    transition: background 0.25s ease; }
+    .accordian .accordian-item:hover {
+      cursor: pointer; }
   .accordian .accordian-submenu {
     font-family: 'Rajdhani-Regular', sans-serif;
     -webkit-font-smoothing: antialiased;

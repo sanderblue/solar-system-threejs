@@ -27,30 +27,6 @@ define(
                 UIController.initResetView();
             },
 
-            initAccordian: function() {
-                var accordianItems = $('.accordian-item'),
-                    itemLabels     = accordianItems.find('.accordian-item-label')
-                ;
-
-                itemLabels.on('click', function() {
-                    var menuContainer = $(this).parent(),
-                        submenu       = menuContainer.find('.accordian-submenu').first()
-                    ;
-
-                    console.log(submenu);
-
-                    if (menuContainer.hasClass('active')) {
-                        menuContainer.removeClass('active');
-                        submenu.slideUp();
-
-                        return;
-                    }
-
-                    menuContainer.addClass('active');
-                    submenu.slideToggle();
-                });
-            },
-
             initResetView: function() {
                 var resetButton = $('#reset-camera');
 
