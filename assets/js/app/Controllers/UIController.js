@@ -1,10 +1,11 @@
 define(
     [
         'jquery',
+        'Accordian',
         'Scene',
         'Camera'
     ],
-    function($, Scene, Camera) {
+    function($, Accordian, Scene, Camera) {
 
         var UIController = {
             initEventListeners: function() {
@@ -69,9 +70,7 @@ define(
                     UIController.initEventListeners();
                 });
 
-                UIController.initAccordian();
-
-                // var accordian = new Accordian();
+                var accordian = new Accordian();
             }
         };
 

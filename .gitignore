@@ -5,7 +5,8 @@ mockups
 mockups/*
 node_modules
 node_modules/*
-assets/sass/bourbon
-assets/sass/bourbon/*
-assets/sass/neat
-assets/sass/neat/*
+assets/sass/lib/*
+assets/sass/lib/bourbon
+assets/sass/lib/bourbon/*
+assets/sass/lib/neat
+assets/sass/lib/neat/*

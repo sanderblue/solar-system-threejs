@@ -1,11 +1,13 @@
 define(function() {
 
-    var Accordian = function() {
+    var Accordian = function(container, animationSpeed) {
+        this.container = container ? container : $('#accordian');
+        this.animationSpeed = 250;
         this.init();
     };
 
     Accordian.prototype.init = function() {
-        var accordianItems = $('.accordian-item'),
+        var accordianItems = this.container.find('.accordian-item'),
             itemLabels     = accordianItems.find('.accordian-item-label')
         ;
 
@@ -16,13 +18,13 @@ define(function() {
 
             if (menuContainer.hasClass('active')) {
                 menuContainer.removeClass('active');
-                submenu.slideUp();
+                submenu.slideUp(this.animationSpeed);
 
                 return;
             }
 
             menuContainer.addClass('active');
-            submenu.slideToggle();
+            submenu.slideToggle(this.animationSpeed);
         });
     };
 
