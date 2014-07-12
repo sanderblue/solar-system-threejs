@@ -1,84 +1,71 @@
+$base_font_color: #f2f2f2;
+$base_link_color: #0080ff;
+
 /*
  *  Font Faces
  */
-@include font-face(OpenSansBold, '../fonts/open-sans/heavy/OpenSans-Bold-webfont');
-@include font-face(OpenSansRegular, '../fonts/open-sans/regular/OpenSans-Regular-webfont');
-@include font-face(OpenSansLight, '../fonts/open-sans/light/OpenSans-Light-webfont');
-
-@include font-face(OpenSansBoldItalic, '../fonts/open-sans/heavy-italic/OpenSans-BoldItalic-webfont');
-@include font-face(OpenSansRegularItalic, '../fonts/open-sans/regular-italic/OpenSans-RegularItalic-webfont');
-@include font-face(OpenSansLightItalic, '../fonts/open-sans/light-italic/OpenSans-LightItalic-webfont');
-
-@include font-face(GloberBold, '../fonts/glober/heavy/glober_bold-webfont');
-@include font-face(GloberLight, '../fonts/glober/light/glober_thin-webfont');
-
-@include font-face(Bebas, '../fonts/bebas-neue/BebasNeue');
+@include font-face('Rajdhani-Light', '../fonts/rajdhani/rajdhani-light-webfont');
+@include font-face('Rajdhani-Medium', '../fonts/rajdhani/rajdhani-medium-webfont');
+@include font-face('Rajdhani-Regular', '../fonts/rajdhani/rajdhani-regular-webfont');
+@include font-face('Rajdhani-Semibold', '../fonts/rajdhani/rajdhani-semibold-webfont');
+@include font-face('Rajdhani-Bold', '../fonts/rajdhani/rajdhani-bold-webfont');
 
 
 /*
  *  Font Families
  */
-@mixin OpenSansBold() {
-    font-family: 'OpenSansBold', sans-serif;
+@mixin Rajdhani-Light() {
+    font-family: 'Rajdhani-Light', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
-@mixin OpenSansRegular() {
-    font-family: 'OpenSansRegular', sans-serif;
+@mixin Rajdhani-Medium() {
+    font-family: 'Rajdhani-Medium', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
-@mixin OpenSansLight() {
-    font-family: 'OpenSansLight', sans-serif;
+@mixin Rajdhani-Regular() {
+    font-family: 'Rajdhani-Regular', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
-@mixin OpenSansBoldItalic() {
-    font-family: 'OpenSansBoldItalic', sans-serif;
+@mixin Rajdhani-Semibold() {
+    font-family: 'Rajdhani-Semibold', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
-@mixin OpenSansRegularItalic() {
-    font-family: 'OpenSansRegularItalic', sans-serif;
+@mixin Rajdhani-Bold() {
+    font-family: 'Rajdhani-Bold', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
-@mixin OpenSansLightItalic() {
-    font-family: 'OpenSansLightItalic', sans-serif;
-    -webkit-font-smoothing: antialiased;
-}
-
-@mixin GloberBold() {
-    font-family: 'GloberBold', sans-serif;
-    -webkit-font-smoothing: antialiased;
-}
-
-@mixin GloberLight() {
-    font-family: 'GloberLight', sans-serif;
-    -webkit-font-smoothing: antialiased;
-}
-
-@mixin Bebas() {
-    font-family: 'Bebas', sans-serif;
-    -webkit-font-smoothing: antialiased;
-}
 
 
 /*
  *  Font Variables
  */
 @mixin font-light() {
-    font-family: 'OpenSansLight', sans-serif;
+    @include Rajdhani-Light();
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-medium() {
+    @include Rajdhani-Medium();
     -webkit-font-smoothing: antialiased;
 }
 
 @mixin font-regular() {
-    font-family: 'OpenSansRegular', sans-serif;
+    @include Rajdhani-Regular();
     -webkit-font-smoothing: antialiased;
 }
 
-@mixin font-heavy() {
-    font-family: 'OpenSansBold', sans-serif;
+@mixin font-semibold() {
+    @include Rajdhani-Semibold();
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-bold() {
+    @include Rajdhani-Bold();
     -webkit-font-smoothing: antialiased;
 }
 
@@ -101,6 +88,11 @@
     -webkit-font-smoothing: antialiased;
 }
 
+@mixin font-15 () {
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+}
+
 @mixin font-16 () {
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
@@ -108,6 +100,11 @@
 
 @mixin font-18 () {
     font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-20 () {
+    font-size: 24px;
     -webkit-font-smoothing: antialiased;
 }
 

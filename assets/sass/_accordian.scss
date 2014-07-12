@@ -1,0 +1,29 @@
+.accordian {
+    @include font-18();
+    @include box-sizing(border-box);
+    background: #fff;
+    padding: 10px;;
+    color: black;
+
+    .accordian-item {
+        @include font-semibold();
+    }
+
+    .accordian-submenu {
+        @include font-regular();
+        @include font-16();
+        @include box-sizing(border-box);
+        padding: 0 4px 10px 4px;
+        display: none;
+
+        .left-side,
+        .right-side {
+            display: inline-block;
+            width: 49%;
+        }
+    }
+
+    .accordian-submenu-item {
+        @include font-13();
+    }
+}

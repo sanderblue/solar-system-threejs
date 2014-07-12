@@ -1,5 +1,6 @@
-$camera_position_indicator: rgba(230, 226, 241, 0.8);
-$orbit_control_line: 1px solid rgba(98, 190, 208, 0.95);
+$orbit_blue: rgba(98, 190, 208, 0.95);
+$camera_position_indicator: rgba(230, 226, 241, 0.85);
+$orbit_control_line: 1px solid $orbit_blue;
 
 canvas {
     display: block;
@@ -10,16 +11,19 @@ input {
 }
 
 .control-panel {
+    @include font-20();
     display: inline-block;
     background: rgba(30, 30, 30, 0.1); // transparent for now
-    min-width: 200px;
-    max-width: 200px;
+    width: 100%;
+    max-width: 260px;
 
     .control-panel-item {
-        @include transition (background-color 1.0s ease);
+        @include transition(background-color 1.0s ease);
+        @include font-medium();
+        padding: 8px;
+        margin: 6px 0;
         position: relative;
         background-color: rgba(70, 70, 70, 0.2);
-        margin: 6px 0;
         border-top: 1px solid rgba(240, 240, 240, 0.25);
 
         &:hover { cursor: pointer; }
@@ -40,6 +44,12 @@ input {
             background-color: rgba(70, 70, 70, 0.6);
         }
     }
+
+    .subitem {
+        @include font-regular();
+        @include font-15();
+        padding-left: 12px;
+    }
 }
 
 div#dynamic-container{
@@ -47,7 +57,7 @@ div#dynamic-container{
     height: 175px;
     background-color: transparent;
     position: relative;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 div#innerCircle{
@@ -73,6 +83,21 @@ div#innerCircle{
         border: $orbit_control_line;
         margin: 0 auto;
         position: relative;
+    }
+
+    .compass-centroid {
+        box-sizing: border-box;
+        width: 10px;
+        height: 10px;
+        padding: 4px;
+        top: 54px;
+        background: orange;
+        border-radius: 50%;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        margin: 0 auto;
+        position: relative;
+        border: 2px solid rgba(98, 190, 208, 1);
     }
 }
 

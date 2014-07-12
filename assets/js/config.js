@@ -39,6 +39,7 @@ require.config({
 
         // Modules
         'Modules'                  : 'app/Modules/Modules',
+        'Accordian'                : 'app/Modules/Accordian',
         'MissingArgumentException' : 'app/Modules/Error/MissingArgumentException',
         'InvalidArgumentException' : 'app/Modules/Error/InvalidArgumentException',
 

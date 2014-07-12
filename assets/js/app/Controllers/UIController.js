@@ -8,31 +8,6 @@ define(
 
         var UIController = {
             initEventListeners: function() {
-                var controlPanelItems = $('.control-item-name');
-
-                controlPanelItems.on('click', function() {
-                    var subMenus    = $('.control-panel-subitems'),
-                        thisSubMenu = $(this).parent().find('.control-panel-subitems'),
-                        isActive    = $(this).hasClass('active')
-                    ;
-
-                    if (isActive) {
-                        thisSubMenu.slideUp();
-                        return;
-                    }
-
-                    console.log(thisSubMenu)
-
-                    $(subMenus).parent().removeClass('active');
-                    $(controlPanelItems).removeClass('active');
-
-                    $(this).parent().addClass('active');
-                    $(thisSubMenu).addClass('active');
-
-                    subMenus.slideUp();
-                    thisSubMenu.slideDown();
-                });
-
                 $('.planet').on('click', function() {
                     var id = $(this).data('id'),
                         matchedPlanet = UIController.findPlanet(id)
@@ -52,6 +27,30 @@ define(
                 UIController.initResetView();
             },
 
+            initAccordian: function() {
+                var accordianItems = $('.accordian-item'),
+                    itemLabels     = accordianItems.find('.accordian-item-label')
+                ;
+
+                itemLabels.on('click', function() {
+                    var menuContainer = $(this).parent(),
+                        submenu       = menuContainer.find('.accordian-submenu').first()
+                    ;
+
+                    console.log(submenu);
+
+                    if (menuContainer.hasClass('active')) {
+                        menuContainer.removeClass('active');
+                        submenu.slideUp();
+
+                        return;
+                    }
+
+                    menuContainer.addClass('active');
+                    submenu.slideToggle();
+                });
+            },
+
             initResetView: function() {
                 var resetButton = $('#reset-camera');
 
@@ -63,17 +62,17 @@ define(
 
             buildPlanetList: function() {
                 return $.Deferred(function(promise) {
-                    var listElement = $('#planets');
+                    // var listElement = $('#planets');
 
-                    listElement.children().remove();
+                    // listElement.children().remove();
 
-                    console.log(Scene.planets )
+                    // console.log(Scene.planets )
 
-                    for (var i = 0; i < Scene.planets.length; i++) {
-                        var id = Scene.planets[i].id;
+                    // for (var i = 0; i < Scene.planets.length; i++) {
+                    //     var id = Scene.planets[i].id;
 
-                        listElement.append('<li id="planet-'+ id +'" class="planet" data-id="'+ id +'">'+ Scene.planets[i].name +'</li>');
-                    }
+                    //     listElement.append('<li id="planet-'+ id +'" class="planet" data-id="'+ id +'">'+ Scene.planets[i].name +'</li>');
+                    // }
 
                     promise.resolve();
                 });
@@ -93,6 +92,10 @@ define(
                 $.when(UIController.buildPlanetList()).done(function() {
                     UIController.initEventListeners();
                 });
+
+                UIController.initAccordian();
+
+                // var accordian = new Accordian();
             }
         };
 

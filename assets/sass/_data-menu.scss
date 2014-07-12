@@ -1,0 +1,12 @@
+.data-container {
+    @include font-13();
+
+    .left-side,
+    .right-side {
+        @include box-sizing(border-box);
+        display: inline-block;
+    }
+
+    .left-side  { width: 64%; }
+    .right-side { width: 34%; }
+}
