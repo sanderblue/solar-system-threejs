@@ -1,9 +1,10 @@
-@import "bourbon/bourbon";
-@import "neat/neat";
+@import "lib/bourbon/bourbon";
+@import "lib/neat/neat";
 
+@import "mixins";
 @import "icons";
 @import "fonts";
 @import "globals";
 @import "accordian";
 @import "data-menu";
-@import "contronl-panel/control-panel";
+@import "controls/control-panel";

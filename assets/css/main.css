@@ -93,33 +93,45 @@ ul {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  background: #fff;
   padding: 10px;
-  color: black; }
+  background: transparent; }
   .accordian .accordian-item {
     font-family: 'Rajdhani-Semibold', sans-serif;
     -webkit-font-smoothing: antialiased;
     -webkit-font-smoothing: antialiased;
-    -webkit-transition: background 0.25s ease;
-    -moz-transition: background 0.25s ease;
-    transition: background 0.25s ease; }
+    -webkit-transition: opacity 0.25s ease;
+    -moz-transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease;
+    background: rgba(95, 95, 95, 0.25);
+    padding: 4px 10px;
+    margin: 4px 0; }
     .accordian .accordian-item:hover {
       cursor: pointer; }
-  .accordian .accordian-submenu {
-    font-family: 'Rajdhani-Regular', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -webkit-font-smoothing: antialiased;
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 0 4px 10px 4px;
-    display: none; }
-    .accordian .accordian-submenu .left-side,
-    .accordian .accordian-submenu .right-side {
-      display: inline-block;
-      width: 49%; }
+    .accordian .accordian-item .accordian-submenu {
+      font-family: 'Rajdhani-Regular', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -webkit-font-smoothing: antialiased;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      opacity: 0;
+      -moz-opacity: 0;
+      -webkit-opacity: 0;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-transition: opacity 0.25s ease;
+      -moz-transition: opacity 0.25s ease;
+      transition: opacity 0.25s ease;
+      padding: 0 4px 10px 4px;
+      display: none; }
+      .accordian .accordian-item .accordian-submenu .left-side,
+      .accordian .accordian-item .accordian-submenu .right-side {
+        display: inline-block;
+        width: 49%; }
+    .accordian .accordian-item.active .accordian-submenu {
+      opacity: 1;
+      -moz-opacity: 1;
+      -webkit-opacity: 1; }
   .accordian .accordian-submenu-item {
     font-size: 13px;
     -webkit-font-smoothing: antialiased; }
@@ -148,9 +160,10 @@ input {
   font-size: 24px;
   -webkit-font-smoothing: antialiased;
   display: inline-block;
-  background: rgba(30, 30, 30, 0.1);
+  background: transparent;
   width: 100%;
-  max-width: 260px; }
+  max-width: 260px;
+  color: #f2f2f2; }
   .control-panel .control-panel-item {
     -webkit-transition: background-color 1s ease;
     -moz-transition: background-color 1s ease;
@@ -186,14 +199,14 @@ input {
     -webkit-font-smoothing: antialiased;
     padding-left: 12px; }
 
-div#dynamic-container {
+.camera-orbit-track {
   width: 175px;
   height: 175px;
   background-color: transparent;
   position: relative;
   margin: 20px auto; }
 
-div#innerCircle {
+.compass {
   width: 160px;
   height: 160px;
   position: absolute;
@@ -204,7 +217,7 @@ div#innerCircle {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border: 1px solid rgba(98, 190, 208, 0.95); }
-  div#innerCircle .compass-circle {
+  .compass .compass-circle {
     box-sizing: border-box;
     width: 120px;
     height: 120px;
@@ -215,7 +228,7 @@ div#innerCircle {
     border: 1px solid rgba(98, 190, 208, 0.95);
     margin: 0 auto;
     position: relative; }
-  div#innerCircle .compass-centroid {
+  .compass .compass-centroid {
     box-sizing: border-box;
     width: 10px;
     height: 10px;
@@ -229,7 +242,7 @@ div#innerCircle {
     position: relative;
     border: 2px solid #62bed0; }
 
-div#marker {
+.camera-positioner {
   width: 10px;
   height: 10px;
   background: rgba(230, 226, 241, 0.85);

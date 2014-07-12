@@ -1,0 +1,53 @@
+canvas {
+    display: block;
+}
+
+input {
+    width: 200px;
+}
+
+.control-panel {
+    @include font-20();
+    display: inline-block;
+    background: transparent; // transparent for now
+    width: 100%;
+    max-width: 260px;
+    color: $base_font_color;
+
+    .control-panel-item {
+        @include transition(background-color 1.0s ease);
+        @include font-medium();
+        padding: 8px;
+        margin: 6px 0;
+        position: relative;
+        background-color: rgba(70, 70, 70, 0.2);
+        border-top: 1px solid rgba(240, 240, 240, 0.25);
+
+        &:hover { cursor: pointer; }
+
+        &:before,
+        &:after {
+            @include font-18();
+            content: '•';
+            position: absolute;
+            line-height: 0;
+            top: 0;
+        }
+
+        &:before { left: 0; }
+        &:after  { right: 0; }
+
+        &.active {
+            background-color: rgba(70, 70, 70, 0.6);
+        }
+    }
+
+    .subitem {
+        @include font-regular();
+        @include font-15();
+        padding-left: 12px;
+    }
+}
+
+@import "camera-controls";
+

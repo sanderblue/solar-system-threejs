@@ -1,30 +1,40 @@
 .accordian {
     @include font-18();
     @include box-sizing(border-box);
-    background: #fff;
-    padding: 10px;;
-    color: black;
+    padding: 10px;
+    background: transparent;
 
     .accordian-item {
         @include font-semibold();
-        @include transition(background 0.25s ease);
+        @include transition(opacity 0.25s ease);
+        background: rgba(95, 95, 95, 0.25);
+        padding: 4px 10px;
+        margin: 4px 0;
 
         &:hover {
             cursor: pointer;
         }
-    }
 
-    .accordian-submenu {
-        @include font-regular();
-        @include font-16();
-        @include box-sizing(border-box);
-        padding: 0 4px 10px 4px;
-        display: none;
+        .accordian-submenu {
+            @include font-regular();
+            @include font-16();
+            @include opacity(0);
+            @include box-sizing(border-box);
+            @include transition(opacity 0.25s ease);
+            padding: 0 4px 10px 4px;
+            display: none;
 
-        .left-side,
-        .right-side {
-            display: inline-block;
-            width: 49%;
+            .left-side,
+            .right-side {
+                display: inline-block;
+                width: 49%;
+            }
+        }
+
+        &.active {
+            .accordian-submenu {
+                @include opacity(1);
+            }
         }
     }
 

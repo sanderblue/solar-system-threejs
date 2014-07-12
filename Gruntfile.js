@@ -33,6 +33,7 @@ module.exports = function(grunt) {
             css: {
                 files: [
                     'assets/sass/lib/*/*.scss',
+                    'assets/sass/control-panel/*.scss',
                     'assets/sass/*/*.scss',
                     'assets/sass/*.scss',
                 ],
