@@ -99,14 +99,26 @@ ul {
     font-family: 'Rajdhani-Semibold', sans-serif;
     -webkit-font-smoothing: antialiased;
     -webkit-font-smoothing: antialiased;
-    -webkit-transition: opacity 0.25s ease;
-    -moz-transition: opacity 0.25s ease;
-    transition: opacity 0.25s ease;
-    background: rgba(95, 95, 95, 0.25);
-    padding: 4px 10px;
-    margin: 4px 0; }
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: background 0.25s ease;
+    -moz-transition: background 0.25s ease;
+    transition: background 0.25s ease;
+    background: rgba(90, 90, 90, 0.15);
+    padding: 6px 12px;
+    margin: 6px 0; }
     .accordian .accordian-item:hover {
-      cursor: pointer; }
+      cursor: pointer;
+      background: rgba(100, 100, 100, 0.275); }
+    .accordian .accordian-item.active {
+      background: rgba(100, 100, 100, 0.275); }
+      .accordian .accordian-item.active .accordian-submenu {
+        opacity: 1;
+        -moz-opacity: 1;
+        -webkit-opacity: 1; }
+    .accordian .accordian-item.subitem {
+      background: transparent; }
     .accordian .accordian-item .accordian-submenu {
       font-family: 'Rajdhani-Regular', sans-serif;
       -webkit-font-smoothing: antialiased;
@@ -128,17 +140,14 @@ ul {
       .accordian .accordian-item .accordian-submenu .right-side {
         display: inline-block;
         width: 49%; }
-    .accordian .accordian-item.active .accordian-submenu {
-      opacity: 1;
-      -moz-opacity: 1;
-      -webkit-opacity: 1; }
   .accordian .accordian-submenu-item {
     font-size: 13px;
     -webkit-font-smoothing: antialiased; }
 
 .data-container {
   font-size: 13px;
-  -webkit-font-smoothing: antialiased; }
+  -webkit-font-smoothing: antialiased;
+  margin-bottom: 10px; }
   .data-container .left-side,
   .data-container .right-side {
     -webkit-box-sizing: border-box;

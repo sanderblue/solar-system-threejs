@@ -1,5 +1,6 @@
 .data-container {
     @include font-13();
+    margin-bottom: 10px;
 
     .left-side,
     .right-side {

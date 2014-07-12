@@ -1,3 +1,5 @@
+$accordian_active_bg_color: rgba(100, 100, 100, 0.275);;
+
 .accordian {
     @include font-18();
     @include box-sizing(border-box);
@@ -6,13 +8,27 @@
 
     .accordian-item {
         @include font-semibold();
-        @include transition(opacity 0.25s ease);
-        background: rgba(95, 95, 95, 0.25);
-        padding: 4px 10px;
-        margin: 4px 0;
+        @include box-sizing(border-box);
+        @include transition(background 0.25s ease);
+        background: rgba(90, 90, 90, 0.15);
+        padding: 6px 12px;
+        margin: 6px 0;
 
         &:hover {
             cursor: pointer;
+            background: $accordian_active_bg_color;
+        }
+
+        &.active {
+            background: $accordian_active_bg_color;
+
+            .accordian-submenu {
+                @include opacity(1);
+            }
+        }
+
+        &.subitem {
+            background: transparent;
         }
 
         .accordian-submenu {
@@ -28,12 +44,6 @@
             .right-side {
                 display: inline-block;
                 width: 49%;
-            }
-        }
-
-        &.active {
-            .accordian-submenu {
-                @include opacity(1);
             }
         }
     }
