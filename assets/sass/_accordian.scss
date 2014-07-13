@@ -9,13 +9,14 @@ $accordian_active_bg_color: rgba(100, 100, 100, 0.275);;
     .accordian-item {
         @include font-semibold();
         @include box-sizing(border-box);
-        @include transition(background 0.25s ease);
+        @include transition(all 0.25s ease);
         background: rgba(90, 90, 90, 0.15);
         padding: 6px 12px;
         margin: 6px 0;
 
         &:hover {
             cursor: pointer;
+            color: $base_font_color;
             background: $accordian_active_bg_color;
         }
 

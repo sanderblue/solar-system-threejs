@@ -58,7 +58,7 @@ body {
   font-family: 'Rajdhani-Regular', sans-serif;
   -webkit-font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
-  color: #f2f2f2;
+  color: #f0f0f0;
   background: #000;
   background-color: #000;
   margin: 0px;
@@ -102,14 +102,15 @@ ul {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    -webkit-transition: background 0.25s ease;
-    -moz-transition: background 0.25s ease;
-    transition: background 0.25s ease;
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    transition: all 0.25s ease;
     background: rgba(90, 90, 90, 0.15);
     padding: 6px 12px;
     margin: 6px 0; }
     .accordian .accordian-item:hover {
       cursor: pointer;
+      color: #f0f0f0;
       background: rgba(100, 100, 100, 0.275); }
     .accordian .accordian-item.active {
       background: rgba(100, 100, 100, 0.275); }
@@ -172,7 +173,7 @@ input {
   background: transparent;
   width: 100%;
   max-width: 260px;
-  color: #f2f2f2; }
+  color: rgba(240, 240, 240, 0.8); }
   .control-panel .control-panel-item {
     -webkit-transition: background-color 1s ease;
     -moz-transition: background-color 1s ease;

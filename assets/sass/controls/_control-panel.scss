@@ -12,7 +12,7 @@ input {
     background: transparent; // transparent for now
     width: 100%;
     max-width: 260px;
-    color: $base_font_color;
+    color: $base_font_color_light_opacity;
 
     .control-panel-item {
         @include transition(background-color 1.0s ease);
