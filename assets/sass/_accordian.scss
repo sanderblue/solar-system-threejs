@@ -23,7 +23,7 @@ $accordian_active_bg_color: rgba(100, 100, 100, 0.275);;
         &.active {
             background: $accordian_active_bg_color;
 
-            .accordian-submenu {
+            > .accordian-submenu {
                 @include opacity(1);
             }
         }

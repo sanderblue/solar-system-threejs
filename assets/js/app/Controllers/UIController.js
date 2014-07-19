@@ -3,9 +3,10 @@ define(
         'jquery',
         'Accordian',
         'Scene',
-        'Camera'
+        'Camera',
+        'SolarSystem'
     ],
-    function($, Accordian, Scene, Camera) {
+    function($, Accordian, Scene, Camera, SolarSystem) {
 
         var UIController = {
             initEventListeners: function() {
@@ -39,17 +40,53 @@ define(
 
             buildPlanetList: function() {
                 return $.Deferred(function(promise) {
-                    // var listElement = $('#planets');
+                    var listElement = $('#planets');
 
-                    // listElement.children().remove();
+                    listElement.children().remove();
 
                     // console.log(Scene.planets )
 
-                    // for (var i = 0; i < Scene.planets.length; i++) {
-                    //     var id = Scene.planets[i].id;
+                    for (var i = 0; i < SolarSystem.planets.length; i++) {
+                        var id            = SolarSystem.planets[i].id,
+                            name          = SolarSystem.planets[i].name,
+                            radius        = SolarSystem.planets[i].radius,
+                            orbitRadius   = SolarSystem.planets[i].distanceFromParent,
+                            orbitDuration = SolarSystem.planets[i].orbitDuration,
+                            axialTilt     = SolarSystem.planets[i].axialTilt
+                        ;
 
-                    //     listElement.append('<li id="planet-'+ id +'" class="planet" data-id="'+ id +'">'+ Scene.planets[i].name +'</li>');
-                    // }
+                        // listElement.append('<li id="planet-'+ planetId +'" class="planet" data-id="'+ iplanetNamed +'">'+  +'</li>');
+                        var planetListItem = '<div class="accordian-item subitem">'
+                                            +    '<div id="'+ id +'" class="accordian-item-label">'+ name +'</div>'
+                                            +    '<div class="accordian-submenu">'
+                                            +        '<div class="accordian-submenu-item">'
+                                            +            '<div class="data-container">'
+                                            +                '<div class="left-side">Radius</div>'
+                                            +                '<div class="right-side">'+ Number(radius).toFixed(4) +'</div>'
+                                            +                '<div class="left-side">Mean Orbit Radius</div>'
+                                            +                '<div class="right-side">'+ Number(orbitRadius).toFixed(4) +'</div>'
+                                            +                '<div class="left-side">Orbit Duration</div>'
+                                            +                '<div class="right-side">'+ Number(orbitDuration).toFixed(4) +'</div>'
+                                            +                '<div class="left-side">Axial Tilt</div>'
+                                            +                '<div class="right-side">'+ Number(axialTilt).toFixed(4) +'</div>'
+                                            +            '</div>'
+                                            +        '</div>'
+                                            // +        '<div class="accordian-submenu-item">'
+                                            // +            '<div class="accordian-item-label">Moons</div>'
+                                            // +            '<div class="accordian-submenu">'
+                                            // +                '<div class="accordian-submenu-item">'
+                                            // +                    'Terra Nova'
+                                            // +                '</div>'
+                                            // +                '<div class="accordian-submenu-item">'
+                                            // +                    'Charon'
+                                            // +                '</div>'
+                                            // +            '</div>'
+                                            // +        '</div>'
+                                            +    '</div>'
+                                            +'</div>';
+
+                        listElement.append(planetListItem);
+                    }
 
                     promise.resolve();
                 });

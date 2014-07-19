@@ -11,10 +11,15 @@ define(function() {
             itemLabels     = accordianItems.find('.accordian-item-label')
         ;
 
-        itemLabels.on('click', function() {
+        itemLabels.on('click', function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
             var menuContainer = $(this).parent(),
                 submenu       = menuContainer.find('.accordian-submenu').first()
             ;
+
+            console.log(menuContainer.hasClass('active'));
 
             if (menuContainer.hasClass('active')) {
                 menuContainer.removeClass('active');
@@ -24,7 +29,7 @@ define(function() {
             }
 
             menuContainer.addClass('active');
-            submenu.slideToggle(this.animationSpeed);
+            submenu.slideDown(this.animationSpeed);
         });
     };
 
