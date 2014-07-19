@@ -22,13 +22,13 @@ define(
              * @param planet [THREE object]
              */
             buildEarthClouds: function(planet) {
-                var geometry    = new THREE.SphereGeometry(planet.radius + 1.5, 100, 70);
+                var geometry    = new THREE.SphereGeometry(planet.radius + 1.25, 100, 70);
 
                 var material    = new THREE.MeshPhongMaterial({
-                    map         : THREE.ImageUtils.loadTexture('../assets/textures/earth_clouds.png'),
+                    map         : THREE.ImageUtils.loadTexture('../assets/textures/earth_clouds_fair.png'),
                     side        : THREE.DoubleSide,
                     transparent : true,
-                    opacity     : 0.3,
+                    opacity     : 0.9,
                 });
 
                 return new THREE.Mesh(geometry, material);
@@ -115,7 +115,13 @@ define(
                     if (planet.name === 'Earth') {
                         var earthClouds  = PlanetFactory.buildEarthClouds(planet);
 
-                        thisPlanet.add(earthClouds);
+                        var cloudCentroid = new THREE.Object3D();
+
+                        cloudCentroid.add(earthClouds);
+
+                        thisPlanet.cloudCentroid = cloudCentroid;
+
+                        thisPlanet.add(cloudCentroid);
                     }
 
                     Scene.planets.push(thisPlanet);

@@ -45,6 +45,8 @@ define(
                     // Earth
                     if (i === 2) {
                         count = dayOnEarth;
+
+                        Scene.planets[i].cloudCentroid.rotation.y += 0.00015;
                     }
 
                     // Mars
