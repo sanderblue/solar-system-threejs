@@ -18,6 +18,22 @@ define(
                 return new THREE.ImageUtils.loadTexture(texturePath);
             },
 
+            /**
+             * @param planet [THREE object]
+             */
+            buildEarthClouds: function(planet) {
+                var geometry    = new THREE.SphereGeometry(planet.radius + 1.5, 100, 70);
+
+                var material    = new THREE.MeshPhongMaterial({
+                    map         : THREE.ImageUtils.loadTexture('../assets/textures/earth_clouds.png'),
+                    side        : THREE.DoubleSide,
+                    transparent : true,
+                    opacity     : 0.3,
+                });
+
+                return new THREE.Mesh(geometry, material);
+            },
+
             addMoons: function(planet, planetObj) {
                 return $.Deferred(function(promise) {
                     for (var i = 0; i < planet.moons.length; i++) {
@@ -96,6 +112,16 @@ define(
                                     planetMaterial
                                  );
 
+                    if (planet.name === 'Earth') {
+                        var earthClouds  = PlanetFactory.buildEarthClouds(planet);
+
+                        thisPlanet.add(earthClouds);
+                    }
+
+                    Scene.planets.push(thisPlanet);
+
+                    planet.threeId = thisPlanet.id;
+
                     var orbitCentroid = new THREE.Mesh(
                                 new THREE.SphereGeometry(
                                         1,
@@ -125,8 +151,6 @@ define(
                             );
 
                             PlanetFactory.addPlanet(thisPlanet, orbitCentroid);
-
-                            Scene.planets.push(thisPlanet);
 
                             var endTime = new Date().getTime();
 

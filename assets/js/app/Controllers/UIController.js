@@ -10,10 +10,15 @@ define(
 
         var UIController = {
             initEventListeners: function() {
-                $('.planet').on('click', function() {
+                $(document).on('click', '.camera-trigger', function(e) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+
                     var id = $(this).data('id'),
                         matchedPlanet = UIController.findPlanet(id)
                     ;
+
+                    console.log('planet', id);
 
                     // for (var i = 0; i < Scene.planetCores.length; i++) {
                     //     if (Scene.planetCores[i].name  === matchedPlanet.name) {
@@ -44,10 +49,10 @@ define(
 
                     listElement.children().remove();
 
-                    // console.log(Scene.planets )
-
                     for (var i = 0; i < SolarSystem.planets.length; i++) {
-                        var id            = SolarSystem.planets[i].id,
+                        var planetId = Scene.planets.length ? Scene.planets[i].id : SolarSystem.planets[i].id;
+
+                        var id            = planetId,
                             name          = SolarSystem.planets[i].name,
                             radius        = SolarSystem.planets[i].radius,
                             orbitRadius   = SolarSystem.planets[i].distanceFromParent,
@@ -57,7 +62,8 @@ define(
 
                         // listElement.append('<li id="planet-'+ planetId +'" class="planet" data-id="'+ iplanetNamed +'">'+  +'</li>');
                         var planetListItem = '<div class="accordian-item subitem">'
-                                            +    '<div id="'+ id +'" class="accordian-item-label">'+ name +'</div>'
+                                            +    '<span id="'+ id +'" class="accordian-item-label planet">'+ name +'</span>'
+                                            +    '<span class="camera-trigger" data-id="'+ id +'">&nbsp;◊&nbsp;</span>'
                                             +    '<div class="accordian-submenu">'
                                             +        '<div class="accordian-submenu-item">'
                                             +            '<div class="data-container">'
