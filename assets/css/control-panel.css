@@ -1,0 +1,183 @@
+@font-face {
+    font-family: 'icomoon';
+    src:url('fonts/icomoon.eot?8gdold');
+    src:url('fonts/icomoon.eot?#iefix8gdold') format('embedded-opentype'),
+        url('fonts/icomoon.woff?8gdold') format('woff'),
+        url('fonts/icomoon.ttf?8gdold') format('truetype'),
+        url('fonts/icomoon.svg?8gdold#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    color: #fff;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-location:before {
+    content: "\4c";
+}
+.icon-checkmark:before {
+    content: "\43";
+}
+.icon-html5:before {
+    content: "\48";
+}
+.icon-css3:before {
+    content: "\e601";
+}
+.icon-out:before {
+    content: "\4f";
+}
+.icon-in:before {
+    content: "\49";
+}
+.icon-user:before {
+    content: "\55";
+}
+.icon-dribbble:before {
+    content: "\44";
+}
+.icon-brightness-half:before {
+    content: "\62";
+}
+.icon-moon:before {
+    content: "\4d";
+}
+.icon-cloud:before {
+    content: "\e60a";
+}
+.icon-circle-half:before {
+    content: "\63";
+}
+.icon-globe:before {
+    content: "\47";
+}
+.icon-paperplane:before {
+    content: "\50";
+}
+.icon-compass:before {
+    content: "\31";
+}
+.icon-star:before {
+    content: "\32";
+}
+.icon-bolt:before {
+    content: "\33";
+}
+.icon-rocket:before {
+    content: "\34";
+}
+.icon-earth:before {
+    content: "\35";
+}
+.icon-arrow-right:before {
+    content: "\e613";
+}
+.icon-arrow-left:before {
+    content: "\36";
+}
+.planet-name .icon-arrow-down:before {
+    content: "\37";
+}
+.icon-arrow-up:before {
+    content: "\38";
+}
+.icon-arrow-right2:before {
+    content: "\39";
+}
+.icon-arrow-left2:before {
+    content: "\2d";
+}
+.icon-arrow-down2:before {
+    content: "\3d";
+}
+.icon-twitter:before {
+    content: "\74";
+}
+.icon-facebook:before {
+    content: "\66";
+}
+.icon-instagram:before {
+    content: "\69";
+}
+
+.manny-control-ui {
+    color: #fff;
+    font-family: 'Rajdhani', Helvetica, Arial, sans-serif;
+    max-width: 220px;
+    max-height: 380px;
+    font-size: 15px;
+}
+
+.control-container {
+    background-color: rgba(70, 70, 70, 0.2);
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+    height: 400px;
+    margin-left: 10px;
+    transition: 1s;
+
+}
+
+.control-container:hover {
+    background-color: #1B1B1B;
+    transition: background-color 1s;
+    cursor: pointer;
+}
+
+.planet-name {
+    font-size: 1.5em;
+    color: #EF5030;
+    border-top: 1px solid #64a3af;
+    padding-top: 3px;
+    text-transform: uppercase;
+}
+
+.icon-arrow-down {
+    float: right;
+}
+
+.row {
+    max-width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.left-side {
+    width: 48%;
+    display: inline-block;
+    padding-right: 15px
+    box-sizing: border-box;
+}
+
+.right-side {
+    width: 48%;
+    display: inline-block;
+    padding-left: 8px;
+    box-sizing: border-box;
+}
+
+.section-number {
+    color: #64a3af ;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    text-transform: uppercase;
+    border-bottom: 1px solid #fff;
+}
+
+
+

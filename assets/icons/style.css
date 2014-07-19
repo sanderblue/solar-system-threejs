@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot?-ve7nvc');
-	src:url('fonts/icomoon.eot?#iefix-ve7nvc') format('embedded-opentype'),
-		url('fonts/icomoon.woff?-ve7nvc') format('woff'),
-		url('fonts/icomoon.ttf?-ve7nvc') format('truetype'),
-		url('fonts/icomoon.svg?-ve7nvc#icomoon') format('svg');
+	src:url('fonts/icomoon.eot?8gdold');
+	src:url('fonts/icomoon.eot?#iefix8gdold') format('embedded-opentype'),
+		url('fonts/icomoon.woff?8gdold') format('woff'),
+		url('fonts/icomoon.ttf?8gdold') format('truetype'),
+		url('fonts/icomoon.svg?8gdold#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,15 +23,90 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-camera:before {
+.icon-location:before {
+	content: "\4c";
+}
+.icon-checkmark:before {
+	content: "\43";
+}
+.icon-html5:before {
+	content: "\48";
+}
+.icon-css3:before {
+	content: "\e601";
+}
+.icon-out:before {
+	content: "\4f";
+}
+.icon-in:before {
+	content: "\49";
+}
+.icon-user:before {
+	content: "\55";
+}
+.icon-dribbble:before {
+	content: "\44";
+}
+.icon-brightness-half:before {
+	content: "\62";
+}
+.icon-moon:before {
+	content: "\4d";
+}
+.icon-cloud:before {
+	content: "\e60a";
+}
+.icon-circle-half:before {
 	content: "\63";
 }
-.icon-rocket:before {
-	content: "\72";
+.icon-globe:before {
+	content: "\47";
 }
-.icon-feed:before {
+.icon-paperplane:before {
+	content: "\50";
+}
+.icon-compass:before {
+	content: "\31";
+}
+.icon-star:before {
+	content: "\32";
+}
+.icon-bolt:before {
+	content: "\33";
+}
+.icon-rocket:before {
+	content: "\34";
+}
+.icon-earth:before {
+	content: "\35";
+}
+.icon-arrow-right:before {
+	content: "\e613";
+}
+.icon-arrow-left:before {
+	content: "\36";
+}
+.icon-arrow-down:before {
+	content: "\37";
+}
+.icon-arrow-up:before {
+	content: "\38";
+}
+.icon-arrow-right2:before {
+	content: "\39";
+}
+.icon-arrow-left2:before {
+	content: "\2d";
+}
+.icon-arrow-down2:before {
+	content: "\3d";
+}
+.icon-twitter:before {
+	content: "\74";
+}
+.icon-facebook:before {
 	content: "\66";
 }
-.icon-podcast:before {
-	content: "\70";
+.icon-instagram:before {
+	content: "\69";
 }

@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 * {
   -webkit-box-sizing: border-box;
@@ -7,6 +8,17 @@
 /*
  *  Font Faces
  */
+@font-face {
+   font-family: 'icomoon';
+   src:url('../icons/fonts/icomoon.eot?-ve7nvc');
+   src:url('../icons/fonts/icomoon.eot?#iefix-ve7nvc') format('embedded-opentype'),
+       url('../icons/fonts/icomoon.woff?-ve7nvc') format('woff'),
+       url('../icons/fonts/icomoon.ttf?-ve7nvc') format('truetype'),
+       url('../icons/fonts/icomoon.svg?-ve7nvc#icomoon') format('svg');
+   font-weight: normal;
+   font-style: normal;
+}
+
 @font-face {
   font-family: "Rajdhani-Light";
   font-weight: normal;
