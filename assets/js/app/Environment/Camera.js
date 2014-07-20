@@ -4,10 +4,14 @@ define(function() {
         radius: 1, // doesn't really mean anything
         diameter: 2, // doesn't really mean anything
         distanceFromParent: 2000, //
-        defaultPosition: new THREE.Vector3(0, -30000, 6000),
+        defaultPosition: new THREE.Vector3(0, -6000, 1000),
         defaultFocalPoint: new THREE.Vector3(0, 0, 0),
         orbitDuration: 364.25,
         dayOfOrbit: 1,
+        perspective: {
+            near: 1,
+            far: 5000000000
+        },
         parent: {
             name: 'Sun',
             radius: 700,

@@ -18,7 +18,6 @@ define(function() {
     ;
 
     var SolarSystem = {
-        buildEnabled: true, // toggle factories on/off
         orbitScale: orbitScale,
         celestialScale: celestialScale,
         moonOrbitScale: moonOrbitScale,
@@ -653,8 +652,11 @@ define(function() {
                 },
             ],
             secondary: [],
-            totalCount: 1400, // true number is estimated in the billions within the main astroid belt
+            count: 1400, // true number is estimated in the billions within the main astroid belt
             distanceFromParent: 450000000 * orbitScale // 450,000,000 km
+        },
+        stars: {
+            count: 250
         }
     };
 

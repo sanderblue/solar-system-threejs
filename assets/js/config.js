@@ -30,6 +30,7 @@ require.config({
         'RingFactory'        : 'app/SolarSystem/Factory/RingFactory',
         'MoonFactory'        : 'app/SolarSystem/Factory/MoonFactory',
         'OrbitFactory'       : 'app/SolarSystem/Factory/OrbitFactory',
+        'StarFactory'        : 'app/SolarSystem/Factory/StarFactory',
 
         // Controllers
         'OrbitController' : 'app/Controllers/OrbitController',
@@ -42,6 +43,7 @@ require.config({
         'Accordian'                : 'app/Modules/Accordian',
         'MissingArgumentException' : 'app/Modules/Error/MissingArgumentException',
         'InvalidArgumentException' : 'app/Modules/Error/InvalidArgumentException',
+        'RandomNumber'             : 'app/Modules/RandomNumber',
 
         // Extensions
         'Date'        : 'app/Extensions/Date',
@@ -64,7 +66,7 @@ require.config({
             deps: ['stats']
         },
         'main': {
-            deps: ['jquery', 'threejs', 'AdditiveBlendShader', 'Time', 'App', 'Modules', 'OrbitFactory', 'UIController']
+            deps: ['jquery', 'threejs', 'App', 'AdditiveBlendShader', 'Time', 'Modules', 'OrbitFactory', 'UIController']
         },
         'Initializer': {
             deps: ['Scene']
@@ -92,6 +94,9 @@ require.config({
         },
         'OrbitFactory': {
             deps: ['threejs']
+        },
+        'StarFactory': {
+            deps: ['Scene', 'RandomNumber']
         }
     }
 });

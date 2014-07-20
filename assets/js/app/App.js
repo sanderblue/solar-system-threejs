@@ -1,7 +1,17 @@
 define(function() {
 
     var Config = {
-        buildEnabled: true,
+        build: {
+            SceneEnabled: true,
+            SunFactoryEnabled: false,
+            PlanetFactoryEnabled: false,
+            MoonFactoryEnabled: false,
+            AstroidBeltFactoryEnabled: false,
+            RingFactoryEnabled: true,
+            OrbitFactoryEnabled: true,
+            SolarSystemFactoryEnabled: true,
+            StarFactoryEnabled: false,
+        },
         moonOrbitsEnabled: true,
         logger: {
             enabled: false

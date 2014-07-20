@@ -12,6 +12,7 @@ define(['Camera', 'Time'], function(Camera) {
         camera: null,
         brightness: 0.165,
         currentRadian: 0.0174532925 * 360,
+        perspective: Camera.perspective,
 
         setContainer: function() {
             Scene.container = document.getElementById('solar-system');
@@ -24,7 +25,7 @@ define(['Camera', 'Time'], function(Camera) {
         },
 
         setAxisHelpers: function() {
-            Scene.scene.add(new THREE.AxisHelper(7000));
+            Scene.scene.add(new THREE.AxisHelper(3000));
             // Scene.scene.add(new THREE.GridHelper(4000, 400));
         },
 
@@ -41,7 +42,7 @@ define(['Camera', 'Time'], function(Camera) {
         },
 
         setCamera: function() {
-            Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 5000000000);
+            Scene.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, Camera.perspective.near, Camera.perspective.far);
         },
 
         setCameraControls: function() {
@@ -95,6 +96,9 @@ define(['Camera', 'Time'], function(Camera) {
 
         init: function() {
             return $.Deferred(function(promise) {
+                if (!App.config.build.SceneEnabled) {
+                    return promise.resolve();
+                }
 
                 Scene.setContainer();
                 Scene.setScene();

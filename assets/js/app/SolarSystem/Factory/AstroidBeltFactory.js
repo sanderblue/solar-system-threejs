@@ -100,7 +100,7 @@ define(
             },
 
             buildBelt: function() {
-                var astroids = SolarSystem.astroidBelt.totalCount;
+                var astroids = SolarSystem.astroidBelt.count;
 
                 for (var i = 0; i < astroids; i++) {
                     AstroidBelt.buildAstroid(i);

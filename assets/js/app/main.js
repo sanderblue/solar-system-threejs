@@ -46,7 +46,7 @@ define(
                     if (i === 2) {
                         count = dayOnEarth;
 
-                        Scene.planets[i].cloudCentroid.rotation.y += 0.00015;
+                        Scene.planets[i].cloudCentroid.rotation.y += 0.00017;
                     }
 
                     // Mars
@@ -109,7 +109,9 @@ define(
             },
 
             render: function() {
-                MainController.positionPlanets();
+                if (Scene.planets.length) {
+                    MainController.positionPlanets();
+                }
 
                 Scene.renderer.render(Scene.scene, Scene.camera);
             },
@@ -177,11 +179,9 @@ define(
                     });
                 });
 
-                if (App.config.buildEnabled) {
-                    $.when(Initializer.init()).done(function() {
-                        MainController.animate();
-                    });
-                }
+                $.when(Initializer.init()).done(function() {
+                    MainController.animate();
+                });
             }
         };
 

@@ -1,49 +1,56 @@
-define(['Scene', 'SolarSystem'], function(Scene, SolarSystem) {
-    var SunFactory = {
-        getTexture: function() {
-            return new THREE.ImageUtils.loadTexture('../assets/textures/sun_detailed.png');
-        },
+define(
+    [
+        'Scene',
+        'SolarSystem'
+    ],
+    function(Scene, SolarSystem) {
 
-        build: function() {
-            return $.Deferred(function(promise) {
-                var texture = SunFactory.getTexture();
+        var SunFactory = {
+            getTexture: function() {
+                return new THREE.ImageUtils.loadTexture('../assets/textures/sun_detailed.png');
+            },
 
-                var material = new THREE.MeshLambertMaterial({
-                                      ambient: 0xffffff,
-                                      emissive: 0xffffff,
-                                      map: texture,
-                                      side: THREE.DoubleSide,
-                                      transparent: true,
-                                      opacity: 1
-                                    });
+            build: function() {
+                return $.Deferred(function(promise) {
+                    var texture = SunFactory.getTexture();
 
-                texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-                texture.anisotropy = 32;
+                    var material = new THREE.MeshLambertMaterial({
+                                          ambient: 0xffffff,
+                                          emissive: 0xffffff,
+                                          map: texture,
+                                          side: THREE.DoubleSide,
+                                          transparent: true,
+                                          opacity: 1
+                                        });
 
-                var sunGeometry = new THREE.SphereGeometry(
-                                        SolarSystem.parent.radius,
-                                        160,
-                                        100
-                                    );
+                    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+                    texture.anisotropy = 32;
 
-                var Sun = new THREE.Mesh(sunGeometry, material);
+                    var sunGeometry = new THREE.SphereGeometry(
+                                            SolarSystem.parent.radius,
+                                            160,
+                                            100
+                                        );
 
-                var pointLight = new THREE.PointLight(0xffffff, 1.2);
+                    var Sun = new THREE.Mesh(sunGeometry, material);
 
-                Sun.scale.x = Sun.scale.y = Sun.scale.z = 1;
+                    var pointLight = new THREE.PointLight(0xffffff, 1.2);
 
-                Scene.Sun = Sun;
+                    Sun.scale.x = Sun.scale.y = Sun.scale.z = 1;
 
-                // Flip axis
-                Sun.rotation.x = Math.PI / 2;
+                    Scene.Sun = Sun;
 
-                Sun.position.set(0, 0, 0);
+                    // Flip axis
+                    Sun.rotation.x = Math.PI / 2;
 
-                Scene.scene.add(pointLight);
-                Scene.scene.add(Sun);
-            });
-        }
-    };
+                    Sun.position.set(0, 0, 0);
 
-    return SunFactory;
-});
+                    Scene.scene.add(pointLight);
+                    Scene.scene.add(Sun);
+                });
+            }
+        };
+
+        return SunFactory;
+    }
+);
