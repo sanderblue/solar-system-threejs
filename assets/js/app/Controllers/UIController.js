@@ -25,6 +25,11 @@ define(
                     Scene.setCameraFocalPoint(matchedPlanet.position);
                 });
 
+                $('#mercury .planet-header').on('click', function() {
+                    console.log(this);
+                    $(this).parent().find('.mercury-content').slideToggle();
+                }); 
+
                 UIController.initResetView();
             },
 

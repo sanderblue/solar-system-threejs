@@ -10,31 +10,35 @@
 	<body>
         <div class="container">
             <div class="manny-control-ui">
-            <div class="control-container">
-                    <div class="planet-name">Mercury
-                        <span class="icon-arrow-down"></span>
-                    </div>
-                    <div class="row">
-                        <div class="left-side">
-                            <div class="section-title">Mass</div>
-                                <div class="section-number">328.5E21 kg</div>
-                            <div class="section-title">Orbit Period</div>
-                                <div class="section-number">87.969</div>
-                            <div class="section-title">Day Length</div>
-                                <div class="section-number">58.646</div>
+            <div class="mercury-container">
+                <div id="mercury" class="planet-name">
+                    <span class="planet-header">Mercury</span>
+                    <span class="icon-arrow-down"></span>
+                        <div class="mercury-content">
+                        <div class="row">
+                            <div class="left-side">
+                                <div class="section-title">Mass</div>
+                                    <div class="section-number">328.5E21 kg</div>
+                                <div class="section-title">Orbit Period</div>
+                                    <div class="section-number">87.969</div>
+                                <div class="section-title">Day Length</div>
+                                    <div class="section-number">58.646</div>
+                            </div>
+                            <div class="right-side">
+                                <div class="section-title">Mean Orbit Radius</div>
+                                    <div class="section-number">0.3829 Earths</div>
+                                <div class="section-title">Mean Radius</div>
+                                    <div class="section-number">87,3216</div>
+                                <div class="section-title">Day Length</div>
+                                    <div class="section-number">58.646</div>
+                            </div>
                         </div>
-                        <div class="right-side">
-                            <div class="section-title">Mean Orbit Radius</div>
-                                <div class="section-number">0.3829 Earths</div>
-                            <div class="section-title">Mean Radius</div>
-                                <div class="section-number">87,3216</div>
-                            <div class="section-title">Day Length</div>
-                                <div class="section-number">58.646</div>
+                        <div class="moons-menu">
+                            <span>Moons</span>
+                            <span class="icon-arrow-right2"></span>
                         </div>
                     </div>
-                    <div class="planet-name">Moons
-                        <span class="icon-arrow-down"></span>
-                    </div>
+                </div>
             </div>
             <div id="control-panel" class="control-panel">
                 <div id="accordian" class="accordian">
@@ -104,6 +108,7 @@
             // ga('create', 'UA-41944984-1', 'sanderblue.com');
             // ga('send', 'pageview');
         </script>
+        <script src="/node_modules/grunt-contrib-watch/tasks/lib/livereload.js"></script>
         <script src="/node_modules/grunt-contrib-watch/tasks/lib/livereload.js"></script>
 	</body>
 </html>

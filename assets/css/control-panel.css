@@ -120,25 +120,17 @@
     font-size: 15px;
 }
 
-.control-container {
-    background-color: rgba(70, 70, 70, 0.2);
+.mercury-container {
+    background-color: #1B1B1B;
     width: 100%;
     height: 100%;
     padding: 5%;
     height: 400px;
     margin-left: 10px;
-    transition: 1s;
-
-}
-
-.control-container:hover {
-    background-color: #1B1B1B;
-    transition: background-color 1s;
-    cursor: pointer;
 }
 
 .planet-name {
-    font-size: 1.5em;
+    font-size: 1.2em;
     color: #EF5030;
     border-top: 1px solid #64a3af;
     padding-top: 3px;
@@ -153,6 +145,7 @@
     max-width: 100%;
     margin: 0 auto;
     margin-bottom: 20px;
+    font-size: .65em;
 }
 
 .left-side {
@@ -177,6 +170,23 @@
 .section-title {
     text-transform: uppercase;
     border-bottom: 1px solid #fff;
+    color: #fff;
+}
+
+.icon-arrow-right2 {
+    float: right;
+}
+
+.mercury-container .mercury-content {
+    display: none;
+}
+
+.moons-menu {
+    font-size: 1em;
+    color: #EF5030;
+    border-top: 1px solid #64a3af;
+    padding-top: 3px;
+    text-transform: uppercase;
 }
 
 
