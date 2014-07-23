@@ -11,21 +11,22 @@ define(
              * Returns a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
              * This ratio helps create an accurate representation of each planet's location along its orbit circumference.
              *
-             * @param planet [Object]
+             * @param object [Object]
              * @return float
              */
-            getPlanetRadian: function(planet) {
-                return 360 / planet.orbitDuration;
+            getOrbitRadian: function(object) {
+                return 360 / object.orbitDuration;
             },
 
             /**
-             * Returns a planet's mean orbit amplitude (distance from the surface of the sun).
+             * Returns a planet's mean orbit amplitude (distance from the surface of the sun [semi-major axis]).
              *
+             * @param parent [Object]
              * @param distance [Integer]
              * @return float [semi-major axis]
              */
-            getOrbitAmplitute: function(distance) {
-                return SolarSystem.parent.radius + distance;
+            getOrbitAmplitute: function(parent, distance) {
+                return parent.radius + distance;
             },
 
             /**
@@ -48,7 +49,7 @@ define(
                 // Build the orbit line
                 for(var i = 0; i <= resolution; i++) {
                     var segment = ( i * size ) * Math.PI / 180,
-                        orbitAmplitude = OrbitFactory.getOrbitAmplitute(planet.distanceFromParent);
+                        orbitAmplitude = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, planet.distanceFromParent);
 
                     orbitLine.vertices.push(
                         new THREE.Vector3(

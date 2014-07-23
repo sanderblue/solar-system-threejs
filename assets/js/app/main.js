@@ -74,17 +74,17 @@ define(
                         count = dayOnEarth + 62885;
                     }
 
-                    var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.planets[i].distanceFromParent)
+                    var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, SolarSystem.planets[i].distanceFromParent)
                                 * Math.cos(
                                     count
-                                    * OrbitFactory.getPlanetRadian(SolarSystem.planets[i])
+                                    * OrbitFactory.getOrbitRadian(SolarSystem.planets[i])
                                     * degreesToRadianRatio
                                 );
 
-                    var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.planets[i].distanceFromParent)
+                    var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, SolarSystem.planets[i].distanceFromParent)
                                 * Math.sin(
                                     count
-                                    * OrbitFactory.getPlanetRadian(SolarSystem.planets[i])
+                                    * OrbitFactory.getOrbitRadian(SolarSystem.planets[i])
                                     * degreesToRadianRatio
                                 );
 
@@ -120,64 +120,6 @@ define(
                 UIController.init();
 
                 window.testposition = 0;
-
-                function rotateAnnotationCropper(offsetSelector, xCoordinate, yCoordinate, cropper){
-                    var x       = xCoordinate - offsetSelector.offset().left - offsetSelector.width()/2;
-                    var y       = -1*(yCoordinate - offsetSelector.offset().top - offsetSelector.height()/2);
-                    var theta   = Math.atan2(y,x)*(180/Math.PI);
-                    var cssDegs = convertThetaToCssDegs(theta);
-                    var rotate  = 'rotate(' + cssDegs + 'deg)';
-
-                    window.testposition = cssDegs;
-
-                    if (Math.ceil(cssDegs) < 0) {
-                        window.testposition = 270 - Math.abs(cssDegs) + 90;
-                    }
-
-                    var degreesToRadianRatio = 0.0174532925;
-
-                    var posX = OrbitFactory.getOrbitAmplitute(70)
-                                * Math.cos(
-                                    window.testposition
-                                    * OrbitFactory.getPlanetRadian(SolarSystem.planets[2].moons[0])
-                                    * degreesToRadianRatio
-                                );
-
-                    var posY = OrbitFactory.getOrbitAmplitute(70)
-                                * Math.sin(
-                                    window.testposition
-                                    * OrbitFactory.getPlanetRadian(SolarSystem.planets[2].moons[0])
-                                    * degreesToRadianRatio
-                                );
-
-                    Scene.setCameraPosition(
-                        null,
-                        null,
-                        new THREE.Vector3(
-                            parseFloat(posX),
-                            20,
-                            parseFloat(posY)
-                        ),
-                        null
-                    );
-
-                    cropper.css({'-moz-transform': rotate, 'transform' : rotate, '-webkit-transform': rotate, '-ms-transform': rotate});
-                    $('body').on('mouseup', function(event){ $('body').unbind('mousemove')});
-
-                }
-
-                function convertThetaToCssDegs(theta){
-                    var cssDegs = 90 - theta;
-                    return cssDegs;
-                }
-
-                $(document).ready(function(){
-                    $('#marker').on('mousedown', function(){
-                        $('body').on('mousemove', function(event){
-                            rotateAnnotationCropper($('#innerCircle').parent(), event.pageX,event.pageY, $('#marker'));
-                        });
-                    });
-                });
 
                 $.when(Initializer.init()).done(function() {
                     MainController.animate();

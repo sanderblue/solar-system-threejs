@@ -4,7 +4,7 @@ define(function() {
         radius: 1, // doesn't really mean anything
         diameter: 2, // doesn't really mean anything
         distanceFromParent: 2000, //
-        defaultPosition: new THREE.Vector3(0, -6000, 1000),
+        defaultPosition: new THREE.Vector3(0, -40000, 3000),
         defaultFocalPoint: new THREE.Vector3(0, 0, 0),
         orbitDuration: 364.25,
         dayOfOrbit: 1,

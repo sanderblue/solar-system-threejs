@@ -3,10 +3,10 @@ define(function() {
     var Config = {
         build: {
             SceneEnabled: true,
-            SunFactoryEnabled: false,
-            PlanetFactoryEnabled: false,
-            MoonFactoryEnabled: false,
-            AstroidBeltFactoryEnabled: false,
+            SunFactoryEnabled: true,
+            PlanetFactoryEnabled: true,
+            MoonFactoryEnabled: true,
+            AstroidBeltFactoryEnabled: true,
             RingFactoryEnabled: true,
             OrbitFactoryEnabled: true,
             SolarSystemFactoryEnabled: true,

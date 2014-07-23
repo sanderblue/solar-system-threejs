@@ -38,12 +38,12 @@ define(
 
                     Sun.scale.x = Sun.scale.y = Sun.scale.z = 1;
 
-                    Scene.Sun = Sun;
-
                     // Flip axis
                     Sun.rotation.x = Math.PI / 2;
 
                     Sun.position.set(0, 0, 0);
+
+                    Scene.Sun = Sun;
 
                     Scene.scene.add(pointLight);
                     Scene.scene.add(Sun);

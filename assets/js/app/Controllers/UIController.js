@@ -4,9 +4,10 @@ define(
         'Accordian',
         'Scene',
         'Camera',
-        'SolarSystem'
+        'SolarSystem',
+        'OrbitFactory'
     ],
-    function($, Accordian, Scene, Camera, SolarSystem) {
+    function($, Accordian, Scene, Camera, SolarSystem, OrbitFactory) {
 
         var UIController = {
             initEventListeners: function() {
@@ -30,8 +31,76 @@ define(
                     Scene.setCameraPosition(matchedPlanet, matchedPlanet, matchedPlanet.position, true);
                     Scene.setCameraFocalPoint(matchedPlanet.position);
                 });
+            },
 
-                UIController.initResetView();
+            rotateAnnotationCropper: function(offsetSelector, xCoordinate, yCoordinate, cropper) {
+                var x       = xCoordinate - offsetSelector.offset().left - offsetSelector.width() / 2;
+                var y       = -1 * (yCoordinate - offsetSelector.offset().top - offsetSelector.height() / 2);
+                var theta   = Math.atan2(y, x) * (180 / Math.PI);
+                var cssDegs = UIController.convertThetaToCssDegs(theta);
+                var rotate  = 'rotate(' + cssDegs + 'deg)';
+
+                window.testposition = cssDegs;
+
+                if (Math.ceil(cssDegs) < 0) {
+                    window.testposition = 270 - Math.abs(cssDegs) + 90;
+                }
+
+                var degreesToRadianRatio = 0.0174532925;
+
+                var object = {};
+                var zoomOffset = 7;
+
+                object.orbitDuration = 360;
+
+                var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.planets[2], SolarSystem.planets[2].moons[0].distanceFromParent / zoomOffset)
+                            * Math.cos(
+                                window.testposition
+                                * OrbitFactory.getOrbitRadian(object)
+                                * degreesToRadianRatio
+                            );
+
+                var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.planets[2], SolarSystem.planets[2].moons[0].distanceFromParent / zoomOffset)
+                            * Math.sin(
+                                window.testposition
+                                * OrbitFactory.getOrbitRadian(object)
+                                * degreesToRadianRatio
+                            );
+
+                console.log(OrbitFactory.getOrbitRadian(SolarSystem.planets[2].distanceFromParent), parseInt(posX), parseInt(posY), parseInt(cssDegs));
+
+                Scene.setCameraPosition(
+                    null,
+                    null,
+                    new THREE.Vector3(
+                        parseFloat(posX),
+                        20,
+                        parseFloat(posY)
+                    ),
+                    null
+                );
+
+                cropper.css({ '-moz-transform': rotate, 'transform' : rotate, '-webkit-transform': rotate, '-ms-transform': rotate });
+
+                $('body').on('mouseup', function(event){
+                    $('body').unbind('mousemove');
+                });
+            },
+
+            convertThetaToCssDegs: function(theta) {
+                var cssDegs = 90 - theta;
+
+                return cssDegs;
+            },
+
+            initCameraOrbitControlListener: function() {
+                $(document).ready(function(){
+                    $('#marker').on('mousedown', function(){
+                        $('body').on('mousemove', function(event){
+                            UIController.rotateAnnotationCropper($('#innerCircle').parent(), event.pageX,event.pageY, $('#marker'));
+                        });
+                    });
+                });
             },
 
             initResetView: function() {
@@ -111,6 +180,8 @@ define(
             init: function() {
                 $.when(UIController.buildPlanetList()).done(function() {
                     UIController.initEventListeners();
+                    UIController.initCameraOrbitControlListener();
+                    UIController.initResetView();
                 });
 
                 var accordian = new Accordian();
