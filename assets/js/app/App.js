@@ -21,6 +21,7 @@ define(function() {
     var App = {
         title: 'Solar System',
         config: Config,
+        objects: {}
     };
 
     if (typeof window !== 'undefined') {

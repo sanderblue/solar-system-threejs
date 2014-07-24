@@ -19,8 +19,6 @@ define(
                         matchedPlanet = UIController.findPlanet(id)
                     ;
 
-                    console.log('planet', id);
-
                     // for (var i = 0; i < Scene.planetCores.length; i++) {
                     //     if (Scene.planetCores[i].name  === matchedPlanet.name) {
                     //         var core = Scene.planetCores[i];
@@ -48,26 +46,21 @@ define(
 
                 var degreesToRadianRatio = 0.0174532925;
 
-                var object = {};
-                var zoomOffset = 7;
+                Camera.orbitDuration = 360;
 
-                object.orbitDuration = 360;
-
-                var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.planets[2], SolarSystem.planets[2].moons[0].distanceFromParent / zoomOffset)
+                var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.planets[2], SolarSystem.planets[2].moons[0].distanceFromParent / Camera.zoom)
                             * Math.cos(
                                 window.testposition
-                                * OrbitFactory.getOrbitRadian(object)
+                                * OrbitFactory.getOrbitRadian(Camera)
                                 * degreesToRadianRatio
                             );
 
-                var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.planets[2], SolarSystem.planets[2].moons[0].distanceFromParent / zoomOffset)
+                var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.planets[2], SolarSystem.planets[2].moons[0].distanceFromParent / Camera.zoom)
                             * Math.sin(
                                 window.testposition
-                                * OrbitFactory.getOrbitRadian(object)
+                                * OrbitFactory.getOrbitRadian(Camera)
                                 * degreesToRadianRatio
                             );
-
-                console.log(OrbitFactory.getOrbitRadian(SolarSystem.planets[2].distanceFromParent), parseInt(posX), parseInt(posY), parseInt(cssDegs));
 
                 Scene.setCameraPosition(
                     null,
@@ -80,9 +73,11 @@ define(
                     null
                 );
 
+                console.log(Scene.camera.position)
+
                 cropper.css({ '-moz-transform': rotate, 'transform' : rotate, '-webkit-transform': rotate, '-ms-transform': rotate });
 
-                $('body').on('mouseup', function(event){
+                $('body').on('mouseup', function(e){
                     $('body').unbind('mousemove');
                 });
             },
@@ -96,10 +91,24 @@ define(
             initCameraOrbitControlListener: function() {
                 $(document).ready(function(){
                     $('#marker').on('mousedown', function(){
-                        $('body').on('mousemove', function(event){
-                            UIController.rotateAnnotationCropper($('#innerCircle').parent(), event.pageX,event.pageY, $('#marker'));
+                        $('body').on('mousemove', function(e){
+                            UIController.rotateAnnotationCropper($('#innerCircle').parent(), e.pageX,e.pageY, $('#marker'));
                         });
                     });
+                });
+            },
+
+            initCameraZoomEventListener: function() {
+                $('#camera-zoom-control').on('change', function() {
+                    console.log('Zoom: ', this.value);
+
+                    Camera.position.x = Scene.camera.position.x - this.value;
+                    Camera.position.z = Scene.camera.position.z - this.value;
+
+                    Scene.camera.position.x = Camera.position.x;
+                    Scene.camera.position.z = Camera.position.z;
+
+                    console.log('Position: ', Scene.camera.position);
                 });
             },
 
@@ -181,6 +190,7 @@ define(
                 $.when(UIController.buildPlanetList()).done(function() {
                     UIController.initEventListeners();
                     UIController.initCameraOrbitControlListener();
+                    UIController.initCameraZoomEventListener();
                     UIController.initResetView();
                 });
 

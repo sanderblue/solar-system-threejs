@@ -1,12 +1,14 @@
 define(function() {
 
     var Camera = {
-        radius: 1, // doesn't really mean anything
-        diameter: 2, // doesn't really mean anything
-        distanceFromParent: 2000, //
+        zoom: 8, // integer value to adjust the camera's zoom (usually the y-axis)
+        radius: 0.1, // doesn't really mean anything
+        diameter: 0.2, // doesn't really mean anything
+        distanceFromParent: 2000,
+        position: new THREE.Vector3(0, 0, 0),
         defaultPosition: new THREE.Vector3(0, -40000, 3000),
-        defaultFocalPoint: new THREE.Vector3(0, 0, 0),
-        orbitDuration: 364.25,
+        defaultFocalPoint: new THREE.Vector3(0, 0, 0), // universe center
+        orbitDuration: 360, // equivalent to 360 degrees
         dayOfOrbit: 1,
         perspective: {
             near: 1,

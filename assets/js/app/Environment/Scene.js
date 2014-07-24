@@ -16,8 +16,6 @@ define(['Camera', 'Time'], function(Camera) {
 
         setContainer: function() {
             Scene.container = document.getElementById('solar-system');
-
-            // document.body.appendChild(Scene.container);
         },
 
         setScene: function() {
@@ -65,6 +63,14 @@ define(['Camera', 'Time'], function(Camera) {
             // Scene.container.appendChild(Scene.stats.domElement);
         },
 
+        /**
+         * Sets the scene's camera position. This method can also reset the camera to its original starting position.
+         *
+         * @param object3d       [THREE Object]
+         * @param parentObject3D [THREE Object]
+         * @param vector3        [THREE object]
+         * @param reset          [boolean]
+         */
         setCameraPosition: function(object3D, parentObject3D, vector3, reset) {
             if (object3D && parentObject3D) {
                 Scene.camera.position.x = parentObject3D.geometry.radius * 5.5; // zoom
@@ -85,10 +91,13 @@ define(['Camera', 'Time'], function(Camera) {
             Scene.camera.position.z = vector3.z;
         },
 
+        /**
+         * Sets the scene's camera focal point.
+         *
+         * @param target [THREE Object]
+         */
         setCameraFocalPoint: function(target) {
             var focalPoint = target;
-
-            // window.focalPoint = target;
 
             Scene.camera.focalPoint = focalPoint;
             Scene.camera.lookAt(focalPoint);
@@ -102,11 +111,12 @@ define(['Camera', 'Time'], function(Camera) {
 
                 Scene.setContainer();
                 Scene.setScene();
-                // Scene.setAxisHelpers();
                 Scene.setLights();
                 Scene.setCamera();
-                // Scene.setCameraControls();
                 Scene.setRender();
+
+                // Scene.setCameraControls();
+                // Scene.setAxisHelpers();
                 // Scene.setStats();
 
                 $.when(
