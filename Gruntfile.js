@@ -39,10 +39,6 @@ module.exports = function(grunt) {
                 ],
                 tasks: ['sass:primary']
             }
-            // ,
-            // options: {
-            //     livereload: 3000
-            // }
         }
     });
 

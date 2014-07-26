@@ -46,7 +46,7 @@ define(
                     if (i === 2) {
                         count = dayOnEarth;
 
-                        Scene.planets[i].cloudCentroid.rotation.y += 0.00017;
+                        Scene.planets[i].cloudCentroid.rotation.y += 0.00018;
                     }
 
                     // Mars
@@ -118,8 +118,6 @@ define(
 
             init: function() {
                 UIController.init();
-
-                window.testposition = 0;
 
                 $.when(Initializer.init()).done(function() {
                     MainController.animate();

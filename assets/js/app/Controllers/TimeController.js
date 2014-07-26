@@ -17,6 +17,9 @@ define(function() {
         return d;
     };
 
+    /*
+
+     */
     var TimeController = function(options) {
         this.options = options || defaults;
     };

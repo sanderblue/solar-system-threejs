@@ -1,15 +1,14 @@
 define(function() {
-    /*
+    /**
      * Solar System
      *
-     * Units of measurement = kilometers (km)
-     *
-     * Initial Scales:
-     *     Planets = 1:1000
-     *     Orbit Amplitudes = 1:100000 (multiplied by orbitScale)
-     *     Moons = 1:1000
-     *
+     * This file contains the universal data to be used to build the entire model.
+     * The initial scales differ for better user experience. Adjustments will be made
+     * as the project progresses.
      */
+
+
+    // Inital scales
     var sunScale       = 1 * Math.pow(10, -2.4),
         celestialScale = 1 * Math.pow(10, -2),
         moonOrbitScale = 1 * Math.pow(10, -2.35),
@@ -17,6 +16,7 @@ define(function() {
         axialTiltOffset = 180
     ;
 
+    // Solar System data
     var SolarSystem = {
         orbitScale: orbitScale,
         celestialScale: celestialScale,
@@ -26,7 +26,7 @@ define(function() {
             radius: 696342 * sunScale, // 696342 ±65 km
             diameter: 1400,
             texture: null,
-            distanceFromParent: 270000000000000030 //  2.7×10^17 km (27,200 light-years) from Milky Way core
+            distanceFromParent: 270000000000000030 //  2.7×10^17 km (27,200 light-years) from the Milky Way core
         },
         planets: [
             {

@@ -19,13 +19,6 @@ define(
                         matchedPlanet = UIController.findPlanet(id)
                     ;
 
-                    // for (var i = 0; i < Scene.planetCores.length; i++) {
-                    //     if (Scene.planetCores[i].name  === matchedPlanet.name) {
-                    //         var core = Scene.planetCores[i];
-                    //         break;
-                    //     }
-                    // }
-
                     Scene.setCameraPosition(matchedPlanet, matchedPlanet, matchedPlanet.position, true);
                     Scene.setCameraFocalPoint(matchedPlanet.position);
                 });
