@@ -1,53 +1,61 @@
 define(function() {
 
-    var defaults = {
+    /**
+     * TimeController
+     *
+     * Creates the universal time for the application. The current time is held in the
+     * clock property. The delay property speeds or slows down time.
+     *
+     *
+     *
+     *
+     *
+     *
+     */
+    var TimeController = {
         offset: null,
         clock: 1,
         interval: null,
-        delay: 1
-    };
+        delay: 1, // seconds
 
-    var getDelta = function(module, offset) {
-        var now = Date.now(),
-            os  = offset ? offset : 1,
-            d   = now - os;
+        start: function() {
+            var TimeController = this;
 
-        module.options.offset = now;
+            if (!TimeController.interval) {
+                TimeController.offset = Date.now();
 
-        return d;
-    };
+                TimeController.interval = setInterval(function() {
+                    TimeController.clock += TimeController.getDelta(TimeController.offset);
+                }, TimeController.delay);
+            }
+        },
 
-    /*
+        stop: function() {
+            if (TimeController.interval) {
+                clearInterval(TimeController.interval);
 
-     */
-    var TimeController = function(options) {
-        this.options = options || defaults;
-    };
+                TimeController.interval = null;
+            }
+        },
 
-    TimeController.prototype.start = function() {
-        var self = this;
+        reset: function() {
+            TimeController.clock = 0;
+        },
 
-        if (!self.options.interval) {
-            self.options.offset = Date.now();
-            self.options.interval = setInterval(function() {
-                self.options.clock += getDelta(self, self.options.offset);
-            }, self.options.delay);
+        getDelta: function(offset) {
+            var now = Date.now(),
+                os  = offset ? offset : 1,
+                d   = now - os
+            ;
+
+            TimeController.offset = now;
+
+            return d;
+        },
+
+        getTime: function() {
+            return TimeController.clock / 1000;
         }
-    }
-
-    TimeController.prototype.stop = function() {
-        if (this.options.interval) {
-            clearInterval(this.options.interval);
-            this.options.interval = null;
-        }
-    };
-
-    TimeController.prototype.reset = function() {
-        this.options.clock = 0;
-    };
-
-    TimeController.prototype.getStopWatchValue = function() {
-        return this.options.clock / 1000;
     };
 
     return TimeController;

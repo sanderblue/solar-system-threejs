@@ -34,16 +34,13 @@ define(
                 // }
 
                 return $.when(Scene.init()).done(function() {
-                    var TimeCtrl = new TimeController();
-
                     $.when(
                         SolarSystemFactory.build()
                     )
                     .done(function() {
+                        TimeController.start();
                         UIController.init();
                     });
-
-                    TimeCtrl.start();
                 });
             }
         };

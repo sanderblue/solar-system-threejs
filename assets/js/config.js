@@ -17,10 +17,13 @@ require.config({
         'main'        : 'app/main',
         'App'         : 'app/App',
         'Initializer' : 'app/SolarSystem/Init/Initializer',
+        'SolarSystem' : 'app/SolarSystem/SolarSystem',
+
+        // Environment
         'Time'        : 'app/Environment/Time',
         'Scene'       : 'app/Environment/Scene',
         'Camera'      : 'app/Environment/Camera',
-        'SolarSystem' : 'app/SolarSystem/SolarSystem',
+        'Constants'   : 'app/Environment/Constants',
 
         // Factories
         'SolarSystemFactory' : 'app/SolarSystem/Factory/SolarSystemFactory',
@@ -66,7 +69,7 @@ require.config({
             deps: ['stats']
         },
         'main': {
-            deps: ['jquery', 'threejs', 'App', 'AdditiveBlendShader', 'Time', 'Modules', 'OrbitFactory', 'UIController']
+            deps: ['jquery', 'threejs', 'App', 'AdditiveBlendShader', 'Constants', 'Time', 'Modules', 'OrbitFactory', 'UIController']
         },
         'Initializer': {
             deps: ['Scene']

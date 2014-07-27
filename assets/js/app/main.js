@@ -13,8 +13,6 @@ define(
     ],
     function($, App, Scene, Initializer, UIController, PlanetFactory, OrbitFactory, SolarSystem, TimeController) {
 
-        var TimeCtrl = new TimeController();
-
         var MainController = {
             animate: function() {
                 requestAnimationFrame(MainController.animate);
@@ -30,7 +28,7 @@ define(
                 ;
 
                 for (var i = 0; i < planets.length; i++) {
-                    var dayOnEarth = new Date().getDOYwithTimeAsDecimal() + TimeCtrl.getStopWatchValue();
+                    var dayOnEarth = new Date().getDOYwithTimeAsDecimal() + TimeController.getTime();
 
                     // Mercury
                     if (i === 0) {
