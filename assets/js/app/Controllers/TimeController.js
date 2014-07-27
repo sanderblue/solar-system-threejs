@@ -4,19 +4,14 @@ define(function() {
      * TimeController
      *
      * Creates the universal time for the application. The current time is held in the
-     * clock property. The delay property speeds or slows down time.
-     *
-     *
-     *
-     *
-     *
-     *
+     * clock property. Currently one second equals one Earth day, meaning it takes
+     * Earth approximately 6 minutes and 4 seconds to orbit the Sun.
      */
     var TimeController = {
         offset: null,
         clock: 1,
         interval: null,
-        delay: 1, // seconds
+        delay: 1,
 
         start: function() {
             var TimeController = this;

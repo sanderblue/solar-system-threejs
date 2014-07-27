@@ -12,6 +12,11 @@ define(
     function($, Scene, SolarSystem, RingFactory, MoonFactory, OrbitFactory, TimerUtil, System) {
 
         var PlanetFactory = {
+            /**
+             * Gets a planet's texture.
+             *
+             * @param planet [object]
+             */
             getTexture: function(planet) {
                 var texturePath = '../assets/textures/' + planet.name.toLowerCase() + '.jpg';
 
@@ -19,6 +24,8 @@ define(
             },
 
             /**
+             * Builds the could layer for earth.
+             *
              * @param planet [THREE object]
              */
             buildEarthClouds: function(planet) {
@@ -34,6 +41,12 @@ define(
                 return new THREE.Mesh(geometry, material);
             },
 
+            /**
+             * Adds a planet's moons.
+             *
+             * @param planet    [object]
+             * @param planetObj [THREE object]
+             */
             addMoons: function(planet, planetObj) {
                 return $.Deferred(function(promise) {
                     for (var i = 0; i < planet.moons.length; i++) {
@@ -47,7 +60,7 @@ define(
             /**
              * Builds a planet's core.
              *
-             * @param planet [THREE Object]
+             * @param planet [THREE object]
              */
             buildCore: function(planet) {
                 var core = new THREE.Object3D();
@@ -65,7 +78,7 @@ define(
             /**
              * Builds a representation of a planet as a Three.js mesh based on a planet's data.
              *
-             * @param planet [Object]
+             * @param planet [object]
              */
             build: function(planet) {
                 return $.Deferred(function(promise) {

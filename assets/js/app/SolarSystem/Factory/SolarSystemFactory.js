@@ -11,7 +11,14 @@ define(
     ],
     function(Scene, SolarSystem, SunFactory, PlanetFactory, AstroidBeltFactory, StarFactory, TimerUtil, System) {
 
-        var SolarSystemBuilder = {
+        /**
+         * SolarSystemFactory
+         *
+         * This is the main factory that controls the construction of the Solar System. The contruction does not
+         * begin until the scene has been built and initialized. Each build process is enabled or disabled by
+         * the application configurations (found in App.js).
+         */
+        var SolarSystemFactory = {
             buildParent: function() {
                 return $.Deferred(function(promise) {
                     if (!App.config.build.SunFactoryEnabled) {
@@ -70,10 +77,10 @@ define(
                 var startTime = new Date().getTime();
 
                 return $.when(
-                    SolarSystemBuilder.buildParent(),
-                    SolarSystemBuilder.buildAstroidBelt(),
-                    SolarSystemBuilder.buildPlanets(),
-                    SolarSystemBuilder.buildStars()
+                    SolarSystemFactory.buildParent(),
+                    SolarSystemFactory.buildAstroidBelt(),
+                    SolarSystemFactory.buildPlanets(),
+                    SolarSystemFactory.buildStars()
                 )
                 .done(function() {
                     var endTime = new Date().getTime();
@@ -83,6 +90,6 @@ define(
             }
         };
 
-        return SolarSystemBuilder;
+        return SolarSystemFactory;
     }
 );

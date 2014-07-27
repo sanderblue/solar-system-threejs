@@ -1,7 +1,7 @@
 define(function() {
 
     /**
-     * The Camera object contains the default camera data. As the scene changes, the data changes.
+     * The Camera object contains the default camera data.
      */
     var Camera = {
         zoom: 8, // integer value to adjust the camera's zoom

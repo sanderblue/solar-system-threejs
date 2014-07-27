@@ -11,7 +11,7 @@ define(
              * Returns a planet's current radian conversion ratio based on each planet's earth days to orbit the Sun.
              * This ratio helps create an accurate representation of each planet's location along its orbit circumference.
              *
-             * @param object [Object]
+             * @param object [object]
              * @return float
              */
             getOrbitRadian: function(object) {
@@ -21,9 +21,9 @@ define(
             /**
              * Returns a planet's mean orbit amplitude (distance from the surface of the sun [semi-major axis]).
              *
-             * @param parent [Object]
-             * @param distance [Integer]
-             * @return float [semi-major axis]
+             * @param parent   [object]
+             * @param distance [integer]
+             * @return float   [semi-major axis]
              */
             getOrbitAmplitute: function(parent, distance) {
                 return parent.radius + distance;
@@ -32,7 +32,7 @@ define(
             /**
              * Builds a planet's orbit line (for display purposes only).
              *
-             * @param planet [Object]
+             * @param planet [object]
              */
             build: function(planet) {
                 var resolution = 540, // segments in the line

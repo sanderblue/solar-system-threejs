@@ -1,6 +1,18 @@
 define(function() {
 
+    /**
+     * RingFactory
+     *
+     * Builds a planet's rings if present.
+     */
     var RingFactory = {
+
+        /**
+         * Builds a planet's rings.
+         *
+         * @param thisPlanet [THREE object]
+         * @param planet     [object]
+         */
         buildRings: function(thisPlanet, planet) {
             return $.Deferred(function(promise) {
                 var hasRings = Boolean(planet.rings.length);
@@ -37,6 +49,12 @@ define(function() {
             });
         },
 
+        /**
+         * Builds a single ring.
+         *
+         * @param planet [object]
+         * @param ring   [object]
+         */
         buildRing: function(planet, ring) {
             return $.Deferred(function(promise) {
                 var resolution = 720, // segments in the line

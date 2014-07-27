@@ -1,16 +1,17 @@
 define(
     [
         'TimeController',
-        'PlanetFactory'
+        'PlanetFactory',
+        'Constants'
     ],
-    function(TimeController, PlanetFactory) {
+    function(TimeController, PlanetFactory, Constants) {
 
         var OrbitController = function(object3d, object, parent, options) {
             for (var i = 0; i <= arguments.length - 1; i++) {
                 var optionalArg = arguments[3];
 
                 if (!arguments[i] && !optionalArg) {
-                    throw new MissingArgumentException(i, method);
+                    throw new MissingArgumentException(i + 1, method);
 
                     return;
                 }
@@ -33,8 +34,7 @@ define(
                 }
             }
 
-            var self = this,
-                degreesToRadianRatio = 0.0174532925,
+            var self  = this,
                 count = TimeController.getTime()
             ;
 
@@ -43,14 +43,14 @@ define(
                             * Math.sin(
                                 count
                                 * (360 / self.object.orbitDuration)
-                                * degreesToRadianRatio
+                                * Constants.degreesToRadianRatio
                             );
 
                 var posY = (self.parent.radius + self.object.distanceFromParent)
                             * Math.cos(
                                 count
                                 * (360 / self.object.orbitDuration)
-                                * degreesToRadianRatio
+                                * Constants.degreesToRadianRatio
                             );
 
                 self.object3d.position.set(

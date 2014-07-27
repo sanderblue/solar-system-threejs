@@ -6,6 +6,14 @@ define(
     ],
     function(Scene, SolarSystem, RandomNumber) {
 
+        /**
+         * StarFactory
+         *
+         * Builds the distance stars in space. The number of stars to be rendered is set in the SolarSystem object.
+         *
+         * Note: This is currently not being used due to performance issues. I will be optimizing this in hopes of creating
+         *       a true 3d array of stars.
+         */
         var StarFactory = {
             getPosition: function(i) {
                 var sceneRadius = 40000,

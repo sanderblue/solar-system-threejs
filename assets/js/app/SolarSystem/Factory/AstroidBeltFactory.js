@@ -1,16 +1,36 @@
 define(
     [
         'Scene',
-        'SolarSystem'
+        'SolarSystem',
+        'OrbitFactory',
+        'Constants',
+        'RandomNumber'
     ],
-    function(Scene, SolarSystem) {
+    function(Scene, SolarSystem, OrbitFactory, Constants, RandomNumber) {
 
-        var AstroidBelt = {
+        /**
+         * AstroidBeltFactory
+         *
+         * Builds the Solar System's Astroid Belt. The number of astroids to be rendered is set in
+         * the SolarSystem object. Each astroid is randomly positioned within its orbit and between
+         * the orbits of Mars and Jupiter.
+         */
+        var AstroidBeltFactory = {
+
+            /**
+             * Gets a generic texture for an astroid.
+             */
             getTexture: function() {
                 return new THREE.ImageUtils.loadTexture('../assets/textures/crust_tiny.jpg');
             },
 
-            getRandomPointInSphere: function(radius) {
+            /**
+             * Gets a random Vector3 object to create a random point
+             *
+             * @param radius   [float]
+             * @return Vector3 [THREE object]
+             */
+            getRandomPointCoordinate: function(radius) {
                 return new THREE.Vector3(
                     Math.random() * radius,
                     Math.random() * radius,
@@ -18,53 +38,48 @@ define(
                 );
             },
 
-            // Gets an astroid's current radian conversion ratio based on each astroid's earth days to orbit the Sun.
-            // This ratio helps create an accurate representation of each astroid's location along its orbit.
+            /**
+             * Gets an astroid's current radian value based on each astroid's earth days to orbit the Sun.
+             * This ratio helps create an accurate representation of each astroid's location along its orbit.
+             */
             getAstroidRadian: function() {
                 return 360 / SolarSystem.astroidBelt.primary[0].orbitDuration; // Using Ceres as a reference point
             },
 
-            getOrbitAmplitute: function(distance) {
-                return SolarSystem.parent.radius + distance;
-            },
-
+            /**
+             * Builds the random points that create a unique shape for each astroid.
+             */
             buildRandomPoints: function() {
                 var points = [];
 
                 for (var i = 0; i < 7; i ++) {
                     var radius = (Math.random() + 1150) * SolarSystem.celestialScale;
 
-                    points.push(AstroidBelt.getRandomPointInSphere(radius));
+                    points.push(AstroidBeltFactory.getRandomPointCoordinate(radius));
                 }
 
                 return points;
             },
 
-            getRandomNumber: function() {
-                var randomNumA = new Date().getMilliseconds() - (new Date().getMilliseconds() / 2.1),
-                    randomNumB = Math.random() * randomNumA;
-
-                if (randomNumB > 250) {
-                    return parseFloat(randomNumB - 100 * Math.PI / 2);
-                }
-
-                return randomNumB;
-            },
-
+            /**
+             * Positions an astroid within its orbit. The semi-major axis of each astroid's orbit is randomized to
+             * distribute the astroids between the Mars and Jupiter orbits.
+             *
+             * @param astroid [THREE object]
+             * @param count   [integer]
+             */
             positionAstroid: function(astroid, count) {
-                var degreesToRadianRatio = 0.0174532925,
-                    amplitude = SolarSystem.astroidBelt.distanceFromParent + AstroidBelt.getRandomNumber() * 65 // randomize the amplitudes to spread them out
-                ;
+                var amplitude = SolarSystem.astroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 65; // randomize the amplitudes to spread them out
 
-                var posX = AstroidBelt.getOrbitAmplitute(amplitude)
+                var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, amplitude)
                             * Math.cos(count + 25 * Math.random()
-                            * AstroidBelt.getAstroidRadian()
-                            * degreesToRadianRatio);
+                            * AstroidBeltFactory.getAstroidRadian()
+                            * Constants.degreesToRadianRatio);
 
-                var posY = AstroidBelt.getOrbitAmplitute(amplitude)
+                var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, amplitude)
                             * Math.sin(count + 45 * Math.random()
-                            * AstroidBelt.getAstroidRadian()
-                            * degreesToRadianRatio);
+                            * AstroidBeltFactory.getAstroidRadian()
+                            * Constants.degreesToRadianRatio);
 
                 astroid.position.set(
                     posX,
@@ -73,11 +88,16 @@ define(
                 );
             },
 
+            /**
+             * Builds a uniquely shaped astroid.
+             *
+             * @param index [integer]
+             */
             buildAstroid: function(index) {
                 return $.Deferred(function(promise) {
-                    var randomPoints = AstroidBelt.buildRandomPoints();
+                    var randomPoints = AstroidBeltFactory.buildRandomPoints();
 
-                    var map = AstroidBelt.getTexture();
+                    var map = AstroidBeltFactory.getTexture();
 
                     map.wrapS = map.wrapT = THREE.RepeatWrapping;
                     map.anisotropy = 2;
@@ -90,8 +110,8 @@ define(
                     // Random convex mesh to represent an irregular, rock-like shape based on random points within a sphere where radius = n(random)
                     var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), materials);
 
-                    AstroidBelt.positionAstroid(object, index);
-                    AstroidBelt.addAstroid(object);
+                    AstroidBeltFactory.positionAstroid(object, index);
+                    AstroidBeltFactory.addAstroid(object);
 
                     Scene.astroids.push(object);
 
@@ -99,19 +119,27 @@ define(
                 });
             },
 
+            /**
+             * Builds the entire astroid belt based on the number astroids we want to render.
+             */
             buildBelt: function() {
                 var astroids = SolarSystem.astroidBelt.count;
 
                 for (var i = 0; i < astroids; i++) {
-                    AstroidBelt.buildAstroid(i);
+                    AstroidBeltFactory.buildAstroid(i);
                 }
             },
 
+            /**
+             * Adds an astroid to the scene.
+             *
+             * @param astroid [THREE object]
+             */
             addAstroid: function(astroid) {
                 Scene.scene.add(astroid);
             }
         };
 
-        return AstroidBelt;
+        return AstroidBeltFactory;
     }
 );

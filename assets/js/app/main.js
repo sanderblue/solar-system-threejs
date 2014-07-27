@@ -11,8 +11,18 @@ define(
         'TimeController',
         'Modules'
     ],
-    function($, App, Scene, Initializer, UIController, PlanetFactory, OrbitFactory, SolarSystem, TimeController) {
-
+    function(
+        $,
+        App,
+        Scene,
+        Initializer,
+        UIController,
+        PlanetFactory,
+        OrbitFactory,
+        SolarSystem,
+        TimeController
+    )
+    {
         var MainController = {
             animate: function() {
                 requestAnimationFrame(MainController.animate);
@@ -44,6 +54,7 @@ define(
                     if (i === 2) {
                         count = dayOnEarth;
 
+                        // Rotates the cloud layer independently from the Earth surface
                         Scene.planets[i].cloudCentroid.rotation.y += 0.00018;
                     }
 
