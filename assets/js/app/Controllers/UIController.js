@@ -24,7 +24,7 @@ define(
                 });
             },
 
-            rotateAnnotationCropper: function(offsetSelector, xCoordinate, yCoordinate, cropper) {
+            adjustCameraOrbitPosition: function(offsetSelector, xCoordinate, yCoordinate, cropper) {
                 var x       = xCoordinate - offsetSelector.offset().left - offsetSelector.width() / 2;
                 var y       = -1 * (yCoordinate - offsetSelector.offset().top - offsetSelector.height() / 2);
                 var theta   = Math.atan2(y, x) * (180 / Math.PI);
@@ -85,18 +85,37 @@ define(
                 $(document).ready(function(){
                     $('#marker').on('mousedown', function(){
                         $('body').on('mousemove', function(e){
-                            UIController.rotateAnnotationCropper($('#innerCircle').parent(), e.pageX,e.pageY, $('#marker'));
+                            UIController.adjustCameraOrbitPosition($('#innerCircle').parent(), e.pageX,e.pageY, $('#marker'));
                         });
                     });
                 });
             },
 
             initCameraZoomEventListener: function() {
-                $('#camera-zoom-control').on('change', function() {
-                    console.log('Zoom: ', this.value);
+                var value = 0;
 
-                    Camera.position.x = Scene.camera.position.x - this.value;
-                    Camera.position.z = Scene.camera.position.z - this.value;
+                $('#camera-zoom-control').on('change', function() {
+                    console.log('Zoom: ', parseFloat(this.value), parseFloat(value));
+
+                    if (parseFloat(this.value) > parseFloat(value) && parseFloat(this.value) > 0) {
+                        Camera.position.x = parseFloat(Scene.camera.position.x) - (parseFloat(this.value) - parseFloat(value));
+                        Camera.position.z = parseFloat(Scene.camera.position.z) - (parseFloat(this.value) - parseFloat(value));
+                    }
+
+                    if (parseFloat(this.value) > parseFloat(value) && parseFloat(this.value) > 0) {
+                        Camera.position.x = parseFloat(Scene.camera.position.x) + parseFloat(this.value);
+                        Camera.position.z = parseFloat(Scene.camera.position.z) + parseFloat(this.value);
+                    }
+
+                    if (parseFloat(this.value) < parseFloat(value) && parseFloat(this.value) < 0) {
+                        Camera.position.x = parseFloat(Scene.camera.position.x) + parseFloat(this.value);
+                        Camera.position.z = parseFloat(Scene.camera.position.z) + parseFloat(this.value);
+                    }
+
+                    value = this.value;
+
+                    positionX = Camera.position.x;
+                    positionZ = Camera.position.z;
 
                     Scene.camera.position.x = Camera.position.x;
                     Scene.camera.position.z = Camera.position.z;

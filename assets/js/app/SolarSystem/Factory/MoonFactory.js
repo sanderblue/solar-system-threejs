@@ -64,6 +64,8 @@ define(
                     MoonController.positionObject(thisMoon);
                 }
 
+                console.log('MOON');
+
                 planetObj.add(moonCentroid);
                 moonCentroid.add(thisMoon);
             }
