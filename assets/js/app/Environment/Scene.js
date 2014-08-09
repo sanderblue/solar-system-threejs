@@ -2,6 +2,12 @@ define(['Camera'], function(Camera) {
 
     window.focalPoint = Camera.defaultFocalPoint;
 
+    /**
+     * Scene
+     *
+     * The universal scene object contains the Threejs scene and is responsible for building
+     * the entire viewable UI with exception of the accordian.
+     */
     var Scene = {
         Sun: null,
         planets: [],

@@ -76,7 +76,7 @@ define(
             },
 
             /**
-             * Builds a representation of a planet as a Three.js mesh based on a planet's data.
+             * Builds a representation of a planet as a Three.js mesh based on the planet's data.
              *
              * @param planet [object]
              */

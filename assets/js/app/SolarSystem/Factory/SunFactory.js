@@ -8,8 +8,8 @@ define(
         /**
          * SunFactory
          *
-         * Builds the Solar System's parent star. The Sun object provides approximately 90% of the light in the scene.
-         * The remaining 10% of ambient light can be adjusted from within the Scene object.
+         * Builds the Solar System's parent star. The Sun object provides approximately 85% of the light in the scene.
+         * The remaining 15% of ambient light can be adjusted from within the Scene object.
          */
         var SunFactory = {
             getTexture: function() {

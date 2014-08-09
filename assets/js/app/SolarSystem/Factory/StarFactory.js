@@ -25,8 +25,6 @@ define(
                     z           = 0
                 ;
 
-                console.log(RandomNumber)
-
                 return RandomNumber.getRandomPointInSphere(sceneRadius, x, y, z);
             },
 

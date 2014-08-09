@@ -58,10 +58,10 @@ define(
 
                 moonCentroid.rotation.x = moon.inclination;
 
-                var MoonController = new OrbitController(thisMoon, moon, parent, { interval: 1 });
+                var OrbitCtrl = new OrbitController(thisMoon, moon, parent, { interval: 1 });
 
                 if (App.config.moonOrbitsEnabled) {
-                    MoonController.positionObject(thisMoon);
+                    OrbitCtrl.positionObject(thisMoon);
                 }
 
                 console.log('MOON');

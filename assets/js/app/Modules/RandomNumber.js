@@ -5,6 +5,8 @@ define(['threejs'], function() {
          * Gets a random point of a sphere, evenly distributed over the sphere.
          * The sphere is centered at (x0,y0,z0) with the passed in radius.
          * The returned point is returned as a three element array [x,y,z].
+         *
+         * @return Vector3 [THREE object]
          */
         getRandomPointInSphere: function(radius, x0, y0, z0){
             if (!x0) { x0 = 0 }
@@ -27,6 +29,8 @@ define(['threejs'], function() {
         /**
          * Gets a random number based off arbitrary timestamps and randomizing with other operations.
          * This method facilitates randomizing the position of the astroids.
+         *
+         * @return integer
          */
         getRandomNumber: function() {
             var randomNumA = new Date().getMilliseconds() - (new Date().getMilliseconds() / 2.1),

@@ -7,12 +7,11 @@ define(function() {
      * as the project progresses.
      */
 
-
     // Inital scales
-    var sunScale       = 1 * Math.pow(10, -2.4),
-        celestialScale = 1 * Math.pow(10, -2),
-        moonOrbitScale = 1 * Math.pow(10, -2.35),
-        orbitScale     = 1 * Math.pow(10, -4),
+    var sunScale        = 1 * Math.pow(10, -2.4),
+        celestialScale  = 1 * Math.pow(10, -2),
+        moonOrbitScale  = 1 * Math.pow(10, -2.35),
+        orbitScale      = 1 * Math.pow(10, -4),
         axialTiltOffset = 180
     ;
 

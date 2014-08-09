@@ -120,7 +120,7 @@ define(
             },
 
             /**
-             * Builds the entire astroid belt based on the number astroids we want to render.
+             * Builds the entire astroid belt based on the configured astroid count.
              */
             buildBelt: function() {
                 var astroids = SolarSystem.astroidBelt.count;

@@ -23,6 +23,11 @@ define(
         TimeController
     )
     {
+        /**
+         * MainController
+         *
+         * This object is responsible for positioning the planets and animating the scene.
+         */
         var MainController = {
             animate: function() {
                 requestAnimationFrame(MainController.animate);

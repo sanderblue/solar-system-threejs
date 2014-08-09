@@ -5,7 +5,7 @@ define(function() {
          * Outputs provided arguments in the browsers javascript console.
          * If argument 2 is provided and is true, the output will display each item in args
          * on a separate line in the javascript console. If force = true, the provided arguments will
-         * logged in the javascript console regardless of the current App settings.
+         * be logged in the javascript console regardless of the current App settings.
          *
          * @param args  [mixed]
          * @param split [boolean]
