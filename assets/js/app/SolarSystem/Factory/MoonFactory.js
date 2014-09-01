@@ -61,10 +61,12 @@ define(
                 var OrbitCtrl = new OrbitController(thisMoon, moon, parent, { interval: 1 });
 
                 if (App.config.moonOrbitsEnabled) {
-                    OrbitCtrl.positionObject(thisMoon);
-                }
+                    // console.log('MOON', moon);
 
-                console.log('MOON');
+                    setInterval(function() {
+                        OrbitCtrl.positionObject(thisMoon);
+                    }, 10)
+                }
 
                 planetObj.add(moonCentroid);
                 moonCentroid.add(thisMoon);

@@ -24,42 +24,29 @@ define(
         };
 
         OrbitController.prototype.positionObject = function() {
-            var method = 'OrbitController::positionObject()';
-
-            for (var i = 0; i <= arguments.length - 1; i++) {
-                if (!arguments[i]) {
-                    throw new MissingArgumentException(i, method);
-
-                    return;
-                }
-            }
-
             var self  = this,
                 count = TimeController.getTime()
             ;
 
-            setInterval(function() {
-                var posX = (self.parent.radius + self.object.distanceFromParent)
-                            * Math.sin(
-                                count
-                                * (360 / self.object.orbitDuration)
-                                * Constants.degreesToRadianRatio
-                            );
+            var posX = (self.parent.radius + self.object.distanceFromParent)
+                        * Math.sin(
+                            count
+                            * (360 / self.object.orbitDuration)
+                            * 0.0174532925
+                        );
 
-                var posY = (self.parent.radius + self.object.distanceFromParent)
-                            * Math.cos(
-                                count
-                                * (360 / self.object.orbitDuration)
-                                * Constants.degreesToRadianRatio
-                            );
+            var posY = (self.parent.radius + self.object.distanceFromParent)
+                        * Math.cos(
+                            count
+                            * (360 / self.object.orbitDuration)
+                            * 0.0174532925
+                        );
 
-                self.object3d.position.set(
-                    parseFloat(posX),
-                    0,
-                    parseFloat(posY)
-                );
-
-            }, self.options.interval);
+            self.object3d.position.set(
+                parseFloat(posX),
+                0,
+                parseFloat(posY)
+            );
         };
 
         return OrbitController;

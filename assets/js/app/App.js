@@ -6,7 +6,7 @@ define(function() {
             SunFactoryEnabled: true,
             PlanetFactoryEnabled: true,
             MoonFactoryEnabled: true,
-            AstroidBeltFactoryEnabled: true,
+            AstroidBeltFactoryEnabled: false,
             RingFactoryEnabled: true,
             OrbitFactoryEnabled: true,
             SolarSystemFactoryEnabled: true,

@@ -28,7 +28,12 @@ define(function() {
                 return;
             }
 
-            menuContainer.addClass('active');
+            menuContainer
+                .addClass('active')
+                .children()
+                .addClass('active')
+            ;
+
             submenu.slideDown(this.animationSpeed);
         });
     };

@@ -159,6 +159,18 @@ define(
 
                     PlanetFactory.buildCore(thisPlanet);
 
+                    if (planet.name === 'Earth') {
+                        var earthClouds  = PlanetFactory.buildEarthClouds(planet);
+
+                        var cloudCentroid = new THREE.Object3D();
+
+                        cloudCentroid.add(earthClouds);
+
+                        thisPlanet.cloudCentroid = cloudCentroid;
+
+                        thisPlanet.add(cloudCentroid);
+                    }
+
                     $.when(PlanetFactory.addMoons(planet, thisPlanet)).done(function() {
                         $.when(RingFactory.buildRings(thisPlanet, planet)).done(function(response) {
                             var posX = OrbitFactory.getOrbitAmplitute(planet.distanceFromParent);
@@ -173,7 +185,7 @@ define(
 
                             var endTime = new Date().getTime();
 
-                            var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime('ms', startTime, endTime) + ' milliseconds';
+                            var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime(startTime, endTime, 'ms') + ' milliseconds';
 
                             System.log(builderStatement);
 

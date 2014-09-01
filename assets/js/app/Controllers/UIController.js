@@ -151,7 +151,7 @@ define(
                         ;
 
                         // listElement.append('<li id="planet-'+ planetId +'" class="planet" data-id="'+ iplanetNamed +'">'+  +'</li>');
-                        var planetListItem = '<div class="accordian-item subitem">'
+                        var planetListItem = '<div class="accordian-subitem">'
                                             +    '<span id="'+ id +'" class="accordian-item-label planet">'+ name +'</span>'
                                             +    '<span class="camera-trigger" data-id="'+ id +'">&nbsp;◊&nbsp;</span>'
                                             +    '<div class="accordian-submenu">'

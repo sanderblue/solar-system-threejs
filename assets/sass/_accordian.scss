@@ -1,4 +1,5 @@
-$accordian_active_bg_color: rgba(100, 100, 100, 0.275);;
+$accordian_active_bg_color: rgba(100, 100, 100, 0.275);
+$accoridian_item_padding: 6px 12px;
 
 .accordian {
     @include font-18();
@@ -11,26 +12,9 @@ $accordian_active_bg_color: rgba(100, 100, 100, 0.275);;
         @include box-sizing(border-box);
         @include transition(all 0.25s ease);
         background: rgba(90, 90, 90, 0.15);
-        padding: 6px 12px;
         margin: 6px 0;
 
-        &:hover {
-            cursor: pointer;
-            color: $base_font_color;
-            background: $accordian_active_bg_color;
-        }
-
-        &.active {
-            background: $accordian_active_bg_color;
-
-            > .accordian-submenu {
-                @include opacity(1);
-            }
-        }
-
-        &.subitem {
-            background: transparent;
-        }
+        .accordian-item-label { padding: $accoridian_item_padding; }
 
         .accordian-submenu {
             @include font-regular();
@@ -45,6 +29,34 @@ $accordian_active_bg_color: rgba(100, 100, 100, 0.275);;
             .right-side {
                 display: inline-block;
                 width: 49%;
+            }
+        }
+
+        &:hover {
+            .accordian-item-label {
+                cursor: pointer;
+                color: $base_font_color;
+                padding: $accoridian_item_padding;
+                background: $accordian_active_bg_color;
+            }
+        }
+
+        &.active {
+            .accordian-submenu {
+                @include opacity(1);
+                @include box-sizing(border-box);
+
+                &.active {
+                    &:hover {
+                        background: transparent;
+                    }
+                }
+
+                .left-side,
+                .right-side {
+                    display: inline-block;
+                    width: 49%;
+                }
             }
         }
     }

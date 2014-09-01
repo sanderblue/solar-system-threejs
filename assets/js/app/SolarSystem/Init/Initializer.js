@@ -41,12 +41,13 @@ define(
                 //     return;
                 // }
 
+                TimeController.start();
+
                 return $.when(Scene.init()).done(function() {
                     $.when(
                         SolarSystemFactory.build()
                     )
                     .done(function() {
-                        TimeController.start();
                         UIController.init();
                     });
                 });
