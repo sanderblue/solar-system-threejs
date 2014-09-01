@@ -109,6 +109,8 @@ ul {
     margin: 6px 0; }
     .accordian .accordian-item .accordian-item-label {
       padding: 6px 12px; }
+      .accordian .accordian-item .accordian-item-label.planet {
+        background: transparent !important; }
     .accordian .accordian-item .accordian-submenu {
       font-family: 'Rajdhani-Regular', sans-serif;
       -webkit-font-smoothing: antialiased;
@@ -135,6 +137,8 @@ ul {
       color: #f0f0f0;
       padding: 6px 12px;
       background: rgba(100, 100, 100, 0.275); }
+      .accordian .accordian-item:hover .accordian-item-label.planet {
+        background: transparent !important; }
     .accordian .accordian-item.active .accordian-submenu {
       opacity: 1;
       -moz-opacity: 1;

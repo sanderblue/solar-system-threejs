@@ -65,7 +65,7 @@ define(
 
                     setInterval(function() {
                         OrbitCtrl.positionObject(thisMoon);
-                    }, 10)
+                    }, 1)
                 }
 
                 planetObj.add(moonCentroid);

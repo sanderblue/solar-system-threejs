@@ -14,7 +14,11 @@ $accoridian_item_padding: 6px 12px;
         background: rgba(90, 90, 90, 0.15);
         margin: 6px 0;
 
-        .accordian-item-label { padding: $accoridian_item_padding; }
+        .accordian-item-label {
+            padding: $accoridian_item_padding;
+
+            &.planet { background: transparent !important; }
+        }
 
         .accordian-submenu {
             @include font-regular();
@@ -38,6 +42,8 @@ $accoridian_item_padding: 6px 12px;
                 color: $base_font_color;
                 padding: $accoridian_item_padding;
                 background: $accordian_active_bg_color;
+
+                &.planet { background: transparent !important; }
             }
         }
 
