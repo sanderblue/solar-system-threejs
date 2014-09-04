@@ -52,8 +52,6 @@ define(
              */
             addMoons: function(planet, planetObj) {
                 return $.Deferred(function(promise) {
-                    console.log('MoonFactory', MoonFactory, planet, planetObj);
-
                     for (var i = 0; i < planet.moons.length; i++) {
                         factory.buildMoon(planet, planet.moons[i], planetObj);
                     }
@@ -67,17 +65,24 @@ define(
              *
              * @param planet [THREE object]
              */
-            buildCore: function(planet) {
-                var core = new THREE.Object3D();
-
-                core.name = planet.name;
+            getPlanetCore: function(planet, material) {
+                var core = new THREE.Mesh(
+                                new THREE.SphereGeometry(
+                                        15,
+                                        14,
+                                        12
+                                    ),
+                                    material
+                                );
 
                 // We need to flip the core's axis
                 core.rotation.x = Math.PI / 2;
 
-                Scene.planetCores.push(core);
+                // Scene.planetCores.push(core);
 
                 Scene.scene.add(core);
+
+                return core;
             },
 
             /**
@@ -162,7 +167,10 @@ define(
                     thisPlanet.rotation.x = Math.PI / 2;
                     thisPlanet.name       = planet.name;
 
-                    PlanetFactory.buildCore(thisPlanet);
+                    var core = PlanetFactory.getPlanetCore(thisPlanet, planetMaterial);
+
+                    orbitCentroid.add(core);
+                    thisPlanet.core = core;
 
                     if (planet.name === 'Earth') {
                         var earthClouds  = PlanetFactory.buildEarthClouds(planet);
@@ -201,6 +209,10 @@ define(
                                 parseFloat(posY),
                                 0
                             );
+
+                            thisPlanet.parent3d      = thisPlanet;
+                            thisPlanet.parentliteral = parent;
+                            thisPlanet.objectliteral = planet;
 
                             var endTime = new Date().getTime();
 

@@ -4,12 +4,12 @@ define(function() {
      * The Camera object contains the default camera data.
      */
     var Camera = {
-        zoom: 8, // integer value to adjust the camera's zoom
+        zoom: 5, // integer value to adjust the camera's zoom
         radius: 0.1, // arbitary and extraneous
         diameter: 0.2, // arbitary and extraneous
         distanceFromParent: 2000,
         position: new THREE.Vector3(0, 0, 0),
-        defaultPosition: new THREE.Vector3(0, 15000, 1000),
+        defaultPosition: new THREE.Vector3(0, -30000, 5000),
         defaultFocalPoint: new THREE.Vector3(0, 0, 0), // universe center
         orbitDuration: 360, // equivalent to 360 degrees
         dayOfOrbit: 1,

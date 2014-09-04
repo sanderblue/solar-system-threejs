@@ -42,11 +42,20 @@ define(
                             * 0.0174532925
                         );
 
-            this.object3d.position.set(
-                parseFloat(posX),
-                0,
-                parseFloat(posY)
-            );
+            if (this.object.celestialType) {
+                this.object3d.position.set(
+                    parseFloat(posX),
+                    parseFloat(posY),
+                    0
+                );
+            } else {
+                // Axis is flipped in this case
+                this.object3d.position.set(
+                    parseFloat(posX),
+                    0,
+                    parseFloat(posY)
+                );
+            }
         };
 
         OrbitController.prototype.animateOrbit = function() {

@@ -40,7 +40,8 @@ define(function() {
                 moons: [],
                 texture: null,
                 rings: [],
-                positionOffset: 48 // Earth days ahead in it based on the current day of the year
+                orbitPositionOffset: 48, // Earth days ahead in it based on the current day of the year
+                celestialType: 'planet'
             },
             {
                 id: 2,
@@ -53,7 +54,8 @@ define(function() {
                 axialTilt: axialTiltOffset + 177.36 / 180 * Math.PI,
                 moons: [],
                 rings: [],
-                positionOffset: 155
+                orbitPositionOffset: 155,
+                celestialType: 'planet'
             },
             {
                 id: 3,
@@ -74,7 +76,8 @@ define(function() {
                     }
                 ],
                 rings: [],
-                positionOffset: 0
+                orbitPositionOffset: 0,
+                celestialType: 'planet'
             },
             {
                 id: 4,
@@ -103,7 +106,8 @@ define(function() {
                 ],
                 texture: null,
                 rings: [],
-                positionOffset: 71
+                orbitPositionOffset: 71,
+                celestialType: 'planet'
             },
             {
                 id: 5,
@@ -228,7 +232,8 @@ define(function() {
                         inclination: 29.691 / 180 * Math.PI
                     }
                 ],
-                positionOffset: 2692
+                orbitPositionOffset: 2692,
+                celestialType: 'planet'
             },
             {
                 id: 6,
@@ -388,7 +393,8 @@ define(function() {
                         inclination: 0.199 / 180 * Math.PI
                     }
                 ],
-                positionOffset: 13753
+                orbitPositionOffset: 13753,
+                celestialType: 'planet'
             },
             {
                 id: 7,
@@ -529,7 +535,8 @@ define(function() {
                         inclination: 0.058 / 180 * Math.PI
                     }
                 ],
-                positionOffset: 29654
+                orbitPositionOffset: 29654,
+                celestialType: 'planet'
             },
             {
                 id: 8,
@@ -632,7 +639,8 @@ define(function() {
                         inclination: 112.712 / 180 * Math.PI
                     }
                 ],
-                positionOffset: 62885
+                orbitPositionOffset: 62885,
+                celestialType: 'planet'
             }
         ],
         astroidBelt: {

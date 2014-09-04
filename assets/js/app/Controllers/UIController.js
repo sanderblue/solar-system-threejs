@@ -19,7 +19,7 @@ define(
                         matchedPlanet = UIController.findPlanet(id)
                     ;
 
-                    Scene.setCameraPosition(matchedPlanet, matchedPlanet, matchedPlanet.position, true);
+                    Scene.setCameraPosition(matchedPlanet.core, matchedPlanet, matchedPlanet.position, false);
                     Scene.setCameraFocalPoint(matchedPlanet.position);
                 });
             },
