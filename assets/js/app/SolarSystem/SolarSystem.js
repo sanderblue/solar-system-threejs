@@ -11,7 +11,7 @@ define(function() {
     var sunScale        = 1 * Math.pow(10, -2.4),
         celestialScale  = 1 * Math.pow(10, -2),
         moonOrbitScale  = 1 * Math.pow(10, -2.75),
-        ringOrbitScale  = 1 * Math.pow(10, -2.5),
+        ringOrbitScale  = 1 * Math.pow(10, -2.55),
         orbitScale      = 1 * Math.pow(10, -4),
         axialTiltOffset = 180
     ;
