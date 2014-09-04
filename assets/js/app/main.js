@@ -9,6 +9,7 @@ define(
         'OrbitFactory',
         'SolarSystem',
         'TimeController',
+        'OrbitController',
         'Modules'
     ],
     function(
@@ -20,7 +21,8 @@ define(
         PlanetFactory,
         OrbitFactory,
         SolarSystem,
-        TimeController
+        TimeController,
+        OrbitController
     )
     {
         /**
@@ -43,7 +45,7 @@ define(
                 ;
 
                 for (var i = 0; i < planets.length; i++) {
-                    var dayOnEarth = new Date().getDOYwithTimeAsDecimal() + TimeController.getTime();
+                    var dayOnEarth = 1;
 
                     // Mercury
                     if (i === 0) {
@@ -102,9 +104,7 @@ define(
                                     * degreesToRadianRatio
                                 );
 
-                    Scene.setCameraFocalPoint(window.focalPoint);
-
-                    Scene.planets[i].rotation.y += 0.0006;
+                    // Scene.planets[i].rotation.y += 0.0006;
 
                     Scene.planetCores[i].position.set(
                         parseFloat(posX),
@@ -117,16 +117,30 @@ define(
                         parseFloat(posY),
                         0
                     );
+
+                    if (i === 2) {
+                        Scene.setCameraFocalPoint(Scene.planets[i].position);
+                    }
                 }
 
-                Scene.Sun.rotation.y += 0.00025;
+                // Scene.Sun.rotation.y += 0.00025;
+            },
+
+            positionMoons: function() {
+                var degreesToRadianRatio = 0.0174532925,
+                    moons = Scene.moons
+                ;
+
+                for (var i = 0; i < moons.length; i++) {
+                    var moon = moons[i];
+
+                    var OrbitCtrl = new OrbitController(moon, moon.objectliteral, moon.parentliteral, { interval: 100 });
+
+                    OrbitCtrl.positionObject();
+                }
             },
 
             render: function() {
-                if (Scene.planets.length) {
-                    MainController.positionPlanets();
-                }
-
                 Scene.renderer.render(Scene.scene, Scene.camera);
             },
 
@@ -134,6 +148,14 @@ define(
                 UIController.init();
 
                 $.when(Initializer.init()).done(function() {
+                    if (Scene.planets.length) {
+                        MainController.positionPlanets();
+                    }
+
+                    if (Scene.moons.length) {
+                        MainController.positionMoons();
+                    }
+
                     MainController.animate();
                 });
             }

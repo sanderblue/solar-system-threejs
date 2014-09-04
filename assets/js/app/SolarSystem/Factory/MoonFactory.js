@@ -1,10 +1,9 @@
 define(
     [
         'Scene',
-        'System',
-        'OrbitController'
+        'System'
     ],
-    function(Scene, System, OrbitController) {
+    function(Scene, System) {
 
         var MoonFactory = {
             /**
@@ -20,9 +19,9 @@ define(
             /**
              * Builds a moon and adds the moon to it's parent planet.
              *
-             * @param parent       [THREE object]
-             * @param moon         [object]
-             * @param planetObject [onject]
+             * @param parent    [object]
+             * @param moon      [object]
+             * @param planetObj [THREE object]
              */
             buildMoon: function(parent, moon, planetObj) {
                 var texture = MoonFactory.getMoonTexture();
@@ -58,15 +57,11 @@ define(
 
                 moonCentroid.rotation.x = moon.inclination;
 
-                var OrbitCtrl = new OrbitController(thisMoon, moon, parent, { interval: 1 });
+                thisMoon.parent3d      = planetObj;
+                thisMoon.parentliteral = parent;
+                thisMoon.objectliteral = moon;
 
-                if (App.config.moonOrbitsEnabled) {
-                    // console.log('MOON', moon);
-
-                    setInterval(function() {
-                        OrbitCtrl.positionObject(thisMoon);
-                    }, 1)
-                }
+                Scene.moons.push(thisMoon);
 
                 planetObj.add(moonCentroid);
                 moonCentroid.add(thisMoon);

@@ -7,9 +7,12 @@ define(
         'MoonFactory',
         'OrbitFactory',
         'TimerUtil',
+        'TimeController',
         'System'
     ],
-    function($, Scene, SolarSystem, RingFactory, MoonFactory, OrbitFactory, TimerUtil, System) {
+    function($, Scene, SolarSystem, RingFactory, MoonFactory, OrbitFactory, TimerUtil, TimeController, System) {
+
+        var factory = MoonFactory;
 
         var PlanetFactory = {
             /**
@@ -49,8 +52,10 @@ define(
              */
             addMoons: function(planet, planetObj) {
                 return $.Deferred(function(promise) {
+                    console.log('MoonFactory', MoonFactory, planet, planetObj);
+
                     for (var i = 0; i < planet.moons.length; i++) {
-                        MoonFactory.buildMoon(planet, planet.moons[i], planetObj);
+                        factory.buildMoon(planet, planet.moons[i], planetObj);
                     }
 
                     promise.resolve();
@@ -173,15 +178,29 @@ define(
 
                     $.when(PlanetFactory.addMoons(planet, thisPlanet)).done(function() {
                         $.when(RingFactory.buildRings(thisPlanet, planet)).done(function(response) {
-                            var posX = OrbitFactory.getOrbitAmplitute(planet.distanceFromParent);
+                            var count = new Date().getDOYwithTimeAsDecimal() + TimeController.getTime();
 
-                            thisPlanet.position.set(
-                                posX, // x
-                                0,    // y
-                                0     // z
-                            );
+                            var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, planet.distanceFromParent)
+                                        * Math.cos(
+                                            count
+                                            * OrbitFactory.getOrbitRadian(planet)
+                                            * degreesToRadianRatio
+                                        );
+
+                            var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, planet.distanceFromParent)
+                                        * Math.sin(
+                                            count
+                                            * OrbitFactory.getOrbitRadian(planet)
+                                            * degreesToRadianRatio
+                                        );
 
                             PlanetFactory.addPlanet(thisPlanet, orbitCentroid);
+
+                            thisPlanet.position.set(
+                                parseFloat(posX),
+                                parseFloat(posY),
+                                0
+                            );
 
                             var endTime = new Date().getTime();
 

@@ -12,6 +12,7 @@ define(['Camera'], function(Camera) {
         Sun: null,
         planets: [],
         planetCores: [],
+        moons: [],
         astroids: [],
         tilt: 200,
         scene: null,

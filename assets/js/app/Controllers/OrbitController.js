@@ -25,28 +25,36 @@ define(
 
         OrbitController.prototype.positionObject = function() {
             var self  = this,
-                count = TimeController.getTime()
+                count = new Date().getDOYwithTimeAsDecimal() + TimeController.getTime()
             ;
 
-            var posX = (self.parent.radius + self.object.distanceFromParent)
+            var posX = (this.parent.radius + this.object.distanceFromParent)
                         * Math.sin(
                             count
-                            * (360 / self.object.orbitDuration)
+                            * (360 / this.object.orbitDuration)
                             * 0.0174532925
                         );
 
-            var posY = (self.parent.radius + self.object.distanceFromParent)
+            var posY = (this.parent.radius + this.object.distanceFromParent)
                         * Math.cos(
                             count
-                            * (360 / self.object.orbitDuration)
+                            * (360 / this.object.orbitDuration)
                             * 0.0174532925
                         );
 
-            self.object3d.position.set(
+            this.object3d.position.set(
                 parseFloat(posX),
                 0,
                 parseFloat(posY)
             );
+        };
+
+        OrbitController.prototype.animateOrbit = function() {
+            var self = this;
+
+            var interval = setInterval(function(controller) {
+                controller.positionObject();
+            }, this.options.interval, this);
         };
 
         return OrbitController;

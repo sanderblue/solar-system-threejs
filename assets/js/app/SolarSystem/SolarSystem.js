@@ -39,7 +39,8 @@ define(function() {
                 axialTilt: axialTiltOffset + 26.73 / 180 * Math.PI,
                 moons: [],
                 texture: null,
-                rings: []
+                rings: [],
+                positionOffset: 48 // Earth days ahead in it based on the current day of the year
             },
             {
                 id: 2,
@@ -51,7 +52,8 @@ define(function() {
                 inclination: 2.19 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 177.36 / 180 * Math.PI,
                 moons: [],
-                rings: []
+                rings: [],
+                positionOffset: 155
             },
             {
                 id: 3,
@@ -71,7 +73,8 @@ define(function() {
                         inclination: 2 / 180 * Math.PI
                     }
                 ],
-                rings: []
+                rings: [],
+                positionOffset: 0
             },
             {
                 id: 4,
@@ -99,7 +102,8 @@ define(function() {
                     }
                 ],
                 texture: null,
-                rings: []
+                rings: [],
+                positionOffset: 71
             },
             {
                 id: 5,
@@ -224,6 +228,7 @@ define(function() {
                         inclination: 29.691 / 180 * Math.PI
                     }
                 ],
+                positionOffset: 2692
             },
             {
                 id: 6,
@@ -382,7 +387,8 @@ define(function() {
                         distanceFromParent: 377396 * moonOrbitScale, // 377,396 km
                         inclination: 0.199 / 180 * Math.PI
                     }
-                ]
+                ],
+                positionOffset: 13753
             },
             {
                 id: 7,
@@ -522,7 +528,8 @@ define(function() {
                         distanceFromParent: 583520 * moonOrbitScale, // 583,520 km
                         inclination: 0.058 / 180 * Math.PI
                     }
-                ]
+                ],
+                positionOffset: 29654
             },
             {
                 id: 8,
@@ -624,7 +631,8 @@ define(function() {
                         distanceFromParent: 16611000 * moonOrbitScale, // 16,611,000 km
                         inclination: 112.712 / 180 * Math.PI
                     }
-                ]
+                ],
+                positionOffset: 62885
             }
         ],
         astroidBelt: {
