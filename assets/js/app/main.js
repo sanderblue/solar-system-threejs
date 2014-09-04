@@ -134,9 +134,10 @@ define(
                 for (var i = 0; i < moons.length; i++) {
                     var moon = moons[i];
 
-                    var OrbitCtrl = new OrbitController(moon, moon.objectliteral, moon.parentliteral, { interval: 100 });
+                    var OrbitCtrl = new OrbitController(moon, moon.objectliteral, moon.parentliteral, { interval: 10 });
 
                     OrbitCtrl.positionObject();
+                    OrbitCtrl.animateOrbit();
                 }
             },
 
