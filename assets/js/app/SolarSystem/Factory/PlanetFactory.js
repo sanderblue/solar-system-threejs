@@ -27,6 +27,15 @@ define(
             },
 
             /**
+             * Gets a planet's core texture (just some crust-like texture for now).
+             */
+            getCoreTexture: function() {
+                var texturePath = '../assets/textures/moon.jpg';
+
+                return new THREE.ImageUtils.loadTexture(texturePath);
+            },
+
+            /**
              * Builds the could layer for earth.
              *
              * @param planet [THREE object]
@@ -68,8 +77,8 @@ define(
             getPlanetCore: function(planet, material) {
                 var core = new THREE.Mesh(
                                 new THREE.SphereGeometry(
-                                        15,
-                                        14,
+                                        12,
+                                        12,
                                         12
                                     ),
                                     material
@@ -105,6 +114,7 @@ define(
                                     });
 
                     var texture = PlanetFactory.getTexture(planet);
+                    var coreTexture = PlanetFactory.getCoreTexture();
 
                     texture.wrapS      = THREE.RepeatWrapping;
                     texture.wrapT      = THREE.RepeatWrapping;
@@ -113,6 +123,12 @@ define(
                     var planetMaterial = new THREE.MeshPhongMaterial({
                                               ambient: 0xbbbbbb,
                                               map: texture,
+                                              side: THREE.DoubleSide
+                                            });
+
+                    var coreMaterial = new THREE.MeshPhongMaterial({
+                                              ambient: 0xbbbbbb,
+                                              map: coreTexture,
                                               side: THREE.DoubleSide
                                             });
 
@@ -167,7 +183,7 @@ define(
                     thisPlanet.rotation.x = Math.PI / 2;
                     thisPlanet.name       = planet.name;
 
-                    var core = PlanetFactory.getPlanetCore(thisPlanet, planetMaterial);
+                    var core = PlanetFactory.getPlanetCore(thisPlanet, coreMaterial);
 
                     orbitCentroid.add(core);
                     thisPlanet.core = core;

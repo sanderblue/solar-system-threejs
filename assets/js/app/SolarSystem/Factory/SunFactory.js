@@ -34,13 +34,13 @@ define(
 
                     var sunGeometry = new THREE.SphereGeometry(
                                             SolarSystem.parent.radius,
-                                            160,
-                                            100
+                                            140,
+                                            90
                                         );
 
                     var Sun = new THREE.Mesh(sunGeometry, material);
 
-                    var pointLight = new THREE.PointLight(0xffffff, 1.2);
+                    var pointLight = new THREE.PointLight(0xffffff, 1.75);
 
                     Sun.scale.x = Sun.scale.y = Sun.scale.z = 1;
 

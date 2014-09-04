@@ -17,7 +17,7 @@ define(['Camera'], function(Camera) {
         tilt: 200,
         scene: null,
         camera: null,
-        brightness: 0.5,
+        brightness: 0.4,
         currentRadian: 0.0174532925 * 360,
         perspective: Camera.perspective,
 
@@ -31,7 +31,7 @@ define(['Camera'], function(Camera) {
 
         setAxisHelpers: function() {
             Scene.scene.add(new THREE.AxisHelper(3000));
-            // Scene.scene.add(new THREE.GridHelper(4000, 400));
+            Scene.scene.add(new THREE.GridHelper(4000, 400));
         },
 
         setLights: function() {
@@ -39,8 +39,8 @@ define(['Camera'], function(Camera) {
                 directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, Scene.brightness)
             ;
 
-            directionalLightFromTop.position.set(0, 1500, 0);
-            directionalLightFromBottom.position.set(0, -1500, 0);
+            directionalLightFromTop.position.set(0, 1400, 0);
+            directionalLightFromBottom.position.set(0, -1400, 0);
 
             Scene.scene.add(directionalLightFromTop);
             Scene.scene.add(directionalLightFromBottom);
@@ -84,7 +84,7 @@ define(['Camera'], function(Camera) {
 
                 Scene.camera.position.x = parentObject3D.geometry.radius * 9.7; // zoom
                 Scene.camera.position.y = parentObject3D.geometry.radius * 1;
-                Scene.camera.position.z = 2;
+                Scene.camera.position.z = 1.5;
 
                 object3D.add(Scene.camera);
 
