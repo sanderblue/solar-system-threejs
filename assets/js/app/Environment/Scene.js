@@ -17,7 +17,7 @@ define(['Camera'], function(Camera) {
         tilt: 200,
         scene: null,
         camera: null,
-        brightness: 0.4,
+        brightness: 0.3,
         currentRadian: 0.0174532925 * 360,
         perspective: Camera.perspective,
 
@@ -39,8 +39,8 @@ define(['Camera'], function(Camera) {
                 directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, Scene.brightness)
             ;
 
-            directionalLightFromTop.position.set(0, 1400, 0);
-            directionalLightFromBottom.position.set(0, -1400, 0);
+            directionalLightFromTop.position.set(0, 1600, 0);
+            directionalLightFromBottom.position.set(0, -1600, 0);
 
             Scene.scene.add(directionalLightFromTop);
             Scene.scene.add(directionalLightFromBottom);

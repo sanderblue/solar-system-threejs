@@ -40,7 +40,7 @@ define(
 
                     var Sun = new THREE.Mesh(sunGeometry, material);
 
-                    var pointLight = new THREE.PointLight(0xffffff, 1.75);
+                    var pointLight = new THREE.PointLight(0xffffff, 1.25);
 
                     Sun.scale.x = Sun.scale.y = Sun.scale.z = 1;
 
