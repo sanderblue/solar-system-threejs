@@ -53,33 +53,33 @@ define(
             positionPlanets: function() {
                 var degreesToRadianRatio = 0.0174532925,
                     planets = Scene.planets,
-                    count = new Date().getDOYwithTimeAsDecimal()
+                    count = new Date().getDOYwithTimeAsDecimal() + TimeController.getTime()
                 ;
 
                 for (var i = 0; i < planets.length; i++) {
                     var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, SolarSystem.planets[i].distanceFromParent)
                                 * Math.cos(
-                                    count + SolarSystem.planets[i].orbitPositionOffset
+                                    parseFloat(Number(count + SolarSystem.planets[i].orbitPositionOffset).toFixed(5))
                                     * OrbitFactory.getOrbitRadian(SolarSystem.planets[i])
                                     * degreesToRadianRatio
                                 );
 
                     var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, SolarSystem.planets[i].distanceFromParent)
                                 * Math.sin(
-                                    count + SolarSystem.planets[i].orbitPositionOffset
+                                    parseFloat(Number(count + SolarSystem.planets[i].orbitPositionOffset).toFixed(5))
                                     * OrbitFactory.getOrbitRadian(SolarSystem.planets[i])
                                     * degreesToRadianRatio
                                 );
 
                     Scene.planets[i].core.position.set(
-                        parseFloat(posX),
-                        parseFloat(posY),
+                        parseFloat(Number(posX).toFixed(4)),
+                        parseFloat(Number(posY).toFixed(4)),
                         0
                     );
 
                     Scene.planets[i].position.set(
-                        parseFloat(posX),
-                        parseFloat(posY),
+                        parseFloat(Number(posX).toFixed(4)),
+                        parseFloat(Number(posY).toFixed(4)),
                         0
                     );
                 }
