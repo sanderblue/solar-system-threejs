@@ -40,7 +40,7 @@ define(
                 ;
 
                 var material = new THREE.LineBasicMaterial({
-                                        color: 0x2e2e2e,
+                                        color: 0x3C3C3C,
                                         linewidth: 0.3
                                     });
 
