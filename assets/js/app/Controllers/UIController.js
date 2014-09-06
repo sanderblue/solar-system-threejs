@@ -10,6 +10,8 @@ define(
     function($, Accordian, Scene, Camera, SolarSystem, OrbitFactory) {
 
         var UIController = {
+            selectedPlanet: null,
+
             initEventListeners: function() {
                 $(document).on('click', '.camera-trigger', function(e) {
                     e.preventDefault();
@@ -19,8 +21,12 @@ define(
                         matchedPlanet = UIController.findPlanet(id)
                     ;
 
-                    Scene.setCameraPosition(matchedPlanet.core, matchedPlanet, matchedPlanet.position, false);
-                    Scene.setCameraFocalPoint(matchedPlanet.position);
+                    UIController.selectedPlanet = matchedPlanet.planet;
+
+                    console.log(UIController.selectedPlanet);
+
+                    Scene.setCameraPosition(matchedPlanet.planet3d.core, matchedPlanet.planet3d, matchedPlanet.planet3d.position, false);
+                    Scene.setCameraFocalPoint(matchedPlanet.planet3d.position);
                 });
 
                 $(document).on('click', '.camera-reset', function(e) {
@@ -49,14 +55,14 @@ define(
 
                 Camera.orbitDuration = 360;
 
-                var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.planets[2], SolarSystem.planets[2].moons[0].distanceFromParent / Camera.zoom)
+                var posX = OrbitFactory.getOrbitAmplitute(UIController.selectedPlanet, UIController.selectedPlanet.radius * 2.7)
                             * Math.cos(
                                 window.testposition
                                 * OrbitFactory.getOrbitRadian(Camera)
                                 * degreesToRadianRatio
                             );
 
-                var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.planets[2], SolarSystem.planets[2].moons[0].distanceFromParent / Camera.zoom)
+                var posY = OrbitFactory.getOrbitAmplitute(UIController.selectedPlanet, UIController.selectedPlanet.radius * 2.7)
                             * Math.sin(
                                 window.testposition
                                 * OrbitFactory.getOrbitRadian(Camera)
@@ -211,7 +217,10 @@ define(
 
                 for (var i = 0; i < planets.length; i++) {
                     if (planets[i].id == id) {
-                        return planets[i];
+                        return  {
+                            planet: SolarSystem.planets[i],
+                            planet3d: planets[i]
+                        }
                     }
                 }
             },
