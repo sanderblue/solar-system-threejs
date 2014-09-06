@@ -19,8 +19,6 @@ define(function() {
                 submenu       = menuContainer.find('.accordian-submenu').first()
             ;
 
-            console.log(menuContainer.hasClass('active'));
-
             if (menuContainer.hasClass('active')) {
                 menuContainer.removeClass('active');
                 submenu.slideUp(this.animationSpeed);

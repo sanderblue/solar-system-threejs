@@ -12,7 +12,7 @@ $accoridian_planet_item_padding: 6px 6px 6px 14px;
         @include font-semibold();
         @include box-sizing(border-box);
         @include transition(all 0.2s ease);
-        background: rgba(90, 90, 90, 0.15);
+        background: rgba(90, 90, 90, 0.2);
         margin: 6px 0;
 
         .accordian-item-label {

@@ -162,7 +162,7 @@ ul {
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     transition: all 0.2s ease;
-    background: rgba(90, 90, 90, 0.15);
+    background: rgba(90, 90, 90, 0.2);
     margin: 6px 0; }
     .accordian .accordian-item .accordian-item-label {
       -webkit-transition: color 0.2s ease;
@@ -360,3 +360,13 @@ input {
   -webkit-transform: rotate(0deg);
   -webkit-transform-origin: 5px 85px;
   z-index: 17; }
+
+.zoom-control-input {
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto; }
+
+.camera-reset-holder {
+  font-size: 12px;
+  -webkit-font-smoothing: antialiased; }

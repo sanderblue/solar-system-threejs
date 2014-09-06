@@ -77,3 +77,12 @@ $radian: 85px;
 
     z-index: 17;
 }
+
+.zoom-control-input {
+    width: 100%;
+    max-width: 300px;
+    display: block;
+    margin: 0 auto;
+}
+
+.camera-reset-holder { @include font-12(); }

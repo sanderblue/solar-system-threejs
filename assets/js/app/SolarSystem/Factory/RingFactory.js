@@ -57,16 +57,17 @@ define(function() {
          */
         buildRing: function(planet, ring) {
             return $.Deferred(function(promise) {
-                var resolution = 720, // segments in the line
+                var resolution = 540, // segments in the line
                     size       = 360 / resolution;
 
                 var material = new THREE.LineBasicMaterial({
                                     color: ring.color,
                                     linewidth: ring.width * 0.00001,
+                                    linejoin: 'round'
                                   });
 
                 if (material.linewidth > 1) {
-                    material.linewidth = 0.8;
+                    material.linewidth = 0.7;
                 }
 
                 var ringLine = new THREE.Geometry();

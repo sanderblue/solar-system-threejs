@@ -22,6 +22,14 @@ define(
                     Scene.setCameraPosition(matchedPlanet.core, matchedPlanet, matchedPlanet.position, false);
                     Scene.setCameraFocalPoint(matchedPlanet.position);
                 });
+
+                $(document).on('click', '.camera-reset', function(e) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+
+                    Scene.setCameraPosition(null, null, Camera.defaultPosition, true);
+                    Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
+                });
             },
 
             adjustCameraOrbitPosition: function(offsetSelector, xCoordinate, yCoordinate, cropper) {
@@ -191,6 +199,8 @@ define(
 
                         listElement.append(planetListItem);
                     }
+
+                    $('#planets').append('<div class="accordian-subitem planet-item camera-reset-holder"><div id="camera-reset" class="camera-reset accordian-item-label">Reset Camera</div></div>');
 
                     promise.resolve();
                 });
