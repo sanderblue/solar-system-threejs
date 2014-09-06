@@ -135,25 +135,25 @@ define(function() {
                         name: 'Halo Ring',
                         distanceFromParent: 107250 * ringOrbitScale, // 92,000 – 122,500 km (107250 mean)
                         width: 30500,
-                        color: 0x706D67
+                        color: 0x2B2210
                     },
                     {
                         name: 'Main Ring',
                         distanceFromParent: 125750 * ringOrbitScale, // 122,500 – 129,000 km (125,750 mean)
                         width: 6500,
-                        color: 0x848176
+                        color: 0x3A3627
                     },
                     {
                         name: 'Amalthea Gossamer Ring',
                         distanceFromParent: 155500 * ringOrbitScale, // 129,000 – 182,000 km (155,500 mean)
                         width: 53000,
-                        color: 0x868375
+                        color: 0x3D3929
                     },
                     {
                         name: 'Thebe Gossamer Ring',
                         distanceFromParent: 177500 * ringOrbitScale, // 129,000 – 226,000 km (177,500 mean)
                         width: 97000,
-                        color: 0x7C786A
+                        color: 0x3E3A2C
                     },
                 ],
                 moons: [
@@ -268,7 +268,57 @@ define(function() {
                         name: 'C Ring',
                         distanceFromParent: 83329 * ringOrbitScale, // 74,658 – 92,000 km (83,329 mean)
                         width: 17500,
-                        color: 0x706D67
+                        color: 0x706D67,
+                        subRings: [
+                            {
+                                name: 'Colombo Gap',
+                                distanceFromParent: 77870  * ringOrbitScale, // 77,870 km
+                                width: 200,
+                                color: 0x706D67
+                            },
+                            {
+                                name: 'Titan Ringlet',
+                                distanceFromParent: 77900  * ringOrbitScale, // 77,870 km
+                                width: 125,
+                                color: 0x605643
+                            },
+                            {
+                                name: 'Maxwell Gap',
+                                distanceFromParent: 87491  * ringOrbitScale, // 87,491 km
+                                width: 170,
+                                color: 0x565147
+                            },
+                            {
+                                name: 'Maxwell Ringlet',
+                                distanceFromParent: 77870  * ringOrbitScale, // 77,870 km
+                                width: 64,
+                                color: 0x706D67
+                            },
+                            {
+                                name: 'Bond Gap',
+                                distanceFromParent: 88700  * ringOrbitScale, // 88,700 km
+                                width: 60,
+                                color: 0x696252
+                            },
+                            {
+                                name: '1.470RS Ringlet',
+                                distanceFromParent: 88716  * ringOrbitScale, // 88,716 km
+                                width: 32,
+                                color: 0x564F41
+                            },
+                            {
+                                name: '1.495RS Ringlet',
+                                distanceFromParent: 90171  * ringOrbitScale, // 90,171 km
+                                width: 62,
+                                color: 0x9D8451
+                            },
+                            {
+                                name: 'Dawes Gap',
+                                distanceFromParent: 90210   * ringOrbitScale, // 90,210 km
+                                width: 40,
+                                color: 0x725F39
+                            }
+                        ]
                     },
                     {
                         name: 'B Ring',
@@ -280,7 +330,63 @@ define(function() {
                         name: 'Cassini Division',
                         distanceFromParent: 119875 * ringOrbitScale, // 117,580 – 122,170 km (119,875 mean)
                         width: 4700,
-                        color: 0x72674D
+                        color: 0x72674D,
+                        subRings: [
+                            {
+                                name: 'Huygens Gap',
+                                distanceFromParent: 117680 * ringOrbitScale, // 117,680 km
+                                width: 1360,
+                                color: 0x706D67
+                            },
+                            {
+                                name: 'Huygens Ringlet',
+                                distanceFromParent: 117848 * ringOrbitScale, // 117,848  km
+                                width: 31,
+                                color: 0x605643
+                            },
+                            {
+                                name: 'Herschel Gap',
+                                distanceFromParent: 118234 * ringOrbitScale, // 118,234 km
+                                width: 102,
+                                color: 0x565147
+                            },
+                            {
+                                name: 'Russell Gap',
+                                distanceFromParent: 118614 * ringOrbitScale, // 118,614 km
+                                width: 33,
+                                color: 0x706D67
+                            },
+                            {
+                                name: 'Jeffreys Gap',
+                                distanceFromParent: 118950 * ringOrbitScale, // 118,950 km
+                                width: 38,
+                                color: 0x696252
+                            },
+                            {
+                                name: 'Kuiper Gap',
+                                distanceFromParent: 119405 * ringOrbitScale, // 119,405 km
+                                width: 3,
+                                color: 0x564F41
+                            },
+                            {
+                                name: 'Laplace Gap',
+                                distanceFromParent: 119967 * ringOrbitScale, // 119,967 km
+                                width: 1238,
+                                color: 0x9D8451
+                            },
+                            {
+                                name: 'Bessel Gap',
+                                distanceFromParent: 120241 * ringOrbitScale, // 120,241 km
+                                width: 40,
+                                color: 0x725F39
+                            },
+                            {
+                                name: 'Barnard Gap',
+                                distanceFromParent: 120412  * ringOrbitScale, // 120,241 km
+                                width: 40,
+                                color: 0x725F39
+                            }
+                        ]
                     },
                     {
                         name: 'A Ring',
@@ -311,6 +417,18 @@ define(function() {
                         distanceFromParent: 170500 * ringOrbitScale, // 166,000 – 175,000 km (170,500 mean)
                         width: 9000,
                         color: 0x6B675D
+                    },
+                    {
+                        name: 'Methone Ring Arc',
+                        distanceFromParent: 194230 * ringOrbitScale, // 194,230 km
+                        width: 300,
+                        color: 0x6E6347
+                    },
+                    {
+                        name: 'Anthe Ring Arc',
+                        distanceFromParent: 197665 * ringOrbitScale, // 197,665 km
+                        width: 300,
+                        color: 0x6E6347
                     },
                     {
                         name: 'Pallene Ring',

@@ -80,9 +80,9 @@ define(['Camera'], function(Camera) {
          */
         setCameraPosition: function(object3D, parentObject3D, vector3, reset) {
             if (object3D && parentObject3D) {
-                Scene.camera.position.x = parentObject3D.geometry.radius * 9.7; // zoom
+                Scene.camera.position.x = parentObject3D.geometry.radius * 8.5; // zoom
                 Scene.camera.position.y = parentObject3D.geometry.radius * 1;
-                Scene.camera.position.z = 1.5;
+                Scene.camera.position.z = 2.2;
 
                 object3D.add(Scene.camera);
 
