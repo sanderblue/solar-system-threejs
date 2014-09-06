@@ -1,4 +1,5 @@
 $base_font_color: rgba(240, 240, 240, 1);
+$base_font_color_hover: rgba(255, 255, 255, 1);
 $base_font_color_light_opacity: rgba(240, 240, 240, 0.8);
 $base_link_color: #0080ff;
 
@@ -10,7 +11,6 @@ $base_link_color: #0080ff;
 @include font-face('Rajdhani-Regular', '../fonts/rajdhani/rajdhani-regular-webfont');
 @include font-face('Rajdhani-Semibold', '../fonts/rajdhani/rajdhani-semibold-webfont');
 @include font-face('Rajdhani-Bold', '../fonts/rajdhani/rajdhani-bold-webfont');
-
 
 /*
  *  Font Families

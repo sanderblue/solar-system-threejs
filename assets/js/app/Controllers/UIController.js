@@ -144,27 +144,35 @@ define(
 
                         var id            = planetId,
                             name          = SolarSystem.planets[i].name,
-                            radius        = SolarSystem.planets[i].radius,
-                            orbitRadius   = SolarSystem.planets[i].distanceFromParent,
                             orbitDuration = SolarSystem.planets[i].orbitDuration,
-                            axialTilt     = SolarSystem.planets[i].axialTilt
+                            axialTilt     = SolarSystem.planets[i].axialTilt,
+                            precision     = 1
                         ;
 
                         // listElement.append('<li id="planet-'+ planetId +'" class="planet" data-id="'+ iplanetNamed +'">'+  +'</li>');
-                        var planetListItem = '<div class="accordian-subitem">'
-                                            +    '<span id="'+ id +'" class="accordian-item-label planet">'+ name +'</span>'
-                                            +    '<span class="camera-trigger" data-id="'+ id +'">&nbsp;◊&nbsp;</span>'
+                        var planetListItem = '<div class="accordian-subitem planet-item">'
+                                            +    '<div id="'+ id +'" class="accordian-item-label planet">'+ name +'</div>'
+                                            +    '<span class="icon-target camera-trigger" data-id="'+ id +'"></span>'
+                                            +    '<span class="camera-trigger" data-id="'+ id +'"></span>'
                                             +    '<div class="accordian-submenu">'
                                             +        '<div class="accordian-submenu-item">'
                                             +            '<div class="data-container">'
-                                            +                '<div class="left-side">Radius</div>'
-                                            +                '<div class="right-side">'+ Number(radius).toFixed(4) +'</div>'
-                                            +                '<div class="left-side">Mean Orbit Radius</div>'
-                                            +                '<div class="right-side">'+ Number(orbitRadius).toFixed(4) +'</div>'
-                                            +                '<div class="left-side">Orbit Duration</div>'
-                                            +                '<div class="right-side">'+ Number(orbitDuration).toFixed(4) +'</div>'
-                                            +                '<div class="left-side">Axial Tilt</div>'
-                                            +                '<div class="right-side">'+ Number(axialTilt).toFixed(4) +'</div>'
+                                            +               '<div class="data-container-row">'
+                                            +                   '<div class="left-side">Radius</div>'
+                                            +                   '<div class="right-side">'+ SolarSystem.planets[i].radiusString +'</div>'
+                                            +                '</div>'
+                                            +                '<div class="data-container-row">'
+                                            +                   '<div class="left-side">Semi-major Axis</div>'
+                                            +                   '<div class="right-side">'+ SolarSystem.planets[i].distanceFromParentString +'</div>'
+                                            +                '</div>'
+                                            +                '<div class="data-container-row">'
+                                            +                   '<div class="left-side">Orbit Duration</div>'
+                                            +                   '<div class="right-side">'+ Number(orbitDuration).toFixed(precision) +'</div>'
+                                            +                '</div>'
+                                            +                '<div class="data-container-row">'
+                                            +                   '<div class="left-side">Axial Tilt</div>'
+                                            +                   '<div class="right-side">'+ Number(SolarSystem.planets[i].axialTilt).toFixed(precision) +'˚</div>'
+                                            +                '</div>'
                                             +            '</div>'
                                             +        '</div>'
                                             // +        '<div class="accordian-submenu-item">'

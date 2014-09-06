@@ -15,7 +15,7 @@ define(
          * the SolarSystem object. Each astroid is randomly positioned within its orbit and between
          * the orbits of Mars and Jupiter.
          */
-        var AstroidBeltFactory = {
+        var AsteroidBeltFactory = {
 
             /**
              * Gets a generic texture for an astroid.
@@ -140,6 +140,6 @@ define(
             }
         };
 
-        return AstroidBeltFactory;
+        return AsteroidBeltFactory;
     }
 );

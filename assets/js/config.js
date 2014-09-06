@@ -29,7 +29,7 @@ require.config({
         'SolarSystemFactory' : 'app/SolarSystem/Factory/SolarSystemFactory',
         'SunFactory'         : 'app/SolarSystem/Factory/SunFactory',
         'PlanetFactory'      : 'app/SolarSystem/Factory/PlanetFactory',
-        'AstroidBeltFactory' : 'app/SolarSystem/Factory/AstroidBeltFactory',
+        'AsteroidBeltFactory' : 'app/SolarSystem/Factory/AsteroidBeltFactory',
         'RingFactory'        : 'app/SolarSystem/Factory/RingFactory',
         'MoonFactory'        : 'app/SolarSystem/Factory/MoonFactory',
         'OrbitFactory'       : 'app/SolarSystem/Factory/OrbitFactory',

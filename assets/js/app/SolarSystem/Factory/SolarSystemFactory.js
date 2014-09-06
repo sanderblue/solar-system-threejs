@@ -4,12 +4,12 @@ define(
         'SolarSystem',
         'SunFactory',
         'PlanetFactory',
-        'AstroidBeltFactory',
+        'AsteroidBeltFactory',
         'StarFactory',
         'TimerUtil',
         'System'
     ],
-    function(Scene, SolarSystem, SunFactory, PlanetFactory, AstroidBeltFactory, StarFactory, TimerUtil, System) {
+    function(Scene, SolarSystem, SunFactory, PlanetFactory, AsteroidBeltFactory, StarFactory, TimerUtil, System) {
 
         /**
          * SolarSystemFactory
@@ -31,9 +31,9 @@ define(
                 });
             },
 
-            buildAstroidBelt: function() {
+            buildAsteroidBelt: function() {
                 return $.Deferred(function(promise) {
-                    if (!App.config.build.AstroidBeltFactoryEnabled) {
+                    if (!App.config.build.AsteroidBeltFactoryEnabled) {
                         return promise.resolve();
                     }
 
@@ -78,7 +78,7 @@ define(
 
                 return $.when(
                     SolarSystemFactory.buildParent(),
-                    SolarSystemFactory.buildAstroidBelt(),
+                    SolarSystemFactory.buildAsteroidBelt(),
                     SolarSystemFactory.buildPlanets(),
                     SolarSystemFactory.buildStars()
                 )

@@ -5,6 +5,10 @@ define(function() {
      * This file contains the universal data to be used to build the entire model.
      * The initial scales differ for better user experience. Adjustments will be made
      * as the project progresses.
+     *
+     * All orbit radii are base on each celestial object semi-major axis˙;
+     *
+     * ˙Semi-major axis: http://upload.wikimedia.org/wikipedia/commons/f/f7/An_image_describing_the_semi-major_and_semi-minor_axis_of_eclipse.png
      */
 
     // Inital scales
@@ -33,8 +37,9 @@ define(function() {
                 id: 1,
                 name: 'Mercury',
                 radius: 2439.7 * celestialScale, // 2439.7 ±1.0 km
-                diameter: 4.88,
+                radiusString: '2439.7 ±1.0 km',
                 distanceFromParent: 57909050 * orbitScale, // 57,909,050 km
+                distanceFromParentString: '57,909,050 km',
                 orbitDuration: 88,
                 inclination: 6.34 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 26.73 / 180 * Math.PI,
@@ -48,8 +53,9 @@ define(function() {
                 id: 2,
                 name: 'Venus',
                 radius: 6051.8 * celestialScale, // 6051.8 ±1.0 km
-                diameter: 12.1,
+                radiusString: '6051.8 ±1.0 km',
                 distanceFromParent: 108208000 * orbitScale, // 108,208,000 km
+                distanceFromParentString: '108,208,000 km',
                 orbitDuration: 224.7,
                 inclination: 2.19 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 177.36 / 180 * Math.PI,
@@ -62,8 +68,9 @@ define(function() {
                 id: 3,
                 name: 'Earth',
                 radius: 6371 * celestialScale, // 6371.0 km
-                diameter: 12.7,
+                radiusString: '6,371 km ±0.1 km',
                 distanceFromParent: 149598261 * orbitScale, // 149,598,261 km
+                distanceFromParentString: '149,598,261 km',
                 orbitDuration: 364.25,
                 inclination: 1.57869 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 23.5 / 180 * Math.PI,
@@ -84,8 +91,9 @@ define(function() {
                 id: 4,
                 name: 'Mars',
                 radius: 3389.5 * celestialScale, // 3389.5 ±0.2 km
-                diameter: 6.8,
+                radiusString: '3,389.5 ±0.2 km',
                 distanceFromParent: 227939100 * orbitScale, // 227,939,100 km
+                distanceFromParentString: '227,939,100 km',
                 orbitDuration: 687,
                 inclination: 1.67 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 25.19 / 180 * Math.PI,
@@ -114,8 +122,9 @@ define(function() {
                 id: 5,
                 name: 'Jupiter',
                 radius: 69911 * celestialScale, // 69911 ±6 km
-                diameter: 143,
+                radiusString: '69,911 ±6 km',
                 distanceFromParent: 778547200 * orbitScale, // 778,547,200 km
+                distanceFromParentString: '778,547,200 km',
                 orbitDuration: 4329,
                 inclination: 1.305 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 3.13 / 180 * Math.PI,
@@ -239,9 +248,10 @@ define(function() {
             {
                 id: 6,
                 name: 'Saturn',
-                radius: 58232 * celestialScale, // 58232 ±6 km
-                diameter: 120,
+                radius: 58232 * celestialScale, // 58,232 ±6 km
+                radiusString: '58,232 ±6 km',
                 distanceFromParent: 1433449370 * orbitScale, // 1,433,449,370 km
+                distanceFromParentString: '1,433,449,370 km',
                 orbitDuration: 10753,
                 inclination: 2.48524 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 26.73 / 180 * Math.PI,
@@ -400,9 +410,10 @@ define(function() {
             {
                 id: 7,
                 name: 'Uranus',
-                radius: 25362 * celestialScale, // 25362 ±7 km
-                diamter: 51.2,
+                radius: 25362 * celestialScale, // 25,362 ±7 km
+                radiusString: '25,362 ±7 km',
                 distanceFromParent: 2876679082 * orbitScale, // 2,876,679,082 km
+                distanceFromParentString: '2,876,679,082 km',
                 orbitDuration: 30687.15,
                 inclination: 1.02 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 97.77 / 180 * Math.PI,
@@ -543,8 +554,9 @@ define(function() {
                 id: 8,
                 name: 'Neptune',
                 radius: 24622 * celestialScale, // 24622 ±19 km
-                diameter: 48.6,
+                radiusString: '24,622 ±19 km',
                 distanceFromParent: 4503443661 * orbitScale, // 4,503,443,661 km
+                distanceFromParentString: '4,503,443,661 km',
                 orbitDuration: 60025,
                 inclination: 1.768 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 28.32 / 180 * Math.PI,
@@ -644,26 +656,38 @@ define(function() {
                 celestialType: 'planet'
             }
         ],
-        astroidBelt: {
+        asteroidBelt: {
             primary: [
                 {
                     name: 'Ceres',
                     radius: 475 * celestialScale,
+                    radiusString: '476.2 km',
+                    distanceFromParent: 4139.1 * orbitScale,
+                    distanceFromParentString: '413,910,000 km',
                     orbitDuration: 1680,
                 },
                 {
                     name: 'Vesta',
                     radius: 262 * celestialScale,
-                    orbitDuration: 1325,
+                    radiusString: '262.7 km',
+                    distanceFromParent: 3533.5 * orbitScale,
+                    distanceFromParentString: '353,350,171 km',
+                    orbitDuration: 1325
                 },
                 {
                     name: 'Pallas',
                     radius: 225 * celestialScale,
+                    radiusString: '225 km',
+                    distanceFromParent: 4146.8 * orbitScale,
+                    distanceFromParentString: '414,685,298 km',
                     orbitDuration: 1686
                 },
                 {
                     name: 'Hygiea',
-                    radius: 2 * celestialScale + 1,
+                    radius: 215 * celestialScale + 1,
+                    radiusString: '215.5 km',
+                    distanceFromParent: 4695.9 * orbitScale,
+                    distanceFromParentString: '469,587,716 km',
                     orbitDuration: 2031
                 },
             ],

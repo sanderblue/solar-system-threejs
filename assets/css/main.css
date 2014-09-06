@@ -46,6 +46,63 @@
 /*
  *  Font Sizes
  */
+@font-face {
+  font-family: 'icomoon';
+  src: url("../icons/icomoon/fonts/icomoon.eot");
+  src: url("../icons/icomoon/fonts/icomoon.eot") format("embedded-opentype"), url("../icons/icomoon/fonts/icomoon.woff") format("woff"), url("../icons/icomoon/fonts/icomoon.ttf") format("truetype"), url("../icons/icomoon/fonts/icomoon.svg") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+[class^="icon-"],
+[class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: middle;
+  color: #f0f0f0;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-earth:before {
+  content: "\45"; }
+
+.icon-target:before {
+  content: "\2b"; }
+
+.icon-rocket:before {
+  content: "\72"; }
+
+.icon-earth2:before {
+  content: "\65"; }
+
+.icon-sun:before {
+  content: "\73"; }
+
+.icon-sun2:before {
+  content: "\53"; }
+
+.icon-adjust:before {
+  content: "\62"; }
+
+.icon-light-bulb:before {
+  content: "\6c"; }
+
+.camera-trigger {
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  -webkit-transition: color 0.2s ease;
+  -moz-transition: color 0.2s ease;
+  transition: color 0.2s ease;
+  color: rgba(240, 240, 240, 0.4);
+  padding-top: 1px; }
+  .camera-trigger:hover {
+    color: white;
+    cursor: pointer; }
+
 html {
   -webkit-font-smoothing: antialiased; }
 
@@ -102,43 +159,25 @@ ul {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    -webkit-transition: all 0.25s ease;
-    -moz-transition: all 0.25s ease;
-    transition: all 0.25s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transition: all 0.2s ease;
     background: rgba(90, 90, 90, 0.15);
     margin: 6px 0; }
     .accordian .accordian-item .accordian-item-label {
-      padding: 6px 12px; }
+      -webkit-transition: color 0.2s ease;
+      -moz-transition: color 0.2s ease;
+      transition: color 0.2s ease;
+      padding: 5px 12px;
+      vertical-align: middle; }
+      .accordian .accordian-item .accordian-item-label:hover {
+        color: white; }
       .accordian .accordian-item .accordian-item-label.planet {
-        background: transparent !important; }
-    .accordian .accordian-item .accordian-submenu {
-      font-family: 'Rajdhani-Regular', sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -webkit-font-smoothing: antialiased;
-      font-size: 16px;
-      -webkit-font-smoothing: antialiased;
-      opacity: 0;
-      -moz-opacity: 0;
-      -webkit-opacity: 0;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-transition: opacity 0.25s ease;
-      -moz-transition: opacity 0.25s ease;
-      transition: opacity 0.25s ease;
-      padding: 0 4px 10px 4px;
-      display: none; }
-      .accordian .accordian-item .accordian-submenu .left-side,
-      .accordian .accordian-item .accordian-submenu .right-side {
         display: inline-block;
-        width: 49%; }
+        vertical-align: middle; }
     .accordian .accordian-item:hover .accordian-item-label {
       cursor: pointer;
-      color: #f0f0f0;
-      padding: 6px 12px;
-      background: rgba(100, 100, 100, 0.275); }
-      .accordian .accordian-item:hover .accordian-item-label.planet {
-        background: transparent !important; }
+      padding: 5px 12px; }
     .accordian .accordian-item.active .accordian-submenu {
       opacity: 1;
       -moz-opacity: 1;
@@ -148,28 +187,69 @@ ul {
       box-sizing: border-box; }
       .accordian .accordian-item.active .accordian-submenu.active:hover {
         background: transparent; }
+      .accordian .accordian-item.active .accordian-submenu .accordian-subitem.planet:hover {
+        color: white; }
       .accordian .accordian-item.active .accordian-submenu .left-side,
       .accordian .accordian-item.active .accordian-submenu .right-side {
         display: inline-block;
         width: 49%; }
+  .accordian .accordian-submenu {
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    opacity: 0;
+    -moz-opacity: 0;
+    -webkit-opacity: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: opacity 0.2s ease;
+    -moz-transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease;
+    padding: 0 4px 10px 4px;
+    display: none; }
+    .accordian .accordian-submenu .accordian-subitem .planet {
+      padding: 6px 6px 6px 14px;
+      display: inline-block; }
+      .accordian .accordian-submenu .accordian-subitem .planet:hover {
+        color: white; }
+    .accordian .accordian-submenu .left-side,
+    .accordian .accordian-submenu .right-side {
+      display: inline-block;
+      width: 49%; }
   .accordian .accordian-submenu-item {
     font-size: 13px;
     -webkit-font-smoothing: antialiased; }
 
 .data-container {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   font-size: 13px;
   -webkit-font-smoothing: antialiased;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  padding-left: 16px; }
   .data-container .left-side,
   .data-container .right-side {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    transition: color 0.2s ease;
     display: inline-block; }
   .data-container .left-side {
-    width: 64%; }
+    width: 62%; }
   .data-container .right-side {
-    width: 34%; }
+    font-family: 'Rajdhani-Regular', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    width: 35%; }
+
+.data-container-row:hover {
+  color: white; }
+  .data-container-row:hover .left-side,
+  .data-container-row:hover .right-side {
+    color: white; }
 
 canvas {
   display: block; }
@@ -210,8 +290,6 @@ input {
       left: 0; }
     .control-panel .control-panel-item:after {
       right: 0; }
-    .control-panel .control-panel-item.active {
-      background-color: rgba(70, 70, 70, 0.6); }
   .control-panel .subitem {
     font-family: 'Rajdhani-Regular', sans-serif;
     -webkit-font-smoothing: antialiased;
