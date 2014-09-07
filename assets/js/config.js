@@ -47,6 +47,7 @@ require.config({
         'MissingArgumentException' : 'app/Modules/Error/MissingArgumentException',
         'InvalidArgumentException' : 'app/Modules/Error/InvalidArgumentException',
         'RandomNumber'             : 'app/Modules/RandomNumber',
+        'DocumentWriter'           : 'app/Modules/DocumentWriter',
 
         // Extensions
         'Date'        : 'app/Extensions/Date',
@@ -56,7 +57,7 @@ require.config({
         'TimerUtil' : 'app/Utilities/TimerUtil'
     },
     shim: {
-        'jqsuery': {
+        'jquery': {
             exports: ['$', 'jQuery']
         },
         'detector': {
@@ -69,7 +70,7 @@ require.config({
             deps: ['stats']
         },
         'main': {
-            deps: ['jquery', 'threejs', 'App', 'AdditiveBlendShader', 'Constants', 'Time', 'Modules', 'OrbitController', 'OrbitFactory', 'UIController']
+            deps: ['jquery', 'threejs', 'App', 'DocumentWriter', 'Constants', 'Time', 'Modules', 'OrbitController', 'OrbitFactory', 'UIController']
         },
         'Initializer': {
             deps: ['Scene']

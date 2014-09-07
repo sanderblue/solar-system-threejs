@@ -14,7 +14,7 @@ define(function() {
         },
         moonOrbitsEnabled: true,
         logger: {
-            enabled: false
+            enabled: true
         }
     };
 

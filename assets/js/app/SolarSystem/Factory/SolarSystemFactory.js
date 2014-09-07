@@ -7,10 +7,21 @@ define(
         'AsteroidBeltFactory',
         'StarFactory',
         'TimerUtil',
-        'System'
+        'System',
+        'DocumentWriter'
     ],
-    function(Scene, SolarSystem, SunFactory, PlanetFactory, AsteroidBeltFactory, StarFactory, TimerUtil, System) {
-
+    function(
+        Scene,
+        SolarSystem,
+        SunFactory,
+        PlanetFactory,
+        AsteroidBeltFactory,
+        StarFactory,
+        TimerUtil,
+        System,
+        DocumentWriter
+    )
+    {
         /**
          * SolarSystemFactory
          *

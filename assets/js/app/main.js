@@ -112,15 +112,15 @@ define(
                 UIController.init();
 
                 $.when(Initializer.init()).done(function() {
-                    if (Scene.planets.length) {
-                        MainController.positionPlanets();
-                    }
+                    // if (Scene.planets.length) {
+                    //     MainController.positionPlanets();
+                    // }
 
-                    if (Scene.moons.length) {
-                        MainController.positionMoons();
-                    }
+                    // if (Scene.moons.length) {
+                    //     MainController.positionMoons();
+                    // }
 
-                    MainController.animate();
+                    // MainController.animate();
                 });
             }
         };

@@ -40,15 +40,16 @@ define(
                 // if (!Initializer.isBrowserCompatible()) {
                 //     return;
                 // }
-
                 TimeController.start();
 
                 return $.when(Scene.init()).done(function() {
-                    $.when(
-                        SolarSystemFactory.build()
-                    )
-                    .done(function() {
-                        UIController.init();
+                    $(document).ready(function() {
+                        $.when(
+                            SolarSystemFactory.build()
+                        )
+                        .done(function() {
+                            UIController.init();
+                        });
                     });
                 });
             }
