@@ -29,6 +29,7 @@
                     <div id="status-messages" class="status-messages-holder"></div>
                 </div>
             </div>
+            <audio id="sound" src="assets/sound/atmosphere_waves.mp3" autoplay="true" loop="true"></audio>
         </div>
 
         <div class="container">
@@ -64,6 +65,10 @@
         <div id="solar-system" class="scene"></div>
 
         <script>
+            var audio = document.getElementById('sound');
+
+            audio.volume = 0.2;
+
             // (function(i, s, o, g, r, a, m) {
             //     i['GoogleAnalyticsObject'] = r;
             //     i[r] = i[r] || function() {

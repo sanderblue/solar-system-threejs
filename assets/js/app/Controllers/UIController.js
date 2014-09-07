@@ -228,6 +228,8 @@ define(
                     UIController.initResetView();
                 });
 
+                $('body').append('<div id ="my_music"> <embed src="http://www.example.com/yourmusicfile.mp3" width="70" height="18" autostart="false" loop="true"> </div>')
+
                 var accordian = new Accordian();
             }
         };
