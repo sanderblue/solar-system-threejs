@@ -3,8 +3,6 @@
 logs
 mockups
 mockups/*
-node_modules
-node_modules/*
 assets/sass/lib/*
 assets/sass/lib/bourbon
 assets/sass/lib/bourbon/*
