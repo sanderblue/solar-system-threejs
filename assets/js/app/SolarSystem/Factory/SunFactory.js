@@ -13,7 +13,7 @@ define(
          */
         var SunFactory = {
             getTexture: function() {
-                return new THREE.ImageUtils.loadTexture('/textures/sun_detailed.png');
+                return new THREE.ImageUtils.loadTexture('/textures/sun_detasdfsdfsdfiled.png');
             },
 
             build: function() {
