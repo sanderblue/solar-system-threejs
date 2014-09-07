@@ -4,7 +4,6 @@ define(
         'App',
         'Scene',
         'Initializer',
-        'UIController',
         'PlanetFactory',
         'OrbitFactory',
         'SolarSystem',
@@ -17,7 +16,6 @@ define(
         App,
         Scene,
         Initializer,
-        UIController,
         PlanetFactory,
         OrbitFactory,
         SolarSystem,
@@ -108,20 +106,14 @@ define(
                 Scene.renderer.render(Scene.scene, Scene.camera);
             },
 
+            renderSolarSystem: function() {
+                MainController.positionPlanets();
+                MainController.positionMoons();
+                MainController.animate();
+            },
+
             init: function() {
-                UIController.init();
-
-                $.when(Initializer.init()).done(function() {
-                    // if (Scene.planets.length) {
-                    //     MainController.positionPlanets();
-                    // }
-
-                    // if (Scene.moons.length) {
-                    //     MainController.positionMoons();
-                    // }
-
-                    // MainController.animate();
-                });
+                Initializer.init(MainController);
             }
         };
 

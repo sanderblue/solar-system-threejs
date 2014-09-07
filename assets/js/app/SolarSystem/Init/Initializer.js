@@ -46,7 +46,7 @@ define(
             },
 
             buildSolarSystem: function(buildStatusPrompt) {
-                $.when(
+                return $.when(
                     SolarSystemFactory.build(buildStatusPrompt)
                 )
                 .done(function() {
@@ -54,7 +54,7 @@ define(
                 });
             },
 
-            init: function() {
+            init: function(MainController) {
                 window.addEventListener('resize', Initializer.onWindowResize, false);
 
                 // if (!Initializer.isBrowserCompatible()) {
@@ -63,7 +63,7 @@ define(
                 TimeController.start();
 
                 return $.when(Scene.init()).done(function() {
-                    LoadingPromptController.init(Initializer);
+                    LoadingPromptController.init(Initializer, MainController);
                 });
             }
         };

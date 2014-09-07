@@ -44,6 +44,7 @@ define(
                         statusMessage = 'Sun Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.'
                     ;
 
+                    buildStatusPrompt.append('<div class="status-message">'+ statusMessage + '</div>');
                     System.log(statusMessage);
 
                     promise.resolve(statusMessage);
@@ -64,6 +65,7 @@ define(
                         statusMessage = 'Asteroid Belt Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.'
                     ;
 
+                    buildStatusPrompt.append('<div class="status-message">'+ statusMessage + '</div>');
                     System.log(statusMessage);
 
                     promise.resolve(statusMessage);
@@ -71,28 +73,26 @@ define(
             },
 
             buildPlanets: function(buildStatusPrompt) {
-                return $.Deferred(function(Apromise) {
-                    if (!App.config.build.PlanetFactoryEnabled) {
-                        return new $.Deferred(function(promise) { return promise.resolve() });
-                    }
+                if (!App.config.build.PlanetFactoryEnabled) {
+                    return $.Deferred(function(promise) { return promise.resolve() });
+                }
 
-                    var startTime = new Date().getTime(),
-                        planets = SolarSystem.planets,
-                        promises = []
+                var startTime = new Date().getTime(),
+                    planets = SolarSystem.planets,
+                    promises = []
+                ;
+
+                for (var i = 0; i < planets.length; i++) {
+                    promises.push(PlanetFactory.build(planets[i], buildStatusPrompt));
+                }
+
+                return $.when.apply($, promises).done(function() {
+                    var endTime = new Date().getTime(),
+                        statusMessage = 'Planet Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.'
                     ;
 
-                    for (var i = 0; i < planets.length; i++) {
-                        promises.push(PlanetFactory.build(planets[i], buildStatusPrompt));
-                    }
-
-                    $.when.apply($, promises).done(function() {
-                        var endTime = new Date().getTime(),
-                            statusMessage = 'Planet Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.'
-                        ;
-
-                        Apromise.resolve(statusMessage);
-                        System.log(statusMessage);
-                    });
+                    buildStatusPrompt.append('<div class="status-message">'+ statusMessage + '</div>');
+                    System.log(statusMessage);
                 });
             },
 
@@ -110,7 +110,7 @@ define(
                         statusMessage = 'Star Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.'
                     ;
 
-                    buildStatusPrompt.append('<p>'+ statusMessage + '</p>');
+                    buildStatusPrompt.append('<div class="status-message">'+ statusMessage + '</div>');
                     System.log(statusMessage);
 
                     promise.resolve();
@@ -124,28 +124,16 @@ define(
 
                 var startTime = new Date().getTime();
 
-                // return $.when(
-                //     SolarSystemFactory.buildParent(buildStatusPrompt),
-                //     SolarSystemFactory.buildPlanets(buildStatusPrompt),
-                //     SolarSystemFactory.buildAsteroidBelt(buildStatusPrompt),
-                //     SolarSystemFactory.buildStars(buildStatusPrompt)
-                // )
-                // .done(function() {
-                //     var endTime = new Date().getTime();
+                return $.when(
+                    SolarSystemFactory.buildParent(buildStatusPrompt),
+                    SolarSystemFactory.buildPlanets(buildStatusPrompt),
+                    SolarSystemFactory.buildAsteroidBelt(buildStatusPrompt),
+                    SolarSystemFactory.buildStars(buildStatusPrompt)
+                )
+                .done(function() {
+                    var endTime = new Date().getTime();
 
-                //     System.log('Solar System Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.');
-                // });
-
-                $.when(SolarSystemFactory.buildParent(buildStatusPrompt)).done(function(message) {
-                    buildStatusPrompt.append('<p>'+ message + '</p>');
-                });
-
-                $.when(SolarSystemFactory.buildPlanets(buildStatusPrompt)).done(function(message) {
-                    buildStatusPrompt.append('<p>'+ message + '</p>');
-                });
-
-                $.when(SolarSystemFactory.buildAsteroidBelt(buildStatusPrompt)).done(function(message) {
-                    buildStatusPrompt.append('<p>'+ message + '</p>');
+                    System.log('Solar System Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.');
                 });
             }
         };

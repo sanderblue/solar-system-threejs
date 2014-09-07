@@ -7,9 +7,7 @@
     right: 0;
     z-index: 100;
 
-    p {
-        margin: 8px 0;
-    }
+    p { margin: 20px 0; }
 }
 
 .loading-prompt-inner-wrap {
@@ -27,9 +25,21 @@
 .introduction-text {
     @include font-regular();
     font-size: 17px;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .build-status-prompt {
+    @include font-14();
+    display: none;
+
+    p { margin: 12px 0; }
+}
+
+.status-messages-holder {
+    margin-top: 20px;
+    margin-bottom: 30px;
     display: none;
 }
 
+.view-button { display: none; }

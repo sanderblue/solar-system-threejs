@@ -237,7 +237,7 @@ define(
 
                             System.log(builderStatement);
 
-                            // buildStatusPrompt.append('<p>'+ builderStatement + '</p>');
+                            buildStatusPrompt.append('<p>'+ builderStatement + '</p>');
 
                             promise.resolve(thisPlanet);
                         });
