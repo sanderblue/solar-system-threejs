@@ -23,8 +23,6 @@ define(
 
                     UIController.selectedPlanet = matchedPlanet.planet;
 
-                    console.log(UIController.selectedPlanet);
-
                     Scene.setCameraPosition(matchedPlanet.planet3d.core, matchedPlanet.planet3d, matchedPlanet.planet3d.position, false);
                     Scene.setCameraFocalPoint(matchedPlanet.planet3d.position);
                 });
@@ -74,13 +72,11 @@ define(
                     null,
                     new THREE.Vector3(
                         parseFloat(posX),
-                        20,
+                        30,
                         parseFloat(posY)
                     ),
                     null
                 );
-
-                console.log(Scene.camera.position)
 
                 cropper.css({ '-moz-transform': rotate, 'transform' : rotate, '-webkit-transform': rotate, '-ms-transform': rotate });
 
@@ -109,7 +105,7 @@ define(
                 var value = 0;
 
                 $('#camera-zoom-control').on('change', function() {
-                    console.log('Zoom: ', parseFloat(this.value), parseFloat(value));
+                    // console.log('Zoom: ', parseFloat(this.value), parseFloat(value));
 
                     if (parseFloat(this.value) > parseFloat(value) && parseFloat(this.value) > 0) {
                         Camera.position.x = parseFloat(Scene.camera.position.x) - (parseFloat(this.value) - parseFloat(value));

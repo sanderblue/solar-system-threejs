@@ -40,8 +40,8 @@ define(
                 ;
 
                 var material = new THREE.LineBasicMaterial({
-                                        color: 0x3C3C3C,
-                                        linewidth: 0.3
+                                        color: 0x535353,
+                                        linewidth: 0.25
                                     });
 
                 var orbitLine = new THREE.Geometry();

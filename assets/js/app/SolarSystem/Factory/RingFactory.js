@@ -30,12 +30,10 @@ define(function() {
                             thisPlanet.add(response.centroid);
                         });
 
-                        console.log(rings[i].subRings);
-
                         if (rings[i].subRings && rings[i].subRings.length) {
                             for (var n = 0; n < rings[i].subRings.length; n++) {
                                 $.when(
-                                    RingFactory.buildSubRing(planet, rings[i].subRings[i])
+                                    RingFactory.buildSubRing(planet, rings[i].subRings[n])
                                 )
                                 .done(function(response) {
                                     response.centroid.add(response.line);

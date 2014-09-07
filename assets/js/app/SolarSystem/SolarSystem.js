@@ -262,19 +262,19 @@ define(function() {
                         name: 'D Ring',
                         distanceFromParent: 70705 * ringOrbitScale, // 66,900 – 74,510 km (70,705 mean)
                         width: 7500,
-                        color: 0x706D67
+                        color: 0x7A7467
                     },
                     {
                         name: 'C Ring',
                         distanceFromParent: 83329 * ringOrbitScale, // 74,658 – 92,000 km (83,329 mean)
                         width: 17500,
-                        color: 0x706D67,
+                        color: 0x887142,
                         subRings: [
                             {
                                 name: 'Colombo Gap',
                                 distanceFromParent: 77870  * ringOrbitScale, // 77,870 km
                                 width: 200,
-                                color: 0x706D67
+                                color: 0x60543C
                             },
                             {
                                 name: 'Titan Ringlet',
@@ -286,19 +286,19 @@ define(function() {
                                 name: 'Maxwell Gap',
                                 distanceFromParent: 87491  * ringOrbitScale, // 87,491 km
                                 width: 170,
-                                color: 0x565147
+                                color: 0x665D4D
                             },
                             {
                                 name: 'Maxwell Ringlet',
                                 distanceFromParent: 77870  * ringOrbitScale, // 77,870 km
                                 width: 64,
-                                color: 0x706D67
+                                color: 0x7F786A
                             },
                             {
                                 name: 'Bond Gap',
                                 distanceFromParent: 88700  * ringOrbitScale, // 88,700 km
                                 width: 60,
-                                color: 0x696252
+                                color: 0x69604B
                             },
                             {
                                 name: '1.470RS Ringlet',
@@ -316,7 +316,7 @@ define(function() {
                                 name: 'Dawes Gap',
                                 distanceFromParent: 90210   * ringOrbitScale, // 90,210 km
                                 width: 40,
-                                color: 0x725F39
+                                color: 0x755F33
                             }
                         ]
                     },
@@ -324,7 +324,7 @@ define(function() {
                         name: 'B Ring',
                         distanceFromParent: 104790 * ringOrbitScale, // 92,000 – 117,580 km (104,790 mean)
                         width: 25500,
-                        color: 0x756A4C
+                        color: 0x7C673E
                     },
                     {
                         name: 'Cassini Division',
@@ -336,7 +336,7 @@ define(function() {
                                 name: 'Huygens Gap',
                                 distanceFromParent: 117680 * ringOrbitScale, // 117,680 km
                                 width: 1360,
-                                color: 0x706D67
+                                color: 0x87744E
                             },
                             {
                                 name: 'Huygens Ringlet',
@@ -354,7 +354,7 @@ define(function() {
                                 name: 'Russell Gap',
                                 distanceFromParent: 118614 * ringOrbitScale, // 118,614 km
                                 width: 33,
-                                color: 0x706D67
+                                color: 0x755F33
                             },
                             {
                                 name: 'Jeffreys Gap',
@@ -366,7 +366,7 @@ define(function() {
                                 name: 'Kuiper Gap',
                                 distanceFromParent: 119405 * ringOrbitScale, // 119,405 km
                                 width: 3,
-                                color: 0x564F41
+                                color: 0x755F33
                             },
                             {
                                 name: 'Laplace Gap',
@@ -378,7 +378,7 @@ define(function() {
                                 name: 'Bessel Gap',
                                 distanceFromParent: 120241 * ringOrbitScale, // 120,241 km
                                 width: 40,
-                                color: 0x725F39
+                                color: 0x87744E
                             },
                             {
                                 name: 'Barnard Gap',
@@ -389,22 +389,156 @@ define(function() {
                         ]
                     },
                     {
+                        name: 'E Ring',
+                        distanceFromParent: 330000 * ringOrbitScale, // 180,000 - 480,000 km (138,078 mean)
+                        width: 300000, // 300,000 km
+                        color: 0x615E58,
+                        subRings: [
+                            {
+                                name: 'E1',
+                                distanceFromParent: 326000 * ringOrbitScale, // E-1 through E-6 rungs are just test rings and do not actually exist.
+                                width: 9000,
+                                color: 0x927947
+                            },
+                            {
+                                name: 'E2',
+                                distanceFromParent: 324000 * ringOrbitScale,
+                                width: 500,
+                                color: 0x967E4F
+                            },
+                            {
+                                name: 'E3',
+                                distanceFromParent: 322500 * ringOrbitScale,
+                                width: 400,
+                                color: 0x967E4F
+                            },
+                            {
+                                name: 'E4',
+                                distanceFromParent: 320000 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x917846
+                            },
+                            {
+                                name: 'E5',
+                                distanceFromParent: 318300 * ringOrbitScale,
+                                width: 1500,
+                                color: 0xA0854F
+                            },
+                            {
+                                name: 'E6',
+                                distanceFromParent: 316700 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x977F4F
+                            },
+                            {
+                                name: 'E7',
+                                distanceFromParent: 313100 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x796740
+                            },
+                            {
+                                name: 'E8',
+                                distanceFromParent: 310100 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x84724C
+                            },
+                            {
+                                name: 'E9',
+                                distanceFromParent: 308100 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x887856
+                            },
+                            {
+                                name: 'E10',
+                                distanceFromParent: 305100 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x8E7B50
+                            },
+                            {
+                                name: 'E11',
+                                distanceFromParent: 292400 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x887856
+                            },
+                            {
+                                name: 'E12',
+                                distanceFromParent: 286100 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x8E7B50
+                            },
+                            {
+                                name: 'E13',
+                                distanceFromParent: 285200 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x887856
+                            },
+                            {
+                                name: 'E14',
+                                distanceFromParent: 280100 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x8E7B50
+                            },
+                            {
+                                name: 'E15',
+                                distanceFromParent: 278100 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x8E7B50
+                            },
+                            {
+                                name: 'E16',
+                                distanceFromParent: 274320 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x8E7B50
+                            },
+                            {
+                                name: 'E17',
+                                distanceFromParent: 265100 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x8E7B50
+                            },
+                            {
+                                name: 'E18',
+                                distanceFromParent: 261100 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x796740
+                            },
+                            {
+                                name: 'E19',
+                                distanceFromParent: 258320 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x8E7B50
+                            },
+                            {
+                                name: 'E20',
+                                distanceFromParent: 250100 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x977F4F
+                            },
+                            {
+                                name: 'E21',
+                                distanceFromParent: 225320 * ringOrbitScale,
+                                width: 2500,
+                                color: 0x8E7B50
+                            }
+                        ]
+                    },
+                    {
                         name: 'A Ring',
                         distanceFromParent: 129473 * ringOrbitScale, // 122,170 – 136,775 km (129,473 mean)
                         width: 14600,
-                        color: 0x6B624B
+                        color: 0x7F745A
                     },
                     {
                         name: 'Roche Division',
                         distanceFromParent: 138078 * ringOrbitScale, // 136,775 – 139,380 km (138,078 mean)
                         width: 2600,
-                        color: 0x615E58
+                        color: 0x6E695F
                     },
                     {
                         name: 'F Ring',
                         distanceFromParent: 140180 * ringOrbitScale, // 140,180 km (140,180 mean)
                         width: 500,
-                        color: 0x6E6758
+                        color: 0x7C725C
                     },
                     {
                         name: 'Janus/Epimetheus Ring',
@@ -434,13 +568,7 @@ define(function() {
                         name: 'Pallene Ring',
                         distanceFromParent: 212250 * ringOrbitScale, // 211,000 – 213,500 km (212,250 mean)
                         width: 2500,
-                        color: 0x706C60
-                    },
-                    {
-                        name: 'E Ring',
-                        distanceFromParent: 330000 * ringOrbitScale, // 180,000 - 480,000 km (138,078 mean)
-                        width: 300000, // 300,000 km
-                        color: 0x615E58
+                        color: 0x887856
                     }
                 ],
                 moons: [
