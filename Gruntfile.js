@@ -31,10 +31,14 @@ module.exports = function(grunt) {
         },
         watch: {
             css: {
-                files: ['assets/sass/*.scss'],
+                files: [
+                    'assets/sass/lib/*/*.scss',
+                    'assets/sass/control-panel/*.scss',
+                    'assets/sass/*/*.scss',
+                    'assets/sass/*.scss',
+                ],
                 tasks: ['sass:primary']
             }
-
         }
     });
 
