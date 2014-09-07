@@ -1,0 +1,28 @@
+.data-container {
+    @include box-sizing(border-box);
+    @include font-13();
+    margin-bottom: 10px;
+    padding-left: 16px;
+
+    .left-side,
+    .right-side {
+        @include box-sizing(border-box);
+        @include transition(color 0.2s ease);
+        display: inline-block;
+    }
+
+    .left-side  { width: 62%; }
+    .right-side {
+        @include font-regular();
+        width: 35%;
+    }
+}
+
+.data-container-row {
+    &:hover {
+        color: $base_font_color_hover;
+
+        .left-side,
+        .right-side { color: $base_font_color_hover; }
+    }
+}

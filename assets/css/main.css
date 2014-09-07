@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -7,62 +8,101 @@
  *  Font Faces
  */
 @font-face {
-  font-family: OpenSansBold;
+  font-family: "Rajdhani-Light";
   font-weight: normal;
   font-style: normal;
-  src: url("../fonts/open-sans/heavy/OpenSans-Bold-webfont.eot");
-  src: url("../fonts/open-sans/heavy/OpenSans-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/heavy/OpenSans-Bold-webfont.woff") format("woff"), url("../fonts/open-sans/heavy/OpenSans-Bold-webfont.ttf") format("truetype"), url("../fonts/open-sans/heavy/OpenSans-Bold-webfont.svg#OpenSansBold") format("svg"); }
+  src: url("../fonts/rajdhani/rajdhani-light-webfont.eot");
+  src: url("../fonts/rajdhani/rajdhani-light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/rajdhani/rajdhani-light-webfont.woff") format("woff"), url("../fonts/rajdhani/rajdhani-light-webfont.ttf") format("truetype"), url("../fonts/rajdhani/rajdhani-light-webfont.svg#Rajdhani-Light") format("svg"); }
 @font-face {
-  font-family: OpenSansRegular;
+  font-family: "Rajdhani-Medium";
   font-weight: normal;
   font-style: normal;
-  src: url("../fonts/open-sans/regular/OpenSans-Regular-webfont.eot");
-  src: url("../fonts/open-sans/regular/OpenSans-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/regular/OpenSans-Regular-webfont.woff") format("woff"), url("../fonts/open-sans/regular/OpenSans-Regular-webfont.ttf") format("truetype"), url("../fonts/open-sans/regular/OpenSans-Regular-webfont.svg#OpenSansRegular") format("svg"); }
+  src: url("../fonts/rajdhani/rajdhani-medium-webfont.eot");
+  src: url("../fonts/rajdhani/rajdhani-medium-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/rajdhani/rajdhani-medium-webfont.woff") format("woff"), url("../fonts/rajdhani/rajdhani-medium-webfont.ttf") format("truetype"), url("../fonts/rajdhani/rajdhani-medium-webfont.svg#Rajdhani-Medium") format("svg"); }
 @font-face {
-  font-family: OpenSansLight;
+  font-family: "Rajdhani-Regular";
   font-weight: normal;
   font-style: normal;
-  src: url("../fonts/open-sans/light/OpenSans-Light-webfont.eot");
-  src: url("../fonts/open-sans/light/OpenSans-Light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/light/OpenSans-Light-webfont.woff") format("woff"), url("../fonts/open-sans/light/OpenSans-Light-webfont.ttf") format("truetype"), url("../fonts/open-sans/light/OpenSans-Light-webfont.svg#OpenSansLight") format("svg"); }
+  src: url("../fonts/rajdhani/rajdhani-regular-webfont.eot");
+  src: url("../fonts/rajdhani/rajdhani-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/rajdhani/rajdhani-regular-webfont.woff") format("woff"), url("../fonts/rajdhani/rajdhani-regular-webfont.ttf") format("truetype"), url("../fonts/rajdhani/rajdhani-regular-webfont.svg#Rajdhani-Regular") format("svg"); }
 @font-face {
-  font-family: OpenSansBoldItalic;
+  font-family: "Rajdhani-Semibold";
   font-weight: normal;
   font-style: normal;
-  src: url("../fonts/open-sans/heavy-italic/OpenSans-BoldItalic-webfont.eot");
-  src: url("../fonts/open-sans/heavy-italic/OpenSans-BoldItalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/heavy-italic/OpenSans-BoldItalic-webfont.woff") format("woff"), url("../fonts/open-sans/heavy-italic/OpenSans-BoldItalic-webfont.ttf") format("truetype"), url("../fonts/open-sans/heavy-italic/OpenSans-BoldItalic-webfont.svg#OpenSansBoldItalic") format("svg"); }
+  src: url("../fonts/rajdhani/rajdhani-semibold-webfont.eot");
+  src: url("../fonts/rajdhani/rajdhani-semibold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/rajdhani/rajdhani-semibold-webfont.woff") format("woff"), url("../fonts/rajdhani/rajdhani-semibold-webfont.ttf") format("truetype"), url("../fonts/rajdhani/rajdhani-semibold-webfont.svg#Rajdhani-Semibold") format("svg"); }
 @font-face {
-  font-family: OpenSansRegularItalic;
+  font-family: "Rajdhani-Bold";
   font-weight: normal;
   font-style: normal;
-  src: url("../fonts/open-sans/regular-italic/OpenSans-RegularItalic-webfont.eot");
-  src: url("../fonts/open-sans/regular-italic/OpenSans-RegularItalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/regular-italic/OpenSans-RegularItalic-webfont.woff") format("woff"), url("../fonts/open-sans/regular-italic/OpenSans-RegularItalic-webfont.ttf") format("truetype"), url("../fonts/open-sans/regular-italic/OpenSans-RegularItalic-webfont.svg#OpenSansRegularItalic") format("svg"); }
-@font-face {
-  font-family: OpenSansLightItalic;
-  font-weight: normal;
-  font-style: normal;
-  src: url("../fonts/open-sans/light-italic/OpenSans-LightItalic-webfont.eot");
-  src: url("../fonts/open-sans/light-italic/OpenSans-LightItalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/light-italic/OpenSans-LightItalic-webfont.woff") format("woff"), url("../fonts/open-sans/light-italic/OpenSans-LightItalic-webfont.ttf") format("truetype"), url("../fonts/open-sans/light-italic/OpenSans-LightItalic-webfont.svg#OpenSansLightItalic") format("svg"); }
-@font-face {
-  font-family: GloberBold;
-  font-weight: normal;
-  font-style: normal;
-  src: url("../fonts/glober/heavy/glober_bold-webfont.eot");
-  src: url("../fonts/glober/heavy/glober_bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/glober/heavy/glober_bold-webfont.woff") format("woff"), url("../fonts/glober/heavy/glober_bold-webfont.ttf") format("truetype"), url("../fonts/glober/heavy/glober_bold-webfont.svg#GloberBold") format("svg"); }
-@font-face {
-  font-family: GloberLight;
-  font-weight: normal;
-  font-style: normal;
-  src: url("../fonts/glober/light/glober_thin-webfont.eot");
-  src: url("../fonts/glober/light/glober_thin-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/glober/light/glober_thin-webfont.woff") format("woff"), url("../fonts/glober/light/glober_thin-webfont.ttf") format("truetype"), url("../fonts/glober/light/glober_thin-webfont.svg#GloberLight") format("svg"); }
+  src: url("../fonts/rajdhani/rajdhani-bold-webfont.eot");
+  src: url("../fonts/rajdhani/rajdhani-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/rajdhani/rajdhani-bold-webfont.woff") format("woff"), url("../fonts/rajdhani/rajdhani-bold-webfont.ttf") format("truetype"), url("../fonts/rajdhani/rajdhani-bold-webfont.svg#Rajdhani-Bold") format("svg"); }
 /*
  *  Font Families
  */
 /*
  *  Font Variables
  */
-/*
- *  Font Sizes
+/**
+ * Font Sizes
  */
+@font-face {
+  font-family: 'icomoon';
+  src: url("../icons/icomoon/fonts/icomoon.eot");
+  src: url("../icons/icomoon/fonts/icomoon.eot") format("embedded-opentype"), url("../icons/icomoon/fonts/icomoon.woff") format("woff"), url("../icons/icomoon/fonts/icomoon.ttf") format("truetype"), url("../icons/icomoon/fonts/icomoon.svg") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+[class^="icon-"],
+[class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: middle;
+  color: #f0f0f0;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-earth:before {
+  content: "\45"; }
+
+.icon-target:before {
+  content: "\2b"; }
+
+.icon-rocket:before {
+  content: "\72"; }
+
+.icon-earth2:before {
+  content: "\65"; }
+
+.icon-sun:before {
+  content: "\73"; }
+
+.icon-sun2:before {
+  content: "\53"; }
+
+.icon-adjust:before {
+  content: "\62"; }
+
+.icon-light-bulb:before {
+  content: "\6c"; }
+
+.camera-trigger {
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  -webkit-transition: color 0.2s ease;
+  -moz-transition: color 0.2s ease;
+  transition: color 0.2s ease;
+  color: rgba(240, 240, 240, 0.4);
+  padding-top: 1px; }
+  .camera-trigger:hover {
+    color: white;
+    cursor: pointer; }
+
 html {
   -webkit-font-smoothing: antialiased; }
 
@@ -72,20 +112,25 @@ canvas {
   -webkit-font-smoothing: antialiased; }
 
 body {
-  color: #bdbdbd;
-  font-family: Monospace;
-  font-size: 13px;
+  font-family: 'Rajdhani-Regular', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  color: #f0f0f0;
   background: #000;
   background-color: #000;
   margin: 0px;
   overflow: hidden;
-  z-index: 0;
-  -webkit-font-smoothing: antialiased; }
+  z-index: 0; }
 
 a {
   color: #0080ff; }
 
 h1, h2, h3, h4, h5, h6 {
+  margin: 0; }
+
+ul {
+  list-style: none;
+  padding: 0;
   margin: 0; }
 
 .container {
@@ -99,64 +144,307 @@ h1, h2, h3, h4, h5, h6 {
   padding: 15px;
   background: transparent; }
 
-.control-panel {
-  display: inline-block;
-  background: rgba(30, 30, 30, 0.55);
-  padding: 17px;
-  z-index: 1;
+.btn-ss {
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  font-family: 'Rajdhani-Semibold', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 3px;
+  color: rgba(240, 240, 240, 0.8);
+  padding: 10px 20px;
   text-align: center;
-  min-width: 240px; }
-  .control-panel i {
-    color: #bdbdbd; }
+  width: 100%;
+  max-width: 250px;
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.25); }
+  .btn-ss:hover {
+    cursor: pointer;
+    border: 1px solid white;
+    color: white;
+    box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.6); }
 
-.zoom-tilt-controls {
-  padding-bottom: 15px; }
-  .zoom-tilt-controls .control-panel-secondary-header {
-    font-size: 14px;
-    padding: 5px 0; }
-  .zoom-tilt-controls .range-holder {
-    line-height: 18px; }
-    .zoom-tilt-controls .range-holder span,
-    .zoom-tilt-controls .range-holder input {
+.accordian {
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  background: transparent; }
+  .accordian .accordian-item {
+    font-family: 'Rajdhani-Semibold', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    background: rgba(90, 90, 90, 0.2);
+    margin: 6px 0; }
+    .accordian .accordian-item .accordian-item-label {
+      -webkit-transition: color 0.2s ease;
+      -moz-transition: color 0.2s ease;
+      transition: color 0.2s ease;
+      padding: 5px 12px;
       vertical-align: middle; }
-  .zoom-tilt-controls .zoom-range,
-  .zoom-tilt-controls .tilt-range {
-    display: inline-block;
-    width: auto; }
-  .zoom-tilt-controls .zoom-range {
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    transform: rotate(180deg); }
-
-.planet-list-holder {
-  padding: 15px 0 15px 0;
-  border-top: 1px solid rgba(110, 110, 110, 0.3);
-  border-bottom: 1px solid rgba(110, 110, 110, 0.3);
-  margin-bottom: 15px; }
-
-.planet-list {
-  list-style: none;
-  text-align: center;
-  padding: 0;
-  margin: 0; }
-  .planet-list .planet {
-    -webkit-transition: color 0.25s ease;
-    -moz-transition: color 0.25s ease;
-    transition: color 0.25s ease;
-    line-height: 18px; }
-    .planet-list .planet:hover {
+      .accordian .accordian-item .accordian-item-label:hover {
+        color: white; }
+      .accordian .accordian-item .accordian-item-label.planet {
+        display: inline-block;
+        vertical-align: middle; }
+    .accordian .accordian-item:hover .accordian-item-label {
       cursor: pointer;
-      color: #f0f0f0; }
+      padding: 5px 12px; }
+    .accordian .accordian-item.active .accordian-submenu {
+      opacity: 1;
+      -moz-opacity: 1;
+      -webkit-opacity: 1;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box; }
+      .accordian .accordian-item.active .accordian-submenu.active:hover {
+        background: transparent; }
+      .accordian .accordian-item.active .accordian-submenu .accordian-subitem.planet:hover {
+        color: white; }
+      .accordian .accordian-item.active .accordian-submenu .left-side,
+      .accordian .accordian-item.active .accordian-submenu .right-side {
+        display: inline-block;
+        width: 49%; }
+  .accordian .accordian-submenu {
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    opacity: 0;
+    -moz-opacity: 0;
+    -webkit-opacity: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: opacity 0.2s ease;
+    -moz-transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease;
+    padding: 0 4px 10px 4px;
+    display: none; }
+    .accordian .accordian-submenu .accordian-subitem .planet {
+      padding: 6px 6px 6px 14px;
+      display: inline-block; }
+      .accordian .accordian-submenu .accordian-subitem .planet:hover {
+        color: white; }
+    .accordian .accordian-submenu .left-side,
+    .accordian .accordian-submenu .right-side {
+      display: inline-block;
+      width: 49%; }
+  .accordian .accordian-submenu-item {
+    font-size: 13px;
+    -webkit-font-smoothing: antialiased; }
 
-.control-panel-header {
-  font-size: 16px;
-  padding: 5px 0;
-  margin-bottom: 15px;
-  border-bottom: 1px solid rgba(110, 110, 110, 0.3); }
+.data-container {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  margin-bottom: 10px;
+  padding-left: 16px; }
+  .data-container .left-side,
+  .data-container .right-side {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    transition: color 0.2s ease;
+    display: inline-block; }
+  .data-container .left-side {
+    width: 62%; }
+  .data-container .right-side {
+    font-family: 'Rajdhani-Regular', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    width: 35%; }
 
-.reset-camera:hover,
-.toggle-logger:hover {
-  cursor: pointer;
-  color: #f0f0f0; }
+.data-container-row:hover {
+  color: white; }
+  .data-container-row:hover .left-side,
+  .data-container-row:hover .right-side {
+    color: white; }
+
+.loading-prompt {
+  background: black;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100; }
+  .loading-prompt p {
+    margin: 20px 0; }
+
+.loading-prompt-inner-wrap {
+  width: 90%;
+  max-width: 960px;
+  margin: 10% auto; }
+
+.introduction-header,
+.status-prompt-header {
+  font-family: 'Rajdhani-Semibold', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  font-size: 22px;
+  -webkit-font-smoothing: antialiased; }
+
+.introduction-text {
+  font-family: 'Rajdhani-Regular', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  font-size: 17px;
+  margin-top: 20px;
+  margin-bottom: 30px; }
+
+.build-status-prompt {
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  display: none; }
+  .build-status-prompt p {
+    margin: 12px 0; }
+
+.status-messages-holder {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  display: none; }
+
+.view-button {
+  display: none; }
+
+canvas {
+  display: block; }
+
+input {
+  width: 200px; }
+
+.control-panel {
+  font-size: 20px;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  background: transparent;
+  width: 100%;
+  max-width: 310px;
+  color: rgba(240, 240, 240, 0.8); }
+  .control-panel .control-panel-item {
+    -webkit-transition: background-color 1s ease;
+    -moz-transition: background-color 1s ease;
+    transition: background-color 1s ease;
+    font-family: 'Rajdhani-Medium', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    padding: 8px;
+    margin: 6px 0;
+    position: relative;
+    background-color: rgba(70, 70, 70, 0.2);
+    border-top: 1px solid rgba(240, 240, 240, 0.25); }
+    .control-panel .control-panel-item:hover {
+      cursor: pointer; }
+    .control-panel .control-panel-item:before, .control-panel .control-panel-item:after {
+      font-size: 18px;
+      -webkit-font-smoothing: antialiased;
+      content: '•';
+      position: absolute;
+      line-height: 0;
+      top: 0; }
+    .control-panel .control-panel-item:before {
+      left: 0; }
+    .control-panel .control-panel-item:after {
+      right: 0; }
+  .control-panel .subitem {
+    font-family: 'Rajdhani-Regular', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    padding-left: 12px; }
+
+audio.soundscape {
+  max-width: 310px;
+  width: 100%; }
+
+.camera-orbit-track {
+  width: 175px;
+  height: 175px;
+  background-color: transparent;
+  position: relative;
+  margin: 20px auto; }
+
+.compass {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  background-color: transparent;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border: 1px solid rgba(98, 190, 208, 0.95); }
+  .compass .compass-circle {
+    box-sizing: border-box;
+    width: 120px;
+    height: 120px;
+    top: 18px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border: 1px solid rgba(98, 190, 208, 0.95);
+    margin: 0 auto;
+    position: relative; }
+  .compass .compass-centroid {
+    box-sizing: border-box;
+    width: 10px;
+    height: 10px;
+    padding: 4px;
+    top: 54px;
+    background: orange;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    border: 2px solid #62bed0; }
+
+.camera-positioner {
+  width: 10px;
+  height: 10px;
+  background: rgba(230, 226, 241, 0.85);
+  position: absolute;
+  left: 85px;
+  cursor: crosshair;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-transform: rotate(0deg);
+  -moz-transform-origin: 5px 85px;
+  transform: rotate(0deg);
+  transform-origin: 5px 85px;
+  -ms-transform: rotate(0deg);
+  -ms-transform-origin: 5px 85px;
+  -webkit-transform: rotate(0deg);
+  -webkit-transform-origin: 5px 85px;
+  z-index: 17; }
+
+.zoom-control-input {
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto; }
+
+.camera-reset {
+  font-size: 12px;
+  -webkit-font-smoothing: antialiased;
+  margin-left: 13px;
+  margin-top: 4px; }
+  .camera-reset:hover {
+    cursor: pointer; }
