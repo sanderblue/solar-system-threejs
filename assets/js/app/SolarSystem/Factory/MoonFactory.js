@@ -13,7 +13,7 @@ define(
              * @param moon [object] // currently not required
              */
             getMoonTexture: function(moon) {
-                return new THREE.ImageUtils.loadTexture('../assets/textures/moon.jpg');
+                return new THREE.ImageUtils.loadTexture('/assets/textures/moon.jpg');
             },
 
             /**
