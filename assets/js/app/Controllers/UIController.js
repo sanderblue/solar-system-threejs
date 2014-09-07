@@ -113,8 +113,6 @@ define(
                 var value = 0;
 
                 $('#camera-zoom-control').on('change', function() {
-                    // console.log('Zoom: ', parseFloat(this.value), parseFloat(value));
-
                     if (parseFloat(this.value) > parseFloat(value) && parseFloat(this.value) > 0) {
                         Camera.position.x = parseFloat(Scene.camera.position.x) - (parseFloat(this.value) - parseFloat(value));
                         Camera.position.z = parseFloat(Scene.camera.position.z) - (parseFloat(this.value) - parseFloat(value));
@@ -137,8 +135,6 @@ define(
 
                     Scene.camera.position.x = Camera.position.x;
                     Scene.camera.position.z = Camera.position.z;
-
-                    console.log('Position: ', Scene.camera.position);
                 });
             },
 
