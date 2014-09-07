@@ -21,7 +21,7 @@ define(
              * @param planet [object]
              */
             getTexture: function(planet) {
-                var texturePath = '/assets/textures/' + planet.name.toLowerCase() + '.jpg';
+                var texturePath = '/textures/' + planet.name.toLowerCase() + '.jpg';
 
                 return new THREE.ImageUtils.loadTexture(texturePath);
             },
@@ -30,7 +30,7 @@ define(
              * Gets a planet's core texture (just some crust-like texture for now).
              */
             getCoreTexture: function() {
-                var texturePath = '/assets/textures/moon.jpg';
+                var texturePath = '/textures/moon.jpg';
 
                 return new THREE.ImageUtils.loadTexture(texturePath);
             },
@@ -44,7 +44,7 @@ define(
                 var geometry    = new THREE.SphereGeometry(planet.radius + 1.11, 100, 70);
 
                 var material    = new THREE.MeshPhongMaterial({
-                    map         : THREE.ImageUtils.loadTexture('/assets/textures/earth_clouds_fair2.png'),
+                    map         : THREE.ImageUtils.loadTexture('/textures/earth_clouds_fair2.png'),
                     side        : THREE.DoubleSide,
                     transparent : true,
                     opacity     : 0.9,
@@ -136,8 +136,8 @@ define(
                     if (planet.name === 'Mercury' || planet.name === 'Venus' || planet.name === 'Earth' || planet.name === 'Mars') {
                         planetMaterial = new THREE.MeshPhongMaterial({
                             ambient     : 0xbbbbbb,
-                            map         : THREE.ImageUtils.loadTexture('/assets/textures/' + planet.name.toLowerCase() + '.jpg'),
-                            bumpMap     : THREE.ImageUtils.loadTexture('/assets/textures/' + planet.name.toLowerCase() + '_topo.jpg'),
+                            map         : THREE.ImageUtils.loadTexture('/textures/' + planet.name.toLowerCase() + '.jpg'),
+                            bumpMap     : THREE.ImageUtils.loadTexture('/textures/' + planet.name.toLowerCase() + '_topo.jpg'),
                             bumpScale   : 1.4,
                             // specular    : new THREE.Color('grey'),
                         });
