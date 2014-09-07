@@ -6,4 +6,30 @@
     left: 0;
     right: 0;
     z-index: 100;
+
+    p {
+        margin: 8px 0;
+    }
 }
+
+.loading-prompt-inner-wrap {
+    width: 90%;
+    max-width: 960px;
+    margin: 10% auto;
+}
+
+.introduction-header,
+.status-prompt-header {
+    @include font-semibold();
+    @include font-22();
+}
+
+.introduction-text {
+    @include font-regular();
+    font-size: 17px;
+}
+
+.build-status-prompt {
+    display: none;
+}
+

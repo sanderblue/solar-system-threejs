@@ -6,10 +6,21 @@ define(
         'SolarSystemFactory',
         'SunFactory',
         'TimeController',
-        'UIController'
+        'UIController',
+        'LoadingPromptController'
 
     ],
-    function($, Scene, SolarSystem, SolarSystemFactory, SunFactory, TimeController, UIController) {
+    function(
+        $,
+        Scene,
+        SolarSystem,
+        SolarSystemFactory,
+        SunFactory,
+        TimeController,
+        UIController,
+        LoadingPromptController
+    )
+    {
 
         /**
          * Initializer
@@ -34,6 +45,15 @@ define(
                 Scene.renderer.setSize(window.innerWidth, window.innerHeight);
             },
 
+            buildSolarSystem: function(buildStatusPrompt) {
+                $.when(
+                    SolarSystemFactory.build(buildStatusPrompt)
+                )
+                .done(function() {
+                    UIController.init();
+                });
+            },
+
             init: function() {
                 window.addEventListener('resize', Initializer.onWindowResize, false);
 
@@ -43,14 +63,7 @@ define(
                 TimeController.start();
 
                 return $.when(Scene.init()).done(function() {
-                    $(document).ready(function() {
-                        $.when(
-                            SolarSystemFactory.build()
-                        )
-                        .done(function() {
-                            UIController.init();
-                        });
-                    });
+                    LoadingPromptController.init(Initializer);
                 });
             }
         };

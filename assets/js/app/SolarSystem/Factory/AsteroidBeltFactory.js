@@ -9,7 +9,7 @@ define(
     function(Scene, SolarSystem, OrbitFactory, Constants, RandomNumber) {
 
         /**
-         * AstroidBeltFactory
+         * AsteroidBeltFactory
          *
          * Builds the Solar System's Astroid Belt. The number of astroids to be rendered is set in
          * the SolarSystem object. Each astroid is randomly positioned within its orbit and between
@@ -43,7 +43,7 @@ define(
              * This ratio helps create an accurate representation of each astroid's location along its orbit.
              */
             getAstroidRadian: function() {
-                return 360 / SolarSystem.astroidBelt.primary[0].orbitDuration; // Using Ceres as a reference point
+                return 360 / SolarSystem.asteroidBelt.primary[0].orbitDuration; // Using Ceres as a reference point
             },
 
             /**
@@ -55,7 +55,7 @@ define(
                 for (var i = 0; i < 7; i ++) {
                     var radius = (Math.random() + 1150) * SolarSystem.celestialScale;
 
-                    points.push(AstroidBeltFactory.getRandomPointCoordinate(radius));
+                    points.push(AsteroidBeltFactory.getRandomPointCoordinate(radius));
                 }
 
                 return points;
@@ -69,16 +69,16 @@ define(
              * @param count   [integer]
              */
             positionAstroid: function(astroid, count) {
-                var amplitude = SolarSystem.astroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 65; // randomize the amplitudes to spread them out
+                var amplitude = SolarSystem.asteroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 65; // randomize the amplitudes to spread them out
 
                 var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, amplitude)
                             * Math.cos(count + 25 * Math.random()
-                            * AstroidBeltFactory.getAstroidRadian()
+                            * AsteroidBeltFactory.getAstroidRadian()
                             * Constants.degreesToRadianRatio);
 
                 var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, amplitude)
                             * Math.sin(count + 45 * Math.random()
-                            * AstroidBeltFactory.getAstroidRadian()
+                            * AsteroidBeltFactory.getAstroidRadian()
                             * Constants.degreesToRadianRatio);
 
                 astroid.position.set(
@@ -95,9 +95,9 @@ define(
              */
             buildAstroid: function(index) {
                 return $.Deferred(function(promise) {
-                    var randomPoints = AstroidBeltFactory.buildRandomPoints();
+                    var randomPoints = AsteroidBeltFactory.buildRandomPoints();
 
-                    var map = AstroidBeltFactory.getTexture();
+                    var map = AsteroidBeltFactory.getTexture();
 
                     map.wrapS = map.wrapT = THREE.RepeatWrapping;
                     map.anisotropy = 2;
@@ -110,8 +110,8 @@ define(
                     // Random convex mesh to represent an irregular, rock-like shape based on random points within a sphere where radius = n(random)
                     var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), materials);
 
-                    AstroidBeltFactory.positionAstroid(object, index);
-                    AstroidBeltFactory.addAstroid(object);
+                    AsteroidBeltFactory.positionAstroid(object, index);
+                    AsteroidBeltFactory.addAstroid(object);
 
                     Scene.astroids.push(object);
 
@@ -123,10 +123,10 @@ define(
              * Builds the entire astroid belt based on the configured astroid count.
              */
             buildBelt: function() {
-                var astroids = SolarSystem.astroidBelt.count;
+                var astroids = SolarSystem.asteroidBelt.count;
 
                 for (var i = 0; i < astroids; i++) {
-                    AstroidBeltFactory.buildAstroid(i);
+                    AsteroidBeltFactory.buildAstroid(i);
                 }
             },
 

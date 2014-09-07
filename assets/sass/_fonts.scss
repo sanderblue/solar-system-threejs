@@ -71,8 +71,8 @@ $base_link_color: #0080ff;
 }
 
 
-/*
- *  Font Sizes
+/**
+ * Font Sizes
  */
 @mixin font-12 () {
     font-size: 12px;
@@ -105,7 +105,12 @@ $base_link_color: #0080ff;
 }
 
 @mixin font-20 () {
-    font-size: 24px;
+    font-size: 20px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-22 () {
+    font-size: 22px;
     -webkit-font-smoothing: antialiased;
 }
 

@@ -3,10 +3,10 @@ define(function() {
      * Solar System
      *
      * This file contains the universal data to be used to build the entire model.
-     * The initial scales differ for better user experience. Adjustments will be made
+     * The initial scales differ for better viewing experience. Adjustments will be made
      * as the project progresses.
      *
-     * All orbit radii are base on each celestial object semi-major axis˙;
+     * All orbit radii are base on each celestial object's semi-major axis˙;
      *
      * ˙Semi-major axis: http://upload.wikimedia.org/wikipedia/commons/f/f7/An_image_describing_the_semi-major_and_semi-minor_axis_of_eclipse.png
      */
@@ -901,6 +901,9 @@ define(function() {
                 orbitPositionOffset: 62885,
                 celestialType: 'planet'
             }
+        ],
+        dwarfPlanets: [
+            // Ceres, Pluto, Haumea, Makemake, Eris
         ],
         asteroidBelt: {
             primary: [

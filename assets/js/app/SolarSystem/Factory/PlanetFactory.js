@@ -97,9 +97,10 @@ define(
             /**
              * Builds a representation of a planet as a Three.js mesh based on the planet's data.
              *
-             * @param planet [object]
+             * @param planet            [object]
+             * @param buildStatusPrompt [jQuery element]
              */
-            build: function(planet) {
+            build: function(planet, buildStatusPrompt) {
                 return $.Deferred(function(promise) {
                     var startTime            = new Date().getTime(),
                         degreesToRadianRatio = 0.0174532925
@@ -235,6 +236,8 @@ define(
                             var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime(startTime, endTime, 'ms') + ' milliseconds';
 
                             System.log(builderStatement);
+
+                            // buildStatusPrompt.append('<p>'+ builderStatement + '</p>');
 
                             promise.resolve(thisPlanet);
                         });

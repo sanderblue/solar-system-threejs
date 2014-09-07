@@ -43,8 +43,8 @@
 /*
  *  Font Variables
  */
-/*
- *  Font Sizes
+/**
+ * Font Sizes
  */
 @font-face {
   font-family: 'icomoon';
@@ -143,6 +143,29 @@ ul {
   width: 100%;
   padding: 15px;
   background: transparent; }
+
+.btn-ss {
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  font-family: 'Rajdhani-Semibold', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 3px;
+  color: rgba(240, 240, 240, 0.8);
+  padding: 10px 20px;
+  text-align: center;
+  width: 100%;
+  max-width: 250px;
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.25); }
+  .btn-ss:hover {
+    cursor: pointer;
+    border: 1px solid white;
+    color: white;
+    box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.6); }
 
 .accordian {
   font-size: 18px;
@@ -259,6 +282,30 @@ ul {
   left: 0;
   right: 0;
   z-index: 100; }
+  .loading-prompt p {
+    margin: 8px 0; }
+
+.loading-prompt-inner-wrap {
+  width: 90%;
+  max-width: 960px;
+  margin: 10% auto; }
+
+.introduction-header,
+.status-prompt-header {
+  font-family: 'Rajdhani-Semibold', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  font-size: 22px;
+  -webkit-font-smoothing: antialiased; }
+
+.introduction-text {
+  font-family: 'Rajdhani-Regular', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  font-size: 17px; }
+
+.build-status-prompt {
+  display: none; }
 
 canvas {
   display: block; }
@@ -267,7 +314,7 @@ input {
   width: 200px; }
 
 .control-panel {
-  font-size: 24px;
+  font-size: 20px;
   -webkit-font-smoothing: antialiased;
   display: inline-block;
   background: transparent;

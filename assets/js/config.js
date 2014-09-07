@@ -26,20 +26,21 @@ require.config({
         'Constants'   : 'app/Environment/Constants',
 
         // Factories
-        'SolarSystemFactory' : 'app/SolarSystem/Factory/SolarSystemFactory',
-        'SunFactory'         : 'app/SolarSystem/Factory/SunFactory',
-        'PlanetFactory'      : 'app/SolarSystem/Factory/PlanetFactory',
+        'SolarSystemFactory'  : 'app/SolarSystem/Factory/SolarSystemFactory',
+        'SunFactory'          : 'app/SolarSystem/Factory/SunFactory',
+        'PlanetFactory'       : 'app/SolarSystem/Factory/PlanetFactory',
         'AsteroidBeltFactory' : 'app/SolarSystem/Factory/AsteroidBeltFactory',
-        'RingFactory'        : 'app/SolarSystem/Factory/RingFactory',
-        'MoonFactory'        : 'app/SolarSystem/Factory/MoonFactory',
-        'OrbitFactory'       : 'app/SolarSystem/Factory/OrbitFactory',
-        'StarFactory'        : 'app/SolarSystem/Factory/StarFactory',
+        'RingFactory'         : 'app/SolarSystem/Factory/RingFactory',
+        'MoonFactory'         : 'app/SolarSystem/Factory/MoonFactory',
+        'OrbitFactory'        : 'app/SolarSystem/Factory/OrbitFactory',
+        'StarFactory'         : 'app/SolarSystem/Factory/StarFactory',
 
         // Controllers
-        'OrbitController' : 'app/Controllers/OrbitController',
-        'Console'         : 'app/Controllers/ConsoleController',
-        'TimeController'  : 'app/Controllers/TimeController',
-        'UIController'    : 'app/Controllers/UIController',
+        'OrbitController'         : 'app/Controllers/OrbitController',
+        'Console'                 : 'app/Controllers/ConsoleController',
+        'TimeController'          : 'app/Controllers/TimeController',
+        'UIController'            : 'app/Controllers/UIController',
+        'LoadingPromptController' : 'app/Controllers/LoadingPromptController',
 
         // Modules
         'Modules'                  : 'app/Modules/Modules',
@@ -70,7 +71,7 @@ require.config({
             deps: ['stats']
         },
         'main': {
-            deps: ['jquery', 'threejs', 'App', 'DocumentWriter', 'Constants', 'Time', 'Modules', 'OrbitController', 'OrbitFactory', 'UIController']
+            deps: ['jquery', 'threejs', 'App', 'LoadingPromptController', 'Constants', 'Time', 'Modules', 'OrbitController', 'OrbitFactory', 'UIController']
         },
         'Initializer': {
             deps: ['Scene']

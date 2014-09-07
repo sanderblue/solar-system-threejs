@@ -6,9 +6,27 @@
         <script data-main="assets/js/config" src="assets/js/libs/requirejs/require.js"></script>
 	</head>
 	<body>
+        <!-- LOADING PROMPT -->
         <div id="loading-prompt" class="loading-prompt">
-            Test
+            <div class="loading-prompt-inner-wrap">
+                <div id="introduction" class="introduction">
+                    <div class="introduction-header">Our Solar System</div>
+                    <div class="introduction-text">
+                        <p>
+                            A solar system refers to a star and all the objects that travel in orbit around it. Our solar system consists of the sun, eight planets (and their natural satellites), dwarf planets, asteroids, and comets. Our solar system is located within the Orion Arm about 27,000 light-years away from the Milky Way Galactic Center.
+                        </p>
+                        <p>
+                            This is a project powered by Three.js and WebGL. All objects within this project have been modeled to scale based on real astronomical data. For a better viewing experience, view within Chrome and use a computer that has at least 16 GB of RAM and a strong video card.
+                        </p>
+                    </div>
+                    <div id="build-button" class="btn-ss">BUILD</div>
+                </div>
+                <div id="build-status-prompt" class="build-status-prompt">
+                    <div class="status-prompt-header">Building the Solar System...</div>
+                </div>
+            </div>
         </div>
+
         <div class="container">
             <div id="control-panel" class="control-panel">
                 <div id="accordian" class="accordian">

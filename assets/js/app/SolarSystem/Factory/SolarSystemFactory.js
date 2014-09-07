@@ -30,73 +30,122 @@ define(
          * the application configurations (found in App.js).
          */
         var SolarSystemFactory = {
-            buildParent: function() {
+            buildParent: function(buildStatusPrompt) {
                 return $.Deferred(function(promise) {
                     if (!App.config.build.SunFactoryEnabled) {
                         return promise.resolve();
                     }
 
+                    var startTime = new Date().getTime();
+
                     SunFactory.build();
 
-                    promise.resolve();
+                    var endTime = new Date().getTime(),
+                        statusMessage = 'Sun Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.'
+                    ;
+
+                    System.log(statusMessage);
+
+                    promise.resolve(statusMessage);
                 });
             },
 
-            buildAsteroidBelt: function() {
+            buildAsteroidBelt: function(buildStatusPrompt) {
                 return $.Deferred(function(promise) {
                     if (!App.config.build.AsteroidBeltFactoryEnabled) {
                         return promise.resolve();
                     }
 
-                    AstroidBeltFactory.buildBelt();
+                    var startTime = new Date().getTime();
 
-                    promise.resolve();
+                    AsteroidBeltFactory.buildBelt();
+
+                    var endTime = new Date().getTime(),
+                        statusMessage = 'Asteroid Belt Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.'
+                    ;
+
+                    System.log(statusMessage);
+
+                    promise.resolve(statusMessage);
                 });
             },
 
-            buildPlanets: function() {
-                return $.Deferred(function(promise) {
+            buildPlanets: function(buildStatusPrompt) {
+                return $.Deferred(function(Apromise) {
                     if (!App.config.build.PlanetFactoryEnabled) {
-                        return promise.resolve();
+                        return new $.Deferred(function(promise) { return promise.resolve() });
                     }
 
-                    var planets = SolarSystem.planets;
+                    var startTime = new Date().getTime(),
+                        planets = SolarSystem.planets,
+                        promises = []
+                    ;
 
                     for (var i = 0; i < planets.length; i++) {
-                        var planetBuildPromise = PlanetFactory.build(planets[i]);
+                        promises.push(PlanetFactory.build(planets[i], buildStatusPrompt));
                     }
 
-                    promise.resolve();
+                    $.when.apply($, promises).done(function() {
+                        var endTime = new Date().getTime(),
+                            statusMessage = 'Planet Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.'
+                        ;
+
+                        Apromise.resolve(statusMessage);
+                        System.log(statusMessage);
+                    });
                 });
             },
 
-            buildStars: function() {
+            buildStars: function(buildStatusPrompt) {
                 return $.Deferred(function(promise) {
                     if (!App.config.build.StarFactoryEnabled) {
                         return promise.resolve();
                     }
 
-                    return $.when(StarFactory.build());
+                    var startTime = new Date().getTime();
+
+                    StarFactory.build();
+
+                    var endTime = new Date().getTime(),
+                        statusMessage = 'Star Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.'
+                    ;
+
+                    buildStatusPrompt.append('<p>'+ statusMessage + '</p>');
+                    System.log(statusMessage);
+
+                    promise.resolve();
                 });
             },
 
-            build: function() {
+            build: function(buildStatusPrompt) {
                 if (!App.config.build.SolarSystemFactoryEnabled) {
                     return promise.resolve();
                 }
 
                 var startTime = new Date().getTime();
 
-                return $.when(
-                    SolarSystemFactory.buildParent(),
-                    SolarSystemFactory.buildAsteroidBelt(),
-                    SolarSystemFactory.buildPlanets(),
-                    SolarSystemFactory.buildStars()
-                )
-                .done(function() {
-                    var endTime = new Date().getTime();
+                // return $.when(
+                //     SolarSystemFactory.buildParent(buildStatusPrompt),
+                //     SolarSystemFactory.buildPlanets(buildStatusPrompt),
+                //     SolarSystemFactory.buildAsteroidBelt(buildStatusPrompt),
+                //     SolarSystemFactory.buildStars(buildStatusPrompt)
+                // )
+                // .done(function() {
+                //     var endTime = new Date().getTime();
 
-                    System.log('Solar System Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.');
+                //     System.log('Solar System Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.');
+                // });
+
+                $.when(SolarSystemFactory.buildParent(buildStatusPrompt)).done(function(message) {
+                    buildStatusPrompt.append('<p>'+ message + '</p>');
+                });
+
+                $.when(SolarSystemFactory.buildPlanets(buildStatusPrompt)).done(function(message) {
+                    buildStatusPrompt.append('<p>'+ message + '</p>');
+                });
+
+                $.when(SolarSystemFactory.buildAsteroidBelt(buildStatusPrompt)).done(function(message) {
+                    buildStatusPrompt.append('<p>'+ message + '</p>');
                 });
             }
         };
