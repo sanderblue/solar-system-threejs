@@ -1,0 +1,45 @@
+.loading-prompt {
+    background: rgba(0, 0, 0, 1);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+
+    p { margin: 20px 0; }
+}
+
+.loading-prompt-inner-wrap {
+    width: 90%;
+    max-width: 960px;
+    margin: 10% auto;
+}
+
+.introduction-header,
+.status-prompt-header {
+    @include font-semibold();
+    @include font-22();
+}
+
+.introduction-text {
+    @include font-regular();
+    font-size: 17px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.build-status-prompt {
+    @include font-14();
+    display: none;
+
+    p { margin: 12px 0; }
+}
+
+.status-messages-holder {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    display: none;
+}
+
+.view-button { display: none; }

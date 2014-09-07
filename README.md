@@ -3,4 +3,6 @@ The Solar System
 
 Modeled with Three.js
 
-![Image](../master/img/screenshot.png?raw=true)
+[Demo](http://sanderblue.github.io/solar-system-threejs/)
+
+![Image](../master/img/screenshot_1.png?raw=true)

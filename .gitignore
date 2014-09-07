@@ -1,4 +1,10 @@
 .DS_Store
 .sass-cache/*
 logs
-node_modules
+mockups
+mockups/*
+assets/sass/lib/*
+assets/sass/lib/bourbon
+assets/sass/lib/bourbon/*
+assets/sass/lib/neat
+assets/sass/lib/neat/*
