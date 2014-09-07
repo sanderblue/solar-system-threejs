@@ -43,6 +43,7 @@ define(function() {
                 orbitDuration: 88,
                 inclination: 6.34 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 26.73 / 180 * Math.PI,
+                axialTiltDegrees: 26.73,
                 moons: [],
                 texture: null,
                 rings: [],
@@ -59,6 +60,7 @@ define(function() {
                 orbitDuration: 224.7,
                 inclination: 2.19 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 177.36 / 180 * Math.PI,
+                axialTiltDegrees: 177.36,
                 moons: [],
                 rings: [],
                 orbitPositionOffset: 155,
@@ -74,6 +76,7 @@ define(function() {
                 orbitDuration: 364.25,
                 inclination: 1.57869 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 23.5 / 180 * Math.PI,
+                axialTiltDegrees: 23.5,
                 moons: [
                     {
                         name: 'Moon',
@@ -97,6 +100,7 @@ define(function() {
                 orbitDuration: 687,
                 inclination: 1.67 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 25.19 / 180 * Math.PI,
+                axialTiltDegrees: 25.19,
                 moons: [
                     {
                         name: 'Phobos',
@@ -128,6 +132,7 @@ define(function() {
                 orbitDuration: 4329,
                 inclination: 1.305 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 3.13 / 180 * Math.PI,
+                axialTiltDegrees: 3.13,
                 moons: [],
                 texture: null,
                 rings: [
@@ -255,6 +260,7 @@ define(function() {
                 orbitDuration: 10753,
                 inclination: 2.48524 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 26.73 / 180 * Math.PI,
+                axialTiltDegrees: 3.13,
                 moons: [],
                 texture: null,
                 rings: [
@@ -663,6 +669,7 @@ define(function() {
                 orbitDuration: 30687.15,
                 inclination: 1.02 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 97.77 / 180 * Math.PI,
+                axialTiltDegrees: 97.77,
                 moons: [],
                 texture: null,
                 rings: [
@@ -806,6 +813,7 @@ define(function() {
                 orbitDuration: 60025,
                 inclination: 1.768 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 28.32 / 180 * Math.PI,
+                axialTiltDegrees: 28.32,
                 moons: [],
                 texture: null,
                 rings: [

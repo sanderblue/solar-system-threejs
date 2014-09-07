@@ -333,7 +333,7 @@ input {
   display: inline-block;
   background: transparent;
   width: 100%;
-  max-width: 260px;
+  max-width: 275px;
   color: rgba(240, 240, 240, 0.8); }
   .control-panel .control-panel-item {
     -webkit-transition: background-color 1s ease;

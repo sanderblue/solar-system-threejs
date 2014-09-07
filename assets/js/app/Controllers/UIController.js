@@ -11,8 +11,11 @@ define(
 
         var UIController = {
             selectedPlanet: null,
+            currentCameraPosition: null,
 
             initEventListeners: function() {
+                var cameraZoomControl = $('#camera-zoom-control');
+
                 $(document).on('click', '.camera-trigger', function(e) {
                     e.preventDefault();
                     e.stopImmediatePropagation();
@@ -22,6 +25,11 @@ define(
                     ;
 
                     UIController.selectedPlanet = matchedPlanet.planet;
+
+                    cameraZoomControl
+                        .attr('min', - matchedPlanet.planet3d.geometry.radius)
+                        .attr('max', matchedPlanet.planet3d.geometry.radius)
+                    ;
 
                     Scene.setCameraPosition(matchedPlanet.planet3d.core, matchedPlanet.planet3d, matchedPlanet.planet3d.position, false);
                     Scene.setCameraFocalPoint(matchedPlanet.planet3d.position);
@@ -53,14 +61,14 @@ define(
 
                 Camera.orbitDuration = 360;
 
-                var posX = OrbitFactory.getOrbitAmplitute(UIController.selectedPlanet, UIController.selectedPlanet.radius * 2.7)
+                var posX = OrbitFactory.getOrbitAmplitute(UIController.selectedPlanet, UIController.selectedPlanet.radius * 2.8)
                             * Math.cos(
                                 window.testposition
                                 * OrbitFactory.getOrbitRadian(Camera)
                                 * degreesToRadianRatio
                             );
 
-                var posY = OrbitFactory.getOrbitAmplitute(UIController.selectedPlanet, UIController.selectedPlanet.radius * 2.7)
+                var posY = OrbitFactory.getOrbitAmplitute(UIController.selectedPlanet, UIController.selectedPlanet.radius * 2.8)
                             * Math.sin(
                                 window.testposition
                                 * OrbitFactory.getOrbitRadian(Camera)
@@ -160,44 +168,35 @@ define(
                         ;
 
                         // listElement.append('<li id="planet-'+ planetId +'" class="planet" data-id="'+ iplanetNamed +'">'+  +'</li>');
-                        var planetListItem = '<div class="accordian-subitem planet-item">'
-                                            +    '<div id="'+ id +'" class="accordian-item-label planet">'+ name +'</div>'
-                                            +    '<span class="icon-target camera-trigger" data-id="'+ id +'"></span>'
-                                            +    '<span class="camera-trigger" data-id="'+ id +'"></span>'
-                                            +    '<div class="accordian-submenu">'
-                                            +        '<div class="accordian-submenu-item">'
-                                            +            '<div class="data-container">'
-                                            +               '<div class="data-container-row">'
-                                            +                   '<div class="left-side">Radius</div>'
-                                            +                   '<div class="right-side">'+ SolarSystem.planets[i].radiusString +'</div>'
-                                            +                '</div>'
-                                            +                '<div class="data-container-row">'
-                                            +                   '<div class="left-side">Semi-major Axis</div>'
-                                            +                   '<div class="right-side">'+ SolarSystem.planets[i].distanceFromParentString +'</div>'
-                                            +                '</div>'
-                                            +                '<div class="data-container-row">'
-                                            +                   '<div class="left-side">Orbit Duration</div>'
-                                            +                   '<div class="right-side">'+ Number(orbitDuration).toFixed(precision) +'</div>'
-                                            +                '</div>'
-                                            +                '<div class="data-container-row">'
-                                            +                   '<div class="left-side">Axial Tilt</div>'
-                                            +                   '<div class="right-side">'+ Number(SolarSystem.planets[i].axialTilt).toFixed(precision) +'˚</div>'
-                                            +                '</div>'
-                                            +            '</div>'
-                                            +        '</div>'
-                                            // +        '<div class="accordian-submenu-item">'
-                                            // +            '<div class="accordian-item-label">Moons</div>'
-                                            // +            '<div class="accordian-submenu">'
-                                            // +                '<div class="accordian-submenu-item">'
-                                            // +                    'Terra Nova'
-                                            // +                '</div>'
-                                            // +                '<div class="accordian-submenu-item">'
-                                            // +                    'Charon'
-                                            // +                '</div>'
-                                            // +            '</div>'
-                                            // +        '</div>'
-                                            +    '</div>'
-                                            +'</div>';
+                        var planetListItem =
+                            '<div class="accordian-subitem planet-item">'
+                            +    '<div id="'+ id +'" class="accordian-item-label planet">'+ name +'</div>'
+                            +    '<span class="icon-target camera-trigger" data-id="'+ id +'"></span>'
+                            +    '<span class="camera-trigger" data-id="'+ id +'"></span>'
+                            +    '<div class="accordian-submenu">'
+                            +        '<div class="accordian-submenu-item">'
+                            +            '<div class="data-container">'
+                            +               '<div class="data-container-row">'
+                            +                   '<div class="left-side">Radius</div>'
+                            +                   '<div class="right-side">'+ SolarSystem.planets[i].radiusString +'</div>'
+                            +                '</div>'
+                            +                '<div class="data-container-row">'
+                            +                   '<div class="left-side">Semi-major Axis</div>'
+                            +                   '<div class="right-side">'+ SolarSystem.planets[i].distanceFromParentString +'</div>'
+                            +                '</div>'
+                            +                '<div class="data-container-row">'
+                            +                   '<div class="left-side">Orbit Duration</div>'
+                            +                   '<div class="right-side">'+ Number(orbitDuration).toFixed(precision) +' Earth days</div>'
+                            +                '</div>'
+                            +                '<div class="data-container-row">'
+                            +                   '<div class="left-side">Axial Tilt</div>'
+                            +                   '<div class="right-side">'+ Number(SolarSystem.planets[i].axialTiltDegrees).toFixed(precision) +'˚</div>'
+                            +                '</div>'
+                            +            '</div>'
+                            +        '</div>'
+                            +    '</div>'
+                            +'</div>'
+                        ;
 
                         listElement.append(planetListItem);
                     }

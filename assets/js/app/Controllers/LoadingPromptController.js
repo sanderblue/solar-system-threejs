@@ -28,7 +28,7 @@ define(['jquery'], function($) {
         initViewSceneListener: function(prompt, MainController) {
             $(document).on('click', '#view-button', function() {
                 MainController.renderSolarSystem();
-                $(prompt).fadeOut(1200);
+                $(prompt).fadeOut(1000);
             });
         },
 
