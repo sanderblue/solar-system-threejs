@@ -441,6 +441,10 @@ audio.soundscape {
   display: block;
   margin: 0 auto; }
 
-.camera-reset-holder {
+.camera-reset {
   font-size: 12px;
-  -webkit-font-smoothing: antialiased; }
+  -webkit-font-smoothing: antialiased;
+  margin-left: 13px;
+  margin-top: 4px; }
+  .camera-reset:hover {
+    cursor: pointer; }

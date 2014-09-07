@@ -201,7 +201,10 @@ define(
                         listElement.append(planetListItem);
                     }
 
-                    $('#planets').append('<div class="accordian-subitem planet-item camera-reset-holder"><div id="camera-reset" class="camera-reset accordian-item-label">Reset Camera</div></div>');
+                    var camaraReset = '<div class="camera-reset">Reset Camera</div>'
+
+                    $('#planets').append(camaraReset);
+                    $('#camera-zoom-control').after(camaraReset);
 
                     promise.resolve();
                 });

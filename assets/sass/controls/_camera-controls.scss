@@ -85,4 +85,10 @@ $radian: 85px;
     margin: 0 auto;
 }
 
-.camera-reset-holder { @include font-12(); }
+.camera-reset {
+    @include font-12();
+    margin-left: 13px;
+    margin-top: 4px;
+
+    &:hover { cursor: pointer; }
+}
