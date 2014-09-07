@@ -11,7 +11,7 @@ input {
     display: inline-block;
     background: transparent; // transparent for now
     width: 100%;
-    max-width: 275px;
+    max-width: 310px;
     color: $base_font_color_light_opacity;
 
     .control-panel-item {
@@ -47,6 +47,11 @@ input {
         @include font-15();
         padding-left: 12px;
     }
+}
+
+audio.soundscape {
+    max-width: 310px;
+    width: 100%;
 }
 
 @import "camera-controls";

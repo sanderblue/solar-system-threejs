@@ -333,7 +333,7 @@ input {
   display: inline-block;
   background: transparent;
   width: 100%;
-  max-width: 275px;
+  max-width: 310px;
   color: rgba(240, 240, 240, 0.8); }
   .control-panel .control-panel-item {
     -webkit-transition: background-color 1s ease;
@@ -367,6 +367,10 @@ input {
     font-size: 15px;
     -webkit-font-smoothing: antialiased;
     padding-left: 12px; }
+
+audio.soundscape {
+  max-width: 310px;
+  width: 100%; }
 
 .camera-orbit-track {
   width: 175px;
