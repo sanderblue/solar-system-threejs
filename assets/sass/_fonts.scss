@@ -1,0 +1,150 @@
+$base_font_color: rgba(240, 240, 240, 1);
+$base_font_color_hover: rgba(255, 255, 255, 1);
+$base_font_color_light_opacity: rgba(240, 240, 240, 0.8);
+$base_link_color: #0080ff;
+
+/*
+ *  Font Faces
+ */
+@include font-face('Rajdhani-Light', '../fonts/rajdhani/rajdhani-light-webfont');
+@include font-face('Rajdhani-Medium', '../fonts/rajdhani/rajdhani-medium-webfont');
+@include font-face('Rajdhani-Regular', '../fonts/rajdhani/rajdhani-regular-webfont');
+@include font-face('Rajdhani-Semibold', '../fonts/rajdhani/rajdhani-semibold-webfont');
+@include font-face('Rajdhani-Bold', '../fonts/rajdhani/rajdhani-bold-webfont');
+
+/*
+ *  Font Families
+ */
+@mixin Rajdhani-Light() {
+    font-family: 'Rajdhani-Light', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin Rajdhani-Medium() {
+    font-family: 'Rajdhani-Medium', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin Rajdhani-Regular() {
+    font-family: 'Rajdhani-Regular', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin Rajdhani-Semibold() {
+    font-family: 'Rajdhani-Semibold', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin Rajdhani-Bold() {
+    font-family: 'Rajdhani-Bold', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+
+/*
+ *  Font Variables
+ */
+@mixin font-light() {
+    @include Rajdhani-Light();
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-medium() {
+    @include Rajdhani-Medium();
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-regular() {
+    @include Rajdhani-Regular();
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-semibold() {
+    @include Rajdhani-Semibold();
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-bold() {
+    @include Rajdhani-Bold();
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/**
+ * Font Sizes
+ */
+@mixin font-12 () {
+    font-size: 12px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-13 () {
+    font-size: 13px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-14 () {
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-15 () {
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-16 () {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-18 () {
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-20 () {
+    font-size: 20px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-22 () {
+    font-size: 22px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-24 () {
+    font-size: 24px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-32 () {
+    font-size: 32px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-36 () {
+    font-size: 36px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-42 () {
+    font-size: 42px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-48 () {
+    font-size: 48px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-60 () {
+    font-size: 60px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-72 () {
+    font-size: 72px;
+    -webkit-font-smoothing: antialiased;
+}

@@ -1,46 +1,87 @@
 <html>
 	<head>
-		<title>My first Three.js app</title>
-		<style>
+		<title>The Solar System</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
-			canvas {
-				width: 100%;
-				height: 100%;
-			}
-
-			body {
-				color: #808080;
-				font-family:Monospace;
-				font-size:13px;
-				text-align:center;
-				background: #000;
-
-				background-color: #fff;
-				margin: 0px;
-				overflow: hidden;
-			}
-
-			#info {
-				position: absolute;
-				top: 0px; width: 100%;
-				padding: 5px;
-			}
-
-			a {
-
-				color: #0080ff;
-			}
-
-		</style>
+        <script data-main="assets/js/config" src="assets/js/libs/requirejs/require.js"></script>
 	</head>
 	<body>
-        <!-- <div id="container"></div> -->
+        <!-- LOADING PROMPT -->
+        <div id="loading-prompt" class="loading-prompt">
+            <div class="loading-prompt-inner-wrap">
+                <div id="introduction" class="introduction">
+                    <div class="introduction-header">Our Solar System</div>
+                    <div class="introduction-text">
+                        <p>
+                            A solar system refers to a star and all the objects that travel in orbit around it. Our solar system consists of the sun, eight planets (and their natural satellites), dwarf planets, asteroids, and comets. Our solar system is located within the Orion Arm about 27,000 light-years away from the Milky Way Galactic Center.
+                        </p>
+                        <p>
+                            This is a project powered by Three.js and WebGL. All objects within this project have been modeled to scale based on real astronomical data. The scene currently renders the sun, all eight planets, and each planet's orbit path, rings (if applicable), and moons (with exception to tiny moons).
+                        </p>
+                        <p>
+                            For a better viewing experience, view within Chrome and use a computer that has at least 16 GB of RAM and a strong video card.
+                        </p>
+                    </div>
+                    <div id="build-button" class="btn-ss">BUILD SOLAR SYSTEM</div>
+                </div>
+                <div id="build-status-prompt" class="build-status-prompt">
+                    <div class="status-prompt-header">Building the Solar System...</div>
+                    <div id="status-messages" class="status-messages-holder"></div>
+                </div>
+            </div>
+        </div>
 
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="js/lib/three.min.js"></script>
-        <script src="js/lib/OrbitControls.js"></script>
-        <script src="js/lib/detector.js"></script>
-        <script src="js/lib/stats.js"></script>
-        <script src="js/solarsystem.js"></script>
+        <div class="container">
+            <div id="control-panel" class="control-panel">
+                <div id="accordian" class="accordian">
+                    <div class="accordian-item">
+                        <div class="accordian-item-label">Camera Controls</div>
+                        <div class="accordian-submenu">
+                            <div id="camera-control">
+                                <div id="dynamic-container" class="camera-orbit-track">
+                                    <div id="marker" class="camera-positioner"></div>
+                                    <div id="innerCircle" class="compass">
+                                        <div class="compass-circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input id="camera-zoom-control" class="zoom-control-input" type="range" name="zoom" min="-100" max="100" step="1" value="0">
+                        </div>
+                    </div>
+                    <div class="accordian-item">
+                        <div class="accordian-item-label">Planets</div>
+                        <div id="planets" class="accordian-submenu">
+                            <!-- Planet list items are built and appended via javascript -->
+                        </div>
+                    </div>
+                    <div class="accordian-item">
+                        <div class="accordian-item-label">Audio Controls</div>
+                        <div class="accordian-submenu">
+                            <audio id="sound" class="soundscape" src="assets/sound/granulation.mp3" autoplay="true" loop="true" type="audio/mpeg" controls></audio>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="solar-system" class="scene"></div>
+
+        <script>
+            var audio = document.getElementById('sound');
+
+            audio.volume = 0.1;
+
+            // (function(i, s, o, g, r, a, m) {
+            //     i['GoogleAnalyticsObject'] = r;
+            //     i[r] = i[r] || function() {
+            //     (i[r].q = i[r].q || []).push(arguments)},
+            //     i[r].l  = 1 * new Date();
+            //     a = s.createElement(o),
+            //     m = s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            // })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            // ga('create', 'UA-41944984-1', 'sanderblue.com');
+            // ga('send', 'pageview');
+        </script>
 	</body>
 </html>
