@@ -78,7 +78,7 @@ define(['Camera'], function(Camera) {
          * @param vector3        [THREE object]
          * @param reset          [boolean]
          */
-        setCameraPosition: function(object3D, parentObject3D, vector3, reset) {
+        setCameraPosition: function(object3D, parentObject3D, vector3, reset, zAxisUp) {
             if (object3D && parentObject3D) {
                 Scene.camera.position.x = parentObject3D.geometry.radius * 5.3; // zoom
                 Scene.camera.position.y = parentObject3D.geometry.radius * 1;
@@ -91,6 +91,14 @@ define(['Camera'], function(Camera) {
 
             if (reset) {
                 Scene.scene.add(Scene.camera);
+            }
+
+            if (zAxisUp) {
+                Scene.camera.up.set(0, 0, 1);
+            }
+
+            if (!zAxisUp) {
+                Scene.camera.up.set(0, 1, 0);
             }
 
             Scene.camera.position.y = vector3.y;
