@@ -26,13 +26,20 @@ define(
 
                     UIController.selectedPlanet = matchedPlanet.planet;
 
+                    var radius = matchedPlanet ? matchedPlanet.planet3d.geometry.radius : Scene.camera.position.x - Scene.Sun.position.x;
+
+                    cameraZoomControl.val(matchedPlanet.planet.distanceFromParent);
+
+                    Scene.setCameraPosition(matchedPlanet.planet3d.core, matchedPlanet.planet3d, matchedPlanet.planet3d.position, false, false);
+                    Scene.setCameraFocalPoint(matchedPlanet.planet3d.position);
+
                     cameraZoomControl
-                        .attr('min', - matchedPlanet.planet3d.geometry.radius)
-                        .attr('max', matchedPlanet.planet3d.geometry.radius)
+                        .attr('min', - parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
+                        .attr('max', parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
+                        .attr('value', 0)
                     ;
 
-                    Scene.setCameraPosition(matchedPlanet.planet3d.core, matchedPlanet.planet3d, matchedPlanet.planet3d.position, false);
-                    Scene.setCameraFocalPoint(matchedPlanet.planet3d.position);
+                    UIController.initCameraZoomEventListener(UIController.selectedPlanet);
                 });
 
                 $(document).on('click', '.camera-reset', function(e) {
@@ -61,30 +68,48 @@ define(
 
                 Camera.orbitDuration = 360;
 
-                var posX = OrbitFactory.getOrbitAmplitute(UIController.selectedPlanet, UIController.selectedPlanet.radius * 2.8)
+                var distanceFromParent = UIController.selectedPlanet ? UIController.selectedPlanet.radius * 2.7 : Camera.defaultPosition.y;
+                var parent = UIController.selectedPlanet ? UIController.selectedPlanet : Scene.Sun.geometry;
+
+                var posX = OrbitFactory.getOrbitAmplitute(parent, Math.abs(distanceFromParent))
                             * Math.cos(
                                 window.testposition
                                 * OrbitFactory.getOrbitRadian(Camera)
                                 * degreesToRadianRatio
                             );
 
-                var posY = OrbitFactory.getOrbitAmplitute(UIController.selectedPlanet, UIController.selectedPlanet.radius * 2.8)
+                var posY = OrbitFactory.getOrbitAmplitute(parent, Math.abs(distanceFromParent))
                             * Math.sin(
                                 window.testposition
                                 * OrbitFactory.getOrbitRadian(Camera)
                                 * degreesToRadianRatio
                             );
 
-                Scene.setCameraPosition(
-                    null,
-                    null,
-                    new THREE.Vector3(
-                        parseFloat(posX),
-                        30,
-                        parseFloat(posY)
-                    ),
-                    null
-                );
+                if (UIController.selectedPlanet) {
+                    Scene.setCameraPosition(
+                        null,
+                        null,
+                        new THREE.Vector3(
+                            parseFloat(posX),
+                            30,
+                            parseFloat(posY)
+                        ),
+                        null
+                    );
+
+                } else {
+                    Scene.setCameraPosition(
+                        null,
+                        null,
+                        new THREE.Vector3(
+                            parseFloat(posY),
+                            parseFloat(posX),
+                            Camera.defaultPosition.z
+                        ),
+                        null,
+                        true
+                    );
+                }
 
                 cropper.css({ '-moz-transform': rotate, 'transform' : rotate, '-webkit-transform': rotate, '-ms-transform': rotate });
 
@@ -109,32 +134,38 @@ define(
                 });
             },
 
-            initCameraZoomEventListener: function() {
-                var value = 0;
+            initCameraZoomEventListener: function(selectedPlanet) {
+                var value = selectedPlanet ? Scene.camera.position.x : Camera.defaultPosition.y;
+
+                $('#camera-zoom-control').val(value);
 
                 $('#camera-zoom-control').on('change', function() {
-                    if (parseFloat(this.value) > parseFloat(value) && parseFloat(this.value) > 0) {
-                        Camera.position.x = parseFloat(Scene.camera.position.x) - (parseFloat(this.value) - parseFloat(value));
-                        Camera.position.z = parseFloat(Scene.camera.position.z) - (parseFloat(this.value) - parseFloat(value));
+                    if (parseFloat(this.value) > parseFloat(value)) {
+                        Camera.position.x = parseFloat(Scene.camera.position.x) + (parseFloat(this.value));
+                        Camera.position.z = parseFloat(Scene.camera.position.z) + (parseFloat(this.value));
                     }
 
-                    if (parseFloat(this.value) > parseFloat(value) && parseFloat(this.value) > 0) {
-                        Camera.position.x = parseFloat(Scene.camera.position.x) + parseFloat(this.value);
-                        Camera.position.z = parseFloat(Scene.camera.position.z) + parseFloat(this.value);
-                    }
-
-                    if (parseFloat(this.value) < parseFloat(value) && parseFloat(this.value) < 0) {
-                        Camera.position.x = parseFloat(Scene.camera.position.x) + parseFloat(this.value);
-                        Camera.position.z = parseFloat(Scene.camera.position.z) + parseFloat(this.value);
+                    if (parseFloat(this.value) < parseFloat(value)) {
+                        Camera.position.x = parseFloat(Scene.camera.position.x) - Math.abs((parseFloat(this.value) - parseFloat(value)));
+                        Camera.position.z = parseFloat(Scene.camera.position.z) - Math.abs((parseFloat(this.value) - parseFloat(value)));
                     }
 
                     value = this.value;
 
-                    positionX = Camera.position.x;
-                    positionZ = Camera.position.z;
+                    var posX = Camera.position.x,
+                        posY = Camera.position.y,
+                        posZ = Camera.position.z
+                    ;
 
-                    Scene.camera.position.x = Camera.position.x;
-                    Scene.camera.position.z = Camera.position.z;
+                    if (!UIController.selectedPlanet) {
+                        posX = Camera.position.y;
+                        posY = Camera.position.x;
+                        posZ = Camera.defaultPosition.z;
+                    }
+
+                    Scene.camera.position.x = posX;
+                    Scene.camera.position.y = posY;
+                    Scene.camera.position.z = posZ;
                 });
             },
 
