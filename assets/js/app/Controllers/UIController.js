@@ -68,7 +68,7 @@ define(
 
                 Camera.orbitDuration = 360;
 
-                var distanceFromParent = UIController.selectedPlanet ? UIController.selectedPlanet.radius * 2.7 : Camera.defaultPosition.y;
+                var distanceFromParent = UIController.selectedPlanet ? UIController.selectedPlanet.radius * 4.5 : Camera.defaultPosition.y;
                 var parent = UIController.selectedPlanet ? UIController.selectedPlanet : Scene.Sun.geometry;
 
                 var posX = OrbitFactory.getOrbitAmplitute(parent, Math.abs(distanceFromParent))
