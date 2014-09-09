@@ -1,22 +1,30 @@
-// Copyright 2009-2012 by contributors, MIT License
+/*!
+ * https://github.com/es-shims/es5-shim
+ * @license es5-shim Copyright 2009-2014 by contributors, MIT License
+ * see https://github.com/es-shims/es5-shim/blob/master/LICENSE
+ */
+
 // vim: ts=4 sts=4 sw=4 expandtab
 
 //Add semicolon to prevent IIFE from being passed as argument to concated code.
 ;
-// Module systems magic dance
-(function (definition) {
-    // RequireJS
-    if (typeof define == "function") {
-        define(definition);
-    // YUI3
-    } else if (typeof YUI == "function") {
-        YUI.add("es5-sham", definition);
-    // CommonJS and <script>
-    } else {
-        definition();
-    }
-})(function () {
 
+// UMD (Universal Module Definition)
+// see https://github.com/umdjs/umd/blob/master/returnExports.js
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(factory);
+    } else if (typeof exports === 'object') {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like enviroments that support module.exports,
+        // like Node.
+        module.exports = factory();
+    } else {
+        // Browser globals (root is window)
+        root.returnExports = factory();
+  }
+}(this, function () {
 
 var call = Function.prototype.call;
 var prototypeOfObject = Object.prototype;
@@ -27,8 +35,8 @@ var defineGetter;
 var defineSetter;
 var lookupGetter;
 var lookupSetter;
-var supportsAccessors;
-if ((supportsAccessors = owns(prototypeOfObject, "__defineGetter__"))) {
+var supportsAccessors = owns(prototypeOfObject, "__defineGetter__");
+if (supportsAccessors) {
     defineGetter = call.bind(prototypeOfObject.__defineGetter__);
     defineSetter = call.bind(prototypeOfObject.__defineSetter__);
     lookupGetter = call.bind(prototypeOfObject.__lookupGetter__);
@@ -41,12 +49,19 @@ if (!Object.getPrototypeOf) {
     // https://github.com/es-shims/es5-shim/issues#issue/2
     // http://ejohn.org/blog/objectgetprototypeof/
     // recommended by fschaefer on github
+    //
+    // sure, and webreflection says ^_^
+    // ... this will nerever possibly return null
+    // ... Opera Mini breaks here with infinite loops
     Object.getPrototypeOf = function getPrototypeOf(object) {
-        return object.__proto__ || (
-            object.constructor
-                ? object.constructor.prototype
-                : prototypeOfObject
-        );
+        var proto = object.__proto__;
+        if (proto || proto === null) {
+            return proto;
+        } else if (object.constructor) {
+            return object.constructor.prototype;
+        } else {
+            return prototypeOfObject;
+        }
     };
 }
 
@@ -68,13 +83,10 @@ function doesGetOwnPropertyDescriptorWork(object) {
 //check whether getOwnPropertyDescriptor works if it's given. Otherwise,
 //shim partially.
 if (Object.defineProperty) {
-    var getOwnPropertyDescriptorWorksOnObject = 
-        doesGetOwnPropertyDescriptorWork({});
-    var getOwnPropertyDescriptorWorksOnDom = typeof document == "undefined" ||
+    var getOwnPropertyDescriptorWorksOnObject = doesGetOwnPropertyDescriptorWork({});
+    var getOwnPropertyDescriptorWorksOnDom = typeof document === "undefined" ||
     doesGetOwnPropertyDescriptorWork(document.createElement("div"));
-    if (!getOwnPropertyDescriptorWorksOnDom || 
-            !getOwnPropertyDescriptorWorksOnObject
-    ) {
+    if (!getOwnPropertyDescriptorWorksOnDom || !getOwnPropertyDescriptorWorksOnObject) {
         var getOwnPropertyDescriptorFallback = Object.getOwnPropertyDescriptor;
     }
 }
@@ -83,7 +95,7 @@ if (!Object.getOwnPropertyDescriptor || getOwnPropertyDescriptorFallback) {
     var ERR_NON_OBJECT = "Object.getOwnPropertyDescriptor called on a non-object: ";
 
     Object.getOwnPropertyDescriptor = function getOwnPropertyDescriptor(object, property) {
-        if ((typeof object != "object" && typeof object != "function") || object === null) {
+        if ((typeof object !== "object" && typeof object !== "function") || object === null) {
             throw new TypeError(ERR_NON_OBJECT + object);
         }
 
@@ -115,13 +127,21 @@ if (!Object.getOwnPropertyDescriptor || getOwnPropertyDescriptorFallback) {
             // `__proto__` so that `__lookupGetter__` will return getter only
             // if it's owned by an object.
             var prototype = object.__proto__;
-            object.__proto__ = prototypeOfObject;
+            var notPrototypeOfObject = object !== prototypeOfObject;
+            // avoid recursion problem, breaking in Opera Mini when
+            // Object.getOwnPropertyDescriptor(Object.prototype, 'toString')
+            // or any other Object.prototype accessor
+            if (notPrototypeOfObject) {
+                object.__proto__ = prototypeOfObject;
+            }
 
             var getter = lookupGetter(object, property);
             var setter = lookupSetter(object, property);
 
-            // Once we have getter and setter we can put values back.
-            object.__proto__ = prototype;
+            if (notPrototypeOfObject) {
+                // Once we have getter and setter we can put values back.
+                object.__proto__ = prototype;
+            }
 
             if (getter || setter) {
                 if (getter) {
@@ -158,8 +178,11 @@ if (!Object.create) {
 
     // Contributed by Brandon Benvie, October, 2012
     var createEmpty;
-    var supportsProto = Object.prototype.__proto__ === null;
-    if (supportsProto || typeof document == 'undefined') {
+    var supportsProto = !({__proto__:null} instanceof Object);
+                        // the following produces false positives
+                        // in Opera Mini => not a reliable check
+                        // Object.prototype.__proto__ === null
+    if (supportsProto || typeof document === 'undefined') {
         createEmpty = function () {
             return { "__proto__": null };
         };
@@ -255,7 +278,7 @@ function doesDefinePropertyWork(object) {
 // shim partially.
 if (Object.defineProperty) {
     var definePropertyWorksOnObject = doesDefinePropertyWork({});
-    var definePropertyWorksOnDom = typeof document == "undefined" ||
+    var definePropertyWorksOnDom = typeof document === "undefined" ||
         doesDefinePropertyWork(document.createElement("div"));
     if (!definePropertyWorksOnObject || !definePropertyWorksOnDom) {
         var definePropertyFallback = Object.defineProperty,
@@ -270,10 +293,10 @@ if (!Object.defineProperty || definePropertyFallback) {
                                       "on this javascript engine";
 
     Object.defineProperty = function defineProperty(object, property, descriptor) {
-        if ((typeof object != "object" && typeof object != "function") || object === null) {
+        if ((typeof object !== "object" && typeof object !== "function") || object === null) {
             throw new TypeError(ERR_NON_OBJECT_TARGET + object);
         }
-        if ((typeof descriptor != "object" && typeof descriptor != "function") || descriptor === null) {
+        if ((typeof descriptor !== "object" && typeof descriptor !== "function") || descriptor === null) {
             throw new TypeError(ERR_NON_OBJECT_DESCRIPTOR + descriptor);
         }
         // make a valiant attempt to use the real defineProperty
@@ -351,7 +374,7 @@ if (!Object.defineProperties || definePropertiesFallback) {
         }
 
         for (var property in properties) {
-            if (owns(properties, property) && property != "__proto__") {
+            if (owns(properties, property) && property !== "__proto__") {
                 Object.defineProperty(object, property, properties[property]);
             }
         }
@@ -387,7 +410,7 @@ try {
 } catch (exception) {
     Object.freeze = (function freeze(freezeObject) {
         return function freeze(object) {
-            if (typeof object == "function") {
+            if (typeof object === "function") {
                 return object;
             } else {
                 return freezeObject(object);
@@ -443,4 +466,5 @@ if (!Object.isExtensible) {
     };
 }
 
-});
+}));
+
