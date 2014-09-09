@@ -60,6 +60,18 @@ define(
                 // if (!Initializer.isBrowserCompatible()) {
                 //     return;
                 // }
+
+                if (App.config.build.UIonly) {
+                    $.when(
+                        UIController.buildPlanetList()
+                    )
+                    .done(function() {
+                        UIController.init();
+                    });
+
+                    return;
+                }
+
                 TimeController.start();
 
                 return $.when(Scene.init()).done(function() {

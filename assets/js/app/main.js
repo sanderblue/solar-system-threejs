@@ -113,6 +113,8 @@ define(
             },
 
             init: function() {
+                console.log('Here');
+
                 Initializer.init(MainController);
             }
         };

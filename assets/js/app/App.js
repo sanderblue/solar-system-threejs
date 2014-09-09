@@ -11,6 +11,7 @@ define(function() {
             OrbitFactoryEnabled: true,
             SolarSystemFactoryEnabled: true,
             StarFactoryEnabled: false,
+            UIonly: true
         },
         moonOrbitsEnabled: true,
         logger: {
