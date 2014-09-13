@@ -275,14 +275,13 @@ ul {
     color: white; }
 
 .loading-prompt {
-  background: black;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  background: url(../img/bg/stars_a.jpg) no-repeat center center fixed;
+  background: url(../img/bg/stars_b.png) no-repeat center center fixed;
   background-size: cover; }
   .loading-prompt p {
     margin: 20px 0; }
