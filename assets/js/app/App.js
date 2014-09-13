@@ -1,6 +1,9 @@
 define(function() {
 
     var Config = {
+        audio: {
+            enabled: false
+        },
         build: {
             SceneEnabled: true,
             SunFactoryEnabled: true,

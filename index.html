@@ -7,7 +7,7 @@
 	</head>
 	<body>
         <!-- LOADING PROMPT -->
-        <!-- <div id="loading-prompt" class="loading-prompt">
+        <div id="loading-prompt" class="loading-prompt">
             <div class="loading-prompt-inner-wrap">
                 <div id="introduction" class="introduction">
                     <div class="introduction-header">Our Solar System</div>
@@ -29,9 +29,7 @@
                     <div id="status-messages" class="status-messages-holder"></div>
                 </div>
             </div>
-        </div> -->
-        <div class="stars"></div>
-        <div class="twinkling"></div>
+        </div>
 
         <div class="container">
             <div id="control-panel" class="control-panel">
@@ -59,7 +57,7 @@
                     <div class="accordian-item">
                         <div class="accordian-item-label">Audio Controls</div>
                         <div class="accordian-submenu">
-                            <audio id="sound" class="soundscape" src="assets/sound/granulation.mp3" autoplay="true" loop="true" type="audio/mpeg" controls></audio>
+                            <!-- <audio id="sound" class="soundscape" src="assets/sound/granulation.mp3" autoplay="true" loop="true" type="audio/mpeg" controls></audio> -->
                         </div>
                     </div>
                 </div>
@@ -69,10 +67,6 @@
         <div id="solar-system" class="scene"></div>
 
         <script>
-            var audio = document.getElementById('sound');
-
-            audio.volume = 0.1;
-
             // (function(i, s, o, g, r, a, m) {
             //     i['GoogleAnalyticsObject'] = r;
             //     i[r] = i[r] || function() {

@@ -4,50 +4,6 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-  @keyframes move-twink-back {
-    from {background-position:0 0;}
-    to {background-position:-10000px 5000px;}
-}
-@-webkit-keyframes move-twink-back {
-    from {background-position:0 0;}
-    to {background-position:-10000px 5000px;}
-}
-@-moz-keyframes move-twink-back {
-    from {background-position:0 0;}
-    to {background-position:-10000px 5000px;}
-}
-@-ms-keyframes move-twink-back {
-    from {background-position:0 0;}
-    to {background-position:-10000px 5000px;}
-}
-
-.stars, .twinkling {
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  width:100%;
-  height:100%;
-  display:block;
-}
-
-.stars {
-  background:#000 url(../img/bg/stars_twinkle.png) repeat top center;
-  z-index:0;
-}
-
-.twinkling{
-  background:transparent url(../img/bg/stars_twinkler.png) repeat top center;
-  z-index:1;
-
-  -moz-animation:move-twink-back 200s linear infinite;
-  -ms-animation:move-twink-back 200s linear infinite;
-  -o-animation:move-twink-back 200s linear infinite;
-  -webkit-animation:move-twink-back 200s linear infinite;
-  animation:move-twink-back 200s linear infinite;
-}
-
 /*
  *  Font Faces
  */
@@ -160,7 +116,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
   color: #f0f0f0;
-  background: #000;
   background-color: #000;
   margin: 0px;
   overflow: hidden;
@@ -244,7 +199,8 @@ ul {
         vertical-align: middle; }
     .accordian .accordian-item:hover .accordian-item-label {
       cursor: pointer;
-      padding: 5px 12px; }
+      padding: 5px 12px;
+      background: white; }
     .accordian .accordian-item.active .accordian-submenu {
       opacity: 1;
       -moz-opacity: 1;
@@ -325,7 +281,9 @@ ul {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 100; }
+  z-index: 100;
+  background: url(../img/bg/stars_a.jpg) no-repeat center center fixed;
+  background-size: cover; }
   .loading-prompt p {
     margin: 20px 0; }
 
