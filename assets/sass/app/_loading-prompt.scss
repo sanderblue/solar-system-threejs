@@ -13,14 +13,21 @@
 
 .loading-prompt-inner-wrap {
     width: 90%;
-    max-width: 960px;
-    margin: 10% auto;
+    max-width: 720px;
+    margin: 7% auto;
+}
+
+.header-holder {
+    background: url(../img/sun-horizon-glow.png) no-repeat center center;
+    padding: 40px 0 20px 0;
 }
 
 .introduction-header,
 .status-prompt-header {
     @include font-semibold();
-    @include font-22();
+    @include font-size(32px);
+    text-align: center;
+    background: transparent;
 }
 
 .introduction-text {
@@ -28,6 +35,7 @@
     font-size: 17px;
     margin-top: 20px;
     margin-bottom: 30px;
+    background: transparent;
 }
 
 .build-status-prompt {

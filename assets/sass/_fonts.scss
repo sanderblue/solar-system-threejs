@@ -74,6 +74,12 @@ $base_link_color: #0080ff;
 /**
  * Font Sizes
  */
+
+@mixin font-size ($size) {
+    font-size: $size;
+    -webkit-font-smoothing: antialiased;
+}
+
 @mixin font-12 () {
     font-size: 12px;
     -webkit-font-smoothing: antialiased;

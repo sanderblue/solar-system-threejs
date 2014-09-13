@@ -39,4 +39,27 @@ ul {
     background: transparent;
 }
 
+.line-segment {
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+    border-top: 1px solid rgba(100, 163, 175, 1);
+    line-height: 0px;
+
+    &:before,
+    &:after {
+        font-size: 28px;
+        content: '•';
+        position: absolute;
+    }
+
+    &:before {
+        left: 0;
+    }
+
+    &:after {
+        right: 0;
+    }
+}
+
 // .scene { display: none; }
