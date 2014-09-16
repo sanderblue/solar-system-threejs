@@ -9,6 +9,8 @@
     background-size: cover;
 
     p { margin: 20px 0; }
+
+    .btn-ss { margin: 0 auto; }
 }
 
 .loading-prompt-inner-wrap {
@@ -24,18 +26,20 @@
 
 .introduction-header,
 .status-prompt-header {
-    @include font-semibold();
+    @include font-regular();
     @include font-size(32px);
     text-align: center;
     background: transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.26em;
 }
 
 .introduction-text {
-    @include font-regular();
-    font-size: 17px;
+    @include loading-prompt-text();
     margin-top: 20px;
     margin-bottom: 30px;
     background: transparent;
+    line-height: 28px;
 }
 
 .build-status-prompt {
@@ -46,6 +50,8 @@
 }
 
 .status-messages-holder {
+    @include loading-prompt-text();
+    text-align: center;
     margin-top: 20px;
     margin-bottom: 30px;
     display: none;

@@ -1,8 +1,8 @@
-$btn_border_color: rgba(255, 255, 255, 0.75);
-$btn_border_color_hover: rgba(255, 255, 255, 1);
+$btn_border_color: rgba(100, 163, 175, 0.75);
+$btn_border_color_hover: rgba(100, 163, 175, 1);
 $btn_padding_regular: 10px 20px;
-$btn_box_shadow: inset 0 0 4px rgba(255, 255, 255, 0.25);
-$btn_box_shadow_hover: inset 0 0 12px rgba(255, 255, 255, 0.6);
+$btn_box_shadow: inset 0 0 6px rgba(100, 163, 175, 0.25);
+$btn_box_shadow_hover: inset 0 1px 14px rgba(100, 163, 175, 0.6);
 
 .btn-ss {
     @include transition(all .2s ease);
