@@ -1,6 +1,7 @@
 .DS_Store
 .sass-cache/*
 logs
+logs/*
 mockups
 mockups/*
 assets/sass/lib/*
