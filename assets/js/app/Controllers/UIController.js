@@ -5,9 +5,10 @@ define(
         'Scene',
         'Camera',
         'SolarSystem',
-        'OrbitFactory'
+        'OrbitFactory',
+        'TimeController'
     ],
-    function($, Accordian, Scene, Camera, SolarSystem, OrbitFactory) {
+    function($, Accordian, Scene, Camera, SolarSystem, OrbitFactory, TimeController) {
 
         var UIController = {
             selectedPlanet: null,
@@ -33,6 +34,8 @@ define(
                     Scene.setCameraPosition(matchedPlanet.planet3d.core, matchedPlanet.planet3d, matchedPlanet.planet3d.position, false, false);
                     Scene.setCameraFocalPoint(matchedPlanet.planet3d.position);
 
+                    UIController.resetCameraControls();
+
                     cameraZoomControl
                         .attr('min', - parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
                         .attr('max', parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
@@ -48,6 +51,7 @@ define(
 
                     Scene.setCameraPosition(null, null, Camera.defaultPosition, true);
                     Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
+                    UIController.resetCameraControls();
                 });
             },
 
@@ -124,12 +128,36 @@ define(
                 return cssDegs;
             },
 
+            resetCameraControls: function() {
+                $('#marker').css({
+                    '-webkit-transform': 'rotate(0deg)',
+                    '-moz-transform': 'rotate(0deg)',
+                    'transform': 'rotate(0deg)'
+                });
+
+                $('#camera-zoom-control').val(0);
+            },
+
             initCameraOrbitControlListener: function() {
-                $(document).ready(function(){
-                    $('#marker').on('mousedown', function(){
-                        $('body').on('mousemove', function(e){
-                            UIController.adjustCameraOrbitPosition($('#innerCircle').parent(), e.pageX,e.pageY, $('#marker'));
+                $(document).ready(function() {
+                    var circleParent = $('#innerCircle').parent(),
+                        marker = $('#marker')
+                    ;
+
+                    marker.on('mousedown', function() {
+                        TimeController.stop();
+
+                        $('body').on('mousemove', function(e) {
+                            UIController.adjustCameraOrbitPosition(circleParent, e.pageX,e.pageY, marker);
+
+                            marker.on('mouseup', function() {
+                                TimeController.start();
+                            });
                         });
+                    });
+
+                    marker.on('mouseup', function() {
+                        TimeController.start();
                     });
                 });
             },

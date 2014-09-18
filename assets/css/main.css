@@ -217,8 +217,7 @@ ul {
         vertical-align: middle; }
     .accordian .accordian-item:hover .accordian-item-label {
       cursor: pointer;
-      padding: 5px 12px;
-      background: white; }
+      padding: 5px 12px; }
     .accordian .accordian-item.active .accordian-submenu {
       opacity: 1;
       -moz-opacity: 1;
