@@ -28,8 +28,7 @@ define(
 
                 var material = new THREE.MeshLambertMaterial({
                                           ambient: 0xbbbbbb,
-                                          map: texture,
-                                          side: THREE.DoubleSide
+                                          map: texture
                                         });
 
                 texture.wrapS = THREE.RepeatWrapping;

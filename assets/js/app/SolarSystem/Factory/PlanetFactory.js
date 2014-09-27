@@ -123,14 +123,12 @@ define(
 
                     var planetMaterial = new THREE.MeshPhongMaterial({
                                               ambient: 0xbbbbbb,
-                                              map: texture,
-                                              side: THREE.DoubleSide
+                                              map: texture
                                             });
 
                     var coreMaterial = new THREE.MeshPhongMaterial({
                                               ambient: 0xbbbbbb,
-                                              map: coreTexture,
-                                              side: THREE.DoubleSide
+                                              map: coreTexture
                                             });
 
                     if (planet.name === 'Mercury' || planet.name === 'Venus' || planet.name === 'Earth' || planet.name === 'Mars') {
