@@ -119,17 +119,10 @@ define(
 
                     texture.wrapS      = THREE.RepeatWrapping;
                     texture.wrapT      = THREE.RepeatWrapping;
-                    texture.anisotropy = 4;
+                    texture.anisotropy = 2;
 
-                    var planetMaterial = new THREE.MeshPhongMaterial({
-                                              ambient: 0xbbbbbb,
-                                              map: texture
-                                            });
-
-                    var coreMaterial = new THREE.MeshPhongMaterial({
-                                              ambient: 0xbbbbbb,
-                                              map: coreTexture
-                                            });
+                    var planetMaterial = new THREE.MeshPhongMaterial({ map: texture });
+                    var coreMaterial   = new THREE.MeshPhongMaterial({ map: coreTexture });
 
                     if (planet.name === 'Mercury' || planet.name === 'Venus' || planet.name === 'Earth' || planet.name === 'Mars') {
                         planetMaterial = new THREE.MeshPhongMaterial({

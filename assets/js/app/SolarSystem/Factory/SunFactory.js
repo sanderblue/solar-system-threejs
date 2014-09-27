@@ -24,7 +24,6 @@ define(
                                           ambient: 0xffffff,
                                           emissive: 0xffffff,
                                           map: texture,
-                                          side: THREE.DoubleSide,
                                           transparent: true,
                                           opacity: 1
                                         });

@@ -105,6 +105,7 @@ define(
                     var startTime = new Date().getTime();
 
                     StarFactory.build();
+                    // StarFactory.buildStarsAsParticleSystem();
 
                     var endTime = new Date().getTime(),
                         statusMessage = 'Star Factory done building in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.'

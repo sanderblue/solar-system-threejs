@@ -5,7 +5,7 @@ require.config({
         // Core
         'requirejs'   : 'libs/requirejs/require',
         'jquery'      : 'libs/jquery/jquery',
-        'threejs'     : 'libs/threejs/three.min',
+        'threejs'     : 'libs/threejs/three.r68.min',
 
         // Three.js Extensions
         'detector'            : 'libs/threejs/extensions/detector',
@@ -62,6 +62,9 @@ require.config({
             exports: ['$', 'jQuery']
         },
         'detector': {
+            deps: ['threejs']
+        },
+        'threeBufferAttribute': {
             deps: ['threejs']
         },
         'stats': {

@@ -36,6 +36,8 @@ define(
 
                     return false;
                 }
+
+                return true;
             },
 
             onWindowResize: function() {
@@ -57,9 +59,9 @@ define(
             init: function(MainController) {
                 window.addEventListener('resize', Initializer.onWindowResize, false);
 
-                // if (!Initializer.isBrowserCompatible()) {
-                //     return;
-                // }
+                if (!Initializer.isBrowserCompatible()) {
+                    return;
+                }
 
                 if (App.config.build.UIonly) {
                     $.when(
