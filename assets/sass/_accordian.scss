@@ -1,6 +1,9 @@
-$accordian_active_bg_color: rgba(100, 100, 100, 0.1);
+$accordian_bg_color: rgba(90, 90, 90, 0.2);
+$accordian_bg_color_active: rgba(90, 90, 90, 0.25);
 $accoridian_item_padding: 5px 12px;
-$accoridian_planet_item_padding: 6px 6px 6px 14px;
+$accoridian_planet_item_padding: 4px 6px 4px 14px;
+$accordian_border: 1px solid transparent;
+$accordian_border_active: 1px solid $blue;
 
 .accordian {
     @include font-18();
@@ -11,65 +14,50 @@ $accoridian_planet_item_padding: 6px 6px 6px 14px;
     .accordian-item {
         @include font-semibold();
         @include box-sizing(border-box);
-        @include transition(all 0.2s ease);
-        background: rgba(90, 90, 90, 0.2);
+        @include transition(all 0.4s ease);
+        background: $accordian_bg_color;
         margin: 6px 0;
 
-        .accordian-item-label {
-            @include transition(color 0.2s ease);
-            padding: $accoridian_item_padding;
-            vertical-align: middle;
-
-            &:hover { color: $base_font_color_hover; }
-
-            &.planet {
-                display: inline-block;
-                vertical-align: middle;
-            }
+        &.active {
+            background: $accordian_bg_color_active;
         }
+    }
+
+    .accordian-item-label {
+        @include transition(all 0.4s ease);
+        padding: $accoridian_item_padding;
+        border-left: $accordian_border;
 
         &:hover {
-            .accordian-item-label {
-                cursor: pointer;
-                padding: $accoridian_item_padding;
-            }
+            cursor: pointer;
+            color: $base_font_color_hover;
         }
 
         &.active {
-            .accordian-submenu {
-                @include opacity(1);
-                @include box-sizing(border-box);
-
-                &.active {
-                    &:hover {
-                        background: transparent;
-                    }
-                }
-
-                .accordian-subitem {
-                    &.planet {
-                        &:hover {
-                            color: $base_font_color_hover;
-                        }
-                    }
-                }
-
-                .left-side,
-                .right-side {
-                    display: inline-block;
-                    width: 49%;
-                }
-            }
+            border-left: $accordian_border_active;
         }
     }
 
     .accordian-submenu {
         @include font-14();
-        @include opacity(0);
+        @include opacity(1);
         @include box-sizing(border-box);
-        @include transition(opacity 0.2s ease);
-        padding: 0 4px 10px 4px;
+        padding: 6px 4px 10px 4px;
         display: none;
+
+        &.active {
+            &:hover {
+                background: transparent;
+            }
+        }
+
+        .accordian-subitem {
+            &.planet {
+                &:hover {
+                    color: $base_font_color_hover;
+                }
+            }
+        }
 
         .accordian-subitem {
             .planet {
@@ -87,9 +75,27 @@ $accoridian_planet_item_padding: 6px 6px 6px 14px;
             display: inline-block;
             width: 49%;
         }
+
+        .accordian-submenu-item { @include font-13(); }
     }
 
-    .accordian-submenu-item {
-        @include font-13();
+    .accordian-subitem-label  {
+        @include transition(all 0.4s ease);
+
+        &.planet {
+            &.active {
+                color: $blue;
+
+                &:hover {
+                    &.active {
+                        color: $blue;
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 }

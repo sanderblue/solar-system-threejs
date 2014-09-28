@@ -15,15 +15,26 @@ define(
             currentCameraPosition: null,
 
             initEventListeners: function() {
-                var cameraZoomControl = $('#camera-zoom-control');
+                var cameraZoomControl = $('#camera-zoom-control'),
+                    planetSelector = '.accordian-subitem-label.planet'
+                ;
 
-                $(document).on('click', '.camera-trigger', function(e) {
+                $(document).on('click', planetSelector, function(e) {
                     e.preventDefault();
                     e.stopImmediatePropagation();
+
+                    var isActive = $(this).hasClass('active');
+
+                    if (isActive) {
+                        return false;
+                    }
 
                     var id = $(this).data('id'),
                         matchedPlanet = UIController.findPlanet(id)
                     ;
+
+                    $(planetSelector).removeClass('active');
+                    $(this).addClass('active');
 
                     UIController.selectedPlanet = matchedPlanet.planet;
 
@@ -225,8 +236,7 @@ define(
                         // listElement.append('<li id="planet-'+ planetId +'" class="planet" data-id="'+ iplanetNamed +'">'+  +'</li>');
                         var planetListItem =
                             '<div class="accordian-subitem planet-item">'
-                            +    '<div id="'+ id +'" class="accordian-item-label planet">'+ name +'</div>'
-                            +    '<span class="icon-target camera-trigger" data-id="'+ id +'"></span>'
+                            +    '<div id="'+ id +'" class="accordian-subitem-label planet" data-id="'+ id +'">'+ name +'</div>'
                             +    '<span class="camera-trigger" data-id="'+ id +'"></span>'
                             +    '<div class="accordian-submenu">'
                             +        '<div class="accordian-submenu-item">'

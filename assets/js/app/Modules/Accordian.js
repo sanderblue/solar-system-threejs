@@ -7,30 +7,28 @@ define(function() {
     };
 
     Accordian.prototype.init = function() {
-        var accordianItems = this.container.find('.accordian-item'),
-            itemLabels     = accordianItems.find('.accordian-item-label')
-        ;
+        var itemLabels = this.container.find('.accordian-item-label');
 
         itemLabels.on('click', function(e) {
             e.preventDefault();
             e.stopImmediatePropagation();
 
-            var menuContainer = $(this).parent(),
+            var menuItem      = $(this),
+                isActive      = menuItem.hasClass('active')
+                openItems     =
+                menuContainer = menuItem.parent(),
                 submenu       = menuContainer.find('.accordian-submenu').first()
             ;
 
-            if (menuContainer.hasClass('active')) {
+            if (isActive) {
                 menuContainer.removeClass('active');
+                menuItem.removeClass('active');
                 submenu.slideUp(this.animationSpeed);
 
                 return;
             }
 
-            menuContainer
-                .addClass('active')
-                .children()
-                .addClass('active')
-            ;
+            $(this).addClass('active');
 
             submenu.slideDown(this.animationSpeed);
         });

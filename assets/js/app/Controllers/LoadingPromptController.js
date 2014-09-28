@@ -32,16 +32,19 @@ define(['jquery'], function($) {
             });
         },
 
+        initAudio: function() {
+            var audio = document.getElementById('sound');
+
+            audio.volume = 0.15;
+
+            if (!App.config.AudioEnabled) {
+                audio.pause();
+            }
+        },
+
         init: function(Initializer, MainController) {
             $(function() {
-                var audio = document.getElementById('sound');
-
-                audio.volume = 0.15;
-
-                if (!App.config.AudioEnabled) {
-                    audio.pause();
-                }
-
+                LoadingPromptController.initAudio();
                 LoadingPromptController.initEventListeners(Initializer, MainController);
             });
         }
