@@ -5,7 +5,7 @@ require.config({
         // Core
         'requirejs'   : 'libs/requirejs/require',
         'jquery'      : 'libs/jquery/jquery',
-        'threejs'     : 'libs/threejs/three.r68.min',
+        'threejs'     : 'libs/threejs/three.r64.min',
 
         // Three.js Extensions
         'detector'            : 'libs/threejs/extensions/detector',

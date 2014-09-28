@@ -15,83 +15,8 @@ define(
          *       a true 3d array of stars.
          */
         var StarFactory = {
-            buildStarsAsParticleSystem: function() {
-                var particles = 500000;
-
-                var geometry = new THREE.BufferGeometry();
-
-                var positions = new Float32Array( particles * 2 );
-                var colors = new Float32Array( particles * 2 );
-
-                var color = new THREE.Color();
-
-                var n = 100000, n2 = n / 2; // particles spread in the cube
-
-                for ( var i = 0; i < positions.length; i += 3 ) {
-
-                    // positions
-
-                    var x = 2000 * (Math.random() * n - n2);
-                    var y = 2000 * (Math.random() * n - n2);
-                    var z = 2000 * (Math.random() * n - n2);
-
-                    positions[ i ]     = x;
-                    positions[ i + 1 ] = y;
-                    positions[ i + 2 ] = z;
-
-                    // colors
-                    color.setRGB( 255, 255, 255 );
-
-                    colors[ i ]     = color.r;
-                    colors[ i + 1 ] = color.g;
-                    colors[ i + 2 ] = color.b;
-
-                }
-
-                console.log('geometry', THREE, geometry);
-                // return;
-
-                geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
-                geometry.addAttribute( 'color', new THREE.BufferAttribute( colors, 3 ) );
-
-                geometry.computeBoundingSphere();
-
-                //
-
-                var material = new THREE.PointCloudMaterial( { size: 15, vertexColors: THREE.VertexColors } );
-
-                particleSystem = new THREE.PointCloud( geometry, material );
-
-                Scene.scene.add( particleSystem );
-            },
-
-            buildStarsAsImageTexture: function() {
-                var texturePath = '/textures/earth_night.jpg';
-
-                var texture = new THREE.ImageUtils.loadTexture(texturePath);
-
-                var planetMaterial = new THREE.MeshPhongMaterial({
-                                            map: texture,
-                                            side: THREE.DoubleSide,
-                                            emissive: new THREE.Color('rgb(255,255,255)')
-                                        });
-
-                var stars = new THREE.Mesh(
-                            new THREE.SphereGeometry(
-                                    500,
-                                    200,
-                                    120
-                                ),
-                                planetMaterial
-                             );
-
-                stars.position.set(0, 0, 0);
-
-                Scene.scene.add(stars);
-            },
-
             getPosition: function(i) {
-                var sceneRadius = (4503443661 * (1 * Math.pow(10, -4))) + 10000,
+                var sceneRadius = (4503443661 * (1 * Math.pow(10, -4))) + 250000,
                     isSecond    = i % 2 == 0,
                     isThird     = i % 3 == 0,
                     isFourth    = i % 4 == 0,
@@ -108,16 +33,15 @@ define(
                     var material = new THREE.MeshLambertMaterial({
                                           ambient: 0xffffff,
                                           emissive: 0xffffff,
-                                          // transparent: true,
-                                          // opacity: 1
+                                          shininess: 10000
+                                          // shading: THREE.NoShading
                                         });
 
-                    var geometry  = new THREE.SphereGeometry(250, 3, 2);
-                    var Star      = new THREE.Mesh(geometry, material);
-
-                    var randomizedPosition = StarFactory.getPosition(i);
-
-                    console.log(randomizedPosition);
+                    var radius             = RandomNumber.getRandomNumberWithinRange(170, 230);
+                        geometry           = new THREE.SphereGeometry(230, 5, 3),
+                        Star               = new THREE.Mesh(geometry, material),
+                        randomizedPosition = StarFactory.getPosition(i)
+                    ;
 
                     Star.position.set(
                         randomizedPosition.x,
