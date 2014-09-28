@@ -3,9 +3,10 @@ require.config({
     // urlArgs: 'bust=' + new Date().getTime().toString(), // bust cache for development purposes ("bust=v2" for production)
     paths: {
         // Core
-        'requirejs'   : 'libs/requirejs/require',
-        'jquery'      : 'libs/jquery/jquery',
-        'threejs'     : 'libs/threejs/three.r64.min',
+        'requirejs' : 'libs/requirejs/require',
+        'jquery'    : 'libs/jquery/jquery',
+        'threejs'   : 'libs/threejs/three.r64.min',
+        'twigjs'    : 'libs/twigjs/twig.min',
 
         // Three.js Extensions
         'detector'            : 'libs/threejs/extensions/detector',
@@ -20,10 +21,10 @@ require.config({
         'SolarSystem' : 'app/SolarSystem/SolarSystem',
 
         // Environment
-        'Time'        : 'app/Environment/Time',
-        'Scene'       : 'app/Environment/Scene',
-        'Camera'      : 'app/Environment/Camera',
-        'Constants'   : 'app/Environment/Constants',
+        'Time'      : 'app/Environment/Time',
+        'Scene'     : 'app/Environment/Scene',
+        'Camera'    : 'app/Environment/Camera',
+        'Constants' : 'app/Environment/Constants',
 
         // Factories
         'SolarSystemFactory'  : 'app/SolarSystem/Factory/SolarSystemFactory',
@@ -49,9 +50,10 @@ require.config({
         'InvalidArgumentException' : 'app/Modules/Error/InvalidArgumentException',
         'RandomNumber'             : 'app/Modules/RandomNumber',
         'DocumentWriter'           : 'app/Modules/DocumentWriter',
+        'PlanetDataModule'         : 'app/Modules/PlanetDataModule',
 
         // Extensions
-        'Date'        : 'app/Extensions/Date',
+        'Date' : 'app/Extensions/Date',
 
         // Utilities
         'System'    : 'app/Utilities/System',
@@ -74,7 +76,7 @@ require.config({
             deps: ['stats']
         },
         'main': {
-            deps: ['App', 'jquery', 'threejs', 'LoadingPromptController', 'Constants', 'Time', 'Modules', 'OrbitController', 'OrbitFactory', 'UIController']
+            deps: ['App', 'twigjs', 'jquery', 'threejs', 'LoadingPromptController', 'Constants', 'Time', 'Modules', 'OrbitController', 'OrbitFactory', 'UIController']
         },
         'Initializer': {
             deps: ['Scene']

@@ -6,9 +6,10 @@ define(
         'Camera',
         'SolarSystem',
         'OrbitFactory',
-        'TimeController'
+        'TimeController',
+        'PlanetDataModule'
     ],
-    function($, Accordian, Scene, Camera, SolarSystem, OrbitFactory, TimeController) {
+    function($, Accordian, Scene, Camera, SolarSystem, OrbitFactory, TimeController, PlanetDataModule) {
 
         var UIController = {
             selectedPlanet: null,

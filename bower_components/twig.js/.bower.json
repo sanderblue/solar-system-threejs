@@ -1,0 +1,38 @@
+{
+  "name": "twig.js",
+  "version": "0.7.2",
+  "main": "twig.min.js",
+  "ignore": [
+    "Makefile",
+    "src",
+    "demos",
+    "bin",
+    "lib",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "test-ext"
+  ],
+  "homepage": "https://github.com/justjohn/twig.js",
+  "authors": [
+    "John Roepke <john@justjohn.us>"
+  ],
+  "description": "JS implementation of the Twig templating language.",
+  "keywords": [
+    "template",
+    "engine",
+    "twig"
+  ],
+  "license": "BSD 2-Clause",
+  "_release": "0.7.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.7.2",
+    "commit": "551d31426b7375fa3bb392ebb28beaa29125abcf"
+  },
+  "_source": "git://github.com/justjohn/twig.js.git",
+  "_target": "~0.7.2",
+  "_originalSource": "twig.js",
+  "_direct": true
+}
