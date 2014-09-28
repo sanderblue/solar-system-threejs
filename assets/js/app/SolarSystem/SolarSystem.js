@@ -950,10 +950,10 @@ define(function() {
             ],
             secondary: [],
             count: 800, // true number is estimated in the billions within the main astroid belt
-            distanceFromParent: 4139.1 * orbitScale // 450,000,000 km
+            distanceFromParent: 420000000 * orbitScale // 420,000,000 km
         },
         stars: {
-            count: 6000,
+            count: 5000,
             solarSystemRadius: 4503443661 + 10000 * orbitScale,
         }
     };

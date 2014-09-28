@@ -9,7 +9,7 @@ define(function() {
             SunFactoryEnabled: true,
             PlanetFactoryEnabled: true,
             MoonFactoryEnabled: true,
-            AsteroidBeltFactoryEnabled: false,
+            AsteroidBeltFactoryEnabled: true,
             RingFactoryEnabled: true,
             OrbitFactoryEnabled: true,
             SolarSystemFactoryEnabled: true,

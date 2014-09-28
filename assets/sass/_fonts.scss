@@ -159,6 +159,6 @@ $base_link_color: #0080ff;
  */
 @mixin loading-prompt-text() {
     @include font-regular();
-    @include font-18();
+    @include font-size(17px);
     line-height: 28px;
 }

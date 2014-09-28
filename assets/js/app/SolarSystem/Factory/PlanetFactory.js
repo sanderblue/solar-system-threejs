@@ -229,7 +229,7 @@ define(
 
                             System.log(builderStatement);
 
-                            buildStatusPrompt.append('<p>'+ builderStatement + '</p>');
+                            buildStatusPrompt.append('<div class="status-message">'+ builderStatement + '</div>');
 
                             promise.resolve(thisPlanet);
                         });

@@ -29,17 +29,17 @@ define(
                                         });
 
                     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-                    texture.anisotropy = 32;
+                    texture.anisotropy = 1;
 
                     var sunGeometry = new THREE.SphereGeometry(
                                             SolarSystem.parent.radius,
-                                            140,
-                                            90
+                                            120,
+                                            80
                                         );
 
                     var Sun = new THREE.Mesh(sunGeometry, material);
 
-                    var pointLight = new THREE.PointLight(0xffffff, 1.25);
+                    var pointLight = new THREE.PointLight(0xffffff, 1.35);
 
                     Sun.scale.x = Sun.scale.y = Sun.scale.z = 1;
 

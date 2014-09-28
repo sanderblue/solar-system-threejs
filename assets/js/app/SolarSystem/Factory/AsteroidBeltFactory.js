@@ -52,10 +52,8 @@ define(
             buildRandomPoints: function() {
                 var points = [];
 
-                for (var i = 0; i < 6; i ++) {
-                    var radius = (Math.random() + 1250) * SolarSystem.celestialScale;
-
-                    console.log(radius);
+                for (var i = 0; i < 7; i ++) {
+                    var radius = (Math.random() * 1250) * SolarSystem.celestialScale + i;
 
                     points.push(AsteroidBeltFactory.getRandomPointCoordinate(radius));
                 }
@@ -71,17 +69,19 @@ define(
              * @param count   [integer]
              */
             positionAstroid: function(astroid, count) {
-                var amplitude = SolarSystem.asteroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 65; // randomize the amplitudes to spread them out
+                var amplitude = SolarSystem.asteroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 160; // randomize the amplitudes to spread them out
 
                 var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, amplitude)
-                            * Math.cos(count + 25 * Math.random()
-                            * AsteroidBeltFactory.getAstroidRadian()
-                            * Constants.degreesToRadianRatio);
+                    * Math.cos(count + 25 * Math.random()
+                    * AsteroidBeltFactory.getAstroidRadian()
+                    * Constants.degreesToRadiansRatio)
+                ;
 
                 var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, amplitude)
-                            * Math.sin(count + 45 * Math.random()
-                            * AsteroidBeltFactory.getAstroidRadian()
-                            * Constants.degreesToRadianRatio);
+                    * Math.sin(count + 45 * Math.random()
+                    * AsteroidBeltFactory.getAstroidRadian()
+                    * Constants.degreesToRadiansRatio)
+                ;
 
                 astroid.position.set(
                     posX,
@@ -97,18 +97,20 @@ define(
              */
             buildAstroid: function(index) {
                 return $.Deferred(function(promise) {
-                    var randomPoints = AsteroidBeltFactory.buildRandomPoints();
-                    var texture      = AsteroidBeltFactory.getTexture();
+                    var randomPoints = AsteroidBeltFactory.buildRandomPoints(),
+                        map          = AsteroidBeltFactory.getTexture()
+                    ;
 
-                    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+                    map.wrapS = map.wrapT = THREE.RepeatWrapping;
+                    map.anisotropy = 1;
 
-                    var material = new THREE.MeshLambertMaterial({ map: texture });
+                    var materials = [
+                        new THREE.MeshLambertMaterial({ map: map }),
+                        new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 1 })
+                    ];
 
                     // Random convex mesh to represent an irregular, rock-like shape based on random points within a sphere where radius = n(random)
-                    var object = THREE.SceneUtils.createMultiMaterialObject(
-                                    new THREE.ConvexGeometry(randomPoints),
-                                    material
-                                 );
+                    var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), materials);
 
                     AsteroidBeltFactory.positionAstroid(object, index);
                     AsteroidBeltFactory.addAstroid(object);
