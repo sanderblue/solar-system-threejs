@@ -33,8 +33,7 @@ define(
                     var material = new THREE.MeshLambertMaterial({
                                           ambient: 0xffffff,
                                           emissive: 0xffffff,
-                                          shininess: 100000
-                                          // shading: THREE.NoShading
+                                          shininess: 100
                                         });
 
                     var radius             = RandomNumber.getRandomNumberWithinRange(180, 330);

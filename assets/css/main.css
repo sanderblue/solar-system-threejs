@@ -311,8 +311,8 @@ ul {
   margin: 7% auto; }
 
 .header-holder {
-  background: url(../img/sun-horizon-glow.png) no-repeat center center;
-  padding: 40px 0 20px 0; }
+  background: url(../img/sun-horizon-glow-500.png) no-repeat center center;
+  padding-top: 70px; }
 
 .introduction-header,
 .status-prompt-header {

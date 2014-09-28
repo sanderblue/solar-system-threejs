@@ -52,8 +52,10 @@ define(
             buildRandomPoints: function() {
                 var points = [];
 
-                for (var i = 0; i < 7; i ++) {
-                    var radius = (Math.random() + 1150) * SolarSystem.celestialScale;
+                for (var i = 0; i < 6; i ++) {
+                    var radius = (Math.random() + 1250) * SolarSystem.celestialScale;
+
+                    console.log(radius);
 
                     points.push(AsteroidBeltFactory.getRandomPointCoordinate(radius));
                 }
@@ -96,19 +98,17 @@ define(
             buildAstroid: function(index) {
                 return $.Deferred(function(promise) {
                     var randomPoints = AsteroidBeltFactory.buildRandomPoints();
+                    var texture      = AsteroidBeltFactory.getTexture();
 
-                    var map = AsteroidBeltFactory.getTexture();
+                    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
-                    map.wrapS = map.wrapT = THREE.RepeatWrapping;
-                    map.anisotropy = 2;
-
-                    var materials = [
-                        new THREE.MeshLambertMaterial({ ambient: 0xbbbbbb, map: map }),
-                        new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.1 })
-                    ];
+                    var material = new THREE.MeshLambertMaterial({ map: texture });
 
                     // Random convex mesh to represent an irregular, rock-like shape based on random points within a sphere where radius = n(random)
-                    var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), materials);
+                    var object = THREE.SceneUtils.createMultiMaterialObject(
+                                    new THREE.ConvexGeometry(randomPoints),
+                                    material
+                                 );
 
                     AsteroidBeltFactory.positionAstroid(object, index);
                     AsteroidBeltFactory.addAstroid(object);
