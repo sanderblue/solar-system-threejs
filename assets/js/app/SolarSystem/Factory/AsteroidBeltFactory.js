@@ -52,8 +52,8 @@ define(
             buildRandomPoints: function() {
                 var points = [];
 
-                for (var i = 0; i < 7; i ++) {
-                    var radius = (Math.random() * 1250) * SolarSystem.celestialScale + i;
+                for (var i = 0; i < 6; i ++) {
+                    var radius = (Math.random() * 1250) * SolarSystem.celestialScale + (i + 1);
 
                     points.push(AsteroidBeltFactory.getRandomPointCoordinate(radius));
                 }

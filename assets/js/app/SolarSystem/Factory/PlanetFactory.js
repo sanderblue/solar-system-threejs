@@ -41,13 +41,13 @@ define(
              * @param planet [THREE object]
              */
             buildEarthClouds: function(planet) {
-                var geometry    = new THREE.SphereGeometry(planet.radius + 1.11, 100, 70);
+                var geometry    = new THREE.SphereGeometry(planet.radius + 2.25, planet.radius, 50);
 
                 var material    = new THREE.MeshPhongMaterial({
                     map         : THREE.ImageUtils.loadTexture('/textures/earth_clouds_fair2.png'),
-                    side        : THREE.DoubleSide,
+                    // side        : THREE.DoubleSide,
                     transparent : true,
-                    opacity     : 0.9,
+                    opacity     : 0.8,
                 });
 
                 return new THREE.Mesh(geometry, material);
@@ -77,9 +77,9 @@ define(
             getPlanetCore: function(planet, material) {
                 var core = new THREE.Mesh(
                                 new THREE.SphereGeometry(
-                                        12,
-                                        12,
-                                        12
+                                        1,
+                                        1,
+                                        1
                                     ),
                                     material
                                 );

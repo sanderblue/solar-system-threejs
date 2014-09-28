@@ -16,7 +16,7 @@ define(
          */
         var StarFactory = {
             getPosition: function(i) {
-                var sceneRadius = (4503443661 * (1 * Math.pow(10, -4))) + 300000,
+                var sceneRadius = (4503443661 * (1 * Math.pow(10, -4))) + 400000,
                     isSecond    = i % 2 == 0,
                     isThird     = i % 3 == 0,
                     isFourth    = i % 4 == 0,
