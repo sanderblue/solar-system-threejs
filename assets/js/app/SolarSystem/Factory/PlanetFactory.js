@@ -41,7 +41,7 @@ define(
              * @param planet [THREE object]
              */
             buildEarthClouds: function(planet) {
-                var geometry    = new THREE.SphereGeometry(planet.radius + 2.25, planet.radius, 50);
+                var geometry    = new THREE.SphereGeometry(planet.radius + 2, planet.radius, 50);
 
                 var material    = new THREE.MeshPhongMaterial({
                     map         : THREE.ImageUtils.loadTexture('/textures/earth_clouds_fair2.png'),
