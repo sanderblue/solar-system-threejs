@@ -34,6 +34,14 @@ define(['jquery'], function($) {
 
         init: function(Initializer, MainController) {
             $(function() {
+                var audio = document.getElementById('sound');
+
+                audio.volume = 0.15;
+
+                if (!App.config.AudioEnabled) {
+                    audio.pause();
+                }
+
                 LoadingPromptController.initEventListeners(Initializer, MainController);
             });
         }
