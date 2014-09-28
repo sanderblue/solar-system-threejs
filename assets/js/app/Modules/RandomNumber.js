@@ -65,7 +65,7 @@ define(['threejs'], function() {
             window.crypto.getRandomValues(byteArray);
 
             var range    = rangeMax - rangeMin + 1,
-                maxRange = 256
+                maxRange = rangeMax
             ;
 
             if (byteArray[0] >= Math.floor(maxRange / range) * range) {

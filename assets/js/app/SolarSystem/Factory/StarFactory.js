@@ -16,7 +16,7 @@ define(
          */
         var StarFactory = {
             getPosition: function(i) {
-                var sceneRadius = (4503443661 * (1 * Math.pow(10, -4))) + 250000,
+                var sceneRadius = (4503443661 * (1 * Math.pow(10, -4))) + 300000,
                     isSecond    = i % 2 == 0,
                     isThird     = i % 3 == 0,
                     isFourth    = i % 4 == 0,
@@ -33,12 +33,12 @@ define(
                     var material = new THREE.MeshLambertMaterial({
                                           ambient: 0xffffff,
                                           emissive: 0xffffff,
-                                          shininess: 10000
+                                          shininess: 100000
                                           // shading: THREE.NoShading
                                         });
 
-                    var radius             = RandomNumber.getRandomNumberWithinRange(170, 230);
-                        geometry           = new THREE.SphereGeometry(230, 5, 3),
+                    var radius             = RandomNumber.getRandomNumberWithinRange(180, 330);
+                        geometry           = new THREE.SphereGeometry(radius, 4, 2),
                         Star               = new THREE.Mesh(geometry, material),
                         randomizedPosition = StarFactory.getPosition(i)
                     ;

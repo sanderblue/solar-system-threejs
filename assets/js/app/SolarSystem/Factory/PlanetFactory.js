@@ -137,8 +137,8 @@ define(
                     thisPlanet = new THREE.Mesh(
                                 new THREE.SphereGeometry(
                                         planet.radius,
-                                        200,
-                                        120
+                                        180,
+                                        110
                                     ),
                                     planetMaterial
                                  );

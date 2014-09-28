@@ -7,7 +7,7 @@ define(function() {
         build: {
             SceneEnabled: true,
             SunFactoryEnabled: true,
-            PlanetFactoryEnabled: false,
+            PlanetFactoryEnabled: true,
             MoonFactoryEnabled: true,
             AsteroidBeltFactoryEnabled: false,
             RingFactoryEnabled: true,
