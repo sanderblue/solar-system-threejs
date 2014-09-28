@@ -26,22 +26,16 @@ define(
             buildMoon: function(parent, moon, planetObj) {
                 var texture = MoonFactory.getMoonTexture();
 
-                var material = new THREE.MeshLambertMaterial({
-                                          ambient: 0xbbbbbb,
-                                          map: texture,
-                                          side: THREE.DoubleSide
-                                        });
+                var material = new THREE.MeshLambertMaterial({ map: texture });
 
                 texture.wrapS = THREE.RepeatWrapping;
                 texture.wrapT = THREE.RepeatWrapping;
 
-                texture.anisotropy = 5;
-
                 thisMoon = new THREE.Mesh(
                             new THREE.SphereGeometry(
                                     moon.radius,
-                                    24,
-                                    17
+                                    20,
+                                    16
                                 ),
                                 material
                             );

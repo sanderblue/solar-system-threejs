@@ -10,7 +10,10 @@
         <div id="loading-prompt" class="loading-prompt">
             <div class="loading-prompt-inner-wrap">
                 <div id="introduction" class="introduction">
-                    <div class="introduction-header">Our Solar System</div>
+                    <div class="header-holder">
+                        <div class="introduction-header">Our Solar System</div>
+                    </div>
+                    <div class="line-segment"></div>
                     <div class="introduction-text">
                         <p>
                             A solar system refers to a star and all the objects that travel in orbit around it. Our solar system consists of the sun, eight planets (and their natural satellites), dwarf planets, asteroids, and comets. Our solar system is located within the Orion Arm about 27,000 light-years away from the Milky Way Galactic Center.
@@ -30,6 +33,7 @@
                 </div>
             </div>
         </div>
+
         <div class="container">
             <div id="control-panel" class="control-panel">
                 <div id="accordian" class="accordian">
@@ -56,7 +60,7 @@
                     <div class="accordian-item">
                         <div class="accordian-item-label">Audio Controls</div>
                         <div class="accordian-submenu">
-                            <audio id="sound" class="soundscape" src="assets/sound/granulation.mp3" autoplay="true" loop="true" type="audio/mpeg" controls></audio>
+                            <!-- <audio id="sound" class="soundscape" src="assets/sound/granulation.mp3" autoplay="true" loop="true" type="audio/mpeg" controls></audio> -->
                         </div>
                     </div>
                 </div>
@@ -66,10 +70,6 @@
         <div id="solar-system" class="scene"></div>
 
         <script>
-            var audio = document.getElementById('sound');
-
-            audio.volume = 0.1;
-
             // (function(i, s, o, g, r, a, m) {
             //     i['GoogleAnalyticsObject'] = r;
             //     i[r] = i[r] || function() {

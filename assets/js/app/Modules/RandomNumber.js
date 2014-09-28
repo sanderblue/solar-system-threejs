@@ -41,6 +41,38 @@ define(['threejs'], function() {
             }
 
             return randomNumB;
+        },
+
+        /**
+         * Gets a random number between a range min and range max.
+         *
+         * @param rangeMin [integer]
+         * @param rangeMax [integer]
+         * @return integer
+         */
+        getRandomNumberWithinRange: function(rangeMin, rangeMax) {
+            if (!rangeMin || !rangeMax) {
+                for (var i = 0; i < arguments.length; i++) {
+                    if (!arguments[i]) {
+                        throw new MissingArgumentException(arguments[i], 'RandomNumber.getRandomNumberWithinRange');
+                    }
+                }
+            }
+
+            // Create byte array and fill with 1 random number
+            var byteArray = new Uint8Array(1);
+
+            window.crypto.getRandomValues(byteArray);
+
+            var range    = rangeMax - rangeMin + 1,
+                maxRange = rangeMax
+            ;
+
+            if (byteArray[0] >= Math.floor(maxRange / range) * range) {
+                return RandomNumber.getRandomNumberWithinRange(rangeMin, rangeMax);
+            }
+
+            return rangeMin + (byteArray[0] % range);
         }
     };
 

@@ -9,7 +9,7 @@ define(function() {
         diameter: 0.2, // arbitary and extraneous
         distanceFromParent: 2000,
         position: new THREE.Vector3(0, 0, 0),
-        defaultPosition: new THREE.Vector3(0, -30000, 5000),
+        defaultPosition: new THREE.Vector3(0, -85000, 9000),
         defaultFocalPoint: new THREE.Vector3(0, 0, 0), // universe center
         orbitDuration: 360, // equivalent to 360 degrees
         dayOfOrbit: 1,

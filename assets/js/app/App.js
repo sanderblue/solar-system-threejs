@@ -1,16 +1,20 @@
 define(function() {
 
-    var Config = {
+    var config = {
+        audio: {
+            enabled: false
+        },
         build: {
             SceneEnabled: true,
             SunFactoryEnabled: true,
             PlanetFactoryEnabled: true,
             MoonFactoryEnabled: true,
-            AsteroidBeltFactoryEnabled: false,
+            AsteroidBeltFactoryEnabled: true,
             RingFactoryEnabled: true,
             OrbitFactoryEnabled: true,
             SolarSystemFactoryEnabled: true,
-            StarFactoryEnabled: false,
+            StarFactoryEnabled: true,
+            UIonly: false
         },
         moonOrbitsEnabled: true,
         logger: {
@@ -20,7 +24,7 @@ define(function() {
 
     var App = {
         title: 'Solar System',
-        config: Config,
+        config: config,
         objects: {}
     };
 

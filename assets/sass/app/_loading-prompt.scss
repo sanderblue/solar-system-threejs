@@ -1,32 +1,45 @@
 .loading-prompt {
-    background: rgba(0, 0, 0, 1);
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 100;
+    background: url(../img/bg/stars_b.png) no-repeat center center fixed;
+    background-size: cover;
 
     p { margin: 20px 0; }
+
+    .btn-ss { margin: 0 auto; }
 }
 
 .loading-prompt-inner-wrap {
     width: 90%;
-    max-width: 960px;
-    margin: 10% auto;
+    max-width: 720px;
+    margin: 7% auto;
+}
+
+.header-holder {
+    background: url(../img/sun-horizon-glow-500.png) no-repeat center center;
+    padding-top: 70px;
 }
 
 .introduction-header,
 .status-prompt-header {
-    @include font-semibold();
-    @include font-22();
+    @include font-regular();
+    @include font-size(32px);
+    text-align: center;
+    background: transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.26em;
 }
 
 .introduction-text {
-    @include font-regular();
-    font-size: 17px;
+    @include loading-prompt-text();
     margin-top: 20px;
     margin-bottom: 30px;
+    background: transparent;
+    line-height: 28px;
 }
 
 .build-status-prompt {
@@ -37,6 +50,8 @@
 }
 
 .status-messages-holder {
+    @include loading-prompt-text();
+    text-align: center;
     margin-top: 20px;
     margin-bottom: 30px;
     display: none;

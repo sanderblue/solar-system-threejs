@@ -41,13 +41,13 @@ define(
              * @param planet [THREE object]
              */
             buildEarthClouds: function(planet) {
-                var geometry    = new THREE.SphereGeometry(planet.radius + 1.11, 100, 70);
+                var geometry    = new THREE.SphereGeometry(planet.radius + 2, planet.radius, 50);
 
                 var material    = new THREE.MeshPhongMaterial({
                     map         : THREE.ImageUtils.loadTexture('/textures/earth_clouds_fair2.png'),
-                    side        : THREE.DoubleSide,
+                    // side        : THREE.DoubleSide,
                     transparent : true,
-                    opacity     : 0.9,
+                    opacity     : 0.8,
                 });
 
                 return new THREE.Mesh(geometry, material);
@@ -77,9 +77,9 @@ define(
             getPlanetCore: function(planet, material) {
                 var core = new THREE.Mesh(
                                 new THREE.SphereGeometry(
-                                        12,
-                                        12,
-                                        12
+                                        1,
+                                        1,
+                                        1
                                     ),
                                     material
                                 );
@@ -114,48 +114,40 @@ define(
                                         name: planet.name
                                     });
 
-                    var texture = PlanetFactory.getTexture(planet);
-                    var coreTexture = PlanetFactory.getCoreTexture();
+                    var texture     = PlanetFactory.getTexture(planet),
+                        coreTexture = PlanetFactory.getCoreTexture()
+                    ;
 
-                    texture.wrapS      = THREE.RepeatWrapping;
-                    texture.wrapT      = THREE.RepeatWrapping;
-                    texture.anisotropy = 4;
+                    texture.wrapS = THREE.RepeatWrapping;
+                    texture.wrapT = THREE.RepeatWrapping;
 
-                    var planetMaterial = new THREE.MeshPhongMaterial({
-                                              ambient: 0xbbbbbb,
-                                              map: texture,
-                                              side: THREE.DoubleSide
-                                            });
-
-                    var coreMaterial = new THREE.MeshPhongMaterial({
-                                              ambient: 0xbbbbbb,
-                                              map: coreTexture,
-                                              side: THREE.DoubleSide
-                                            });
+                    var planetMaterial = new THREE.MeshPhongMaterial({ map: texture }),
+                        coreMaterial   = new THREE.MeshPhongMaterial({ map: coreTexture })
+                    ;
 
                     if (planet.name === 'Mercury' || planet.name === 'Venus' || planet.name === 'Earth' || planet.name === 'Mars') {
                         planetMaterial = new THREE.MeshPhongMaterial({
-                            ambient     : 0xbbbbbb,
-                            map         : THREE.ImageUtils.loadTexture('/textures/' + planet.name.toLowerCase() + '.jpg'),
-                            bumpMap     : THREE.ImageUtils.loadTexture('/textures/' + planet.name.toLowerCase() + '_topo.jpg'),
-                            bumpScale   : 1.4,
-                            // specular    : new THREE.Color('grey'),
+                            map       : THREE.ImageUtils.loadTexture('/textures/' + planet.name.toLowerCase() + '.jpg'),
+                            bumpMap   : THREE.ImageUtils.loadTexture('/textures/' + planet.name.toLowerCase() + '_topo.jpg'),
+                            bumpScale : 1.4
                         });
                     }
+
+                    var widthSegments = planet.radius < 200 ? planet.radius + 30 : 200;
 
                     thisPlanet = new THREE.Mesh(
                                 new THREE.SphereGeometry(
                                         planet.radius,
-                                        200,
-                                        120
+                                        widthSegments,
+                                        110
                                     ),
                                     planetMaterial
                                  );
 
                     if (planet.name === 'Earth') {
-                        var earthClouds  = PlanetFactory.buildEarthClouds(planet);
-
-                        var cloudCentroid = new THREE.Object3D();
+                        var earthClouds   = PlanetFactory.buildEarthClouds(planet),
+                            cloudCentroid = new THREE.Object3D()
+                        ;
 
                         cloudCentroid.add(earthClouds);
 
@@ -190,9 +182,9 @@ define(
                     thisPlanet.core = core;
 
                     if (planet.name === 'Earth') {
-                        var earthClouds  = PlanetFactory.buildEarthClouds(planet);
-
-                        var cloudCentroid = new THREE.Object3D();
+                        var earthClouds  = PlanetFactory.buildEarthClouds(planet),
+                            cloudCentroid = new THREE.Object3D()
+                        ;
 
                         cloudCentroid.add(earthClouds);
 
@@ -237,7 +229,7 @@ define(
 
                             System.log(builderStatement);
 
-                            buildStatusPrompt.append('<p>'+ builderStatement + '</p>');
+                            buildStatusPrompt.append('<div class="status-message">'+ builderStatement + '</div>');
 
                             promise.resolve(thisPlanet);
                         });

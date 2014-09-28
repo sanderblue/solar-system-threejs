@@ -152,13 +152,13 @@ define(function() {
                         name: 'Amalthea Gossamer Ring',
                         distanceFromParent: 155500 * ringOrbitScale, // 129,000 – 182,000 km (155,500 mean)
                         width: 53000,
-                        color: 0x3D3929
+                        color: 0x201E17
                     },
                     {
                         name: 'Thebe Gossamer Ring',
                         distanceFromParent: 177500 * ringOrbitScale, // 129,000 – 226,000 km (177,500 mean)
                         width: 97000,
-                        color: 0x3E3A2C
+                        color: 0x242218
                     },
                 ],
                 moons: [
@@ -949,11 +949,12 @@ define(function() {
                 },
             ],
             secondary: [],
-            count: 800, // true number is estimated in the billions within the main astroid belt
-            distanceFromParent: 4139.1 * orbitScale // 450,000,000 km
+            count: 675, // true number is estimated in the billions within the main astroid belt
+            distanceFromParent: 420000000 * orbitScale // 420,000,000 km
         },
         stars: {
-            count: 250
+            count: 4250,
+            solarSystemRadius: 4503443661 + 10000 * orbitScale,
         }
     };
 

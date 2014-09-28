@@ -16,7 +16,7 @@ define(
          */
         var StarFactory = {
             getPosition: function(i) {
-                var sceneRadius = 40000,
+                var sceneRadius = (4503443661 * (1 * Math.pow(10, -4))) + 400000,
                     isSecond    = i % 2 == 0,
                     isThird     = i % 3 == 0,
                     isFourth    = i % 4 == 0,
@@ -33,20 +33,14 @@ define(
                     var material = new THREE.MeshLambertMaterial({
                                           ambient: 0xffffff,
                                           emissive: 0xffffff,
-                                          side: THREE.DoubleSide,
-                                          transparent: true,
-                                          opacity: 1
+                                          shininess: 100
                                         });
 
-                    var geometry  = new THREE.SphereGeometry(30, 1, 1);
-                    var Star      = new THREE.Mesh(geometry, material);
-                    var Starlight = new THREE.PointLight(0xffffff, 10);
-
-                    var randomizedPosition = StarFactory.getPosition(i);
-
-                    console.log(randomizedPosition);
-
-                    Star.add(Starlight);
+                    var radius             = RandomNumber.getRandomNumberWithinRange(180, 330);
+                        geometry           = new THREE.SphereGeometry(radius, 4, 2),
+                        Star               = new THREE.Mesh(geometry, material),
+                        randomizedPosition = StarFactory.getPosition(i)
+                    ;
 
                     Star.position.set(
                         randomizedPosition.x,
@@ -67,7 +61,6 @@ define(
                     for (var i = 0; i < SolarSystem.stars.count; i++) {
                         promises.push(StarFactory.buildStar(i));
                     }
-
 
                     return $.when.apply($, promises).done();
                 });

@@ -101,7 +101,9 @@ define(
             },
 
             render: function() {
-                Scene.Sun.rotation.y += 0.00029;
+                if (App.config.build.SunFactoryEnabled) {
+                    Scene.Sun.rotation.y += 0.00029;
+                }
 
                 Scene.renderer.render(Scene.scene, Scene.camera);
             },

@@ -5,7 +5,7 @@ require.config({
         // Core
         'requirejs'   : 'libs/requirejs/require',
         'jquery'      : 'libs/jquery/jquery',
-        'threejs'     : 'libs/threejs/three.min',
+        'threejs'     : 'libs/threejs/three.r64.min',
 
         // Three.js Extensions
         'detector'            : 'libs/threejs/extensions/detector',
@@ -64,6 +64,9 @@ require.config({
         'detector': {
             deps: ['threejs']
         },
+        'threeBufferAttribute': {
+            deps: ['threejs']
+        },
         'stats': {
             deps: ['detector']
         },
@@ -71,7 +74,7 @@ require.config({
             deps: ['stats']
         },
         'main': {
-            deps: ['jquery', 'threejs', 'App', 'LoadingPromptController', 'Constants', 'Time', 'Modules', 'OrbitController', 'OrbitFactory', 'UIController']
+            deps: ['App', 'jquery', 'threejs', 'LoadingPromptController', 'Constants', 'Time', 'Modules', 'OrbitController', 'OrbitFactory', 'UIController']
         },
         'Initializer': {
             deps: ['Scene']
