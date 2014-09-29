@@ -44,6 +44,8 @@ define(
 
                     planetDataModule.innerHTML = planetDataHTML;
 
+                    $(planetDataModule).slideDown();
+
                     UIController.selectedPlanet = matchedPlanet.planet;
 
                     var radius = matchedPlanet ? matchedPlanet.planet3d.geometry.radius : Scene.camera.position.x - Scene.Sun.position.x;
@@ -67,6 +69,10 @@ define(
                 $(document).on('click', '.camera-reset', function(e) {
                     e.preventDefault();
                     e.stopImmediatePropagation();
+
+                    var planetDataModule = document.getElementById('planet-data-module');
+
+                    $(planetDataModule).slideUp();
 
                     Scene.setCameraPosition(null, null, Camera.defaultPosition, true);
                     Scene.setCameraFocalPoint(Camera.defaultFocalPoint);

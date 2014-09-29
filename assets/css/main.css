@@ -495,6 +495,7 @@ audio.soundscape {
   box-sizing: border-box;
   top: 15px;
   right: 15px;
+  display: none;
   width: 300px;
   height: 400px; }
   .planet-data-module .data-holder {
