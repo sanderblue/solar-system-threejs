@@ -31,11 +31,18 @@ define(
                     }
 
                     var id = $(this).data('id'),
-                        matchedPlanet = UIController.findPlanet(id)
+                        matchedPlanet = UIController.findPlanet(id),
+                        planetDataModule = document.getElementById('planet-data-module')
                     ;
 
                     $(planetSelector).removeClass('active');
                     $(this).addClass('active');
+
+                    console.log('MATCHED', matchedPlanet.planet);
+
+                    var planetDataHTML = PlanetDataModule.getRenderedTemplate('planet', matchedPlanet.planet.uiData);
+
+                    planetDataModule.innerHTML = planetDataHTML;
 
                     UIController.selectedPlanet = matchedPlanet.planet;
 

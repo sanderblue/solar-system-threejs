@@ -1,0 +1,40 @@
+$module_bg_color: rgba(90, 90, 90, 0.2);
+$module_bg_color_active: rgba(90, 90, 90, 0.25);
+
+.planet-data-module {
+    color: $base_font_color;
+    background: $module_bg_color;
+    position: absolute;
+    box-sizing: border-box;
+    top: 15px;
+    right: 15px;
+
+    width: 300px; // for initial styling only
+    height: 400px; // for initial styling only
+
+    .data-holder {
+        padding: 15px;
+    }
+
+    .data-header {
+        @include font-size(20px);
+        @include font-bold();
+        box-sizing: border-box;
+        padding-bottom: 4px;
+        margin-bottom: 6px;
+        border-bottom: 1px solid $blue;
+    }
+
+    .data-row {
+        box-sizing: border-box;
+        padding: 3px 0;
+    }
+
+    .left-side,
+    .right-side {
+        box-sizing: border-box;
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+    }
+}

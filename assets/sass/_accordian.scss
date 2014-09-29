@@ -8,7 +8,6 @@ $accordian_border_active: 1px solid $blue;
 .accordian {
     @include font-18();
     @include box-sizing(border-box);
-    padding: 10px;
     background: transparent;
 
     .accordian-item {

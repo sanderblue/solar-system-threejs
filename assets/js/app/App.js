@@ -9,13 +9,13 @@ define(function() {
             SunFactoryEnabled: true,
             PlanetFactoryEnabled: true,
             MoonFactoryEnabled: true,
-            AsteroidBeltFactoryEnabled: false,
+            AsteroidBeltFactoryEnabled: true,
             RingFactoryEnabled: true,
             OrbitFactoryEnabled: true,
             SolarSystemFactoryEnabled: true,
-            StarFactoryEnabled: false,
+            StarFactoryEnabled: true,
             UIonly: false,
-            AudioEnabled: false
+            AudioEnabled: true
         },
         moonOrbitsEnabled: true,
         logger: {

@@ -196,7 +196,6 @@ ul {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 10px;
   background: transparent; }
   .accordian .accordian-item {
     font-family: 'Rajdhani-Semibold', sans-serif;
@@ -488,3 +487,34 @@ audio.soundscape {
   margin-top: 4px; }
   .camera-reset:hover {
     cursor: pointer; }
+
+.planet-data-module {
+  color: #f0f0f0;
+  background: rgba(90, 90, 90, 0.2);
+  position: absolute;
+  box-sizing: border-box;
+  top: 15px;
+  right: 15px;
+  width: 300px;
+  height: 400px; }
+  .planet-data-module .data-holder {
+    padding: 15px; }
+  .planet-data-module .data-header {
+    font-size: 20px;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Rajdhani-Bold', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #64a3af; }
+  .planet-data-module .data-row {
+    box-sizing: border-box;
+    padding: 3px 0; }
+  .planet-data-module .left-side,
+  .planet-data-module .right-side {
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    width: 50%; }
