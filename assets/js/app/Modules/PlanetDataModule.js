@@ -24,8 +24,6 @@ define(['twigjs'], function(Twig) {
                 throw new InvalidArugmentException(arguments[i], method);
             }
 
-            console.log('GET TEMPLATE: ', id, data);
-
             return Twig.twig({ ref: id }).render({ 'data': data });
         },
 

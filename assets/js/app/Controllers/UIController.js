@@ -38,13 +38,12 @@ define(
                     $(planetSelector).removeClass('active');
                     $(this).addClass('active');
 
-                    console.log('MATCHED', matchedPlanet.planet);
-
                     var planetDataHTML = PlanetDataModule.getRenderedTemplate('planet', matchedPlanet.planet.uiData);
 
-                    planetDataModule.innerHTML = planetDataHTML;
-
-                    $(planetDataModule).slideDown();
+                    $(planetDataModule).fadeOut(200, function() {
+                        planetDataModule.innerHTML = planetDataHTML;
+                        $(planetDataModule).fadeIn(200);
+                    });
 
                     UIController.selectedPlanet = matchedPlanet.planet;
 

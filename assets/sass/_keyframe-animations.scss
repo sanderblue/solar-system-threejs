@@ -1,22 +1,29 @@
-@mixin keyframes($name) {
-    @-webkit-keyframes $name {
-      0%   { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    @-moz-keyframes $name {
-      0%   { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    @-o-keyframes $name {
-      0%   { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    @keyframes $name {
-      0%   { opacity: 0; }
-      100% { opacity: 1; }
-    }
+/**
+ * Definitions
+ */
+@-webkit-keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 
+/**
+ * Mixins
+ */
+@mixin keyframe-animation($name, $duration, $timingFunction) {
+    -webkit-animation: $name $duration $timingFunction; /* Safari 4+ */
+    -moz-animation:    $name $duration $timingFunction; /* Fx 5+ */
+    -o-animation:      $name $duration $timingFunction; /* Opera 12+ */
+    animation:         $name $duration $timingFunction; /* IE 10+, Fx 29+ */
+}

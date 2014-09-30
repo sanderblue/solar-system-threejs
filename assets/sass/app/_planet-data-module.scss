@@ -11,7 +11,11 @@ $module_bg_color_active: rgba(90, 90, 90, 0.25);
     display: none;
 
     width: 300px; // for initial styling only
-    height: 400px; // for initial styling only
+
+    &.triggered {
+        opacity: 1;
+        @include keyframe-animation(fadeIn, 0.5s, ease-in);
+    }
 
     .data-holder {
         padding: 15px;

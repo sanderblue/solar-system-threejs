@@ -4,6 +4,36 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
+/**
+ * Definitions
+ */
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+/**
+ * Mixins
+ */
 /*
  *  Font Faces
  */
@@ -496,8 +526,17 @@ audio.soundscape {
   top: 15px;
   right: 15px;
   display: none;
-  width: 300px;
-  height: 400px; }
+  width: 300px; }
+  .planet-data-module.triggered {
+    opacity: 1;
+    -webkit-animation: fadeIn 0.5s ease-in;
+    /* Safari 4+ */
+    -moz-animation: fadeIn 0.5s ease-in;
+    /* Fx 5+ */
+    -o-animation: fadeIn 0.5s ease-in;
+    /* Opera 12+ */
+    animation: fadeIn 0.5s ease-in;
+    /* IE 10+, Fx 29+ */ }
   .planet-data-module .data-holder {
     padding: 15px; }
   .planet-data-module .data-header {
