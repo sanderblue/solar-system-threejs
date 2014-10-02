@@ -2,11 +2,12 @@ require.config({
     baseUrl: "assets/js",
     // urlArgs: 'bust=' + new Date().getTime().toString(), // bust cache for development purposes ("bust=v2" for production)
     paths: {
-        // Core
+        // Core Dependencies
         'requirejs' : 'libs/requirejs/require',
         'jquery'    : 'libs/jquery/jquery',
         'threejs'   : 'libs/threejs/three.r64.min',
         'twigjs'    : 'libs/twigjs/twig.min',
+        'tweenjs'   : 'libs/tweenjs/tween.min',
 
         // Three.js Extensions
         'detector'            : 'libs/threejs/extensions/detector',
@@ -76,7 +77,7 @@ require.config({
             deps: ['stats']
         },
         'main': {
-            deps: ['App', 'twigjs', 'jquery', 'threejs', 'LoadingPromptController', 'Constants', 'Time', 'Modules', 'OrbitController', 'OrbitFactory', 'UIController']
+            deps: ['App', 'twigjs', 'tweenjs', 'jquery', 'threejs', 'LoadingPromptController', 'Constants', 'Time', 'Modules', 'OrbitController', 'OrbitFactory', 'UIController']
         },
         'Initializer': {
             deps: ['Scene']
