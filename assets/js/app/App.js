@@ -13,7 +13,7 @@ define(function() {
             RingFactoryEnabled: true,
             OrbitFactoryEnabled: true,
             SolarSystemFactoryEnabled: true,
-            StarFactoryEnabled: false,
+            StarFactoryEnabled: true,
             UIonly: false,
             AudioEnabled: true
         },

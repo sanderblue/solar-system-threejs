@@ -70,7 +70,7 @@ define(
              * @param count   [integer]
              */
             positionAstroid: function(astroid, count) {
-                var amplitude = SolarSystem.asteroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 110; // randomize the amplitudes to spread them out
+                var amplitude = SolarSystem.asteroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 120; // randomize the amplitudes to spread them out
 
                 var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, amplitude)
                     * Math.cos(count + 25 * Math.random()

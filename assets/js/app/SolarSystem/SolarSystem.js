@@ -364,7 +364,7 @@ define(function() {
                     },
                     {
                         key: 'Orbit Duration',
-                        value: '4329 days'
+                        value: '4,329 days'
                     },
                     {
                         key: 'Inclination',
@@ -799,7 +799,7 @@ define(function() {
                     },
                     {
                         key: 'Orbit Duration',
-                        value: '10753 days'
+                        value: '10,753 days'
                     },
                     {
                         key: 'Inclination',
@@ -969,7 +969,7 @@ define(function() {
                     },
                     {
                         key: 'Orbit Duration',
-                        value: '30687.15 days'
+                        value: '30,687 days'
                     },
                     {
                         key: 'Inclination',
@@ -1101,7 +1101,7 @@ define(function() {
                     },
                     {
                         key: 'Orbit Duration',
-                        value: '60025 days'
+                        value: '60,025 days'
                     },
                     {
                         key: 'Inclination',
@@ -1153,7 +1153,7 @@ define(function() {
             distanceFromParent: 400000000 * orbitScale // 400,000,000 km
         },
         stars: {
-            count: 4000,
+            count: 2800,
             solarSystemRadius: 4503443661 + 10000 * orbitScale,
         }
     };
