@@ -21,7 +21,7 @@ define(
              * Gets a generic texture for an astroid.
              */
             getTexture: function() {
-                return new THREE.ImageUtils.loadTexture('../assets/textures/crust_tiny.jpg');
+                return new THREE.ImageUtils.loadTexture('/textures/crust_tiny.jpg');
             },
 
             /**
@@ -48,12 +48,13 @@ define(
 
             /**
              * Builds the random points that create a unique shape for each astroid.
+             * Each asteriod has a max radius of ~13 units.
              */
             buildRandomPoints: function() {
                 var points = [];
 
                 for (var i = 0; i < 6; i ++) {
-                    var radius = (Math.random() * 1250) * SolarSystem.celestialScale + (i + 1);
+                    var radius = (Math.random() * 1150) * SolarSystem.celestialScale + (i + 1);
 
                     points.push(AsteroidBeltFactory.getRandomPointCoordinate(radius));
                 }
@@ -69,7 +70,7 @@ define(
              * @param count   [integer]
              */
             positionAstroid: function(astroid, count) {
-                var amplitude = SolarSystem.asteroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 160; // randomize the amplitudes to spread them out
+                var amplitude = SolarSystem.asteroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 110; // randomize the amplitudes to spread them out
 
                 var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, amplitude)
                     * Math.cos(count + 25 * Math.random()
