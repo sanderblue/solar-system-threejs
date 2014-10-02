@@ -1,6 +1,7 @@
-define(['Camera'], function(Camera) {
+define(['Camera', 'tweenjs'], function(Camera) {
 
     window.focalPoint = Camera.defaultFocalPoint;
+    window.focalPointObject = null;
 
     /**
      * Scene
@@ -18,7 +19,7 @@ define(['Camera'], function(Camera) {
         scene: null,
         camera: null,
         brightness: 0.3,
-        currentRadian: 0.0174532925 * 360,
+        currentRadian: 0.0174532925 * 200,
         perspective: Camera.perspective,
 
         setContainer: function() {
@@ -39,8 +40,8 @@ define(['Camera'], function(Camera) {
                 directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, Scene.brightness)
             ;
 
-            directionalLightFromTop.position.set(0, 1600, 0);
-            directionalLightFromBottom.position.set(0, -1600, 0);
+            directionalLightFromTop.position.set(0, 1700, 0);
+            directionalLightFromBottom.position.set(0, -1700, 0);
 
             Scene.scene.add(directionalLightFromTop);
             Scene.scene.add(directionalLightFromBottom);
@@ -79,15 +80,63 @@ define(['Camera'], function(Camera) {
          * @param reset          [boolean]
          */
         setCameraPosition: function(object3D, parentObject3D, vector3, reset, zAxisUp) {
-            if (object3D && parentObject3D) {
-                Scene.camera.position.x = parentObject3D.geometry.radius * 6; // zoom
-                Scene.camera.position.y = parentObject3D.geometry.radius * 1;
-                Scene.camera.position.z = 2.3;
+            Scene.scene.add(Scene.camera);
 
-                object3D.add(Scene.camera);
+            if (object3D && parentObject3D) {
+                console.log();
+
+                var tween = new TWEEN.Tween(Scene.camera.position).to({
+                    x: parentObject3D.position.x,
+                    y: parentObject3D.position.y,
+                    z: 2.3
+                }, 4000)
+                .easing(TWEEN.Easing.Linear.None)
+                .onUpdate(function () {
+                    // ...
+                })
+                .onComplete(function () {
+
+
+                    Scene.camera.position.x = parentObject3D.geometry.radius * 6; // zoom
+                    Scene.camera.position.y = parentObject3D.geometry.radius * 1;
+                    Scene.camera.position.z = 2.3;
+
+                    object3D.add(Scene.camera);
+                })
+                .start();
+
+                // var tween = new TWEEN.Tween(object3D.position).to({
+                //     x: object3D.position.x,
+                //     y: object3D.position.y,
+                //     z: object3D.position.z
+                // })
+                // .easing(TWEEN.Easing.Linear.None)
+                // .onUpdate(function () {})
+                // .onComplete(function () {
+                //     Scene.setCameraFocalPoint(object3D.position);
+                // })
+                // .start();
+
+                if (zAxisUp) {
+                    Scene.camera.up.set(0, 0, 1);
+                }
+
+                if (!zAxisUp) {
+                    Scene.camera.up.set(0, 1, 0);
+                }
 
                 return;
             }
+
+            // if (object3D && parentObject3D) {
+            //     Scene.camera.position.x = parentObject3D.geometry.radius * 6; // zoom
+            //     Scene.camera.position.y = parentObject3D.geometry.radius * 1;
+            //     Scene.camera.position.z = 2.3;
+
+            //     object3D.add(Scene.camera);
+
+            //     return;
+            // }
 
             if (reset) {
                 Scene.scene.add(Scene.camera);

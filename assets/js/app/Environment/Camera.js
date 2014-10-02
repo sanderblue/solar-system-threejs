@@ -11,6 +11,7 @@ define(function() {
         position: new THREE.Vector3(0, 0, 0),
         defaultPosition: new THREE.Vector3(0, -85000, 9000),
         defaultFocalPoint: new THREE.Vector3(0, 0, 0), // universe center
+        currentFocalPointObject: new THREE.Vector3(0, 0, 0),
         orbitDuration: 360, // equivalent to 360 degrees
         dayOfOrbit: 1,
         perspective: {

@@ -40,11 +40,6 @@ define(
 
                     var planetDataHTML = PlanetDataModule.getRenderedTemplate('planet', matchedPlanet.planet.uiData);
 
-                    // $(planetDataModule).fadeOut(200, function() {
-
-                    //     $(planetDataModule).fadeIn(200);
-                    // });
-
                     planetDataModule.innerHTML = planetDataHTML;
 
                     if (!$(planetDataModule).hasClass('triggered')) {
@@ -62,6 +57,8 @@ define(
                     var radius = matchedPlanet ? matchedPlanet.planet3d.geometry.radius : Scene.camera.position.x - Scene.Sun.position.x;
 
                     cameraZoomControl.val(matchedPlanet.planet.distanceFromParent);
+
+                    window.focalPointObject = matchedPlanet.planet3d;
 
                     Scene.setCameraPosition(matchedPlanet.planet3d.core, matchedPlanet.planet3d, matchedPlanet.planet3d.position, false, false);
                     Scene.setCameraFocalPoint(matchedPlanet.planet3d.position);

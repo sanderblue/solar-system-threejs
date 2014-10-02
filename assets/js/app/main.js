@@ -9,7 +9,8 @@ define(
         'SolarSystem',
         'TimeController',
         'OrbitController',
-        'Modules'
+        'Modules',
+        'tweenjs'
     ],
     function(
         $,
@@ -36,7 +37,11 @@ define(
                 MainController.animatePlanetRotations();
                 // Scene.stats.update();
 
-                Scene.setCameraFocalPoint(window.focalPoint);
+                if (window.focalPointObject) {
+                    Scene.setCameraFocalPoint(window.focalPointObject.position);
+                } else {
+                    Scene.setCameraFocalPoint(window.focalPoint);
+                }
             },
 
             animatePlanetRotations: function() {
@@ -82,7 +87,11 @@ define(
                     );
                 }
 
-                Scene.setCameraFocalPoint(window.focalPoint);
+                // if (window.focalPointObject) {
+                //     Scene.setCameraFocalPoint(window.focalPointObject.position);
+                // } else {
+                //     Scene.setCameraFocalPoint(window.focalPoint);
+                // }
             },
 
             positionMoons: function() {
@@ -104,6 +113,8 @@ define(
                 if (App.config.build.SunFactoryEnabled) {
                     Scene.Sun.rotation.y += 0.00029;
                 }
+
+                TWEEN.update();
 
                 Scene.renderer.render(Scene.scene, Scene.camera);
             },
