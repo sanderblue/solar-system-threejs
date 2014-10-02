@@ -1,5 +1,6 @@
 $module_bg_color: rgba(90, 90, 90, 0.2);
 $module_bg_color_active: rgba(90, 90, 90, 0.25);
+$module_bg_animation_speed: 0.13s;
 
 .planet-data-module {
     color: $base_font_color;
@@ -12,13 +13,18 @@ $module_bg_color_active: rgba(90, 90, 90, 0.25);
 
     width: 300px; // for initial styling only
 
-    &.triggered {
-        opacity: 1;
-        @include keyframe-animation(fadeIn, 0.5s, ease-in);
-    }
+    &.triggered { display: block; }
 
     .data-holder {
         padding: 15px;
+        display: none;
+
+        &.triggered {
+            padding: 15px;
+            display: block;
+            opacity: 1;
+            @include keyframe-animation(fadeIn, $module_bg_animation_speed, ease-in);
+        }
     }
 
     .data-header {
@@ -31,6 +37,8 @@ $module_bg_color_active: rgba(90, 90, 90, 0.25);
     }
 
     .data-row {
+        @include font-semibold();
+        @include font-size(14.5px);
         box-sizing: border-box;
         padding: 3px 0;
     }

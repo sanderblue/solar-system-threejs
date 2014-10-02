@@ -528,17 +528,22 @@ audio.soundscape {
   display: none;
   width: 300px; }
   .planet-data-module.triggered {
-    opacity: 1;
-    -webkit-animation: fadeIn 0.5s ease-in;
-    /* Safari 4+ */
-    -moz-animation: fadeIn 0.5s ease-in;
-    /* Fx 5+ */
-    -o-animation: fadeIn 0.5s ease-in;
-    /* Opera 12+ */
-    animation: fadeIn 0.5s ease-in;
-    /* IE 10+, Fx 29+ */ }
+    display: block; }
   .planet-data-module .data-holder {
-    padding: 15px; }
+    padding: 15px;
+    display: none; }
+    .planet-data-module .data-holder.triggered {
+      padding: 15px;
+      display: block;
+      opacity: 1;
+      -webkit-animation: fadeIn 0.13s ease-in;
+      /* Safari 4+ */
+      -moz-animation: fadeIn 0.13s ease-in;
+      /* Fx 5+ */
+      -o-animation: fadeIn 0.13s ease-in;
+      /* Opera 12+ */
+      animation: fadeIn 0.13s ease-in;
+      /* IE 10+, Fx 29+ */ }
   .planet-data-module .data-header {
     font-size: 20px;
     -webkit-font-smoothing: antialiased;
@@ -550,6 +555,11 @@ audio.soundscape {
     margin-bottom: 6px;
     border-bottom: 1px solid #64a3af; }
   .planet-data-module .data-row {
+    font-family: 'Rajdhani-Semibold', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14.5px;
+    -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     padding: 3px 0; }
   .planet-data-module .left-side,

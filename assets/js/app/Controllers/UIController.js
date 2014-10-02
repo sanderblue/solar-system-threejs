@@ -18,6 +18,7 @@ define(
             initEventListeners: function() {
                 var cameraZoomControl = $('#camera-zoom-control'),
                     planetSelector = '.accordian-subitem-label.planet'
+                    planetDataModule = document.getElementById('planet-data-module')
                 ;
 
                 $(document).on('click', planetSelector, function(e) {
@@ -31,8 +32,7 @@ define(
                     }
 
                     var id = $(this).data('id'),
-                        matchedPlanet = UIController.findPlanet(id),
-                        planetDataModule = document.getElementById('planet-data-module')
+                        matchedPlanet = UIController.findPlanet(id)
                     ;
 
                     $(planetSelector).removeClass('active');
@@ -40,10 +40,22 @@ define(
 
                     var planetDataHTML = PlanetDataModule.getRenderedTemplate('planet', matchedPlanet.planet.uiData);
 
-                    $(planetDataModule).fadeOut(200, function() {
-                        planetDataModule.innerHTML = planetDataHTML;
-                        $(planetDataModule).fadeIn(200);
-                    });
+                    // $(planetDataModule).fadeOut(200, function() {
+
+                    //     $(planetDataModule).fadeIn(200);
+                    // });
+
+                    planetDataModule.innerHTML = planetDataHTML;
+
+                    if (!$(planetDataModule).hasClass('triggered')) {
+                        $(planetDataModule).fadeIn(200).addClass('triggered');
+                    }
+
+                    $(planetDataModule).find('.data-holder').removeClass('triggered');
+
+                    setTimeout(function() {
+                        $(planetDataModule).find('.data-holder').addClass('triggered');
+                    }, 100);
 
                     UIController.selectedPlanet = matchedPlanet.planet;
 
@@ -69,9 +81,11 @@ define(
                     e.preventDefault();
                     e.stopImmediatePropagation();
 
-                    var planetDataModule = document.getElementById('planet-data-module');
+                    $(planetDataModule).fadeOut(150, function() {
+                        $(this).removeClass('triggered').children().remove();
+                    });
 
-                    $(planetDataModule).slideUp();
+                    $(planetSelector).removeClass('active');
 
                     Scene.setCameraPosition(null, null, Camera.defaultPosition, true);
                     Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
