@@ -54,24 +54,24 @@ define(
 
                     UIController.selectedPlanet = matchedPlanet.planet;
 
-                    var radius = matchedPlanet ? matchedPlanet.planet3d.geometry.radius : Scene.camera.position.x - Scene.Sun.position.x;
+                    // var radius = matchedPlanet ? matchedPlanet.planet3d.geometry.radius : Scene.camera.position.x - Scene.Sun.position.x;
 
-                    cameraZoomControl.val(matchedPlanet.planet.distanceFromParent);
+                    // cameraZoomControl.val(matchedPlanet.planet.distanceFromParent);
 
-                    window.focalPointObject = matchedPlanet.planet3d;
+                    window.focalPointObject = Camera;
 
                     Scene.setCameraPosition(matchedPlanet.planet3d.core, matchedPlanet.planet3d, matchedPlanet.planet3d.position, false, false);
-                    Scene.setCameraFocalPoint(matchedPlanet.planet3d.position);
+                    // Scene.setCameraFocalPoint(matchedPlanet.planet3d.position);
 
-                    UIController.resetCameraControls();
+                    // UIController.resetCameraControls();
 
-                    cameraZoomControl
-                        .attr('min', - parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
-                        .attr('max', parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
-                        .attr('value', 0)
-                    ;
+                    // cameraZoomControl
+                    //     .attr('min', - parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
+                    //     .attr('max', parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
+                    //     .attr('value', 0)
+                    // ;
 
-                    UIController.initCameraZoomEventListener(UIController.selectedPlanet);
+                    // UIController.initCameraZoomEventListener(UIController.selectedPlanet);
                 });
 
                 $(document).on('click', '.camera-reset', function(e) {

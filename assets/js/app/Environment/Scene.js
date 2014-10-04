@@ -80,30 +80,10 @@ define(['Camera', 'tweenjs'], function(Camera) {
          * @param reset          [boolean]
          */
         setCameraPosition: function(object3D, parentObject3D, vector3, reset, zAxisUp) {
-            Scene.scene.add(Scene.camera);
+            // Scene.scene.add(Scene.camera);
 
             if (object3D && parentObject3D) {
-                console.log();
-
-                var tween = new TWEEN.Tween(Scene.camera.position).to({
-                    x: parentObject3D.position.x,
-                    y: parentObject3D.position.y,
-                    z: 2.3
-                }, 4000)
-                .easing(TWEEN.Easing.Linear.None)
-                .onUpdate(function () {
-                    // ...
-                })
-                .onComplete(function () {
-
-
-                    Scene.camera.position.x = parentObject3D.geometry.radius * 6; // zoom
-                    Scene.camera.position.y = parentObject3D.geometry.radius * 1;
-                    Scene.camera.position.z = 2.3;
-
-                    object3D.add(Scene.camera);
-                })
-                .start();
+                Scene.tweenCameraPosition(Scene.camera, parentObject3D.position, parentObject3D.position);
 
                 // var tween = new TWEEN.Tween(object3D.position).to({
                 //     x: object3D.position.x,
@@ -117,13 +97,13 @@ define(['Camera', 'tweenjs'], function(Camera) {
                 // })
                 // .start();
 
-                if (zAxisUp) {
-                    Scene.camera.up.set(0, 0, 1);
-                }
+                // if (zAxisUp) {
+                //     Scene.camera.up.set(0, 0, 1);
+                // }
 
-                if (!zAxisUp) {
-                    Scene.camera.up.set(0, 1, 0);
-                }
+                // if (!zAxisUp) {
+                //     Scene.camera.up.set(0, 1, 0);
+                // }
 
                 return;
             }
@@ -153,6 +133,38 @@ define(['Camera', 'tweenjs'], function(Camera) {
             Scene.camera.position.y = vector3.y;
             Scene.camera.position.x = vector3.x;
             Scene.camera.position.z = vector3.z;
+        },
+
+        tweenCameraPosition: function(camera, position, target) {
+            // System.log([camera, position, target], true);
+            // alert('k');
+
+            var cameraTween = new TWEEN.Tween(camera.position).to({
+                    x: position.x,
+                    y: position.y,
+                    z: position.z}, 6000)
+                .easing(TWEEN.Easing.Linear.None)
+                .onUpdate(function() {
+                    Scene.setCameraFocalPoint(target);
+                })
+                .onComplete(function() {
+                     console.log('FCUK', target);
+                    Scene.setCameraFocalPoint(target);
+                })
+                .start()
+            ;
+
+            var targetTween = new TWEEN.Tween(target).to({
+                    x: target.x,
+                    y: target.y,
+                    z: target.z}, 6000)
+                .easing(TWEEN.Easing.Linear.None)
+                .onUpdate(function() {
+
+                })
+                .onComplete()
+                .start()
+            ;
         },
 
         /**
