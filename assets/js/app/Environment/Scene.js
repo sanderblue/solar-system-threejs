@@ -83,7 +83,7 @@ define(['Camera', 'tweenjs'], function(Camera) {
             // Scene.scene.add(Scene.camera);
 
             if (object3D && parentObject3D) {
-                Scene.tweenCameraPosition(Scene.camera, parentObject3D.position, parentObject3D.position);
+                Scene.tweenCameraPosition(Scene.camera, object3D.position, object3D.position);
 
                 // var tween = new TWEEN.Tween(object3D.position).to({
                 //     x: object3D.position.x,
