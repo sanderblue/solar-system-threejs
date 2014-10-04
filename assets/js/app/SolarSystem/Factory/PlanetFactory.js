@@ -172,7 +172,7 @@ define(
 
                     // We need to flip the planet's axis so the text renders as a vertical canvas
                     // thisPlanet.rotation.x = planet.axialTilt;
-                    // thisPlanet.rotation.x = Math.PI / 2;
+                    thisPlanet.rotation.x = Math.PI / 2;
                     thisPlanet.name       = planet.name;
 
                     var core = PlanetFactory.getPlanetCore(thisPlanet, coreMaterial);

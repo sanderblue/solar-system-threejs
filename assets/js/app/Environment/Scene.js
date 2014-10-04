@@ -119,8 +119,8 @@ define(['Camera', 'tweenjs'], function(Camera) {
             // alert('k');
 
             var cameraTween = new TWEEN.Tween(camera.position).to({
-                    x: position.x,
-                    y: position.y,
+                    x: position.x + 400,
+                    y: position.y + 400,
                     z: position.z}, 6000)
                 .easing(TWEEN.Easing.Linear.None)
                 .onUpdate(function() {
