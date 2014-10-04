@@ -84,27 +84,6 @@ define(['Camera', 'tweenjs'], function(Camera) {
 
             if (object3D && parentObject3D) {
                 Scene.tweenCameraPosition(Scene.camera, object3D.position, object3D.position);
-
-                // var tween = new TWEEN.Tween(object3D.position).to({
-                //     x: object3D.position.x,
-                //     y: object3D.position.y,
-                //     z: object3D.position.z
-                // })
-                // .easing(TWEEN.Easing.Linear.None)
-                // .onUpdate(function () {})
-                // .onComplete(function () {
-                //     Scene.setCameraFocalPoint(object3D.position);
-                // })
-                // .start();
-
-                // if (zAxisUp) {
-                //     Scene.camera.up.set(0, 0, 1);
-                // }
-
-                // if (!zAxisUp) {
-                //     Scene.camera.up.set(0, 1, 0);
-                // }
-
                 return;
             }
 
@@ -147,8 +126,7 @@ define(['Camera', 'tweenjs'], function(Camera) {
                 .onUpdate(function() {
                     Scene.setCameraFocalPoint(target);
                 })
-                .onComplete(function() {
-                     console.log('FCUK', target);
+                .onComplete(function(a) {
                     Scene.setCameraFocalPoint(target);
                 })
                 .start()
@@ -160,9 +138,11 @@ define(['Camera', 'tweenjs'], function(Camera) {
                     z: target.z}, 6000)
                 .easing(TWEEN.Easing.Linear.None)
                 .onUpdate(function() {
-
+                    Scene.setCameraFocalPoint(target);
                 })
-                .onComplete()
+                .onComplete(function() {
+                    Scene.setCameraFocalPoint(target);
+                })
                 .start()
             ;
         },

@@ -25,6 +25,8 @@ define(
                     e.preventDefault();
                     e.stopImmediatePropagation();
 
+                    TimeController.stop();
+
                     var isActive = $(this).hasClass('active');
 
                     if (isActive) {
