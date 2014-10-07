@@ -37,11 +37,11 @@ define(
                 MainController.animatePlanetRotations();
                 // Scene.stats.update();
 
-                // if (window.focalPointObject) {
-                //     Scene.setCameraFocalPoint(window.focalPointObject.position);
-                // } else {
-                //     Scene.setCameraFocalPoint(window.focalPoint);
-                // }
+                if (window.focalPointObject) {
+                    Scene.setCameraFocalPoint(window.focalPointObject.position);
+                } else {
+                    Scene.setCameraFocalPoint(window.focalPoint);
+                }
             },
 
             animatePlanetRotations: function() {

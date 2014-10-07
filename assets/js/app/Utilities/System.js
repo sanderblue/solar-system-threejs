@@ -12,7 +12,7 @@ define(function() {
          * @param force [boolean]
          */
         log: function(args, split, force) {
-            if (typeof console == 'undefined' || !!(window.console && window.console.log)) {
+            if (typeof console === 'undefined' || (!window.console && !window.console.log)) {
                 window.console = {};
                 window.console.log = function() {};
             }
@@ -21,7 +21,7 @@ define(function() {
                 return;
             }
 
-            if (typeof split !== 'boolean') {
+            if (split && typeof split !== 'boolean') {
                 console.error('Argument 2 of method log() must be an instance of Boolean.');
 
                 return;

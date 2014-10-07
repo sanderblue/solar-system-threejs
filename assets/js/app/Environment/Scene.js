@@ -1,4 +1,4 @@
-define(['Camera', 'tweenjs'], function(Camera) {
+define(['Camera', 'TimeController', 'tweenjs'], function(Camera, TimeController) {
 
     window.focalPoint = Camera.defaultFocalPoint;
     window.focalPointObject = null;
@@ -83,7 +83,13 @@ define(['Camera', 'tweenjs'], function(Camera) {
             // Scene.scene.add(Scene.camera);
 
             if (object3D && parentObject3D) {
-                Scene.tweenCameraPosition(Scene.camera, object3D.position, object3D.position);
+                Scene.tweenCameraPosition(
+                    Scene.camera,
+                    parentObject3D.position,
+                    parentObject3D.position,
+                    parentObject3D
+                );
+
                 return;
             }
 
@@ -114,9 +120,9 @@ define(['Camera', 'tweenjs'], function(Camera) {
             Scene.camera.position.z = vector3.z;
         },
 
-        tweenCameraPosition: function(camera, position, target) {
-            // System.log([camera, position, target], true);
-            // alert('k');
+        tweenCameraPosition: function(camera, position, target, object3D) {
+            Scene.scene.add(camera);
+            TimeController.stop();
 
             var cameraTween = new TWEEN.Tween(camera.position).to({
                     x: position.x + 400,
@@ -127,7 +133,15 @@ define(['Camera', 'tweenjs'], function(Camera) {
                     Scene.setCameraFocalPoint(target);
                 })
                 .onComplete(function(a) {
-                    Scene.setCameraFocalPoint(target);
+                    console.log(object3D.geometry);
+
+                    camera.position.x = object3D.geometry.radius * 6; // zoom
+                    camera.position.y = object3D.geometry.radius * 1;
+                    camera.position.z = 2.3;
+
+                    object3D.add(camera);
+
+                    Scene.setCameraFocalPoint(object3D.position);
                 })
                 .start()
             ;
