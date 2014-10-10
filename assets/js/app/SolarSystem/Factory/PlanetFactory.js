@@ -165,7 +165,7 @@ define(
                                         1,
                                         1
                                     ),
-                                    planetMaterial
+                                    new THREE.Material()
                                 );
 
                     // orbitCentroid.rotation.y = planet.inclination;
@@ -192,8 +192,8 @@ define(
                         thisPlanet.add(cloudCentroid);
                     }
 
-                    $.when(PlanetFactory.addMoons(planet, thisPlanet)).done(function() {
-                        $.when(RingFactory.buildRings(thisPlanet, planet)).done(function(response) {
+                    PlanetFactory.addMoons(planet, thisPlanet).done(function() {
+                        RingFactory.buildRings(thisPlanet, planet).done(function(response) {
                             var count = new Date().getDOYwithTimeAsDecimal() + TimeController.getTime();
 
                             var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, planet.distanceFromParent)
