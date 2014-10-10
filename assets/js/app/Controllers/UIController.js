@@ -38,19 +38,19 @@ define(
                     $(planetSelector).removeClass('active');
                     $(this).addClass('active');
 
-                    var planetDataHTML = PlanetDataModule.getRenderedTemplate('planet', matchedPlanet.planet.uiData);
+                    // var planetDataHTML = PlanetDataModule.getRenderedTemplate('planet', matchedPlanet.planet.uiData);
 
-                    planetDataModule.innerHTML = planetDataHTML;
+                    // planetDataModule.innerHTML = planetDataHTML;
 
-                    if (!$(planetDataModule).hasClass('triggered')) {
-                        $(planetDataModule).fadeIn(200).addClass('triggered');
-                    }
+                    // if (!$(planetDataModule).hasClass('triggered')) {
+                    //     $(planetDataModule).fadeIn(200).addClass('triggered');
+                    // }
 
-                    $(planetDataModule).find('.data-holder').removeClass('triggered');
+                    // $(planetDataModule).find('.data-holder').removeClass('triggered');
 
-                    setTimeout(function() {
-                        $(planetDataModule).find('.data-holder').addClass('triggered');
-                    }, 100);
+                    // setTimeout(function() {
+                    //     $(planetDataModule).find('.data-holder').addClass('triggered');
+                    // }, 100);
 
                     UIController.selectedPlanet = matchedPlanet.planet;
 
@@ -58,9 +58,16 @@ define(
 
                     // cameraZoomControl.val(matchedPlanet.planet.distanceFromParent);
 
-                    window.focalPointObject = Camera;
+                    // window.focalPointObject = Camera;
 
-                    Scene.setCameraPosition(matchedPlanet.planet3d.core, matchedPlanet.planet3d, matchedPlanet.planet3d.position, false, false);
+                    Scene.setCameraPosition(
+                        matchedPlanet.planet3d.core,
+                        matchedPlanet.planet3d,
+                        matchedPlanet.planet3d.position,
+                        false,
+                        false
+                    );
+
                     // Scene.setCameraFocalPoint(matchedPlanet.planet3d.position);
 
                     // UIController.resetCameraControls();
