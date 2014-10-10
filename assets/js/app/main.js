@@ -32,16 +32,18 @@ define(
         var MainController = {
             animate: function() {
                 requestAnimationFrame(MainController.animate);
-
                 MainController.render();
-                MainController.animatePlanetRotations();
+
+                if (!TimeController.isPaused) {
+                    MainController.animatePlanetRotations();
+                }
                 // Scene.stats.update();
 
-                if (window.focalPointObject) {
-                    Scene.setCameraFocalPoint(window.focalPointObject.position);
-                } else {
-                    Scene.setCameraFocalPoint(window.focalPoint);
-                }
+                // if (window.focalPointObject) {
+                //     Scene.setCameraFocalPoint(window.focalPointObject.position);
+                // } else {
+                //     Scene.setCameraFocalPoint(window.focalPoint);
+                // }
             },
 
             animatePlanetRotations: function() {

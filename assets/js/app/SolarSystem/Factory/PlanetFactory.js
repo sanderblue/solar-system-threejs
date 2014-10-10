@@ -168,10 +168,10 @@ define(
                                     planetMaterial
                                 );
 
-                    orbitCentroid.rotation.y = planet.inclination;
+                    // orbitCentroid.rotation.y = planet.inclination;
 
                     // We need to flip the planet's axis so the text renders as a vertical canvas
-                    // thisPlanet.rotation.x = planet.axialTilt;
+                    thisPlanet.rotation.x = planet.axialTilt;
                     thisPlanet.rotation.x = Math.PI / 2;
                     thisPlanet.name       = planet.name;
 
@@ -237,8 +237,8 @@ define(
             },
 
             addPlanet: function(planet, orbitCentroid) {
-                Scene.scene.add(orbitCentroid);
-                orbitCentroid.add(planet);
+                // orbitCentroid.add(planet);
+                Scene.scene.add(planet);
             }
         };
 

@@ -33,18 +33,18 @@ define(
 
                     var sunGeometry = new THREE.SphereGeometry(
                                             SolarSystem.parent.radius,
-                                            120,
+                                            100,
                                             80
                                         );
 
                     var Sun = new THREE.Mesh(sunGeometry, material);
 
-                    var pointLight = new THREE.PointLight(0xffffff, 1.35);
+                    var pointLight = new THREE.PointLight(0xffffff, 1.3);
 
-                    Sun.scale.x = Sun.scale.y = Sun.scale.z = 1;
+                    // Sun.scale.x = Sun.scale.y = Sun.scale.z = 1;
 
                     // Flip axis
-                    Sun.rotation.x = Math.PI / 2;
+                    // Sun.rotation.x = Math.PI / 2;
 
                     Sun.position.set(0, 0, 0);
 

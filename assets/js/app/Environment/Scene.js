@@ -38,6 +38,8 @@ define(
 
             setScene: function() {
                 Scene.scene = new THREE.Scene();
+
+                window.Scene = Scene;
             },
 
             setAxisHelpers: function() {
@@ -117,9 +119,9 @@ define(
             },
 
             tweenCameraPosition: function(camera, target) {
-                if (camera.parent) {
-                    Scene.scene.add(camera);
-                }
+                // if (camera.parent) {
+                //     Scene.scene.add(camera);
+                // }
 
                 TimeController.stop();
 
@@ -133,24 +135,23 @@ define(
                 );
 
                 var cameraTween = new TWEEN.Tween(camera.position).to({
-                        x: target.position.x + 400,
-                        y: target.position.y + 400,
-                        z: target.position.z}, 5000)
+                        x: target.position.x + 200,
+                        y: target.position.y + 200,
+                        z: target.position.z }, 4000)
                     .easing(TWEEN.Easing.Linear.None)
                     .onUpdate(function() {
                         Scene.setCameraFocalPoint(target.position);
-                        camera.updateProjectionMatrix();
                     })
                     .onComplete(function() {
                         console.log('cameraTween complete top: ', camera.position, camera);
 
-                        camera.position.x = target.geometry.radius * 6; // zoom
-                        camera.position.y = target.geometry.radius * 1;
-                        camera.position.z = 4;
+                        // camera.position.x = target.geometry.radius * 6; // zoom
+                        // camera.position.y = target.geometry.radius * 1;
+                        // camera.position.z = 4;
 
-                        target.add(camera);
+                        // target.add(camera);
 
-                        Scene.setCameraFocalPoint(target.position);
+                        // camera.lookAt(target.position);
 
                         console.log('cameraTween complete bottom: ', camera.position, camera);
 
