@@ -143,14 +143,12 @@ define(
                         x: posX,
                         y: posY,
                         z: posZ }, 4000)
-                    .easing(TWEEN.Easing.Linear.None)
+                    .easing(TWEEN.Easing.Cubic.InOut)
                     .onUpdate(function() {
                         Scene.setCameraFocalPoint(target.position);
                     })
                     .onComplete(function() {
                         Scene.setCameraFocalPoint(target.position);
-
-                        console.log('cameraTween complete top: ', camera.position, camera);
                     })
                     .start()
                 ;
