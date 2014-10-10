@@ -134,28 +134,23 @@ define(
                     '\n\n'
                 );
 
+                var posX = target.position.x + target.geometry.radius * 5,
+                    posY = target.position.y,
+                    posZ = target.position.z
+                ;
+
                 var cameraTween = new TWEEN.Tween(camera.position).to({
-                        x: target.position.x + 200,
-                        y: target.position.y + 200,
-                        z: target.position.z }, 4000)
+                        x: posX,
+                        y: posY,
+                        z: posZ }, 4000)
                     .easing(TWEEN.Easing.Linear.None)
                     .onUpdate(function() {
                         Scene.setCameraFocalPoint(target.position);
                     })
                     .onComplete(function() {
+                        Scene.setCameraFocalPoint(target.position);
+
                         console.log('cameraTween complete top: ', camera.position, camera);
-
-                        // camera.position.x = target.geometry.radius * 6; // zoom
-                        // camera.position.y = target.geometry.radius * 1;
-                        // camera.position.z = 4;
-
-                        // target.add(camera);
-
-                        // camera.lookAt(target.position);
-
-                        console.log('cameraTween complete bottom: ', camera.position, camera);
-
-                        alert('pause');
                     })
                     .start()
                 ;
