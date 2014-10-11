@@ -58,7 +58,7 @@ define(
 
                     // cameraZoomControl.val(matchedPlanet.planet.distanceFromParent);
 
-                    // window.focalPointObject = Camera;
+                    window.focalPointObject = matchedPlanet.planet3d;
 
                     Scene.setCameraPosition(
                         matchedPlanet.planet3d.core,
@@ -68,9 +68,7 @@ define(
                         false
                     );
 
-                    // Scene.setCameraFocalPoint(matchedPlanet.planet3d.position);
-
-                    // UIController.resetCameraControls();
+                    UIController.resetCameraControls();
 
                     // cameraZoomControl
                     //     .attr('min', - parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))

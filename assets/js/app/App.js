@@ -12,6 +12,7 @@ define(function() {
             AsteroidBeltFactoryEnabled: true,
             RingFactoryEnabled: true,
             OrbitFactoryEnabled: true,
+            OrbitInclinationsEnabled: false,
             SolarSystemFactoryEnabled: true,
             StarFactoryEnabled: false,
             UIonly: false,

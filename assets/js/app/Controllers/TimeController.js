@@ -17,7 +17,7 @@ define(function() {
         start: function() {
             var TimeController = this;
 
-            TimeController.isPaused = true;
+            TimeController.isPaused = false;
 
             if (!TimeController.interval) {
                 TimeController.offset = Date.now();

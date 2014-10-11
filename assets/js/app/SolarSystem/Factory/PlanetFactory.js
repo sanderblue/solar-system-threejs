@@ -132,7 +132,7 @@ define(
                         });
                     }
 
-                    var widthSegments = planet.radius < 200 ? planet.radius + 30 : 200;
+                    var widthSegments = planet.radius < 200 ? planet.radius + 50 : 200;
 
                     thisPlanet = new THREE.Mesh(
                                 new THREE.SphereGeometry(
@@ -141,7 +141,7 @@ define(
                                         110
                                     ),
                                     planetMaterial
-                                 );
+                                );
 
                     if (planet.name === 'Earth') {
                         var earthClouds   = PlanetFactory.buildEarthClouds(planet),
@@ -165,10 +165,12 @@ define(
                                         1,
                                         1
                                     ),
-                                    new THREE.Material()
+                                    coreMaterial
                                 );
 
-                    // orbitCentroid.rotation.y = planet.inclination;
+                    if (App.config.OrbitInclinationsEnabled) {
+                        orbitCentroid.rotation.y = planet.inclination;
+                    }
 
                     // We need to flip the planet's axis so the text renders as a vertical canvas
                     thisPlanet.rotation.x = planet.axialTilt;
@@ -185,10 +187,9 @@ define(
                             cloudCentroid = new THREE.Object3D()
                         ;
 
-                        cloudCentroid.add(earthClouds);
-
                         thisPlanet.cloudCentroid = cloudCentroid;
 
+                        cloudCentroid.add(earthClouds);
                         thisPlanet.add(cloudCentroid);
                     }
 
@@ -210,20 +211,19 @@ define(
                                             * degreesToRadianRatio
                                         );
 
-                            PlanetFactory.addPlanet(thisPlanet, orbitCentroid);
-
                             thisPlanet.position.set(
                                 parseFloat(posX),
                                 parseFloat(posY),
                                 0
                             );
 
+                            PlanetFactory.addPlanet(thisPlanet, orbitCentroid);
+
                             thisPlanet.parent3d      = thisPlanet;
                             thisPlanet.parentliteral = parent;
                             thisPlanet.objectliteral = planet;
 
                             var endTime = new Date().getTime();
-
                             var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime(startTime, endTime, 'ms') + ' milliseconds';
 
                             System.log(builderStatement);
@@ -237,8 +237,8 @@ define(
             },
 
             addPlanet: function(planet, orbitCentroid) {
-                // orbitCentroid.add(planet);
-                Scene.scene.add(planet);
+                Scene.scene.add(orbitCentroid);
+                orbitCentroid.add(planet);
             }
         };
 
