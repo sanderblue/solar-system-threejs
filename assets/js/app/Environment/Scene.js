@@ -27,7 +27,7 @@ define(
             tilt: 200,
             scene: null,
             camera: null,
-            brightness: 0.3,
+            brightness: 0.2,
             currentRadian: 0.0174532925 * 200,
             perspective: Camera.perspective,
 
@@ -37,6 +37,7 @@ define(
 
             setScene: function() {
                 Scene.scene = new THREE.Scene();
+                Scene.scene.name = 'solarsystem';
 
                 window.Scene = Scene;
             },
@@ -47,12 +48,12 @@ define(
             },
 
             setLights: function() {
-                var directionalLightFromTop    = new THREE.DirectionalLight(0xffffff, Scene.brightness),
-                    directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, Scene.brightness)
+                var directionalLightFromTop    = new THREE.DirectionalLight(0xffffff, Scene.brightness, { target: new THREE.Vector3(0, 0, 0)}),
+                    directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, Scene.brightness, { target: new THREE.Vector3(0, 0, 0)})
                 ;
 
-                directionalLightFromTop.position.set(0, 1700, 0);
-                directionalLightFromBottom.position.set(0, -1700, 0);
+                directionalLightFromTop.position.set(0, 0, 7500);
+                directionalLightFromBottom.position.set(0, 0, -7500);
 
                 Scene.scene.add(directionalLightFromTop);
                 Scene.scene.add(directionalLightFromBottom);
@@ -125,35 +126,88 @@ define(
 
                 var targetObject   = target,
                     targetPosition = target.position,
-                    posX           = targetPosition.x + target.geometry.radius * 5,
+                    posX           = targetPosition.x + target.geometry.radius * 6,
                     posY           = targetPosition.y,
                     posZ           = 0.4 * target.geometry.radius
                 ;
 
-                if (camera.parent) {
+                var point = {
+                    x: posX,
+                    y: posY,
+                    z: posZ
+                };
+
+                if (camera.parent && camera.parent.name !== 'solarsystem') {
                     var globalCameraPosition = camera.parent.position;
 
                     Scene.scene.add(camera);
 
+                    Scene.camera.up.set(0, 0, 1);
+
                     Scene.camera.position.x = globalCameraPosition.x;
                     Scene.camera.position.y = globalCameraPosition.y;
                     Scene.camera.position.z = globalCameraPosition.z;
+
+                    Scene.prepareForTravel(
+                        Scene.camera,
+                        targetObject
+                    )
+                    .done(function() {
+                        Scene.travelToPoint(
+                            point,
+                            Scene.camera,
+                            targetObject,
+                            centroid
+                        );
+                    });
+
+                    return;
                 }
 
+                Scene.travelToPoint(
+                    point,
+                    camera,
+                    targetObject,
+                    centroid
+                );
+            },
+
+            prepareForTravel: function(camera, targetObject) {
+                return $.Deferred(function(promise) {
+                    var cameraTween = new TWEEN.Tween(camera.position).to({
+                            x: camera.position.x,
+                            y: camera.position.y,
+                            z: camera.position.z + 3500 }, 4500)
+                        .easing(TWEEN.Easing.Cubic.InOut)
+                        .onUpdate(function() {
+                            Scene.setCameraFocalPoint(targetObject.position);
+                        })
+                        .onComplete(function() {
+                            Scene.setCameraFocalPoint(targetObject.position);
+
+                            promise.resolve();
+                        })
+                        .start()
+                    ;
+                });
+            },
+
+            travelToPoint: function(point, camera, targetObject, centroid) {
                 var cameraTween = new TWEEN.Tween(camera.position).to({
-                        x: posX,
-                        y: posY,
-                        z: posZ}, 6000)
+                        x: point.x,
+                        y: point.y,
+                        z: point.z}, 6000)
                     .easing(TWEEN.Easing.Cubic.InOut)
                     .onUpdate(function() {
-                        Scene.setCameraFocalPoint(target.position);
+                        Scene.setCameraFocalPoint(targetObject.position);
                     })
                     .onComplete(function() {
+                        Scene.camera.up.set(0, 1, 0);
                         centroid.add(Scene.camera);
                         Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
                         Scene.camera.up.set(0, 1, 0);
 
-                        var newPosX = Math.abs(Scene.camera.position.x - targetPosition.x),
+                        var newPosX = Math.abs(Scene.camera.position.x - targetObject.position.x),
                             newPosY = 0.5 * targetObject.geometry.radius
                         ;
 
