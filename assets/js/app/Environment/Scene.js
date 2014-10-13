@@ -96,7 +96,8 @@ define(
 
                     Scene.tweenCameraPosition(
                         Scene.camera,
-                        parentObject3D
+                        parentObject3D,
+                        object3D
                     );
 
                     return;
@@ -119,21 +120,21 @@ define(
                 Scene.camera.position.z = vector3.z;
             },
 
-            tweenCameraPosition: function(camera, target) {
+            tweenCameraPosition: function(camera, target, centroid) {
                 // if (camera.parent) {
                 //     Scene.scene.add(camera);
                 // }
 
                 TimeController.stop();
 
-                // console.log(
-                //     '\n\nTWEEN',
-                //     '\nCamera Position: ', camera.position,
-                //     '\nTarget Position: ', target.position,
-                //     '\nCamera: ', camera,
-                //     '\nTarget: ', target,
-                //     '\n\n'
-                // );
+                console.log(
+                    '\n\nTWEEN',
+                    // '\nCamera Position: ', camera.position,
+                    // '\nTarget Position: ', target.position,
+                    // '\nCamera: ', camera,
+                    '\nTarget: ', target,
+                    '\n\n'
+                );
 
                 var posX = target.position.x + target.geometry.radius * 5,
                     posY = target.position.y,
@@ -149,23 +150,26 @@ define(
                         Scene.setCameraFocalPoint(target.position);
                     })
                     .onComplete(function() {
-                        Scene.setCameraFocalPoint(target.position);
+                        // TimeController.start();
 
-                        window.focalPointObject = target;
+                        centroid.add(Scene.camera);
+                        Scene.camera.up.set(0, 1, 0);
+                        Scene.setCameraFocalPoint(new THREE.Vector3(0, 0, 0));
 
-                        // camera.position.set(
-                        //     target.geometry.radius * 5,
-                        //     target.geometry.radius * 5,
-                        //     1
-                        // );
-
-                        // target.add(camera);
-
-                        // Scene.camera.up.set(0, 0, 1);
-
-                        console.log('Camera Position: ', camera.position);
+                        Scene.camera.position.x = target.geometry.radius * 6; // zoom
+                        Scene.camera.position.y = target.geometry.radius * 1;
+                        Scene.camera.position.z = 2.3;
 
                         TimeController.start();
+
+                        console.log(
+                            '\n\nTWEEN COMPLETE',
+                            // '\nCamera Position: ', camera.position,
+                            // '\nTarget Position: ', target.position,
+                            // '\nCamera: ', camera,
+                            // '\nTarget: ', target,
+                            '\n\n'
+                        );
                     })
                     .start()
                 ;

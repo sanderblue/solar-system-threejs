@@ -50,7 +50,9 @@ define(
                             );
 
                 moonCentroid.rotation.x = moon.inclination;
+                moonCentroid.name = moon.name + ' Centroid';
 
+                thisMoon.name          = moon.name;
                 thisMoon.parent3d      = planetObj;
                 thisMoon.parentliteral = parent;
                 thisMoon.objectliteral = moon;
