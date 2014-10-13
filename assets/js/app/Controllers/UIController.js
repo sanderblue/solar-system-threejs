@@ -38,27 +38,23 @@ define(
                     $(planetSelector).removeClass('active');
                     $(this).addClass('active');
 
-                    // var planetDataHTML = PlanetDataModule.getRenderedTemplate('planet', matchedPlanet.planet.uiData);
+                    var planetDataHTML = PlanetDataModule.getRenderedTemplate('planet', matchedPlanet.planet.uiData);
 
-                    // planetDataModule.innerHTML = planetDataHTML;
+                    planetDataModule.innerHTML = planetDataHTML;
 
-                    // if (!$(planetDataModule).hasClass('triggered')) {
-                    //     $(planetDataModule).fadeIn(200).addClass('triggered');
-                    // }
+                    if (!$(planetDataModule).hasClass('triggered')) {
+                        $(planetDataModule).fadeIn(200).addClass('triggered');
+                    }
 
-                    // $(planetDataModule).find('.data-holder').removeClass('triggered');
+                    $(planetDataModule).find('.data-holder').removeClass('triggered');
 
-                    // setTimeout(function() {
-                    //     $(planetDataModule).find('.data-holder').addClass('triggered');
-                    // }, 100);
+                    setTimeout(function() {
+                        $(planetDataModule).find('.data-holder').addClass('triggered');
+                    }, 100);
 
                     UIController.selectedPlanet = matchedPlanet.planet;
 
-                    // var radius = matchedPlanet ? matchedPlanet.planet3d.geometry.radius : Scene.camera.position.x - Scene.Sun.position.x;
-
-                    // cameraZoomControl.val(matchedPlanet.planet.distanceFromParent);
-
-                    // window.focalPointObject = matchedPlanet.planet3d;
+                    cameraZoomControl.val(matchedPlanet.planet.distanceFromParent);
 
                     Scene.setCameraPosition(
                         matchedPlanet.planet3d.core,
@@ -68,15 +64,17 @@ define(
                         false
                     );
 
-                    // UIController.resetCameraControls();
+                    UIController.resetCameraControls();
 
-                    // cameraZoomControl
-                    //     .attr('min', - parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
-                    //     .attr('max', parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
-                    //     .attr('value', 0)
-                    // ;
+                    var radius = matchedPlanet ? matchedPlanet.planet3d.geometry.radius : Scene.camera.position.x - Scene.Sun.position.x;
 
-                    // UIController.initCameraZoomEventListener(UIController.selectedPlanet);
+                    cameraZoomControl
+                        .attr('min', - parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
+                        .attr('max', parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
+                        .attr('value', 0)
+                    ;
+
+                    UIController.initCameraZoomEventListener(UIController.selectedPlanet);
                 });
 
                 $(document).on('click', '.camera-reset', function(e) {

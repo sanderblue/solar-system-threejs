@@ -121,55 +121,47 @@ define(
             },
 
             tweenCameraPosition: function(camera, target, centroid) {
-                // if (camera.parent) {
-                //     Scene.scene.add(camera);
-                // }
-
                 TimeController.stop();
 
-                console.log(
-                    '\n\nTWEEN',
-                    // '\nCamera Position: ', camera.position,
-                    // '\nTarget Position: ', target.position,
-                    // '\nCamera: ', camera,
-                    '\nTarget: ', target,
-                    '\n\n'
-                );
-
-                var posX = target.position.x + target.geometry.radius * 5,
-                    posY = target.position.y,
-                    posZ = target.position.z
+                var targetObject   = target,
+                    targetPosition = target.position,
+                    posX           = targetPosition.x + target.geometry.radius * 5,
+                    posY           = targetPosition.y,
+                    posZ           = 0.4 * target.geometry.radius
                 ;
+
+                if (camera.parent) {
+                    var globalCameraPosition = camera.parent.position;
+
+                    Scene.scene.add(camera);
+
+                    Scene.camera.position.x = globalCameraPosition.x;
+                    Scene.camera.position.y = globalCameraPosition.y;
+                    Scene.camera.position.z = globalCameraPosition.z;
+                }
 
                 var cameraTween = new TWEEN.Tween(camera.position).to({
                         x: posX,
                         y: posY,
-                        z: posZ + 20 }, 5000)
+                        z: posZ}, 6000)
                     .easing(TWEEN.Easing.Cubic.InOut)
                     .onUpdate(function() {
                         Scene.setCameraFocalPoint(target.position);
                     })
                     .onComplete(function() {
-                        // TimeController.start();
-
                         centroid.add(Scene.camera);
+                        Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
                         Scene.camera.up.set(0, 1, 0);
-                        Scene.setCameraFocalPoint(new THREE.Vector3(0, 0, 0));
 
-                        Scene.camera.position.x = target.geometry.radius * 6; // zoom
-                        Scene.camera.position.y = target.geometry.radius * 1;
-                        Scene.camera.position.z = 2.3;
+                        var newPosX = Math.abs(Scene.camera.position.x - targetPosition.x),
+                            newPosY = 0.5 * targetObject.geometry.radius
+                        ;
+
+                        Scene.camera.position.x = newPosX; // zoom
+                        Scene.camera.position.y = newPosY; // vertical positioning of the camera
+                        Scene.camera.position.z = 0;       // this is really the y-axis in terms of plan view
 
                         TimeController.start();
-
-                        console.log(
-                            '\n\nTWEEN COMPLETE',
-                            // '\nCamera Position: ', camera.position,
-                            // '\nTarget Position: ', target.position,
-                            // '\nCamera: ', camera,
-                            // '\nTarget: ', target,
-                            '\n\n'
-                        );
                     })
                     .start()
                 ;
