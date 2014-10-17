@@ -54,7 +54,7 @@ define(
                 var points = [];
 
                 for (var i = 0; i < 6; i ++) {
-                    var radius = (Math.random() * 1150) * SolarSystem.celestialScale + (i + 1);
+                    var radius = (Math.random() * 1150) * SolarSystem.celestialScale + (i + 1.5);
 
                     points.push(AsteroidBeltFactory.getRandomPointCoordinate(radius));
                 }
@@ -70,7 +70,7 @@ define(
              * @param count   [integer]
              */
             positionAstroid: function(astroid, count) {
-                var amplitude = SolarSystem.asteroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 120; // randomize the amplitudes to spread them out
+                var amplitude = SolarSystem.asteroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 115; // randomize the amplitudes to spread them out
 
                 var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, amplitude)
                     * Math.cos(count + 25 * Math.random()
@@ -111,14 +111,25 @@ define(
                     ];
 
                     // Random convex mesh to represent an irregular, rock-like shape based on random points within a sphere where radius = n(random)
-                    var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), materials);
+                    var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), materials),
+                        centroid = new THREE.Object3D(),
+                        isOdd = index % 2,
+                        offset = isOdd ? -1 : 1
+                    ;
+
+                    // Create a random orbit inclination to give the Asteroid Belt some "depth"
+                    var orbitInclination = (Math.random() * RandomNumber.getRandomNumberWithinRange(1, 3) / 180 * Math.PI * 0.375) * offset;
+
+                    centroid.rotation.x = orbitInclination;
+
+                    centroid.add(object);
 
                     AsteroidBeltFactory.positionAstroid(object, index);
-                    AsteroidBeltFactory.addAstroid(object);
+                    AsteroidBeltFactory.addAstroid(centroid);
 
                     Scene.astroids.push(object);
 
-                    promise.resolve(object);
+                    promise.resolve();
                 });
             },
 
