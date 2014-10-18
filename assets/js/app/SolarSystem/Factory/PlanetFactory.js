@@ -108,11 +108,6 @@ define(
                     // Create our orbit line geometry first
                     OrbitFactory.build(planet);
 
-                    var thisPlanet = new THREE.Object3D({
-                                        id: planet.id,
-                                        name: planet.name
-                                    });
-
                     var texture     = PlanetFactory.getTexture(planet),
                         coreTexture = PlanetFactory.getCoreTexture()
                     ;
@@ -134,14 +129,14 @@ define(
 
                     var widthSegments = planet.radius < 200 ? planet.radius + 50 : 200;
 
-                    thisPlanet = new THREE.Mesh(
-                                new THREE.SphereGeometry(
-                                        planet.radius,
-                                        widthSegments,
-                                        110
-                                    ),
-                                    planetMaterial
-                                );
+                    var thisPlanet = new THREE.Mesh(
+                                        new THREE.SphereGeometry(
+                                                planet.radius,
+                                                widthSegments,
+                                                110
+                                            ),
+                                            planetMaterial
+                                        );
 
                     if (planet.name === 'Earth') {
                         var earthClouds   = PlanetFactory.buildEarthClouds(planet),
@@ -173,7 +168,7 @@ define(
                     }
 
                     // We need to flip the planet's axis so the text renders as a vertical canvas
-                    thisPlanet.rotation.x = planet.axialTilt;
+                    // thisPlanet.rotation.x = planet.axialTilt;
                     thisPlanet.rotation.x = Math.PI / 2;
                     thisPlanet.name       = planet.name;
 

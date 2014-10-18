@@ -1153,7 +1153,7 @@ define(function() {
             distanceFromParent: 400000000 * orbitScale // 400,000,000 km
         },
         stars: {
-            count: 2800,
+            count: 2200,
             solarSystemRadius: 4503443661 + 10000 * orbitScale,
         }
     };
