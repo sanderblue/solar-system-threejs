@@ -126,7 +126,8 @@ define(
 
                 var targetObject   = target,
                     targetPosition = target.position,
-                    posX           = targetPosition.x + target.geometry.radius * 6,
+                    offset         = target.geometry.radius * 6,
+                    posX           = targetPosition.x + offset,
                     posY           = targetPosition.y,
                     posZ           = 0.4 * target.geometry.radius
                 ;
@@ -137,8 +138,20 @@ define(
                     z: posZ
                 };
 
+                console.log('Position', camera.parent);
+
                 if (camera.parent && camera.parent.name !== 'solarsystem') {
                     var globalCameraPosition = camera.parent.position;
+
+                    console.log(camera.parent.children[camera.parent.children.length - 1]);
+
+                    if (camera.parent.children[camera.parent.children.length - 1].distanceFromParent < target.objectliteral.distanceFromParent) {
+                        point = {
+                            x: posX - (offset * 2),
+                            y: posY,
+                            z: posZ
+                        };
+                    }
 
                     Scene.scene.add(camera);
 
