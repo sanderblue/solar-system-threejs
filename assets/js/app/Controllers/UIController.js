@@ -64,13 +64,15 @@ define(
 
                     UIController.resetCameraControls();
 
-                    var radius = matchedPlanet ? matchedPlanet.planet3d.geometry.radius : Scene.camera.position.x - Scene.Sun.position.x;
+                    var radius = matchedPlanet ? matchedPlanet.planet3d.geometry.radius : Scene.camera.position.x - Scene.Sun.position.x,
+                        distance = parseInt(radius * 6)
+                    ;
 
-                    cameraZoomControl.setAttribute('min', 0);
-                    cameraZoomControl.setAttribute('max', parseInt(matchedPlanet.planet3d.geometry.radius * 2.7));
-                    cameraZoomControl.value = matchedPlanet.planet.distanceFromParent;
+                    cameraZoomControl.setAttribute('min', parseInt(radius));
+                    cameraZoomControl.setAttribute('max', distance * 10);
+                    cameraZoomControl.value = distance;
 
-                    UIController.initCameraZoomEventListener(UIController.selectedPlanet);
+                    UIController.initCameraZoomEventListener(cameraZoomControl.value);
                 });
 
                 $(document).on('click', '.camera-reset', function(e) {
@@ -196,30 +198,17 @@ define(
                 });
             },
 
-            initCameraZoomEventListener: function(selectedPlanet) {
-                var value = selectedPlanet ? Scene.camera.position.x : Camera.defaultPosition.y;
-
-                $('#camera-zoom-control').val(value);
-
-                $('#camera-zoom-control').on('change', function() {
-                    if (parseFloat(this.value) > parseFloat(value)) {
-                        Camera.position.x = parseFloat(Scene.camera.position.x) + (parseFloat(this.value));
-                        Camera.position.z = parseFloat(Scene.camera.position.z) + (parseFloat(this.value));
-                    }
-
-                    if (parseFloat(this.value) < parseFloat(value)) {
-                        Camera.position.x = parseFloat(Scene.camera.position.x) - Math.abs((parseFloat(this.value) - parseFloat(value)));
-                        Camera.position.z = parseFloat(Scene.camera.position.z) - Math.abs((parseFloat(this.value) - parseFloat(value)));
-                    }
-
-                    value = this.value;
+            initCameraZoomEventListener: function(val) {
+                $('#camera-zoom-control').on('change input', function() {
+                    Camera.position.x = this.value;
+                    Camera.position.z = this.value;
 
                     var posX = Camera.position.x,
                         posY = Camera.position.y,
                         posZ = Camera.position.z
                     ;
 
-                    if (!UIController.selectedPlanet) {
+                    if (!val) {
                         posX = Camera.position.y;
                         posY = Camera.position.x;
                         posZ = Camera.defaultPosition.z;
@@ -318,8 +307,6 @@ define(
                     UIController.initCameraZoomEventListener();
                     UIController.initResetView();
                 });
-
-                // $('body').append('<div id ="my_music"> <embed src="http://www.example.com/yourmusicfile.mp3" width="70" height="18" autostart="false" loop="true"> </div>')
 
                 var accordian = new Accordian();
             }

@@ -1149,12 +1149,12 @@ define(function() {
                 },
             ],
             secondary: [],
-            count: 450, // true number is estimated in the billions within the main astroid belt
+            count: 400, // true number is estimated in the billions within the main astroid belt
             distanceFromParent: 400000000 * orbitScale // 400,000,000 km
         },
         stars: {
-            count: 2200,
-            solarSystemRadius: 4503443661 + 10000 * orbitScale,
+            count: 1500,
+            solarSystemRadius: 4503443661 + 9000 * orbitScale,
         }
     };
 
