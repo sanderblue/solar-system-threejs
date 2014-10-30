@@ -16,9 +16,9 @@ define(
             currentCameraPosition: null,
 
             initEventListeners: function() {
-                var cameraZoomControl = $('#camera-zoom-control'),
-                    planetSelector = '.accordian-subitem-label.planet'
-                    planetDataModule = document.getElementById('planet-data-module')
+                var planetSelector = '.accordian-subitem-label.planet',
+                    planetDataModule = document.getElementById('planet-data-module'),
+                    cameraZoomControl = document.getElementById('camera-zoom-control')
                 ;
 
                 $(document).on('click', planetSelector, function(e) {
@@ -54,8 +54,6 @@ define(
 
                     UIController.selectedPlanet = matchedPlanet.planet;
 
-                    cameraZoomControl.val(matchedPlanet.planet.distanceFromParent);
-
                     Scene.setCameraPosition(
                         matchedPlanet.planet3d.core,
                         matchedPlanet.planet3d,
@@ -68,11 +66,9 @@ define(
 
                     var radius = matchedPlanet ? matchedPlanet.planet3d.geometry.radius : Scene.camera.position.x - Scene.Sun.position.x;
 
-                    cameraZoomControl
-                        .attr('min', - parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
-                        .attr('max', parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
-                        .attr('value', 0)
-                    ;
+                    cameraZoomControl.setAttribute('min', 0);
+                    cameraZoomControl.setAttribute('max', parseInt(matchedPlanet.planet3d.geometry.radius * 2.7));
+                    cameraZoomControl.value = matchedPlanet.planet.distanceFromParent;
 
                     UIController.initCameraZoomEventListener(UIController.selectedPlanet);
                 });

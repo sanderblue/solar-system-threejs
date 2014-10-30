@@ -58,7 +58,7 @@ define(function() {
                     },
                     {
                         key: 'Axial Tilt',
-                        value: '26.73'
+                        value: '26.73°'
                     },
                     {
                         key: 'Semi-major Axis',
@@ -70,7 +70,7 @@ define(function() {
                     },
                     {
                         key: 'Inclination',
-                        value: '6.34'
+                        value: '6.34°'
                     }
                 ]
             },
@@ -98,7 +98,7 @@ define(function() {
                     },
                     {
                         key: 'Axial Tilt',
-                        value: '177.36'
+                        value: '177.36°'
                     },
                     {
                         key: 'Semi-major Axis',
@@ -110,7 +110,7 @@ define(function() {
                     },
                     {
                         key: 'Inclination',
-                        value: '2.19'
+                        value: '2.19°'
                     }
                 ]
             },
@@ -146,7 +146,7 @@ define(function() {
                     },
                     {
                         key: 'Axial Tilt',
-                        value: '23.5'
+                        value: '23.5°'
                     },
                     {
                         key: 'Semi-major Axis',
@@ -158,7 +158,7 @@ define(function() {
                     },
                     {
                         key: 'Inclination',
-                        value: '1.579'
+                        value: '1.579°'
                     }
                 ]
             },
@@ -202,7 +202,7 @@ define(function() {
                     },
                     {
                         key: 'Axial Tilt',
-                        value: '25.19'
+                        value: '25.19°'
                     },
                     {
                         key: 'Semi-major Axis',
@@ -214,7 +214,7 @@ define(function() {
                     },
                     {
                         key: 'Inclination',
-                        value: '1.67'
+                        value: '1.67°'
                     }
                 ]
             },
@@ -356,7 +356,7 @@ define(function() {
                     },
                     {
                         key: 'Axial Tilt',
-                        value: '3.13'
+                        value: '3.13°'
                     },
                     {
                         key: 'Semi-major Axis',
@@ -368,7 +368,7 @@ define(function() {
                     },
                     {
                         key: 'Inclination',
-                        value: '1.305'
+                        value: '1.305°'
                     }
                 ]
             },
@@ -791,7 +791,7 @@ define(function() {
                     },
                     {
                         key: 'Axial Tilt',
-                        value: '3.13'
+                        value: '3.13°'
                     },
                     {
                         key: 'Semi-major Axis',
@@ -803,7 +803,7 @@ define(function() {
                     },
                     {
                         key: 'Inclination',
-                        value: '2.48524'
+                        value: '2.48524°'
                     }
                 ]
             },
@@ -961,7 +961,7 @@ define(function() {
                     },
                     {
                         key: 'Axial Tilt',
-                        value: '97.77'
+                        value: '97.77°'
                     },
                     {
                         key: 'Semi-major Axis',
@@ -973,7 +973,7 @@ define(function() {
                     },
                     {
                         key: 'Inclination',
-                        value: '1.02'
+                        value: '1.02°'
                     }
                 ]
             },
@@ -1093,7 +1093,7 @@ define(function() {
                     },
                     {
                         key: 'Axial Tilt',
-                        value: '28.32'
+                        value: '28.32°'
                     },
                     {
                         key: 'Semi-major Axis',
@@ -1105,7 +1105,7 @@ define(function() {
                     },
                     {
                         key: 'Inclination',
-                        value: '1.768'
+                        value: '1.768°'
                     }
                 ]
             }

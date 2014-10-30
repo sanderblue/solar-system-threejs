@@ -138,12 +138,8 @@ define(
                     z: posZ
                 };
 
-                console.log('Position', camera.parent);
-
                 if (camera.parent && camera.parent.name !== 'solarsystem') {
                     var globalCameraPosition = camera.parent.position;
-
-                    console.log(camera.parent.children[camera.parent.children.length - 1]);
 
                     if (camera.parent.children[camera.parent.children.length - 1].distanceFromParent < target.objectliteral.distanceFromParent) {
                         point = {
@@ -206,10 +202,12 @@ define(
             },
 
             travelToPoint: function(point, camera, targetObject, centroid) {
+                var travelDuration = 7500;
+
                 var cameraTween = new TWEEN.Tween(camera.position).to({
                         x: point.x,
                         y: point.y,
-                        z: point.z}, 6000)
+                        z: point.z }, travelDuration)
                     .easing(TWEEN.Easing.Cubic.InOut)
                     .onUpdate(function() {
                         Scene.setCameraFocalPoint(targetObject.position);
