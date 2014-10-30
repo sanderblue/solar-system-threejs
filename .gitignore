@@ -11,3 +11,5 @@ assets/sass/lib/neat
 assets/sass/lib/neat/*
 node_modules
 node_modules/*
+bower_components
+bower_components/*
