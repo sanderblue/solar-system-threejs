@@ -584,7 +584,7 @@ define(function() {
                             },
                             {
                                 name: 'E11',
-                                distanceFromParent: 292400 * ringOrbitScale,
+                                distanceFromParent: 287400 * ringOrbitScale,
                                 width: 2500,
                                 color: 0x887856
                             },
@@ -602,13 +602,13 @@ define(function() {
                             },
                             {
                                 name: 'E14',
-                                distanceFromParent: 280100 * ringOrbitScale,
+                                distanceFromParent: 283100 * ringOrbitScale,
                                 width: 2500,
                                 color: 0x8E7B50
                             },
                             {
                                 name: 'E15',
-                                distanceFromParent: 278100 * ringOrbitScale,
+                                distanceFromParent: 281100 * ringOrbitScale,
                                 width: 2500,
                                 color: 0x8E7B50
                             },
@@ -638,13 +638,13 @@ define(function() {
                             },
                             {
                                 name: 'E20',
-                                distanceFromParent: 250100 * ringOrbitScale,
+                                distanceFromParent: 255100 * ringOrbitScale,
                                 width: 2500,
                                 color: 0x977F4F
                             },
                             {
                                 name: 'E21',
-                                distanceFromParent: 225320 * ringOrbitScale,
+                                distanceFromParent: 245320 * ringOrbitScale,
                                 width: 2500,
                                 color: 0x8E7B50
                             }
@@ -670,13 +670,13 @@ define(function() {
                     },
                     {
                         name: 'Janus/Epimetheus Ring',
-                        distanceFromParent: 151500 * ringOrbitScale, // 149,000 – 154,000 km (151,500 mean)
+                        distanceFromParent: 154000 * ringOrbitScale, // 149,000 – 154,000 km (151,500 mean)
                         width: 5000,
                         color: 0x615E58
                     },
                     {
                         name: 'G Ring',
-                        distanceFromParent: 170500 * ringOrbitScale, // 166,000 – 175,000 km (170,500 mean)
+                        distanceFromParent: 166000 * ringOrbitScale, // 166,000 – 175,000 km (170,500 mean)
                         width: 9000,
                         color: 0x6B675D
                     },
