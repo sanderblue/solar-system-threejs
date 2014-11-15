@@ -122,6 +122,7 @@ define(
             },
 
             tweenCameraPosition: function(camera, target, centroid) {
+                $(document).trigger('travelStart');
                 TimeController.stop();
 
                 var targetObject   = target,
@@ -227,6 +228,8 @@ define(
                         Scene.camera.position.z = 0;       // this is really the y-axis in terms of plan view
 
                         TimeController.start();
+
+                        $(document).trigger('travelComplete');
                     })
                     .start()
                 ;

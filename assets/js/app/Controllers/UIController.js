@@ -304,6 +304,17 @@ define(
                     UIController.initResetView();
                 });
 
+                $(document).on('travelStart', function() {
+                    $(document).off('click', '.accordian-subitem-label.planet');
+                });
+
+                $(document).on('travelComplete', function() {
+                    UIController.initEventListeners();
+                    UIController.initCameraOrbitControlListener();
+                    UIController.initCameraZoomEventListener();
+                    UIController.initResetView();
+                });
+
                 var accordian = new Accordian();
             }
         };
