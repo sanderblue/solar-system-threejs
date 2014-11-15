@@ -183,8 +183,6 @@ define(
                     marker.on('mousedown', function() {
                         TimeController.stop();
 
-                        console.log('MOUSEDOWN?');
-
                         $('body').on('mousemove', function(e) {
                             UIController.adjustCameraOrbitPosition(circleParent, e.pageX,e.pageY, marker);
                         });

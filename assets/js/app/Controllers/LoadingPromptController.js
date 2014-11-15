@@ -38,11 +38,11 @@ define(['jquery'], function($) {
         initAudio: function() {
             var audio = document.getElementById('sound');
 
-            audio.volume = 0.125;
-
-            if (!App.config.AudioEnabled) {
+            if (!App.config.audio.enabled) {
                 audio.pause();
             }
+
+            audio.volume = 0.05;
         },
 
         init: function(Initializer, MainController) {
