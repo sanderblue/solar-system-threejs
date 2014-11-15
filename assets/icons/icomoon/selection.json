@@ -18,7 +18,7 @@
 			},
 			"properties": {
 				"id": 194,
-				"order": 10,
+				"order": 8,
 				"prevSize": 32,
 				"code": 69,
 				"name": "earth",
@@ -41,7 +41,7 @@
 			},
 			"properties": {
 				"id": 22,
-				"order": 4,
+				"order": 3,
 				"prevSize": 20,
 				"code": 43,
 				"name": "target",
@@ -67,7 +67,7 @@
 			},
 			"properties": {
 				"id": 80,
-				"order": 3,
+				"order": 2,
 				"prevSize": 20,
 				"code": 114,
 				"name": "rocket",
@@ -90,7 +90,7 @@
 			},
 			"properties": {
 				"id": 84,
-				"order": 2,
+				"order": 1,
 				"prevSize": 20,
 				"code": 101,
 				"name": "earth2",
@@ -113,7 +113,7 @@
 			},
 			"properties": {
 				"id": 92,
-				"order": 6,
+				"order": 5,
 				"prevSize": 20,
 				"code": 115,
 				"name": "sun",
@@ -136,7 +136,7 @@
 			},
 			"properties": {
 				"id": 93,
-				"order": 5,
+				"order": 4,
 				"prevSize": 20,
 				"code": 83,
 				"name": "sun2",
@@ -160,7 +160,7 @@
 			},
 			"properties": {
 				"id": 94,
-				"order": 7,
+				"order": 6,
 				"prevSize": 20,
 				"code": 98,
 				"name": "adjust",
@@ -185,7 +185,7 @@
 			},
 			"properties": {
 				"id": 98,
-				"order": 8,
+				"order": 7,
 				"prevSize": 20,
 				"code": 108,
 				"name": "light-bulb",
@@ -193,6 +193,74 @@
 			},
 			"setIdx": 3,
 			"iconIdx": 98
+		},
+		{
+			"icon": {
+				"paths": [
+					"M792.73 438.426c-20.838 21.402-240.384 230.554-240.384 230.554-11.162 11.418-25.754 17.101-40.346 17.101-14.643 0-29.235-5.683-40.346-17.101 0 0-219.546-209.152-240.435-230.554-20.838-21.402-22.272-59.853 0-82.739 22.323-22.835 53.402-24.627 80.691 0l200.090 191.898 200.038-191.846c27.341-24.627 58.47-22.835 80.691 0 22.323 22.835 20.941 61.338 0 82.688z"
+				],
+				"tags": [
+					"arrow-down",
+					"down",
+					"bottom"
+				],
+				"grid": 20
+			},
+			"properties": {
+				"id": 206,
+				"order": 11,
+				"prevSize": 20,
+				"code": 96,
+				"name": "arrow-down",
+				"ligatures": ""
+			},
+			"setIdx": 3,
+			"iconIdx": 206
+		},
+		{
+			"icon": {
+				"paths": [
+					"M792.73 585.574c-20.838-21.402-240.384-230.502-240.384-230.502-11.162-11.418-25.754-17.152-40.346-17.152-14.643 0-29.235 5.734-40.346 17.152 0 0-219.546 209.101-240.435 230.502-20.838 21.402-22.272 59.904 0 82.739 22.323 22.784 53.402 24.627 80.691 0l200.090-191.846 200.038 191.846c27.341 24.627 58.47 22.784 80.691 0 22.323-22.886 20.941-61.389 0-82.739z"
+				],
+				"tags": [
+					"arrow-up",
+					"up",
+					"top"
+				],
+				"grid": 20
+			},
+			"properties": {
+				"id": 207,
+				"order": 10,
+				"prevSize": 20,
+				"code": 94,
+				"name": "arrow-up",
+				"ligatures": ""
+			},
+			"setIdx": 3,
+			"iconIdx": 207
+		},
+		{
+			"icon": {
+				"paths": [
+					"M512 399.36c-62.208 0-112.64 50.432-112.64 112.64s50.432 112.64 112.64 112.64 112.64-50.432 112.64-112.64-50.432-112.64-112.64-112.64z"
+				],
+				"tags": [
+					"dot",
+					"circle"
+				],
+				"grid": 20
+			},
+			"properties": {
+				"id": 224,
+				"order": 9,
+				"prevSize": 20,
+				"code": 46,
+				"name": "dot",
+				"ligatures": ""
+			},
+			"setIdx": 3,
+			"iconIdx": 224
 		}
 	],
 	"height": 1024,
@@ -219,7 +287,8 @@
 			"showMetrics": true,
 			"showMetadata": false,
 			"useClassSelector": false,
-			"classSelector": ".icon"
+			"classSelector": ".icon",
+			"autoHost": true
 		},
 		"imagePref": {
 			"color": 0,
@@ -236,6 +305,9 @@
 		"showGrid": true,
 		"showGlyphs": true,
 		"showQuickUse": true,
-		"search": ""
+		"search": "",
+		"quickUsageToken": {
+			"UntitledProject1": "MGQzNGRiYTNlZmQ2MThiYWVkNzI5YWU4ZGE1ZGRmZjgjMSMxNDA5OTY3MjU4IyMj"
+		}
 	}
 }

@@ -6,48 +6,84 @@ define(
         'Camera',
         'SolarSystem',
         'OrbitFactory',
-        'TimeController'
+        'TimeController',
+        'PlanetDataModule'
     ],
-    function($, Accordian, Scene, Camera, SolarSystem, OrbitFactory, TimeController) {
+    function($, Accordian, Scene, Camera, SolarSystem, OrbitFactory, TimeController, PlanetDataModule) {
 
         var UIController = {
             selectedPlanet: null,
             currentCameraPosition: null,
 
             initEventListeners: function() {
-                var cameraZoomControl = $('#camera-zoom-control');
+                var planetSelector = '.accordian-subitem-label.planet',
+                    planetDataModule = document.getElementById('planet-data-module'),
+                    cameraZoomControl = document.getElementById('camera-zoom-control')
+                ;
 
-                $(document).on('click', '.camera-trigger', function(e) {
+                $(document).on('click', planetSelector, function(e) {
                     e.preventDefault();
                     e.stopImmediatePropagation();
+
+                    var isActive = $(this).hasClass('active');
+
+                    if (isActive) {
+                        return false;
+                    }
 
                     var id = $(this).data('id'),
                         matchedPlanet = UIController.findPlanet(id)
                     ;
 
+                    $(planetSelector).removeClass('active');
+                    $(this).addClass('active');
+
+                    var planetDataHTML = PlanetDataModule.getRenderedTemplate('planet', matchedPlanet.planet.uiData);
+
+                    planetDataModule.innerHTML = planetDataHTML;
+
+                    if (!$(planetDataModule).hasClass('triggered')) {
+                        $(planetDataModule).fadeIn(200).addClass('triggered');
+                    }
+
+                    $(planetDataModule).find('.data-holder').removeClass('triggered');
+
+                    setTimeout(function() {
+                        $(planetDataModule).find('.data-holder').addClass('triggered');
+                    }, 100);
+
                     UIController.selectedPlanet = matchedPlanet.planet;
 
-                    var radius = matchedPlanet ? matchedPlanet.planet3d.geometry.radius : Scene.camera.position.x - Scene.Sun.position.x;
-
-                    cameraZoomControl.val(matchedPlanet.planet.distanceFromParent);
-
-                    Scene.setCameraPosition(matchedPlanet.planet3d.core, matchedPlanet.planet3d, matchedPlanet.planet3d.position, false, false);
-                    Scene.setCameraFocalPoint(matchedPlanet.planet3d.position);
+                    Scene.setCameraPosition(
+                        matchedPlanet.planet3d.core,
+                        matchedPlanet.planet3d,
+                        matchedPlanet.planet3d.position,
+                        false,
+                        false
+                    );
 
                     UIController.resetCameraControls();
 
-                    cameraZoomControl
-                        .attr('min', - parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
-                        .attr('max', parseInt(matchedPlanet.planet3d.geometry.radius * 2.7))
-                        .attr('value', 0)
+                    var radius = matchedPlanet ? matchedPlanet.planet3d.geometry.radius : Scene.camera.position.x - Scene.Sun.position.x,
+                        distance = parseInt(radius * 6)
                     ;
 
-                    UIController.initCameraZoomEventListener(UIController.selectedPlanet);
+                    cameraZoomControl.setAttribute('min', parseInt(radius));
+                    cameraZoomControl.setAttribute('max', distance * 10);
+                    cameraZoomControl.value = distance;
+
+                    UIController.initCameraZoomEventListener(cameraZoomControl.value);
                 });
 
                 $(document).on('click', '.camera-reset', function(e) {
                     e.preventDefault();
                     e.stopImmediatePropagation();
+
+                    $(planetDataModule).fadeOut(150, function() {
+                        $(this).removeClass('triggered').children().remove();
+                    });
+
+                    $(planetSelector).removeClass('active');
 
                     Scene.setCameraPosition(null, null, Camera.defaultPosition, true);
                     Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
@@ -147,45 +183,30 @@ define(
                     marker.on('mousedown', function() {
                         TimeController.stop();
 
+                        console.log('MOUSEDOWN?');
+
                         $('body').on('mousemove', function(e) {
                             UIController.adjustCameraOrbitPosition(circleParent, e.pageX,e.pageY, marker);
-
-                            marker.on('mouseup', function() {
-                                TimeController.start();
-                            });
                         });
-                    });
 
-                    marker.on('mouseup', function() {
-                        TimeController.start();
+                        $(document).one('mouseup', function() {
+                            TimeController.start();
+                        });
                     });
                 });
             },
 
-            initCameraZoomEventListener: function(selectedPlanet) {
-                var value = selectedPlanet ? Scene.camera.position.x : Camera.defaultPosition.y;
-
-                $('#camera-zoom-control').val(value);
-
-                $('#camera-zoom-control').on('change', function() {
-                    if (parseFloat(this.value) > parseFloat(value)) {
-                        Camera.position.x = parseFloat(Scene.camera.position.x) + (parseFloat(this.value));
-                        Camera.position.z = parseFloat(Scene.camera.position.z) + (parseFloat(this.value));
-                    }
-
-                    if (parseFloat(this.value) < parseFloat(value)) {
-                        Camera.position.x = parseFloat(Scene.camera.position.x) - Math.abs((parseFloat(this.value) - parseFloat(value)));
-                        Camera.position.z = parseFloat(Scene.camera.position.z) - Math.abs((parseFloat(this.value) - parseFloat(value)));
-                    }
-
-                    value = this.value;
+            initCameraZoomEventListener: function(val) {
+                $('#camera-zoom-control').on('change input', function() {
+                    Camera.position.x = this.value;
+                    Camera.position.z = this.value;
 
                     var posX = Camera.position.x,
                         posY = Camera.position.y,
                         posZ = Camera.position.z
                     ;
 
-                    if (!UIController.selectedPlanet) {
+                    if (!val) {
                         posX = Camera.position.y;
                         posY = Camera.position.x;
                         posZ = Camera.defaultPosition.z;
@@ -225,8 +246,7 @@ define(
                         // listElement.append('<li id="planet-'+ planetId +'" class="planet" data-id="'+ iplanetNamed +'">'+  +'</li>');
                         var planetListItem =
                             '<div class="accordian-subitem planet-item">'
-                            +    '<div id="'+ id +'" class="accordian-item-label planet">'+ name +'</div>'
-                            +    '<span class="icon-target camera-trigger" data-id="'+ id +'"></span>'
+                            +    '<div id="'+ id +'" class="accordian-subitem-label planet" data-id="'+ id +'">'+ name +'</div>'
                             +    '<span class="camera-trigger" data-id="'+ id +'"></span>'
                             +    '<div class="accordian-submenu">'
                             +        '<div class="accordian-submenu-item">'
@@ -285,8 +305,6 @@ define(
                     UIController.initCameraZoomEventListener();
                     UIController.initResetView();
                 });
-
-                // $('body').append('<div id ="my_music"> <embed src="http://www.example.com/yourmusicfile.mp3" width="70" height="18" autostart="false" loop="true"> </div>')
 
                 var accordian = new Accordian();
             }

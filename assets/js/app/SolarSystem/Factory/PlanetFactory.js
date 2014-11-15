@@ -41,11 +41,10 @@ define(
              * @param planet [THREE object]
              */
             buildEarthClouds: function(planet) {
-                var geometry    = new THREE.SphereGeometry(planet.radius + 2, planet.radius, 50);
+                var geometry = new THREE.SphereGeometry(planet.radius + 2, planet.radius, 50);
 
-                var material    = new THREE.MeshPhongMaterial({
+                var material = new THREE.MeshPhongMaterial({
                     map         : THREE.ImageUtils.loadTexture('/textures/earth_clouds_fair2.png'),
-                    // side        : THREE.DoubleSide,
                     transparent : true,
                     opacity     : 0.8,
                 });
@@ -109,11 +108,6 @@ define(
                     // Create our orbit line geometry first
                     OrbitFactory.build(planet);
 
-                    var thisPlanet = new THREE.Object3D({
-                                        id: planet.id,
-                                        name: planet.name
-                                    });
-
                     var texture     = PlanetFactory.getTexture(planet),
                         coreTexture = PlanetFactory.getCoreTexture()
                     ;
@@ -133,16 +127,16 @@ define(
                         });
                     }
 
-                    var widthSegments = planet.radius < 200 ? planet.radius + 30 : 200;
+                    var widthSegments = planet.radius < 200 ? planet.radius + 50 : 200;
 
-                    thisPlanet = new THREE.Mesh(
-                                new THREE.SphereGeometry(
-                                        planet.radius,
-                                        widthSegments,
-                                        110
-                                    ),
-                                    planetMaterial
-                                 );
+                    var thisPlanet = new THREE.Mesh(
+                                        new THREE.SphereGeometry(
+                                                planet.radius,
+                                                widthSegments,
+                                                110
+                                            ),
+                                            planetMaterial
+                                        );
 
                     if (planet.name === 'Earth') {
                         var earthClouds   = PlanetFactory.buildEarthClouds(planet),
@@ -166,13 +160,14 @@ define(
                                         1,
                                         1
                                     ),
-                                    planetMaterial
+                                    coreMaterial
                                 );
 
-                    orbitCentroid.rotation.y = planet.inclination;
+                    if (App.config.OrbitInclinationsEnabled) {
+                        orbitCentroid.rotation.y = planet.inclination;
+                    }
 
-                    // We need to flip the planet's axis so the text renders as a vertical canvas
-                    // thisPlanet.rotation.x = planet.axialTilt;
+                    thisPlanet.rotation.x = planet.axialTilt;
                     thisPlanet.rotation.x = Math.PI / 2;
                     thisPlanet.name       = planet.name;
 
@@ -186,15 +181,14 @@ define(
                             cloudCentroid = new THREE.Object3D()
                         ;
 
-                        cloudCentroid.add(earthClouds);
-
                         thisPlanet.cloudCentroid = cloudCentroid;
 
+                        cloudCentroid.add(earthClouds);
                         thisPlanet.add(cloudCentroid);
                     }
 
-                    $.when(PlanetFactory.addMoons(planet, thisPlanet)).done(function() {
-                        $.when(RingFactory.buildRings(thisPlanet, planet)).done(function(response) {
+                    PlanetFactory.addMoons(planet, thisPlanet).done(function() {
+                        RingFactory.buildRings(thisPlanet, planet).done(function(response) {
                             var count = new Date().getDOYwithTimeAsDecimal() + TimeController.getTime();
 
                             var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, planet.distanceFromParent)
@@ -211,20 +205,19 @@ define(
                                             * degreesToRadianRatio
                                         );
 
-                            PlanetFactory.addPlanet(thisPlanet, orbitCentroid);
-
                             thisPlanet.position.set(
                                 parseFloat(posX),
                                 parseFloat(posY),
                                 0
                             );
 
+                            PlanetFactory.addPlanet(thisPlanet, orbitCentroid);
+
                             thisPlanet.parent3d      = thisPlanet;
                             thisPlanet.parentliteral = parent;
                             thisPlanet.objectliteral = planet;
 
                             var endTime = new Date().getTime();
-
                             var builderStatement = 'Planet Factory done building ' + thisPlanet.name + ' in ' + TimerUtil.getElapsedTime(startTime, endTime, 'ms') + ' milliseconds';
 
                             System.log(builderStatement);

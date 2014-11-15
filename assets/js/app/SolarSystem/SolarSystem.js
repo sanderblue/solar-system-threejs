@@ -37,9 +37,7 @@ define(function() {
                 id: 1,
                 name: 'Mercury',
                 radius: 2439.7 * celestialScale, // 2439.7 ±1.0 km
-                radiusString: '2439.7 ±1.0 km',
                 distanceFromParent: 57909050 * orbitScale, // 57,909,050 km
-                distanceFromParentString: '57,909,050 km',
                 orbitDuration: 88,
                 inclination: 6.34 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 26.73 / 180 * Math.PI,
@@ -48,15 +46,39 @@ define(function() {
                 texture: null,
                 rings: [],
                 orbitPositionOffset: 48, // Earth days ahead in it based on the current day of the year
-                celestialType: 'planet'
+                celestialType: 'planet',
+                uiData: [
+                    {
+                        key: 'Name',
+                        value: 'Mercury'
+                    },
+                    {
+                        key: 'Radius',
+                        value: '2439.7 ±1.0 km'
+                    },
+                    {
+                        key: 'Axial Tilt',
+                        value: '26.73°'
+                    },
+                    {
+                        key: 'Semi-major Axis',
+                        value: '57,909,050 km'
+                    },
+                    {
+                        key: 'Orbit Duration',
+                        value: '88 days'
+                    },
+                    {
+                        key: 'Inclination',
+                        value: '6.34°'
+                    }
+                ]
             },
             {
                 id: 2,
                 name: 'Venus',
                 radius: 6051.8 * celestialScale, // 6051.8 ±1.0 km
-                radiusString: '6051.8 ±1.0 km',
                 distanceFromParent: 108208000 * orbitScale, // 108,208,000 km
-                distanceFromParentString: '108,208,000 km',
                 orbitDuration: 224.7,
                 inclination: 2.19 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 177.36 / 180 * Math.PI,
@@ -64,15 +86,39 @@ define(function() {
                 moons: [],
                 rings: [],
                 orbitPositionOffset: 155,
-                celestialType: 'planet'
+                celestialType: 'planet',
+                uiData: [
+                    {
+                        key: 'Name',
+                        value: 'Venus'
+                    },
+                    {
+                        key: 'Radius',
+                        value: '6051.8 ±1.0 km'
+                    },
+                    {
+                        key: 'Axial Tilt',
+                        value: '177.36°'
+                    },
+                    {
+                        key: 'Semi-major Axis',
+                        value: '108,208,000 km'
+                    },
+                    {
+                        key: 'Orbit Duration',
+                        value: '224.7 days'
+                    },
+                    {
+                        key: 'Inclination',
+                        value: '2.19°'
+                    }
+                ]
             },
             {
                 id: 3,
                 name: 'Earth',
                 radius: 6371 * celestialScale, // 6371.0 km
-                radiusString: '6,371 km ±0.1 km',
                 distanceFromParent: 149598261 * orbitScale, // 149,598,261 km
-                distanceFromParentString: '149,598,261 km',
                 orbitDuration: 364.25,
                 inclination: 1.57869 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 23.5 / 180 * Math.PI,
@@ -88,15 +134,39 @@ define(function() {
                 ],
                 rings: [],
                 orbitPositionOffset: 0,
-                celestialType: 'planet'
+                celestialType: 'planet',
+                uiData: [
+                    {
+                        key: 'Name',
+                        value: 'Earth'
+                    },
+                    {
+                        key: 'Radius',
+                        value: '6,371 km ±0.1 km'
+                    },
+                    {
+                        key: 'Axial Tilt',
+                        value: '23.5°'
+                    },
+                    {
+                        key: 'Semi-major Axis',
+                        value: '149,598,261 km'
+                    },
+                    {
+                        key: 'Orbit Duration',
+                        value: '364.25 days'
+                    },
+                    {
+                        key: 'Inclination',
+                        value: '1.579°'
+                    }
+                ]
             },
             {
                 id: 4,
                 name: 'Mars',
                 radius: 3389.5 * celestialScale, // 3389.5 ±0.2 km
-                radiusString: '3,389.5 ±0.2 km',
                 distanceFromParent: 227939100 * orbitScale, // 227,939,100 km
-                distanceFromParentString: '227,939,100 km',
                 orbitDuration: 687,
                 inclination: 1.67 / 180 * Math.PI,
                 axialTilt: axialTiltOffset + 25.19 / 180 * Math.PI,
@@ -120,7 +190,33 @@ define(function() {
                 texture: null,
                 rings: [],
                 orbitPositionOffset: 71,
-                celestialType: 'planet'
+                celestialType: 'planet',
+                uiData: [
+                    {
+                        key: 'Name',
+                        value: 'Mars'
+                    },
+                    {
+                        key: 'Radius',
+                        value: '3,389.5 ±0.2 km'
+                    },
+                    {
+                        key: 'Axial Tilt',
+                        value: '25.19°'
+                    },
+                    {
+                        key: 'Semi-major Axis',
+                        value: '227,939,100 km'
+                    },
+                    {
+                        key: 'Orbit Duration',
+                        value: '687 days'
+                    },
+                    {
+                        key: 'Inclination',
+                        value: '1.67°'
+                    }
+                ]
             },
             {
                 id: 5,
@@ -248,7 +344,33 @@ define(function() {
                     }
                 ],
                 orbitPositionOffset: 2692,
-                celestialType: 'planet'
+                celestialType: 'planet',
+                uiData: [
+                    {
+                        key: 'Name',
+                        value: 'Jupiter'
+                    },
+                    {
+                        key: 'Radius',
+                        value: '69,911 ±6 km'
+                    },
+                    {
+                        key: 'Axial Tilt',
+                        value: '3.13°'
+                    },
+                    {
+                        key: 'Semi-major Axis',
+                        value: '778,547,200 km'
+                    },
+                    {
+                        key: 'Orbit Duration',
+                        value: '4,329 days'
+                    },
+                    {
+                        key: 'Inclination',
+                        value: '1.305°'
+                    }
+                ]
             },
             {
                 id: 6,
@@ -462,7 +584,7 @@ define(function() {
                             },
                             {
                                 name: 'E11',
-                                distanceFromParent: 292400 * ringOrbitScale,
+                                distanceFromParent: 287400 * ringOrbitScale,
                                 width: 2500,
                                 color: 0x887856
                             },
@@ -480,13 +602,13 @@ define(function() {
                             },
                             {
                                 name: 'E14',
-                                distanceFromParent: 280100 * ringOrbitScale,
+                                distanceFromParent: 283100 * ringOrbitScale,
                                 width: 2500,
                                 color: 0x8E7B50
                             },
                             {
                                 name: 'E15',
-                                distanceFromParent: 278100 * ringOrbitScale,
+                                distanceFromParent: 281100 * ringOrbitScale,
                                 width: 2500,
                                 color: 0x8E7B50
                             },
@@ -516,13 +638,13 @@ define(function() {
                             },
                             {
                                 name: 'E20',
-                                distanceFromParent: 250100 * ringOrbitScale,
+                                distanceFromParent: 255100 * ringOrbitScale,
                                 width: 2500,
                                 color: 0x977F4F
                             },
                             {
                                 name: 'E21',
-                                distanceFromParent: 225320 * ringOrbitScale,
+                                distanceFromParent: 245320 * ringOrbitScale,
                                 width: 2500,
                                 color: 0x8E7B50
                             }
@@ -548,13 +670,13 @@ define(function() {
                     },
                     {
                         name: 'Janus/Epimetheus Ring',
-                        distanceFromParent: 151500 * ringOrbitScale, // 149,000 – 154,000 km (151,500 mean)
+                        distanceFromParent: 154000 * ringOrbitScale, // 149,000 – 154,000 km (151,500 mean)
                         width: 5000,
                         color: 0x615E58
                     },
                     {
                         name: 'G Ring',
-                        distanceFromParent: 170500 * ringOrbitScale, // 166,000 – 175,000 km (170,500 mean)
+                        distanceFromParent: 166000 * ringOrbitScale, // 166,000 – 175,000 km (170,500 mean)
                         width: 9000,
                         color: 0x6B675D
                     },
@@ -657,7 +779,33 @@ define(function() {
                     }
                 ],
                 orbitPositionOffset: 13753,
-                celestialType: 'planet'
+                celestialType: 'planet',
+                uiData: [
+                    {
+                        key: 'Name',
+                        value: 'Saturn'
+                    },
+                    {
+                        key: 'Radius',
+                        value: '58,232 ±6 km'
+                    },
+                    {
+                        key: 'Axial Tilt',
+                        value: '3.13°'
+                    },
+                    {
+                        key: 'Semi-major Axis',
+                        value: '1,433,449,370 km'
+                    },
+                    {
+                        key: 'Orbit Duration',
+                        value: '10,753 days'
+                    },
+                    {
+                        key: 'Inclination',
+                        value: '2.48524°'
+                    }
+                ]
             },
             {
                 id: 7,
@@ -801,7 +949,33 @@ define(function() {
                     }
                 ],
                 orbitPositionOffset: 29654,
-                celestialType: 'planet'
+                celestialType: 'planet',
+                uiData: [
+                    {
+                        key: 'Name',
+                        value: 'Uranus'
+                    },
+                    {
+                        key: 'Radius',
+                        value: '25,362 ±7 km'
+                    },
+                    {
+                        key: 'Axial Tilt',
+                        value: '97.77°'
+                    },
+                    {
+                        key: 'Semi-major Axis',
+                        value: '2,876,679,082 km'
+                    },
+                    {
+                        key: 'Orbit Duration',
+                        value: '30,687 days'
+                    },
+                    {
+                        key: 'Inclination',
+                        value: '1.02°'
+                    }
+                ]
             },
             {
                 id: 8,
@@ -907,7 +1081,33 @@ define(function() {
                     }
                 ],
                 orbitPositionOffset: 62885,
-                celestialType: 'planet'
+                celestialType: 'planet',
+                uiData: [
+                    {
+                        key: 'Name',
+                        value: 'Uranus'
+                    },
+                    {
+                        key: 'Radius',
+                        value: '24,622 ±19 km'
+                    },
+                    {
+                        key: 'Axial Tilt',
+                        value: '28.32°'
+                    },
+                    {
+                        key: 'Semi-major Axis',
+                        value: '4,503,443,661 km'
+                    },
+                    {
+                        key: 'Orbit Duration',
+                        value: '60,025 days'
+                    },
+                    {
+                        key: 'Inclination',
+                        value: '1.768°'
+                    }
+                ]
             }
         ],
         dwarfPlanets: [
@@ -949,12 +1149,12 @@ define(function() {
                 },
             ],
             secondary: [],
-            count: 675, // true number is estimated in the billions within the main astroid belt
-            distanceFromParent: 420000000 * orbitScale // 420,000,000 km
+            count: 400, // true number is estimated in the billions within the main astroid belt
+            distanceFromParent: 400000000 * orbitScale // 400,000,000 km
         },
         stars: {
-            count: 4000,
-            solarSystemRadius: 4503443661 + 10000 * orbitScale,
+            count: 1500,
+            solarSystemRadius: 4503443661 + 9000 * orbitScale,
         }
     };
 

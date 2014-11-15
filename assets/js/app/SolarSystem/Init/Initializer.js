@@ -56,6 +56,12 @@ define(
                 });
             },
 
+            initTimeCreationListener: function() {
+                $(document).on('time', function() {
+                    TimeController.start();
+                });
+            },
+
             init: function(MainController) {
                 window.addEventListener('resize', Initializer.onWindowResize, false);
 
@@ -74,9 +80,8 @@ define(
                     return;
                 }
 
-                TimeController.start();
-
                 return $.when(Scene.init()).done(function() {
+                    Initializer.initTimeCreationListener();
                     LoadingPromptController.init(Initializer, MainController);
                 });
             }

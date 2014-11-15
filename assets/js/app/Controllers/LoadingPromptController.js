@@ -27,13 +27,27 @@ define(['jquery'], function($) {
 
         initViewSceneListener: function(prompt, MainController) {
             $(document).on('click', '#view-button', function() {
+                $(document).trigger('time');
+
                 MainController.renderSolarSystem();
-                $(prompt).fadeOut(1000);
+
+                $(prompt).fadeOut(850);
             });
+        },
+
+        initAudio: function() {
+            var audio = document.getElementById('sound');
+
+            audio.volume = 0.125;
+
+            if (!App.config.AudioEnabled) {
+                audio.pause();
+            }
         },
 
         init: function(Initializer, MainController) {
             $(function() {
+                LoadingPromptController.initAudio();
                 LoadingPromptController.initEventListeners(Initializer, MainController);
             });
         }

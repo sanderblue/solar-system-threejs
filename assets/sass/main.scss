@@ -2,6 +2,7 @@
 @import "lib/neat/neat";
 
 @import "mixins";
+@import "app/colors";
 @import "fonts";
 @import "icons";
 @import "globals";
@@ -10,3 +11,4 @@
 @import "data-menu";
 @import "app/loading-prompt";
 @import "controls/control-panel";
+@import "app/planet-data-module";

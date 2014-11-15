@@ -1,0 +1,14 @@
+{% spaceless %}
+    <div class="data-holder">
+        {% for row in data %}
+            {% if row.key == 'Name' %}
+                <div class="data-header">{{ row.value }}</div>
+            {% else %}
+                <div class="data-row">
+                    <div class="left-side">{{ row.key }}</div>
+                    <div class="right-side">{{ row.value }}</div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endspaceless %}

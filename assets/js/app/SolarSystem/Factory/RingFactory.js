@@ -70,8 +70,9 @@ define(function() {
          */
         buildRing: function(planet, ring) {
             return $.Deferred(function(promise) {
-                var resolution = 540, // segments in the line
-                    size       = 360 / resolution;
+                var resolution = 640, // segments in the line
+                    size       = 360 / resolution
+                ;
 
                 var material = new THREE.LineBasicMaterial({
                                     color: ring.color,
@@ -101,16 +102,9 @@ define(function() {
                     );
                 }
 
-                var ringLine = new THREE.Line(ringLine, material);
-
-                var ringCentroid = new THREE.Mesh(
-                            new THREE.SphereGeometry(
-                                    1,
-                                    1,
-                                    1
-                                ),
-                                material
-                            );
+                var ringLine     = new THREE.Line(ringLine, material),
+                    ringCentroid = new THREE.Object3D()
+                ;
 
                 ringCentroid.rotation.x = planet.axialTilt;
 

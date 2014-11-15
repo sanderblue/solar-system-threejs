@@ -12,9 +12,12 @@ define(function() {
         clock: 1,
         interval: null,
         delay: 1,
+        isPaused: true,
 
         start: function() {
             var TimeController = this;
+
+            TimeController.isPaused = false;
 
             if (!TimeController.interval) {
                 TimeController.offset = Date.now();
@@ -26,6 +29,8 @@ define(function() {
         },
 
         stop: function() {
+            TimeController.isPaused = true;
+
             if (TimeController.interval) {
                 clearInterval(TimeController.interval);
 

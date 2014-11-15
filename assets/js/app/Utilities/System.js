@@ -12,28 +12,41 @@ define(function() {
          * @param force [boolean]
          */
         log: function(args, split, force) {
-            if (!App.config.logger.enabled && !force || typeof console === 'undefined') {
+            if (typeof console === 'undefined' || (!window.console && !window.console.log)) {
+                window.console = {};
+                window.console.log = function() {};
+            }
+
+            if (!App.config.logger.enabled && !force) {
                 return;
             }
 
-            if (!split instanceof Boolean) {
+            if (split && typeof split !== 'boolean') {
                 console.error('Argument 2 of method log() must be an instance of Boolean.');
 
                 return;
             }
 
             if (args instanceof Array && split) {
+                console.log('\n');
+
                 for (var i = 0; args.length; i++) {
                     console.log(args[i]);
                 }
+
+                console.log('\n');
 
                 return;
             }
 
             if (args instanceof Object && !(args instanceof Array) && split) {
+                console.log('\n');
+
                 for (key in args) {
                     console.log(key);
                 }
+
+                console.log('\n');
 
                 return;
             }

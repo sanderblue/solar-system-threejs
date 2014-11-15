@@ -62,7 +62,9 @@ define(
 
                 var orbitLine = new THREE.Line(orbitLine, material);
 
-                orbitLine.rotation.y = planet.inclination;
+                if (App.config.OrbitInclinationsEnabled) {
+                    orbitLine.rotation.y = planet.inclination;
+                }
 
                 Scene.scene.add(orbitLine);
             }

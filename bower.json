@@ -1,0 +1,20 @@
+{
+  "name": "solarsystemjs",
+  "version": "1.2.0",
+  "homepage": "https://github.com/sanderblue/solar-system-threejs",
+  "authors": [
+    "Sander Blue <william.a.blue@gmail.com>"
+  ],
+  "description": "The solar system modeled to scale with Three.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "twig.js": "~0.7.2"
+  }
+}
