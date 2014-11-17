@@ -1111,18 +1111,84 @@ define(function() {
             }
         ],
         dwarfPlanets: [
-            // Ceres, Pluto, Haumea, Makemake, Eris
+            {
+                id: 9,
+                name: 'Pluto',
+                radius: 1184 * celestialScale,
+                radiusString: '1184 ±10 km',
+                distanceFromParent: 5874000000 * orbitScale, // km
+                distanceFromParentString: '5,874,000,000 km',
+                orbitDuration: 90334,
+                inclination: 11.88 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 119.59 / 180 * Math.PI,
+                axialTiltDegrees: 119.59,
+                moons: [],
+                texture: null,
+                rings: []
+            },
+            {
+                id: 10,
+                name: 'Ceres',
+                radius: 475 * celestialScale,
+                radiusString: '476.2 ±2 km',
+                distanceFromParent: 413910000 * orbitScale, // km
+                distanceFromParentString: '413,910,000 km',
+                orbitDuration: 1680,
+                inclination: 9.2 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 3 / 180 * Math.PI,
+                axialTiltDegrees: 3,
+                moons: [],
+                texture: null,
+                rings: []
+            },
+            {
+                id: 11,
+                name: 'Haumea',
+                radius: 650 * celestialScale,
+                radiusString: '620 ±34 km',
+                distanceFromParent: 6452455360 * orbitScale, // km
+                distanceFromParentString: '6,452,455,360 km',
+                orbitDuration: 103468,
+                inclination: 28.22 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 3 / 180 * Math.PI,
+                axialTiltDegrees: 3,
+                moons: [],
+                texture: null,
+                rings: []
+            },
+            {
+                id: 11,
+                name: 'Makemake',
+                radius: 715 * celestialScale,
+                radiusString: '715 ±7 km',
+                distanceFromParent: 6850236100 * orbitScale, // km
+                distanceFromParentString: '6,850,236,100 km',
+                orbitDuration: 113183,
+                inclination: 28.96 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 3 / 180 * Math.PI,
+                axialTiltDegrees: 3,
+                moons: [],
+                texture: null,
+                rings: []
+            },
+            {
+                id: 12,
+                name: 'Eris',
+                radius: 1163 * celestialScale,
+                radiusString: '1163 ±6 km',
+                distanceFromParent: 10166372100 * orbitScale, // km
+                distanceFromParentString: '10,166,372,100 km',
+                orbitDuration: 204624,
+                inclination: 43.89 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 3 / 180 * Math.PI,
+                axialTiltDegrees: 3,
+                moons: [],
+                texture: null,
+                rings: []
+            }
         ],
         asteroidBelt: {
             primary: [
-                {
-                    name: 'Ceres',
-                    radius: 475 * celestialScale,
-                    radiusString: '476.2 km',
-                    distanceFromParent: 4139.1 * orbitScale,
-                    distanceFromParentString: '413,910,000 km',
-                    orbitDuration: 1680,
-                },
                 {
                     name: 'Vesta',
                     radius: 262 * celestialScale,

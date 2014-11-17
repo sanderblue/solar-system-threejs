@@ -105,6 +105,8 @@ define(
                         degreesToRadianRatio = 0.0174532925
                     ;
 
+                    Scene.planetObjects.push(planet);
+
                     // Create our orbit line geometry first
                     OrbitFactory.build(planet);
 

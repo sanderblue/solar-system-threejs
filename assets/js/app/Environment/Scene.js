@@ -30,6 +30,7 @@ define(
             brightness: 0.2,
             currentRadian: 0.0174532925 * 200,
             perspective: Camera.perspective,
+            planetObjects: [],
 
             setContainer: function() {
                 Scene.container = document.getElementById('solar-system');

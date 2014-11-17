@@ -48,7 +48,7 @@ define(
             },
 
             positionPlanets: function() {
-                var planets = Scene.planets,
+                var planets = Scene.planetObjects,
                     count = new Date().getDOYwithTimeAsDecimal() + TimeController.getTime()
                 ;
 
@@ -56,23 +56,23 @@ define(
                     Scene.Sun.rotation.y += 0.00029;
                 }
 
-                Scene.asteroidBelt.rotation.z += -0.00008;
+                Scene.asteroidBelt.rotation.z += -0.00007;
 
                 for (var i = 0; i < planets.length; i++) {
                     Scene.planets[i].rotation.y += 0.0007;
                     Scene.planets[i].core.rotation.y += -0.0001;
 
-                    var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, SolarSystem.planets[i].distanceFromParent)
+                    var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, planets[i].distanceFromParent)
                                 * Math.cos(
-                                    parseFloat(Number(count + SolarSystem.planets[i].orbitPositionOffset).toFixed(5))
-                                    * OrbitFactory.getOrbitRadian(SolarSystem.planets[i])
+                                    parseFloat(Number(count + planets[i].orbitPositionOffset).toFixed(5))
+                                    * OrbitFactory.getOrbitRadian(planets[i])
                                     * Constants.degreesToRadiansRatio
                                 );
 
-                    var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, SolarSystem.planets[i].distanceFromParent)
+                    var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, planets[i].distanceFromParent)
                                 * Math.sin(
-                                    parseFloat(Number(count + SolarSystem.planets[i].orbitPositionOffset).toFixed(5))
-                                    * OrbitFactory.getOrbitRadian(SolarSystem.planets[i])
+                                    parseFloat(Number(count + planets[i].orbitPositionOffset).toFixed(5))
+                                    * OrbitFactory.getOrbitRadian(planets[i])
                                     * Constants.degreesToRadiansRatio
                                 );
 
