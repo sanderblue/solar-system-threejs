@@ -56,9 +56,11 @@ define(
                     Scene.Sun.rotation.y += 0.00029;
                 }
 
+                Scene.asteroidBelt.rotation.z += -0.00008;
+
                 for (var i = 0; i < planets.length; i++) {
                     Scene.planets[i].rotation.y += 0.0007;
-                    Scene.planets[i].core.rotation.y -= 0.0001;
+                    Scene.planets[i].core.rotation.y += -0.0001;
 
                     var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, SolarSystem.planets[i].distanceFromParent)
                                 * Math.cos(
