@@ -84,7 +84,7 @@ define(function() {
                     material.linewidth = 0.7;
 
                     if (planet.name === 'Jupiter') {
-                        material.linewidth = material.linewidth - 0.3;
+                        material.linewidth = 0.1;
                     }
                 }
 

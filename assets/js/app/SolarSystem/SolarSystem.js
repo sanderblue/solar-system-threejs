@@ -248,13 +248,13 @@ define(function() {
                         name: 'Amalthea Gossamer Ring',
                         distanceFromParent: 155500 * ringOrbitScale, // 129,000 – 182,000 km (155,500 mean)
                         width: 53000,
-                        color: 0x201E17
+                        color: 0x3C7647
                     },
                     {
                         name: 'Thebe Gossamer Ring',
                         distanceFromParent: 177500 * ringOrbitScale, // 129,000 – 226,000 km (177,500 mean)
                         width: 97000,
-                        color: 0x242218
+                        color: 0x3A3627
                     },
                 ],
                 moons: [
@@ -1108,6 +1108,215 @@ define(function() {
                         value: '1.768°'
                     }
                 ]
+            },
+            {
+                id: 9,
+                name: 'Pluto',
+                radius: 1184 * celestialScale,
+                radiusString: '1184 ±10 km',
+                distanceFromParent: 5874000000 * orbitScale, // km
+                distanceFromParentString: '5,874,000,000 km',
+                orbitDuration: 90334,
+                inclination: 11.88 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 119.59 / 180 * Math.PI,
+                axialTiltDegrees: 119.59,
+                moons: [],
+                texture: null,
+                rings: [],
+                orbitPositionOffset: 20,
+                uiData: [
+                    {
+                        key: 'Name',
+                        value: 'Jupiter'
+                    },
+                    {
+                        key: 'Radius',
+                        value: '69,911 ±6 km'
+                    },
+                    {
+                        key: 'Axial Tilt',
+                        value: '3.13°'
+                    },
+                    {
+                        key: 'Semi-major Axis',
+                        value: '778,547,200 km'
+                    },
+                    {
+                        key: 'Orbit Duration',
+                        value: '4,329 days'
+                    },
+                    {
+                        key: 'Inclination',
+                        value: '1.305°'
+                    }
+                ]
+            },
+            {
+                id: 10,
+                name: 'Ceres',
+                radius: 476.2 * celestialScale,
+                radiusString: '476.2 ±2 km',
+                distanceFromParent: 413910000 * orbitScale, // km
+                distanceFromParentString: '413,910,000 km',
+                orbitDuration: 1680,
+                inclination: 9.2 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 3 / 180 * Math.PI,
+                axialTiltDegrees: 3,
+                moons: [],
+                texture: null,
+                rings: [],
+                orbitPositionOffset: 4000,
+                uiData: [
+                    {
+                        key: 'Name',
+                        value: 'Jupiter'
+                    },
+                    {
+                        key: 'Radius',
+                        value: '69,911 ±6 km'
+                    },
+                    {
+                        key: 'Axial Tilt',
+                        value: '3.13°'
+                    },
+                    {
+                        key: 'Semi-major Axis',
+                        value: '778,547,200 km'
+                    },
+                    {
+                        key: 'Orbit Duration',
+                        value: '4,329 days'
+                    },
+                    {
+                        key: 'Inclination',
+                        value: '1.305°'
+                    }
+                ]
+            },
+            {
+                id: 11,
+                name: 'Haumea',
+                radius: 650 * celestialScale,
+                radiusString: '620 ±34 km',
+                distanceFromParent: 6452455360 * orbitScale, // km
+                distanceFromParentString: '6,452,455,360 km',
+                orbitDuration: 103468,
+                inclination: 28.22 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 3 / 180 * Math.PI,
+                axialTiltDegrees: 3,
+                moons: [],
+                texture: null,
+                rings: [],
+                orbitPositionOffset: 60000,
+                uiData: [
+                    {
+                        key: 'Name',
+                        value: 'Jupiter'
+                    },
+                    {
+                        key: 'Radius',
+                        value: '69,911 ±6 km'
+                    },
+                    {
+                        key: 'Axial Tilt',
+                        value: '3.13°'
+                    },
+                    {
+                        key: 'Semi-major Axis',
+                        value: '778,547,200 km'
+                    },
+                    {
+                        key: 'Orbit Duration',
+                        value: '4,329 days'
+                    },
+                    {
+                        key: 'Inclination',
+                        value: '1.305°'
+                    }
+                ]
+            },
+            {
+                id: 12,
+                name: 'Makemake',
+                radius: 715 * celestialScale,
+                radiusString: '715 ±7 km',
+                distanceFromParent: 6850236100 * orbitScale, // km
+                distanceFromParentString: '6,850,236,100 km',
+                orbitDuration: 113183,
+                inclination: 28.96 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 3 / 180 * Math.PI,
+                axialTiltDegrees: 3,
+                moons: [],
+                texture: null,
+                rings: [],
+                orbitPositionOffset: 100000,
+                uiData: [
+                    {
+                        key: 'Name',
+                        value: 'Jupiter'
+                    },
+                    {
+                        key: 'Radius',
+                        value: '69,911 ±6 km'
+                    },
+                    {
+                        key: 'Axial Tilt',
+                        value: '3.13°'
+                    },
+                    {
+                        key: 'Semi-major Axis',
+                        value: '778,547,200 km'
+                    },
+                    {
+                        key: 'Orbit Duration',
+                        value: '4,329 days'
+                    },
+                    {
+                        key: 'Inclination',
+                        value: '1.305°'
+                    }
+                ]
+            },
+            {
+                id: 12,
+                name: 'Eris',
+                radius: 1163 * celestialScale,
+                radiusString: '1163 ±6 km',
+                distanceFromParent: 10166372100 * orbitScale, // km
+                distanceFromParentString: '10,166,372,100 km',
+                orbitDuration: 204624,
+                inclination: 43.89 / 180 * Math.PI,
+                axialTilt: axialTiltOffset + 3 / 180 * Math.PI,
+                axialTiltDegrees: 3,
+                moons: [],
+                texture: null,
+                rings: [],
+                uiData: [
+                    {
+                        key: 'Name',
+                        value: 'Jupiter'
+                    },
+                    {
+                        key: 'Radius',
+                        value: '69,911 ±6 km'
+                    },
+                    {
+                        key: 'Axial Tilt',
+                        value: '3.13°'
+                    },
+                    {
+                        key: 'Semi-major Axis',
+                        value: '778,547,200 km'
+                    },
+                    {
+                        key: 'Orbit Duration',
+                        value: '4,329 days'
+                    },
+                    {
+                        key: 'Inclination',
+                        value: '1.305°'
+                    }
+                ]
             }
         ],
         dwarfPlanets: [
@@ -1215,8 +1424,8 @@ define(function() {
                 },
             ],
             secondary: [],
-            count: 1000, // true number is estimated in the billions within the main astroid belt
-            distanceFromParent: 400000000 * orbitScale // 400,000,000 km
+            count: 800, // true number is estimated in the billions within the main astroid belt
+            distanceFromParent: 380000000 * orbitScale // 400,000,000 km
         },
         stars: {
             count: 1250,

@@ -38,20 +38,6 @@ define(
                     $(planetSelector).removeClass('active');
                     $(this).addClass('active');
 
-                    var planetDataHTML = PlanetDataModule.getRenderedTemplate('planet', matchedPlanet.planet.uiData);
-
-                    planetDataModule.innerHTML = planetDataHTML;
-
-                    if (!$(planetDataModule).hasClass('triggered')) {
-                        $(planetDataModule).fadeIn(200).addClass('triggered');
-                    }
-
-                    $(planetDataModule).find('.data-holder').removeClass('triggered');
-
-                    setTimeout(function() {
-                        $(planetDataModule).find('.data-holder').addClass('triggered');
-                    }, 100);
-
                     UIController.selectedPlanet = matchedPlanet.planet;
 
                     Scene.setCameraPosition(
@@ -71,6 +57,22 @@ define(
                     cameraZoomControl.setAttribute('min', parseInt(radius));
                     cameraZoomControl.setAttribute('max', distance * 10);
                     cameraZoomControl.value = distance;
+
+                    if (matchedPlanet.planet.uiData) {
+                        var planetDataHTML = PlanetDataModule.getRenderedTemplate('planet', matchedPlanet.planet.uiData);
+
+                        planetDataModule.innerHTML = planetDataHTML;
+
+                        if (!$(planetDataModule).hasClass('triggered')) {
+                            $(planetDataModule).fadeIn(200).addClass('triggered');
+                        }
+
+                        $(planetDataModule).find('.data-holder').removeClass('triggered');
+
+                        setTimeout(function() {
+                            $(planetDataModule).find('.data-holder').addClass('triggered');
+                        }, 100);
+                    }
 
                     UIController.initCameraZoomEventListener(cameraZoomControl.value);
                 });
