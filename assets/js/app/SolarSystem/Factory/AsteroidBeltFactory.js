@@ -55,8 +55,8 @@ define(
             buildRandomPoints: function() {
                 var points = [];
 
-                for (var i = 0; i < 8; i ++) {
-                    var radius = (Math.random() * 6000) * SolarSystem.celestialScale + (i + 1.9);
+                for (var i = 0; i < 7; i ++) {
+                    var radius = (Math.random() * 6300) * SolarSystem.celestialScale + (i * 2);
 
                     points.push(AsteroidBeltFactory.getRandomPointCoordinate(radius));
                 }
@@ -107,8 +107,12 @@ define(
                     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
                     texture.anisotropy = 1;
 
+                    var materials = [
+                        new THREE.MeshLambertMaterial({ map: texture }),
+                        new THREE.MeshLambertMaterial({ emissive: 0xffffff, transparent: true, opacity: 0.25 })
+                    ];
                     // Random convex mesh to represent an irregular, rock-like shape based on random points within a sphere where radius = n(random)
-                    var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), [new THREE.MeshLambertMaterial({ map: texture })]),
+                    var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), materials),
                         centroid = new THREE.Object3D(),
                         isOdd = index % 2,
                         offset = isOdd ? -1 : 1

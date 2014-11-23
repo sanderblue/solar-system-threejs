@@ -40,15 +40,10 @@ define(
                 }
 
                 var resolution = 1080, // segments in the line
-                    length     = 360 / resolution
+                    length     = 360 / resolution,
+                    material   = new THREE.LineBasicMaterial({ color: 0x3f3f3f, linewidth: 0.1 }),
+                    orbitLine  = new THREE.Geometry()
                 ;
-
-                var material = new THREE.LineBasicMaterial({
-                                        color: 0x3f3f3f,
-                                        linewidth: 0.1
-                                    });
-
-                var orbitLine = new THREE.Geometry();
 
                 // Build the orbit line
                 for(var i = 0; i <= resolution; i++) {

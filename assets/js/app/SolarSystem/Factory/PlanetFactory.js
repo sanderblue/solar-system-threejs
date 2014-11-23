@@ -75,14 +75,7 @@ define(
              * @param planet [THREE object]
              */
             getPlanetCore: function(planet, material) {
-                var core = new THREE.Mesh(
-                                new THREE.SphereGeometry(
-                                        1,
-                                        1,
-                                        1
-                                    ),
-                                    material
-                                );
+                var core = new THREE.Mesh(new THREE.SphereGeometry(1, 1, 1), material);
 
                 // We need to flip the core's axis
                 core.rotation.x = Math.PI / 2;
@@ -169,12 +162,6 @@ define(
                     if (App.config.OrbitInclinationsEnabled) {
                         orbitCentroid.rotation.y = planet.inclination;
                     }
-
-                    console.log(
-                        'planet.axialTilt = ', planet.axialTilt, '\n',
-                        'Math.PI / 2 = ', Math.PI / 2, '\n',
-                        'Axial Tilt Radians = ', planet.axialTilt * Constants.degreesToRadiansRatio, '\n'
-                    );
 
                     // thisPlanet.rotation.x = planet.axialTilt;
                     thisPlanet.rotation.x = planet.axialTilt;
