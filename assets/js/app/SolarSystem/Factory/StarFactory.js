@@ -15,10 +15,10 @@ define(
         var StarFactory = {
 
             starsCentriod: new THREE.Object3D({ name: 'stars_centriod' }),
+            distanceFromCenter: (6850236100 * (1 * Math.pow(10, -3.87))) + 200000,
 
             getPosition: function(i) {
-                var sceneRadius = SolarSystem.planets[SolarSystem.planets.length - 1].distanceFromParent + 320000,
-                    isSecond    = i % 2 == 0,
+                var isSecond    = i % 2 == 0,
                     isThird     = i % 3 == 0,
                     isFourth    = i % 4 == 0,
                     x           = 0,
@@ -26,7 +26,7 @@ define(
                     z           = 0
                 ;
 
-                return RandomNumber.getRandomPointInSphere(sceneRadius, x, y, z);
+                return RandomNumber.getRandomPointInSphere(StarFactory.distanceFromCenter, x, y, z);
             },
 
             buildStar: function(i) {
@@ -34,11 +34,11 @@ define(
                     var material = new THREE.MeshLambertMaterial({
                                           ambient: 0xffffff,
                                           emissive: 0xffffff,
-                                          shininess: 100
+                                          shininess: 10000
                                         });
 
-                    var radius             = RandomNumber.getRandomNumberWithinRange(175, 300);
-                        geometry           = new THREE.SphereGeometry(radius, 7, 4),
+                    var radius             = RandomNumber.getRandomNumberWithinRange(250, 450);
+                        geometry           = new THREE.SphereGeometry(radius, 6, 3),
                         Star               = new THREE.Mesh(geometry, material),
                         randomizedPosition = StarFactory.getPosition(i)
                     ;

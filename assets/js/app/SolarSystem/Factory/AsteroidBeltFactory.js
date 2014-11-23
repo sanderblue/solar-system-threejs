@@ -109,7 +109,7 @@ define(
 
                     var materials = [
                         new THREE.MeshLambertMaterial({ map: texture }),
-                        new THREE.MeshLambertMaterial({ emissive: 0xffffff, transparent: true, opacity: 0.25 })
+                        new THREE.MeshLambertMaterial({ emissive: 0xBE9477, transparent: true, opacity: 0.3 })
                     ];
                     // Random convex mesh to represent an irregular, rock-like shape based on random points within a sphere where radius = n(random)
                     var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), materials),

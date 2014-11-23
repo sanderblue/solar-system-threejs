@@ -38,7 +38,7 @@ define(
                                         );
 
                     var Sun = new THREE.Mesh(sunGeometry, material),
-                        pointLight = new THREE.PointLight(0xffffff, 1.15)
+                        pointLight = new THREE.PointLight(0xffffff, 1.12)
                     ;
 
                     // Flip axis

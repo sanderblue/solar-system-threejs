@@ -12,10 +12,10 @@ define(function() {
      */
 
     // Inital scales
-    var sunScale        = 1 * Math.pow(10, -1.9),
-        celestialScale  = 1 * Math.pow(10, -1.9),
-        moonOrbitScale  = 1 * Math.pow(10, -2.55),
-        ringOrbitScale  = 1 * Math.pow(10, -2.55),
+    var sunScale        = 1 * Math.pow(10, -1.89),
+        celestialScale  = 1 * Math.pow(10, -1.89),
+        moonOrbitScale  = 1 * Math.pow(10, -2.46),
+        ringOrbitScale  = 1 * Math.pow(10, -2.46),
         orbitScale      = 1 * Math.pow(10, -3.87),
         axialTiltOffset = 1
     ;
@@ -1277,47 +1277,47 @@ define(function() {
                     }
                 ]
             },
-            {
-                id: 12,
-                name: 'Eris',
-                radius: 1163 * celestialScale,
-                radiusString: '1163 ±6 km',
-                distanceFromParent: 10166372100 * orbitScale, // km
-                distanceFromParentString: '10,166,372,100 km',
-                orbitDuration: 204624,
-                inclination: 43.89 / 180 * Math.PI,
-                axialTilt: axialTiltOffset + 3 / 180 * Math.PI,
-                axialTiltDegrees: 3,
-                moons: [],
-                texture: null,
-                rings: [],
-                uiData: [
-                    {
-                        key: 'Name',
-                        value: 'Jupiter'
-                    },
-                    {
-                        key: 'Radius',
-                        value: '69,911 ±6 km'
-                    },
-                    {
-                        key: 'Axial Tilt',
-                        value: '3.13°'
-                    },
-                    {
-                        key: 'Semi-major Axis',
-                        value: '778,547,200 km'
-                    },
-                    {
-                        key: 'Orbit Duration',
-                        value: '4,329 days'
-                    },
-                    {
-                        key: 'Inclination',
-                        value: '1.305°'
-                    }
-                ]
-            }
+            // {
+            //     id: 12,
+            //     name: 'Eris',
+            //     radius: 1163 * celestialScale,
+            //     radiusString: '1163 ±6 km',
+            //     distanceFromParent: 10166372100 * orbitScale, // km
+            //     distanceFromParentString: '10,166,372,100 km',
+            //     orbitDuration: 204624,
+            //     inclination: 43.89 / 180 * Math.PI,
+            //     axialTilt: axialTiltOffset + 3 / 180 * Math.PI,
+            //     axialTiltDegrees: 3,
+            //     moons: [],
+            //     texture: null,
+            //     rings: [],
+            //     uiData: [
+            //         {
+            //             key: 'Name',
+            //             value: 'Jupiter'
+            //         },
+            //         {
+            //             key: 'Radius',
+            //             value: '69,911 ±6 km'
+            //         },
+            //         {
+            //             key: 'Axial Tilt',
+            //             value: '3.13°'
+            //         },
+            //         {
+            //             key: 'Semi-major Axis',
+            //             value: '778,547,200 km'
+            //         },
+            //         {
+            //             key: 'Orbit Duration',
+            //             value: '4,329 days'
+            //         },
+            //         {
+            //             key: 'Inclination',
+            //             value: '1.305°'
+            //         }
+            //     ]
+            // }
         ],
         dwarfPlanets: [
             {
@@ -1379,22 +1379,23 @@ define(function() {
                 moons: [],
                 texture: null,
                 rings: []
-            },
-            {
-                id: 12,
-                name: 'Eris',
-                radius: 1163 * celestialScale,
-                radiusString: '1163 ±6 km',
-                distanceFromParent: 10166372100 * orbitScale, // km
-                distanceFromParentString: '10,166,372,100 km',
-                orbitDuration: 204624,
-                inclination: 43.89 / 180 * Math.PI,
-                axialTilt: axialTiltOffset + 3 / 180 * Math.PI,
-                axialTiltDegrees: 3,
-                moons: [],
-                texture: null,
-                rings: []
             }
+            // ,
+            // {
+            //     id: 12,
+            //     name: 'Eris',
+            //     radius: 1163 * celestialScale,
+            //     radiusString: '1163 ±6 km',
+            //     distanceFromParent: 1016637210 * orbitScale, // km
+            //     distanceFromParentString: '10,166,372,100 km',
+            //     orbitDuration: 204624,
+            //     inclination: 43.89 / 180 * Math.PI,
+            //     axialTilt: axialTiltOffset + 3 / 180 * Math.PI,
+            //     axialTiltDegrees: 3,
+            //     moons: [],
+            //     texture: null,
+            //     rings: []
+            // }
         ],
         asteroidBelt: {
             primary: [
@@ -1424,11 +1425,11 @@ define(function() {
                 },
             ],
             secondary: [],
-            count: 600, // true number is estimated in the billions within the main astroid belt
+            count: 550, // true number is estimated in the billions within the main astroid belt
             distanceFromParent: 335000000 * orbitScale // 299,000,000 - 400,000,000 km
         },
         stars: {
-            count: 3500,
+            count: 1700,
             solarSystemRadius: 4503443661 + 9000 * orbitScale,
         }
     };
