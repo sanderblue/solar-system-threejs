@@ -24,34 +24,22 @@ define(
              * @param planetObj [THREE object]
              */
             buildMoon: function(parent, moon, planetObj) {
-                var texture = MoonFactory.getMoonTexture();
+                var texture =  MoonFactory.getMoonTexture();
+
+                texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
                 var material = new THREE.MeshLambertMaterial({ map: texture });
-
-                texture.wrapS = THREE.RepeatWrapping;
-                texture.wrapT = THREE.RepeatWrapping;
 
                 thisMoon = new THREE.Mesh(
                             new THREE.SphereGeometry(
                                     moon.radius,
-                                    20,
-                                    16
+                                    24,
+                                    12
                                 ),
                                 material
                             );
 
-                var moonCentroid = new THREE.Mesh(
-                            new THREE.SphereGeometry(
-                                    1,
-                                    1,
-                                    1
-                                ),
-                                material
-                            );
-
-                moonCentroid.rotation.x = moon.inclination;
-                moonCentroid.name = moon.name + ' Centroid';
-
+                thisMoon.rotation.x    = parent.axialTilt;
                 thisMoon.name          = moon.name;
                 thisMoon.parent3d      = planetObj;
                 thisMoon.parentliteral = parent;
@@ -59,8 +47,7 @@ define(
 
                 Scene.moons.push(thisMoon);
 
-                planetObj.add(moonCentroid);
-                moonCentroid.add(thisMoon);
+                planetObj.add(thisMoon);
             }
         };
 

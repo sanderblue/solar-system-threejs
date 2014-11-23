@@ -9,14 +9,15 @@ define(
         /**
          * StarFactory
          *
-         * Builds the distance stars in space. The number of stars to be rendered is set in the SolarSystem object.
-         *
-         * Note: This is currently not being used due to performance issues. I will be optimizing this in hopes of creating
-         *       a true 3d array of stars.
+         * Builds the distance stars in space. The star count is depicted in
+         * the Solar System object.
          */
         var StarFactory = {
+
+            starsCentriod: new THREE.Object3D({ name: 'stars_centriod' }),
+
             getPosition: function(i) {
-                var sceneRadius = (4503443661 * (1 * Math.pow(10, -4))) + 320000,
+                var sceneRadius = SolarSystem.planets[SolarSystem.planets.length - 1].distanceFromParent + 320000,
                     isSecond    = i % 2 == 0,
                     isThird     = i % 3 == 0,
                     isFourth    = i % 4 == 0,
@@ -33,10 +34,10 @@ define(
                     var material = new THREE.MeshLambertMaterial({
                                           ambient: 0xffffff,
                                           emissive: 0xffffff,
-                                          shininess: 10
+                                          shininess: 100
                                         });
 
-                    var radius             = RandomNumber.getRandomNumberWithinRange(175, 290);
+                    var radius             = RandomNumber.getRandomNumberWithinRange(175, 300);
                         geometry           = new THREE.SphereGeometry(radius, 7, 4),
                         Star               = new THREE.Mesh(geometry, material),
                         randomizedPosition = StarFactory.getPosition(i)
@@ -48,7 +49,7 @@ define(
                         randomizedPosition.z
                     );
 
-                    Scene.scene.add(Star);
+                    StarFactory.starsCentriod.add(Star);
 
                     promise.resolve();
                 });
@@ -62,8 +63,14 @@ define(
                         promises.push(StarFactory.buildStar(i));
                     }
 
-                    return $.when.apply($, promises).done();
+                    return $.when.apply($, promises).done(function() {
+                        StarFactory.addStars();
+                    });
                 });
+            },
+
+            addStars: function() {
+                Scene.scene.add(StarFactory.starsCentriod);
             }
         };
 

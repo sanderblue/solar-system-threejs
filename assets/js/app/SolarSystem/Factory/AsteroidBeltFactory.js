@@ -55,8 +55,8 @@ define(
             buildRandomPoints: function() {
                 var points = [];
 
-                for (var i = 0; i < 5; i ++) {
-                    var radius = (Math.random() * 1100) * SolarSystem.celestialScale + (i + 1.5);
+                for (var i = 0; i < 8; i ++) {
+                    var radius = (Math.random() * 6000) * SolarSystem.celestialScale + (i + 1.9);
 
                     points.push(AsteroidBeltFactory.getRandomPointCoordinate(radius));
                 }
@@ -101,26 +101,21 @@ define(
             buildAstroid: function(index, addBelt) {
                 return $.Deferred(function(promise) {
                     var randomPoints = AsteroidBeltFactory.buildRandomPoints(),
-                        map          = AsteroidBeltFactory.getTexture()
+                        texture      = AsteroidBeltFactory.getTexture()
                     ;
 
-                    map.wrapS = map.wrapT = THREE.RepeatWrapping;
-                    map.anisotropy = 1;
-
-                    var materials = [
-                        new THREE.MeshLambertMaterial({ map: map }),
-                        new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 1 })
-                    ];
+                    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+                    texture.anisotropy = 1;
 
                     // Random convex mesh to represent an irregular, rock-like shape based on random points within a sphere where radius = n(random)
-                    var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), materials),
+                    var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), [new THREE.MeshLambertMaterial({ map: texture })]),
                         centroid = new THREE.Object3D(),
                         isOdd = index % 2,
                         offset = isOdd ? -1 : 1
                     ;
 
                     // Create a random orbit inclination to give the Asteroid Belt some "depth"
-                    var orbitInclination = (Math.random() * RandomNumber.getRandomNumberWithinRange(1, 4) / 180 * Math.PI * 0.375) * offset;
+                    var orbitInclination = (Math.random() * RandomNumber.getRandomNumberWithinRange(1, 5) / 150) * offset;
 
                     centroid.rotation.x = orbitInclination;
                     centroid.add(object);

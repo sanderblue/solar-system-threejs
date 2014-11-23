@@ -46,7 +46,7 @@ define(
                 var material = new THREE.MeshPhongMaterial({
                     map         : THREE.ImageUtils.loadTexture('/textures/earth_clouds_fair2.png'),
                     transparent : true,
-                    opacity     : 0.8,
+                    opacity     : 0.78,
                 });
 
                 return new THREE.Mesh(geometry, material);

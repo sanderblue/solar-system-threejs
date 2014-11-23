@@ -12,11 +12,11 @@ define(function() {
      */
 
     // Inital scales
-    var sunScale        = 1 * Math.pow(10, -2.4),
-        celestialScale  = 1 * Math.pow(10, -2),
-        moonOrbitScale  = 1 * Math.pow(10, -2.75),
+    var sunScale        = 1 * Math.pow(10, -1.9),
+        celestialScale  = 1 * Math.pow(10, -1.9),
+        moonOrbitScale  = 1 * Math.pow(10, -2.55),
         ringOrbitScale  = 1 * Math.pow(10, -2.55),
-        orbitScale      = 1 * Math.pow(10, -4),
+        orbitScale      = 1 * Math.pow(10, -3.87),
         axialTiltOffset = 180
     ;
 
@@ -27,7 +27,7 @@ define(function() {
         moonOrbitScale: moonOrbitScale,
         parent: {
             name: 'Sun',
-            radius: 696342 * sunScale, // 696342 ±65 km
+            radius: 696342 * sunScale, // 696,342 ±65 km
             diameter: 1400,
             texture: null,
             distanceFromParent: 270000000000000030 //  2.7×10^17 km (27,200 light-years) from the Milky Way core
@@ -236,25 +236,25 @@ define(function() {
                         name: 'Halo Ring',
                         distanceFromParent: 107250 * ringOrbitScale, // 92,000 – 122,500 km (107250 mean)
                         width: 30500,
-                        color: 0x2B2210
+                        color: 0x4f4f4f
                     },
                     {
                         name: 'Main Ring',
                         distanceFromParent: 125750 * ringOrbitScale, // 122,500 – 129,000 km (125,750 mean)
                         width: 6500,
-                        color: 0x3A3627
+                        color: 0x4f4f4f
                     },
                     {
                         name: 'Amalthea Gossamer Ring',
                         distanceFromParent: 155500 * ringOrbitScale, // 129,000 – 182,000 km (155,500 mean)
                         width: 53000,
-                        color: 0x3C7647
+                        color: 0x4f4f4f
                     },
                     {
                         name: 'Thebe Gossamer Ring',
                         distanceFromParent: 177500 * ringOrbitScale, // 129,000 – 226,000 km (177,500 mean)
                         width: 97000,
-                        color: 0x3A3627
+                        color: 0x4f4f4f
                     },
                 ],
                 moons: [
@@ -1424,14 +1424,16 @@ define(function() {
                 },
             ],
             secondary: [],
-            count: 800, // true number is estimated in the billions within the main astroid belt
-            distanceFromParent: 380000000 * orbitScale // 400,000,000 km
+            count: 600, // true number is estimated in the billions within the main astroid belt
+            distanceFromParent: 335000000 * orbitScale // 299,000,000 - 400,000,000 km
         },
         stars: {
-            count: 1250,
+            count: 3500,
             solarSystemRadius: 4503443661 + 9000 * orbitScale,
         }
     };
+
+    console.log('Solar System ', SolarSystem);
 
     return SolarSystem;
 });

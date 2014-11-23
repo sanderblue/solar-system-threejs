@@ -53,8 +53,8 @@ define(
                     directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, Scene.brightness, { target: new THREE.Vector3(0, 0, 0)})
                 ;
 
-                directionalLightFromTop.position.set(0, 0, 7500);
-                directionalLightFromBottom.position.set(0, 0, -7500);
+                directionalLightFromTop.position.set(0, 0, 7000);
+                directionalLightFromBottom.position.set(0, 0, -7000);
 
                 Scene.scene.add(directionalLightFromTop);
                 Scene.scene.add(directionalLightFromBottom);

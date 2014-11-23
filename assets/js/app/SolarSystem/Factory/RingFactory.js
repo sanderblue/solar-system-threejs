@@ -15,50 +15,43 @@ define(function() {
          */
         buildRings: function(thisPlanet, planet) {
             return $.Deferred(function(promise) {
-                var hasRings = Boolean(planet.rings.length);
+                if (!planet.rings.length) {
+                    var promiseObject = {
+                        planet: planet,
+                        thisPlanet: thisPlanet
+                    };
 
-                if (hasRings) {
-                    var rings = planet.rings;
+                    promise.resolve(promiseObject);
+                    return;
+                }
 
-                    for (var i = 0; i < rings.length; i++) {
-                        $.when(
-                            RingFactory.buildRing(planet, rings[i])
-                        )
-                        .done(function(response) {
-                            response.centroid.add(response.line);
 
-                            thisPlanet.add(response.centroid);
-                        });
+                var rings = planet.rings;
 
-                        if (rings[i].subRings && rings[i].subRings.length) {
-                            for (var n = 0; n < rings[i].subRings.length; n++) {
-                                $.when(
-                                    RingFactory.buildSubRing(planet, rings[i].subRings[n])
-                                )
-                                .done(function(response) {
-                                    response.centroid.add(response.line);
+                for (var i = 0; i < planet.rings.length; i++) {
+                    RingFactory.buildRing(planet, planet.rings[i]).done(function(response) {
+                        response.centroid.add(response.line);
 
-                                    thisPlanet.add(response.centroid);
-                                });
-                            }
+                        thisPlanet.add(response.centroid);
+                    });
+
+                    if (planet.rings[i].subRings && planet.rings[i].subRings.length) {
+                        for (var n = 0; n < planet.rings[i].subRings.length; n++) {
+                            RingFactory.buildSubRing(planet, planet.rings[i].subRings[n]).done(function(response) {
+                                response.centroid.add(response.line);
+
+                                thisPlanet.add(response.centroid);
+                            });
                         }
                     }
-
-                    var promiseObject = {
-                        planet: planet,
-                        thisPlanet: thisPlanet
-                    };
-
-                    promise.resolve(promiseObject);
-
-                } else {
-                    var promiseObject = {
-                        planet: planet,
-                        thisPlanet: thisPlanet
-                    };
-
-                    promise.resolve(promiseObject);
                 }
+
+                var promiseObject = {
+                    planet: planet,
+                    thisPlanet: thisPlanet
+                };
+
+                promise.resolve(promiseObject);
             });
         },
 
@@ -70,13 +63,13 @@ define(function() {
          */
         buildRing: function(planet, ring) {
             return $.Deferred(function(promise) {
-                var resolution = 640, // segments in the line
-                    size       = 360 / resolution
+                var resolution = 1080, // segments in the line
+                    length     = 360 / resolution
                 ;
 
                 var material = new THREE.LineBasicMaterial({
                                     color: ring.color,
-                                    linewidth: ring.width * 0.00001,
+                                    linewidth: 0.1,
                                     linejoin: 'round'
                                   });
 
@@ -91,7 +84,7 @@ define(function() {
                 var ringLine = new THREE.Geometry();
 
                 for (var i = 0; i <= resolution; i++) {
-                    var segment = (i * size) * Math.PI / 180;
+                    var segment = (i * length) * Math.PI / 180;
 
                     ringLine.vertices.push(
                         new THREE.Vector3(
@@ -120,7 +113,7 @@ define(function() {
         buildSubRing: function(planet, ring) {
             return $.Deferred(function(promise) {
                 var resolution = 540, // segments in the line
-                    size       = 360 / resolution;
+                    length     = 360 / resolution;
 
                 var material = new THREE.LineBasicMaterial({
                                     color: ring.color,
@@ -139,7 +132,7 @@ define(function() {
                 var ringLine = new THREE.Geometry();
 
                 for (var i = 0; i <= resolution; i++) {
-                    var segment = (i * size) * Math.PI / 180;
+                    var segment = (i * length) * Math.PI / 180;
 
                     ringLine.vertices.push(
                         new THREE.Vector3(
