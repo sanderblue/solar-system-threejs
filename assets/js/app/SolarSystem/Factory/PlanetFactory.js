@@ -8,9 +8,10 @@ define(
         'OrbitFactory',
         'TimerUtil',
         'TimeController',
+        'Constants',
         'System'
     ],
-    function($, Scene, SolarSystem, RingFactory, MoonFactory, OrbitFactory, TimerUtil, TimeController, System) {
+    function($, Scene, SolarSystem, RingFactory, MoonFactory, OrbitFactory, TimerUtil, TimeController, Constants, System) {
 
         var factory = MoonFactory;
 
@@ -169,8 +170,14 @@ define(
                         orbitCentroid.rotation.y = planet.inclination;
                     }
 
+                    console.log(
+                        'planet.axialTilt = ', planet.axialTilt, '\n',
+                        'Math.PI / 2 = ', Math.PI / 2, '\n',
+                        'Axial Tilt Radians = ', planet.axialTilt * Constants.degreesToRadiansRatio, '\n'
+                    );
+
+                    // thisPlanet.rotation.x = planet.axialTilt;
                     thisPlanet.rotation.x = planet.axialTilt;
-                    thisPlanet.rotation.x = Math.PI / 2;
                     thisPlanet.name       = planet.name;
 
                     var core = PlanetFactory.getPlanetCore(thisPlanet, coreMaterial);
@@ -190,7 +197,7 @@ define(
                     }
 
                     PlanetFactory.addMoons(planet, thisPlanet).done(function() {
-                        RingFactory.buildRings(thisPlanet, planet).done(function(response) {
+                        RingFactory.buildRings(thisPlanet, planet).done(function() {
                             var count = new Date().getDOYwithTimeAsDecimal() + TimeController.getTime();
 
                             var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, planet.distanceFromParent)

@@ -16,54 +16,33 @@ define(function() {
         buildRings: function(thisPlanet, planet) {
             return $.Deferred(function(promise) {
                 if (!planet.rings.length) {
-                    var promiseObject = {
-                        planet: planet,
-                        thisPlanet: thisPlanet
-                    };
-
-                    promise.resolve(promiseObject);
-                    return;
+                    return promise.resolve();
                 }
 
-
-                var rings = planet.rings;
-
                 for (var i = 0; i < planet.rings.length; i++) {
-                    RingFactory.buildRing(planet, planet.rings[i]).done(function(response) {
-                        response.centroid.add(response.line);
-
-                        thisPlanet.add(response.centroid);
-                    });
+                    RingFactory.buildRing(planet, planet.rings[i], thisPlanet);
 
                     if (planet.rings[i].subRings && planet.rings[i].subRings.length) {
                         for (var n = 0; n < planet.rings[i].subRings.length; n++) {
-                            RingFactory.buildSubRing(planet, planet.rings[i].subRings[n]).done(function(response) {
-                                response.centroid.add(response.line);
-
-                                thisPlanet.add(response.centroid);
-                            });
+                            RingFactory.buildSubRing(planet, planet.rings[i].subRings[n], thisPlanet);
                         }
                     }
                 }
 
-                var promiseObject = {
-                    planet: planet,
-                    thisPlanet: thisPlanet
-                };
-
-                promise.resolve(promiseObject);
+                promise.resolve();
             });
         },
 
         /**
          * Builds a single ring.
          *
-         * @param planet [object]
-         * @param ring   [object]
+         * @param planet     [object]
+         * @param ring       [object]
+         * @param thisPlanet [THREE object]
          */
-        buildRing: function(planet, ring) {
+        buildRing: function(planet, ring, thisPlanet) {
             return $.Deferred(function(promise) {
-                var resolution = 1080, // segments in the line
+                var resolution = 720, // segments in the line
                     length     = 360 / resolution
                 ;
 
@@ -95,24 +74,19 @@ define(function() {
                     );
                 }
 
-                var ringLine     = new THREE.Line(ringLine, material),
-                    ringCentroid = new THREE.Object3D()
-                ;
+                var ringLine = new THREE.Line(ringLine, material);
 
-                ringCentroid.rotation.x = planet.axialTilt;
+                ringLine.rotation.x = Math.PI / 2;
 
-                var responseObject = {
-                    line: ringLine,
-                    centroid: ringCentroid
-                };
+                thisPlanet.add(ringLine);
 
-                promise.resolve(responseObject);
+                promise.resolve();
             });
         },
 
-        buildSubRing: function(planet, ring) {
+        buildSubRing: function(planet, ring, thisPlanet) {
             return $.Deferred(function(promise) {
-                var resolution = 540, // segments in the line
+                var resolution = 720, // segments in the line
                     length     = 360 / resolution;
 
                 var material = new THREE.LineBasicMaterial({
@@ -145,23 +119,11 @@ define(function() {
 
                 var ringLine = new THREE.Line(ringLine, material);
 
-                var ringCentroid = new THREE.Mesh(
-                            new THREE.SphereGeometry(
-                                    1,
-                                    1,
-                                    1
-                                ),
-                                material
-                            );
+                ringLine.rotation.x = Math.PI / 2;
 
-                ringCentroid.rotation.x = planet.axialTilt;
+                thisPlanet.add(ringLine);
 
-                var responseObject = {
-                    line: ringLine,
-                    centroid: ringCentroid
-                };
-
-                promise.resolve(responseObject);
+                promise.resolve();
             });
         }
     };

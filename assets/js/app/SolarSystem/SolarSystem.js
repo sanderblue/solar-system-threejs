@@ -17,7 +17,7 @@ define(function() {
         moonOrbitScale  = 1 * Math.pow(10, -2.55),
         ringOrbitScale  = 1 * Math.pow(10, -2.55),
         orbitScale      = 1 * Math.pow(10, -3.87),
-        axialTiltOffset = 180
+        axialTiltOffset = 1
     ;
 
     // Solar System data
