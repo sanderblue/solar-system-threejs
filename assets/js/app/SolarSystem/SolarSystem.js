@@ -16,7 +16,7 @@ define(function() {
         celestialScale  = 1 * Math.pow(10, -1.88),
         moonOrbitScale  = 1 * Math.pow(10, -2.39),
         ringOrbitScale  = 1 * Math.pow(10, -2.39),
-        orbitScale      = 1 * Math.pow(10, -3.86),
+        orbitScale      = 1 * Math.pow(10, -3.35),
         axialTiltOffset = 1
     ;
 
@@ -1380,12 +1380,12 @@ define(function() {
                 },
             ],
             secondary: [],
-            count: 550, // true number is estimated in the billions within the main astroid belt
+            count: 750, // true number is estimated in the billions within the main astroid belt
             distanceFromParent: 335000000 * orbitScale // 299,000,000 - 400,000,000 km
         },
         stars: {
-            count: 1000,
-            solarSystemRadius: 4503443661 + 9000 * orbitScale,
+            count: 850,
+            solarSystemRadius: 4503443661 + 10000 * orbitScale,
         }
     };
 

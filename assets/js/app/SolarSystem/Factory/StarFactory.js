@@ -37,8 +37,8 @@ define(
                                           shininess: 10000
                                         });
 
-                    var radius             = RandomNumber.getRandomNumberWithinRange(250, 450);
-                        geometry           = new THREE.SphereGeometry(radius, 6, 3),
+                    var radius             = RandomNumber.getRandomNumberWithinRange(350, 500);
+                        geometry           = new THREE.SphereGeometry(radius, 5, 3),
                         Star               = new THREE.Mesh(geometry, material),
                         randomizedPosition = StarFactory.getPosition(i)
                     ;
