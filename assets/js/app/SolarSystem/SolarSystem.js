@@ -16,7 +16,7 @@ define(function() {
         celestialScale  = 1 * Math.pow(10, -1.88),
         moonOrbitScale  = 1 * Math.pow(10, -2.39),
         ringOrbitScale  = 1 * Math.pow(10, -2.39),
-        orbitScale      = 1 * Math.pow(10, -3.35),
+        orbitScale      = 1 * Math.pow(10, -3.49),
         axialTiltOffset = 1
     ;
 
@@ -780,25 +780,25 @@ define(function() {
                         name: 'ζcc',
                         distanceFromParent: 30865 * ringOrbitScale, // 26,840 – 34,890 km (30,865 mean)
                         width: 8000,
-                        color: 0x3d5154
+                        color: 0x45595b
                     },
                     {
                         name: 'ζc',
                         distanceFromParent: 36370 * ringOrbitScale, // 34,890 – 37,850 km (36,370 mean)
                         width: 7500,
-                        color: 0x445456
+                        color: 0x4a5c5e
                     },
                     {
                         name: '1986U2R',
                         distanceFromParent: 38250 * ringOrbitScale, // 37,000 – 39,500 km (38,250 mean)
                         width: 2500,
-                        color: 0x3d4849
+                        color: 0x445051
                     },
                     {
                         name: 'ζ',
                         distanceFromParent: 39600 * ringOrbitScale, // 37,850 – 41,350 km (39,600 mean)
                         width: 3500,
-                        color: 0x3b4647
+                        color: 0x414e4f
                     },
                     {
                         name: 'α',
@@ -822,7 +822,7 @@ define(function() {
                         name: 'ν',
                         distanceFromParent: 68000 * ringOrbitScale, // 66,100 – 69,900 km (39,600 mean)
                         width: 3800,
-                        color: 0x455254
+                        color: 0x505e60
                     },
                     {
                         name: 'μ',
@@ -1040,7 +1040,7 @@ define(function() {
                 uiData: [
                     {
                         key: 'Name',
-                        value: 'Uranus'
+                        value: 'Neptune'
                     },
                     {
                         key: 'Radius',
@@ -1082,27 +1082,27 @@ define(function() {
                 uiData: [
                     {
                         key: 'Name',
-                        value: 'Jupiter'
+                        value: 'Pluto'
                     },
                     {
                         key: 'Radius',
-                        value: '69,911 ±6 km'
+                        value: '1184 ±10 km'
                     },
                     {
                         key: 'Axial Tilt',
-                        value: '3.13°'
+                        value: '119.59°'
                     },
                     {
                         key: 'Semi-major Axis',
-                        value: '778,547,200 km'
+                        value: '5,874,000,000 km'
                     },
                     {
                         key: 'Orbit Duration',
-                        value: '4,329 days'
+                        value: '90,334 days'
                     },
                     {
                         key: 'Inclination',
-                        value: '1.305°'
+                        value: '11.88°'
                     }
                 ]
             },
@@ -1124,27 +1124,27 @@ define(function() {
                 uiData: [
                     {
                         key: 'Name',
-                        value: 'Jupiter'
+                        value: 'Ceres'
                     },
                     {
                         key: 'Radius',
-                        value: '69,911 ±6 km'
+                        value: '476.2 ±2 km'
                     },
                     {
                         key: 'Axial Tilt',
-                        value: '3.13°'
+                        value: '3°'
                     },
                     {
                         key: 'Semi-major Axis',
-                        value: '778,547,200 km'
+                        value: '413,910,000 km'
                     },
                     {
                         key: 'Orbit Duration',
-                        value: '4,329 days'
+                        value: '1,680 days'
                     },
                     {
                         key: 'Inclination',
-                        value: '1.305°'
+                        value: '9.2°'
                     }
                 ]
             },
@@ -1166,27 +1166,27 @@ define(function() {
                 uiData: [
                     {
                         key: 'Name',
-                        value: 'Jupiter'
+                        value: 'Haumea'
                     },
                     {
                         key: 'Radius',
-                        value: '69,911 ±6 km'
+                        value: '620 ±34 km'
                     },
                     {
                         key: 'Axial Tilt',
-                        value: '3.13°'
+                        value: '3.1°'
                     },
                     {
                         key: 'Semi-major Axis',
-                        value: '778,547,200 km'
+                        value: '6,452,455,360 km'
                     },
                     {
                         key: 'Orbit Duration',
-                        value: '4,329 days'
+                        value: '103,468 days'
                     },
                     {
                         key: 'Inclination',
-                        value: '1.305°'
+                        value: '28.22°'
                     }
                 ]
             },
@@ -1208,27 +1208,27 @@ define(function() {
                 uiData: [
                     {
                         key: 'Name',
-                        value: 'Jupiter'
+                        value: 'Makemake'
                     },
                     {
                         key: 'Radius',
-                        value: '69,911 ±6 km'
+                        value: '715 ±7 km'
                     },
                     {
                         key: 'Axial Tilt',
-                        value: '3.13°'
+                        value: '0°'
                     },
                     {
                         key: 'Semi-major Axis',
-                        value: '778,547,200 km'
+                        value: '6,850,236,100 km'
                     },
                     {
                         key: 'Orbit Duration',
-                        value: '4,329 days'
+                        value: '113,183 days'
                     },
                     {
                         key: 'Inclination',
-                        value: '1.305°'
+                        value: '28.96°'
                     }
                 ]
             },
@@ -1380,11 +1380,11 @@ define(function() {
                 },
             ],
             secondary: [],
-            count: 750, // true number is estimated in the billions within the main astroid belt
+            count: 900, // true number is estimated in the billions within the main astroid belt
             distanceFromParent: 335000000 * orbitScale // 299,000,000 - 400,000,000 km
         },
         stars: {
-            count: 850,
+            count: 650,
             solarSystemRadius: 4503443661 + 10000 * orbitScale,
         }
     };

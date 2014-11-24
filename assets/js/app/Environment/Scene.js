@@ -184,7 +184,7 @@ define(
             },
 
             prepareForTravel: function(camera, targetObject) {
-                var liftOffHeight   = 5000,
+                var liftOffHeight   = 6000,
                     liftOffDuration = 3000
                 ;
 
@@ -208,7 +208,7 @@ define(
             },
 
             travelToPoint: function(point, camera, targetObject, centroid) {
-                var travelDuration = 9000; // milliseconds
+                var travelDuration = 8000; // milliseconds
 
                 var cameraTween = new TWEEN.Tween(camera.position).to({
                         x: point.x,

@@ -229,51 +229,42 @@ define(
 
             buildPlanetList: function() {
                 return $.Deferred(function(promise) {
-                    var listElement = $('#planets');
+                    var planetListElement = $('#planets'),
+                        dwarfPlanetListElement = $('#dwarf-planets')
+                    ;
 
-                    listElement.children().remove();
+                    planetListElement.children().remove();
 
                     for (var i = 0; i < SolarSystem.planets.length; i++) {
+                        if (i > 7) {
+                            break;
+                        }
+
                         var planetId = Scene.planets.length ? Scene.planets[i].id : SolarSystem.planets[i].id;
 
-                        var id            = planetId,
-                            name          = SolarSystem.planets[i].name,
-                            orbitDuration = SolarSystem.planets[i].orbitDuration,
-                            axialTilt     = SolarSystem.planets[i].axialTilt,
-                            precision     = 1
-                        ;
-
-                        // listElement.append('<li id="planet-'+ planetId +'" class="planet" data-id="'+ iplanetNamed +'">'+  +'</li>');
+                        // planetListElement.append('<li id="planet-'+ planetId +'" class="planet" data-id="'+ iplanetNamed +'">'+  +'</li>');
                         var planetListItem =
                             '<div class="accordian-subitem planet-item">'
-                            +    '<div id="'+ id +'" class="accordian-subitem-label planet" data-id="'+ id +'">'+ name +'</div>'
-                            +    '<span class="camera-trigger" data-id="'+ id +'"></span>'
-                            +    '<div class="accordian-submenu">'
-                            +        '<div class="accordian-submenu-item">'
-                            +            '<div class="data-container">'
-                            +               '<div class="data-container-row">'
-                            +                   '<div class="left-side">Radius</div>'
-                            +                   '<div class="right-side">'+ SolarSystem.planets[i].radiusString +'</div>'
-                            +                '</div>'
-                            +                '<div class="data-container-row">'
-                            +                   '<div class="left-side">Semi-major Axis</div>'
-                            +                   '<div class="right-side">'+ SolarSystem.planets[i].distanceFromParentString +'</div>'
-                            +                '</div>'
-                            +                '<div class="data-container-row">'
-                            +                   '<div class="left-side">Orbit Duration</div>'
-                            +                   '<div class="right-side">'+ Number(orbitDuration).toFixed(precision) +' Earth days</div>'
-                            +                '</div>'
-                            +                '<div class="data-container-row">'
-                            +                   '<div class="left-side">Axial Tilt</div>'
-                            +                   '<div class="right-side">'+ Number(SolarSystem.planets[i].axialTiltDegrees).toFixed(precision) +'˚</div>'
-                            +                '</div>'
-                            +            '</div>'
-                            +        '</div>'
-                            +    '</div>'
+                            +    '<div id="'+ planetId +'" class="accordian-subitem-label planet" data-id="'+ planetId +'">'+ SolarSystem.planets[i].name +'</div>'
                             +'</div>'
                         ;
 
-                        listElement.append(planetListItem);
+                        planetListElement.append(planetListItem);
+                    }
+
+                    dwarfPlanetListElement.children().remove();
+
+                    for (var n = 8; n < SolarSystem.planets.length; n++) {
+                        var planetId = Scene.planets.length ? Scene.planets[n].id : SolarSystem.planets[n].id;
+
+                        var dawrfPlanetListItem =
+                            '<div class="accordian-subitem planet-item">'
+                            +    '<div id="'+ planetId +'" class="accordian-subitem-label planet" data-id="'+ planetId +'">'+ SolarSystem.planets[n].name +'</div>'
+                            +'</div>'
+                        ;
+
+
+                        dwarfPlanetListElement.append(dawrfPlanetListItem);
                     }
 
                     var camaraReset = '<div class="camera-reset">Reset Camera</div>'

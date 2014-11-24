@@ -72,10 +72,10 @@ define(
              * @param count   [integer]
              */
             positionAstroid: function(astroid, count) {
-                var amplitude = SolarSystem.asteroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 115; // randomize the amplitudes to spread them out
+                var amplitude = SolarSystem.asteroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 150; // randomize the amplitudes to spread them out
 
                 var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, amplitude)
-                    * Math.cos(count + 25 * Math.random()
+                    * Math.cos(count + 35 * Math.random()
                     * AsteroidBeltFactory.getAstroidRadian()
                     * Constants.degreesToRadiansRatio)
                 ;
@@ -109,7 +109,7 @@ define(
 
                     var materials = [
                         new THREE.MeshLambertMaterial({ map: texture }),
-                        new THREE.MeshLambertMaterial({ emissive: 0x79849E, transparent: true, opacity: 0.3 })
+                        new THREE.MeshLambertMaterial({ emissive: 0x79849E, transparent: true, opacity: 0.2, wireframe: true })
                     ];
                     // Random convex mesh to represent an irregular, rock-like shape based on random points within a sphere where radius = n(random)
                     var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), materials),
@@ -119,7 +119,7 @@ define(
                     ;
 
                     // Create a random orbit inclination to give the Asteroid Belt some "depth"
-                    var orbitInclination = (Math.random() * RandomNumber.getRandomNumberWithinRange(1, 5) / 150) * offset;
+                    var orbitInclination = (Math.random() * RandomNumber.getRandomNumberWithinRange(1, 6) / 150) * offset;
 
                     centroid.rotation.x = orbitInclination;
                     centroid.add(object);
