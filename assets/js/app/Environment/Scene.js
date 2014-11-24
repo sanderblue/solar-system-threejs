@@ -27,7 +27,7 @@ define(
             tilt: 200,
             scene: null,
             camera: null,
-            brightness: 0.2,
+            brightness: 0.23,
             currentRadian: 0.0174532925 * 200,
             perspective: Camera.perspective,
             planetObjects: [],
@@ -128,7 +128,7 @@ define(
 
                 var targetObject   = target,
                     targetPosition = target.position,
-                    offset         = target.geometry.radius * 6,
+                    offset         = target.geometry.radius * 5.83,
                     posX           = targetPosition.x + offset,
                     posY           = targetPosition.y,
                     posZ           = 0.4 * target.geometry.radius
@@ -184,11 +184,15 @@ define(
             },
 
             prepareForTravel: function(camera, targetObject) {
+                var liftOffHeight   = 5000,
+                    liftOffDuration = 3000
+                ;
+
                 return $.Deferred(function(promise) {
                     var cameraTween = new TWEEN.Tween(camera.position).to({
                             x: camera.position.x,
                             y: camera.position.y,
-                            z: camera.position.z + 3500 }, 4500)
+                            z: camera.position.z + liftOffHeight }, liftOffDuration)
                         .easing(TWEEN.Easing.Cubic.InOut)
                         .onUpdate(function() {
                             Scene.setCameraFocalPoint(targetObject.position);
@@ -204,7 +208,7 @@ define(
             },
 
             travelToPoint: function(point, camera, targetObject, centroid) {
-                var travelDuration = 7500;
+                var travelDuration = 9000; // milliseconds
 
                 var cameraTween = new TWEEN.Tween(camera.position).to({
                         x: point.x,

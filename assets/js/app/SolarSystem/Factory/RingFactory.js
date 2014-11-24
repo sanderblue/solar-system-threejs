@@ -52,14 +52,6 @@ define(function() {
                                     linejoin: 'round'
                                   });
 
-                if (material.linewidth > 1) {
-                    material.linewidth = 0.7;
-
-                    if (planet.name === 'Jupiter') {
-                        material.linewidth = 0.1;
-                    }
-                }
-
                 var ringLine = new THREE.Geometry();
 
                 for (var i = 0; i <= resolution; i++) {
@@ -91,17 +83,9 @@ define(function() {
 
                 var material = new THREE.LineBasicMaterial({
                                     color: ring.color,
-                                    linewidth: ring.width * 0.00001,
+                                    linewidth: 0.1,
                                     linejoin: 'round'
                                   });
-
-                if (material.linewidth > 1) {
-                    material.linewidth = 0.7;
-
-                    if (planet.name === 'Jupiter') {
-                        material.linewidth = material.linewidth - 0.3;
-                    }
-                }
 
                 var ringLine = new THREE.Geometry();
 
