@@ -57,7 +57,7 @@ define(
                 }
 
                 if (App.config.build.AsteroidBeltFactoryEnabled) {
-                    Scene.asteroidBelt.rotation.z += -0.00008
+                    Scene.asteroidBelt.rotation.z += -0.000078
                 }
 
                 for (var i = 0; i < planets.length; i++) {

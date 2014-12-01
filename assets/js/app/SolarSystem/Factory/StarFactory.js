@@ -15,7 +15,7 @@ define(
         var StarFactory = {
 
             starsCentriod: new THREE.Object3D({ name: 'stars_centriod' }),
-            distanceFromCenter: 6750236100 * SolarSystem.orbitScale + 500000,
+            distanceFromCenter: 6753036100 * SolarSystem.orbitScale,
 
             getPosition: function(i) {
                 var isSecond    = i % 2 == 0,
@@ -34,10 +34,10 @@ define(
                     var material = new THREE.MeshLambertMaterial({
                                           ambient: 0xffffff,
                                           emissive: 0xffffff,
-                                          shininess: 10000
+                                          shininess: 1000
                                         });
 
-                    var radius             = RandomNumber.getRandomNumberWithinRange(1150, 1320);
+                    var radius             = RandomNumber.getRandomNumberWithinRange(SolarSystem.stars.sizeRange.min, SolarSystem.stars.sizeRange.max);
                         geometry           = new THREE.SphereGeometry(radius, 5, 3),
                         Star               = new THREE.Mesh(geometry, material),
                         randomizedPosition = StarFactory.getPosition(i)

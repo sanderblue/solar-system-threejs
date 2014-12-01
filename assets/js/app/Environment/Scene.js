@@ -184,8 +184,8 @@ define(
             },
 
             prepareForTravel: function(camera, targetObject) {
-                var liftOffHeight   = 6000,
-                    liftOffDuration = 3000
+                var liftOffHeight   = 6700,
+                    liftOffDuration = 3200
                 ;
 
                 return $.Deferred(function(promise) {

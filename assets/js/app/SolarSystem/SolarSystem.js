@@ -12,16 +12,19 @@ define(function() {
      */
 
     // Inital scales
-    var sunScale        = 1 * Math.pow(10, -1.88),
-        celestialScale  = 1 * Math.pow(10, -1.88),
-        moonOrbitScale  = 1 * Math.pow(10, -2.39),
-        ringOrbitScale  = 1 * Math.pow(10, -2.39),
-        orbitScale      = 1 * Math.pow(10, -3.49),
+    var scaleOffset     = 0.835, // only for fast prototyping of setting each of the scales below
+        sunScale        = 1 * Math.pow(10, -1.88) * scaleOffset,
+        celestialScale  = 1 * Math.pow(10, -1.88) * scaleOffset,
+        moonOrbitScale  = 1 * Math.pow(10, -2.39) * scaleOffset,
+        ringOrbitScale  = 1 * Math.pow(10, -2.39) * scaleOffset,
+        orbitScale      = 1 * Math.pow(10, -3.49) * scaleOffset,
+        starScale       = 1 * scaleOffset, // arbitrary sizes - for UI and viewing experience only (for the time being)
         axialTiltOffset = 1
     ;
 
     // Solar System data
     var SolarSystem = {
+        scaleOffset: scaleOffset,
         orbitScale: orbitScale,
         celestialScale: celestialScale,
         moonOrbitScale: moonOrbitScale,
@@ -834,70 +837,70 @@ define(function() {
                 moons: [
                     {
                         name: 'Cressida',
-                        radius: 39.8 * celestialScale + 2.398, // 39.8 ±2 km
+                        radius: 39.8 * celestialScale + 4.398, // 39.8 ±2 km
                         orbitDuration: 0.46357,
                         distanceFromParent: 61766.730 * moonOrbitScale, // 61,766.730 ±0.046 km
                         inclination: 0.046 / 180 * Math.PI
                     },
                     {
                         name: 'Juliet',
-                        radius: 46.8 * celestialScale + 2.468, // 46.8 ±4 km
+                        radius: 46.8 * celestialScale + 4.468, // 46.8 ±4 km
                         orbitDuration: 0.49307,
                         distanceFromParent: 64358.222 * moonOrbitScale, // 64,358.222 ±0.048 km
                         inclination: 0.10546 / 180 * Math.PI
                     },
                     {
                         name: 'Portia',
-                        radius: 67.6 * celestialScale + 2.676, // 67.6 ±4 km
+                        radius: 67.6 * celestialScale + 4.676, // 67.6 ±4 km
                         orbitDuration: 0.513196,
                         distanceFromParent: 66097.265 * moonOrbitScale, // 66,097.265 ±0.050 km
                         inclination: 0.09808 / 180 * Math.PI
                     },
                     {
                         name: 'Belinda',
-                        radius: 40.3 * celestialScale + 2.403, // 40.3 ±8 km
+                        radius: 40.3 * celestialScale + 4.403, // 40.3 ±8 km
                         orbitDuration: 0.62353,
                         distanceFromParent: 75255.613 * moonOrbitScale, // 75,255.613 ± 0.057 km
                         inclination: 0.0306 / 180 * Math.PI
                     },
                     {
                         name: 'Puck',
-                        radius: 81 * celestialScale + 2.81, // (81 ± 2 km)
+                        radius: 81 * celestialScale + 4.81, // (81 ± 2 km)
                         orbitDuration: 0.7618,
                         distanceFromParent: 86004.444 * moonOrbitScale, // 86,004.444 km
                         inclination: 0.3192 / 180 * Math.PI
                     },
                     {
                         name: 'Miranda',
-                        radius: 235.8 * celestialScale + 0.35, // 235.8 ±0.7 km
+                        radius: 235.8 * celestialScale + 1.35, // 235.8 ±0.7 km
                         orbitDuration: 1.4135,
                         distanceFromParent: 129390 * moonOrbitScale, // 129,390 km
                         inclination: 4.232 / 180 * Math.PI
                     },
                     {
                         name: 'Ariel',
-                        radius: 578.9 * celestialScale + 0.78, // 578.9 ±0.6 km
+                        radius: 578.9 * celestialScale + 1.78, // 578.9 ±0.6 km
                         orbitDuration: 2.520,
                         distanceFromParent: 191020 * moonOrbitScale, // 191,020 km
                         inclination: 0.26 / 180 * Math.PI
                     },
                     {
                         name: 'Umbriel',
-                        radius: 584.7 * celestialScale + 0.84, // 584.7 ±2.8 km
+                        radius: 584.7 * celestialScale + 1.84, // 584.7 ±2.8 km
                         orbitDuration: 4.144,
                         distanceFromParent: 266000 * moonOrbitScale, // 266,000 km
                         inclination: 0.128 / 180 * Math.PI
                     },
                     {
                         name: 'Titania',
-                        radius: 788.4 * celestialScale + 0.88, // 788.4 ±0.6 km
+                        radius: 788.4 * celestialScale + 1.88, // 788.4 ±0.6 km
                         orbitDuration: 8.7062,
                         distanceFromParent: 435910 * moonOrbitScale, // 435,910 km
                         inclination: 0.34 / 180 * Math.PI
                     },
                     {
                         name: 'Oberon',
-                        radius: 761.4 * celestialScale + 0.61, // 761.4 ±2.6 km
+                        radius: 761.4 * celestialScale + 1.61, // 761.4 ±2.6 km
                         orbitDuration: 13.4632,
                         distanceFromParent: 583520 * moonOrbitScale, // 583,520 km
                         inclination: 0.058 / 180 * Math.PI
@@ -1231,7 +1234,8 @@ define(function() {
                         value: '28.96°'
                     }
                 ]
-            },
+            }
+            // ,
             // {
             //     id: 12,
             //     name: 'Eris',
@@ -1241,19 +1245,19 @@ define(function() {
             //     distanceFromParentString: '10,166,372,100 km',
             //     orbitDuration: 204624,
             //     inclination: 43.89 / 180 * Math.PI,
-            //     axialTilt: axialTiltOffset + 3 / 180 * Math.PI,
-            //     axialTiltDegrees: 3,
+            //     axialTilt: axialTiltOffset + 44.04 / 180 * Math.PI,
+            //     axialTiltDegrees: 44.04,
             //     moons: [],
             //     texture: null,
             //     rings: [],
             //     uiData: [
             //         {
             //             key: 'Name',
-            //             value: 'Jupiter'
+            //             value: 'Eris'
             //         },
             //         {
             //             key: 'Radius',
-            //             value: '69,911 ±6 km'
+            //             value: '1163 ±6 km'
             //         },
             //         {
             //             key: 'Axial Tilt',
@@ -1261,15 +1265,15 @@ define(function() {
             //         },
             //         {
             //             key: 'Semi-major Axis',
-            //             value: '778,547,200 km'
+            //             value: '10,166,372,100 km'
             //         },
             //         {
             //             key: 'Orbit Duration',
-            //             value: '4,329 days'
+            //             value: '20,4624 days'
             //         },
             //         {
             //             key: 'Inclination',
-            //             value: '1.305°'
+            //             value: '44.04°'
             //         }
             //     ]
             // }
@@ -1380,16 +1384,18 @@ define(function() {
                 },
             ],
             secondary: [],
-            count: 900, // true number is estimated in the billions within the main astroid belt
-            distanceFromParent: 335000000 * orbitScale // 299,000,000 - 400,000,000 km
+            count: 630, // true number is estimated in the billions within the main astroid belt
+            distanceFromParent: 337000000 * orbitScale // 299,000,000 - 400,000,000 km
         },
         stars: {
-            count: 650,
-            solarSystemRadius: 4503443661 + 10000 * orbitScale,
+            count: 790,
+            sizeRange: {
+                min: 700,
+                max: 950,
+            },
+            solarSystemRadius: 4503443661 * orbitScale,
         }
     };
-
-    console.log('Solar System ', SolarSystem, 149000 * 1.07);
 
     return SolarSystem;
 });
