@@ -1391,7 +1391,7 @@ define(function() {
             count: 790,
             sizeRange: {
                 min: 700,
-                max: 950,
+                max: 925,
             },
             solarSystemRadius: 4503443661 * orbitScale,
         }
