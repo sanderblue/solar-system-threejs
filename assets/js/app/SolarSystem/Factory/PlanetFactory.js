@@ -8,9 +8,10 @@ define(
         'OrbitFactory',
         'TimerUtil',
         'TimeController',
+        'Constants',
         'System'
     ],
-    function($, Scene, SolarSystem, RingFactory, MoonFactory, OrbitFactory, TimerUtil, TimeController, System) {
+    function($, Scene, SolarSystem, RingFactory, MoonFactory, OrbitFactory, TimerUtil, TimeController, Constants, System) {
 
         var factory = MoonFactory;
 
@@ -46,7 +47,7 @@ define(
                 var material = new THREE.MeshPhongMaterial({
                     map         : THREE.ImageUtils.loadTexture('/textures/earth_clouds_fair2.png'),
                     transparent : true,
-                    opacity     : 0.8,
+                    opacity     : 0.78,
                 });
 
                 return new THREE.Mesh(geometry, material);
@@ -74,14 +75,7 @@ define(
              * @param planet [THREE object]
              */
             getPlanetCore: function(planet, material) {
-                var core = new THREE.Mesh(
-                                new THREE.SphereGeometry(
-                                        1,
-                                        1,
-                                        1
-                                    ),
-                                    material
-                                );
+                var core = new THREE.Mesh(new THREE.SphereGeometry(1, 1, 1), material);
 
                 // We need to flip the core's axis
                 core.rotation.x = Math.PI / 2;
@@ -104,6 +98,8 @@ define(
                     var startTime            = new Date().getTime(),
                         degreesToRadianRatio = 0.0174532925
                     ;
+
+                    Scene.planetObjects.push(planet);
 
                     // Create our orbit line geometry first
                     OrbitFactory.build(planet);
@@ -167,8 +163,8 @@ define(
                         orbitCentroid.rotation.y = planet.inclination;
                     }
 
+                    // thisPlanet.rotation.x = planet.axialTilt;
                     thisPlanet.rotation.x = planet.axialTilt;
-                    thisPlanet.rotation.x = Math.PI / 2;
                     thisPlanet.name       = planet.name;
 
                     var core = PlanetFactory.getPlanetCore(thisPlanet, coreMaterial);
@@ -188,7 +184,7 @@ define(
                     }
 
                     PlanetFactory.addMoons(planet, thisPlanet).done(function() {
-                        RingFactory.buildRings(thisPlanet, planet).done(function(response) {
+                        RingFactory.buildRings(thisPlanet, planet).done(function() {
                             var count = new Date().getDOYwithTimeAsDecimal() + TimeController.getTime();
 
                             var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, planet.distanceFromParent)

@@ -27,9 +27,10 @@ define(
             tilt: 200,
             scene: null,
             camera: null,
-            brightness: 0.2,
+            brightness: 0.23,
             currentRadian: 0.0174532925 * 200,
             perspective: Camera.perspective,
+            planetObjects: [],
 
             setContainer: function() {
                 Scene.container = document.getElementById('solar-system');
@@ -52,8 +53,8 @@ define(
                     directionalLightFromBottom = new THREE.DirectionalLight(0xffffff, Scene.brightness, { target: new THREE.Vector3(0, 0, 0)})
                 ;
 
-                directionalLightFromTop.position.set(0, 0, 7500);
-                directionalLightFromBottom.position.set(0, 0, -7500);
+                directionalLightFromTop.position.set(0, 0, 7000);
+                directionalLightFromBottom.position.set(0, 0, -7000);
 
                 Scene.scene.add(directionalLightFromTop);
                 Scene.scene.add(directionalLightFromBottom);
@@ -127,7 +128,7 @@ define(
 
                 var targetObject   = target,
                     targetPosition = target.position,
-                    offset         = target.geometry.radius * 6,
+                    offset         = target.geometry.radius * 5.83,
                     posX           = targetPosition.x + offset,
                     posY           = targetPosition.y,
                     posZ           = 0.4 * target.geometry.radius
@@ -183,11 +184,15 @@ define(
             },
 
             prepareForTravel: function(camera, targetObject) {
+                var liftOffHeight   = 6700,
+                    liftOffDuration = 3200
+                ;
+
                 return $.Deferred(function(promise) {
                     var cameraTween = new TWEEN.Tween(camera.position).to({
                             x: camera.position.x,
                             y: camera.position.y,
-                            z: camera.position.z + 3500 }, 4500)
+                            z: camera.position.z + liftOffHeight }, liftOffDuration)
                         .easing(TWEEN.Easing.Cubic.InOut)
                         .onUpdate(function() {
                             Scene.setCameraFocalPoint(targetObject.position);
@@ -203,7 +208,7 @@ define(
             },
 
             travelToPoint: function(point, camera, targetObject, centroid) {
-                var travelDuration = 7500;
+                var travelDuration = 8000; // milliseconds
 
                 var cameraTween = new TWEEN.Tween(camera.position).to({
                         x: point.x,

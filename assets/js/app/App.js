@@ -8,6 +8,7 @@ define(function() {
             SceneEnabled: true,
             SunFactoryEnabled: true,
             PlanetFactoryEnabled: true,
+            DwarfPlanetFactoryEnabled: false,
             MoonFactoryEnabled: true,
             AsteroidBeltFactoryEnabled: true,
             RingFactoryEnabled: true,

@@ -33,12 +33,12 @@ define(
 
                     var sunGeometry = new THREE.SphereGeometry(
                                             SolarSystem.parent.radius,
-                                            100,
-                                            80
+                                            120,
+                                            90
                                         );
 
                     var Sun = new THREE.Mesh(sunGeometry, material),
-                        pointLight = new THREE.PointLight(0xffffff, 1.3)
+                        pointLight = new THREE.PointLight(0xffffff, 1.12)
                     ;
 
                     // Flip axis

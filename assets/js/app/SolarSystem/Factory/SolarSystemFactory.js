@@ -96,6 +96,30 @@ define(
                 });
             },
 
+            buildDwarfPlanets: function(buildStatusPrompt) {
+                if (!App.config.build.DwarfPlanetFactoryEnabled) {
+                    return $.Deferred(function(promise) { return promise.resolve() });
+                }
+
+                var startTime = new Date().getTime(),
+                    dwarfPlanets = SolarSystem.dwarfPlanets,
+                    promises = []
+                ;
+
+                for (var i = 0; i < dwarfPlanets.length; i++) {
+                    promises.push(PlanetFactory.build(dwarfPlanets[i], buildStatusPrompt));
+                }
+
+                return $.when.apply($, promises).done(function() {
+                    var endTime = new Date().getTime(),
+                        statusMessage = 'Planet Factory done building dwarf planets in ' +  TimerUtil.getElapsedTime(startTime, endTime) + ' milliseconds.'
+                    ;
+
+                    buildStatusPrompt.append('<div class="status-message">'+ statusMessage + '</div>');
+                    System.log(statusMessage);
+                });
+            },
+
             buildStars: function(buildStatusPrompt) {
                 return $.Deferred(function(promise) {
                     if (!App.config.build.StarFactoryEnabled) {
@@ -128,6 +152,7 @@ define(
                 return $.when(
                     SolarSystemFactory.buildParent(buildStatusPrompt),
                     SolarSystemFactory.buildPlanets(buildStatusPrompt),
+                    SolarSystemFactory.buildDwarfPlanets(buildStatusPrompt),
                     SolarSystemFactory.buildAsteroidBelt(buildStatusPrompt),
                     SolarSystemFactory.buildStars(buildStatusPrompt)
                 )

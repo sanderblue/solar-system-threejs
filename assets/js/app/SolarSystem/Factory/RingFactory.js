@@ -15,131 +15,47 @@ define(function() {
          */
         buildRings: function(thisPlanet, planet) {
             return $.Deferred(function(promise) {
-                var hasRings = Boolean(planet.rings.length);
+                if (!planet.rings.length) {
+                    return promise.resolve();
+                }
 
-                if (hasRings) {
-                    var rings = planet.rings;
+                for (var i = 0; i < planet.rings.length; i++) {
+                    RingFactory.buildRing(planet, planet.rings[i], thisPlanet);
 
-                    for (var i = 0; i < rings.length; i++) {
-                        $.when(
-                            RingFactory.buildRing(planet, rings[i])
-                        )
-                        .done(function(response) {
-                            response.centroid.add(response.line);
-
-                            thisPlanet.add(response.centroid);
-                        });
-
-                        if (rings[i].subRings && rings[i].subRings.length) {
-                            for (var n = 0; n < rings[i].subRings.length; n++) {
-                                $.when(
-                                    RingFactory.buildSubRing(planet, rings[i].subRings[n])
-                                )
-                                .done(function(response) {
-                                    response.centroid.add(response.line);
-
-                                    thisPlanet.add(response.centroid);
-                                });
-                            }
+                    if (planet.rings[i].subRings && planet.rings[i].subRings.length) {
+                        for (var n = 0; n < planet.rings[i].subRings.length; n++) {
+                            RingFactory.buildSubRing(planet, planet.rings[i].subRings[n], thisPlanet);
                         }
                     }
-
-                    var promiseObject = {
-                        planet: planet,
-                        thisPlanet: thisPlanet
-                    };
-
-                    promise.resolve(promiseObject);
-
-                } else {
-                    var promiseObject = {
-                        planet: planet,
-                        thisPlanet: thisPlanet
-                    };
-
-                    promise.resolve(promiseObject);
                 }
+
+                promise.resolve();
             });
         },
 
         /**
          * Builds a single ring.
          *
-         * @param planet [object]
-         * @param ring   [object]
+         * @param planet     [object]
+         * @param ring       [object]
+         * @param thisPlanet [THREE object]
          */
-        buildRing: function(planet, ring) {
+        buildRing: function(planet, ring, thisPlanet) {
             return $.Deferred(function(promise) {
-                var resolution = 640, // segments in the line
-                    size       = 360 / resolution
+                var resolution = 720, // segments in the line
+                    length     = 360 / resolution
                 ;
 
                 var material = new THREE.LineBasicMaterial({
                                     color: ring.color,
-                                    linewidth: ring.width * 0.00001,
+                                    linewidth: 0.1,
                                     linejoin: 'round'
                                   });
-
-                if (material.linewidth > 1) {
-                    material.linewidth = 0.7;
-
-                    if (planet.name === 'Jupiter') {
-                        material.linewidth = material.linewidth - 0.3;
-                    }
-                }
 
                 var ringLine = new THREE.Geometry();
 
                 for (var i = 0; i <= resolution; i++) {
-                    var segment = (i * size) * Math.PI / 180;
-
-                    ringLine.vertices.push(
-                        new THREE.Vector3(
-                            Math.cos(segment) * (ring.distanceFromParent + planet.radius),
-                            Math.sin(segment) * (ring.distanceFromParent + planet.radius),
-                            0
-                        )
-                    );
-                }
-
-                var ringLine     = new THREE.Line(ringLine, material),
-                    ringCentroid = new THREE.Object3D()
-                ;
-
-                ringCentroid.rotation.x = planet.axialTilt;
-
-                var responseObject = {
-                    line: ringLine,
-                    centroid: ringCentroid
-                };
-
-                promise.resolve(responseObject);
-            });
-        },
-
-        buildSubRing: function(planet, ring) {
-            return $.Deferred(function(promise) {
-                var resolution = 540, // segments in the line
-                    size       = 360 / resolution;
-
-                var material = new THREE.LineBasicMaterial({
-                                    color: ring.color,
-                                    linewidth: ring.width * 0.00001,
-                                    linejoin: 'round'
-                                  });
-
-                if (material.linewidth > 1) {
-                    material.linewidth = 0.7;
-
-                    if (planet.name === 'Jupiter') {
-                        material.linewidth = material.linewidth - 0.3;
-                    }
-                }
-
-                var ringLine = new THREE.Geometry();
-
-                for (var i = 0; i <= resolution; i++) {
-                    var segment = (i * size) * Math.PI / 180;
+                    var segment = (i * length) * Math.PI / 180;
 
                     ringLine.vertices.push(
                         new THREE.Vector3(
@@ -152,23 +68,46 @@ define(function() {
 
                 var ringLine = new THREE.Line(ringLine, material);
 
-                var ringCentroid = new THREE.Mesh(
-                            new THREE.SphereGeometry(
-                                    1,
-                                    1,
-                                    1
-                                ),
-                                material
-                            );
+                ringLine.rotation.x = Math.PI / 2;
 
-                ringCentroid.rotation.x = planet.axialTilt;
+                thisPlanet.add(ringLine);
 
-                var responseObject = {
-                    line: ringLine,
-                    centroid: ringCentroid
-                };
+                promise.resolve();
+            });
+        },
 
-                promise.resolve(responseObject);
+        buildSubRing: function(planet, ring, thisPlanet) {
+            return $.Deferred(function(promise) {
+                var resolution = 720, // segments in the line
+                    length     = 360 / resolution;
+
+                var material = new THREE.LineBasicMaterial({
+                                    color: ring.color,
+                                    linewidth: 0.1,
+                                    linejoin: 'round'
+                                  });
+
+                var ringLine = new THREE.Geometry();
+
+                for (var i = 0; i <= resolution; i++) {
+                    var segment = (i * length) * Math.PI / 180;
+
+                    ringLine.vertices.push(
+                        new THREE.Vector3(
+                            Math.cos(segment) * (ring.distanceFromParent + planet.radius),
+                            Math.sin(segment) * (ring.distanceFromParent + planet.radius),
+                            0
+                        )
+                    );
+                }
+
+                var ringLine = new THREE.Line(ringLine, material);
+
+                ringLine.rotation.x = Math.PI / 2;
+
+                thisPlanet.add(ringLine);
+
+                promise.resolve();
             });
         }
     };

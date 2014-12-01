@@ -17,6 +17,8 @@ define(
          */
         var AsteroidBeltFactory = {
 
+            asteroidBelt: new THREE.Object3D({ name: 'asteroid_belt_centroid' }),
+
             /**
              * Gets a generic texture for an astroid.
              */
@@ -48,13 +50,13 @@ define(
 
             /**
              * Builds the random points that create a unique shape for each astroid.
-             * Each asteriod has a max radius of ~13 units.
+             * Each asteroid has a max radius of ~13 units.
              */
             buildRandomPoints: function() {
                 var points = [];
 
-                for (var i = 0; i < 5; i ++) {
-                    var radius = (Math.random() * 1100) * SolarSystem.celestialScale + (i + 1.5);
+                for (var i = 0; i < 7; i ++) {
+                    var radius = (Math.random() * 6300) * SolarSystem.celestialScale + (i * 2);
 
                     points.push(AsteroidBeltFactory.getRandomPointCoordinate(radius));
                 }
@@ -70,16 +72,16 @@ define(
              * @param count   [integer]
              */
             positionAstroid: function(astroid, count) {
-                var amplitude = SolarSystem.asteroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 115; // randomize the amplitudes to spread them out
+                var amplitude = SolarSystem.asteroidBelt.distanceFromParent + RandomNumber.getRandomNumber() * 170; // randomize the amplitudes to spread them out
 
                 var posX = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, amplitude)
-                    * Math.cos(count + 25 * Math.random()
+                    * Math.cos(count + 35 * Math.random()
                     * AsteroidBeltFactory.getAstroidRadian()
                     * Constants.degreesToRadiansRatio)
                 ;
 
                 var posY = OrbitFactory.getOrbitAmplitute(SolarSystem.parent, amplitude)
-                    * Math.sin(count + 45 * Math.random()
+                    * Math.sin(count + 50 * Math.random()
                     * AsteroidBeltFactory.getAstroidRadian()
                     * Constants.degreesToRadiansRatio)
                 ;
@@ -96,20 +98,19 @@ define(
              *
              * @param index [integer]
              */
-            buildAstroid: function(index) {
+            buildAstroid: function(index, addBelt) {
                 return $.Deferred(function(promise) {
                     var randomPoints = AsteroidBeltFactory.buildRandomPoints(),
-                        map          = AsteroidBeltFactory.getTexture()
+                        texture      = AsteroidBeltFactory.getTexture()
                     ;
 
-                    map.wrapS = map.wrapT = THREE.RepeatWrapping;
-                    map.anisotropy = 1;
+                    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+                    texture.anisotropy = 1;
 
                     var materials = [
-                        new THREE.MeshLambertMaterial({ map: map }),
-                        new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 1 })
+                        new THREE.MeshLambertMaterial({ map: texture }),
+                        new THREE.MeshLambertMaterial({ emissive: 0x79849E, transparent: true, opacity: 0.2, wireframe: true })
                     ];
-
                     // Random convex mesh to represent an irregular, rock-like shape based on random points within a sphere where radius = n(random)
                     var object = THREE.SceneUtils.createMultiMaterialObject(new THREE.ConvexGeometry(randomPoints), materials),
                         centroid = new THREE.Object3D(),
@@ -118,16 +119,19 @@ define(
                     ;
 
                     // Create a random orbit inclination to give the Asteroid Belt some "depth"
-                    var orbitInclination = (Math.random() * RandomNumber.getRandomNumberWithinRange(1, 3) / 180 * Math.PI * 0.375) * offset;
+                    var orbitInclination = (Math.random() * RandomNumber.getRandomNumberWithinRange(1, 6) / 150) * offset;
 
                     centroid.rotation.x = orbitInclination;
-
                     centroid.add(object);
 
                     AsteroidBeltFactory.positionAstroid(object, index);
                     AsteroidBeltFactory.addAstroid(centroid);
 
                     Scene.astroids.push(object);
+
+                    if (addBelt) {
+                        AsteroidBeltFactory.addAstroidBelt();
+                    }
 
                     promise.resolve();
                 });
@@ -137,10 +141,12 @@ define(
              * Builds the entire astroid belt based on the configured astroid count.
              */
             buildBelt: function() {
-                var astroids = SolarSystem.asteroidBelt.count;
+                for (var i = 0; i < SolarSystem.asteroidBelt.count; i++) {
+                    if (i === SolarSystem.asteroidBelt.count - 1) {
+                        AsteroidBeltFactory.buildAstroid(i, true);
+                    }
 
-                for (var i = 0; i < astroids; i++) {
-                    AsteroidBeltFactory.buildAstroid(i);
+                    AsteroidBeltFactory.buildAstroid(i, false);
                 }
             },
 
@@ -150,7 +156,12 @@ define(
              * @param astroid [THREE object]
              */
             addAstroid: function(astroid) {
-                Scene.scene.add(astroid);
+                AsteroidBeltFactory.asteroidBelt.add(astroid);
+            },
+
+            addAstroidBelt: function() {
+                Scene.asteroidBelt = AsteroidBeltFactory.asteroidBelt;
+                Scene.scene.add(AsteroidBeltFactory.asteroidBelt);
             }
         };
 
