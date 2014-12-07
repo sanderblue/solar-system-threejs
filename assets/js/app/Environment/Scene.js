@@ -224,7 +224,7 @@ define(
                         Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
                         Scene.camera.up.set(0, 1, 0);
 
-                        var newPosX = Math.abs(Scene.camera.position.x - targetObject.position.x),
+                        var newPosX = Math.abs(Scene.camera.position.x - targetObject.position.x) * 0.7,
                             newPosY = 0.5 * targetObject.geometry.radius
                         ;
 
