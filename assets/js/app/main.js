@@ -3,6 +3,7 @@ define(
         'jquery',
         'App',
         'Scene',
+        'Camera',
         'Initializer',
         'PlanetFactory',
         'OrbitFactory',
@@ -17,6 +18,7 @@ define(
         $,
         App,
         Scene,
+        Camera,
         Initializer,
         PlanetFactory,
         OrbitFactory,
@@ -118,9 +120,30 @@ define(
             },
 
             renderSolarSystem: function() {
+                var Europa = Scene.majorMoons[0];
+
                 MainController.positionPlanets();
                 MainController.positionMoons();
                 MainController.animate();
+
+                // Scene.planets[4].add(Scene.camera);
+
+                Europa.add(Scene.camera);
+
+                // Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
+
+                Scene.camera.position.x = 90;
+                Scene.camera.position.y = 70;
+                Scene.camera.position.z = 45;
+
+                console.log(
+                    Europa, '\n',
+                    Scene.camera, '\n'
+                );
+
+                // window.focalPoint = new THREE.Vector3(100,0,0);
+
+                // Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
             },
 
             init: function() {

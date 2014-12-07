@@ -6,14 +6,33 @@ define(
     function(Scene, System) {
 
         var MoonFactory = {
+
             /**
-             * Gets a moon's texture. Currently only using one texture. I will eventually use
-             * moon surface textures for the major moons of the Solar System, such as Europa and Titan.
+             * Gets a moon's texture.
              *
-             * @param moon [object] // currently not required
+             * @param moon [object]
              */
             getMoonTexture: function(moon) {
-                return new THREE.ImageUtils.loadTexture('/textures/moon.jpg');
+                switch (moon.name) {
+                    case 'Europa':
+                        // console.log("Europa\n");
+                        return new THREE.ImageUtils.loadTexture('/textures/europa.jpg');
+                        break;
+                    case 'Titan':
+                        // console.log("Titan\n");
+                        return new THREE.ImageUtils.loadTexture('/textures/moon.jpg');
+                        break;
+                    case 'Io':
+                        // console.log("Io\n");
+                        return new THREE.ImageUtils.loadTexture('/textures/moon.jpg');
+                        break;
+                    case 'Iapetus':
+                        // console.log("Iapetus\n");
+                        return new THREE.ImageUtils.loadTexture('/textures/moon.jpg');
+                        break;
+                    default:
+                        return new THREE.ImageUtils.loadTexture('/textures/moon.jpg');
+                }
             },
 
             /**
@@ -24,17 +43,25 @@ define(
              * @param planetObj [THREE object]
              */
             buildMoon: function(parent, moon, planetObj) {
-                var texture =  MoonFactory.getMoonTexture();
+                var texture =  MoonFactory.getMoonTexture(moon);
 
                 texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
-                var material = new THREE.MeshLambertMaterial({ map: texture });
+                var material = new THREE.MeshLambertMaterial({ map: texture }),
+                    widthSegments = 20,
+                    heightSegments = 14
+                ;
+
+                if (moon.name == 'Europa') {
+                    widthSegments = 42;
+                    heightSegments = 42;
+                }
 
                 thisMoon = new THREE.Mesh(
                             new THREE.SphereGeometry(
                                     moon.radius,
-                                    24,
-                                    12
+                                    widthSegments,
+                                    heightSegments
                                 ),
                                 material
                             );
@@ -46,6 +73,10 @@ define(
                 thisMoon.objectliteral = moon;
 
                 Scene.moons.push(thisMoon);
+
+                if (moon.name == 'Europa') {
+                    Scene.majorMoons.push(thisMoon);
+                }
 
                 planetObj.add(thisMoon);
             }

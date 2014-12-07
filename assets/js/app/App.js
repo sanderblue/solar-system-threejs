@@ -2,7 +2,7 @@ define(function() {
 
     var config = {
         audio: {
-            enabled: true
+            enabled: false
         },
         build: {
             SceneEnabled: true,

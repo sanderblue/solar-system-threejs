@@ -23,6 +23,7 @@ define(
             planets: [],
             planetCores: [],
             moons: [],
+            majorMoons: [],
             astroids: [],
             tilt: 200,
             scene: null,
@@ -243,7 +244,7 @@ define(
             /**
              * Sets the scene's camera focal point.
              *
-             * @param target [THREE Object]
+             * @param target [THREE Vector3]
              */
             setCameraFocalPoint: function(target) {
                 Scene.camera.lookAt(target);

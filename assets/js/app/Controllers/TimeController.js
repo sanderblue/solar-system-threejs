@@ -13,6 +13,7 @@ define(function() {
         interval: null,
         delay: 1,
         isPaused: true,
+        speed: 0.04,
 
         start: function() {
             var TimeController = this;
@@ -23,7 +24,7 @@ define(function() {
                 TimeController.offset = Date.now();
 
                 TimeController.interval = setInterval(function() {
-                    TimeController.clock += TimeController.getDelta(TimeController.offset);
+                    TimeController.clock += TimeController.getDelta(TimeController.offset) * TimeController.speed;
                 }, TimeController.delay);
             }
         },
