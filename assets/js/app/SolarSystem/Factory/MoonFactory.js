@@ -13,25 +13,27 @@ define(
              * @param moon [object]
              */
             getMoonTexture: function(moon) {
+                var ImageUtils = THREE.ImageUtils;
+
                 switch (moon.name) {
                     case 'Europa':
                         // console.log("Europa\n");
-                        return new THREE.ImageUtils.loadTexture('/textures/europa.jpg');
+                        return ImageUtils.loadTexture('/textures/europa.jpg');
                         break;
                     case 'Titan':
                         // console.log("Titan\n");
-                        return new THREE.ImageUtils.loadTexture('/textures/moon.jpg');
+                        return ImageUtils.loadTexture('/textures/moon.jpg');
                         break;
                     case 'Io':
                         // console.log("Io\n");
-                        return new THREE.ImageUtils.loadTexture('/textures/moon.jpg');
+                        return ImageUtils.loadTexture('/textures/moon.jpg');
                         break;
                     case 'Iapetus':
                         // console.log("Iapetus\n");
-                        return new THREE.ImageUtils.loadTexture('/textures/moon.jpg');
+                        return ImageUtils.loadTexture('/textures/moon.jpg');
                         break;
                     default:
-                        return new THREE.ImageUtils.loadTexture('/textures/moon.jpg');
+                        return ImageUtils.loadTexture('/textures/moon.jpg');
                 }
             },
 

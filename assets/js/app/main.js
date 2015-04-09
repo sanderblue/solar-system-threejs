@@ -11,6 +11,7 @@ define(
         'TimeController',
         'OrbitController',
         'Constants',
+        'GeometryHelper',
         'Modules',
         'tweenjs'
     ],
@@ -25,7 +26,8 @@ define(
         SolarSystem,
         TimeController,
         OrbitController,
-        Constants
+        Constants,
+        GeometryHelper
     )
     {
         /**
@@ -128,22 +130,37 @@ define(
 
                 // Scene.planets[4].add(Scene.camera);
 
+                // Europa.add(Scene.camera);
+
+                // Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
+
+                // console.log(
+                //     'Europa THREE object: ', Europa.position, '\n',
+                //     'Camera THREE object: ', Scene.camera.position, '\n'
+                // );
+                var theta = GeometryHelper.getRadians(180),
+                    distance = 320,
+                    point = GeometryHelper.getPointOnCircle(0, 0, distance, theta),
+                    x = point.x,
+                    y = point.y,
+                    z = distance // distance
+                ;
+
+                // var x = Europa.position.x + 10, // height
+                //     y = Europa.position.y + 100, // azimuth
+                //     z = Europa.position.z + 120 // distance
+                // ;
+
+                Scene.camera.position.set(x, y, z);
+
                 Europa.add(Scene.camera);
 
-                // Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
-
-                Scene.camera.position.x = 90;
-                Scene.camera.position.y = 70;
-                Scene.camera.position.z = 45;
-
                 console.log(
-                    Europa, '\n',
-                    Scene.camera, '\n'
+                    'Point: ', point, '\n',
+                    'Jupiter THREE object: ', Europa.parent3d.position, '\n',
+                    'Europa THREE object: ', Europa.position, '\n',
+                    'Camera THREE object: ', Scene.camera.position, '\n'
                 );
-
-                // window.focalPoint = new THREE.Vector3(100,0,0);
-
-                // Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
             },
 
             init: function() {
