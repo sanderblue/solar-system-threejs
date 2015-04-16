@@ -246,8 +246,12 @@ define(
              *
              * @param target [THREE Vector3]
              */
-            setCameraFocalPoint: function(target) {
+            setCameraFocalPoint: function(target, follow) {
                 Scene.camera.lookAt(target);
+
+                if (follow) {
+                    window.focalPoint = target;
+                }
             },
 
             init: function() {

@@ -138,27 +138,52 @@ define(
                 //     'Europa THREE object: ', Europa.position, '\n',
                 //     'Camera THREE object: ', Scene.camera.position, '\n'
                 // );
-                var theta = GeometryHelper.getRadians(180),
-                    distance = 320,
-                    point = GeometryHelper.getPointOnCircle(0, 0, distance, theta),
-                    x = point.x,
-                    y = point.y,
-                    z = distance // distance
-                ;
+                // var theta = GeometryHelper.getRadians(180),
+                //     distance = 320,
+                //     point = GeometryHelper.getPointOnCircle(0, 0, distance, theta),
+                //     x = point.x,
+                //     y = point.y,
+                //     z = distance // distance
+                // ;
+
+                var OrbitCtrl = new OrbitController(
+                    Europa,
+                    Europa.objectliteral,
+                    Europa.parentliteral,
+                    { interval: 10 }
+                );
+
+                OrbitCtrl.positionObject();
+                OrbitCtrl.animateOrbit();
 
                 // var x = Europa.position.x + 10, // height
                 //     y = Europa.position.y + 100, // azimuth
                 //     z = Europa.position.z + 120 // distance
                 // ;
 
-                Scene.camera.position.set(x, y, z);
+                Europa.parent3d.add(Scene.camera);
 
-                Europa.add(Scene.camera);
+                var OrbitCtrl = new OrbitController(
+                    Scene.camera,
+                    Europa.objectliteral,
+                    Europa.parentliteral,
+                    { interval: 10 },
+                    Europa.objectliteral.distanceFromParent + 200
+                );
+
+                OrbitCtrl.positionObject();
+                OrbitCtrl.animateOrbit();
+
+                // Scene.camera.position.set(Europa.position.x, Europa.position.y, Europa.position.z);
+
+                // Scene.setCameraFocalPoint(Europa.parent3d.position, true);
+
+                // Scene.setCameraPosition(null, null, Europa.parent3d.position);
 
                 console.log(
-                    'Point: ', point, '\n',
+                    // 'Point: ', point, '\n',
                     'Jupiter THREE object: ', Europa.parent3d.position, '\n',
-                    'Europa THREE object: ', Europa.position, '\n',
+                    'Europa THREE object: ', Europa, '\n',
                     'Camera THREE object: ', Scene.camera.position, '\n'
                 );
             },
