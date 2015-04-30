@@ -1,6 +1,6 @@
 {
-  "name": "solar_system",
-  "version": "1.0.1",
+  "name": "solarsystemjs",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {}
 }
