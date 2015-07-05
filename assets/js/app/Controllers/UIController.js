@@ -32,8 +32,14 @@ define(
                     }
 
                     var id = $(this).data('id'),
-                        matchedPlanet = UIController.findPlanet(id)
+                        isMoon = $(this).text() == 'Europa'
                     ;
+
+                    if (isMoon) {
+                        matchedPlanet = UIController.findMoon(id);
+                    } else {
+                        matchedPlanet = UIController.findPlanet(id);
+                    }
 
                     $(planetSelector).removeClass('active');
                     $(this).addClass('active');
@@ -230,7 +236,8 @@ define(
             buildPlanetList: function() {
                 return $.Deferred(function(promise) {
                     var planetListElement = $('#planets'),
-                        dwarfPlanetListElement = $('#dwarf-planets')
+                        dwarfPlanetListElement = $('#dwarf-planets'),
+                        moonListElement = $('#major-moons')
                     ;
 
                     planetListElement.children().remove();
@@ -267,6 +274,26 @@ define(
                         dwarfPlanetListElement.append(dawrfPlanetListItem);
                     }
 
+                    console.log(
+                            Scene.majorMoons
+                            // Scene.majorMoons[i].name +': '+ Scene.majorMoons[i].id
+                        );
+
+                    for (var v = 0; v < Scene.majorMoons.length; v++) {
+                        console.log(
+                            Scene.majorMoons[v].name +': '+ Scene.majorMoons[v].id
+                        );
+
+                        var moonListItem =
+                            '<div class="accordian-subitem planet-item">'
+                            +    '<div id="'+ Scene.majorMoons[v].id +'" class="accordian-subitem-label planet" data-id="'+ Scene.majorMoons[v].id +'">'+ Scene.majorMoons[v].name +'</div>'
+                            +'</div>'
+                        ;
+
+
+                        moonListElement.append(moonListItem);
+                    }
+
                     var camaraReset = '<div class="camera-reset">Reset Camera</div>'
 
                     $('#planets').append(camaraReset);
@@ -286,6 +313,23 @@ define(
                             planet3d: planets[i]
                         }
                     }
+                }
+            },
+
+            findMoon: function(id) {
+                for (var i = 0; i < Scene.majorMoons.length; i++) {
+
+                    return {
+                        planet: SolarSystem.planets[4].moons[3],
+                        planet3d: Scene.majorMoons[i]
+                    }
+
+                    // if (Scene.majorMoons[i].id == id) {
+                    //     return {
+                    //         planet: SolarSystem.planets[i],
+                    //         planet3d: planets[i]
+                    //     }
+                    // }
                 }
             },
 

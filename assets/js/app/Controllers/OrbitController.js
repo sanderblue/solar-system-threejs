@@ -6,8 +6,16 @@ define(
     ],
     function(TimeController, PlanetFactory, Constants) {
 
-        var OrbitController = function(object3d, object, parent, options) {
-            for (var i = 0; i <= arguments.length - 1; i++) {
+        /**
+         * OrbitController
+         *
+         * @param {[type]} object3d [description]
+         * @param {[type]} object   [description]
+         * @param {[type]} parent   [description]
+         * @param {[type]} options  [description]
+         */
+        var OrbitController = function(object3d, object, parent, options, distanceFromParent) {
+            for (var i = 0; i <= arguments.length - 2; i++) {
                 var optionalArg = arguments[3];
 
                 if (!arguments[i] && !optionalArg) {
@@ -20,22 +28,24 @@ define(
             this.object3d = object3d;
             this.object   = object;
             this.parent   = parent;
+            this.dfp      = distanceFromParent || null;
             this.options  = options || { interval: TimeController.interval };
         };
 
         OrbitController.prototype.positionObject = function() {
             var self  = this,
+                dfp = this.dfp ? this.dfp : this.object.distanceFromParent,
+                amplitude = this.parent.radius + dfp,
                 count = new Date().getDOYwithTimeAsDecimal() + TimeController.getTime()
             ;
 
-            var posX = (this.parent.radius + this.object.distanceFromParent)
-                        * Math.sin(
+            var posX = amplitude * Math.sin(
                             count
                             * (360 / this.object.orbitDuration)
                             * 0.0174532925
                         );
 
-            var posY = (this.parent.radius + this.object.distanceFromParent)
+            var posY = amplitude
                         * Math.cos(
                             count
                             * (360 / this.object.orbitDuration)

@@ -3,6 +3,7 @@ define(
         'jquery',
         'App',
         'Scene',
+        'Camera',
         'Initializer',
         'PlanetFactory',
         'OrbitFactory',
@@ -10,6 +11,7 @@ define(
         'TimeController',
         'OrbitController',
         'Constants',
+        'GeometryHelper',
         'Modules',
         'tweenjs'
     ],
@@ -17,13 +19,15 @@ define(
         $,
         App,
         Scene,
+        Camera,
         Initializer,
         PlanetFactory,
         OrbitFactory,
         SolarSystem,
         TimeController,
         OrbitController,
-        Constants
+        Constants,
+        GeometryHelper
     )
     {
         /**
@@ -118,9 +122,70 @@ define(
             },
 
             renderSolarSystem: function() {
+                var Europa = Scene.majorMoons[0];
+
                 MainController.positionPlanets();
                 MainController.positionMoons();
                 MainController.animate();
+
+                // Scene.planets[4].add(Scene.camera);
+
+                // Europa.add(Scene.camera);
+
+                // Scene.setCameraFocalPoint(Camera.defaultFocalPoint);
+
+                // console.log(
+                //     'Europa THREE object: ', Europa.position, '\n',
+                //     'Camera THREE object: ', Scene.camera.position, '\n'
+                // );
+                // var theta = GeometryHelper.getRadians(180),
+                //     distance = 320,
+                //     point = GeometryHelper.getPointOnCircle(0, 0, distance, theta),
+                //     x = point.x,
+                //     y = point.y,
+                //     z = distance // distance
+                // ;
+
+                var OrbitCtrl = new OrbitController(
+                    Europa,
+                    Europa.objectliteral,
+                    Europa.parentliteral,
+                    { interval: 10 }
+                );
+
+                OrbitCtrl.positionObject();
+                OrbitCtrl.animateOrbit();
+
+                // var x = Europa.position.x + 10, // height
+                //     y = Europa.position.y + 100, // azimuth
+                //     z = Europa.position.z + 120 // distance
+                // ;
+
+                Europa.parent3d.add(Scene.camera);
+
+                var OrbitCtrl = new OrbitController(
+                    Scene.camera,
+                    Europa.objectliteral,
+                    Europa.parentliteral,
+                    { interval: 10 },
+                    Europa.objectliteral.distanceFromParent + 200
+                );
+
+                OrbitCtrl.positionObject();
+                OrbitCtrl.animateOrbit();
+
+                // Scene.camera.position.set(Europa.position.x, Europa.position.y, Europa.position.z);
+
+                // Scene.setCameraFocalPoint(Europa.parent3d.position, true);
+
+                // Scene.setCameraPosition(null, null, Europa.parent3d.position);
+
+                console.log(
+                    // 'Point: ', point, '\n',
+                    'Jupiter THREE object: ', Europa.parent3d.position, '\n',
+                    'Europa THREE object: ', Europa, '\n',
+                    'Camera THREE object: ', Scene.camera.position, '\n'
+                );
             },
 
             init: function() {

@@ -52,6 +52,7 @@ require.config({
         'RandomNumber'             : 'app/Modules/RandomNumber',
         'DocumentWriter'           : 'app/Modules/DocumentWriter',
         'PlanetDataModule'         : 'app/Modules/PlanetDataModule',
+        'GeometryHelper'           : 'app/Modules/GeometryHelper',
 
         // Extensions
         'Date' : 'app/Extensions/Date',
