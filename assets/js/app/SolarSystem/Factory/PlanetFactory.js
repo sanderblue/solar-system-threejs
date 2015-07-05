@@ -54,6 +54,31 @@ define(
             },
 
             /**
+             * Builds the earth's night texture.
+             *
+             * @param planet [THREE object]
+             */
+            buildEarthNightTexture: function(planet) {
+                // planetMaterial = new THREE.MeshPhongMaterial({
+                //     map       : THREE.ImageUtils.loadTexture('/textures/' + planet.name.toLowerCase() + '.jpg'),
+                //     bumpMap   : THREE.ImageUtils.loadTexture('/textures/' + planet.name.toLowerCase() + '_topo.jpg'),
+                //     bumpScale : 1.4
+                // });
+
+
+                var geometry = new THREE.SphereGeometry(planet.radius + 0.1, planet.radius, 50);
+
+                var material = new THREE.MeshPhongMaterial({
+                    map         : THREE.ImageUtils.loadTexture('/textures/earth_night.png'),
+                    transparent : true,
+                    opacity     : 0.6,
+                    emissive    : 0xF1F1F1
+                });
+
+                return new THREE.Mesh(geometry, material);
+            },
+
+            /**
              * Adds a planet's moons.
              *
              * @param planet    [object]
@@ -135,15 +160,25 @@ define(
                                         );
 
                     if (planet.name === 'Earth') {
-                        var earthClouds   = PlanetFactory.buildEarthClouds(planet),
-                            cloudCentroid = new THREE.Object3D()
+                        // var earthClouds   = PlanetFactory.buildEarthClouds(planet),
+                        //     cloudCentroid = new THREE.Object3D()
+                        // ;
+
+                        // cloudCentroid.add(earthClouds);
+
+                        // thisPlanet.cloudCentroid = cloudCentroid;
+
+                        // thisPlanet.add(cloudCentroid);
+
+                        var earthNightTexture = PlanetFactory.buildEarthNightTexture(planet),
+                            textureCentroid = new THREE.Object3D()
                         ;
 
-                        cloudCentroid.add(earthClouds);
+                        textureCentroid.add(earthNightTexture);
 
-                        thisPlanet.cloudCentroid = cloudCentroid;
+                        thisPlanet.textureCentroid = textureCentroid;
 
-                        thisPlanet.add(cloudCentroid);
+                        thisPlanet.add(textureCentroid);
                     }
 
                     Scene.planets.push(thisPlanet);
