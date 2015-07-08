@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: "./src/app",
+    baseUrl: './src/app',
     paths: {
         'jquery'  : 'vendor/jquery/dist/jquery.min',
         'threejs' : 'vendor/threejs/build/three.min'

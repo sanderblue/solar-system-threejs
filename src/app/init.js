@@ -1,7 +1,8 @@
 define(
 [
-    'jquery'
+    'jquery',
+    'Modules/Loader'
 ],
-function($) {
-    alert('HERE');
+function($, Loader) {
+
 });

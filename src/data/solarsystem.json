@@ -5,35 +5,179 @@
     "planets": [
         {
             "id": 1,
-            "name": "Mercury"
+            "name": "Mercury",
+            "diameter": 4879, // km
+            "mass": 0.330, // 10^24 kg
+            "gravity": 3.7, // m/s
+            "density": 5427, // kg/m^3
+            "rotationPeriod": 1407.6, // hrs
+            "lengthOfDay": 4222.6, // hrs
+            "distanceFromParent": 57900000, // km
+            "orbitalPeriod": 88, // earth days
+            "orbitalVelocity": 47.4, // km/s
+            "orbitalInclination": 3.4, // degrees
+            "axialTilt": 0.01, // degrees
+            "meanTemperature": 167, // Celsius
+            "3d": {
+                "textures": {
+                    "base": "/src/assets/textures/mercury.jpg",
+                    "topo": "/src/assets/textures/mercury_topo.jpg"
+                }
+            }
         },
         {
             "id": 2,
-            "name": "Venus"
+            "name": "Venus",
+            "diameter": 12104, // km
+            "mass": 4.87, // 10^24 kg
+            "gravity": 8.9, // m/s
+            "density": 5243, // kg/m^3
+            "rotationPeriod": -5832.5, // hrs
+            "lengthOfDay": 2802, // hrs
+            "distanceFromParent": 108200000, // km
+            "orbitalPeriod": 224.7, // earth days
+            "orbitalVelocity": 35, // km/s
+            "orbitalInclination": 7, // degrees
+            "axialTilt": 177.4, // degrees
+            "meanTemperature": 464, // Celsius
+            "3d": {
+                "textures": {
+                    "base": "/src/assets/textures/venus.jpg",
+                    "topo": "/src/assets/textures/venus_topo.jpg"
+                }
+            }
         },
         {
             "id": 3,
-            "name": "Earth"
+            "name": "Earth",
+            "diameter": 12756, // km
+            "mass": 5.97, // 10^24 kg
+            "gravity": 9.8, // m/s
+            "density": 5514, // kg/m^3
+            "rotationPeriod": 23.9, // hrs
+            "lengthOfDay": 24, // hrs
+            "distanceFromParent": 149600000, // km
+            "orbitalPeriod": 365.2, // earth days
+            "orbitalVelocity": 29.8, // km/s
+            "orbitalInclination": 0, // degrees
+            "axialTilt": 23.4, // degrees
+            "meanTemperature": 15, // Celsius
+            "3d": {
+                "textures": {
+                    "base": "/src/assets/textures/earth.jpg",
+                    "topo": "/src/assets/textures/earth_topo.jpg"
+                }
+            }
         },
         {
             "id": 4,
-            "name": "Mars"
+            "name": "Mars",
+            "diameter": 6792, // km
+            "mass": 0.642, // 10^24 kg
+            "gravity": 3.7, // m/s
+            "density": 3933, // kg/m^3
+            "rotationPeriod": 24.6, // hrs
+            "lengthOfDay": 24.7, // hrs
+            "distanceFromParent": 227900000, // km
+            "orbitalPeriod": 687, // earth days
+            "orbitalVelocity": 24.1, // km/s
+            "orbitalInclination": 1.9, // degrees
+            "axialTilt": 25.2, // degrees
+            "meanTemperature": -65, // Celsius
+            "3d": {
+                "textures": {
+                    "base": "/src/assets/textures/mars.jpg",
+                    "topo": "/src/assets/textures/mars_topo.jpg"
+                }
+            }
         },
         {
             "id": 5,
-            "name": "Jupiter"
+            "name": "Jupiter",
+            "diameter": 142984, // km
+            "mass": 1898, // 10^24 kg
+            "gravity": 23.1, // m/s
+            "density": 1326, // kg/m^3
+            "rotationPeriod": 9.9, // hrs
+            "lengthOfDay": 9.9, // hrs
+            "distanceFromParent": 778600000, // km
+            "orbitalPeriod": 4331, // earth days
+            "orbitalVelocity": 13.1, // km/s
+            "orbitalInclination": 1.3, // degrees
+            "axialTilt": 3.1, // degrees
+            "meanTemperature": -110, // Celsius
+            "3d": {
+                "textures": {
+                    "base": "/src/assets/textures/jupiter.jpg",
+                    "topo": "/src/assets/textures/jupiter_topo.jpg"
+                }
+            }
         },
         {
             "id": 6,
-            "name": "Saturn"
+            "name": "Saturn",
+            "diameter": 120536, // km
+            "mass": 568, // 10^24 kg
+            "density": 687, // kg/m^3
+            "gravity": 9, // m/s
+            "rotationPeriod": 10.7, // hrs
+            "lengthOfDay": 10.7, // hrs
+            "distanceFromParent": 1433500000, // km
+            "orbitalPeriod": 10747, // earth days
+            "orbitalVelocity": 9.7, // km/s
+            "orbitalInclination": 2.5, // degrees
+            "axialTilt": 26.7, // degrees
+            "meanTemperature": -140, // Celsius
+            "3d": {
+                "textures": {
+                    "base": "/src/assets/textures/saturn.jpg",
+                    "topo": "/src/assets/textures/saturn_topo.jpg"
+                }
+            }
         },
         {
             "id": 7,
-            "name": "Uranus"
+            "name": "Uranus",
+            "mass": 86.8, // 10^24 kg
+            "diameter": 51118, // km
+            "density": 1271, // kg/m^3
+            "gravity": 8.7, // m/s
+            "rotationPeriod": -17.2, // hrs
+            "lengthOfDay": 17.2, // hrs
+            "distanceFromParent": 2872500000, // km
+            "orbitalPeriod": 30589, // earth days
+            "orbitalVelocity": 6.8, // km/s
+            "orbitalInclination": 0.8, // degrees
+            "axialTilt": 97.8, // degrees
+            "meanTemperature": -195, // Celsius
+            "3d": {
+                "textures": {
+                    "base": "/src/assets/textures/uranus.jpg",
+                    "topo": "/src/assets/textures/uranus_topo.jpg"
+                }
+            }
         },
         {
             "id": 8,
-            "name": "Neptune"
+            "name": "Neptune",
+            "mass": 102, // 10^24 kg
+            "diameter": 49528, // km
+            "density": 1638, // kg/m^3
+            "gravity": 11, // m/s
+            "rotationPeriod": 16.1, // hrs
+            "lengthOfDay": 16.1, // hrs
+            "distanceFromParent": 4495100000, // km
+            "orbitalPeriod": 59800, // earth days
+            "orbitalVelocity": 5.4, // km/s
+            "orbitalInclination": 1.8, // degrees
+            "axialTilt": 28.3, // degrees
+            "meanTemperature": -200, // Celsius
+            "3d": {
+                "textures": {
+                    "base": "/src/assets/textures/neptune.jpg",
+                    "topo": "/src/assets/textures/neptune_topo.jpg"
+                }
+            }
         }
     ],
     "dwarfPlanets": [
