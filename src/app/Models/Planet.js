@@ -6,107 +6,65 @@ define(function() {
       // super();
 
       for (var prop in data) {
-        this['_' + prop] = data[prop];
+        if (prop != '_3d') {
+          this['_' + prop] = data[prop];
+        }
       }
 
-      this._textureBase = this.getTexture(data._3d.textures.base);
-      this._textureTopo = data._3d.textures.topo ? this.getTexture(data._3d.textures.topo) : null;
-    }
-
-    set name(name) {
-      this._name = name;
+      this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo);
+      this._threeObject = this.createGeometry(this._surface);
     }
 
     get name() {
       return this._name;
     }
 
-    set diameter(km) {
-      this._diameter = km;
-    }
-
     get diameter() {
       return this._diameter;
-    }
-
-    set mass(kg) {
-      this._mass = kg;
     }
 
     get mass() {
       return this._mass;
     }
 
-    set gravity(mps) {
-      this._gravity = mps;
-    }
-
     get gravity() {
       return this._gravity;
-    }
-
-    set density(kgpm3) {
-      this._density = kgpm3;
     }
 
     get density() {
       return this._density;
     }
 
-    set rotationPeriod(hrs) {
-      this._rotationPeriod = hrs;
-    }
-
     get rotationPeriod() {
       return this._rotationPeriod;
-    }
-
-    set distanceFromParent(km) {
-      this._distanceFromParent = km;
     }
 
     get distanceFromParent() {
       return this._distanceFromParent;
     }
 
-    set orbitalPeriod(days) {
-      this._orbitalPeriod = days;
-    }
-
     get orbitalPeriod() {
       return this._orbitalPeriod;
-    }
-
-    set orbitalVelocity(kps) {
-      this._orbitalVelocity = kps;
     }
 
     get orbitalVelocity() {
       return this._orbitalVelocity;
     }
 
-    set orbitalInclination(degrees) {
-      this._orbitalInclination = degrees;
-    }
-
     get orbitalInclination() {
       return this._orbitalInclination;
-    }
-
-    set axialTilt(degrees) {
-      this._axialTilt = degrees;
     }
 
     get axialTilt() {
       return this._axialTilt;
     }
 
-    set meanTemperature(temp) {
-      this._meanTemperature = temp;
-    }
-
     get meanTemperature() {
       return this._meanTemperature;
+    }
+
+    get threeObject() {
+      return this._threeObject;
     }
 
     getTexture(src) {
@@ -115,9 +73,32 @@ define(function() {
       }
     }
 
-    // get texture() {
-    //   return this.texture;
-    // }
+    createSurface(base, topo) {
+      if (!base) {
+        return;
+      }
+
+      if (topo) {
+        return new THREE.MeshPhongMaterial({
+          map: this.getTexture(base),
+          bumpMap: this.getTexture(topo),
+          bumpScale: 1.4
+        });
+      }
+
+      return new THREE.MeshPhongMaterial({ map: this.getTexture(base) });
+    }
+
+    createGeometry(surface) {
+      return new THREE.Mesh(
+        new THREE.SphereGeometry(
+                this._diameter / 2,
+                200,
+                110
+            ),
+            surface
+        );
+    }
 
     // static something() {
     //   return 'something';
