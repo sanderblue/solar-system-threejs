@@ -11,7 +11,6 @@ function($, Planet) {
         dataType: 'json'
     });
 
-
     getSolarSystemData.done(function(data) {
         console.log('Solar System data? ', data);
 
@@ -23,8 +22,6 @@ function($, Planet) {
             console.log('Planet:', planet);
         }
     });
-
-    console.log(4495.1* Math.pow(10, 6));
 });
 
 

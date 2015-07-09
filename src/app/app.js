@@ -9,7 +9,13 @@ require.config({
             exports: ['$', 'jQuery']
         },
         'threejs': {
-            exports: ['THREE']
+            exports: ['THREE', '3']
+        },
+        'Modules/Config': {
+            exports: ['App']
+        },
+        'init': {
+            deps: ['Modules/Config']
         }
     },
     urlArgs: 'bust=' + new Date().getTime().toString()

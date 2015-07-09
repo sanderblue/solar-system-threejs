@@ -1,8 +1,6 @@
-define(
-[
+require([
     'jquery',
+    'threejs',
+    'Modules/Config',
     'Modules/Loader'
-],
-function($, Loader) {
-
-});
+]);
