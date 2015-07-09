@@ -8,6 +8,9 @@ define(function() {
       for (var prop in data) {
         this['_' + prop] = data[prop];
       }
+
+      this._textureBase = this.getTexture(data._3d.textures.base);
+      this._textureTopo = data._3d.textures.topo ? this.getTexture(data._3d.textures.topo) : null;
     }
 
     set name(name) {
@@ -104,6 +107,12 @@ define(function() {
 
     get meanTemperature() {
       return this._meanTemperature;
+    }
+
+    getTexture(src) {
+      if (src) {
+        return THREE.ImageUtils.loadTexture(src);
+      }
     }
 
     // get texture() {
