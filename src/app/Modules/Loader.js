@@ -1,9 +1,10 @@
 define(
 [
     'jquery',
-    'Models/Planet'
+    'Models/Planet',
+    'Modules/Scene'
 ],
-function($, Planet) {
+function($, Planet, Scene) {
     'use strict';
 
     var getSolarSystemData = $.ajax({
@@ -19,7 +20,15 @@ function($, Planet) {
         for (var i = 0; i < planets.length; i++) {
             var planet = new Planet(planets[i]);
 
-            console.log('Planet:', planet);
+            if (i === 2) {
+                console.log('App:', App);
+                console.log('App:', planet.threeObject);
+                console.log('\n\n');
+
+                App.scene.add(planet.threeObject);
+            }
+
+            // console.log('Planet:', planet);
         }
     });
 });

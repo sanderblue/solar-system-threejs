@@ -92,7 +92,7 @@ define(function() {
     createGeometry(surface) {
       return new THREE.Mesh(
         new THREE.SphereGeometry(
-                this._diameter / 2,
+                500,
                 200,
                 110
             ),
