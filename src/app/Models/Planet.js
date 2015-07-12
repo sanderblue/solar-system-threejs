@@ -78,21 +78,23 @@ define(function() {
         return;
       }
 
-      if (topo) {
-        return new THREE.MeshPhongMaterial({
-          map: this.getTexture(base),
-          bumpMap: this.getTexture(topo),
-          bumpScale: 1.4
-        });
-      }
+      // if (topo) {
+      //   return new THREE.MeshPhongMaterial({
+      //     map: this.getTexture(base)
+      //   });
+      // }
 
-      return new THREE.MeshPhongMaterial({ map: this.getTexture(base) });
+      var texture = this.getTexture(base);
+
+      texture.minFilter = THREE.NearestFilter;
+
+      return new THREE.MeshPhongMaterial({ map: texture });
     }
 
     createGeometry(surface) {
       return new THREE.Mesh(
         new THREE.SphereGeometry(
-                500,
+                this.diameter / 2,
                 200,
                 110
             ),

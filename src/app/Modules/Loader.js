@@ -20,17 +20,24 @@ function($, Planet, Scene) {
         for (var i = 0; i < planets.length; i++) {
             var planet = new Planet(planets[i]);
 
-            if (i === 2) {
-                console.log('App:', App);
-                console.log('App:', planet.threeObject);
-                console.log('\n\n');
-
-                App.scene.add(planet.threeObject);
-            }
+            // if (i === 2) {
+            //     App.scene.add(planet.threeObject);
+            // }
 
             // console.log('Planet:', planet);
         }
-    });
+    })
+    // .then(function() {
+    //     console.log('\n');
+    //     console.log('And then?', App.camera);
+
+    //     function render() {
+    //         // console.log('poop');
+    //         requestAnimationFrame(render);
+    //         Scene.renderEngine.render(App.scene, App.camera);
+    //     }
+    //     render();
+    // });
 });
 
 

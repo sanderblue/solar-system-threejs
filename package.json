@@ -2,5 +2,8 @@
   "name": "solarsystemjs",
   "version": "1.0.0",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.0.3"
+  }
 }
