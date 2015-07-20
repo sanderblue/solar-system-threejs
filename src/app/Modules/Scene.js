@@ -8,7 +8,7 @@ define(function() {
     // }
 
 
-    var Scene = function() {
+    var Scene = (function() {
         // this.setScene();
         // this.setContainer();
         // this.setRenderEngine();
@@ -16,33 +16,38 @@ define(function() {
         // this.setCamera();
         // this.setFocalPoint();
 
-        var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-        var renderer = new THREE.WebGLRenderer();
+        var scene      = new THREE.Scene();
+        var camera     = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        var renderEngine = new THREE.WebGLRenderer();
+        var ambientLight = new THREE.AmbientLight(0xffffff);
 
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild(renderEngine.domElement);
+        renderEngine.setSize( window.innerWidth, window.innerHeight );
 
-        document.body.appendChild( renderer.domElement );
+        scene.add(ambientLight);
 
-        var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        var cube = new THREE.Mesh( geometry, material );
+        // var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+        // var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+        // var sphere = new THREE.Mesh( geometry, material );
 
-        scene.add( cube );
+        // scene.add(sphere);
 
-        camera.position.z = 5;
 
-        var render = function () {
-            requestAnimationFrame( render );
+        camera.position.z = 24;
 
-            cube.rotation.x += 0.1;
-            cube.rotation.y += 0.1;
-
-            renderer.render(scene, camera);
+        var render = function() {
+            requestAnimationFrame(render);
+            renderEngine.render(scene, camera);
         };
 
         render();
-    };
+
+        return {
+            scene: scene,
+            camera: camera,
+            renderEngine: renderEngine
+        }
+    })();
 
     // Scene.prototype.setScene = function() {
     //     this.scene = new THREE.Scene();
@@ -102,5 +107,5 @@ define(function() {
     //     // this.scene.camera.lookAt(target);
     // };
 
-    return new Scene();
+    return Scene;
 });

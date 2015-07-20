@@ -20,9 +20,13 @@ function($, Planet, Scene) {
         for (var i = 0; i < planets.length; i++) {
             var planet = new Planet(planets[i]);
 
-            // if (i === 2) {
-            //     App.scene.add(planet.threeObject);
-            // }
+            if (i === 2) {
+                console.log('THREE diameter:', planet.threeDiameter);
+                console.log('Planet:', planet.threeObject.geometry);
+
+                console.log(Scene);
+                Scene.scene.add(planet.threeObject);
+            }
 
             // console.log('Planet:', planet);
         }

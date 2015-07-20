@@ -1,6 +1,8 @@
 define(function() {
   'use strict';
 
+  var celestialScale = Math.pow(10, -3);
+
   class Planet {
     constructor(data) {
       // super();
@@ -12,9 +14,13 @@ define(function() {
       }
 
       this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo);
+      this._threeDiameter = this._diameter * celestialScale;
       this._threeObject = this.createGeometry(this._surface);
     }
 
+    /**
+     * Planet Data
+     */
     get name() {
       return this._name;
     }
@@ -63,6 +69,16 @@ define(function() {
       return this._meanTemperature;
     }
 
+
+
+    /**
+     * 3D Model Data
+     */
+
+    get threeDiameter() {
+      return this._threeDiameter;
+    }
+
     get threeObject() {
       return this._threeObject;
     }
@@ -94,9 +110,9 @@ define(function() {
     createGeometry(surface) {
       return new THREE.Mesh(
         new THREE.SphereGeometry(
-                this.diameter / 2,
-                200,
-                110
+                this._threeDiameter,
+                48,
+                24
             ),
             surface
         );
@@ -109,30 +125,3 @@ define(function() {
 
   return Planet;
 });
-
-/*
-
-  {
-      "id": 1,
-      "name": "Mercury",
-      "diameter": 4879, // km
-      "mass": 0.330, // 10^24 kg
-      "gravity": 3.7, // m/s
-      "density": 5427, // kg/m^3
-      "rotationPeriod": 1407.6, // hrs
-      "lengthOfDay": 4222.6, // hrs
-      "distanceFromParent": 57900000, // km
-      "orbitalPeriod": 88, // earth days
-      "orbitalVelocity": 47.4, // km/s
-      "orbitalInclination": 3.4, // degrees
-      "axialTilt": 0.01, // degrees
-      "meanTemperature": 167, // Celsius
-      "3d": {
-          "textures": {
-              "base": "/src/assets/textures/mercury.jpg",
-              "topo": "/src/assets/textures/mercury_topo.jpg"
-          }
-      }
-  }
-
-*/
