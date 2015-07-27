@@ -1,11 +1,24 @@
 define(
 [
     'jquery',
-    'Models/Planet',
-    'Modules/Scene'
+    'Modules/Scene',
+    'Models/Sun',
+    'Models/Planet'
 ],
-function($, Planet, Scene) {
+function($, Scene, Sun, Planet) {
     'use strict';
+
+    function getElapsedTimeMs(start, end) {
+        return (end - start);
+    }
+
+    function getElapsedTimeSec(start, end) {
+        return (end - start) * 0.001;
+    }
+
+    function getAvgElapsedTime(start, end, interations) {
+        return getElapsedTimeMs(start, end) / interations;
+    }
 
     var getSolarSystemData = $.ajax({
         url: 'http://www.solarsystem.lcl/src/data/solarsystem.json',
@@ -13,23 +26,54 @@ function($, Planet, Scene) {
     });
 
     getSolarSystemData.done(function(data) {
-        console.log('Solar System data? ', data);
-
         var planets = data.planets;
 
-        for (var i = 0; i < planets.length; i++) {
-            var planet = new Planet(planets[i]);
+        console.log('\n');
 
-            if (i === 2) {
-                console.log('THREE diameter:', planet.threeDiameter);
-                console.log('Planet:', planet.threeObject.geometry);
+        var iterationDurations = [];
 
-                console.log(Scene);
-                Scene.scene.add(planet.threeObject);
-            }
+        var start = new Date().getTime();
 
-            // console.log('Planet:', planet);
+        for (var i = 0; i < 5000; i++) {
+            var a = new Date().getTime();
+
+            var earth = new Planet(planets[2]);
+
+            var b = new Date().getTime();
+
+            iterationDurations.push(getElapsedTimeMs(a, b));
+
+            // if (i == 1000) {
+            //     console.log('Elapsed Time at 1000:', getAverageElapsedTime(iterationDurations));
+            // }
+
+            // if (i == 3000) {
+            //     console.log('Elapsed Time 3000:', getAverageElapsedTime(iterationDurations));
+            // }
         }
+
+        var end = new Date().getTime();
+
+        console.log('THREE diameter:', earth.threeDiameter);
+        console.log('\n');
+        console.log('\n');
+        console.log('Total Elapsed Time :', getElapsedTimeSec(start, end));
+        console.log('Total Elapsed Time Average:', getAvgElapsedTime(start, end, 5000));
+        console.log('\n');
+
+        // console.log('Scene', Scene);
+        Scene.scene.add(earth.threeObject);
+
+
+        // for (var i = 0; i < planets.length; i++) {
+        //     var planet = new Planet(planets[i]);
+
+        //     if (i === 2) {
+
+        //     }
+
+        //     // console.log('Planet:', planet);
+        // }
     })
     // .then(function() {
     //     console.log('\n');

@@ -1,20 +1,29 @@
-define(function() {
+define(
+[
+  'Models/CelestialObject'
+],
+function(CelestialObject) {
   'use strict';
 
   var celestialScale = Math.pow(10, -3);
 
-  class Planet {
+  class Planet extends CelestialObject {
     constructor(data) {
-      // super();
+      super(data.diameter, data.mass, data.gravity, data.density);
 
-      for (var prop in data) {
-        if (prop != '_3d') {
-          this['_' + prop] = data[prop];
-        }
-      }
+      this._id = data.id || null;
+      this._name = data.name || null;
+      this._rotationPeriod = data.rotationPeriod || null;
+      this._lengthOfDay = data.lengthOfDay || null;
+      this._distanceFromParent = data.distanceFromParent || null;
+      this._orbitalPeriod = data.orbitalPeriod || null;
+      this._orbitalVelocity = data.orbitalVelocity || null;
+      this._orbitalInclination = data.orbitalInclination || null;
+      this._axialTilt = data.axialTilt || null;
+      this._meanTemperature = data.meanTemperature || null;
 
+      this._threeDiameter = this.createThreeDiameter();
       this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo);
-      this._threeDiameter = this._diameter * celestialScale;
       this._threeObject = this.createGeometry(this._surface);
     }
 
@@ -23,22 +32,6 @@ define(function() {
      */
     get name() {
       return this._name;
-    }
-
-    get diameter() {
-      return this._diameter;
-    }
-
-    get mass() {
-      return this._mass;
-    }
-
-    get gravity() {
-      return this._gravity;
-    }
-
-    get density() {
-      return this._density;
     }
 
     get rotationPeriod() {
@@ -89,16 +82,28 @@ define(function() {
       }
     }
 
+    createThreeDiameter() {
+      return this._diameter * celestialScale;
+    }
+
+    createGeometry(surface) {
+      var segmentsOffset = parseInt(this._threeDiameter * 3);
+
+      return new THREE.Mesh(
+        new THREE.SphereGeometry(
+                this._threeDiameter,
+                segmentsOffset,
+                segmentsOffset
+            ),
+            surface
+        )
+      ;
+    }
+
     createSurface(base, topo) {
       if (!base) {
         return;
       }
-
-      // if (topo) {
-      //   return new THREE.MeshPhongMaterial({
-      //     map: this.getTexture(base)
-      //   });
-      // }
 
       var texture = this.getTexture(base);
 
@@ -106,21 +111,6 @@ define(function() {
 
       return new THREE.MeshPhongMaterial({ map: texture });
     }
-
-    createGeometry(surface) {
-      return new THREE.Mesh(
-        new THREE.SphereGeometry(
-                this._threeDiameter,
-                48,
-                24
-            ),
-            surface
-        );
-    }
-
-    // static something() {
-    //   return 'something';
-    // }
   }
 
   return Planet;
