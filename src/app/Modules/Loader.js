@@ -30,27 +30,9 @@ function($, Scene, Sun, Planet) {
 
         console.log('\n');
 
-        var iterationDurations = [];
-
         var start = new Date().getTime();
 
-        for (var i = 0; i < 5000; i++) {
-            var a = new Date().getTime();
-
-            var earth = new Planet(planets[2]);
-
-            var b = new Date().getTime();
-
-            iterationDurations.push(getElapsedTimeMs(a, b));
-
-            // if (i == 1000) {
-            //     console.log('Elapsed Time at 1000:', getAverageElapsedTime(iterationDurations));
-            // }
-
-            // if (i == 3000) {
-            //     console.log('Elapsed Time 3000:', getAverageElapsedTime(iterationDurations));
-            // }
-        }
+        var earth = new Planet(planets[2]);
 
         var end = new Date().getTime();
 
@@ -58,35 +40,49 @@ function($, Scene, Sun, Planet) {
         console.log('\n');
         console.log('\n');
         console.log('Total Elapsed Time :', getElapsedTimeSec(start, end));
-        console.log('Total Elapsed Time Average:', getAvgElapsedTime(start, end, 5000));
         console.log('\n');
 
-        // console.log('Scene', Scene);
-        Scene.scene.add(earth.threeObject);
+        // Scene.scene.add(earth.threeObject);
 
+        var axisHelper = new THREE.AxisHelper(5);
 
-        // for (var i = 0; i < planets.length; i++) {
-        //     var planet = new Planet(planets[i]);
+        Scene.scene.add(axisHelper);
 
-        //     if (i === 2) {
+        var size = 15;
+        var step = 1;
 
-        //     }
+        var gridHelper = new THREE.GridHelper(size, step);
 
-        //     // console.log('Planet:', planet);
-        // }
-    })
-    // .then(function() {
-    //     console.log('\n');
-    //     console.log('And then?', App.camera);
-
-    //     function render() {
-    //         // console.log('poop');
-    //         requestAnimationFrame(render);
-    //         Scene.renderEngine.render(App.scene, App.camera);
-    //     }
-    //     render();
-    // });
+        Scene.scene.add(gridHelper, earth.threeObject);
+    });
 });
+
+
+
+
+
+
+
+
+// $.ajax({
+//     url: 'http://star-api.herokuapp.com/api/v1/stars/Sun',
+//     dataType: 'text/html'
+// })
+// .done(function(data) {
+//     console.log('Data:', data);
+
+//     var planets = data.planets;
+
+//     // console.log('planets.length',planets.length);
+
+//     // var mercury = new Planet(planets[0]);
+
+//     // console.log('Mercury:', mercury);
+
+//     for (var i = 0; i <  of planets) {
+//         console.log('Planet', planet)
+//     }
+// });
 
 
 

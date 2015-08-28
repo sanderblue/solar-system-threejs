@@ -5,7 +5,7 @@ define(
 function(CelestialObject) {
   'use strict';
 
-  var celestialScale = Math.pow(10, -3);
+  var celestialScale = Math.pow(10, -3.1);
 
   class Planet extends CelestialObject {
     constructor(data) {
@@ -78,7 +78,12 @@ function(CelestialObject) {
 
     getTexture(src) {
       if (src) {
-        return THREE.ImageUtils.loadTexture(src);
+        var texture = THREE.ImageUtils.loadTexture(src);
+
+        texture.wrapS = THREE.ClampToEdgeWrapping;
+        texture.wrapT = THREE.ClampToEdgeWrapping;
+
+        return texture;
       }
     }
 
@@ -87,7 +92,7 @@ function(CelestialObject) {
     }
 
     createGeometry(surface) {
-      var segmentsOffset = parseInt(this._threeDiameter * 3);
+      var segmentsOffset = parseInt(this._threeDiameter * 5);
 
       return new THREE.Mesh(
         new THREE.SphereGeometry(
