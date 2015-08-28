@@ -1,14 +1,15 @@
 define(
 [
+  'Environment/Constants',
   'Models/CelestialObject'
 ],
-function(CelestialObject) {
+function(Constants, CelestialObject, Sun) {
   'use strict';
 
-  var celestialScale = Math.pow(10, -3.1);
+  const CELESTIAL_SCALE = Constants.celestialScale;
 
   class Planet extends CelestialObject {
-    constructor(data) {
+    constructor(data, threeParent) {
       super(data.diameter, data.mass, data.gravity, data.density);
 
       this._id = data.id || null;
@@ -25,6 +26,8 @@ function(CelestialObject) {
       this._threeDiameter = this.createThreeDiameter();
       this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo);
       this._threeObject = this.createGeometry(this._surface);
+      this._threeParent = threeParent || null
+      this._threeDistanceFromParent = this.createThreeDistanceFromParent();
     }
 
     /**
@@ -76,6 +79,14 @@ function(CelestialObject) {
       return this._threeObject;
     }
 
+    get threeDistanceFromParent() {
+      return this._threeDistanceFromParent;
+    }
+
+    createThreeDistanceFromParent() {
+      return this._distanceFromParent * CELESTIAL_SCALE;
+    }
+
     getTexture(src) {
       if (src) {
         var texture = THREE.ImageUtils.loadTexture(src);
@@ -88,13 +99,13 @@ function(CelestialObject) {
     }
 
     createThreeDiameter() {
-      return this._diameter * celestialScale;
+      return this._diameter * CELESTIAL_SCALE;
     }
 
     createGeometry(surface) {
-      var segmentsOffset = parseInt(this._threeDiameter * 5);
+      var segmentsOffset = parseInt(this._threeDiameter * 10);
 
-      return new THREE.Mesh(
+      var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
                 this._threeDiameter,
                 segmentsOffset,
@@ -103,6 +114,10 @@ function(CelestialObject) {
             surface
         )
       ;
+
+      mesh.rotation.x = 90 * 0.0174532925; // degrees to radians
+
+      return mesh;
     }
 
     createSurface(base, topo) {
@@ -117,6 +132,8 @@ function(CelestialObject) {
       return new THREE.MeshPhongMaterial({ map: texture });
     }
   }
+
+  // export Planet;
 
   return Planet;
 });

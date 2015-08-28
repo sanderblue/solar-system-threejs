@@ -1,6 +1,41 @@
 {
+    "kuiperBelt": {
+        "diameter": 14959787070
+    },
     "parent": {
-        "name": "Sun"
+        "id": 0,
+        "name": "Sun",
+        "diameter": 1391016,
+        "mass": 1988500,
+        "gravity": 274,
+        "density": 1408,
+        "rotationPeriod": 609.12,
+        "distanceFromParent": null,
+        "orbitalPeriod": null,
+        "orbitalVelocity": null,
+        "orbitalInclination": null,
+        "axialTilt": null,
+        "meanTemperature": "5778 K",
+        "solarConstant": 1.365,
+        "composition": {
+            "majorElements": [
+                {
+                    "abbr": "H",
+                    "element": "Hydrogen",
+                    "percentageOfComposition": 90.965
+                },
+                {
+                    "abbr": "He",
+                    "element": "Helium",
+                    "percentageOfComposition": 8.889
+                }
+            ]
+        },
+        "_3d": {
+            "textures": {
+                "base": "/src/assets/textures/sun_alpha.jpg"
+            }
+        }
     },
     "planets": [
         {

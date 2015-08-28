@@ -8,9 +8,9 @@ define(function() {
 
 
         // Camera
-        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 0;
-        camera.position.y = 20;
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 5 * Math.pow(10, 12));
+        camera.position.z = 1200;
+        camera.position.y = 0;
 
 
         // Render Engine
@@ -29,6 +29,7 @@ define(function() {
         scene.add(ambientLight);
 
         console.debug('Camera Distance - X:', camera.position.x);
+        console.debug('Camera Distance - Y:', camera.position.x);
         console.debug('Camera Distance - Z:', camera.position.z);
 
         camera.lookAt(new THREE.Vector3(0,0,0));
@@ -36,6 +37,8 @@ define(function() {
         var render = function() {
             requestAnimationFrame(render);
             renderEngine.render(scene, camera);
+
+            // scene.rotation.z += 1 * 0.0174532925;
         };
 
         render();

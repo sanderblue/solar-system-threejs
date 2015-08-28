@@ -1,3 +1,6 @@
+
+// import myModule from "my-module.js";
+
 define(
 [
     'jquery',
@@ -28,32 +31,53 @@ function($, Scene, Sun, Planet) {
     getSolarSystemData.done(function(data) {
         var planets = data.planets;
 
-        console.log('\n');
-
         var start = new Date().getTime();
 
-        var earth = new Planet(planets[2]);
+        var sun = new Sun(data.parent);
+
+        console.debug('Sun Diameter:', sun.threeDiameter);
+
+        for (var i = 0; i < planets.length; i++) {
+            var planet = new Planet(planets[i], sun);
+
+            var posX = sun.threeDiameter + 150 + (i * 70);
+
+            console.debug('Pos X:', posX);
+
+            planet.threeObject.position.x = posX;
+
+            Scene.scene.add(planet.threeObject);
+        }
 
         var end = new Date().getTime();
 
-        console.log('THREE diameter:', earth.threeDiameter);
-        console.log('\n');
         console.log('\n');
         console.log('Total Elapsed Time :', getElapsedTimeSec(start, end));
         console.log('\n');
 
-        // Scene.scene.add(earth.threeObject);
-
-        var axisHelper = new THREE.AxisHelper(5);
+        var axisHelper = new THREE.AxisHelper(1000);
 
         Scene.scene.add(axisHelper);
 
-        var size = 15;
-        var step = 1;
+        var size = 100000;
+        var step = 500;
 
         var gridHelper = new THREE.GridHelper(size, step);
+        gridHelper.rotation.x = 90 * 0.0174532925;
 
-        Scene.scene.add(gridHelper, earth.threeObject);
+        // Scene.camera.position.set(
+        //     earth.threeObject.position.x,
+        //     earth.threeObject.position.y,
+        //     earth.threeObject.position.z
+        // );
+
+        // Scene.camera.position.z = earth.threeDiameter + 10;
+
+        // Scene.camera.lookAt(earth.threeObject.position);
+
+        // earth.threeObject.position.set(0,0,0);
+
+        Scene.scene.add(axisHelper, gridHelper, sun.threeObject);
     });
 });
 
