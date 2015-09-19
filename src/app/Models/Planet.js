@@ -25,7 +25,7 @@ function(Constants, CelestialObject, Sun) {
 
       this._threeDiameter = this.createThreeDiameter();
       this._threeRadius = this.createThreeRadius();
-      this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo);
+      this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo, data._3d.textures.specular);
       this._threeObject = this.createGeometry(this._surface);
       this._threeParent = threeParent || null
       this._threeDistanceFromParent = this.createThreeDistanceFromParent();
@@ -129,7 +129,7 @@ function(Constants, CelestialObject, Sun) {
       return mesh;
     }
 
-    createSurface(base, topo) {
+    createSurface(base, topo, specular) {
       if (!base) {
         return;
       }
@@ -144,10 +144,18 @@ function(Constants, CelestialObject, Sun) {
         bumpMap.minFilter = THREE.NearestFilter;
       }
 
+      if (specular) {
+        var specularMap = this.getTexture(specular);
+
+        specularMap.minFilter = THREE.NearestFilter;
+      }
+
       return new THREE.MeshPhongMaterial({
         map: map,
         bumpMap: bumpMap || null,
-        bumpScale: bumpMap ? 0.015 : null
+        bumpScale: bumpMap ? 0.015 : null,
+        specularMap: specularMap || null,
+        specular: specularMap ? new THREE.Color(0x0a0a0a) : null
       });
     }
   }
