@@ -101,7 +101,8 @@
                 "textures": {
                     "base": "/src/assets/textures/earth_4k.jpg",
                     "topo": "/src/assets/textures/earth_topo_10k.jpg",
-                    "specular": "/src/assets/textures/earth_ocean_reflectance_10k.jpg"
+                    "specular": "/src/assets/textures/earth_ocean_reflectance_10k.jpg",
+                    "clouds": "/src/assets/textures/earth_clouds_active2.png"
                 }
             }
         },

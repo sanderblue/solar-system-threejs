@@ -36,14 +36,14 @@ function($, Scene, Sun, Planet) {
 
         var sun = new Sun(data.parent);
 
-        console.debug('Sun Diameter:', sun.threeDiameter);
+        // console.debug('Sun Diameter:', sun.threeDiameter);
 
         for (var i = 0; i < planets.length; i++) {
             var planet = new Planet(planets[i], sun);
 
             var posX = sun.threeRadius + planet.threeDistanceFromParent;
 
-            console.debug('Planet pos X:', posX);
+            // console.debug('Planet pos X:', posX);
 
             planet.threeObject.position.x = posX;
 
