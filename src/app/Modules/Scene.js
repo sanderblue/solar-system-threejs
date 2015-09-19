@@ -8,9 +8,8 @@ define(function() {
 
 
         // Camera
-        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 5 * Math.pow(10, 12));
-        camera.position.z = 1200;
-        camera.position.y = 0;
+        var camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 5 * Math.pow(10, 12));
+        camera.position.set(0, 0, 300);
 
 
         // Render Engine
@@ -19,6 +18,13 @@ define(function() {
 
         // Ambient Light
         var ambientLight = new THREE.AmbientLight(0xffffff);
+        var directionalLightTop = new THREE.DirectionalLight(0xffffff, 1); // 0.13
+        var directionalLightBottom = new THREE.DirectionalLight(0xffffff, 1); // 0.13
+
+        directionalLightTop.position.set(0, 0, 1000);
+        directionalLightBottom.position.set(0, 0, -1000)
+        scene.add(directionalLightTop);
+        scene.add(directionalLightBottom);
 
 
         // Get the scene ready.
@@ -26,7 +32,7 @@ define(function() {
         renderEngine.setSize(window.innerWidth, window.innerHeight);
 
         // Add the lights
-        scene.add(ambientLight);
+        // scene.add(ambientLight);
 
         console.debug('Camera Distance - X:', camera.position.x);
         console.debug('Camera Distance - Y:', camera.position.x);

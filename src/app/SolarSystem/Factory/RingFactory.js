@@ -46,31 +46,14 @@ define(function() {
                     length     = 360 / resolution
                 ;
 
-                var material = new THREE.LineBasicMaterial({
-                                    color: ring.color,
-                                    linewidth: 0.1,
-                                    linejoin: 'round'
-                                  });
+                var geometry = new THREE.TorusGeometry(200, 15, 2, 50),
+                    material = new THREE.MeshNormalMaterial(),
+                    ring = new THREE.Mesh(geometry, material)
+                ;
 
-                var ringLine = new THREE.Geometry();
+                ring.rotation.x = Math.PI / 2;
 
-                for (var i = 0; i <= resolution; i++) {
-                    var segment = (i * length) * Math.PI / 180;
-
-                    ringLine.vertices.push(
-                        new THREE.Vector3(
-                            Math.cos(segment) * (ring.distanceFromParent + planet.radius),
-                            Math.sin(segment) * (ring.distanceFromParent + planet.radius),
-                            0
-                        )
-                    );
-                }
-
-                var ringLine = new THREE.Line(ringLine, material);
-
-                ringLine.rotation.x = Math.PI / 2;
-
-                thisPlanet.add(ringLine);
+                thisPlanet.add(ring);
 
                 promise.resolve();
             });

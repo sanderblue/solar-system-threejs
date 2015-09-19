@@ -21,6 +21,7 @@ function(CelestialObject, Constants) {
       this._meanTemperature = data.meanTemperature || null;
 
       this._threeDiameter = this.createThreeDiameter();
+      this._threeRadius = this.createThreeRadius();
       this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo);
       this._threeObject = this.createGeometry(this._surface);
     };
@@ -32,11 +33,15 @@ function(CelestialObject, Constants) {
 
     get threeDiameter() {
       return this._threeDiameter;
-    }
+    };
+
+    get threeRadius() {
+      return this._threeRadius;
+    };
 
     get threeObject() {
       return this._threeObject;
-    }
+    };
 
     getTexture(src) {
       if (src) {
@@ -45,7 +50,7 @@ function(CelestialObject, Constants) {
         texture.wrapS = THREE.ClampToEdgeWrapping;
         texture.wrapT = THREE.ClampToEdgeWrapping;
 
-        return texture
+        return texture;
       }
     };
 
@@ -53,18 +58,24 @@ function(CelestialObject, Constants) {
       return this._diameter * CELESTIAL_SCALE;
     };
 
+    createThreeRadius() {
+      return (this._diameter * CELESTIAL_SCALE) / 2;
+    };
+
     createGeometry(surface) {
-      var mesh = new THREE.Mesh(
-        new THREE.SphereGeometry(
-                this._threeDiameter,
-                60,
-                60
-            ),
-            surface
-        )
+      var geometry = new THREE.SphereGeometry(
+          this._threeRadius,
+          60,
+          60
+      );
+
+      var mesh = new THREE.Mesh(geometry, surface),
+          sunLight = new THREE.PointLight(0xffffff, 1.1, 4495100000 * CELESTIAL_SCALE)
       ;
 
-      mesh.rotation.x = 90 * 0.0174532925; // degrees to radians
+      mesh.rotation.x = 90 * Constants.degreesToRadiansRatio; // degrees to radians
+
+      mesh.add(sunLight);
 
       return mesh;
     };
@@ -77,6 +88,12 @@ function(CelestialObject, Constants) {
       var texture = this.getTexture(base);
 
       texture.minFilter = THREE.NearestFilter;
+
+      return new THREE.MeshLambertMaterial({
+        map: texture,
+        transparent: true,
+        opacity: 0.8
+      });
 
       return new THREE.MeshPhongMaterial({ map: texture });
     };

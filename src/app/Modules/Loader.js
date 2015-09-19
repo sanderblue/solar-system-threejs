@@ -30,6 +30,7 @@ function($, Scene, Sun, Planet) {
 
     getSolarSystemData.done(function(data) {
         var planets = data.planets;
+        var viewPlanet;
 
         var start = new Date().getTime();
 
@@ -40,11 +41,19 @@ function($, Scene, Sun, Planet) {
         for (var i = 0; i < planets.length; i++) {
             var planet = new Planet(planets[i], sun);
 
-            var posX = sun.threeDiameter + 150 + (i * 70);
+            var posX = sun.threeRadius + planet.threeDistanceFromParent;
 
-            console.debug('Pos X:', posX);
+            console.debug('Planet pos X:', posX);
 
             planet.threeObject.position.x = posX;
+
+            if (planets[i].id === 3) {
+                viewPlanet = planet;
+            }
+
+            var axisHelperPlanet = new THREE.AxisHelper(planet.threeObject.radius + 10);
+
+            planet.threeObject.add(axisHelperPlanet);
 
             Scene.scene.add(planet.threeObject);
         }
@@ -65,17 +74,20 @@ function($, Scene, Sun, Planet) {
         var gridHelper = new THREE.GridHelper(size, step);
         gridHelper.rotation.x = 90 * 0.0174532925;
 
-        // Scene.camera.position.set(
-        //     earth.threeObject.position.x,
-        //     earth.threeObject.position.y,
-        //     earth.threeObject.position.z
-        // );
+        if (viewPlanet instanceof Planet) {
+            Scene.camera.position.set(
+                viewPlanet.threeObject.position.x + 0.5,
+                viewPlanet.threeObject.position.y + 3.5,
+                0
+            );
 
-        // Scene.camera.position.z = earth.threeDiameter + 10;
+            Scene.camera.up.set(0, 0, 1);
+            // Scene.camera.position.z = viewPlanet.threeDiameter + 10;
 
-        // Scene.camera.lookAt(earth.threeObject.position);
+            Scene.camera.lookAt(viewPlanet.threeObject.position);
+        }
 
-        // earth.threeObject.position.set(0,0,0);
+        // viewPlanet.threeObject.position.set(0,0,0);
 
         Scene.scene.add(axisHelper, gridHelper, sun.threeObject);
     });

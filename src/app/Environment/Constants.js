@@ -7,7 +7,9 @@ define(function() {
      */
     var Constants = {
         degreesToRadiansRatio: 0.0174532925,
-        celestialScale: Math.pow(10, -3.5)
+        universeScale: Math.pow(10, -3.6),
+        celestialScale: Math.pow(10, -3.5),
+        orbitScale: Math.pow(10, -5)
     };
 
     return Constants;

@@ -6,7 +6,7 @@ define(
 function(Constants, CelestialObject, Sun) {
   'use strict';
 
-  const CELESTIAL_SCALE = Constants.celestialScale;
+  const CELESTIAL_SCALE = Constants.universeScale;
 
   class Planet extends CelestialObject {
     constructor(data, threeParent) {
@@ -24,6 +24,7 @@ function(Constants, CelestialObject, Sun) {
       this._meanTemperature = data.meanTemperature || null;
 
       this._threeDiameter = this.createThreeDiameter();
+      this._threeRadius = this.createThreeRadius();
       this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo);
       this._threeObject = this.createGeometry(this._surface);
       this._threeParent = threeParent || null
@@ -75,12 +76,24 @@ function(Constants, CelestialObject, Sun) {
       return this._threeDiameter;
     }
 
+    get threeRadius() {
+      return this._threeRadius;
+    }
+
     get threeObject() {
       return this._threeObject;
     }
 
     get threeDistanceFromParent() {
       return this._threeDistanceFromParent;
+    }
+
+    createThreeDiameter() {
+      return this._diameter * CELESTIAL_SCALE;
+    }
+
+    createThreeRadius() {
+      return (this._diameter * CELESTIAL_SCALE) / 2;
     }
 
     createThreeDistanceFromParent() {
@@ -98,16 +111,12 @@ function(Constants, CelestialObject, Sun) {
       }
     }
 
-    createThreeDiameter() {
-      return this._diameter * CELESTIAL_SCALE;
-    }
-
     createGeometry(surface) {
-      var segmentsOffset = parseInt(this._threeDiameter * 10);
+      var segmentsOffset = parseInt(this._threeDiameter * 8);
 
       var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
-                this._threeDiameter,
+                this._threeRadius,
                 segmentsOffset,
                 segmentsOffset
             ),
@@ -115,7 +124,7 @@ function(Constants, CelestialObject, Sun) {
         )
       ;
 
-      mesh.rotation.x = 90 * 0.0174532925; // degrees to radians
+      mesh.rotation.x = 90 * Constants.degreesToRadiansRatio; // degrees to radians
 
       return mesh;
     }
@@ -125,11 +134,21 @@ function(Constants, CelestialObject, Sun) {
         return;
       }
 
-      var texture = this.getTexture(base);
+      var map = this.getTexture(base);
 
-      texture.minFilter = THREE.NearestFilter;
+      map.minFilter = THREE.NearestFilter;
 
-      return new THREE.MeshPhongMaterial({ map: texture });
+      if (topo) {
+        var bumpMap = this.getTexture(topo);
+
+        bumpMap.minFilter = THREE.NearestFilter;
+      }
+
+      return new THREE.MeshPhongMaterial({
+        map: map,
+        bumpMap: bumpMap || null,
+        bumpScale: bumpMap ? 0.015 : null
+      });
     }
   }
 
