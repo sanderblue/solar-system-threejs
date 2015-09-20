@@ -102,6 +102,10 @@ function(Constants, CelestialObject, Sun) {
     }
 
     getTexture(src) {
+      if (!src) {
+        throw new MissingArgumentException(arguments[i]);
+      }
+
       if (src) {
         var texture = THREE.ImageUtils.loadTexture(src);
 
@@ -158,43 +162,26 @@ function(Constants, CelestialObject, Sun) {
       return new THREE.MeshPhongMaterial({
         map: map,
         bumpMap: bumpMap || null,
-        bumpScale: bumpMap ? 0.015 : null,
+        bumpScale: bumpMap ? 0.012 : null,
         specularMap: specularMap || null,
         specular: specularMap ? new THREE.Color(0x0a0a0a) : null
       });
     }
 
-    createAtmosphere(clouds, transparencyLayer) {
-      // var geometry   = new THREE.SphereGeometry(0.51, 32, 32)
-      // var material  = new THREE.MeshPhongMaterial({
-      //   map: new THREE.Texture(canvasCloud),
-      //   side: THREE.DoubleSide,
-      //   opacity: 0.75,
-      //   transparent: true,
-      //   depthWrite: false
-      // });
-
-      // var cloudMesh = new THREE.Mesh(geometry, material);
-
-      // earthMesh.add(cloudMesh);
-
+    createAtmosphere(clouds, haze) {
       if (clouds) {
         var segmentsOffset = parseInt(this._threeDiameter * 8);
 
         console.debug('Radius', this._threeRadius);
 
-        var geometry = new THREE.SphereGeometry(this._threeRadius * 1.025, segmentsOffset, segmentsOffset);
-
-        // new THREE.SphereGeometry(this._threeRadius + 1, this._threeRadius, 50);
-
-
-        var material = new THREE.MeshPhongMaterial({
-            map: this.getTexture(clouds),
+        return new THREE.Mesh(
+          new THREE.SphereGeometry(this._threeRadius * 1.02, segmentsOffset, segmentsOffset),
+          new THREE.MeshPhongMaterial({
+            map: this.getTexture(clouds, THREE.NearestFilter),
             transparent: true,
-            opacity: 0.75,
-        });
-
-        return new THREE.Mesh(geometry, material);
+            opacity: 0.95
+          })
+        );
       }
 
       return null;

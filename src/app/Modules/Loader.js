@@ -1,96 +1,100 @@
-
-// import myModule from "my-module.js";
-
 define(
 [
-    'jquery',
-    'Modules/Scene',
-    'Models/Sun',
-    'Models/Planet'
+  'jquery',
+  'Modules/Scene',
+  'Models/Sun',
+  'Models/Planet',
+  'Controllers/RenderController'
 ],
-function($, Scene, Sun, Planet) {
-    'use strict';
+function($, Scene, Sun, Planet, RenderController) {
+  'use strict';
 
-    function getElapsedTimeMs(start, end) {
-        return (end - start);
+  function getElapsedTimeMs(start, end) {
+    return (end - start);
+  }
+
+  function getElapsedTimeSec(start, end) {
+    return (end - start) * 0.001;
+  }
+
+  function getAvgElapsedTime(start, end, interations) {
+    return getElapsedTimeMs(start, end) / interations;
+  }
+
+  var getSolarSystemData = $.ajax({
+    url: 'http://www.solarsystem.lcl/src/data/solarsystem.json',
+    dataType: 'json'
+  });
+
+  getSolarSystemData.done(function(data) {
+    var planets = data.planets;
+    var threePlanets = [];
+    var viewPlanet;
+
+    var start = new Date().getTime();
+    var scene = new Scene();
+    var sun = new Sun(data.parent);
+
+    // console.debug('Sun Diameter:', sun.threeDiameter);
+
+    for (var i = 0; i < planets.length; i++) {
+      var planet = new Planet(planets[i], sun);
+      var posX = parseInt(sun.threeRadius + planet.threeDistanceFromParent / 600); // testing purposes
+
+      console.debug('Planet pos X:', posX);
+
+      if (planets[i].id === 3) {
+          viewPlanet = planet;
+      }
+
+      var axisHelperPlanet = new THREE.AxisHelper(3);
+
+      planet.threeObject.add(axisHelperPlanet);
+
+      planet.threeObject.position.x = posX;
+
+      threePlanets.push(planet.threeObject);
+
+      scene.add(planet.threeObject);
     }
 
-    function getElapsedTimeSec(start, end) {
-        return (end - start) * 0.001;
+    var end = new Date().getTime();
+
+    console.log('\n');
+    console.log('Total Elapsed Time :', getElapsedTimeSec(start, end));
+    console.log('\n');
+
+    var axisHelperScene = new THREE.AxisHelper(1000);
+
+    var size = 2200;
+    var step = 5;
+    var gridHelperScene = new THREE.GridHelper(size, step);
+
+    gridHelperScene.rotation.x = 90 * 0.0174532925;
+
+    if (viewPlanet instanceof Planet) {
+        scene.camera.position.set(
+            viewPlanet.threeObject.position.x + 5,
+            viewPlanet.threeObject.position.y - 3.5,
+            1
+        );
+
+        scene.camera.up.set(0, 0, 1);
+        // Scene.camera.position.z = viewPlanet.threeDiameter + 10;
+
+        scene.camera.lookAt(viewPlanet.threeObject.position);
     }
 
-    function getAvgElapsedTime(start, end, interations) {
-        return getElapsedTimeMs(start, end) / interations;
-    }
+    // viewPlanet.threeObject.position.set(0,0,0);
 
-    var getSolarSystemData = $.ajax({
-        url: 'http://www.solarsystem.lcl/src/data/solarsystem.json',
-        dataType: 'json'
-    });
+    scene.add(
+        axisHelperScene,
+        gridHelperScene,
+        sun.threeObject
+    );
 
-    getSolarSystemData.done(function(data) {
-        var planets = data.planets;
-        var viewPlanet;
-
-        var start = new Date().getTime();
-
-        var sun = new Sun(data.parent);
-
-        // console.debug('Sun Diameter:', sun.threeDiameter);
-
-        for (var i = 0; i < planets.length; i++) {
-            var planet = new Planet(planets[i], sun);
-
-            var posX = sun.threeRadius + planet.threeDistanceFromParent;
-
-            // console.debug('Planet pos X:', posX);
-
-            planet.threeObject.position.x = posX;
-
-            if (planets[i].id === 3) {
-                viewPlanet = planet;
-            }
-
-            var axisHelperPlanet = new THREE.AxisHelper(planet.threeObject.radius + 10);
-
-            planet.threeObject.add(axisHelperPlanet);
-
-            Scene.scene.add(planet.threeObject);
-        }
-
-        var end = new Date().getTime();
-
-        console.log('\n');
-        console.log('Total Elapsed Time :', getElapsedTimeSec(start, end));
-        console.log('\n');
-
-        var axisHelper = new THREE.AxisHelper(1000);
-
-        Scene.scene.add(axisHelper);
-
-        var size = 100000;
-        var step = 500;
-
-        var gridHelper = new THREE.GridHelper(size, step);
-        gridHelper.rotation.x = 90 * 0.0174532925;
-
-        if (viewPlanet instanceof Planet) {
-            Scene.camera.position.set(
-                viewPlanet.threeObject.position.x + 0.5,
-                viewPlanet.threeObject.position.y + 3.5,
-                0
-            );
-
-            Scene.camera.up.set(0, 0, 1);
-            // Scene.camera.position.z = viewPlanet.threeDiameter + 10;
-
-            Scene.camera.lookAt(viewPlanet.threeObject.position);
-        }
-
-        // viewPlanet.threeObject.position.set(0,0,0);
-
-        Scene.scene.add(axisHelper, gridHelper, sun.threeObject);
-    });
+    var renderController = new RenderController(scene, threePlanets);
+  });
 });
 
 

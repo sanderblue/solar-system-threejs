@@ -1,11 +1,23 @@
 require.config({
     baseUrl: './src/app',
     paths: {
-        'jquery'  : 'vendor/jquery/dist/jquery.min',
+        // Vendor
+        'jquery': 'vendor/jquery/dist/jquery.min',
+
+        // App
+        'init': 'init'
     },
     shim: {
         'jquery': {
             exports: ['$']
+        },
+
+        'init': {
+            deps: [
+                'Modules/Error/InvalidArgumentException',
+                'Modules/Error/MissingArgumentException',
+                'Controllers/RenderController'
+            ]
         }
     },
     urlArgs: 'bust=' + new Date().getTime().toString()

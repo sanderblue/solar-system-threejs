@@ -99,8 +99,8 @@
             "meanTemperature": 15,
             "_3d": {
                 "textures": {
-                    "base": "/src/assets/textures/earth_4k.jpg",
-                    "topo": "/src/assets/textures/earth_topo_10k.jpg",
+                    "base": "/src/assets/textures/earth_terrain_4k.jpg",
+                    "topo": "/src/assets/textures/earth_topo_4k.jpg",
                     "specular": "/src/assets/textures/earth_ocean_reflectance_10k.jpg",
                     "clouds": "/src/assets/textures/earth_clouds_active2.png"
                 }
