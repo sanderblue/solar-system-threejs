@@ -75,7 +75,7 @@ function($, Scene, Sun, Planet, RenderController) {
     if (viewPlanet instanceof Planet) {
         scene.camera.position.set(
             viewPlanet.threeObject.position.x + 3.8,
-            1,
+            -1,
             0.25
         );
 

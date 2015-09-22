@@ -101,7 +101,7 @@ function(Constants, CelestialObject, Sun) {
       return this._distanceFromParent * CELESTIAL_SCALE;
     }
 
-    getTexture(src) {
+    getTexture(src, filter) {
       if (!src) {
         throw new MissingArgumentException(arguments[i]);
       }
@@ -111,6 +111,10 @@ function(Constants, CelestialObject, Sun) {
 
         texture.wrapS = THREE.ClampToEdgeWrapping;
         texture.wrapT = THREE.ClampToEdgeWrapping;
+
+        if (filter) {
+          texture.filter = filter;
+        }
 
         return texture;
       }
@@ -154,7 +158,7 @@ function(Constants, CelestialObject, Sun) {
       if (specular) {
         var specularMap = this.getTexture(specular);
 
-        // specularMap.minFilter = THREE.NearestFilter;
+        specularMap.minFilter = THREE.LinearFilter; // specularMap.filter ? specularMap.filter: THREE.LinearFilter;
       }
 
       return new THREE.MeshPhongMaterial({
@@ -168,14 +172,18 @@ function(Constants, CelestialObject, Sun) {
 
     createAtmosphere(clouds, haze) {
       if (clouds) {
-        var segmentsOffset = parseInt(this._threeDiameter * 10); // * 8
+        var segmentsOffset = parseInt(this._threeDiameter * 60);
 
         console.debug('Radius', this._threeRadius);
+
+        var map = this.getTexture(clouds);
+
+        map.minFilter = THREE.LinearFilter;
 
         return new THREE.Mesh(
           new THREE.SphereGeometry(this._threeRadius * 1.02, segmentsOffset, segmentsOffset),
           new THREE.MeshPhongMaterial({
-            map: this.getTexture(clouds, THREE.NearestFilter),
+            map: map,
             transparent: true,
             opacity: 0.95
           })
