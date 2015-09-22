@@ -13,6 +13,7 @@ function() {
 
       this.setCamera();
       this.setLights();
+      this.setAxis();
     };
 
     get camera() {
@@ -51,7 +52,11 @@ function() {
           object.position.set(-1000, 0, 0);
           break;
       }
-    }
+    };
+
+    setAxis() {
+      this.rotation.x = 90 * 0.0174532925;
+    };
   }
 
   return Scene;

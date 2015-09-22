@@ -16,10 +16,6 @@ define(function() {
   // }
 
   function RenderController(scene, planets) {
-    console.debug('RenderController');
-    console.debug('Scene:', scene);
-    console.debug('Planets:', planets);
-
     this._renderEngine = new THREE.WebGLRenderer();
     this._scene = scene;
     this._camera = scene.camera;
@@ -30,6 +26,9 @@ define(function() {
     var self = this;
 
     function render() {
+      self._planets[2].rotation.y += 0.0002;
+      self._planets[2].children[0].rotation.y += 0.00021;
+
       requestAnimationFrame(render);
 
       self._renderEngine.render(self._scene, self._camera);

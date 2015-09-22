@@ -121,19 +121,17 @@ function(Constants, CelestialObject, Sun) {
 
       var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
-                this._threeRadius,
-                segmentsOffset,
-                segmentsOffset
-            ),
-            surface
+            this._threeRadius,
+            segmentsOffset,
+            segmentsOffset
+          ),
+          surface
         )
       ;
 
       if (atmosphere) {
         mesh.add(atmosphere);
       }
-
-      mesh.rotation.x = 90 * Constants.degreesToRadiansRatio; // degrees to radians
 
       return mesh;
     }
@@ -156,7 +154,7 @@ function(Constants, CelestialObject, Sun) {
       if (specular) {
         var specularMap = this.getTexture(specular);
 
-        specularMap.minFilter = THREE.NearestFilter;
+        // specularMap.minFilter = THREE.NearestFilter;
       }
 
       return new THREE.MeshPhongMaterial({
@@ -170,7 +168,7 @@ function(Constants, CelestialObject, Sun) {
 
     createAtmosphere(clouds, haze) {
       if (clouds) {
-        var segmentsOffset = parseInt(this._threeDiameter * 8);
+        var segmentsOffset = parseInt(this._threeDiameter * 10); // * 8
 
         console.debug('Radius', this._threeRadius);
 

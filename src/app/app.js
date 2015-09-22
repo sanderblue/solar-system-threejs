@@ -15,8 +15,7 @@ require.config({
         'init': {
             deps: [
                 'Modules/Error/InvalidArgumentException',
-                'Modules/Error/MissingArgumentException',
-                'Controllers/RenderController'
+                'Modules/Error/MissingArgumentException'
             ]
         }
     },
