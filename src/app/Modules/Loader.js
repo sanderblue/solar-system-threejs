@@ -4,8 +4,7 @@ define(
   'Modules/Scene',
   'Models/Sun',
   'Models/Planet',
-  'Controllers/RenderController',
-  'Controllers/TimeController'
+  'Controllers/RenderController'
 ],
 function($, Scene, Sun, Planet, RenderController) {
   'use strict';
@@ -76,8 +75,8 @@ function($, Scene, Sun, Planet, RenderController) {
     if (viewPlanet instanceof Planet) {
         scene.camera.position.set(
             viewPlanet.threeObject.position.x + 3.8,
-            -1,
-            0.25
+            0,
+            6
         );
 
         scene.camera.up.set(0, 0, 1);
