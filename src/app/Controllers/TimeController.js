@@ -32,9 +32,6 @@ define(function() {
           this._offset = Date.now();
 
           this._interval = setInterval(() => {
-
-            // console.debug('Time:', this._clock);
-
             this._clock += this.getDelta(this._offset);
           }, this._delay);
         }
