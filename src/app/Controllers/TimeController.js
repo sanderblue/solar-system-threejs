@@ -1,62 +1,62 @@
 define(function() {
+    'use strict';
 
     /**
      * TimeController
      *
      * Creates the universal time for the application. The current time is held in the
-     * clock property. Currently one second equals one Earth day, meaning it takes
-     * Earth approximately 6 minutes and 4 seconds to orbit the Sun.
+     * clock property.
+     *
+     * 1 Earth Day = 24 seconds
      */
-    var TimeController = {
-        offset: null,
-        clock: 1,
-        interval: null,
-        delay: 1,
-        isPaused: true,
+    class TimeController {
+      constructor() {
+        this._offset = null;
+        this._clock = 1;
+        this._interval = null;
+        this._delay = 1000;
+        this._isPaused = true;
+        this._earthDay = 24000;
+      }
 
-        start: function() {
-            var TimeController = this;
+      start() {
+        this._isPaused = false;
 
-            TimeController.isPaused = false;
+        if (!TimeController.interval) {
+          this._offset = Date.now();
 
-            if (!TimeController.interval) {
-                TimeController.offset = Date.now();
-
-                TimeController.interval = setInterval(function() {
-                    TimeController.clock += TimeController.getDelta(TimeController.offset);
-                }, TimeController.delay);
-            }
-        },
-
-        stop: function() {
-            TimeController.isPaused = true;
-
-            if (TimeController.interval) {
-                clearInterval(TimeController.interval);
-
-                TimeController.interval = null;
-            }
-        },
-
-        reset: function() {
-            TimeController.clock = 0;
-        },
-
-        getDelta: function(offset) {
-            var now = Date.now(),
-                os  = offset ? offset : 1,
-                d   = now - os
-            ;
-
-            TimeController.offset = now;
-
-            return d;
-        },
-
-        getTime: function() {
-            return TimeController.clock / 1000;
+          this._interval = setInterval(() => {
+            this._clock += this.getDelta(this._offset);
+          }, this._delay);
         }
-    };
+      };
 
-    return TimeController;
+      stop() {
+        this._isPaused = true;
+        this._interval = null;
+
+        clearInterval(this._interval);
+      };
+
+      reset() {
+        this._clock = 0;
+      };
+
+      getDelta(offset) {
+        var now = Date.now(),
+            os  = offset ? offset : 1,
+            d   = now - os
+        ;
+
+        this._offset = now;
+
+        return d;
+      };
+
+      getTime() {
+        return this._clock;
+      };
+    }
+
+    return new TimeController();
 });

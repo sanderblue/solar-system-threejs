@@ -26,9 +26,7 @@ define(function() {
     var self = this;
 
     function render() {
-      self._planets[2].rotation.y += 0.0002;
-      self._planets[2].children[0].rotation.y += 0.00004;
-
+      console.debug('Rotation value:', self._planets[2].rotation.y);
       requestAnimationFrame(render);
 
       self._renderEngine.render(self._scene, self._camera);

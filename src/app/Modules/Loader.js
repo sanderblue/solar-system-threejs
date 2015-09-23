@@ -4,7 +4,8 @@ define(
   'Modules/Scene',
   'Models/Sun',
   'Models/Planet',
-  'Controllers/RenderController'
+  'Controllers/RenderController',
+  'Controllers/TimeController'
 ],
 function($, Scene, Sun, Planet, RenderController) {
   'use strict';
