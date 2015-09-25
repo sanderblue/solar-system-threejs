@@ -35,32 +35,32 @@ function(Constants, TimeCtrl) {
     var self = this;
 
     function render() {
-      var delta = TimeCtrl.threeClock.getDelta();
-      var elapsedTime = roundHundred(TimeCtrl.time);
+      // TimeCtrl.start();
+      // var delta = TimeCtrl.threeClock.getDelta();
 
-      TimeCtrl.start();
+      // var elapsedTime = roundHundred(TimeCtrl.time);
 
-      var degreesPerFrame = delta * (2 * Math.PI / 24); // 24s == 1 Earth day
+      // var degreesPerFrame = delta * (2 * Math.PI / 24); // 24s == 1 Earth day
 
-      if (elapsedTime !== 24000 || elapsedTime !== 72000) {
-        self._planets[2].rotation.y += degreesPerFrame;
-      }
+      // if (elapsedTime !== 24000 || elapsedTime !== 72000) {
+      //   self._planets[2].rotation.y += degreesPerFrame;
+      // }
 
-      if (elapsedTime == 12000) {
-        console.debug('Rotation at 12s: ', self._planets[2].rotation.y * Constants.radiansToDegreesRatio);
-      }
+      // if (elapsedTime == 12000) {
+      //   console.debug('Rotation at 12s: ', self._planets[2].rotation.y * Constants.radiansToDegreesRatio);
+      // }
 
-      if (elapsedTime == 24000) {
-        console.debug('Rotation at 24s: ', self._planets[2].rotation.y * Constants.radiansToDegreesRatio);
-      }
+      // if (elapsedTime == 24000) {
+      //   console.debug('Rotation at 24s: ', self._planets[2].rotation.y * Constants.radiansToDegreesRatio);
+      // }
 
-      if (elapsedTime == 48000) {
-        console.debug('Rotation at 48s: ', self._planets[2].rotation.y * Constants.radiansToDegreesRatio);
-      }
+      // if (elapsedTime == 48000) {
+      //   console.debug('Rotation at 48s: ', self._planets[2].rotation.y * Constants.radiansToDegreesRatio);
+      // }
 
-      if (elapsedTime == 72000) {
-        console.debug('Rotation at 72s: ', self._planets[2].rotation.y * Constants.radiansToDegreesRatio);
-      }
+      // if (elapsedTime == 72000) {
+      //   console.debug('Rotation at 72s: ', self._planets[2].rotation.y * Constants.radiansToDegreesRatio);
+      // }
 
       requestAnimationFrame(render);
 
