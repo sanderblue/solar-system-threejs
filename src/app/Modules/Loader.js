@@ -38,29 +38,17 @@ function($, Scene, Sun, Planet, RenderController, OrbitController) {
 
     // console.debug('Sun Diameter:', sun.threeDiameter);
 
-    var distance = 0;
-
     for (var i = 0; i < planets.length; i++) {
       var planet = new Planet(planets[i], sun);
-      // var posX = parseInt(sun.threeRadius + planet.threeDistanceFromParent / 2000); // testing purposes
-
-      if (!i) {
-        var posX = 0;
-      } else {
-        var posX = parseInt(planet.threeDiameter * 2.5);
-      }
-
-      distance = distance + posX;
-
-      planet.threeObject.position.x = distance;
-
-      console.debug('Planet pos X:', planet.threeObject.position.x);
 
       if (planets[i].id === 3) {
           viewPlanet = planet;
 
           var orbitCtrl = new OrbitController(planet);
-          orbitCtrl.animateOrbit();
+
+          orbitCtrl.positionObject();
+
+          console.debug('Earth pos X:', planet.threeObject.position.x);
       }
 
       var axisHelperPlanet = new THREE.AxisHelper(3);
@@ -87,19 +75,19 @@ function($, Scene, Sun, Planet, RenderController, OrbitController) {
     // gridHelperScene.rotation.x = 90 * 0.0174532925;
 
     if (viewPlanet instanceof Planet) {
-        scene.camera.position.set(
-            0, // viewPlanet.threeObject.position.x + 3.8,
-            0,
-            40
-        );
+      scene.camera.position.set(
+          viewPlanet.threeObject.position.x,
+          viewPlanet.threeObject.position.y,
+          20
+      );
 
-        scene.camera.up.set(0, 0, 1);
-        // Scene.camera.position.z = viewPlanet.threeDiameter + 10;
+      scene.camera.up.set(0, 0, -1);
 
-        // scene.camera.lookAt(viewPlanet.threeObject.position);
+      scene.camera.lookAt(viewPlanet.threeObject.position);
+
+    } else {
+      scene.camera.lookAt(new THREE.Vector3(0,0,0));
     }
-
-    scene.camera.lookAt(new THREE.Vector3(0,0,0));
 
     scene.add(
         axisHelperScene,

@@ -15,7 +15,8 @@ require.config({
         'init': {
             deps: [
                 'Modules/Error/InvalidArgumentException',
-                'Modules/Error/MissingArgumentException'
+                'Modules/Error/MissingArgumentException',
+                'Extensions/Date'
             ]
         }
     },

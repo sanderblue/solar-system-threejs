@@ -6,8 +6,6 @@ define(
 function(Constants, CelestialObject, Sun) {
   'use strict';
 
-  const CELESTIAL_SCALE = Constants.universeScale;
-
   class Planet extends CelestialObject {
     constructor(data, threeParent) {
       super(data.diameter, data.mass, data.gravity, data.density);
@@ -90,15 +88,15 @@ function(Constants, CelestialObject, Sun) {
     }
 
     createThreeDiameter() {
-      return this._diameter * CELESTIAL_SCALE;
+      return this._diameter * Constants.universeScale;
     }
 
     createThreeRadius() {
-      return (this._diameter * CELESTIAL_SCALE) / 2;
+      return (this._diameter * Constants.universeScale) / 2;
     }
 
     createThreeDistanceFromParent() {
-      return this._distanceFromParent * CELESTIAL_SCALE;
+      return this._distanceFromParent * Constants.universeScale;
     }
 
     getTexture(src, filter) {

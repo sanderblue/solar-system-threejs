@@ -6,8 +6,6 @@ define(
 function(CelestialObject, Constants) {
   'use strict';
 
-  const CELESTIAL_SCALE = Constants.celestialScale;
-
   class Sun extends CelestialObject {
     constructor(data) {
       super(data.diameter, data.mass, data.gravity, data.density);
@@ -55,11 +53,11 @@ function(CelestialObject, Constants) {
     };
 
     createThreeDiameter() {
-      return this._diameter * CELESTIAL_SCALE;
+      return this._diameter * Constants.universeScale;
     };
 
     createThreeRadius() {
-      return (this._diameter * CELESTIAL_SCALE) / 2;
+      return (this._diameter * Constants.universeScale) / 2;
     };
 
     createGeometry(surface) {
@@ -70,7 +68,7 @@ function(CelestialObject, Constants) {
       );
 
       var mesh = new THREE.Mesh(geometry, surface),
-          sunLight = new THREE.PointLight(0xffffff, 1.1, 4495100000 * CELESTIAL_SCALE)
+          sunLight = new THREE.PointLight(0xffffff, 1.1, 4495100000 * Constants.universeScale)
       ;
 
       mesh.rotation.x = 90 * Constants.degreesToRadiansRatio; // degrees to radians

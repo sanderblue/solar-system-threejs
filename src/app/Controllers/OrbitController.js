@@ -1,60 +1,35 @@
-define(function() {
+define(
+[
+  'Environment/Constants'
+],
+function(Constants) {
     'use strict';
 
     class OrbitController {
         constructor(planet) {
             this._planet = planet;
             this._threePlanet = planet.threeObject;
-            this._distanceFromParent = planet.threeObject.position.x;
+            this._distanceFromParent = planet.threeDistanceFromParent;
         }
 
         positionObject(fakeTime) {
-            var count = fakeTime;
+            var doy = new Date().getDOYwithTimeAsDecimal(3); // Maybe try not calling this every time
+            var theta = doy * (360 / this._planet.orbitalPeriod) * Constants.degreesToRadiansRatio;
 
-            var posX = (this._distanceFromParent)
-                        * Math.sin(
-                            count
-                            * (360 / this._planet.orbitalPeriod)
-                            * 0.0174532925
-                        );
+            console.debug('theta', theta);
+            console.debug('_distanceFromParent', this._distanceFromParent);
 
-            var posY = (this._distanceFromParent)
-                        * Math.cos(
-                            count
-                            * (360 / this._planet.orbitalPeriod)
-                            * 0.0174532925
-                        );
+            var posX = this._distanceFromParent * Math.sin(theta);
+            var posY = this._distanceFromParent * Math.cos(theta);
+
+            console.debug('X: ', posX);
+            console.debug('Y: ', posY);
 
             this._threePlanet.position.set(
                 parseFloat(posX),
                 0,
                 parseFloat(posY)
             );
-
-            // if (this.object.celestialType) {
-            //     this.object3d.position.set(
-            //         parseFloat(posX),
-            //         parseFloat(posY),
-            //         0
-            //     );
-            // } else {
-            //     // Axis is flipped in this case
-            //     this.object3d.position.set(
-            //         parseFloat(posX),
-            //         0,
-            //         parseFloat(posY)
-            //     );
-            // }
-        };
-
-        animateOrbit() {
-            var fakeTime = 0;
-
-            setInterval(() => {
-                fakeTime = fakeTime + 1;
-
-                this.positionObject(fakeTime);
-            }, 10);
         };
     }
 
