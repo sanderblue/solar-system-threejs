@@ -6,6 +6,8 @@ define(
 function(CelestialObject, Constants) {
   'use strict';
 
+  const DISTANCE_TO_KUIPER_BELT = 7479893535; // Kuiper Belt radius
+
   class Sun extends CelestialObject {
     constructor(data) {
       super(data.diameter, data.mass, data.gravity, data.density);
@@ -63,13 +65,16 @@ function(CelestialObject, Constants) {
     createGeometry(surface) {
       var geometry = new THREE.SphereGeometry(
           this._threeRadius,
-          60,
-          60
+          90,
+          90
       );
 
-      var mesh = new THREE.Mesh(geometry, surface),
-          sunLight = new THREE.PointLight(0xffffff, 1.1, 4495100000 * Constants.universeScale)
-      ;
+      var mesh = new THREE.Mesh(geometry, surface);
+      var lightColor = 0xffffff;
+      var intesity = 1;
+      var lightDistanceStrength = DISTANCE_TO_KUIPER_BELT * Constants.universeScale;
+      var lightDecayRate = 0.8;
+      var sunLight = new THREE.PointLight(lightColor, intesity, lightDistanceStrength, lightDecayRate);
 
       mesh.rotation.x = 90 * Constants.degreesToRadiansRatio; // degrees to radians
 

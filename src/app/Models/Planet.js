@@ -28,11 +28,17 @@ function(Constants, CelestialObject, Sun) {
       this._threeObject = this.createGeometry(this._surface, this._atmosphere);
       this._threeParent = threeParent || null
       this._threeDistanceFromParent = this.createThreeDistanceFromParent();
+
+      this._threeObject.rotation.x = 90 * Constants.degreesToRadiansRatio;
     }
 
     /**
      * Planet Data
      */
+    get id() {
+      return this._id;
+    }
+
     get name() {
       return this._name;
     }
@@ -96,7 +102,7 @@ function(Constants, CelestialObject, Sun) {
     }
 
     createThreeDistanceFromParent() {
-      return this._distanceFromParent * Constants.universeScale;
+      return this._distanceFromParent * Constants.orbitScale;
     }
 
     getTexture(src, filter) {

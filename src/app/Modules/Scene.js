@@ -1,8 +1,4 @@
-define(
-[
-
-],
-function() {
+define(function() {
   'use strict';
 
   class Scene extends THREE.Scene {
@@ -55,7 +51,7 @@ function() {
     };
 
     setAxis() {
-      this.rotation.x = 90 * 0.0174532925;
+      // this.rotation.x = 90 * 0.0174532925;
     };
   }
 
