@@ -20,15 +20,13 @@ function(Constants, CelestialObject, Sun) {
       this._orbitalInclination = data.orbitalInclination || null;
       this._axialTilt = data.axialTilt || null;
       this._meanTemperature = data.meanTemperature || null;
-
       this._threeDiameter = this.createThreeDiameter();
       this._threeRadius = this.createThreeRadius();
       this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo, data._3d.textures.specular);
       this._atmosphere = this.createAtmosphere(data._3d.textures.clouds);
       this._threeObject = this.createGeometry(this._surface, this._atmosphere);
-      this._threeParent = threeParent || null
       this._threeDistanceFromParent = this.createThreeDistanceFromParent();
-
+      this._threeParent = threeParent || null
       this._threeObject.rotation.x = 90 * Constants.degreesToRadiansRatio;
     }
 
@@ -76,7 +74,6 @@ function(Constants, CelestialObject, Sun) {
     /**
      * 3D Model Data
      */
-
     get threeDiameter() {
       return this._threeDiameter;
     }
@@ -89,16 +86,20 @@ function(Constants, CelestialObject, Sun) {
       return this._threeObject;
     }
 
+    get threeParent() {
+      return this._threeParent;
+    }
+
     get threeDistanceFromParent() {
       return this._threeDistanceFromParent;
     }
 
     createThreeDiameter() {
-      return this._diameter * Constants.universeScale;
+      return this._diameter * Constants.celestialScale;
     }
 
     createThreeRadius() {
-      return (this._diameter * Constants.universeScale) / 2;
+      return (this._diameter * Constants.celestialScale) / 2;
     }
 
     createThreeDistanceFromParent() {

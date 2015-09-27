@@ -19,7 +19,6 @@ function(CelestialObject, Constants) {
       this._distanceFromParent = data.distanceFromParent || null;
       this._axialTilt = data.axialTilt || null;
       this._meanTemperature = data.meanTemperature || null;
-
       this._threeDiameter = this.createThreeDiameter();
       this._threeRadius = this.createThreeRadius();
       this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo);
@@ -30,7 +29,6 @@ function(CelestialObject, Constants) {
     /**
      * 3D Model Data
      */
-
     get threeDiameter() {
       return this._threeDiameter;
     };
@@ -95,7 +93,7 @@ function(CelestialObject, Constants) {
       return new THREE.MeshLambertMaterial({
         map: texture,
         transparent: true,
-        opacity: 0.8
+        opacity: 0.5 // 0.8
       });
 
       return new THREE.MeshPhongMaterial({ map: texture });

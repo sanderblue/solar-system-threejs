@@ -1,13 +1,15 @@
 define(
 [
   'jquery',
+  'Environment/Constants',
+  'Environment/GridHelper',
   'Modules/Scene',
   'Models/Sun',
   'Models/Planet',
   'Controllers/RenderController',
   'Controllers/OrbitController'
 ],
-function($, Scene, Sun, Planet, RenderController, OrbitController) {
+function($, Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitController) {
   'use strict';
 
   function getElapsedTimeMs(start, end) {
@@ -36,67 +38,50 @@ function($, Scene, Sun, Planet, RenderController, OrbitController) {
   getSolarSystemData.done(function(data) {
     var planets = data.planets;
     var threePlanets = [];
-    var viewPlanet;
-
+    var axisHelper = new THREE.AxisHelper(1000);
+    var gridHelper = new GridHelper(); // planets[7].distanceFromParent * Constants.celestialScale
     var start = new Date().getTime();
     var scene = new Scene();
     var sun = new Sun(data.parent);
 
-    // console.debug('Sun Diameter:', sun.threeDiameter);
+    console.debug('Sun Diameter:', sun.threeDiameter);
 
     for (var i = 0; i < planets.length; i++) {
       var planet = new Planet(planets[i], sun);
+      var orbitCtrl = new OrbitController(planet);
 
-      if (planet.id === 3) {
-        var orbitCtrl = new OrbitController(planet);
-        orbitCtrl.positionObject();
+      orbitCtrl.positionObject();
 
-        viewPlanet = planet;
+      console.debug(planet.name + ' Position X:', planet.threeObject.position.x);
+      console.debug(planet.name + ' Position Y:', planet.threeObject.position.y);
+      console.log('');
 
-        console.debug(planet.name + ' Position X:', planet.threeObject.position.x);
-        console.debug(planet.name + ' Position Y:', planet.threeObject.position.y);
+      var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
 
-        var axisHelperPlanet = new THREE.AxisHelper(3);
+      planet.threeObject.add(axisHelperPlanet);
 
-        planet.threeObject.add(axisHelperPlanet);
+      threePlanets.push(planet.threeObject);
 
-        threePlanets.push(planet.threeObject);
-
-        scene.add(planet.threeObject);
-      }
+      scene.add(planet.threeObject);
     }
 
-    var end = new Date().getTime();
+    scene.camera.position.set(
+        0,
+        0,
+        sun.threeDiameter * 2
+    );
 
-    var axisHelperScene = new THREE.AxisHelper(1000);
-
-    var size = 100;
-    var step = 10;
-    var gridHelperScene = new THREE.GridHelper(size, step);
-
-    gridHelperScene.rotation.y = 90 * 0.0174532925;
-
-    // if (viewPlanet instanceof Planet) {
-      scene.camera.position.set(
-          viewPlanet.threeObject.position.x,
-          viewPlanet.threeObject.position.y,
-          10
-      );
-
-      scene.camera.lookAt(new THREE.Vector3(0,0,0));
-
-    // } else {
-    //   scene.camera.lookAt(new THREE.Vector3(0,0,0));
-    // }
+    scene.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     scene.add(
-        axisHelperScene
-        // gridHelperScene
-        // ,
-        // sun.threeObject
+        axisHelper,
+        gridHelper,
+        sun.threeObject
     );
 
     var renderController = new RenderController(scene, threePlanets);
+
+    var end = new Date().getTime();
 
     logTimeElapsed(start, end);
   });
