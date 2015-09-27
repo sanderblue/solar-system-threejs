@@ -6,10 +6,11 @@ define(
   'Modules/Scene',
   'Models/Sun',
   'Models/Planet',
+  'Models/Orbit',
   'Controllers/RenderController',
   'Controllers/OrbitController'
 ],
-function($, Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitController) {
+function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, OrbitController) {
   'use strict';
 
   function getElapsedTimeMs(start, end) {
@@ -62,13 +63,16 @@ function($, Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitCo
 
       threePlanets.push(planet.threeObject);
 
+      var orbitLine = new Orbit(planet);
+
+      scene.add(orbitLine.orbit);
       scene.add(planet.threeObject);
     }
 
     scene.camera.position.set(
         0,
         0,
-        sun.threeDiameter * 2
+        sun.threeDiameter * 3.4
     );
 
     scene.camera.lookAt(new THREE.Vector3(0, 0, 0));

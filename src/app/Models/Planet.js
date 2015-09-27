@@ -26,7 +26,7 @@ function(Constants, CelestialObject, Sun) {
       this._atmosphere = this.createAtmosphere(data._3d.textures.clouds);
       this._threeObject = this.createGeometry(this._surface, this._atmosphere);
       this._threeDistanceFromParent = this.createThreeDistanceFromParent();
-      this._threeParent = threeParent || null
+      this._threeParent = threeParent || null;
       this._threeObject.rotation.x = 90 * Constants.degreesToRadiansRatio;
     }
 
