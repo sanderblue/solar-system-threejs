@@ -45,7 +45,7 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
     var scene = new Scene();
     var sun = new Sun(data.parent);
 
-    console.debug('Sun Diameter:', sun.threeDiameter);
+    // console.debug('Sun Diameter:', sun.threeDiameter);
 
     for (var i = 0; i < planets.length; i++) {
       var planet = new Planet(planets[i], sun);
@@ -53,9 +53,9 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
 
       orbitCtrl.positionObject();
 
-      console.debug(planet.name + ' Position X:', planet.threeObject.position.x);
-      console.debug(planet.name + ' Position Y:', planet.threeObject.position.y);
-      console.log('');
+      // console.debug(planet.name + ' Position X:', planet.threeObject.position.x);
+      // console.debug(planet.name + ' Position Y:', planet.threeObject.position.y);
+      // console.log('');
 
       var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
 

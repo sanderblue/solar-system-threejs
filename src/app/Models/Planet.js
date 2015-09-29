@@ -178,9 +178,6 @@ function(Constants, CelestialObject, Sun) {
     createAtmosphere(clouds, haze) {
       if (clouds) {
         var segmentsOffset = parseInt(this._threeDiameter * 60);
-
-        console.debug('Radius', this._threeRadius);
-
         var map = this.getTexture(clouds);
 
         map.minFilter = THREE.LinearFilter;

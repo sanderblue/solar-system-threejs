@@ -18,7 +18,7 @@ define(function() {
           orbitLine = new THREE.Geometry()
         ;
 
-        console.debug('\n Orbit: ', this._planet);
+        // console.debug('\n Orbit: ', this._planet);
 
         // Build the orbit line
         for (var i = 0; i <= resolution; i++) {
