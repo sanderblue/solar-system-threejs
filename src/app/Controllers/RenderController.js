@@ -1,7 +1,8 @@
 define(
 [
-  'Environment/Constants',
-  'Controllers/TimeController'
+  'Environment/Constants'
+  // ,
+  // 'Controllers/TimeController'
 ],
 function(Constants, TimeCtrl) {
   'use strict';
@@ -20,6 +21,10 @@ function(Constants, TimeCtrl) {
   //   };
   // }
 
+  function getElapsedTimeSec(start, end) {
+    return (end - start) * 0.001;
+  }
+
   function roundHundred(value){
     return Math.round(value / 100) * 100;
   }
@@ -34,8 +39,14 @@ function(Constants, TimeCtrl) {
 
     var self = this;
 
+    var frameEvent = new CustomEvent('frame');
+
     function render() {
-      // TimeCtrl.start();
+
+      document.dispatchEvent(frameEvent);
+
+      // console.debug('PLANETS', window.Planets);
+
       // var delta = TimeCtrl.threeClock.getDelta();
 
       // var elapsedTime = roundHundred(TimeCtrl.time);

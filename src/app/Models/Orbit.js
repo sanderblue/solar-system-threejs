@@ -12,9 +12,9 @@ define(function() {
     }
 
     createOrbit() {
-        var resolution = 1080, // segments in the line
+        var resolution = 365, // segments in the line
           length = 360 / resolution,
-          material = new THREE.LineBasicMaterial({ color: 0x3f3f3f, linewidth: 0.1 }),
+          material = new THREE.LineBasicMaterial({ color: 0x3f3f3f, linewidth: 1 }),
           orbitLine = new THREE.Geometry()
         ;
 

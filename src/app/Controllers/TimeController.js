@@ -1,72 +1,117 @@
 define(function() {
-    'use strict';
+  'use strict';
 
-    /**
-     * TimeController
-     *
-     * Creates the universal time for the application. The current time is held in the
-     * clock property. In Three.js, rotation units are measured in radians.
-     *
-     *  Examples:
-     *    mesh.rotation.x += 1;                  // 1 degree per frame
-     *    mesh.rotation.x += 45 * Math.PI / 180  // Rotates  45 degrees per frame
-     *
-     *
-     * 1 Earth Day = 24 seconds
-     */
-    class TimeController {
-      constructor() {
-        this._offset = null;
-        this._clock = 1;
-        this._interval = null;
-        this._delay = 100;
-        this._isPaused = true;
-        this._earthDay = 24000;
-        this._threeClock = new THREE.Clock();
-      }
+  var today = new Date();
+  var year = today.getFullYear(today);
+  var dayOfYear = today.getDayOfYear(today);
 
-      start() {
-        this._isPaused = false;
+  console.debug('Year:', year);
+  console.debug('Day Of Year:', dayOfYear);
 
-        if (!this._interval) {
-          this._offset = Date.now();
+  var TimeCtrl = {
+    _year: year,
+    _day: dayOfYear,
+    _offset: null,
+    _time: 1,
+    _interval: null,
+    _delay: 1000,
+    _isPaused: true,
+    _threeClock: new THREE.Clock(),
 
-          this._interval = setInterval(() => {
-            this._clock += this.getDelta(this._offset);
-          }, this._delay);
-        }
-      };
+    start: function() {
+      console.debug('START: ', TimeCtrl._delay);
 
-      get time() {
-        return this._clock;
-      };
+      // setInterval(() => {
 
-      get threeClock() {
-        return this._threeClock;
-      };
+      //   console.debug('Day: ', TimeCtrl._day);
 
-      stop() {
-        this._isPaused = true;
-        this._interval = null;
+      //   if (TimeCtrl._day === 365) {
+      //       TimeCtrl._day = 1;
+      //       TimeCtrl._year++;
+      //   }
 
-        clearInterval(this._interval);
-      };
+      // }, TimeCtrl._delay);
+    },
 
-      reset() {
-        this._clock = 0;
-      };
+    getDayOfYear: function() {
+      return TimeCtrl._day;
+    },
 
-      getDelta(offset) {
-        var now = Date.now(),
-            os  = offset ? offset : 1,
-            d   = now - os
-        ;
+    init: function() {
+      document.addEventListener('startTime', () => {
+        console.debug('Start...');
 
-        this._offset = now;
-
-        return d;
-      };
+        TimeCtrl.start();
+      }, false);
     }
+  };
 
-    return new TimeController();
+  TimeCtrl.init();
+
+    // class TimeController {
+    //   constructor() {
+    //     this._offset = null;
+    //     this._time = 1;
+    //     this._interval = null;
+    //     this._delay = 1000;
+    //     this._isPaused = true;
+    //     this._earthDay = 24 * 1000;
+    //     this._threeClock = new THREE.Clock();
+    //   }
+
+    //   start() {
+    //     var self = this;
+
+    //     this._isPaused = false;
+
+    //     if (!this._interval) {
+    //       this._offset = Date.now();
+
+    //       this._interval = setInterval(function() {
+    //         self.time += self.getDelta(self._offset);
+    //         window.time += self.getDelta(self._offset);
+    //       }, this._delay);
+    //     }
+    //   };
+
+    //   set time(time) {
+    //     // console.debug('SET TIME', time);
+
+    //     this._time = time;
+    //   }
+
+    //   get time() {
+    //     return this._time
+    //   };
+
+    //   get threeClock() {
+    //     return this._threeClock;
+    //   };
+
+    //   getTime() {
+    //     return this.time;
+    //   }
+
+    //   stop() {
+    //     this._isPaused = true;
+    //     this._interval = null;
+
+    //     clearInterval(this._interval);
+    //   };
+
+    //   reset() {
+    //     this._time = 0;
+    //   };
+
+    //   getDelta(offset) {
+    //     var now = Date.now(),
+    //         os  = offset ? offset : 1,
+    //         d   = now - os
+    //     ;
+
+    //     return d;
+    //   };
+    // }
+
+    return TimeCtrl;
 });

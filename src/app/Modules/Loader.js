@@ -45,37 +45,55 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
     var scene = new Scene();
     var sun = new Sun(data.parent);
 
+    window.Planets = [];
+
     // console.debug('Sun Diameter:', sun.threeDiameter);
+    // for (var i = 0; i < planets.length; i++) {
 
-    for (var i = 0; i < planets.length; i++) {
-      var planet = new Planet(planets[i], sun);
-      var orbitCtrl = new OrbitController(planet);
+    // }
 
-      orbitCtrl.positionObject();
+    var startEvent = new CustomEvent('startTime', {});
+    document.dispatchEvent(startEvent);
 
-      // console.debug(planet.name + ' Position X:', planet.threeObject.position.x);
-      // console.debug(planet.name + ' Position Y:', planet.threeObject.position.y);
-      // console.log('');
+    var planet = new Planet(planets[2], sun);
+    var orbitCtrl = new OrbitController(planet);
 
-      var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
+    orbitCtrl.positionObject();
 
-      planet.threeObject.add(axisHelperPlanet);
+    // window.Planets.push(planet);
 
-      threePlanets.push(planet.threeObject);
+    // console.debug(planet.name + ' Position X:', planet.threeObject.position.x);
+    // console.debug(planet.name + ' Position Y:', planet.threeObject.position.y);
+    // console.log('');
 
-      var orbitLine = new Orbit(planet);
+    var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
 
-      scene.add(orbitLine.orbit);
-      scene.add(planet.threeObject);
-    }
+    planet.threeObject.add(axisHelperPlanet);
+
+    threePlanets.push(planet.threeObject);
+
+    var orbitLine = new Orbit(planet);
+
+    scene.add(orbitLine.orbit);
+    scene.add(planet.threeObject);
+
+    var cameraHeight = sun.threeDiameter * 3;
+    var cameraTarget = planet.threeObject.position;
 
     scene.camera.position.set(
-        0,
-        0,
-        sun.threeDiameter * 3.4
+      planet.threeObject.position.x,
+      planet.threeObject.position.y,
+      cameraHeight
     );
 
-    scene.camera.lookAt(new THREE.Vector3(0, 0, 0));
+    // var cameraTarget = new THREE.Vector3(0, 0, 0);
+    // scene.camera.position.set(
+    //     0,
+    //     0,
+    //     cameraHeight
+    // );
+
+    scene.camera.lookAt(cameraTarget);
 
     scene.add(
         axisHelper,

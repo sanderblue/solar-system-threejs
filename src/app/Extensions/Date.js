@@ -6,10 +6,11 @@ define(function() {
    *
    * @return {Integer}
    */
-  Date.prototype.getDOY = function() {
-      var onejan = new Date(this.getFullYear(), 0, 1);
+  Date.prototype.getDayOfYear = function(date) {
+    var date = date || new Date();
+    var onejan = new Date(date.getFullYear(), 0, 1);
 
-      return Math.ceil((this - onejan) / 86400000);
+    return Math.ceil((this - onejan) / 86400000);
   };
 
   /**
@@ -37,7 +38,7 @@ define(function() {
    * @return {Float}
    */
   Date.prototype.getDOYwithTimeAsDecimal = function(toFixed) {
-    var float = this.getDOY() + this.timeStringToDecimal() / 24;
+    var float = this.getDayOfYear() + this.timeStringToDecimal() / 24;
 
     return toFixed && toFixed > 0
       ? Number.parseFloat(float.toFixed(toFixed))

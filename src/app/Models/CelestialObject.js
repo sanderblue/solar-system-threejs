@@ -1,4 +1,8 @@
-define(function() {
+define(
+[
+  'Controllers/OrbitController'
+],
+function(OrbitController) {
   'use strict';
 
   class CelestialObject {
