@@ -15,37 +15,61 @@ define(function() {
     _offset: null,
     _time: 0,
     _interval: null,
-    _delay: 1000,
+    _delay: 24000, // 24 seconds = 24 hrs
     _vertexesPerDay: 3,
     _isPaused: true,
+    _segmentsInDay: 24000 / 100,
+    _segmentOfDay: 1,
     // _threeClock: new THREE.Clock(),
 
     start: function() {
-      console.debug('START: ', TimeCtrl._delay);
+      console.debug('START TIME... \n');
+
+      var segmentOfDay = 1;
+
+      // var second = 0;
+
+      // setInterval(()=> {
+      //   if (second < 24) {
+      //     second++;
+      //   } else {
+      //     second = 0;
+      //   }
+
+      //   console.log('SECOND', second);
+      // }, 1000);
 
       setInterval(() => {
 
-        console.debug('Day: ', TimeCtrl._day);
+        if (TimeCtrl._segmentsInDay > 1) {
+          if (segmentOfDay < TimeCtrl._segmentsInDay) {
+            segmentOfDay++;
+          } else {
+            segmentOfDay = 1;
+          }
+        }
 
         if (TimeCtrl._day === 365) {
           TimeCtrl._day = 1;
           TimeCtrl._year++;
         } else {
-          TimeCtrl._day++;
+          // TimeCtrl._day++;
+          TimeCtrl._day = TimeCtrl._day + (1 / TimeCtrl._segmentsInDay);
         }
 
-        TimeCtrl._totalElapsedDays++;
+        // console.debug('Day: ', TimeCtrl._day);
 
         var dayEvent = new CustomEvent('day', {
           'detail': {
             'day': TimeCtrl._day,
-            'totalElapsedDays': TimeCtrl._totalElapsedDays
+            'totalElapsedDays': TimeCtrl._totalElapsedDays,
+            'segmentOfDay': segmentOfDay
           }
         });
 
         document.dispatchEvent(dayEvent);
 
-      }, TimeCtrl._delay);
+      }, TimeCtrl._delay / TimeCtrl._segmentsInDay);
     },
 
     getDayOfYear: function() {
