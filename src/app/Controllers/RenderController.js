@@ -2,9 +2,10 @@ define(
 [
   'Environment/Constants'
   // ,
+  // 'stats'
   // 'Controllers/TimeController'
 ],
-function(Constants, TimeCtrl) {
+function(Constants, Stats) {
   'use strict';
 
   // class RenderController extends THREE.WebGLRenderer {
@@ -44,6 +45,22 @@ function(Constants, TimeCtrl) {
     function render() {
 
       document.dispatchEvent(frameEvent);
+
+
+
+      // stats.begin();
+
+      // monitored code goes here
+
+      // stats.end();
+
+
+
+
+
+
+
+
 
       // console.debug('PLANETS', window.Planets);
 

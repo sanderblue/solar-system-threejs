@@ -1,3 +1,6 @@
 {
-  "directory": "src/app/vendor"
+  "directory": "src/app/vendor",
+  "scripts": {
+    "postinstall": "rm -rf src/app/vendor/threejs/examples"
+  }
 }

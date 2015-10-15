@@ -23,16 +23,23 @@ function(Constants, TimeController) {
     initListeners() {
       var frame = 0;
 
-      document.addEventListener('frame', () => {
-        frame++;
+      document.addEventListener('day', (e) => {
 
-        if (frame % 60 === 0) {
-          console.debug('Day Passed', fakeTime);
+        console.debug('Day event:', e.detail);
 
-          fakeTime++;
 
-          this.positionObject(fakeTime);
-        }
+        // frame++;
+
+        // this.positionObject(fakeTime);
+
+        // if (frame % 60 === 0) {
+        //   console.debug('Day Passed:', fakeTime);
+        //   console.debug('TimeController Time:', TimeController);
+
+        //   fakeTime++;
+
+          this.positionObject(e.detail.day);
+        // }
       }, false);
     }
 

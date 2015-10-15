@@ -20,5 +20,8 @@
     "requirejs": "~2.1.17",
     "tweenjs": "*",
     "threejs": "*"
+  },
+  "devDependencies": {
+    "stats.js": "*"
   }
 }

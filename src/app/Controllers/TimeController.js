@@ -3,7 +3,7 @@ define(function() {
 
   var today = new Date();
   var year = today.getFullYear(today);
-  var dayOfYear = today.getDayOfYear(today);
+  var dayOfYear = Math.floor(new Date().getDOYwithTimeAsDecimal());
 
   console.debug('Year:', year);
   console.debug('Day Of Year:', dayOfYear);
@@ -11,30 +11,49 @@ define(function() {
   var TimeCtrl = {
     _year: year,
     _day: dayOfYear,
+    _totalElapsedDays: dayOfYear,
     _offset: null,
-    _time: 1,
+    _time: 0,
     _interval: null,
     _delay: 1000,
+    _vertexesPerDay: 3,
     _isPaused: true,
-    _threeClock: new THREE.Clock(),
+    // _threeClock: new THREE.Clock(),
 
     start: function() {
       console.debug('START: ', TimeCtrl._delay);
 
-      // setInterval(() => {
+      setInterval(() => {
 
-      //   console.debug('Day: ', TimeCtrl._day);
+        console.debug('Day: ', TimeCtrl._day);
 
-      //   if (TimeCtrl._day === 365) {
-      //       TimeCtrl._day = 1;
-      //       TimeCtrl._year++;
-      //   }
+        if (TimeCtrl._day === 365) {
+          TimeCtrl._day = 1;
+          TimeCtrl._year++;
+        } else {
+          TimeCtrl._day++;
+        }
 
-      // }, TimeCtrl._delay);
+        TimeCtrl._totalElapsedDays++;
+
+        var dayEvent = new CustomEvent('day', {
+          'detail': {
+            'day': TimeCtrl._day,
+            'totalElapsedDays': TimeCtrl._totalElapsedDays
+          }
+        });
+
+        document.dispatchEvent(dayEvent);
+
+      }, TimeCtrl._delay);
     },
 
     getDayOfYear: function() {
       return TimeCtrl._day;
+    },
+
+    getTotalElapsedDays: function() {
+      return TimeCtrl._totalElapsedDays;
     },
 
     init: function() {
