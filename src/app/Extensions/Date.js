@@ -45,4 +45,14 @@ define(function() {
       : float
     ;
   };
+
+  // Date.getDOYwithTimeAsDecimal = function(toFixed) {
+  //   var float = this.getDayOfYear() + this.timeStringToDecimal() / 24;
+
+  //   return toFixed && toFixed > 0
+  //     ? Number.parseFloat(float.toFixed(toFixed))
+  //     : float
+  //   ;
+  // };
+
 });

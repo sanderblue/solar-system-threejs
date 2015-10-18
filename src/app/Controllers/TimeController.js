@@ -1,9 +1,13 @@
-define(function() {
+define(
+[
+
+],
+function() {
   'use strict';
 
   var today = new Date();
   var year = today.getFullYear(today);
-  var dayOfYear = Math.floor(new Date().getDOYwithTimeAsDecimal());
+  var dayOfYear = Math.floor(today.getDOYwithTimeAsDecimal());
 
   console.debug('Year:', year);
   console.debug('Day Of Year:', dayOfYear);
@@ -39,6 +43,8 @@ define(function() {
       //   console.log('SECOND', second);
       // }, 1000);
 
+      var interval = TimeCtrl._delay / TimeCtrl._segmentsInDay;
+
       setInterval(() => {
 
         if (TimeCtrl._segmentsInDay > 1) {
@@ -69,7 +75,9 @@ define(function() {
 
         document.dispatchEvent(dayEvent);
 
-      }, TimeCtrl._delay / TimeCtrl._segmentsInDay);
+      }, interval);
+
+      console.debug('TimeCtrl._delay / TimeCtrl._segmentsInDay: ', interval);
     },
 
     getDayOfYear: function() {

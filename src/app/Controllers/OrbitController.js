@@ -24,8 +24,20 @@ function(Constants, TimeController) {
     }
 
     initListeners() {
+      var tic = 0;
+
+      setInterval(() => {
+        tic++;
+
+        console.debug('Tic: ', tic);
+      }, 1000);
+
       document.addEventListener('day', (e)=> {
         this.positionObject(e.detail.day, e.detail.segmentOfDay);
+
+        if (tic <= 24) {
+          this.rotateObject();
+        }
       }, false);
     }
 
@@ -40,6 +52,13 @@ function(Constants, TimeController) {
 
       this._threePlanet.position.set(x, y, 0);
     };
+
+    rotateObject() {
+      var degreesToRotate = 1.5165;
+
+      this._threePlanet.rotation.y += degreesToRotate * Math.PI / 180; // 1 degree per frame
+
+    }
   }
 
   return OrbitController;

@@ -83,9 +83,9 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
     scene.camera.up.set(0, 0, 1);
 
     scene.camera.position.set(
-      250, // planet.threeObject.position.x, // 350
-      0, // planet.threeObject.position.y, // 0
-      60 // cameraHeight // 0
+      planet.threeObject.position.x, // planet.threeObject.position.x, // 350
+      planet.threeObject.position.y, // planet.threeObject.position.y, // 0
+      6 // cameraHeight // 0
     );
 
     console.debug('CAMERA POSITION:', scene.camera.position);

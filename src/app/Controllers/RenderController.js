@@ -5,7 +5,7 @@ define(
   // 'stats'
   // 'Controllers/TimeController'
 ],
-function(Constants, Stats) {
+function(Constants) {
   'use strict';
 
   // class RenderController extends THREE.WebGLRenderer {
@@ -42,57 +42,26 @@ function(Constants, Stats) {
 
     var frameEvent = new CustomEvent('frame');
 
+    var stats = new Stats();
+    stats.setMode( 0 ); // 0: fps, 1: ms, 2: mb
+
+    // align top-left
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '0px';
+    stats.domElement.style.top = '0px';
+
+    document.body.appendChild( stats.domElement );
+
     function render() {
 
-      document.dispatchEvent(frameEvent);
-
-
-
-      // stats.begin();
-
-      // monitored code goes here
-
-      // stats.end();
-
-
-
-
-
-
-
-
-
-      // console.debug('PLANETS', window.Planets);
-
-      // var delta = TimeCtrl.threeClock.getDelta();
-
-      // var elapsedTime = roundHundred(TimeCtrl.time);
-
-      // var degreesPerFrame = delta * (2 * Math.PI / 24); // 24s == 1 Earth day
-
-      // if (elapsedTime !== 24000 || elapsedTime !== 72000) {
-      //   self._planets[2].rotation.y += degreesPerFrame;
-      // }
-
-      // if (elapsedTime == 12000) {
-      //   console.debug('Rotation at 12s: ', self._planets[2].rotation.y * Constants.radiansToDegreesRatio);
-      // }
-
-      // if (elapsedTime == 24000) {
-      //   console.debug('Rotation at 24s: ', self._planets[2].rotation.y * Constants.radiansToDegreesRatio);
-      // }
-
-      // if (elapsedTime == 48000) {
-      //   console.debug('Rotation at 48s: ', self._planets[2].rotation.y * Constants.radiansToDegreesRatio);
-      // }
-
-      // if (elapsedTime == 72000) {
-      //   console.debug('Rotation at 72s: ', self._planets[2].rotation.y * Constants.radiansToDegreesRatio);
-      // }
+      // Moniter javascript performance
+      stats.begin();
 
       requestAnimationFrame(render);
-
+      document.dispatchEvent(frameEvent);
       self._renderEngine.render(self._scene, self._camera);
+
+      stats.end();
     }
 
     render();
