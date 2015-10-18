@@ -11,6 +11,11 @@ function(OrbitController) {
       this._mass = mass || 1;
       this._gravity = gravity || 1;
       this._density = density || 1;
+      this._core = new THREE.Object3D();
+    }
+
+    get core() {
+      return this._core;
     }
 
     get diameter() {

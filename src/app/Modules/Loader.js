@@ -63,22 +63,21 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
 
     scene.add(orbitLine.orbit);
     scene.add(planet.threeObject);
+    scene.add(planet.core);
 
     var cameraHeight = sun.threeDiameter * 2;
     var cameraTarget = new THREE.Vector3(0, 0, 0); // planet.threeObject.position;
 
     // ADD CAMERA TO PLANET INSTEAD FOR NOW
-    planet.threeObject.add(scene.camera);
+    // planet.core.add(scene.camera);
 
-    // scene.camera.up.set(0, 0, 1);
+    scene.camera.up.set(0, 0, 1);
 
     scene.camera.position.set(
-      8, // planet.threeObject.position.x, // 350
+      0, // planet.threeObject.position.x, // 350
       0, // planet.threeObject.position.y, // 0
-      0 // cameraHeight // 0
+      360 // cameraHeight // 0
     );
-
-    console.debug('CAMERA POSITION:', scene.camera.position);
 
     // var cameraTarget = new THREE.Vector3(0, 0, 0);
     // scene.camera.position.set(

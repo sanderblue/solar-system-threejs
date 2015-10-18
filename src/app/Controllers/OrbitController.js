@@ -1,15 +1,17 @@
 define(
 [
   'Environment/Constants',
-  'Controllers/TimeController'
+  'Controllers/TimeController',
+  'Modules/Clock'
 ],
-function(Constants, TimeController) {
+function(Constants, TimeController, Clock) {
   'use strict';
 
-  const COORDINATE_PRECISION = 2;
+  var clock = new Clock();
 
-  var time = TimeController._day;
-  var fakeTime = time;
+  clock.start();
+
+  const COORDINATE_PRECISION = 2;
 
   class OrbitController {
     constructor(planet) {
@@ -26,22 +28,37 @@ function(Constants, TimeController) {
 
     initListeners() {
       var tic = 0;
+      var min = 0;
+      var count = 0;
+      var offset = 0.1 / 1440;
 
-      setInterval(() => {
-        tic++;
+      // setInterval(() => {
+      //   tic++;
 
-        console.debug('Tic: ', tic);
-      }, 1000);
+      //   if (tic % 60 === 0) {
+      //     min++;
+
+      //     var theta = tic * (360 / this._planet.orbitalPeriod);
+      //   }
+      // }, 1000);
 
       document.addEventListener('frame', (e)=> {
-        this.positionObject();
+        count = count + offset;
+
+        if (count === 3600) {
+          count = 0;
+        }
+
+        this.positionObject(count);
         this.rotateObject();
       }, false);
     }
 
-    positionObject(day) {
-      var doy = day || 0.0067; // || day
-      var theta = doy * (360 / this._planet.orbitalPeriod) * Constants.degreesToRadiansRatio;
+    positionObject(time) {
+      var time = clock.getElapsedTime() / 60;
+
+      var doy = time || 0.001; // || day
+      var theta = time * (360 / this._planet.orbitalPeriod) * Constants.degreesToRadiansRatio;
       var x = this._orbitAmplitude * Math.cos(theta);
       var y = this._orbitAmplitude * Math.sin(theta);
 
@@ -49,6 +66,17 @@ function(Constants, TimeController) {
       y = Number.parseFloat(y.toFixed(COORDINATE_PRECISION));
 
       this._threePlanet.position.set(x, y, 0);
+      this._planet.core.position.set(x, y, 0);
+
+      if (timeParsedInteger > 0 && timeParsedInteger % 60 === 0) {
+        console.debug(
+          '\n',
+          'Clock: ', clock.getElapsedTime(),
+          '\n'
+        );
+
+        clock = new Clock(true);
+      }
     };
 
     rotateObject() {

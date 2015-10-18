@@ -64,8 +64,6 @@ function() {
         // document.dispatchEvent(dayEvent);
 
       }, interval);
-
-      console.debug('TimeCtrl._delay / TimeCtrl._segmentsInDay: ', interval);
     },
 
     getDayOfYear: function() {

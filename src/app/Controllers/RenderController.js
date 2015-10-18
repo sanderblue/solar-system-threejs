@@ -43,19 +43,16 @@ function(Constants) {
     var frameEvent = new CustomEvent('frame');
 
     var stats = new Stats();
-    stats.setMode( 0 ); // 0: fps, 1: ms, 2: mb
+    stats.setMode(0); // 0: fps, 1: ms, 2: mb
 
     // align top-left
     stats.domElement.style.position = 'absolute';
     stats.domElement.style.left = '0px';
     stats.domElement.style.top = '0px';
 
-    console.debug('Stats: ', stats);
-
     document.body.appendChild(stats.domElement);
 
     function render() {
-
       // Moniter javascript performance
       stats.begin();
 
