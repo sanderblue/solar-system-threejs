@@ -19,6 +19,7 @@ function(Constants, TimeController) {
       this._segmentsInDay = 1;
       this._currentDay = 1;
       this._orbitAmplitude = this._planet.threeParent.threeRadius + this._distanceFromParent;
+      this._degreesToRotate = 0.1; // 1 min = 1 day
 
       this.initListeners();
     }
@@ -32,17 +33,14 @@ function(Constants, TimeController) {
         console.debug('Tic: ', tic);
       }, 1000);
 
-      document.addEventListener('day', (e)=> {
-        this.positionObject(e.detail.day, e.detail.segmentOfDay);
-
-        if (tic <= 24) {
-          this.rotateObject();
-        }
+      document.addEventListener('frame', (e)=> {
+        this.positionObject();
+        this.rotateObject();
       }, false);
     }
 
     positionObject(day) {
-      var doy = 0.001; // || day
+      var doy = day || 0.0067; // || day
       var theta = doy * (360 / this._planet.orbitalPeriod) * Constants.degreesToRadiansRatio;
       var x = this._orbitAmplitude * Math.cos(theta);
       var y = this._orbitAmplitude * Math.sin(theta);
@@ -54,9 +52,7 @@ function(Constants, TimeController) {
     };
 
     rotateObject() {
-      var degreesToRotate = 1.5165;
-
-      this._threePlanet.rotation.y += degreesToRotate * Math.PI / 180; // 1 degree per frame
+      this._threePlanet.rotation.y += this._degreesToRotate * Math.PI / 180; // 1 degree per frame
 
     }
   }

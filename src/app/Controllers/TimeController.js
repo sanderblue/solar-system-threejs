@@ -24,26 +24,14 @@ function() {
     _isPaused: true,
     _segmentsInDay: 24000 / 100,
     _segmentOfDay: 1,
+    _framesPerYear: 3600, // 60 fps * 60 secs = simulated earth day (1 minute = 1 day)
     // _threeClock: new THREE.Clock(),
 
     start: function() {
       console.debug('START TIME... \n');
 
       var segmentOfDay = 1;
-
-      // var second = 0;
-
-      // setInterval(()=> {
-      //   if (second < 24) {
-      //     second++;
-      //   } else {
-      //     second = 0;
-      //   }
-
-      //   console.log('SECOND', second);
-      // }, 1000);
-
-      var interval = TimeCtrl._delay / TimeCtrl._segmentsInDay;
+      var interval = 3600 / 24; // TimeCtrl._delay / TimeCtrl._segmentsInDay;
 
       setInterval(() => {
 
@@ -65,15 +53,15 @@ function() {
 
         // console.debug('Day: ', TimeCtrl._day);
 
-        var dayEvent = new CustomEvent('day', {
-          'detail': {
-            'day': TimeCtrl._day,
-            'totalElapsedDays': TimeCtrl._totalElapsedDays,
-            'segmentOfDay': segmentOfDay
-          }
-        });
+        // var dayEvent = new CustomEvent('day', {
+        //   'detail': {
+        //     'day': TimeCtrl._day,
+        //     'totalElapsedDays': TimeCtrl._totalElapsedDays,
+        //     'segmentOfDay': segmentOfDay
+        //   }
+        // });
 
-        document.dispatchEvent(dayEvent);
+        // document.dispatchEvent(dayEvent);
 
       }, interval);
 

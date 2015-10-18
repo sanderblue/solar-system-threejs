@@ -50,7 +50,9 @@ function(Constants) {
     stats.domElement.style.left = '0px';
     stats.domElement.style.top = '0px';
 
-    document.body.appendChild( stats.domElement );
+    console.debug('Stats: ', stats);
+
+    document.body.appendChild(stats.domElement);
 
     function render() {
 

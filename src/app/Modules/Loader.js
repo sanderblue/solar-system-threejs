@@ -44,27 +44,14 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
     var start = new Date().getTime();
     var scene = new Scene();
     var sun = new Sun(data.parent);
-
-    window.Planets = [];
-
-    // console.debug('Sun Diameter:', sun.threeDiameter);
-    // for (var i = 0; i < planets.length; i++) {
-
-    // }
-
     var startEvent = new CustomEvent('startTime', {});
+
     document.dispatchEvent(startEvent);
 
     var planet = new Planet(planets[2], sun);
     var orbitCtrl = new OrbitController(planet);
 
     orbitCtrl.positionObject();
-
-    // window.Planets.push(planet);
-
-    // console.debug(planet.name + ' Position X:', planet.threeObject.position.x);
-    // console.debug(planet.name + ' Position Y:', planet.threeObject.position.y);
-    // console.log('');
 
     var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
 
@@ -78,14 +65,17 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
     scene.add(planet.threeObject);
 
     var cameraHeight = sun.threeDiameter * 2;
-    var cameraTarget = planet.threeObject.position;
+    var cameraTarget = new THREE.Vector3(0, 0, 0); // planet.threeObject.position;
 
-    scene.camera.up.set(0, 0, 1);
+    // ADD CAMERA TO PLANET INSTEAD FOR NOW
+    planet.threeObject.add(scene.camera);
+
+    // scene.camera.up.set(0, 0, 1);
 
     scene.camera.position.set(
-      planet.threeObject.position.x, // planet.threeObject.position.x, // 350
-      planet.threeObject.position.y, // planet.threeObject.position.y, // 0
-      6 // cameraHeight // 0
+      8, // planet.threeObject.position.x, // 350
+      0, // planet.threeObject.position.y, // 0
+      0 // cameraHeight // 0
     );
 
     console.debug('CAMERA POSITION:', scene.camera.position);
