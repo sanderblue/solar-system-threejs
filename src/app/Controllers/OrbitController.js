@@ -18,6 +18,7 @@ function(Constants, TimeController) {
       this._distanceFromParent = planet.threeDistanceFromParent;
       this._segmentsInDay = 1;
       this._currentDay = 1;
+      this._orbitAmplitude = this._planet.threeParent.threeRadius + this._distanceFromParent;
 
       this.initListeners();
     }
@@ -29,11 +30,10 @@ function(Constants, TimeController) {
     }
 
     positionObject(day) {
-      var doy = day || 1;
+      var doy = 0.001; // || day
       var theta = doy * (360 / this._planet.orbitalPeriod) * Constants.degreesToRadiansRatio;
-      var orbitAmplitude = this._planet.threeParent.threeRadius + this._distanceFromParent;
-      var x = orbitAmplitude * Math.cos(theta);
-      var y = orbitAmplitude * Math.sin(theta);
+      var x = this._orbitAmplitude * Math.cos(theta);
+      var y = this._orbitAmplitude * Math.sin(theta);
 
       x = Number.parseFloat(x.toFixed(COORDINATE_PRECISION));
       y = Number.parseFloat(y.toFixed(COORDINATE_PRECISION));
