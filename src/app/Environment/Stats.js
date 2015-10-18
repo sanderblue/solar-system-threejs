@@ -1,21 +1,14 @@
-define(
-[
-    'stats'
-],
-function(Stats) {
-    'use strict';
+define(function() {
+  'use strict';
 
-    // class Statistics extends Stats {
-    //     constructor() {
-    //         super();
+  var stats = new Stats();
 
-    //         this.positionDomElement();
-    //     };
+  stats.setMode(0); // 0: fps, 1: ms, 2: mb
+  stats.domElement.style.position = 'absolute';
+  stats.domElement.style.left = '0px';
+  stats.domElement.style.top = '0px';
 
-    //     positionDomElement() {
-    //         .domElement.style.position = 'absolute';
-    //         .domElement.style.right = '0px';
-    //         .domElement.style.top = '0px';
-    //     };
-    // }
+  document.body.appendChild(stats.domElement);
+
+  return stats;
 });

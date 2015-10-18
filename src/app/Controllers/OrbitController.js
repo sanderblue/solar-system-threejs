@@ -8,6 +8,7 @@ function(Constants, TimeController, Clock) {
   'use strict';
 
   var clock = new Clock();
+  var prevTime = 0;
 
   clock.start();
 
@@ -27,34 +28,13 @@ function(Constants, TimeController, Clock) {
     }
 
     initListeners() {
-      var tic = 0;
-      var min = 0;
-      var count = 0;
-      var offset = 0.1 / 1440;
-
-      // setInterval(() => {
-      //   tic++;
-
-      //   if (tic % 60 === 0) {
-      //     min++;
-
-      //     var theta = tic * (360 / this._planet.orbitalPeriod);
-      //   }
-      // }, 1000);
-
       document.addEventListener('frame', (e)=> {
-        count = count + offset;
-
-        if (count === 3600) {
-          count = 0;
-        }
-
-        this.positionObject(count);
+        this.positionObject();
         this.rotateObject();
       }, false);
     }
 
-    positionObject(time) {
+    positionObject() {
       var time = clock.getElapsedTime() / 60;
 
       var doy = time || 0.001; // || day
@@ -68,7 +48,19 @@ function(Constants, TimeController, Clock) {
       this._threePlanet.position.set(x, y, 0);
       this._planet.core.position.set(x, y, 0);
 
-      if (timeParsedInteger > 0 && timeParsedInteger % 60 === 0) {
+      var timeParsed = Number.parseInt(time);
+
+      if (timeParsed > prevTime) {
+        prevTime = timeParsed;
+
+        console.debug(
+          '\n',
+          'Clock: ', clock.getElapsedTime(),
+          '\n'
+        );
+      }
+
+      if (timeParsed > 0 && timeParsed % 60 === 0) {
         console.debug(
           '\n',
           'Clock: ', clock.getElapsedTime(),

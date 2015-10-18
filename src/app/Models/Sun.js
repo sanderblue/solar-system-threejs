@@ -53,11 +53,11 @@ function(CelestialObject, Constants) {
     };
 
     createThreeDiameter() {
-      return this._diameter * Constants.universeScale;
+      return this._diameter * Constants.celestialScale;
     };
 
     createThreeRadius() {
-      return (this._diameter * Constants.universeScale) / 2;
+      return (this._diameter * Constants.celestialScale) / 2;
     };
 
     createGeometry(surface) {
@@ -69,9 +69,9 @@ function(CelestialObject, Constants) {
 
       var mesh = new THREE.Mesh(geometry, surface);
       var lightColor = 0xffffff;
-      var intesity = 1;
+      var intesity = 1.5;
       var lightDistanceStrength = DISTANCE_TO_KUIPER_BELT * Constants.universeScale;
-      var lightDecayRate = 0.8;
+      var lightDecayRate = 0.9;
       var sunLight = new THREE.PointLight(lightColor, intesity, lightDistanceStrength, lightDecayRate);
 
       mesh.rotation.x = 90 * Constants.degreesToRadiansRatio; // degrees to radians
@@ -93,7 +93,7 @@ function(CelestialObject, Constants) {
       return new THREE.MeshLambertMaterial({
         map: texture,
         transparent: true,
-        opacity: 0.5 // 0.8
+        opacity: 0.75 // 0.8
       });
 
       return new THREE.MeshPhongMaterial({ map: texture });

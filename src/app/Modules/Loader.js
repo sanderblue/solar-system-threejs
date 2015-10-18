@@ -51,6 +51,11 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
     var planet = new Planet(planets[2], sun);
     var orbitCtrl = new OrbitController(planet);
 
+    var pluto = new Planet(planets[8], sun);
+
+    console.debug('Earth Distance: ', planet.threeDistanceFromParent);
+    console.debug('Pluto Distance: ', pluto.threeDistanceFromParent);
+
     orbitCtrl.positionObject();
 
     var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
@@ -69,28 +74,21 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
     var cameraTarget = new THREE.Vector3(0, 0, 0); // planet.threeObject.position;
 
     // ADD CAMERA TO PLANET INSTEAD FOR NOW
-    // planet.core.add(scene.camera);
+    planet.core.add(scene.camera);
 
     scene.camera.up.set(0, 0, 1);
 
     scene.camera.position.set(
-      0, // planet.threeObject.position.x, // 350
-      0, // planet.threeObject.position.y, // 0
-      360 // cameraHeight // 0
+      50, // 350
+      0, // 0
+      10 // cameraHeight // 0
     );
-
-    // var cameraTarget = new THREE.Vector3(0, 0, 0);
-    // scene.camera.position.set(
-    //     0,
-    //     0,
-    //     cameraHeight
-    // );
 
     scene.camera.lookAt(cameraTarget);
 
     scene.add(
         axisHelper,
-        gridHelper,
+        // gridHelper,
         sun.threeObject
     );
 

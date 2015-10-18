@@ -211,6 +211,27 @@
                     "base": "/src/assets/textures/neptune.jpg"
                 }
             }
+        },
+        {
+            "id": 9,
+            "name": "Pluto",
+            "mass": 102,
+            "diameter": 2374,
+            "density": 1638,
+            "gravity": 11,
+            "rotationPeriod": 16.1,
+            "lengthOfDay": 6.39,
+            "distanceFromParent": 5874000000,
+            "orbitalPeriod": 90570,
+            "orbitalVelocity": 4.67,
+            "orbitalInclination": 17.1405,
+            "axialTilt": 119.59,
+            "meanTemperature": -229,
+            "_3d": {
+                "textures": {
+                    "base": "/src/assets/textures/pluto.jpg"
+                }
+            }
         }
     ],
     "dwarfPlanets": [

@@ -1,11 +1,10 @@
 define(
 [
-  'Environment/Constants'
-  // ,
-  // 'stats'
+  'Environment/Constants',
+  'Environment/Stats'
   // 'Controllers/TimeController'
 ],
-function(Constants) {
+function(Constants, Stats) {
   'use strict';
 
   // class RenderController extends THREE.WebGLRenderer {
@@ -42,25 +41,15 @@ function(Constants) {
 
     var frameEvent = new CustomEvent('frame');
 
-    var stats = new Stats();
-    stats.setMode(0); // 0: fps, 1: ms, 2: mb
-
-    // align top-left
-    stats.domElement.style.position = 'absolute';
-    stats.domElement.style.left = '0px';
-    stats.domElement.style.top = '0px';
-
-    document.body.appendChild(stats.domElement);
-
     function render() {
       // Moniter javascript performance
-      stats.begin();
+      Stats.begin();
 
       requestAnimationFrame(render);
       document.dispatchEvent(frameEvent);
       self._renderEngine.render(self._scene, self._camera);
 
-      stats.end();
+      Stats.end();
     }
 
     render();
