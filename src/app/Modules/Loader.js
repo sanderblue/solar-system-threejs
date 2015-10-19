@@ -31,6 +31,10 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
     console.log('\n');
   }
 
+  function buildPlanet() {
+
+  }
+
   var getSolarSystemData = $.ajax({
     url: 'http://www.solarsystem.lcl/src/data/solarsystem.json',
     dataType: 'json'
@@ -45,46 +49,42 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
     var scene = new Scene();
     var sun = new Sun(data.parent);
     var startEvent = new CustomEvent('startTime', {});
+    var planet;
 
     document.dispatchEvent(startEvent);
 
-    var planet = new Planet(planets[2], sun);
-    var orbitCtrl = new OrbitController(planet);
+    for (var i = 0; i < planets.length; i++) {
+      planet = new Planet(planets[i], sun);
 
-    var pluto = new Planet(planets[8], sun);
+      var orbitLine = new Orbit(planet);
+      var orbitCtrl = new OrbitController(planet);
 
-    console.debug('Earth Distance: ', planet.threeDistanceFromParent);
-    console.debug('Pluto Distance: ', pluto.threeDistanceFromParent);
+      scene.add(planet.threeObject, planet.core, orbitLine.orbit);
 
-    orbitCtrl.positionObject();
+      console.debug(planet.name + ' Diameter: ', planet.threeDiameter);
+      console.debug(planet.name + ' Distance: ', planet.threeDistanceFromParent);
 
-    var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
+      if (planet.id === 5) {
+        var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
 
-    planet.threeObject.add(axisHelperPlanet);
+        planet.threeObject.add(axisHelperPlanet);
+        planet.core.add(scene.camera);
 
-    threePlanets.push(planet.threeObject);
+        scene.camera.up.set(0, 0, 1);
 
-    var orbitLine = new Orbit(planet);
+        scene.camera.position.set(
+          planet.threeDiameter * 3, // pluto.threeObject.position.x, // 350
+          0, // 0
+          1 // cameraHeight // 0
+        );
 
-    scene.add(orbitLine.orbit);
-    scene.add(planet.threeObject);
-    scene.add(planet.core);
+        scene.camera.lookAt(new THREE.Vector3(0, 0, 0));
+      }
 
-    var cameraHeight = sun.threeDiameter * 2;
-    var cameraTarget = new THREE.Vector3(0, 0, 0); // planet.threeObject.position;
+      threePlanets.push(planet.threeObject);
 
-    // ADD CAMERA TO PLANET INSTEAD FOR NOW
-    planet.core.add(scene.camera);
-
-    scene.camera.up.set(0, 0, 1);
-
-    scene.camera.position.set(
-      50, // 350
-      0, // 0
-      10 // cameraHeight // 0
-    );
-
-    scene.camera.lookAt(cameraTarget);
+      orbitCtrl.positionObject();
+    }
 
     scene.add(
         axisHelper,

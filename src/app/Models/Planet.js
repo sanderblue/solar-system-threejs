@@ -126,7 +126,9 @@ function(Constants, CelestialObject, Sun) {
     }
 
     createGeometry(surface, atmosphere) {
-      var segmentsOffset = parseInt(this._threeDiameter * 8);
+      var segmentsOffset = this._threeDiameter < 3
+        ? Number.parseInt(this._threeDiameter * 16) * 3
+        : Number.parseInt(this._threeDiameter * 8);
 
       var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
