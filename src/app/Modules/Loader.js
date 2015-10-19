@@ -31,10 +31,6 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
     console.log('\n');
   }
 
-  function buildPlanet() {
-
-  }
-
   var getSolarSystemData = $.ajax({
     url: 'http://www.solarsystem.lcl/src/data/solarsystem.json',
     dataType: 'json'
@@ -44,7 +40,7 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
     var planets = data.planets;
     var threePlanets = [];
     var axisHelper = new THREE.AxisHelper(1000);
-    var gridHelper = new GridHelper(); // planets[7].distanceFromParent * Constants.celestialScale
+    var gridHelper = new GridHelper();
     var start = new Date().getTime();
     var scene = new Scene();
     var sun = new Sun(data.parent);
@@ -64,7 +60,7 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
       console.debug(planet.name + ' Diameter: ', planet.threeDiameter);
       console.debug(planet.name + ' Distance: ', planet.threeDistanceFromParent);
 
-      if (planet.id === 5) {
+      if (planet.id === 6) {
         var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
 
         planet.threeObject.add(axisHelperPlanet);
@@ -73,9 +69,9 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
         scene.camera.up.set(0, 0, 1);
 
         scene.camera.position.set(
-          planet.threeDiameter * 3, // pluto.threeObject.position.x, // 350
+          planet.threeDiameter * 2.5, // pluto.threeObject.position.x, // 350
           0, // 0
-          1 // cameraHeight // 0
+          7.5 // cameraHeight // 0
         );
 
         scene.camera.lookAt(new THREE.Vector3(0, 0, 0));

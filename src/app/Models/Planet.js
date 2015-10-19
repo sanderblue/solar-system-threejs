@@ -28,6 +28,10 @@ function(Constants, CelestialObject, Sun) {
       this._threeDistanceFromParent = this.createThreeDistanceFromParent();
       this._threeParent = threeParent || null;
       this._threeObject.rotation.x = 90 * Constants.degreesToRadiansRatio;
+
+      if (data.rings) {
+        this.createRingGeometry(data);
+      }
     }
 
     /**
@@ -126,9 +130,19 @@ function(Constants, CelestialObject, Sun) {
     }
 
     createGeometry(surface, atmosphere) {
-      var segmentsOffset = this._threeDiameter < 3
-        ? Number.parseInt(this._threeDiameter * 16) * 3
-        : Number.parseInt(this._threeDiameter * 8);
+      var segmentsOffset = Number.parseInt(this._threeDiameter * 5);
+
+      if (this._threeDiameter < 1) {
+        segmentsOffset = Number.parseInt(this._threeDiameter * 16) * 8
+      }
+
+      if (this._threeDiameter >= 1 && this._threeDiameter < 3) {
+        segmentsOffset = Number.parseInt(this._threeDiameter * 7);
+      }
+
+      if (this._threeDiameter >= 3) {
+        segmentsOffset = Number.parseInt(this._threeDiameter * 6)
+      }
 
       var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
@@ -145,6 +159,37 @@ function(Constants, CelestialObject, Sun) {
       }
 
       return mesh;
+    }
+
+    createRingGeometry(data) {
+      var innerRadius = data.rings.innerRadius * Constants.celestialScale;
+      var outerRadius = data.rings.outerRadius * Constants.celestialScale;
+      var thetaSegments = 90;
+      var phiSegments = 90;
+      var geometry = new THREE.RingGeometry(
+        innerRadius,
+        outerRadius,
+        thetaSegments,
+        phiSegments,
+        0,
+        Math.PI * 2
+      );
+
+      var map = this.getTexture('src/assets/textures/saturn_rings.png');
+      map.minFilter = THREE.NearestFilter;
+
+      var material = new THREE.MeshPhongMaterial({
+        map: map,
+        transparent: true,
+        opacity: 0.5,
+        side: THREE.DoubleSide
+      });
+
+      var ring = new THREE.Mesh(geometry, material);
+      ring.position.set(0, 0, 0);
+      ring.rotation.x = 90 * Constants.degreesToRadiansRatio;
+
+      this._threeObject.add(ring);
     }
 
     createSurface(base, topo, specular) {

@@ -36,7 +36,6 @@ function(Constants, TimeController, Clock) {
 
     positionObject() {
       var time = clock.getElapsedTime() / 60;
-
       var doy = time || 0.001; // || day
       var theta = time * (360 / this._planet.orbitalPeriod) * Constants.degreesToRadiansRatio;
       var x = this._orbitAmplitude * Math.cos(theta);
