@@ -60,7 +60,7 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
       console.debug(planet.name + ' Diameter: ', planet.threeDiameter);
       console.debug(planet.name + ' Distance: ', planet.threeDistanceFromParent);
 
-      if (planet.id === 6) {
+      if (planet.id === 3) {
         var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
 
         planet.threeObject.add(axisHelperPlanet);
@@ -71,7 +71,7 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
         scene.camera.position.set(
           planet.threeDiameter * 2.5, // pluto.threeObject.position.x, // 350
           0, // 0
-          7.5 // cameraHeight // 0
+          0.5 // cameraHeight // 0
         );
 
         scene.camera.lookAt(new THREE.Vector3(0, 0, 0));
@@ -95,57 +95,3 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
     logTimeElapsed(start, end);
   });
 });
-
-
-
-
-
-
-
-
-// $.ajax({
-//     url: 'http://star-api.herokuapp.com/api/v1/stars/Sun',
-//     dataType: 'text/html'
-// })
-// .done(function(data) {
-//     console.log('Data:', data);
-
-//     var planets = data.planets;
-
-//     // console.log('planets.length',planets.length);
-
-//     // var mercury = new Planet(planets[0]);
-
-//     // console.log('Mercury:', mercury);
-
-//     for (var i = 0; i <  of planets) {
-//         console.log('Planet', planet)
-//     }
-// });
-
-
-
-
-
-
-
-
-// $.ajax({
-//     url: 'http://star-api.herokuapp.com/api/v1/stars/Sun',
-//     dataType: 'text/html'
-// })
-// .done(function(data) {
-//     console.log('Data:', data);
-
-//     var planets = data.planets;
-
-//     // console.log('planets.length',planets.length);
-
-//     // var mercury = new Planet(planets[0]);
-
-//     // console.log('Mercury:', mercury);
-
-//     for (var i = 0; i <  of planets) {
-//         console.log('Planet', planet)
-//     }
-// });
