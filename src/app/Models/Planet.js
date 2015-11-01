@@ -1,9 +1,10 @@
 define(
 [
   'Environment/Constants',
-  'Models/CelestialObject'
+  'Models/CelestialObject',
+  'Models/Orbit'
 ],
-function(Constants, CelestialObject, Sun) {
+function(Constants, CelestialObject, Orbit) {
   'use strict';
 
   class Planet extends CelestialObject {
@@ -28,10 +29,15 @@ function(Constants, CelestialObject, Sun) {
       this._threeDistanceFromParent = this.createThreeDistanceFromParent();
       this._threeParent = threeParent || null;
       this._threeObject.rotation.x = 90 * Constants.degreesToRadiansRatio;
+      this._orbitCentroid = this.createOrbitCentroid();
 
       if (data.rings) {
         this.createRingGeometry(data);
       }
+
+      this.buildFullObject3D();
+
+      console.debug('Planet', this);
     }
 
     /**
@@ -96,6 +102,28 @@ function(Constants, CelestialObject, Sun) {
 
     get threeDistanceFromParent() {
       return this._threeDistanceFromParent;
+    }
+
+    get orbitCentroid() {
+      return this._orbitCentroid;
+    }
+
+    setOrbitAxis() {
+
+    }
+
+    createOrbitCentroid() {
+      return new THREE.Object3D();
+    }
+
+    buildFullObject3D() {
+      this._orbitLine = new Orbit(this);
+
+      this._orbitCentroid.add(
+        this._threeObject,
+        this._core,
+        this._orbitLine.orbit
+      );
     }
 
     createThreeDiameter() {
@@ -210,7 +238,7 @@ function(Constants, CelestialObject, Sun) {
       if (specular) {
         var specularMap = this.getTexture(specular);
 
-        specularMap.minFilter = THREE.LinearFilter; // specularMap.filter ? specularMap.filter: THREE.LinearFilter;
+        specularMap.minFilter = THREE.LinearFilter;
       }
 
       return new THREE.MeshPhongMaterial({

@@ -6,11 +6,10 @@ define(
   'Modules/Scene',
   'Models/Sun',
   'Models/Planet',
-  'Models/Orbit',
   'Controllers/RenderController',
   'Controllers/OrbitController'
 ],
-function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, OrbitController) {
+function($, Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitController) {
   'use strict';
 
   function getElapsedTimeMs(start, end) {
@@ -45,17 +44,14 @@ function($, Constants, GridHelper, Scene, Sun, Planet, Orbit, RenderController, 
     var scene = new Scene();
     var sun = new Sun(data.parent);
     var startEvent = new CustomEvent('startTime', {});
-    var planet;
 
     document.dispatchEvent(startEvent);
 
     for (var i = 0; i < planets.length; i++) {
-      planet = new Planet(planets[i], sun);
-
-      var orbitLine = new Orbit(planet);
+      var planet = new Planet(planets[i], sun);
       var orbitCtrl = new OrbitController(planet);
 
-      scene.add(planet.threeObject, planet.core, orbitLine.orbit);
+      scene.add(planet.orbitCentroid); // all 3d objects are attached to the orbit centroid
 
       console.debug(planet.name + ' Diameter: ', planet.threeDiameter);
       console.debug(planet.name + ' Distance: ', planet.threeDistanceFromParent);
