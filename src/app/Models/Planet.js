@@ -36,8 +36,6 @@ function(Constants, CelestialObject, Orbit) {
       }
 
       this.buildFullObject3D();
-
-      console.debug('Planet', this);
     }
 
     /**
@@ -108,10 +106,6 @@ function(Constants, CelestialObject, Orbit) {
       return this._orbitCentroid;
     }
 
-    setOrbitAxis() {
-
-    }
-
     createOrbitCentroid() {
       return new THREE.Object3D();
     }
@@ -158,19 +152,9 @@ function(Constants, CelestialObject, Orbit) {
     }
 
     createGeometry(surface, atmosphere) {
-      var segmentsOffset = Number.parseInt(this._threeDiameter * 5);
+      var segmentsOffset = Number.parseInt(this._threeDiameter + 1 * 60);
 
-      if (this._threeDiameter < 1) {
-        segmentsOffset = Number.parseInt(this._threeDiameter * 16) * 8
-      }
-
-      if (this._threeDiameter >= 1 && this._threeDiameter < 3) {
-        segmentsOffset = Number.parseInt(this._threeDiameter * 7);
-      }
-
-      if (this._threeDiameter >= 3) {
-        segmentsOffset = Number.parseInt(this._threeDiameter * 6)
-      }
+      console.debug(this._name +  ' segments offset:', segmentsOffset);
 
       var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
@@ -252,22 +236,26 @@ function(Constants, CelestialObject, Orbit) {
 
     createAtmosphere(clouds, haze) {
       if (clouds) {
-        var segmentsOffset = parseInt(this._threeDiameter * 60);
+        var segmentsOffset = this.getSphereGeometrySegmentOffset()
         var map = this.getTexture(clouds);
 
         map.minFilter = THREE.LinearFilter;
 
         return new THREE.Mesh(
-          new THREE.SphereGeometry(this._threeRadius * 1.02, segmentsOffset, segmentsOffset),
+          new THREE.SphereGeometry(this._threeRadius * 1.01, segmentsOffset, segmentsOffset),
           new THREE.MeshPhongMaterial({
             map: map,
             transparent: true,
-            opacity: 0.95
+            opacity: 0.9
           })
         );
       }
 
       return null;
+    }
+
+    getSphereGeometrySegmentOffset() {
+      return Number.parseInt(this._threeDiameter + 1 * 60);
     }
   }
 

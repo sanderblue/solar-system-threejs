@@ -1,10 +1,15 @@
-define(function() {
+define(
+[
+  'Environment/Constants'
+],
+function(Constants) {
   'use strict';
 
   class Orbit {
     constructor(planet) {
       this._planet = planet;
       this._orbit = this.createOrbit();
+      this.setOrbitInclination();
     }
 
     get orbit() {
@@ -14,11 +19,9 @@ define(function() {
     createOrbit() {
       var resolution = 365, // segments in the line
         length = 360 / resolution,
-        material = new THREE.LineBasicMaterial({ color: 0x3f3f3f, linewidth: 1 }),
+        material = new THREE.LineBasicMaterial({ color: 0x2b2b2b, linewidth: 1 }),
         orbitLine = new THREE.Geometry()
       ;
-
-      // console.debug('\n Orbit: ', this._planet);
 
       // Build the orbit line
       for (var i = 0; i <= resolution; i++) {
@@ -41,6 +44,10 @@ define(function() {
 
       return line;
     };
+
+    setOrbitInclination() {
+      this._planet.orbitCentroid.rotation.y = this._planet.orbitalInclination * Constants.degreesToRadiansRatio;
+    }
   }
 
   return Orbit;
