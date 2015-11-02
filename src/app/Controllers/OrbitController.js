@@ -1,10 +1,9 @@
 define(
 [
   'Environment/Constants',
-  'Controllers/TimeController',
   'Modules/Clock'
 ],
-function(Constants, TimeController, Clock) {
+function(Constants, Clock) {
   'use strict';
 
   var clock = new Clock();

@@ -46,11 +46,6 @@ function(Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitContr
     var scene = new Scene();
     var sun = new Sun(data.parent);
     var startEvent = new CustomEvent('startTime', {});
-
-    // Orbit Controls
-
-    console.debug('OrbitControls @ require:', OrbitControls);
-
     var orbitControls = new OrbitControls(scene.camera);
 
     document.dispatchEvent(startEvent);
@@ -64,10 +59,10 @@ function(Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitContr
       // console.debug(planet.name + ' Diameter: ', planet.threeDiameter);
       // console.debug(planet.name + ' Distance: ', planet.threeDistanceFromParent);
 
-      if (planet.id === 5) {
+      if (planet.id === 3) {
         var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
 
-        planet.threeObject.add(axisHelperPlanet);
+        // planet.threeObject.add(axisHelperPlanet);
         planet.core.add(scene.camera);
 
         scene.camera.up.set(0, 0, 1);
@@ -87,7 +82,7 @@ function(Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitContr
     }
 
     scene.add(
-        axisHelper,
+        // axisHelper,
         // gridHelper,
         sun.threeObject
     );

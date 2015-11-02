@@ -25,7 +25,7 @@ define(function() {
       var ambientLightCount = 4;
 
       for (var i = 0; i < ambientLightCount; i++) {
-        var directionalLight = new THREE.DirectionalLight(0xffffff, 0.85);
+        var directionalLight = new THREE.DirectionalLight(0xffffff, 0.1);
 
         this.setObjectPosition(directionalLight, i);
 

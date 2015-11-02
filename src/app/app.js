@@ -13,8 +13,7 @@ require.config({
             deps: [
                 'Extensions/Date',
                 'Modules/Error/InvalidArgumentException',
-                'Modules/Error/MissingArgumentException',
-                'Controllers/TimeController'
+                'Modules/Error/MissingArgumentException'
             ]
         }
     },
