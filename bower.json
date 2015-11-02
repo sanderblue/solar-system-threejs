@@ -19,7 +19,8 @@
     "jquery": "~2.1.4",
     "requirejs": "~2.1.17",
     "tweenjs": "*",
-    "threejs": "*"
+    "threejs": "*",
+    "THREEOrbitControls": "~71.1.0"
   },
   "devDependencies": {
     "stats.js": "*"

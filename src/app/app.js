@@ -28,5 +28,5 @@ require.config({
     urlArgs: 'bust=' + new Date().getTime().toString()
 });
 
-// Load the main app module
-requirejs(['init']);
+// Initialize app
+require(['init']);

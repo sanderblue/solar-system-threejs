@@ -7,7 +7,8 @@ define(
   'Models/Sun',
   'Models/Planet',
   'Controllers/RenderController',
-  'Controllers/OrbitController'
+  'Controllers/OrbitController',
+
 ],
 function($, Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitController) {
   'use strict';
@@ -44,6 +45,10 @@ function($, Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitCo
     var scene = new Scene();
     var sun = new Sun(data.parent);
     var startEvent = new CustomEvent('startTime', {});
+
+    // Orbit Controls
+    var OrbitControls = require(['vendor/THREEOrbitControls/umd/index'])(THREE);
+    var orbitControls = new OrbitControls(scene.camera);
 
     document.dispatchEvent(startEvent);
 

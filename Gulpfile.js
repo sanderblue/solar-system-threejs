@@ -5,6 +5,7 @@
  */
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var wrapUMD = require('gulp-wrap-umd');
 
 
 /**
@@ -13,7 +14,7 @@ var sass = require('gulp-sass');
 var src = {
     sass: 'src/assets/sass',
     css: 'src/assets/css',
-    js: 'public/js/'
+    js: 'src/app/'
 };
 
 
@@ -37,18 +38,27 @@ function handleError(err) {
 /**
  * Tasks
  */
-gulp.task('sass', function() {
-    return gulp.src(src.sass + 'main.scss')
-        .pipe(sass())
-        .pipe(gulp.dest(src.css))
-        .on('error', handleError)
-        .on('end', sassCompileCallback)
-    ;
-});
+// gulp.task('sass', function() {
+//   return gulp.src(src.sass + 'main.scss')
+//     .pipe(sass())
+//     .pipe(gulp.dest(src.css))
+//     .on('error', handleError)
+//     .on('end', sassCompileCallback)
+//   ;
+// });
 
-gulp.task('watch', function() {
-    return gulp.watch(src.sass + '**/*.scss', ['sass'])
-        .on('change', watcherCallback)
-        .on('error', handleError)
-    ;
+// gulp.task('watch', function() {
+//   return gulp.watch(src.sass + '**/*.scss', ['sass'])
+//     .on('change', watcherCallback)
+//     .on('error', handleError)
+//   ;
+// });
+
+gulp.task('umd', function(){
+  gulp.src([src.js + 'vendor/THREEOrbitControls/index.js'])
+    .pipe(wrapUMD({
+      namespace: 'THREE.OrbitControls'
+     }))
+    .pipe(gulp.dest(src.js + 'vendor/THREEOrbitControls/umd'))
+  ;
 });
