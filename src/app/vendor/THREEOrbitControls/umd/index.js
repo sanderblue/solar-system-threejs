@@ -1,19 +1,4 @@
-
-(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(factory);
-  } else if (typeof exports === 'object') {
-    module.exports = factory(require, exports, module);
-  } else {
-    root.THREE.OrbitControls = factory();
-  }
-}(this, function(require, exports, module) {
-
-return module.exports = function(THREE) {
-    var MOUSE = THREE.MOUSE
-    if (!MOUSE)
-        MOUSE = { LEFT: 0, MIDDLE: 1, RIGHT: 2 };
-
+ define(function() {
     /**
      * @author qiao / https://github.com/qiao
      * @author mrdoob / http://mrdoob.com
@@ -31,7 +16,12 @@ return module.exports = function(THREE) {
     //    Zoom - middle mouse, or mousewheel / touch: two finger spread or squish
     //    Pan - right mouse, or arrow keys / touch: three finter swipe
 
-    function OrbitControls ( object, domElement ) {
+    function OrbitControls( object, domElement ) {
+        var MOUSE = THREE.MOUSE;
+
+        if (!MOUSE) {
+            MOUSE = { LEFT: 0, MIDDLE: 1, RIGHT: 2 };
+        }
 
         this.object = object;
         this.domElement = ( domElement !== undefined ) ? domElement : document;
@@ -721,7 +711,4 @@ return module.exports = function(THREE) {
     OrbitControls.prototype = Object.create( THREE.EventDispatcher.prototype );
     OrbitControls.prototype.constructor = OrbitControls;
     return OrbitControls;
-}
-;
-
-}));
+});

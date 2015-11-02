@@ -1,4 +1,3 @@
 require([
-    'jquery',
     'Modules/Loader'
 ]);

@@ -1,17 +1,10 @@
 require.config({
     baseUrl: './src/app',
     paths: {
-        // Vendor
-        'jquery': 'vendor/jquery/dist/jquery.min',
-
         // App
         'init': 'init'
     },
     shim: {
-        'jquery': {
-            exports: ['$']
-        },
-
         'stats': {
             exports: ['Stats']
         },

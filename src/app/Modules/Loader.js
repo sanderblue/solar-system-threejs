@@ -1,6 +1,5 @@
 define(
 [
-  'jquery',
   'Environment/Constants',
   'Environment/GridHelper',
   'Modules/Scene',
@@ -8,9 +7,10 @@ define(
   'Models/Planet',
   'Controllers/RenderController',
   'Controllers/OrbitController',
-
+  'vendor/THREEOrbitControls/umd/index',
+  'vendor/httprequest/httprequest'
 ],
-function($, Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitController) {
+function(Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitController, OrbitControls, HttpRequest) {
   'use strict';
 
   function getElapsedTimeMs(start, end) {
@@ -31,12 +31,13 @@ function($, Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitCo
     console.log('\n');
   }
 
-  var getSolarSystemData = $.ajax({
-    url: 'http://www.solarsystem.lcl/src/data/solarsystem.json',
-    dataType: 'json'
-  });
+  var dataRequest = new HttpRequest(
+    'GET',
+    'http://www.solarsystem.lcl/src/data/solarsystem.json',
+    true
+  );
 
-  getSolarSystemData.done(function(data) {
+  dataRequest.send().then(function(data) {
     var planets = data.planets;
     var threePlanets = [];
     var axisHelper = new THREE.AxisHelper(1000);
@@ -47,7 +48,9 @@ function($, Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitCo
     var startEvent = new CustomEvent('startTime', {});
 
     // Orbit Controls
-    var OrbitControls = require(['vendor/THREEOrbitControls/umd/index'])(THREE);
+
+    console.debug('OrbitControls @ require:', OrbitControls);
+
     var orbitControls = new OrbitControls(scene.camera);
 
     document.dispatchEvent(startEvent);
@@ -93,6 +96,6 @@ function($, Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitCo
 
     var end = new Date().getTime();
 
-    logTimeElapsed(start, end);
+    // logTimeElapsed(start, end);
   });
 });
