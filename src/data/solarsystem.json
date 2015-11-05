@@ -38,7 +38,7 @@
         },
         "_3d": {
             "textures": {
-                "base": "/src/assets/textures/sun_alpha.jpg"
+                "base": "/src/assets/textures/sun_detailed.png"
             }
         }
     },

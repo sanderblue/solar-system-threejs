@@ -69,7 +69,7 @@ function(CelestialObject, Constants) {
 
       var mesh = new THREE.Mesh(geometry, surface);
       var lightColor = 0xffffff;
-      var intesity = 1.5;
+      var intesity = 1;
       var lightDistanceStrength = DISTANCE_TO_KUIPER_BELT * Constants.universeScale;
       var lightDecayRate = 0.9;
       var sunLight = new THREE.PointLight(lightColor, intesity, lightDistanceStrength, lightDecayRate);

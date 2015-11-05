@@ -56,10 +56,7 @@ function(Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitContr
 
       scene.add(planet.orbitCentroid); // all 3d objects are attached to the orbit centroid
 
-      // console.debug(planet.name + ' Diameter: ', planet.threeDiameter);
-      // console.debug(planet.name + ' Distance: ', planet.threeDistanceFromParent);
-
-      if (planet.id === 1) {
+      if (planet.id === 3) {
         var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
 
         // planet.threeObject.add(axisHelperPlanet);
@@ -70,7 +67,7 @@ function(Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitContr
         scene.camera.position.set(
           planet.threeDiameter * 2.5, // pluto.threeObject.position.x, // 350
           0, // 0
-          0.25 // cameraHeight // 0
+          0.35 // cameraHeight // 0
         );
 
         scene.camera.lookAt(new THREE.Vector3(0, 0, 0));
