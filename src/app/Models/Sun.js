@@ -98,8 +98,12 @@ function(CelestialObject, Constants) {
 
       return new THREE.MeshPhongMaterial({
         map: texture,
+        lightMap: texture,
         transparent: true,
-        opacity: 0.75 // 0.8
+        opacity: 0.85, // 0.8
+        // blending: THREE.AdditiveAlphaBlending
+        shading: THREE.SmoothShading
+        // emissive: 0xff0000
       });
     };
   }

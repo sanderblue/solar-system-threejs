@@ -1,6 +1,11 @@
 {
+    "oort_cloud": {
+        "diameter": 18921460945160,
+        "radius": 9460730472580
+    },
     "kuiperBelt": {
-        "diameter": 14959787070
+        "diameter": 14959787070,
+        "radius": 7479893535
     },
     "parent": {
         "id": 0,

@@ -59,7 +59,7 @@ function(Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitContr
       // console.debug(planet.name + ' Diameter: ', planet.threeDiameter);
       // console.debug(planet.name + ' Distance: ', planet.threeDistanceFromParent);
 
-      if (planet.id === 3) {
+      if (planet.id === 1) {
         var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
 
         // planet.threeObject.add(axisHelperPlanet);
