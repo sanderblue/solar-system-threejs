@@ -3,6 +3,7 @@ define(
   'Environment/Constants',
   'Environment/GridHelper',
   'Modules/Scene',
+  'Modules/StarFactory',
   'Models/Sun',
   'Models/Planet',
   'Controllers/RenderController',
@@ -10,7 +11,7 @@ define(
   'vendor/THREEOrbitControls/umd/index',
   'vendor/httprequest/httprequest'
 ],
-function(Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitController, OrbitControls, HttpRequest) {
+function(Constants, GridHelper, Scene, StarFactory, Sun, Planet, RenderController, OrbitController, OrbitControls, HttpRequest) {
   'use strict';
 
   function getElapsedTimeMs(start, end) {
@@ -31,6 +32,7 @@ function(Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitContr
     console.log('\n');
   }
 
+  var scene = new Scene();
   var dataRequest = new HttpRequest(
     'GET',
     'http://www.solarsystem.lcl/src/data/solarsystem.json',
@@ -43,10 +45,13 @@ function(Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitContr
     var axisHelper = new THREE.AxisHelper(1000);
     var gridHelper = new GridHelper();
     var start = new Date().getTime();
-    var scene = new Scene();
     var sun = new Sun(data.parent);
     var startEvent = new CustomEvent('startTime', {});
     var orbitControls = new OrbitControls(scene.camera);
+
+    var starFactory = new StarFactory(scene);
+
+    starFactory.build();
 
     document.dispatchEvent(startEvent);
 
@@ -67,7 +72,7 @@ function(Constants, GridHelper, Scene, Sun, Planet, RenderController, OrbitContr
         scene.camera.position.set(
           planet.threeDiameter * 2.5, // pluto.threeObject.position.x, // 350
           0, // 0
-          0.35 // cameraHeight // 0
+          0.8 // cameraHeight // 0
         );
 
         scene.camera.lookAt(new THREE.Vector3(0, 0, 0));

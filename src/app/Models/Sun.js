@@ -90,20 +90,12 @@ function(CelestialObject, Constants) {
 
       texture.minFilter = THREE.NearestFilter;
 
-      // return new THREE.MeshLambertMaterial({
-      //   map: texture,
-      //   transparent: true,
-      //   opacity: 0.75 // 0.8
-      // });
-
       return new THREE.MeshPhongMaterial({
         map: texture,
         lightMap: texture,
         transparent: true,
         opacity: 0.85, // 0.8
-        // blending: THREE.AdditiveAlphaBlending
         shading: THREE.SmoothShading
-        // emissive: 0xff0000
       });
     };
   }
