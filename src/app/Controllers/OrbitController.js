@@ -27,11 +27,13 @@ function(Constants, Clock) {
     }
 
     initListeners() {
-      document.addEventListener('frame', (e)=> {
-        this.positionObject();
-        this.rotateObject();
-      }, false);
-    }
+      this.positionObject();
+
+      // document.addEventListener('frame', (e)=> {
+      //   this.positionObject();
+      //   this.rotateObject();
+      // }, false);
+    };
 
     positionObject() {
       var time = clock.getElapsedTime() / 60;
@@ -71,8 +73,7 @@ function(Constants, Clock) {
 
     rotateObject() {
       this._threePlanet.rotation.y += this._degreesToRotate * Math.PI / 180; // 1 degree per frame
-
-    }
+    };
   }
 
   return OrbitController;

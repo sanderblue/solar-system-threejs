@@ -20,7 +20,8 @@
     "requirejs": "~2.1.17",
     "tweenjs": "*",
     "threejs": "*",
-    "THREEOrbitControls": "~71.1.0"
+    "THREEOrbitControls": "~71.1.0",
+    "tween.js": "tweenjs#~16.3.1"
   },
   "devDependencies": {
     "stats.js": "*"

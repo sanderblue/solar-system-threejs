@@ -8,10 +8,23 @@ define(
   'Models/Planet',
   'Controllers/RenderController',
   'Controllers/OrbitController',
+  'Controllers/TravelController',
   'vendor/THREEOrbitControls/umd/index',
   'vendor/httprequest/httprequest'
 ],
-function(Constants, GridHelper, Scene, StarFactory, Sun, Planet, RenderController, OrbitController, OrbitControls, HttpRequest) {
+function(
+  Constants,
+  GridHelper,
+  Scene,
+  StarFactory,
+  Sun,
+  Planet,
+  RenderController,
+  OrbitController,
+  TravelController,
+  OrbitControls,
+  HttpRequest
+  ) {
   'use strict';
 
   function getElapsedTimeMs(start, end) {
@@ -48,10 +61,11 @@ function(Constants, GridHelper, Scene, StarFactory, Sun, Planet, RenderControlle
     var sun = new Sun(data.parent);
     var startEvent = new CustomEvent('startTime', {});
     var orbitControls = new OrbitControls(scene.camera);
-
     var starFactory = new StarFactory(scene);
 
     starFactory.build();
+
+    var travelTo = null;
 
     document.dispatchEvent(startEvent);
 
@@ -61,8 +75,12 @@ function(Constants, GridHelper, Scene, StarFactory, Sun, Planet, RenderControlle
 
       scene.add(planet.orbitCentroid); // all 3d objects are attached to the orbit centroid
 
-      if (planet.id === 3) {
-        var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
+      if (planet.id === 2) {
+        travelTo = planet;
+      }
+
+      if (planet.id === 8) {
+        // var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
 
         // planet.threeObject.add(axisHelperPlanet);
         planet.core.add(scene.camera);
@@ -72,26 +90,40 @@ function(Constants, GridHelper, Scene, StarFactory, Sun, Planet, RenderControlle
         scene.camera.position.set(
           planet.threeDiameter * 2.5, // pluto.threeObject.position.x, // 350
           0, // 0
-          0.8 // cameraHeight // 0
+          0.3 // cameraHeight // 0
         );
 
-        scene.camera.lookAt(new THREE.Vector3(0, 0, 0));
+        // console.debug(
+        //   scene.camera.position.distanceTo(planet.threeObject.position)
+        // );
+
+        scene.camera.lookAt(new THREE.Vector3());
       }
 
       threePlanets.push(planet.threeObject);
-
-      orbitCtrl.positionObject();
     }
 
     scene.add(
+        // scene.camera,
         // axisHelper,
         // gridHelper,
         sun.threeObject
     );
 
     var renderController = new RenderController(scene, threePlanets);
+    var travelController = new TravelController(scene);
 
     var end = new Date().getTime();
+
+    setTimeout(()=> {
+      var travelToPlanet = threePlanets[4];
+
+      console.debug('CAMERA', scene.camera);
+
+      var cameraParentPosition = scene.camera.parent.position;
+
+      travelController.travelToPoint(cameraParentPosition, travelTo);
+    }, 10000);
 
     // logTimeElapsed(start, end);
   });

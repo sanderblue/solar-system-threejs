@@ -17,17 +17,15 @@ function(Constants) {
     }
 
     createOrbit() {
-      var resolution = 365, // segments in the line
-        length = 360 / resolution,
-        material = new THREE.LineBasicMaterial({ color: 0x2b2b2b, linewidth: 1 }),
-        orbitLine = new THREE.Geometry()
-      ;
+      var resolution = 1440; // segments in the line
+      var length = 360 / resolution;
+      var material = new THREE.LineBasicMaterial({ color: 0x282828, linewidth: 1 });
+      var orbitLine = new THREE.Geometry();
 
       // Build the orbit line
       for (var i = 0; i <= resolution; i++) {
-        var segment = (i * length) * Math.PI / 180,
-          orbitAmplitude = this._planet.threeParent.threeRadius + this._planet.threeDistanceFromParent
-        ;
+        var segment = (i * length) * Math.PI / 180;
+        var orbitAmplitude = this._planet.threeParent.threeRadius + this._planet.threeDistanceFromParent;
 
         orbitLine.vertices.push(
           new THREE.Vector3(

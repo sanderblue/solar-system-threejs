@@ -21,6 +21,16 @@ function(Constants, Stats) {
   //   };
   // }
 
+  var tweening = false;
+
+  document.addEventListener('travelStart', (e)=> {
+    tweening = true;
+  }, false);
+
+  document.addEventListener('travelComplete', (e)=> {
+    tweening = false;
+  }, false);
+
   function getElapsedTimeSec(start, end) {
     return (end - start) * 0.001;
   }
@@ -48,6 +58,12 @@ function(Constants, Stats) {
       requestAnimationFrame(render);
       document.dispatchEvent(frameEvent);
       self._renderEngine.render(self._scene, self._camera);
+
+      // console.debug('Tweening?', tweening);
+
+      // if (tweening) {
+        TWEEN.update();
+      // }
 
       Stats.end();
     }

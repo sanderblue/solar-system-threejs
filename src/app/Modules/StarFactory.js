@@ -10,10 +10,10 @@ function(Constants, Scene, RandomNumberGenorator) {
   class StarFactory {
     constructor(scene) {
       this._starsCentriod = new THREE.Object3D();
-      this._starsCount = 4000;
+      this._starsCount = 1000;
       // this._minDiameter = 0.75;
       // this._maxDiameter = 2
-      this._threeDistanceFromParent = 6753036100 * Math.pow(10, -5.2); // Constants.orbitScale;
+      this._threeDistanceFromParent = 6753036100 * Math.pow(10, -5.1); // Constants.orbitScale;
       this._randomNumberGenorator = new RandomNumberGenorator();
       this._starlight = new THREE.PointLight(0xffffff, 1, this._threeDistanceFromParent * 1.5, 0.1);
       this._starlight = new THREE.AmbientLight(0xffffff, 0.5);

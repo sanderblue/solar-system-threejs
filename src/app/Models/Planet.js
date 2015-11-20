@@ -154,7 +154,7 @@ function(Constants, CelestialObject, Orbit) {
     createGeometry(surface, atmosphere) {
       var segmentsOffset = Number.parseInt(this._threeDiameter + 1 * 60);
 
-      console.debug(this._name +  ' segments offset:', segmentsOffset);
+      // console.debug(this._name +  ' diameter:', this._threeDiameter);
 
       var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
