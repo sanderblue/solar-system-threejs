@@ -75,7 +75,7 @@ function(
 
       scene.add(planet.orbitCentroid); // all 3d objects are attached to the orbit centroid
 
-      if (planet.id === 2) {
+      if (planet.id === 5) {
         travelTo = planet;
       }
 
@@ -90,7 +90,7 @@ function(
         scene.camera.position.set(
           planet.threeDiameter * 2.5, // pluto.threeObject.position.x, // 350
           0, // 0
-          0.3 // cameraHeight // 0
+          0 // cameraHeight // 0
         );
 
         // console.debug(
@@ -116,14 +116,12 @@ function(
     var end = new Date().getTime();
 
     setTimeout(()=> {
-      var travelToPlanet = threePlanets[4];
-
       console.debug('CAMERA', scene.camera);
 
       var cameraParentPosition = scene.camera.parent.position;
 
       travelController.travelToPoint(cameraParentPosition, travelTo);
-    }, 10000);
+    }, 5000);
 
     // logTimeElapsed(start, end);
   });

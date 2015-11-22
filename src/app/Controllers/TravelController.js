@@ -28,10 +28,14 @@ define(function() {
 
             var self =this;
 
+            var cameraDistanceFromTarget = targetObject.threeDiameter * 2.5;
+
+            console.debug('cameraDistanceFromTarget', cameraDistanceFromTarget);
+
             var point = {
-                x: targetPosition.x + 2,
+                x: targetPosition.x + cameraDistanceFromTarget,
                 y: targetPosition.y,
-                z: targetPosition.z + 0.3
+                z: targetPosition.z
             };
 
             var cameraTween = new TWEEN.Tween(this.camera.position)
@@ -42,15 +46,18 @@ define(function() {
                 })
                 .onComplete(function() {
                     // self.camera.up.set(0, 1, 0);
-                    // self.camera.lookAt(new THREE.Vector3());
+                    self.camera.lookAt(new THREE.Vector3());
 
-                    // targetObject.threeObject.add(self.camera);
+                    targetObject.core.add(self.camera);
 
-                    // self.camera.position.x = 2; // newPosX; // zoom
-                    // self.camera.position.y = 0; // newPosY; // vertical positioning of the camera
-                    // self.camera.position.z = 0.3; // 0;       // this is really the y-axis in terms of plan view
+                    self.camera.position.x = cameraDistanceFromTarget; // newPosX; // zoom
+                    self.camera.position.y = 0; // newPosY; // vertical positioning of the camera
+                    self.camera.position.z = 0; // 0;       // this is really the y-axis in terms of plan view
 
-                    console.debug('Space flight complete.', self.camera);
+                    console.debug(
+                      'Distance To Target',
+                      self.camera.position.distanceTo(targetObject.threeObject.position)
+                    );
 
                     document.dispatchEvent(self.travelCompleteEvent);
                 })
