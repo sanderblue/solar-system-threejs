@@ -6,8 +6,8 @@ function(Constants) {
   'use strict';
 
   class Orbit {
-    constructor(planet) {
-      this._planet = planet;
+    constructor(object) {
+      this._object = object;
       this._orbit = this.createOrbit();
       this.setOrbitInclination();
     }
@@ -25,7 +25,7 @@ function(Constants) {
       // Build the orbit line
       for (var i = 0; i <= resolution; i++) {
         var segment = (i * length) * Math.PI / 180;
-        var orbitAmplitude = this._planet.threeParent.threeRadius + this._planet.threeDistanceFromParent;
+        var orbitAmplitude = this._object.threeParent.threeRadius + this._object.threeDistanceFromParent;
 
         orbitLine.vertices.push(
           new THREE.Vector3(
@@ -44,7 +44,7 @@ function(Constants) {
     };
 
     setOrbitInclination() {
-      this._planet.orbitCentroid.rotation.y = this._planet.orbitalInclination * Constants.degreesToRadiansRatio;
+      this._object.orbitCentroid.rotation.y = this._object.orbitalInclination * Constants.degreesToRadiansRatio;
     }
   }
 

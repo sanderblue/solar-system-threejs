@@ -42,7 +42,7 @@ define(function() {
                 .to(point, travelDuration)
                 .easing(TWEEN.Easing.Cubic.InOut)
                 .onUpdate(function() {
-                    // self.camera.lookAt(targetPosition);
+                    self.camera.lookAt(targetPosition);
                 })
                 .onComplete(function() {
                     // self.camera.up.set(0, 1, 0);

@@ -29,10 +29,10 @@ function(Constants, Clock) {
     initListeners() {
       this.positionObject();
 
-      // document.addEventListener('frame', (e)=> {
-      //   this.positionObject();
-      //   this.rotateObject();
-      // }, false);
+      document.addEventListener('frame', (e)=> {
+        this.positionObject();
+        this.rotateObject();
+      }, false);
     };
 
     positionObject() {

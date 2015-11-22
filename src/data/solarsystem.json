@@ -59,6 +59,7 @@
             "axialTilt": 0.01,
             "meanTemperature": 167,
             "rings": false,
+            "satellites": [],
             "_3d": {
                 "textures": {
                     "base": "/src/assets/textures/mercury.jpg",
@@ -82,6 +83,7 @@
             "axialTilt": 177.4,
             "meanTemperature": 464,
             "rings": false,
+            "satellites": [],
             "_3d": {
                 "textures": {
                     "base": "/src/assets/textures/venus.jpg",
@@ -105,6 +107,27 @@
             "axialTilt": 23.4,
             "meanTemperature": 15,
             "rings": false,
+            "satellites": [
+                {
+                    "name": "Moon",
+                    "diameter": 3476.2,
+                    "mass": 0.07342,
+                    "distanceFromParent": 384400,
+                    "orbitalPeriod": 27.3,
+                    "orbitalInclination": 18.28,
+                    "gravity": 1.62,
+                    "surfaceTemps": {
+                        "min": -110,
+                        "max": 130
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_4k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_4k.jpg"
+                        }
+                    }
+                }
+            ],
             "_3d": {
                 "textures": {
                     "base": "/src/assets/textures/earth_4k.jpg",
@@ -130,6 +153,48 @@
             "axialTilt": 25.2,
             "meanTemperature": -65,
             "rings": false,
+            "satellites": [
+                {
+                    "name": "Phobos",
+                    "diameter": 22,
+                    "mass": "1.0659 * 10^16",
+                    "distanceFromParent": 5989,
+                    "orbitalPeriod": 0.31875,
+                    "orbitalInclination": 1.093,
+                    "gravity": 0.0057,
+                    "surfaceTemps": {
+                        "min": -40.15,
+                        "max": -40.15,
+                        "mean": -40.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Deimos",
+                    "diameter": 12.4,
+                    "mass": "1.4762 * 10^15",
+                    "distanceFromParent": 23455,
+                    "orbitalPeriod": 1.25,
+                    "orbitalInclination": 0.93,
+                    "gravity": 0.003,
+                    "surfaceTemps": {
+                        "min": -40.15,
+                        "max": -40.15,
+                        "mean": -40.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                }
+            ],
             "_3d": {
                 "textures": {
                     "base": "/src/assets/textures/mars.jpg",
@@ -153,6 +218,88 @@
             "axialTilt": 3.1,
             "meanTemperature": -110,
             "rings": false,
+            "satellites": [
+                {
+                    "name": "Europa",
+                    "diameter": 3121.6,
+                    "mass": "4.799844 * 10^22",
+                    "distanceFromParent": 670900,
+                    "orbitalPeriod": 3.55,
+                    "orbitalInclination": 0.470,
+                    "gravity": 1.314,
+                    "surfaceTemps": {
+                        "min": -214.15,
+                        "max": -148.15,
+                        "mean": -171.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Io",
+                    "distanceFromParent": 421700,
+                    "orbitalPeriod": 1.769,
+                    "orbitalInclination": 0.05,
+                    "diameter": 3643.2,
+                    "mass": "8.931938 * 10^22",
+                    "gravity": 1.796,
+                    "surfaceTemps": {
+                        "min": -183.15,
+                        "max": -143.15,
+                        "mean": -163.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Ganymede",
+                    "distanceFromParent": 1070400,
+                    "orbitalPeriod": 7.155,
+                    "orbitalInclination": 0.2,
+                    "diameter": 5268.2,
+                    "mass": "1.4819 * 10^23",
+                    "gravity": 1.428,
+                    "surfaceTemps": {
+                        "min": -203.15,
+                        "max": -121.15,
+                        "mean": -163.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Amalthea",
+                    "distanceFromParent": 181366,
+                    "orbitalPeriod": 0.498,
+                    "orbitalInclination": 0.374,
+                    "diameter": 167,
+                    "mass": "2.08 * 10^15",
+                    "gravity": 0.02,
+                    "surfaceTemps": {
+                        "min": -195,
+                        "max": -108.15,
+                        "mean": -153.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                }
+            ],
             "_3d": {
                 "textures": {
                     "base": "/src/assets/textures/jupiter.jpg"
@@ -178,6 +325,128 @@
                 "innerRadius": 74510,
                 "outerRadius": 140220
             },
+            "satellites": [
+                {
+                    "name": "Titan",
+                    "distanceFromParent": 1221870,
+                    "orbitalPeriod": 15.945,
+                    "orbitalInclination": 0.349,
+                    "diameter": 5151,
+                    "mass": "1.3452 * 10^23",
+                    "gravity": 1.352,
+                    "surfaceTemps": {
+                        "min": -179.45,
+                        "max": -179.45,
+                        "mean": -179.45
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Enceladus",
+                    "distanceFromParent": 237948,
+                    "orbitalPeriod": 1.37,
+                    "orbitalInclination": 0.019,
+                    "diameter": 504.2,
+                    "mass": "1.08022 * 10^20",
+                    "gravity": 0.113,
+                    "surfaceTemps": {
+                        "min": -240,
+                        "max": -128,
+                        "mean": -198
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Dione",
+                    "distanceFromParent": 377396,
+                    "orbitalPeriod": 2.737,
+                    "orbitalInclination": 0.019,
+                    "diameter": 1122.8,
+                    "mass": "1.095452 * 10^21",
+                    "gravity": 0.232,
+                    "surfaceTemps": {
+                        "min": -186,
+                        "max": -186,
+                        "mean": -186
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Rhea",
+                    "distanceFromParent": 527108,
+                    "orbitalPeriod": 4.518,
+                    "orbitalInclination": 0.345,
+                    "diameter": 1527.6,
+                    "mass": "2.306518 * 10^21",
+                    "gravity": 0.264,
+                    "surfaceTemps": {
+                        "min": -220.15,
+                        "max": -174.15,
+                        "mean": -197.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Mimas",
+                    "distanceFromParent": 185539,
+                    "orbitalPeriod": 0.942,
+                    "orbitalInclination": 1.574,
+                    "diameter": 396.4,
+                    "mass": "3.7493 * 10^19",
+                    "gravity": 0.064,
+                    "surfaceTemps": {
+                        "min": -209.15,
+                        "max": -209.15,
+                        "mean": -209.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Iapetus",
+                    "distanceFromParent": 3560820,
+                    "orbitalPeriod": 79.32,
+                    "orbitalInclination": 15.47,
+                    "diameter": 1469,
+                    "mass": "1.805635 * 10^21",
+                    "gravity": 0.223,
+                    "surfaceTemps": {
+                        "min": -183.15,
+                        "max": -143.15,
+                        "mean": -163.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                }
+            ],
             "_3d": {
                 "textures": {
                     "base": "/src/assets/textures/saturn.jpg"
@@ -200,6 +469,108 @@
             "axialTilt": 97.8,
             "meanTemperature": -195,
             "rings": false,
+            "satellites": [
+                {
+                    "name": "Miranda",
+                    "distanceFromParent": 129390,
+                    "orbitalPeriod": 1.413,
+                    "orbitalInclination": 4.232,
+                    "diameter": 471.6,
+                    "mass": "6.59 * 10^19",
+                    "gravity": 0.079,
+                    "surfaceTemps": {
+                        "min": -160.15,
+                        "max": -189.15,
+                        "mean": -213.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Ariel",
+                    "distanceFromParent": 191020,
+                    "orbitalPeriod": 2.52,
+                    "orbitalInclination": 0.26,
+                    "diameter": 1157.8,
+                    "mass": "1.353 * 10^21",
+                    "gravity": 0.269,
+                    "surfaceTemps": {
+                        "min": -160.15,
+                        "max": -189.15,
+                        "mean": -213.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Umbriel",
+                    "distanceFromParent": 266000,
+                    "orbitalPeriod": 4.144,
+                    "orbitalInclination": 0.128,
+                    "diameter": 1169.4,
+                    "mass": "1.172 * 10^21",
+                    "gravity": 0.2,
+                    "surfaceTemps": {
+                        "min": -160.15,
+                        "max": -188.15,
+                        "mean": -198.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Titania",
+                    "distanceFromParent": 435910,
+                    "orbitalPeriod": 8.706,
+                    "orbitalInclination": 0.34,
+                    "diameter": 1576.8,
+                    "mass": "3.527 * 10^21",
+                    "gravity": 0.379,
+                    "surfaceTemps": {
+                        "min": -213.15,
+                        "max": -184.15,
+                        "mean": -203.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Oberon",
+                    "distanceFromParent": 583520,
+                    "orbitalPeriod": 13.463,
+                    "orbitalInclination": 0.058,
+                    "diameter": 1522.8,
+                    "mass": "3.014 * 10^21",
+                    "gravity": 0.346,
+                    "surfaceTemps": {
+                        "min": -203.15,
+                        "max": -193.15,
+                        "mean": -198.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                }
+            ],
             "_3d": {
                 "textures": {
                     "base": "/src/assets/textures/uranus.jpg"
@@ -222,6 +593,68 @@
             "axialTilt": 28.3,
             "meanTemperature": -200,
             "rings": false,
+            "satellites": [
+                {
+                    "name": "Triton",
+                    "distanceFromParent": 354759,
+                    "orbitalPeriod": -5.877,
+                    "orbitalInclination": 156.885,
+                    "diameter": 2706.8,
+                    "mass": "2.14 * 10^22",
+                    "gravity": 0.779,
+                    "surfaceTemps": {
+                        "min": -235,
+                        "max": -235,
+                        "mean": -235
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Nereid",
+                    "distanceFromParent": 5513787,
+                    "orbitalPeriod": 360.14,
+                    "orbitalInclination": 32.55,
+                    "diameter": 340,
+                    "mass": "2.14 * 10^16",
+                    "gravity": 0.002,
+                    "surfaceTemps": {
+                        "min": -223,
+                        "max": -223,
+                        "mean": -223
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Proteus",
+                    "distanceFromParent": 117647,
+                    "orbitalPeriod": 1.122,
+                    "orbitalInclination": 0.524,
+                    "diameter": 420,
+                    "mass": "4.4 * 10^19",
+                    "gravity": 0.07,
+                    "surfaceTemps": {
+                        "min": -222,
+                        "max": -222,
+                        "mean": -222
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                }
+            ],
             "_3d": {
                 "textures": {
                     "base": "/src/assets/textures/neptune.jpg"
@@ -244,6 +677,68 @@
             "axialTilt": 119.59,
             "meanTemperature": -229,
             "rings": false,
+            "satellites": [
+                {
+                    "name": "Charon",
+                    "distanceFromParent": 19571,
+                    "orbitalPeriod": 6.387,
+                    "orbitalInclination": 0.001,
+                    "diameter": 1212,
+                    "mass": "1.586 * 10^21",
+                    "gravity": 0.288,
+                    "surfaceTemps": {
+                        "min": -220,
+                        "max": -220,
+                        "mean": -220
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Nix",
+                    "distanceFromParent": 48694,
+                    "orbitalPeriod": 24.85,
+                    "orbitalInclination": 0.133,
+                    "diameter": 54,
+                    "mass": "4.5 * 10^16",
+                    "gravity": 0.001,
+                    "surfaceTemps": {
+                        "min": -240,
+                        "max": -218,
+                        "mean": -231
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Hydra",
+                    "distanceFromParent": 64738,
+                    "orbitalPeriod": 38.2,
+                    "orbitalInclination": 0.242,
+                    "diameter": 41,
+                    "mass": "4.8 * 10^16",
+                    "gravity": 0.001,
+                    "surfaceTemps": {
+                        "min": -240,
+                        "max": -218,
+                        "mean": -231
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/venus.jpg",
+                            "topo": "/src/assets/textures/venus_topo.jpg"
+                        }
+                    }
+                }
+            ],
             "_3d": {
                 "textures": {
                     "base": "/src/assets/textures/pluto.jpg"

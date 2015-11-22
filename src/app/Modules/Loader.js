@@ -6,6 +6,7 @@ define(
   'Modules/StarFactory',
   'Models/Sun',
   'Models/Planet',
+  'Models/Moon',
   'Controllers/RenderController',
   'Controllers/OrbitController',
   'Controllers/TravelController',
@@ -19,6 +20,7 @@ function(
   StarFactory,
   Sun,
   Planet,
+  Moon,
   RenderController,
   OrbitController,
   TravelController,
@@ -75,8 +77,16 @@ function(
 
       scene.add(planet.orbitCentroid); // all 3d objects are attached to the orbit centroid
 
-      if (planet.id === 5) {
+      if (planet.id === 3) {
         travelTo = planet;
+
+        var moon = new Moon(planets[i].satellites[0], planet);
+
+        console.debug('Moon', moon);
+
+        var orbitCtrlMoon = new OrbitController(moon);
+
+        planet.core.add(moon.threeObject);
       }
 
       if (planet.id === 8) {
@@ -121,7 +131,7 @@ function(
       var cameraParentPosition = scene.camera.parent.position;
 
       travelController.travelToPoint(cameraParentPosition, travelTo);
-    }, 5000);
+    }, 3000);
 
     // logTimeElapsed(start, end);
   });
