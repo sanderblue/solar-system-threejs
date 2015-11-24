@@ -126,8 +126,6 @@ function(
     var end = new Date().getTime();
 
     setTimeout(()=> {
-      console.debug('CAMERA', scene.camera);
-
       var cameraParentPosition = scene.camera.parent.position;
 
       travelController.travelToPoint(cameraParentPosition, travelTo);

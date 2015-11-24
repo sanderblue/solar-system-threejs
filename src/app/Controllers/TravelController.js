@@ -33,7 +33,7 @@ define(function() {
             console.debug('cameraDistanceFromTarget', cameraDistanceFromTarget);
 
             var point = {
-                x: targetPosition.x + cameraDistanceFromTarget,
+                x: targetPosition.x,
                 y: targetPosition.y,
                 z: targetPosition.z
             };
@@ -41,8 +41,14 @@ define(function() {
             var cameraTween = new TWEEN.Tween(this.camera.position)
                 .to(point, travelDuration)
                 .easing(TWEEN.Easing.Cubic.InOut)
-                .onUpdate(function() {
+                .onUpdate(function(currentAnimationPosition) {
+                    console.debug('Camera Position: ', this);
+                    console.debug('Target Position: ', targetObject.threeObject.position);
+
+                    this.y = targetObject.threeObject.position.y;
                     self.camera.lookAt(targetPosition);
+
+
                 })
                 .onComplete(function() {
                     // self.camera.up.set(0, 1, 0);
