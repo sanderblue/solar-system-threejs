@@ -14,10 +14,10 @@ define(function() {
             document.dispatchEvent(this.travelStartEvent);
 
             var targetPosition = targetObject.threeObject.position;
-            var travelDuration = 10000; // milliseconds
+            var travelDuration = 5000; // milliseconds
 
-            console.debug('currentPosition', currentPosition);
-            console.debug('targetPosition', targetPosition);
+            // console.debug('currentPosition', currentPosition);
+            // console.debug('targetPosition', targetPosition);
             // console.debug('targetObject', targetObject);
 
             targetObject.orbitCentroid.add(this.camera);
@@ -42,9 +42,10 @@ define(function() {
                 .to(point, travelDuration)
                 .easing(TWEEN.Easing.Cubic.InOut)
                 .onUpdate(function(currentAnimationPosition) {
-                    console.debug('Camera Position: ', this);
-                    console.debug('Target Position: ', targetObject.threeObject.position);
+                    // console.debug('Camera Position: ', this);
+                    // console.debug('Target Position: ', targetObject.threeObject.position);
 
+                    // Follow the target for a smooth transition from "flight" to "orbit".
                     this.y = targetObject.threeObject.position.y;
                     self.camera.lookAt(targetPosition);
 
@@ -53,6 +54,8 @@ define(function() {
                 .onComplete(function() {
                     // self.camera.up.set(0, 1, 0);
                     self.camera.lookAt(new THREE.Vector3());
+
+                    console.debug('Target Object', targetObject);
 
                     targetObject.core.add(self.camera);
 

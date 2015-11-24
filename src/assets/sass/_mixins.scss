@@ -1,7 +1,5 @@
 @mixin opacity($int) {
     opacity: $int;
-    -moz-opacity: $int;
-    -webkit-opacity: $int;
 }
 
 @import "keyframe-animations";

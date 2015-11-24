@@ -122,8 +122,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/earth/satellites/moon_4k.jpg",
-                            "topo": "/src/assets/textures/earth/satellites/moon_topo_4k.jpg"
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
                 }

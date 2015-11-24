@@ -129,7 +129,7 @@ function(
       var cameraParentPosition = scene.camera.parent.position;
 
       travelController.travelToPoint(cameraParentPosition, travelTo);
-    }, 3000);
+    }, 2000);
 
     // logTimeElapsed(start, end);
   });

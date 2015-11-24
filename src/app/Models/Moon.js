@@ -169,9 +169,9 @@ function(Constants, CelestialObject, Orbit) {
 
       return new THREE.MeshPhongMaterial({
         map: map,
-        bumpMap: bumpMap || null,
-        bumpScale: bumpMap ? 0.012 : null,
-        specularMap: specularMap || null,
+        // bumpMap: bumpMap || null,
+        // bumpScale: bumpMap ? 0.012 : null,
+        // specularMap: specularMap || null,
         specular: specularMap ? new THREE.Color(0x0a0a0a) : null
       });
     }

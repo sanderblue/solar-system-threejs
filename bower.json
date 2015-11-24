@@ -21,7 +21,8 @@
     "tweenjs": "*",
     "threejs": "*",
     "THREEOrbitControls": "~71.1.0",
-    "tween.js": "tweenjs#~16.3.1"
+    "tween.js": "tweenjs#~16.3.1",
+    "foundation-sites": "~6.1.2"
   },
   "devDependencies": {
     "stats.js": "*"
