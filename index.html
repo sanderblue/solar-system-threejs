@@ -1,8 +1,25 @@
 <html>
 	<head>
 		<title>The Solar System</title>
-        <link rel="stylesheet" type="text/css" href="src/app/vendor/foundation-sites/css/foundation.min.css">
+        <link rel="stylesheet" type="text/css" href="src/app/vendor/foundation-sites/dist/foundation.min.css">
         <link rel="stylesheet" type="text/css" href="src/assets/css/main.css">
+	</head>
+	<body>
+        <div class="container-main">
+            <div class="span-16 columns">
+                <div class="off-canvas-wrapper">
+                    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+                    <button type="button" class="button" data-toggle="offCanvas">Open Menu</button>
+                        <div class="off-canvas position-left" id="offCanvas" data-off-canvas data-position="left">
+
+                        </div>
+                        <div class="off-canvas-content" data-off-canvas-content>
+                            <div id="solar-system" class="scene"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script type="text/javascript" src="src/app/vendor/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="src/app/vendor/foundation-sites/dist/foundation.min.js"></script>
@@ -10,10 +27,5 @@
         <script type="text/javascript" src="src/app/vendor/tweenjs/build/tween.min.js"></script>
         <script type="text/javascript" src="src/app/vendor/threejs/build/three.js"></script>
         <script data-main="src/app/app" src="src/app/vendor/requirejs/require.js"></script>
-	</head>
-	<body>
-        <div class="inner-wrap">
-            <div id="solar-system" class="scene"></div>
-        </div>
 	</body>
 </html>

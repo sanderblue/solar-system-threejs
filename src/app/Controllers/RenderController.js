@@ -35,7 +35,7 @@ function(Constants, Stats) {
     return (end - start) * 0.001;
   }
 
-  function roundHundred(value){
+  function roundHundred(value) {
     return Math.round(value / 100) * 100;
   }
 
@@ -61,9 +61,9 @@ function(Constants, Stats) {
 
       // console.debug('Tweening?', tweening);
 
-      // if (tweening) {
+      if (tweening) {
         TWEEN.update();
-      // }
+      }
 
       Stats.end();
     }
@@ -72,7 +72,13 @@ function(Constants, Stats) {
   }
 
   RenderController.prototype.setFrame = function() {
-    document.body.appendChild(this._renderEngine.domElement);
+    var framecontainer = document.getElementById('solar-system');
+
+    if (framecontainer) {
+      framecontainer.appendChild(this._renderEngine.domElement);
+    } else {
+      document.body.appendChild(this._renderEngine.domElement);
+    }
 
     this._renderEngine.setSize(window.innerWidth, window.innerHeight);
   };

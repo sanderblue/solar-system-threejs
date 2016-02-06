@@ -8,7 +8,6 @@ require.config({
         'stats': {
             exports: ['Stats']
         },
-
         'init': {
             deps: [
                 'Extensions/Date',

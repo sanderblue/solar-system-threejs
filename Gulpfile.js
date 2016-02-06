@@ -38,21 +38,21 @@ function handleError(err) {
 /**
  * Tasks
  */
-// gulp.task('sass', function() {
-//   return gulp.src(src.sass + 'main.scss')
-//     .pipe(sass())
-//     .pipe(gulp.dest(src.css))
-//     .on('error', handleError)
-//     .on('end', sassCompileCallback)
-//   ;
-// });
+gulp.task('sass', function() {
+  return gulp.src(src.sass + 'main.scss')
+    .pipe(sass())
+    .pipe(gulp.dest(src.css))
+    .on('error', handleError)
+    .on('end', sassCompileCallback)
+  ;
+});
 
-// gulp.task('watch', function() {
-//   return gulp.watch(src.sass + '**/*.scss', ['sass'])
-//     .on('change', watcherCallback)
-//     .on('error', handleError)
-//   ;
-// });
+gulp.task('watch', function() {
+  return gulp.watch(src.sass + '**/*.scss', ['sass'])
+    .on('change', watcherCallback)
+    .on('error', handleError)
+  ;
+});
 
 gulp.task('umd', function(){
   gulp.src([src.js + 'vendor/THREEOrbitControls/index.js'])
