@@ -15,7 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "twig.js": "~0.8.2",
+    "twig.js": "~0.8.7",
     "jquery": "~2.1.4",
     "requirejs": "~2.1.17",
     "tweenjs": "*",

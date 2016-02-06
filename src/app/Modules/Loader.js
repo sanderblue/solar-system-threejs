@@ -11,7 +11,8 @@ define(
   'Controllers/OrbitController',
   'Controllers/TravelController',
   'vendor/THREEOrbitControls/umd/index',
-  'vendor/httprequest/httprequest'
+  'vendor/httprequest/httprequest',
+  'Modules/TemplateLoader'
 ],
 function(
   Constants,
@@ -25,9 +26,26 @@ function(
   OrbitController,
   TravelController,
   OrbitControls,
-  HttpRequest
+  HttpRequest,
+  TemplateLoader
   ) {
   'use strict';
+
+
+
+
+
+
+  var TemplateLoader = new TemplateLoader();
+
+  var menu = TemplateLoader.get('menu', 'src/app/Views/menu.html');
+
+  console.debug(menu);
+
+
+
+
+
 
   function getElapsedTimeMs(start, end) {
     return (end - start);

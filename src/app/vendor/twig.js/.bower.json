@@ -1,6 +1,6 @@
 {
   "name": "twig.js",
-  "version": "0.8.2",
+  "version": "0.8.7",
   "main": "twig.min.js",
   "ignore": [
     "Makefile",
@@ -25,14 +25,14 @@
     "twig"
   ],
   "license": "BSD 2-Clause",
-  "_release": "0.8.2",
+  "_release": "0.8.7",
   "_resolution": {
     "type": "version",
-    "tag": "0.8.2",
-    "commit": "1db69d907cd505960573aa0ccfd63d2560831b10"
+    "tag": "0.8.7",
+    "commit": "fbc56e9a4bf968a96dfe9fd21c92f400382237cf"
   },
   "_source": "git://github.com/justjohn/twig.js.git",
-  "_target": "~0.8.2",
+  "_target": "~0.8.7",
   "_originalSource": "twig.js",
   "_direct": true
 }

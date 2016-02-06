@@ -2,11 +2,15 @@ require.config({
     baseUrl: './src/app',
     paths: {
         // App
-        'init': 'init'
+        'init': 'init',
+        'twig': 'vendor/twig.js/twig'
     },
     shim: {
         'stats': {
             exports: ['Stats']
+        },
+        'twig': {
+            exports: ['Twig']
         },
         'init': {
             deps: [
