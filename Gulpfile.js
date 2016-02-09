@@ -39,7 +39,7 @@ function handleError(err) {
  * Tasks
  */
 gulp.task('sass', function() {
-  return gulp.src(src.sass + 'main.scss')
+  return gulp.src(src.sass + '/main.scss')
     .pipe(sass())
     .pipe(gulp.dest(src.css))
     .on('error', handleError)
@@ -48,7 +48,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('watch', function() {
-  return gulp.watch(src.sass + '**/*.scss', ['sass'])
+  return gulp.watch(src.sass + '/**/*.scss', ['sass'])
     .on('change', watcherCallback)
     .on('error', handleError)
   ;

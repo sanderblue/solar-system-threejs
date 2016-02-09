@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>The Solar System</title>
@@ -5,15 +6,17 @@
         <link rel="stylesheet" type="text/css" href="src/assets/css/main.css">
 	</head>
 	<body>
-        <div class="container-main">
-            <div class="span-16 columns">
-                <div class="off-canvas-wrapper">
-                    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
-                    <button type="button" class="button" data-toggle="offCanvas">Open Menu</button>
-                        <div class="off-canvas position-left" id="offCanvas" data-off-canvas data-position="left">
+        <header class="header">
+            <button class="button" type="button" data-toggle="offCanvas">Open Menu</button>
+            <button id="render-scene" class="button" type="button">Render Scene</button>
+        </header>
 
-                        </div>
-                        <div class="off-canvas-content" data-off-canvas-content>
+        <div class="off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+                <div id="menu" class="off-canvas position-left reveal-for-large menu" id="offCanvas" data-off-canvas data-position="left"></div>
+                <div class="off-canvas-content" data-off-canvas-content>
+                    <div class="container-main">
+                        <div class="span-16 columns">
                             <div id="solar-system" class="scene"></div>
                         </div>
                     </div>

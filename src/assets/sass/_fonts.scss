@@ -3,17 +3,17 @@ $base_font_color_hover: rgba(255, 255, 255, 1);
 $base_font_color_light_opacity: rgba(240, 240, 240, 0.8);
 $base_link_color: #0080ff;
 
-/*
- *  Font Faces
+/**
+ * Font Faces
  */
-@include font-face('Rajdhani-Light', '../fonts/rajdhani/rajdhani-light-webfont');
-@include font-face('Rajdhani-Medium', '../fonts/rajdhani/rajdhani-medium-webfont');
-@include font-face('Rajdhani-Regular', '../fonts/rajdhani/rajdhani-regular-webfont');
-@include font-face('Rajdhani-Semibold', '../fonts/rajdhani/rajdhani-semibold-webfont');
-@include font-face('Rajdhani-Bold', '../fonts/rajdhani/rajdhani-bold-webfont');
+@include font-face('Rajdhani-Light', '../fonts/rajdhani/rajdhani-light-webfont', $file-formats: eot woff svg ttf);
+@include font-face('Rajdhani-Medium', '../fonts/rajdhani/rajdhani-medium-webfont', $file-formats: eot woff svg ttf);
+@include font-face('Rajdhani-Regular', '../fonts/rajdhani/rajdhani-regular-webfont', $file-formats: eot woff svg ttf);
+@include font-face('Rajdhani-Semibold', '../fonts/rajdhani/rajdhani-semibold-webfont', $file-formats: eot woff svg ttf);
+@include font-face('Rajdhani-Bold', '../fonts/rajdhani/rajdhani-bold-webfont', $file-formats: eot woff svg ttf);
 
-/*
- *  Font Families
+/**
+ * Font Families
  */
 @mixin Rajdhani-Light() {
     font-family: 'Rajdhani-Light', sans-serif;
@@ -42,8 +42,8 @@ $base_link_color: #0080ff;
 
 
 
-/*
- *  Font Variables
+/**
+ * Font Variables
  */
 @mixin font-light() {
     @include Rajdhani-Light();

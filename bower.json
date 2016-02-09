@@ -25,6 +25,7 @@
     "foundation-sites": "~6.1.2"
   },
   "devDependencies": {
-    "stats.js": "*"
+    "stats.js": "*",
+    "bourbon": "~4.2.6"
   }
 }

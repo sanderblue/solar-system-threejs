@@ -1,0 +1,20 @@
+.off-canvas {
+    margin-top: 3rem; // header height
+}
+
+.menu {
+    background: transparent;
+
+    ul {
+        list-style: none
+    }
+
+    li {
+        line-height: 2rem;
+    }
+}
+
+.planet-name {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
