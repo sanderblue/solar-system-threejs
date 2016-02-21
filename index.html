@@ -2,25 +2,13 @@
 <html>
 	<head>
 		<title>The Solar System</title>
-        <link rel="stylesheet" type="text/css" href="src/app/vendor/foundation-sites/dist/foundation.min.css">
         <link rel="stylesheet" type="text/css" href="src/assets/css/main.css">
 	</head>
 	<body>
-        <header class="header">
-            <button class="button" type="button" data-toggle="offCanvas">Open Menu</button>
-            <button id="render-scene" class="button" type="button">Render Scene</button>
-        </header>
-
-        <div class="off-canvas-wrapper">
-            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
-                <div id="menu" class="off-canvas position-left reveal-for-large menu" id="offCanvas" data-off-canvas data-position="left"></div>
-                <div class="off-canvas-content" data-off-canvas-content>
-                    <div class="container-main">
-                        <div class="span-16 columns">
-                            <div id="solar-system" class="scene"></div>
-                        </div>
-                    </div>
-                </div>
+        <div id="menu" class="menu"></div>
+        <div class="container-main">
+            <div class="span-16 columns">
+                <div id="solar-system" class="scene"></div>
             </div>
         </div>
 

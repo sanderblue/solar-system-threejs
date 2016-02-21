@@ -1,0 +1,23 @@
+@import "../../app/vendor/foundation-sites/scss/foundation";
+
+/**
+ * Accordion
+ */
+$accordion-background: rgba(40, 40, 40, 0.8);
+$accordion-item-color: white;
+$accordion-item-background-hover: rgba(60, 60, 60, 0.8);
+$accordion-item-padding: 0.5rem 1rem;
+$accordion-content-background: rgba(40, 40, 40, 0.8);
+$accordion-content-color: white;
+$accordion-content-border: 1px solid rgba(70, 70, 70, 0.8);
+
+/**
+ * Table
+ */
+$table-background: transparent;
+$table-padding: 0;
+$table-color-scale: 0%;
+$table-border: none;
+$table-striped-background: transparent;
+
+@include foundation-everything();

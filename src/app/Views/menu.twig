@@ -2,9 +2,28 @@
     <ul class="accordion planet-list" data-accordion>
         {% for planet in planets %}
             <li class="accordion-item" data-accordion-item>
-                <a class="accordion-title planet-name">{{ planet.name }}</a>
+                <a id="{{ planet.id }}" class="accordion-title planet-name">{{ planet.name }}</a>
                 <div class="accordion-content" data-tab-content>
-                  I would start in the open state, due to using the `is-active` state class.
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Diameter</td>
+                                <td>{{ planet.diameter }} km</td>
+                            </tr>
+                            <tr>
+                                <td>Length Of Day</td>
+                                <td>{{ planet.lengthOfDay }} hrs</td>
+                            </tr>
+                            <tr>
+                                <td>Orbital Period</td>
+                                <td>{{ planet.orbitalPeriod }} days</td>
+                            </tr>
+                            <tr>
+                                <td>Surface Temp</td>
+                                <td>{{ planet.surfaceTemps.mean }} K</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </li>
         {% endfor %}

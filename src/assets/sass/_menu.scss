@@ -1,9 +1,6 @@
-.off-canvas {
-    margin-top: 3rem; // header height
-}
-
 .menu {
-    background: transparent;
+    background: rgba(40, 40, 40, 0.8);
+    max-width: 250px;
 
     ul {
         list-style: none
@@ -12,9 +9,20 @@
     li {
         line-height: 2rem;
     }
+
+    table {
+        margin-bottom: 0;
+        color: white;
+    }
+
+    a {
+        &:hover {
+            color: white;
+        }
+    }
 }
 
 .planet-name {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
+    @include font-semibold();
+    font-size: 1.125rem;
 }

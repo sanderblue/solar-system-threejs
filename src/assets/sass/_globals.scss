@@ -1,14 +1,13 @@
 html {
-    -webkit-font-smoothing: antialiased;
 }
 
 canvas {
     width: 100%;
     height: 100%;
-    -webkit-font-smoothing: antialiased;
 }
 
 body {
     @include font-regular();
     background: transparent;
+    -webkit-font-smoothing: antialiased;
 }
