@@ -31,8 +31,10 @@ function(
   ) {
   'use strict';
 
+  var solarSystemData = null;
+
   $('#render-scene').on('click', function() {
-    renderScene();
+    renderScene(solarSystemData);
   });
 
   function getElapsedTimeMs(start, end) {
@@ -63,6 +65,8 @@ function(
   var getMenuTemplate = templateLoader.get('menu', 'src/app/Views/menu.twig');
 
   dataRequest.send().then(function(data) {
+    solarSystemData = data;
+
     getMenuTemplate.then(function(template) {
       var menu = template.render({ planets: data.planets });
 
@@ -76,103 +80,84 @@ function(
     });
   });
 
-  // function renderScene() {
-  //   var scene = new Scene();
+  function renderScene(data) {
+    var scene = new Scene();
+    var planets = data.planets;
+    var threePlanets = [];
+    var axisHelper = new THREE.AxisHelper(1000);
+    var gridHelper = new GridHelper();
+    var start = new Date().getTime();
+    var sun = new Sun(data.parent);
+    var startEvent = new CustomEvent('startTime', {});
+    var orbitControls = new OrbitControls(scene.camera);
+    var starFactory = new StarFactory(scene);
 
-  //   dataRequest.send().then(function(data) {
-  //     var getMenuTemplate = templateLoader.get('menu', 'src/app/Views/menu.twig');
+    starFactory.build();
 
-  //     getMenuTemplate.then(function(template) {
-  //       var menu = template.render({ planets: data.planets });
+    var travelTo = null;
 
-  //       console.debug('Data:', data);
+    document.dispatchEvent(startEvent);
 
-  //       var menu = $('#menu').html(menu);
+    for (var i = 0; i < planets.length; i++) {
+      var planet = new Planet(planets[i], sun);
+      var orbitCtrl = new OrbitController(planet);
 
-  //       var accordion = new Foundation.Accordion(menu.find('.accordion'), {
-  //         allowAllClosed: true
-  //       });
-  //     });
+      scene.add(planet.orbitCentroid); // all 3d objects are attached to the orbit centroid
 
-  //     return;
+      if (planet.id === 3) {
+        travelTo = planet;
 
-  //     var planets = data.planets;
-  //     var threePlanets = [];
-  //     var axisHelper = new THREE.AxisHelper(1000);
-  //     var gridHelper = new GridHelper();
-  //     var start = new Date().getTime();
-  //     var sun = new Sun(data.parent);
-  //     var startEvent = new CustomEvent('startTime', {});
-  //     var orbitControls = new OrbitControls(scene.camera);
-  //     var starFactory = new StarFactory(scene);
+        var moon = new Moon(planets[i].satellites[0], planet);
 
-  //     starFactory.build();
+        console.debug('Moon', moon);
 
-  //     var travelTo = null;
+        var orbitCtrlMoon = new OrbitController(moon);
 
-  //     document.dispatchEvent(startEvent);
+        planet.core.add(moon.threeObject);
+      }
 
-  //     for (var i = 0; i < planets.length; i++) {
-  //       var planet = new Planet(planets[i], sun);
-  //       var orbitCtrl = new OrbitController(planet);
+      if (planet.id === 8) {
+        // var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
 
-  //       scene.add(planet.orbitCentroid); // all 3d objects are attached to the orbit centroid
+        // planet.threeObject.add(axisHelperPlanet);
+        planet.core.add(scene.camera);
 
-  //       if (planet.id === 3) {
-  //         travelTo = planet;
+        scene.camera.up.set(0, 0, 1);
 
-  //         var moon = new Moon(planets[i].satellites[0], planet);
+        scene.camera.position.set(
+          planet.threeDiameter * 2.5, // pluto.threeObject.position.x, // 350
+          0, // 0
+          0 // cameraHeight // 0
+        );
 
-  //         console.debug('Moon', moon);
+        // console.debug(
+        //   scene.camera.position.distanceTo(planet.threeObject.position)
+        // );
 
-  //         var orbitCtrlMoon = new OrbitController(moon);
+        scene.camera.lookAt(new THREE.Vector3());
+      }
 
-  //         planet.core.add(moon.threeObject);
-  //       }
+      threePlanets.push(planet.threeObject);
+    }
 
-  //       if (planet.id === 8) {
-  //         // var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
+    scene.add(
+        // scene.camera,
+        // axisHelper,
+        // gridHelper,
+        sun.threeObject
+    );
 
-  //         // planet.threeObject.add(axisHelperPlanet);
-  //         planet.core.add(scene.camera);
+    var renderController = new RenderController(scene, threePlanets);
+    var travelController = new TravelController(scene);
 
-  //         scene.camera.up.set(0, 0, 1);
+    var end = new Date().getTime();
 
-  //         scene.camera.position.set(
-  //           planet.threeDiameter * 2.5, // pluto.threeObject.position.x, // 350
-  //           0, // 0
-  //           0 // cameraHeight // 0
-  //         );
+    setTimeout(()=> {
+      var cameraParentPosition = scene.camera.parent.position;
 
-  //         // console.debug(
-  //         //   scene.camera.position.distanceTo(planet.threeObject.position)
-  //         // );
+      travelController.travelToPoint(cameraParentPosition, travelTo);
+    }, 2000);
 
-  //         scene.camera.lookAt(new THREE.Vector3());
-  //       }
-
-  //       threePlanets.push(planet.threeObject);
-  //     }
-
-  //     scene.add(
-  //         // scene.camera,
-  //         // axisHelper,
-  //         // gridHelper,
-  //         sun.threeObject
-  //     );
-
-  //     var renderController = new RenderController(scene, threePlanets);
-  //     var travelController = new TravelController(scene);
-
-  //     var end = new Date().getTime();
-
-  //     setTimeout(()=> {
-  //       var cameraParentPosition = scene.camera.parent.position;
-
-  //       travelController.travelToPoint(cameraParentPosition, travelTo);
-  //     }, 2000);
-
-  //     // logTimeElapsed(start, end);
-  //   });
-  // }
+    // logTimeElapsed(start, end);
+  }
 });

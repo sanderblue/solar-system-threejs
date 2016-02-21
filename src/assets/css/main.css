@@ -3317,10 +3317,15 @@ body {
   background: rgba(20, 20, 20, 0.4); }
 
 .menu {
+  position: fixed;
+  top: 0;
+  left: 0;
   background: rgba(40, 40, 40, 0.8);
-  max-width: 250px; }
+  width: 250px;
+  z-index: 1; }
   .menu ul {
-    list-style: none; }
+    list-style: none;
+    margin-bottom: 0; }
   .menu li {
     line-height: 2rem; }
   .menu table {
@@ -3332,3 +3337,8 @@ body {
 .planet-name {
   font-family: 'Rajdhani-Semibold', sans-serif;
   font-size: 1.125rem; }
+
+.render-scene {
+  position: fixed;
+  bottom: 0;
+  left: 0; }
