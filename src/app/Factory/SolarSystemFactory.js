@@ -42,6 +42,8 @@ function(
       var orbitControls = new OrbitControls(scene.camera);
       var starFactory = new StarFactory(scene);
 
+      window.SOLAR_SYSTEM_OBJECTS = [];
+
       starFactory.build();
 
       var travelTo = null;
@@ -75,19 +77,16 @@ function(
           scene.camera.up.set(0, 0, 1);
 
           scene.camera.position.set(
-            planet.threeDiameter * 2.5, // pluto.threeObject.position.x, // 350
+            planet.threeDiameter * 3, // pluto.threeObject.position.x, // 350
             0, // 0
             0 // cameraHeight // 0
           );
-
-          // console.debug(
-          //   scene.camera.position.distanceTo(planet.threeObject.position)
-          // );
 
           scene.camera.lookAt(new THREE.Vector3());
         }
 
         threePlanets.push(planet.threeObject);
+        SOLAR_SYSTEM_OBJECTS.push(planet.threeObject);
       }
 
       scene.add(
@@ -101,6 +100,10 @@ function(
       var travelController = new TravelController(scene);
 
       var end = new Date().getTime();
+
+      var endEvent = new CustomEvent('endEvent', {
+        detail: SOLAR_SYSTEM_OBJECTS
+      });
 
       setTimeout(()=> {
         var cameraParentPosition = scene.camera.parent.position;

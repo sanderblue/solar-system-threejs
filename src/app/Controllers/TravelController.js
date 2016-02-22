@@ -28,7 +28,7 @@ define(function() {
 
             var self =this;
 
-            var cameraDistanceFromTarget = targetObject.threeDiameter * 2.5;
+            var cameraDistanceFromTarget = targetObject.threeDiameter * 2.25;
 
             console.debug('cameraDistanceFromTarget', cameraDistanceFromTarget);
 

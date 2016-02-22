@@ -5,7 +5,7 @@ define(function() {
     constructor() {
       super();
 
-      this._camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 5 * Math.pow(10, 13));
+      this._camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 5 * Math.pow(10, 13));
 
       this.setCamera();
       this.setLights();
