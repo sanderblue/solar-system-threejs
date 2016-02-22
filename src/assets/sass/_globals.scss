@@ -8,6 +8,7 @@ canvas {
 
 body {
     @include font-regular();
-    background: transparent;
+    background: black;
+    color: white;
     -webkit-font-smoothing: antialiased;
 }

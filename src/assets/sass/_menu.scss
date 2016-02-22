@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background: rgba(40, 40, 40, 0.8);
+    background: rgba(25, 25, 25, 0.1);
     width: 250px;
     z-index: 1;
 
@@ -13,11 +13,15 @@
 
     li {
         line-height: 2rem;
+        font-size: 0.925rem;
     }
 
     table {
+        @include font-semibold();
         margin-bottom: 0;
         color: white;
+        font-size: 0.8125rem;
+        line-height: normal;
     }
 
     a {

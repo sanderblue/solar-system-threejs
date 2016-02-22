@@ -1871,8 +1871,8 @@ select {
 
 .accordion {
   list-style-type: none;
-  background: rgba(40, 40, 40, 0.8);
-  border: 1px solid rgba(70, 70, 70, 0.8);
+  background: rgba(25, 25, 25, 0.5);
+  border: 1px solid rgba(40, 40, 40, 0.8);
   border-bottom: 0;
   border-radius: 0;
   margin-left: 0; }
@@ -1884,9 +1884,9 @@ select {
   font-size: 0.75rem;
   color: white;
   position: relative;
-  border-bottom: 1px solid rgba(70, 70, 70, 0.8); }
+  border-bottom: 1px solid rgba(40, 40, 40, 0.8); }
   .accordion-title:hover, .accordion-title:focus {
-    background-color: rgba(60, 60, 60, 0.8); }
+    background-color: rgba(25, 25, 25, 0.75); }
   .accordion-title::before {
     content: '+';
     position: absolute;
@@ -1899,8 +1899,8 @@ select {
 .accordion-content {
   padding: 1rem;
   display: none;
-  border-bottom: 1px solid rgba(70, 70, 70, 0.8);
-  background-color: rgba(40, 40, 40, 0.8); }
+  border-bottom: 1px solid rgba(40, 40, 40, 0.8);
+  background-color: rgba(25, 25, 25, 0.5); }
 
 .is-accordion-submenu-parent > a {
   position: relative; }
@@ -3305,7 +3305,8 @@ canvas {
 
 body {
   font-family: 'Rajdhani-Regular', sans-serif;
-  background: transparent;
+  background: black;
+  color: white;
   -webkit-font-smoothing: antialiased; }
 
 .header {
@@ -3320,17 +3321,21 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(40, 40, 40, 0.8);
+  background: rgba(25, 25, 25, 0.1);
   width: 250px;
   z-index: 1; }
   .menu ul {
     list-style: none;
     margin-bottom: 0; }
   .menu li {
-    line-height: 2rem; }
+    line-height: 2rem;
+    font-size: 0.925rem; }
   .menu table {
+    font-family: 'Rajdhani-Semibold', sans-serif;
     margin-bottom: 0;
-    color: white; }
+    color: white;
+    font-size: 0.8125rem;
+    line-height: normal; }
   .menu a:hover {
     color: white; }
 

@@ -3,13 +3,13 @@
 /**
  * Accordion
  */
-$accordion-background: rgba(40, 40, 40, 0.8);
+$accordion-background: rgba(25, 25, 25, 0.5);
 $accordion-item-color: white;
-$accordion-item-background-hover: rgba(60, 60, 60, 0.8);
+$accordion-item-background-hover: rgba(25, 25, 25, 0.75);
 $accordion-item-padding: 0.5rem 1rem;
-$accordion-content-background: rgba(40, 40, 40, 0.8);
+$accordion-content-background: $accordion-background;
 $accordion-content-color: white;
-$accordion-content-border: 1px solid rgba(70, 70, 70, 0.8);
+$accordion-content-border: 1px solid rgba(40, 40, 40, 0.8);
 
 /**
  * Table
