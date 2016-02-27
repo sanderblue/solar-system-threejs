@@ -1,22 +1,26 @@
 define(
 [
-    'lodash',
+    'jquery',
+    'underscore',
     'backbone',
     'Controllers/TravelController'
 ],
-function(Backbone) {
+function($, _, Backbone) {
 
         return Backbone.View.extend({
             event: {
                 'click .planet-name': 'travelToObject'
             },
 
-            initialize: function() {
+            initialize: function(options) {
+                this.data = options.data || {};
+                this.sceneObjects = options.sceneObjects || [];
 
+                console.debug('MenuController', options);
             },
 
-            travelToObject: function() {
-
+            travelToObject: function(e) {
+                console.debug('Click', e.currentTarget);
             }
         });
 });

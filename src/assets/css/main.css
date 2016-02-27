@@ -3323,7 +3323,7 @@ body {
   left: 0;
   background: rgba(25, 25, 25, 0.1);
   width: 250px;
-  z-index: 1; }
+  z-index: 2; }
   .menu ul {
     list-style: none;
     margin-bottom: 0; }
@@ -3345,5 +3345,9 @@ body {
 
 .render-scene {
   position: fixed;
+  width: 100%;
+  top: 0;
   bottom: 0;
-  left: 0; }
+  left: 0;
+  right: 0;
+  font-size: 72px; }

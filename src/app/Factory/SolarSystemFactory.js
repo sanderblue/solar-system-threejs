@@ -9,6 +9,7 @@ define(
   'Controllers/RenderController',
   'Controllers/OrbitController',
   'Controllers/TravelController',
+  'Controllers/MenuController',
   'vendor/THREEOrbitControls/umd/index',
   'Listeners/FactoryListener'
 ],
@@ -22,6 +23,7 @@ function(
   RenderController,
   OrbitController,
   TravelController,
+  MenuController,
   OrbitControls
 ) {
   'use strict';
@@ -35,16 +37,18 @@ function(
 
     var self = this;
 
-    var travelController = new TravelController(this.scene);
+    // var travelController = new TravelController(this.scene);
 
-    $('.planet-name').on('click', function() {
-      console.debug('self.solarSystemObjects', self.scene.camera.parent);
+    // $('.planet-name').on('click', function() {
+    //   console.debug('self.solarSystemObjects', self.scene.camera.parent);
 
-      var cameraParentPosition = self.scene.camera.parent.position;
-      var object = self.solarSystemObjects[0];
+    //   var cameraParentPosition = self.scene.camera.parent.position;
+    //   var id = this.dataset;
 
-      travelController.travelToPoint(cameraParentPosition, object);
-    });
+    //   console.debug('id', id);
+
+    //   // travelController.travelToPoint(cameraParentPosition, object);
+    // });
   }
 
   SolarSystemFactory.prototype.buildPlanets = function(planets, sun) {
@@ -116,6 +120,12 @@ function(
     });
 
     document.dispatchEvent(endEvent);
+
+    var menuController = new MenuController({
+      el: '#menu',
+      data: this.data,
+      sceneObjects: this.solarSystemObjects
+    });
   };
 
   SolarSystemFactory.prototype.buildStars = function(scene) {
