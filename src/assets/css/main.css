@@ -3350,4 +3350,15 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  font-size: 72px; }
+  font-size: 72px;
+  z-index: 3;
+  background: black; }
+
+.scene {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 0; }

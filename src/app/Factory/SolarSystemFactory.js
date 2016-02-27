@@ -121,8 +121,13 @@ function(
 
     document.dispatchEvent(endEvent);
 
+    var accordion = new Foundation.Accordion($('#menu').find('.accordion'), {
+      allowAllClosed: true
+    });
+
     var menuController = new MenuController({
       el: '#menu',
+      scene: this.scene,
       data: this.data,
       sceneObjects: this.solarSystemObjects
     });

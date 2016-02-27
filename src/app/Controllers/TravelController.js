@@ -7,11 +7,13 @@ define(function() {
             this.camera = scene.camera;
             this.travelStartEvent = new CustomEvent('travelStart');
             this.travelCompleteEvent = new CustomEvent('travelComplete');
-            this.travelToPoint = this.travelToPoint;
+            this.travelToObject = this.travelToObject;
         }
 
-        travelToPoint(currentPosition, targetObject) {
+        travelToObject(currentPosition, targetObject) {
             document.dispatchEvent(this.travelStartEvent);
+
+            console.debug('targetObject', targetObject);
 
             var targetPosition = targetObject.threeObject.position;
             var travelDuration = 5000; // milliseconds

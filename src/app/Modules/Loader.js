@@ -26,15 +26,10 @@ function(
 
     getMenuTemplate.then(function(template) {
       var menu = template.render({ planets: data.planets });
+      menu = $('#menu').html(menu);
 
       console.debug('DATA:', data);
-
-      var menu = $('#menu').html(menu);
-
       var solarSystemFactory = new SolarSystemFactory(solarSystemData);
-      var accordion = new Foundation.Accordion(menu.find('.accordion'), {
-        allowAllClosed: true
-      });
 
       $('#render-scene').on('click', function() {
         $(this).fadeOut(300, function() {
