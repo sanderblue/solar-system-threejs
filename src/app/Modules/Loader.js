@@ -37,7 +37,7 @@ function(
       });
 
       $('#render-scene').on('click', function() {
-        solarSystemFactory.renderScene(solarSystemData);
+        solarSystemFactory.build(solarSystemData);
       });
     });
   });

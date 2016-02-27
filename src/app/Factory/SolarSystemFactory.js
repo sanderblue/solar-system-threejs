@@ -26,18 +26,25 @@ function(
 ) {
   'use strict';
 
-  function logTimeElapsed(start, end) {
-    var elapsed = (end - start) * 0.001;;
-
-    console.debug('Build time: ', elapsed + 'seconds');
-  }
-
   function SolarSystemFactory(data) {
     this.scene = new Scene();
     this.data = data || {};
     this.parent = data.parent || null;
     this.planets = data.planets || [];
     this.solarSystemObjects = [];
+
+    var self = this;
+
+    var travelController = new TravelController(this.scene);
+
+    $('.planet-name').on('click', function() {
+      console.debug('self.solarSystemObjects', self.scene.camera.parent);
+
+      var cameraParentPosition = self.scene.camera.parent.position;
+      var object = self.solarSystemObjects[0];
+
+      travelController.travelToPoint(cameraParentPosition, object);
+    });
   }
 
   SolarSystemFactory.prototype.buildPlanets = function(planets, sun) {
@@ -70,6 +77,7 @@ function(
       }
 
       threePlanets.push(planet.threeObject);
+      this.solarSystemObjects.push(planet);
     }
 
     return threePlanets;
@@ -83,7 +91,7 @@ function(
     return sun;
   };
 
-  SolarSystemFactory.prototype.renderScene = function(data) {
+  SolarSystemFactory.prototype.build = function(data) {
     var planets = data.planets;
     var orbitControls = new OrbitControls(this.scene.camera);
     var startTime = new Date().getTime();
@@ -99,22 +107,15 @@ function(
     var sun = this.buildSun(data.parent, this.scene);
     var threePlanets = this.buildPlanets(planets, sun);
     var renderController = new RenderController(this.scene, threePlanets);
-    var travelController = new TravelController(this.scene);
     var endTime = new Date().getTime();
     var endEvent = new CustomEvent('build.solarsystem.end', {
       detail: {
         timestamp: endTime,
-        elapsedTime: getElapsedTime(startTime, endTime)
+        elapsedTime: (endTime - startTime) * 0.001
       }
     });
 
     document.dispatchEvent(endEvent);
-  };
-
-  SolarSystemFactory.prototype.travelTo = function(scene, object) {
-    var cameraParentPosition = this.scene.camera.parent.position;
-
-    travelController.travelToPoint(cameraParentPosition, object);
   };
 
   SolarSystemFactory.prototype.buildStars = function(scene) {
@@ -122,10 +123,6 @@ function(
 
     starFactory.build();
   };
-
-  function getElapsedTime(start, end) {
-    return (end - start) * 0.001;
-  }
 
   return SolarSystemFactory;
 });

@@ -1,18 +1,26 @@
 require.config({
     baseUrl: './src/app',
     paths: {
-        // App
-        'init': 'init',
-        'twig': 'vendor/twig.js/twig'
+        init: 'init',
+        twig: 'vendor/twig.js/twig',
+        backbone: 'vendor/backbone/backbone',
+        underscore: 'vendor/underscore/underscore'
     },
     shim: {
-        'stats': {
-            exports: ['Stats']
+        underscore: {
+            exports: '_'
         },
-        'twig': {
-            exports: ['Twig']
+        backbone: {
+            exports: 'Backbone',
+            deps: ['underscore']
         },
-        'init': {
+        stats: {
+            exports: 'Stats'
+        },
+        twig: {
+            exports: 'Twig'
+        },
+        init: {
             deps: [
                 'Extensions/Date',
                 'Modules/Error/InvalidArgumentException',
