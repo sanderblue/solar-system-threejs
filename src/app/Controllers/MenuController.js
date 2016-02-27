@@ -17,6 +17,7 @@ function($, _, Backbone, TravelController) {
                 this.data = options.data || {};
                 this.sceneObjects = options.sceneObjects || [];
                 this.travelController = new TravelController(this.scene);
+                this.currentTarget = new THREE.Object3D();
             },
 
             matchTarget: function(id) {
@@ -37,7 +38,13 @@ function($, _, Backbone, TravelController) {
 
                 var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
 
-                this.travelController.travelToObject(this.scene.camera.parent.position, target);
+                if (_.isEqual(this.currentTarget, target)) {
+                    return;
+                }
+
+                this.currentTarget = target;
+
+                this.travelController.travelToObject(this.scene.camera.parent.position, this.currentTarget);
                 console.debug('Target:', target);
 
             }
