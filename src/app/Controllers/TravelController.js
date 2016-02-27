@@ -16,7 +16,7 @@ define(function() {
             var targetPosition = targetObject.threeObject.position;
             var travelDuration = 5000; // milliseconds
 
-            // console.debug('currentPosition', currentPosition);
+            console.debug('currentPosition', currentPosition);
             // console.debug('targetPosition', targetPosition);
             // console.debug('targetObject', targetObject);
 

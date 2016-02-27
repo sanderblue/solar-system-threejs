@@ -9,7 +9,8 @@ define(
   'Controllers/RenderController',
   'Controllers/OrbitController',
   'Controllers/TravelController',
-  'vendor/THREEOrbitControls/umd/index'
+  'vendor/THREEOrbitControls/umd/index',
+  'Listeners/FactoryListener'
 ],
 function(
   GridHelper,
@@ -25,93 +26,106 @@ function(
 ) {
   'use strict';
 
-  class SolarSystemFactory {
-    contructor() {
+  function logTimeElapsed(start, end) {
+    var elapsed = (end - start) * 0.001;;
 
-    }
+    console.debug('Build time: ', elapsed + 'seconds');
+  }
 
-    build(data) {
-      var scene = new Scene();
-      var planets = data.planets;
-      var threePlanets = [];
-      var axisHelper = new THREE.AxisHelper(1000);
-      var gridHelper = new GridHelper();
-      var start = new Date().getTime();
-      var sun = new Sun(data.parent);
-      var startEvent = new CustomEvent('startTime', {});
-      var orbitControls = new OrbitControls(scene.camera);
-      var starFactory = new StarFactory(scene);
+  function SolarSystemFactory(data) {
+    this.scene = new Scene();
+    this.data = data || {};
+    this.parent = data.parent || null;
+    this.planets = data.planets || [];
+    this.solarSystemObjects = [];
+  }
 
-      window.SOLAR_SYSTEM_OBJECTS = [];
+  SolarSystemFactory.prototype.buildPlanets = function(planets, sun) {
+    var threePlanets = [];
 
-      starFactory.build();
+    for (var i = 0; i < planets.length; i++) {
+      var planet = new Planet(planets[i], sun);
+      var orbitCtrl = new OrbitController(planet);
 
-      var travelTo = null;
+      this.scene.add(planet.orbitCentroid); // all 3d objects are attached to the orbit centroid
 
-      document.dispatchEvent(startEvent);
+      if (planet.id === 3) {
+        var moon = new Moon(planets[i].satellites[0], planet);
+        var orbitCtrlMoon = new OrbitController(moon);
 
-      for (var i = 0; i < planets.length; i++) {
-        var planet = new Planet(planets[i], sun);
-        var orbitCtrl = new OrbitController(planet);
-
-        scene.add(planet.orbitCentroid); // all 3d objects are attached to the orbit centroid
-
-        if (planet.id === 3) {
-          travelTo = planet;
-
-          var moon = new Moon(planets[i].satellites[0], planet);
-
-          console.debug('Moon', moon);
-
-          var orbitCtrlMoon = new OrbitController(moon);
-
-          planet.core.add(moon.threeObject);
-        }
-
-        if (planet.id === 8) {
-          // var axisHelperPlanet = new THREE.AxisHelper(planet.threeDiameter);
-
-          // planet.threeObject.add(axisHelperPlanet);
-          planet.core.add(scene.camera);
-
-          scene.camera.up.set(0, 0, 1);
-
-          scene.camera.position.set(
-            planet.threeDiameter * 3, // pluto.threeObject.position.x, // 350
-            0, // 0
-            0 // cameraHeight // 0
-          );
-
-          scene.camera.lookAt(new THREE.Vector3());
-        }
-
-        threePlanets.push(planet.threeObject);
-        SOLAR_SYSTEM_OBJECTS.push(planet.threeObject);
+        planet.core.add(moon.threeObject);
       }
 
-      scene.add(
-          // scene.camera,
-          // axisHelper,
-          // gridHelper,
-          sun.threeObject
-      );
+      if (planet.id === 3) {
+        planet.core.add(this.scene.camera);
 
-      var renderController = new RenderController(scene, threePlanets);
-      var travelController = new TravelController(scene);
+        this.scene.camera.up.set(0, 0, 1);
+        this.scene.camera.position.set(
+          planet.threeDiameter * 2.5,
+          0,
+          0
+        );
 
-      var end = new Date().getTime();
+        this.scene.camera.lookAt(new THREE.Vector3());
+      }
 
-      var endEvent = new CustomEvent('endEvent', {
-        detail: SOLAR_SYSTEM_OBJECTS
-      });
+      threePlanets.push(planet.threeObject);
+    }
 
-      setTimeout(()=> {
-        var cameraParentPosition = scene.camera.parent.position;
-
-        travelController.travelToPoint(cameraParentPosition, travelTo);
-      }, 2000);
-    };
+    return threePlanets;
   };
+
+  SolarSystemFactory.prototype.buildSun = function(parentData, scene) {
+    var sun = new Sun(parentData);
+
+    this.scene.add(sun.threeObject);
+
+    return sun;
+  };
+
+  SolarSystemFactory.prototype.renderScene = function(data) {
+    var planets = data.planets;
+    var orbitControls = new OrbitControls(this.scene.camera);
+    var startTime = new Date().getTime();
+    var startEvent = new CustomEvent('build.solarsystem.start', {
+      detail: {
+        timestamp: new Date().getTime()
+      }
+    });
+
+    document.dispatchEvent(startEvent);
+
+    this.buildStars(this.scene);
+    var sun = this.buildSun(data.parent, this.scene);
+    var threePlanets = this.buildPlanets(planets, sun);
+    var renderController = new RenderController(this.scene, threePlanets);
+    var travelController = new TravelController(this.scene);
+    var endTime = new Date().getTime();
+    var endEvent = new CustomEvent('build.solarsystem.end', {
+      detail: {
+        timestamp: endTime,
+        elapsedTime: getElapsedTime(startTime, endTime)
+      }
+    });
+
+    document.dispatchEvent(endEvent);
+  };
+
+  SolarSystemFactory.prototype.travelTo = function(scene, object) {
+    var cameraParentPosition = this.scene.camera.parent.position;
+
+    travelController.travelToPoint(cameraParentPosition, object);
+  };
+
+  SolarSystemFactory.prototype.buildStars = function(scene) {
+    var starFactory = new StarFactory(this.scene);
+
+    starFactory.build();
+  };
+
+  function getElapsedTime(start, end) {
+    return (end - start) * 0.001;
+  }
 
   return SolarSystemFactory;
 });

@@ -12,7 +12,6 @@ function(
   'use strict';
 
   var solarSystemData = null;
-  var solarSystemFactory = new SolarSystemFactory();
   var templateLoader = new TemplateLoader();
   var dataRequest = new HttpRequest(
     'GET',
@@ -28,16 +27,17 @@ function(
     getMenuTemplate.then(function(template) {
       var menu = template.render({ planets: data.planets });
 
-      console.debug('Data:', data);
+      console.debug('DATA:', data);
 
       var menu = $('#menu').html(menu);
 
+      var solarSystemFactory = new SolarSystemFactory(solarSystemData);
       var accordion = new Foundation.Accordion(menu.find('.accordion'), {
         allowAllClosed: true
       });
 
       $('#render-scene').on('click', function() {
-        solarSystemFactory.build(solarSystemData);
+        solarSystemFactory.renderScene(solarSystemData);
       });
     });
   });

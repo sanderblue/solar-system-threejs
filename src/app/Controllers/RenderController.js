@@ -74,13 +74,13 @@ function(Constants, Stats) {
   RenderController.prototype.setFrame = function() {
     var framecontainer = document.getElementById('solar-system');
 
+    this._renderEngine.setSize(window.innerWidth, window.innerHeight);
+
     if (framecontainer) {
       framecontainer.appendChild(this._renderEngine.domElement);
     } else {
       document.body.appendChild(this._renderEngine.domElement);
     }
-
-    this._renderEngine.setSize(window.innerWidth, window.innerHeight);
   };
 
   return RenderController;
