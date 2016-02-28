@@ -38,10 +38,10 @@ function(
 
   SolarSystemFactory.prototype.buildMoons = function(planetData, planet) {
     for (var i = 0; i < planetData.satellites.length; i++) {
-      var moon = new Moon(planetData.satellites[i], planet);
+      var moon = new Moon(planetData.satellites[i], planet, planetData);
       var orbitCtrlMoon = new OrbitController(moon);
 
-      planet.core.add(moon.threeObject);
+      planet.core.add(moon.orbitCentroid);
     }
   };
 
@@ -58,7 +58,7 @@ function(
         this.buildMoons(planets[i], planet);
       }
 
-      if (planet.id === 5) {
+      if (planet.id === 6) {
         planet.core.add(this.scene.camera);
 
         this.scene.camera.up.set(0, 0, 1);

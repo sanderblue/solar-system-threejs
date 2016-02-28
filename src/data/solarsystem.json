@@ -129,7 +129,7 @@
                     "mass": 0.07342,
                     "distanceFromParent": 384400,
                     "orbitalPeriod": 27.3,
-                    "orbitalInclination": 18.28,
+                    "orbitalInclination": 5.14,
                     "gravity": 1.62,
                     "surfaceTemps": {
                         "min": -110,
@@ -571,8 +571,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/venus.jpg",
-                            "topo": "/src/assets/textures/venus_topo.jpg"
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
                 },
@@ -591,8 +591,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/venus.jpg",
-                            "topo": "/src/assets/textures/venus_topo.jpg"
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
                 },
@@ -611,8 +611,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/venus.jpg",
-                            "topo": "/src/assets/textures/venus_topo.jpg"
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
                 },
@@ -631,8 +631,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/venus.jpg",
-                            "topo": "/src/assets/textures/venus_topo.jpg"
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
                 },
@@ -651,8 +651,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/venus.jpg",
-                            "topo": "/src/assets/textures/venus_topo.jpg"
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
                 },
@@ -671,8 +671,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/venus.jpg",
-                            "topo": "/src/assets/textures/venus_topo.jpg"
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
                 }

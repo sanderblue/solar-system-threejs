@@ -28,11 +28,12 @@ function(Constants, CelestialObject, Orbit) {
       this._threeObject = this.createGeometry(this._surface, this._atmosphere);
       this._threeDistanceFromParent = this.createThreeDistanceFromParent();
       this._threeParent = threeParent || null;
-      this._threeObject.rotation.x = 90 * Constants.degreesToRadiansRatio;
+
+      this._threeObject.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
+
       this._orbitCentroid = this.createOrbitCentroid();
 
       if (data.rings) {
-        console.debug('hola');
         this.createRingGeometry(data);
       }
 
@@ -78,8 +79,6 @@ function(Constants, CelestialObject, Orbit) {
       return this._meanTemperature;
     }
 
-
-
     /**
      * 3D Model Data
      */
@@ -113,6 +112,9 @@ function(Constants, CelestialObject, Orbit) {
 
     buildFullObject3D() {
       this._orbitLine = new Orbit(this);
+
+      this._orbitCentroid.rotation.x = 90 + this._orbitalInclination * Constants.degreesToRadiansRatio;
+
       this._orbitCentroid.add(
         this._threeObject,
         this._core,
@@ -170,37 +172,6 @@ function(Constants, CelestialObject, Orbit) {
       return mesh;
     }
 
-    createRingGeometry(data) {
-      var innerRadius = data.rings.innerRadius * Constants.celestialScale;
-      var outerRadius = data.rings.outerRadius * Constants.celestialScale;
-      var thetaSegments = 90;
-      var phiSegments = 90;
-      var geometry = new THREE.RingGeometry(
-        innerRadius,
-        outerRadius,
-        thetaSegments,
-        phiSegments,
-        0,
-        Math.PI * 2
-      );
-
-      var map = this.getTexture('src/assets/textures/saturn_rings.png');
-      map.minFilter = THREE.NearestFilter;
-
-      var material = new THREE.MeshPhongMaterial({
-        map: map,
-        transparent: true,
-        opacity: 0.5,
-        side: THREE.DoubleSide
-      });
-
-      var ring = new THREE.Mesh(geometry, material);
-      ring.position.set(0, 0, 0);
-      ring.rotation.x = 90 * Constants.degreesToRadiansRatio;
-
-      this._threeObject.add(ring);
-    }
-
     createSurface(base, topo, specular) {
       if (!base) {
         return;
@@ -233,7 +204,7 @@ function(Constants, CelestialObject, Orbit) {
 
     createAtmosphere(clouds, haze) {
       if (clouds) {
-        var segmentsOffset = this.getSphereGeometrySegmentOffset()
+        var segmentsOffset = this.getSphereGeometrySegmentOffset();
         var map = this.getTexture(clouds);
 
         map.minFilter = THREE.LinearFilter;
@@ -251,12 +222,45 @@ function(Constants, CelestialObject, Orbit) {
       return null;
     }
 
+    createRingGeometry(data) {
+      var innerRadius = data.rings.innerRadius * Constants.celestialScale;
+      var outerRadius = data.rings.outerRadius * Constants.celestialScale;
+      var thetaSegments = 180;
+      var phiSegments = 180;
+      var geometry = new THREE.RingGeometry(
+        innerRadius,
+        outerRadius,
+        thetaSegments,
+        phiSegments,
+        0,
+        Math.PI * 2
+      );
+
+      var map = this.getTexture('src/assets/textures/saturn_rings.png');
+      map.minFilter = THREE.NearestFilter;
+
+      var colorMap = this.getTexture('src/assets/textures/saturn_rings_color_map.png');
+      colorMap.minFilter = THREE.NearestFilter;
+
+      var material = new THREE.MeshPhongMaterial({
+        map: colorMap,
+        alphaMap: map,
+        transparent: true,
+        opacity: 0.98,
+        side: THREE.DoubleSide
+      });
+
+      var ring = new THREE.Mesh(geometry, material);
+      ring.position.set(0, 0, 0);
+      ring.rotation.x = 90 * Constants.degreesToRadiansRatio;
+
+      this._threeObject.add(ring);
+    }
+
     getSphereGeometrySegmentOffset() {
       return Number.parseInt(this._threeDiameter + 1 * 60);
     }
   }
-
-  // export Planet;
 
   return Planet;
 });

@@ -6,8 +6,9 @@ function(Constants) {
   'use strict';
 
   class Orbit {
-    constructor(object) {
+    constructor(object, color) {
       this._object = object;
+      this._color = color || 0x3d3d3d;
       this._orbit = this.createOrbit();
       this.setOrbitInclination();
     }
@@ -19,8 +20,12 @@ function(Constants) {
     createOrbit() {
       var resolution = 2880; // segments in the line
       var length = 360 / resolution;
-      var material = new THREE.LineBasicMaterial({ color: 0x3d3d3d, linewidth: 1 });
       var orbitLine = new THREE.Geometry();
+      var material = new THREE.LineBasicMaterial({
+        color: this._color,
+        linewidth: 1,
+        fog: true
+      });
 
       // Build the orbit line
       for (var i = 0; i <= resolution; i++) {

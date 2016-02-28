@@ -8,7 +8,7 @@ function(Constants, CelestialObject, Orbit) {
   'use strict';
 
   class Moon extends CelestialObject {
-    constructor(data, threeParent) {
+    constructor(data, threeParent, parentData) {
       super(data.diameter, data.mass, data.gravity, data.density);
 
       this._name = data.name || null;
@@ -22,6 +22,7 @@ function(Constants, CelestialObject, Orbit) {
       this._threeDistanceFromParent = this.createThreeDistanceFromParent();
       this._threeParent = threeParent || null;
       this._threeObject.rotation.x = 90 * Constants.degreesToRadiansRatio;
+      this._parentData = parentData || null;
       this._orbitCentroid = this.createOrbitCentroid();
 
       if (data.rings) {
@@ -79,12 +80,21 @@ function(Constants, CelestialObject, Orbit) {
       return this._orbitCentroid;
     }
 
+    get parentData() {
+      return this._parentData;
+    }
+
     createOrbitCentroid() {
       return new THREE.Object3D();
     }
 
     buildFullObject3D() {
-      this._orbitLine = new Orbit(this);
+      // var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+      var randomColor = '#333333';
+
+      this._orbitLine = new Orbit(this, randomColor);
+
+      this._orbitCentroid.rotation.x = 90 - this._parentData.axialTilt - this._orbitalInclination * Constants.degreesToRadiansRatio;
 
       this._orbitCentroid.add(
         this._threeObject,

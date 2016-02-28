@@ -18,14 +18,14 @@ define(function() {
 
     setCamera() {
       this._camera.position.set(0, 0, 300);
-      this._camera.lookAt(new THREE.Vector3(0,0,0));
+      this._camera.lookAt(new THREE.Vector3(0, 0, 0));
     };
 
     setLights() {
       var ambientLightCount = 4;
 
       for (var i = 0; i < ambientLightCount; i++) {
-        var directionalLight = new THREE.DirectionalLight(0xffffff, 0.125);
+        var directionalLight = new THREE.DirectionalLight(0xffffff, 0.4/* 0.125 */);
 
         this.setObjectPosition(directionalLight, i);
 
