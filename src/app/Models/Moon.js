@@ -89,7 +89,7 @@ function(Constants, CelestialObject, Orbit) {
     }
 
     buildFullObject3D() {
-      // var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+      // var randomColor = '#'+ (Math.random().toString(16) + '000000').slice(2, 8);
       var randomColor = '#333333';
 
       this._orbitLine = new Orbit(this, randomColor);

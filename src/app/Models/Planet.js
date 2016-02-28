@@ -106,15 +106,17 @@ function(Constants, CelestialObject, Orbit) {
       return this._orbitCentroid;
     }
 
+    get orbitLine() {
+      return this._orbitLine;
+    }
+
     createOrbitCentroid() {
       return new THREE.Object3D();
     }
 
     buildFullObject3D() {
       this._orbitLine = new Orbit(this);
-
       this._orbitCentroid.rotation.x = 90 + this._orbitalInclination * Constants.degreesToRadiansRatio;
-
       this._orbitCentroid.add(
         this._threeObject,
         this._core,
