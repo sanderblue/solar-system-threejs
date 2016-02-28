@@ -12,6 +12,8 @@ define(function() {
     const DEGREES_TO_RADIANS_RATIO = 0.0174532925;
     const RADIANS_TO_DEGREES_RATIO = 57.2957795;
 
+    console.debug('Distance to Kuiper Belt', Math.pow(10, -5.0) * 14959787070);
+
     class Constants {
         get degreesToRadiansRatio() {
             return DEGREES_TO_RADIANS_RATIO;

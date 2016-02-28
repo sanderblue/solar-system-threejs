@@ -63,15 +63,15 @@ function(CelestialObject, Constants) {
     createGeometry(surface) {
       var geometry = new THREE.SphereGeometry(
           this._threeRadius,
-          90,
-          90
+          120,
+          60
       );
 
       var mesh = new THREE.Mesh(geometry, surface);
       var lightColor = 0xffffff;
       var intesity = 1;
       var lightDistanceStrength = DISTANCE_TO_KUIPER_BELT * Constants.universeScale;
-      var lightDecayRate = 0.9;
+      var lightDecayRate = 0.6;
       var sunLight = new THREE.PointLight(lightColor, intesity, lightDistanceStrength, lightDecayRate);
 
       mesh.rotation.x = 90 * Constants.degreesToRadiansRatio; // degrees to radians

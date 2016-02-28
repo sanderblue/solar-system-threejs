@@ -305,26 +305,6 @@
                     }
                 },
                 {
-                    "name": "Amalthea",
-                    "distanceFromParent": 181366,
-                    "orbitalPeriod": 0.498,
-                    "orbitalInclination": 0.374,
-                    "diameter": 167,
-                    "mass": "2.08 * 10^15",
-                    "gravity": 0.02,
-                    "surfaceTemps": {
-                        "min": -195,
-                        "max": -108.15,
-                        "mean": -153.15
-                    },
-                    "_3d": {
-                        "textures": {
-                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
-                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
-                        }
-                    }
-                },
-                {
                     "name": "Callisto",
                     "distanceFromParent": 1882700,
                     "orbitalPeriod": 16.689,
@@ -336,6 +316,26 @@
                         "min": 80,
                         "max": 134,
                         "mean": 165
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Amalthea",
+                    "distanceFromParent": 181366,
+                    "orbitalPeriod": 0.498,
+                    "orbitalInclination": 0.374,
+                    "diameter": 187,
+                    "mass": "2.08 * 10^15",
+                    "gravity": 0.02,
+                    "surfaceTemps": {
+                        "min": -195,
+                        "max": -108.15,
+                        "mean": -153.15
                     },
                     "_3d": {
                         "textures": {
@@ -371,6 +371,46 @@
                     "orbitalInclination": 27.006,
                     "diameter": 36,
                     "mass": "6.3 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Leda",
+                    "distanceFromParent": 11187781,
+                    "orbitalPeriod": 240.82,
+                    "orbitalInclination": 27.562,
+                    "diameter": 16,
+                    "mass": "0.6 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Anake",
+                    "distanceFromParent": 21454952,
+                    "orbitalPeriod": "-640.38",
+                    "orbitalInclination": 151.564,
+                    "diameter": 28,
+                    "mass": "3.0 * 10^16",
                     "gravity": null,
                     "surfaceTemps": {
                         "min": null,

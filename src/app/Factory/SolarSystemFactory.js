@@ -2,7 +2,7 @@ define(
 [
   'Environment/GridHelper',
   'Modules/Scene',
-  'Modules/StarFactory',
+  'Factory/StarFactory',
   'Models/Sun',
   'Models/Planet',
   'Models/Moon',
@@ -36,6 +36,15 @@ function(
     this.solarSystemObjects = [];
   }
 
+  SolarSystemFactory.prototype.buildMoons = function(planetData, planet) {
+    for (var i = 0; i < planetData.satellites.length; i++) {
+      var moon = new Moon(planetData.satellites[i], planet);
+      var orbitCtrlMoon = new OrbitController(moon);
+
+      planet.core.add(moon.threeObject);
+    }
+  };
+
   SolarSystemFactory.prototype.buildPlanets = function(planets, sun) {
     var threePlanets = [];
 
@@ -45,38 +54,11 @@ function(
 
       this.scene.add(planet.orbitCentroid); // all 3d objects are attached to the orbit centroid
 
-      if (planet.id === 3) {
-        var moon = new Moon(planets[i].satellites[0], planet);
-        var orbitCtrlMoon = new OrbitController(moon);
-
-        console.debug('Earth Moon:', moon);
-
-        planet.core.add(moon.threeObject);
-      }
-
-      if (planet.id === 4) {
-        for (var m = 0; m < planets[i].satellites.length; m++) {
-          var marsMoon = new Moon(planets[i].satellites[m], planet);
-          var orbitCtrlMarsMoon = new OrbitController(marsMoon);
-
-          console.debug('Mars Moon:', marsMoon);
-
-          planet.core.add(marsMoon.threeObject);
-        }
+      if (planets[i].satellites.length) {
+        this.buildMoons(planets[i], planet);
       }
 
       if (planet.id === 5) {
-        for (var m = 0; m < planets[i].satellites.length; m++) {
-          var jupiterMoon = new Moon(planets[i].satellites[m], planet);
-          var orbitCtrlMarsMoon = new OrbitController(jupiterMoon);
-
-          console.debug('Jupiter Moon:', jupiterMoon);
-
-          planet.core.add(jupiterMoon.threeObject);
-        }
-      }
-
-      if (planet.id === 3) {
         planet.core.add(this.scene.camera);
 
         this.scene.camera.up.set(0, 0, 1);
@@ -145,7 +127,7 @@ function(
   SolarSystemFactory.prototype.buildStars = function(scene) {
     var starFactory = new StarFactory(this.scene);
 
-    starFactory.build();
+    starFactory.buildStarField();
   };
 
   return SolarSystemFactory;

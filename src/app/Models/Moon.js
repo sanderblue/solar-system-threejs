@@ -94,10 +94,8 @@ function(Constants, CelestialObject, Orbit) {
     }
 
     createThreeDiameter() {
-      console.debug('this._diameter', this._diameter);
-
       if (this._diameter < 200) {
-        return this._diameter * 0.0007;
+        return this._diameter * 0.0008;
       }
 
       return this._diameter * Constants.celestialScale;
@@ -128,7 +126,7 @@ function(Constants, CelestialObject, Orbit) {
 
         if (filter) {
           texture.filter = filter;
-        }
+        }2
 
         return texture;
       }
@@ -136,9 +134,6 @@ function(Constants, CelestialObject, Orbit) {
 
     createGeometry(surface, atmosphere) {
       var segmentsOffset = Number.parseInt(this._threeDiameter + 1 * 60);
-
-      // console.debug(this._name +  ' diameter:', this._threeDiameter);
-
       var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
             this._threeRadius,

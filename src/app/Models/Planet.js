@@ -32,6 +32,7 @@ function(Constants, CelestialObject, Orbit) {
       this._orbitCentroid = this.createOrbitCentroid();
 
       if (data.rings) {
+        console.debug('hola');
         this.createRingGeometry(data);
       }
 
@@ -112,7 +113,6 @@ function(Constants, CelestialObject, Orbit) {
 
     buildFullObject3D() {
       this._orbitLine = new Orbit(this);
-
       this._orbitCentroid.add(
         this._threeObject,
         this._core,
@@ -152,14 +152,11 @@ function(Constants, CelestialObject, Orbit) {
     }
 
     createGeometry(surface, atmosphere) {
-      var segmentsOffset = Number.parseInt(this._threeDiameter + 1 * 60);
-
-      // console.debug(this._name +  ' diameter:', this._threeDiameter);
-
+      var segmentsOffset = Number.parseInt(this._threeDiameter + 1 * 40);
       var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
             this._threeRadius,
-            segmentsOffset,
+            segmentsOffset * 2,
             segmentsOffset
           ),
           surface

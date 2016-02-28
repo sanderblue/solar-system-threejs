@@ -17,9 +17,9 @@ function(Constants) {
     }
 
     createOrbit() {
-      var resolution = 1440; // segments in the line
+      var resolution = 2880; // segments in the line
       var length = 360 / resolution;
-      var material = new THREE.LineBasicMaterial({ color: 0x282828, linewidth: 1 });
+      var material = new THREE.LineBasicMaterial({ color: 0x3d3d3d, linewidth: 1 });
       var orbitLine = new THREE.Geometry();
 
       // Build the orbit line

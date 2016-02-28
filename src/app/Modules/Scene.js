@@ -5,7 +5,7 @@ define(function() {
     constructor() {
       super();
 
-      this._camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 5 * Math.pow(10, 13));
+      this._camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.05, 5 * Math.pow(10, 13));
 
       this.setCamera();
       this.setLights();
@@ -25,7 +25,7 @@ define(function() {
       var ambientLightCount = 4;
 
       for (var i = 0; i < ambientLightCount; i++) {
-        var directionalLight = new THREE.DirectionalLight(0xffffff, 0.1);
+        var directionalLight = new THREE.DirectionalLight(0xffffff, 0.125);
 
         this.setObjectPosition(directionalLight, i);
 
@@ -36,16 +36,16 @@ define(function() {
     setObjectPosition(object, index) {
       switch(index) {
         case 0:
-          object.position.set(0, 0, 1000);
+          object.position.set(0, 0, 10000);
           break;
         case 1:
-          object.position.set(0, 0, -1000);
+          object.position.set(0, 0, -10000);
           break;
         case 2:
-          object.position.set(1000, 0, 0);
+          object.position.set(10000, 0, 0);
           break;
         case 3:
-          object.position.set(-1000, 0, 0);
+          object.position.set(-10000, 0, 0);
           break;
       }
     };
