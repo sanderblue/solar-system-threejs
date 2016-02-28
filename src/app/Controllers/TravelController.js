@@ -13,14 +13,8 @@ define(function() {
         travelToObject(currentPosition, targetObject) {
             document.dispatchEvent(this.travelStartEvent);
 
-            console.debug('targetObject', targetObject);
-
             var targetPosition = targetObject.threeObject.position;
             var travelDuration = 5000; // milliseconds
-
-            console.debug('currentPosition', currentPosition);
-            // console.debug('targetPosition', targetPosition);
-            // console.debug('targetObject', targetObject);
 
             targetObject.orbitCentroid.add(this.camera);
 
@@ -28,8 +22,7 @@ define(function() {
             this.camera.position.y = currentPosition.y;
             this.camera.position.z = currentPosition.z;
 
-            var self =this;
-
+            var self = this;
             var endPoint = this.calculateTravelToPoint(targetObject);
 
             function getPoint(targetObject) {
@@ -65,9 +58,6 @@ define(function() {
             }
 
             var point = getPoint(targetObject);
-
-            console.debug('Point:', point);
-
             var cameraTween = new TWEEN.Tween(this.camera.position)
                 .to(point, travelDuration)
                 .easing(TWEEN.Easing.Cubic.InOut)

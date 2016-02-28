@@ -189,8 +189,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/venus.jpg",
-                            "topo": "/src/assets/textures/venus_topo.jpg"
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
                 },
@@ -209,8 +209,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/venus.jpg",
-                            "topo": "/src/assets/textures/venus_topo.jpg"
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
                 }
@@ -259,8 +259,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/venus.jpg",
-                            "topo": "/src/assets/textures/venus_topo.jpg"
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
                 },
@@ -279,8 +279,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/venus.jpg",
-                            "topo": "/src/assets/textures/venus_topo.jpg"
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
                 },
@@ -299,8 +299,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/venus.jpg",
-                            "topo": "/src/assets/textures/venus_topo.jpg"
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
                 },
@@ -319,8 +319,168 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/venus.jpg",
-                            "topo": "/src/assets/textures/venus_topo.jpg"
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Callisto",
+                    "distanceFromParent": 1882700,
+                    "orbitalPeriod": 16.689,
+                    "orbitalInclination": 2.017,
+                    "diameter": 4820.6,
+                    "mass": "1.075938 * 10^23",
+                    "gravity": 1.235,
+                    "surfaceTemps": {
+                        "min": 80,
+                        "max": 134,
+                        "mean": 165
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Adrastea",
+                    "distanceFromParent": 128690,
+                    "orbitalPeriod": 0.29826,
+                    "orbitalInclination": 0.03,
+                    "diameter": 20,
+                    "mass": "0.2 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Lysithea",
+                    "distanceFromParent": 11740560,
+                    "orbitalPeriod": 259.89,
+                    "orbitalInclination": 27.006,
+                    "diameter": 36,
+                    "mass": "6.3 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Elara",
+                    "distanceFromParent": 11778034,
+                    "orbitalPeriod": 257.62,
+                    "orbitalInclination": 29.69,
+                    "diameter": 86,
+                    "mass": "87 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Themisto",
+                    "distanceFromParent": 7393216,
+                    "orbitalPeriod": 129.87,
+                    "orbitalInclination": 45.76,
+                    "diameter": 8,
+                    "mass": "0.069 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Himalia",
+                    "distanceFromParent": 11451971,
+                    "orbitalPeriod": 250.23,
+                    "orbitalInclination": 30.486,
+                    "diameter": 170,
+                    "mass": "670 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Metis",
+                    "distanceFromParent": 127690,
+                    "orbitalPeriod": 0.24,
+                    "orbitalInclination": 1.08,
+                    "diameter": 60,
+                    "mass": "3.6 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "name": "Thebe",
+                    "distanceFromParent": 221889,
+                    "orbitalPeriod": 0.6745,
+                    "orbitalInclination": 1.08,
+                    "diameter": 58,
+                    "mass": "43 * 10^16",
+                    "gravity":null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
                 }

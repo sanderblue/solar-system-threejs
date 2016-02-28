@@ -94,10 +94,20 @@ function(Constants, CelestialObject, Orbit) {
     }
 
     createThreeDiameter() {
+      console.debug('this._diameter', this._diameter);
+
+      if (this._diameter < 200) {
+        return this._diameter * 0.0007;
+      }
+
       return this._diameter * Constants.celestialScale;
     }
 
     createThreeRadius() {
+      if (this._diameter < 200) {
+        return this._diameter * 0.0008 / 2;
+      }
+
       return (this._diameter * Constants.celestialScale) / 2;
     }
 

@@ -34,21 +34,6 @@ function(
     this.parent = data.parent || null;
     this.planets = data.planets || [];
     this.solarSystemObjects = [];
-
-    var self = this;
-
-    // var travelController = new TravelController(this.scene);
-
-    // $('.planet-name').on('click', function() {
-    //   console.debug('self.solarSystemObjects', self.scene.camera.parent);
-
-    //   var cameraParentPosition = self.scene.camera.parent.position;
-    //   var id = this.dataset;
-
-    //   console.debug('id', id);
-
-    //   // travelController.travelToPoint(cameraParentPosition, object);
-    // });
   }
 
   SolarSystemFactory.prototype.buildPlanets = function(planets, sun) {
@@ -64,7 +49,31 @@ function(
         var moon = new Moon(planets[i].satellites[0], planet);
         var orbitCtrlMoon = new OrbitController(moon);
 
+        console.debug('Earth Moon:', moon);
+
         planet.core.add(moon.threeObject);
+      }
+
+      if (planet.id === 4) {
+        for (var m = 0; m < planets[i].satellites.length; m++) {
+          var marsMoon = new Moon(planets[i].satellites[m], planet);
+          var orbitCtrlMarsMoon = new OrbitController(marsMoon);
+
+          console.debug('Mars Moon:', marsMoon);
+
+          planet.core.add(marsMoon.threeObject);
+        }
+      }
+
+      if (planet.id === 5) {
+        for (var m = 0; m < planets[i].satellites.length; m++) {
+          var jupiterMoon = new Moon(planets[i].satellites[m], planet);
+          var orbitCtrlMarsMoon = new OrbitController(jupiterMoon);
+
+          console.debug('Jupiter Moon:', jupiterMoon);
+
+          planet.core.add(jupiterMoon.threeObject);
+        }
       }
 
       if (planet.id === 3) {
