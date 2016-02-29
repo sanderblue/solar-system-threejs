@@ -10,6 +10,7 @@ define(
   'Controllers/OrbitController',
   'Controllers/TravelController',
   'Controllers/MenuController',
+  'Controllers/EffectsController',
   'vendor/THREEOrbitControls/umd/index',
   'Listeners/FactoryListener'
 ],
@@ -24,6 +25,7 @@ function(
   OrbitController,
   TravelController,
   MenuController,
+  EffectsController,
   OrbitControls
 ) {
   'use strict';
@@ -38,9 +40,10 @@ function(
 
   SolarSystemFactory.prototype.buildMoons = function(planetData, planet) {
     for (var i = 0; i < planetData.satellites.length; i++) {
-      var moon = new Moon(planetData.satellites[i], planet, planetData);
+      var moon = new Moon(planetData.satellites[i], planet, planetData, i + 1);
       var orbitCtrlMoon = new OrbitController(moon);
 
+      planet._moons.push(moon);
       planet.core.add(moon.orbitCentroid);
     }
   };
@@ -120,6 +123,11 @@ function(
       el: '#menu',
       scene: this.scene,
       data: this.data,
+      sceneObjects: this.solarSystemObjects
+    });
+
+    var effectsController = new EffectsController({
+      el: '#toggle-effects',
       sceneObjects: this.solarSystemObjects
     });
   };

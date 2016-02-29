@@ -87,9 +87,9 @@ define(function() {
             var cameraDistanceFromTarget = targetObject.threeDiameter + 1.5 + (targetObject.threeDiameter / 2);
             var endPoint = this.calculateTravelToPoint(targetObject);
 
-            console.debug('Camera Position:', this.camera.position);
-            console.debug('Target Position:', targetObject.threeObject.position);
-            console.debug('End Point: ', endPoint);
+            // console.debug('Camera Position:', this.camera.position);
+            // console.debug('Target Position:', targetObject.threeObject.position);
+            // console.debug('End Point: ', endPoint);
 
             this.camera.position.x = endPoint.x; // newPosX; // zoom
             this.camera.position.y = endPoint.y; // newPosY; // vertical positioning of the camera
@@ -97,12 +97,17 @@ define(function() {
 
             targetObject.core.add(this.camera);
 
-            console.debug(
-              'Distance To Target',
-              this.camera.position.distanceTo(targetObject.threeObject.position)
-            );
+            // console.debug(
+            //   'Distance To Target',
+            //   this.camera.position.distanceTo(targetObject.threeObject.position)
+            // );
 
             document.dispatchEvent(this.travelCompleteEvent);
+            document.dispatchEvent(new CustomEvent('solarsystem.travel.complete', {
+                detail: {
+                    object: targetObject
+                }
+            }));
         }
     }
 

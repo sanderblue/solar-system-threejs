@@ -8,7 +8,11 @@
                         <tbody>
                             <tr>
                                 <td>Diameter</td>
-                                <td>{{ planet.diameter }} km</td>
+                                <td>{{ planet.diameter|number_format(0, ',') }} km</td>
+                            </tr>
+                            <tr>
+                                <td>Semi-major Axis</td>
+                                <td>{{ planet.distanceToParent|number_format(0, ',') }} km</td>
                             </tr>
                             <tr>
                                 <td>Length Of Day</td>
@@ -19,8 +23,16 @@
                                 <td>{{ planet.orbitalPeriod }} days</td>
                             </tr>
                             <tr>
+                                <td>Orbit Inclination</td>
+                                <td>{{ planet.orbitInclination }} km</td>
+                            </tr>
+                            <tr>
                                 <td>Surface Temp</td>
                                 <td>{{ planet.surfaceTemps.mean }} K</td>
+                            </tr>
+                            <tr>
+                                <td>Number of Moons</td>
+                                <td>{{ planet.moons|length }}</td>
                             </tr>
                         </tbody>
                     </table>

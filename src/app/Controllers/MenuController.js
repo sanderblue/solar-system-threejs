@@ -3,87 +3,99 @@ define(
 	'jquery',
 	'underscore',
 	'backbone',
-	'Controllers/TravelController'
+	'Controllers/TravelController',
+	'Modules/TemplateLoader'
 ],
-function($, _, Backbone, TravelController) {
+function($, _, Backbone, TravelController, TemplateLoader) {
 
-		return Backbone.View.extend({
-			events: {
-				'click a[data-id]': 'travelToObject',
-				'mouseenter a[data-id]': 'highlightObject',
-				'mouseleave a[data-id]': 'unhighlightObject'
-			},
+  return Backbone.View.extend({
+    events: {
+      'click a[data-id]': 'travelToObject',
+      'mouseenter a[data-id]': 'highlightObject',
+      'mouseleave a[data-id]': 'unhighlightObject'
+    },
 
-			initialize: function(options) {
-				this.scene = options.scene || null;
-				this.data = options.data || {};
-				this.sceneObjects = options.sceneObjects || [];
-				this.travelController = new TravelController(this.scene);
-				this.currentTarget = null;
-			},
+    initialize: function(options) {
+      this.scene = options.scene || null;
+      this.data = options.data || {};
+      this.sceneObjects = options.sceneObjects || [];
+      this.travelController = new TravelController(this.scene);
+      this.templateLoader = new TemplateLoader();
+      this.currentTarget = null;
+    },
 
-			matchTarget: function(id) {
-				var target = null;
+    matchTarget: function(id) {
+      var target = null;
 
-				for (var i = 0; i < this.sceneObjects.length; i++) {
-					if (this.sceneObjects[i].id === id) {
-						target = this.sceneObjects[i];
-						break;
-					}
-				}
+      for (var i = 0; i < this.sceneObjects.length; i++) {
+        if (this.sceneObjects[i].id === id) {
+          return this.sceneObjects[i];
+      	}
+      }
 
-				return target;
-			},
+      return target;
+    },
 
-			highlightObject: function(e) {
-				var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
+    travelToObject: function(e) {
+      var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
 
-				console.debug('Hover', target);
+      console.debug('Target:', target.id);
 
-				if (_.isEqual(this.currentTarget, target)) {
-					return;
-				}
+      if (this.currentTarget && _.isEqual(this.currentTarget.id, target.id)) {
+        return;
+      }
 
-				target.orbitLine.orbit.material.color = new THREE.Color('#60fc41');
-				target.orbitLine.orbit.material.needsUpdate = true;
-			},
+      // Return old target to default orbit line color
+      if (this.currentTarget) {
+        this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+      }
 
-			unhighlightObject: function(e) {
-				var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
+      // Change new target orbit line color
+      target.orbitLine.orbit.material.color = new THREE.Color('#8b8b8b');
+      target.orbitLine.orbit.material.needsUpdate = true;
 
-				console.debug('Hover', e.currentTarget.dataset.id, this.sceneObjects);
+      this.currentTarget = target;
 
-				if (_.isEqual(this.currentTarget, target)) {
-					return;
-				}
+      this.travelController.travelToObject(this.scene.camera.parent.position, this.currentTarget);
 
-				target.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
-				target.orbitLine.orbit.material.needsUpdate = true;
-			},
+      var getMoonTemplate = this.templateLoader.get('moons', 'src/app/Views/moons.twig');
 
-			travelToObject: function(e) {
-				console.debug('Click', e.currentTarget.dataset.id, this.sceneObjects);
+      document.removeEventListener('solarsystem.travel.complete');
+      document.addEventListener('solarsystem.travel.complete', function(e) {
+        var planet = e.detail.object;
 
-				var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
+        getMoonTemplate.then(function(template) {
+          var html = template.render({ moons: planet._moons });
 
-				console.debug('Target:', target.orbitLine.orbit);
+          html = $('#moons').html(html);
 
-				if (_.isEqual(this.currentTarget, target)) {
-					return;
-				}
+          var accordion = new Foundation.Accordion($('#moons').find('.accordion'), {
+            allowAllClosed: true
+          });
+        });
+      }.bind(this));
+    },
 
-				// Return old target to default orbit line color
-				if (this.currentTarget) {
-					this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
-				}
+  	highlightObject: function(e) {
+		  var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
 
-				// Change new target orbit line color
-				target.orbitLine.orbit.material.color = new THREE.Color('#8b8b8b');
-				target.orbitLine.orbit.material.needsUpdate = true;
+      if (this.currentTarget && _.isEqual(this.currentTarget.id, target.id)) {
+      	return;
+      }
 
-				this.currentTarget = target;
+      target.orbitLine.orbit.material.color = new THREE.Color('#d3d3d3');
+      target.orbitLine.orbit.material.needsUpdate = true;
+    },
 
-				this.travelController.travelToObject(this.scene.camera.parent.position, this.currentTarget);
-			}
-		});
+    unhighlightObject: function(e) {
+      var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
+
+      if (this.currentTarget && _.isEqual(this.currentTarget, target)) {
+        return;
+      }
+
+      target.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+      target.orbitLine.orbit.material.needsUpdate = true;
+    }
+  });
 });

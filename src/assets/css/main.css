@@ -3317,18 +3317,24 @@ body {
   right: 0;
   background: rgba(20, 20, 20, 0.4); }
 
-.menu {
+.menu,
+.moons {
   position: fixed;
   top: 0;
-  left: 0;
   background: rgba(25, 25, 25, 0.1);
-  width: 250px;
   z-index: 2; }
-  .menu ul {
+  .menu ul,
+  .moons ul {
     list-style: none;
     margin-bottom: 0; }
+  .menu li,
+  .moons li {
+    line-height: 2rem; }
+
+.menu {
+  left: 0;
+  width: 250px; }
   .menu li {
-    line-height: 2rem;
     font-size: 0.925rem; }
   .menu table {
     font-family: 'Rajdhani-Semibold', sans-serif;
@@ -3339,9 +3345,29 @@ body {
   .menu a:hover {
     color: white; }
 
+.moons {
+  right: 0;
+  width: 250px; }
+  .moons .accordion-title {
+    font-family: 'Rajdhani-Semibold', sans-serif;
+    font-size: 1rem; }
+  .moons table {
+    font-family: 'Rajdhani-Semibold', sans-serif;
+    font-size: 0.925rem;
+    line-height: 1rem; }
+
 .planet-name {
   font-family: 'Rajdhani-Semibold', sans-serif;
   font-size: 1.125rem; }
+
+.toggle-effects {
+  position: fixed;
+  width: 250px;
+  bottom: 0;
+  right: 0;
+  z-index: 2; }
+  .toggle-effects label {
+    color: white; }
 
 .render-scene {
   position: fixed;

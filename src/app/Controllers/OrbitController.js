@@ -11,7 +11,7 @@ function(Constants, Clock) {
 
   clock.start();
 
-  const COORDINATE_PRECISION = 3;
+  const COORDINATE_PRECISION = 4;
 
   class OrbitController {
     constructor(planet) {

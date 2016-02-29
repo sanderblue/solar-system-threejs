@@ -1,9 +1,8 @@
-.menu {
+.menu,
+.moons {
     position: fixed;
     top: 0;
-    left: 0;
     background: rgba(25, 25, 25, 0.1);
-    width: 250px;
     z-index: 2;
 
     ul {
@@ -13,6 +12,14 @@
 
     li {
         line-height: 2rem;
+    }
+}
+
+.menu {
+    left: 0;
+    width: 250px;
+
+    li {
         font-size: 0.925rem;
     }
 
@@ -31,7 +38,40 @@
     }
 }
 
+.moons {
+    right: 0;
+    width: 250px;
+
+    .accordion-title {
+        @include font-semibold();
+        font-size: 1rem;
+    }
+
+    table {
+        @include font-semibold();
+        font-size: 0.925rem;
+        line-height: 1rem;
+    }
+}
+
 .planet-name {
     @include font-semibold();
     font-size: 1.125rem;
+}
+
+.toggle-effects {
+    position: fixed;
+    width: 250px;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+
+    label {
+        color: white;
+    }
+
+    .control-holder {
+
+
+    }
 }

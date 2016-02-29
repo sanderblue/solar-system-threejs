@@ -28,6 +28,7 @@ function(Constants, CelestialObject, Orbit) {
       this._threeObject = this.createGeometry(this._surface, this._atmosphere);
       this._threeDistanceFromParent = this.createThreeDistanceFromParent();
       this._threeParent = threeParent || null;
+      this._moons = [];
 
       this._threeObject.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
 
@@ -77,6 +78,10 @@ function(Constants, CelestialObject, Orbit) {
 
     get meanTemperature() {
       return this._meanTemperature;
+    }
+
+    get moons() {
+      return this._moons;
     }
 
     /**
