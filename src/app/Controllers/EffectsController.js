@@ -38,7 +38,7 @@ function($, _, Backbone, TemplateLoader) {
           var moons = this.sceneObjects[i]._moons;
 
           for (var n = 0; n < moons.length; n++) {
-            moons[n]._orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+            moons[n]._orbitLine.orbit.material.color = new THREE.Color('#222222');
           }
         }
       });

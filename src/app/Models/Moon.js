@@ -100,11 +100,11 @@ function(Constants, CelestialObject, Orbit) {
 
     buildFullObject3D() {
       // var randomColor = '#'+ (Math.random().toString(16) + '000000').slice(2, 8);
-      var randomColor = '#232323';
+      var randomColor = '#222222';
 
       this._orbitLine = new Orbit(this, randomColor);
 
-      this._orbitCentroid.rotation.x = 90 - this._parentData.axialTilt - this._orbitalInclination * Constants.degreesToRadiansRatio;
+      this._orbitCentroid.rotation.x += this._parentData.axialTilt * Constants.degreesToRadiansRatio;
 
       this._orbitCentroid.add(
         this._threeObject,
@@ -114,16 +114,16 @@ function(Constants, CelestialObject, Orbit) {
     }
 
     createThreeDiameter() {
-      if (this._diameter < 200) {
-        return this._diameter * 0.0008;
+      if (this._diameter < 300) {
+        return this._diameter * 0.0007;
       }
 
       return this._diameter * Constants.celestialScale;
     }
 
     createThreeRadius() {
-      if (this._diameter < 200) {
-        return this._diameter * 0.0008 / 2;
+      if (this._diameter < 300) {
+        return this._diameter * 0.0007 / 2;
       }
 
       return (this._diameter * Constants.celestialScale) / 2;

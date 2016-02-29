@@ -11,7 +11,7 @@ function(Constants, Scene, RandomNumberGenorator) {
     constructor(scene) {
       this._starsCentriod = new THREE.Object3D();
       this._starsCount = 3000;
-      this._threeDistanceFromParent = 14959787070 * 2 * Constants.orbitScale;
+      this._threeDistanceFromParent = 14959787070 * 2.5 * Constants.orbitScale;
       this._randomNumberGenorator = new RandomNumberGenorator();
       this._scene = scene;
     }
@@ -25,7 +25,7 @@ function(Constants, Scene, RandomNumberGenorator) {
     }
 
     buildStarField() {
-      var geometry = new THREE.SphereGeometry(16, 16, 8);
+      var geometry = new THREE.SphereGeometry(24, 16, 8);
       var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
       for (var i = 0; i < this._starsCount; i++) {
