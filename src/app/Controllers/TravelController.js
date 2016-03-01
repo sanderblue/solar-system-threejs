@@ -13,6 +13,7 @@ define(function() {
         travelToObject(currentPosition, targetObject) {
             document.dispatchEvent(this.travelStartEvent);
 
+            this.camera.up.set(0, 0, 1);
             var targetPosition = targetObject.threeObject.position;
             var travelDuration = 5000; // milliseconds
 

@@ -25,7 +25,6 @@ function(CelestialObject, Constants) {
       this._threeObject = this.createGeometry(this._surface);
     };
 
-
     /**
      * 3D Model Data
      */

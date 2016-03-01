@@ -103,9 +103,7 @@ function(Constants, CelestialObject, Orbit) {
       var randomColor = '#222222';
 
       this._orbitLine = new Orbit(this, randomColor);
-
       this._orbitCentroid.rotation.x += this._parentData.axialTilt * Constants.degreesToRadiansRatio;
-
       this._orbitCentroid.add(
         this._threeObject,
         this._core,

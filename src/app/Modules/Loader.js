@@ -30,12 +30,19 @@ function(
 
       console.debug('DATA:', data);
       var solarSystemFactory = new SolarSystemFactory(solarSystemData);
+      var introScreen = $('#render-scene');
+      var solarsystem = $('#solar-system');
 
-      $('#render-scene').on('click', function() {
-        $(this).fadeOut(300, function() {
-          $(this).remove();
+      solarsystem.fadeOut();
 
-          solarSystemFactory.build(solarSystemData);
+      introScreen.on('click', function() {
+        solarSystemFactory.build(solarSystemData).then(()=> {
+          setTimeout(()=> {
+            introScreen.fadeOut(4000, function() {
+              introScreen.remove();
+              solarsystem.fadeIn(2000);
+            });
+          }, 500);
         });
       });
     });

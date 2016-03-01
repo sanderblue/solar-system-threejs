@@ -7,16 +7,12 @@ define(
 ],
 function($, _, Backbone, TemplateLoader) {
 
-  window.orbitEffectsEnabled = false;
-
   return Backbone.View.extend({
     events: {
       'change #toggle-orbit-highlight': 'toggleOrbitHighlight'
     },
 
     initialize: function(options) {
-      console.debug('EffectsController', options);
-
       this.sceneObjects = options.sceneObjects || [];
       this._enableOrbitEffectsEvent = new CustomEvent('solarsystem.effects.orbit.enable');
       this._disableOrbitEffectsEvent = new CustomEvent('solarsystem.effects.orbit.disable');

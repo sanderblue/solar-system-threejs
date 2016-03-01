@@ -39,8 +39,6 @@ function($, _, Backbone, TravelController, TemplateLoader) {
     travelToObject: function(e) {
       var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
 
-      console.debug('Target:', target.id);
-
       if (this.currentTarget && _.isEqual(this.currentTarget.id, target.id)) {
         return;
       }
