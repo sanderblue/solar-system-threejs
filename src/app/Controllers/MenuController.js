@@ -7,6 +7,7 @@ define(
 	'Modules/TemplateLoader'
 ],
 function($, _, Backbone, TravelController, TemplateLoader) {
+  'use strict';
 
   return Backbone.View.extend({
     events: {
@@ -22,6 +23,28 @@ function($, _, Backbone, TravelController, TemplateLoader) {
       this.travelController = new TravelController(this.scene);
       this.templateLoader = new TemplateLoader();
       this.currentTarget = null;
+      this.initListeners();
+    },
+
+    initListeners: function() {
+      var getMoonTemplate = this.templateLoader.get('moons', 'src/app/Views/moons.twig');
+
+      document.removeEventListener('solarsystem.travel.complete', handleTravelComplete);
+      document.addEventListener('solarsystem.travel.complete', handleTravelComplete.bind(this));
+
+      function handleTravelComplete(e) {
+        var planet = e.detail.object;
+
+        getMoonTemplate.then(function(template) {
+          var html = template.render({ moons: planet._moons });
+
+          html = $('#moons').html(html);
+
+          var accordion = new Foundation.Accordion($('#moons').find('.accordion'), {
+            allowAllClosed: true
+          });
+        });
+      }
     },
 
     matchTarget: function(id) {
@@ -49,29 +72,11 @@ function($, _, Backbone, TravelController, TemplateLoader) {
       }
 
       // Change new target orbit line color
-      target.orbitLine.orbit.material.color = new THREE.Color('#8b8b8b');
+      target.orbitLine.orbit.material.color = new THREE.Color('#aaaaaa');
       target.orbitLine.orbit.material.needsUpdate = true;
 
       this.currentTarget = target;
-
       this.travelController.travelToObject(this.scene.camera.parent.position, this.currentTarget);
-
-      var getMoonTemplate = this.templateLoader.get('moons', 'src/app/Views/moons.twig');
-
-      document.removeEventListener('solarsystem.travel.complete');
-      document.addEventListener('solarsystem.travel.complete', function(e) {
-        var planet = e.detail.object;
-
-        getMoonTemplate.then(function(template) {
-          var html = template.render({ moons: planet._moons });
-
-          html = $('#moons').html(html);
-
-          var accordion = new Foundation.Accordion($('#moons').find('.accordion'), {
-            allowAllClosed: true
-          });
-        });
-      }.bind(this));
     },
 
   	highlightObject: function(e) {

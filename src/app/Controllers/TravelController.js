@@ -15,7 +15,7 @@ define(function() {
 
             this.camera.up.set(0, 0, 1);
             var targetPosition = targetObject.threeObject.position;
-            var travelDuration = 5000; // milliseconds
+            var travelDuration = 6000; // milliseconds
 
             targetObject.orbitCentroid.add(this.camera);
 

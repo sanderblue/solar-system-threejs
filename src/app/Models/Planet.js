@@ -161,11 +161,19 @@ function(Constants, CelestialObject, Orbit) {
     }
 
     createGeometry(surface, atmosphere) {
-      var segmentsOffset = Number.parseInt(this._threeDiameter + 1 * 40);
+      var hiRes = false;
+      var segmentsOffset = Number.parseInt(this._threeDiameter + 1.1 * 60);
+
+      if (hiRes) {
+        segmentsOffset = Number.parseInt(this._threeDiameter + 1.5 * 120);
+      }
+
+      console.debug(this.name + ' radius:', this._threeRadius, segmentsOffset);
+
       var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
             this._threeRadius,
-            segmentsOffset * 2,
+            segmentsOffset,
             segmentsOffset
           ),
           surface
@@ -203,9 +211,9 @@ function(Constants, CelestialObject, Orbit) {
       return new THREE.MeshPhongMaterial({
         map: map,
         bumpMap: bumpMap || null,
-        bumpScale: bumpMap ? 0.012 : null,
-        specularMap: specularMap || null,
-        specular: specularMap ? new THREE.Color(0x0a0a0a) : null
+        bumpScale: bumpMap ? 0.01 : null,
+        specularMap: null, // specularMap || null,
+        // specular: specularMap ? new THREE.Color(0x0a0a0a) : null
       });
     }
 

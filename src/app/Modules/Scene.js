@@ -7,7 +7,7 @@ define(function() {
 
       this._camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.05, 5 * Math.pow(10, 13));
 
-      this.setCamera();
+      // this.setCamera();
       this.setLights();
       this.setAxis();
     };
@@ -51,7 +51,7 @@ define(function() {
     };
 
     setAxis() {
-      // this.rotation.x = 90 * 0.0174532925;
+      this.rotation.x = 90 * 0.0174532925;
     };
   }
 

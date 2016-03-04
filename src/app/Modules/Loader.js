@@ -35,10 +35,10 @@ function(
 
       solarsystem.fadeOut();
 
-      introScreen.on('click', function() {
+      introScreen.one('click', function() {
         solarSystemFactory.build(solarSystemData).then(()=> {
           setTimeout(()=> {
-            introScreen.fadeOut(4000, function() {
+            introScreen.fadeOut(3000, function() {
               introScreen.remove();
               solarsystem.fadeIn(2000);
             });

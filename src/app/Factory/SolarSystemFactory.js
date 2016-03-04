@@ -35,21 +35,18 @@ function(
     this.data = data || {};
     this.parent = data.parent || null;
     this.planets = data.planets || [];
-    this.solarSystemObjects = [];
-
-    document.addEventListener('solarsystem.build.planet.end', (e)=> {
-      console.debug('solarsystem.build.planet.end', e.detail);
-
-      setTimeout(()=> {
-        $('#render-scene').append('<div style="font-size: 16px;">'+ e.detail.planet.name + ' in '+ e.detail.elapsedTime + ' ms' +'</div>');
-      }, 500);
-    });
+    this.solarSystemObjects = {
+      planets: [],
+      moons: []
+    };
   }
 
   SolarSystemFactory.prototype.buildMoons = function(planetData, planet) {
     for (var i = 0; i < planetData.satellites.length; i++) {
       var moon = new Moon(planetData.satellites[i], planet, planetData, i + 1);
       var orbitCtrlMoon = new OrbitController(moon);
+
+      this.solarSystemObjects.moons.push(moon);
 
       planet._moons.push(moon);
       planet.core.add(moon.orbitCentroid);
@@ -71,18 +68,7 @@ function(
       }
 
       threePlanets.push(planet.threeObject);
-      this.solarSystemObjects.push(planet);
-
-      var endTime = new Date().getTime();
-      var endEvent = new CustomEvent('solarsystem.build.planet.end', {
-        detail: {
-          planet: planet,
-          timestamp: endTime,
-          elapsedTime: endTime - startTime
-        }
-      });
-
-      document.dispatchEvent(endEvent);
+      this.solarSystemObjects.planets.push(planet);
     }
 
     return threePlanets;
@@ -111,6 +97,7 @@ function(
         document.dispatchEvent(startEvent);
 
         this.buildStars(this.scene);
+
         var sun = this.buildSun(data.parent, this.scene);
         var threePlanets = this.buildPlanets(planets, sun);
         var renderController = new RenderController(this.scene, threePlanets);
@@ -122,13 +109,13 @@ function(
           }
         });
 
-        sun.threeObject.add(this.scene.camera);
-
-        this.scene.camera.up.set(1, 0, 0);
+        // Add camera to a planet to start off
+        this.solarSystemObjects.planets[2].core.add(this.scene.camera);
+        this.scene.camera.up.set(0, 0, 1);
         this.scene.camera.position.set(
-          sun.threeDiameter + 400,
-          0,
-          0
+          6,
+          -4,
+          0.5
         );
 
         this.scene.camera.lookAt(new THREE.Vector3());
@@ -143,12 +130,12 @@ function(
           el: '#menu',
           scene: this.scene,
           data: this.data,
-          sceneObjects: this.solarSystemObjects
+          sceneObjects: this.solarSystemObjects.planets
         });
 
         var effectsController = new EffectsController({
           el: '#toggle-effects',
-          sceneObjects: this.solarSystemObjects
+          sceneObjects: this.solarSystemObjects.planets
         });
 
         resolve();
