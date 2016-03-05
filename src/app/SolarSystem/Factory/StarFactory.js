@@ -2,15 +2,15 @@ define(
 [
     'Scene',
     'Environment/Constants',
-    'Modules/RandomNumberGenorator'
+    'Modules/RandomNumberGenerator'
 ],
-function(Scene, Constants, RandomNumberGenorator) {
+function(Scene, Constants, RandomNumberGenerator) {
 
   class StarFactory {
     constructor() {
       this._starsCentriod = new THREE.Object3D();
       this._threeDistanceFromParent = 6753036100 * Constants.orbitScale;
-      this._randomNumberGenorator = new RandomNumberGenorator();
+      this._randomNumberGenerator = new RandomNumberGenerator();
     }
 
     getPosition() {

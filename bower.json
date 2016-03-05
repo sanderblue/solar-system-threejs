@@ -23,7 +23,8 @@
     "THREEOrbitControls": "~71.1.0",
     "tween.js": "tweenjs#~16.3.1",
     "foundation-sites": "~6.1.2",
-    "backbone": "^1.2.3"
+    "backbone": "^1.2.3",
+    "randomcolor": "^0.4.4"
   },
   "devDependencies": {
     "stats.js": "*",

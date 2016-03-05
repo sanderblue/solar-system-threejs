@@ -12,6 +12,7 @@ define(
   'Controllers/MenuController',
   'Controllers/EffectsController',
   'vendor/THREEOrbitControls/umd/index',
+  'Modules/RandomColorGenerator',
   'Listeners/FactoryListener'
 ],
 function(
@@ -26,7 +27,8 @@ function(
   TravelController,
   MenuController,
   EffectsController,
-  OrbitControls
+  OrbitControls,
+  RandomColorGenerator
 ) {
   'use strict';
 
@@ -39,11 +41,21 @@ function(
       planets: [],
       moons: []
     };
+
+    this._randomColorGenerator = new RandomColorGenerator();
   }
 
   SolarSystemFactory.prototype.buildMoons = function(planetData, planet) {
     for (var i = 0; i < planetData.satellites.length; i++) {
-      var moon = new Moon(planetData.satellites[i], planet, planetData, i + 1);
+      var orbitColor = this._randomColorGenerator.getRandomColor({
+        luminosity: 'bright',
+        format: 'hex',
+        hue: 'green'
+      });
+
+      // console.debug('secondaryOrbitColor', orbitColor);
+
+      var moon = new Moon(planetData.satellites[i], planet, planetData, orbitColor);
       var orbitCtrlMoon = new OrbitController(moon);
 
       this.solarSystemObjects.moons.push(moon);
@@ -130,7 +142,7 @@ function(
           el: '#menu',
           scene: this.scene,
           data: this.data,
-          sceneObjects: this.solarSystemObjects.planets
+          sceneObjects: this.solarSystemObjects
         });
 
         var effectsController = new EffectsController({

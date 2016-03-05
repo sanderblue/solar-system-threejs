@@ -14,18 +14,18 @@ function($, _, Backbone, TemplateLoader) {
     },
 
     initialize: function(options) {
+      this.scene = options.scene || null;
       this.data = options.data || {};
-      this.moons = options.moons || [];
-      this.templateLoader = new TemplateLoader();
+      this.sceneObjects = options.sceneObjects || [];
       this.currentTarget = null;
     },
 
     matchTarget: function(id) {
       var target = null;
 
-      for (var i = 0; i < this.moon.length; i++) {
-        if (this.moon[i].id === id) {
-          return this.moon[i];
+      for (var i = 0; i < this.sceneObjects.length; i++) {
+        if (this.sceneObjects[i].id == id) {
+          return this.sceneObjects[i];
         }
       }
 
@@ -33,24 +33,24 @@ function($, _, Backbone, TemplateLoader) {
     },
 
     highlightObject: function(e) {
-      var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
+      var target = this.matchTarget(e.currentTarget.dataset.id);
 
       if (this.currentTarget && _.isEqual(this.currentTarget.id, target.id)) {
         return;
       }
 
-      target.orbitLine.orbit.material.color = new THREE.Color('#d3d3d3');
+      target.orbitLine.orbit.material.color = new THREE.Color(target.orbitColor);
       target.orbitLine.orbit.material.needsUpdate = true;
     },
 
     unhighlightObject: function(e) {
-      var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
+      var target = this.matchTarget(e.currentTarget.dataset.id);
 
       if (this.currentTarget && _.isEqual(this.currentTarget, target)) {
         return;
       }
 
-      target.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+      target.orbitLine.orbit.material.color = new THREE.Color(target.orbitColorDefault);
       target.orbitLine.orbit.material.needsUpdate = true;
     }
   });

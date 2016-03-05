@@ -8,15 +8,19 @@ function(Constants, CelestialObject, Orbit) {
   'use strict';
 
   class Moon extends CelestialObject {
-    constructor(data, threeParent, parentData, index) {
+    constructor(data, threeParent, parentData, orbitColor) {
       super(data.diameter, data.mass, data.gravity, data.density);
 
-      this._id = data.id || parentData.id * 10 + index
+      this._id = data.id || null;
       this._name = data.name || null;
       this._distanceFromParent = data.distanceFromParent || null;
       this._orbitalPeriod = data.orbitalPeriod || null;
       this._orbitalInclination = data.orbitalInclination || null;
       this._mass = data.mass || null;
+      this._orbitColorDefault = '#222222';
+      this._orbitColor = orbitColor || this._orbitColorDefault;
+
+      // THREE properties
       this._threeDiameter = this.createThreeDiameter();
       this._threeRadius = this.createThreeRadius();
       this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo);
@@ -86,8 +90,20 @@ function(Constants, CelestialObject, Orbit) {
       return this._threeDistanceFromParent;
     }
 
+    get orbitLine() {
+      return this._orbitLine;
+    }
+
     get orbitCentroid() {
       return this._orbitCentroid;
+    }
+
+    get orbitColor() {
+      return this._orbitColor;
+    }
+
+    get orbitColorDefault() {
+      return this._orbitColorDefault;
     }
 
     get parentData() {
@@ -99,10 +115,7 @@ function(Constants, CelestialObject, Orbit) {
     }
 
     buildFullObject3D() {
-      // var randomColor = '#'+ (Math.random().toString(16) + '000000').slice(2, 8);
-      var randomColor = '#222222';
-
-      this._orbitLine = new Orbit(this, randomColor);
+      this._orbitLine = new Orbit(this, this._orbitColorDefault);
       this._orbitCentroid.rotation.x += this._parentData.axialTilt * Constants.degreesToRadiansRatio;
       this._orbitCentroid.add(
         this._threeObject,

@@ -4,9 +4,17 @@ define(
 	'underscore',
 	'backbone',
 	'Controllers/TravelController',
+  'Controllers/MoonMenuController',
 	'Modules/TemplateLoader'
 ],
-function($, _, Backbone, TravelController, TemplateLoader) {
+function(
+  $,
+  _,
+  Backbone,
+  TravelController,
+  MoonMenuController,
+  TemplateLoader
+) {
   'use strict';
 
   return Backbone.View.extend({
@@ -35,13 +43,20 @@ function($, _, Backbone, TravelController, TemplateLoader) {
       function handleTravelComplete(e) {
         var planet = e.detail.object;
 
-        getMoonTemplate.then(function(template) {
+        getMoonTemplate.then((template)=> {
           var html = template.render({ moons: planet._moons });
 
           html = $('#moons').html(html);
 
           var accordion = new Foundation.Accordion($('#moons').find('.accordion'), {
             allowAllClosed: true
+          });
+
+          var moonMenuController = new MoonMenuController({
+            el: '#moons',
+            scene: this.scene,
+            data: this.data,
+            sceneObjects: this.sceneObjects.moons
           });
         });
       }
@@ -50,9 +65,9 @@ function($, _, Backbone, TravelController, TemplateLoader) {
     matchTarget: function(id) {
       var target = null;
 
-      for (var i = 0; i < this.sceneObjects.length; i++) {
-        if (this.sceneObjects[i].id === id) {
-          return this.sceneObjects[i];
+      for (var i = 0; i < this.sceneObjects.planets.length; i++) {
+        if (this.sceneObjects.planets[i].id === id) {
+          return this.sceneObjects.planets[i];
       	}
       }
 

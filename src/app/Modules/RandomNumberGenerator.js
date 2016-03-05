@@ -1,7 +1,7 @@
 define(function() {
   'use strict';
 
-  class RandomNumberGenorator {
+  class RandomNumberGenerator {
     constructor(base) {
       this.base = Number.parseFloat(base);
     }
@@ -70,5 +70,5 @@ define(function() {
     }
   }
 
-  return RandomNumberGenorator;
+  return RandomNumberGenerator;
 });
