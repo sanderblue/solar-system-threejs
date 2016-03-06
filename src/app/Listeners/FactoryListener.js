@@ -12,7 +12,7 @@ define(function() {
     function logObjectComplete(event) {
         var object =  event.detail;
 
-        console.log('Done building ', object.name);
+        // console.log('Done building ', object.name);
     }
 
     document.addEventListener('solarsystem.build.start', logStart);

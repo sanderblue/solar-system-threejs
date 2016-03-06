@@ -1756,6 +1756,195 @@
                             "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
+                },
+                {
+                    "id": 7.17,
+                    "name": "Bianca",
+                    "diameter": 51,
+                    "mass": "0.092 * 10^18",
+                    "distanceFromParent": 59170,
+                    "orbitalPeriod": 0.434579,
+                    "orbitalInclination": 0.193,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 7.18,
+                    "name": "Desdemona",
+                    "diameter": 64,
+                    "mass": "0.18 * 10^18",
+                    "distanceFromParent": 62680,
+                    "orbitalPeriod": 0.47365,
+                    "orbitalInclination": 0.11125,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 7.19,
+                    "name": "Rosalind",
+                    "diameter": 72,
+                    "mass": "0.25 * 10^18",
+                    "distanceFromParent": 69940,
+                    "orbitalPeriod": 0.55846,
+                    "orbitalInclination": 0.279,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 7.20,
+                    "name": "Cupid",
+                    "diameter": 18,
+                    "mass": "0.0038 * 10^18",
+                    "distanceFromParent": 74800,
+                    "orbitalPeriod": 0.618,
+                    "orbitalInclination": 0.1,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 7.21,
+                    "name": "Perdita",
+                    "diameter": 30,
+                    "mass": "0.018 * 10^18",
+                    "distanceFromParent": 76400,
+                    "orbitalPeriod": 0.638,
+                    "orbitalInclination": 0,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 7.22,
+                    "name": "Mab",
+                    "diameter": 25,
+                    "mass": "0.01 * 10^18",
+                    "distanceFromParent": 97700,
+                    "orbitalPeriod": 0.923,
+                    "orbitalInclination": 0.1335,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 7.23,
+                    "name": "Trinculo",
+                    "diameter": 18,
+                    "mass": "0.0039 * 10^18",
+                    "distanceFromParent": 8571000,
+                    "orbitalPeriod": "-758.10",
+                    "orbitalInclination": 166.252,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 7.24,
+                    "name": "Sycorax",
+                    "diameter": 165,
+                    "mass": "2.3 * 10^18",
+                    "distanceFromParent": 12179000,
+                    "orbitalPeriod": "-1283.4",
+                    "orbitalInclination": 152.456,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 7.25,
+                    "name": "Prospero",
+                    "diameter": 50,
+                    "mass": "0.085 * 10^18",
+                    "distanceFromParent": 16418000,
+                    "orbitalPeriod": "-1992.8",
+                    "orbitalInclination": 146.017,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
                 }
             ],
             "_3d": {
@@ -1962,6 +2151,90 @@
                     "distanceFromParent": 16611000,
                     "orbitalPeriod": "−1879.08",
                     "orbitalInclination": 112.898,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 8.10,
+                    "name": "Sao",
+                    "diameter": 44,
+                    "mass": "6 * 10^16",
+                    "distanceFromParent": 22228000,
+                    "orbitalPeriod": 2912.72,
+                    "orbitalInclination": 49.907,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 8.11,
+                    "name": "Laomedeia",
+                    "diameter": 42,
+                    "mass": "5 * 10^16",
+                    "distanceFromParent": 23567000,
+                    "orbitalPeriod": 3171.33,
+                    "orbitalInclination": 34.049,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 8.12,
+                    "name": "Psamathe",
+                    "diameter": 40,
+                    "mass": "4 * 10^16",
+                    "distanceFromParent": 48096000,
+                    "orbitalPeriod": "-9074.30",
+                    "orbitalInclination": 137.679,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 8.13,
+                    "name": "Neso",
+                    "diameter": 60,
+                    "mass": "15 * 10^16",
+                    "distanceFromParent": 49285000,
+                    "orbitalPeriod": "-9740.73",
+                    "orbitalInclination": 131.265,
                     "gravity": null,
                     "surfaceTemps": {
                         "min": null,
