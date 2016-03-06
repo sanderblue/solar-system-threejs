@@ -37,6 +37,7 @@ function(
     initListeners: function() {
       var getMoonTemplate = this.templateLoader.get('moons', 'src/app/Views/moons.twig');
 
+      document.addEventListener('solarsystem.focalpoint.change', handleFocalPointChange.bind(this));
       document.removeEventListener('solarsystem.travel.complete', handleTravelComplete);
       document.addEventListener('solarsystem.travel.complete', handleTravelComplete.bind(this));
 
@@ -45,6 +46,27 @@ function(
 
         getMoonTemplate.then((template)=> {
           var html = template.render({ moons: planet._moons });
+
+          html = $('#moons').html(html);
+
+          var accordion = new Foundation.Accordion($('#moons').find('.accordion'), {
+            allowAllClosed: true
+          });
+
+          var moonMenuController = new MoonMenuController({
+            el: '#moons',
+            scene: this.scene,
+            data: this.data,
+            sceneObjects: this.sceneObjects.moons
+          });
+        });
+      }
+
+      function handleFocalPointChange(e) {
+        var object = e.detail.object;
+
+        getMoonTemplate.then((template)=> {
+          var html = template.render({ moons: object._moons });
 
           html = $('#moons').html(html);
 

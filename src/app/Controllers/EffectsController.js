@@ -24,6 +24,10 @@ function($, _, Backbone, TemplateLoader) {
           for (var n = 0; n < moons.length; n++) {
             var randomColor = '#'+ (Math.random().toString(16) + '000000').slice(2, 8);
 
+            // if (moons[n].name == 'Phobos' || moons[n].name == 'Deimos') {
+            //   console.debug('color:', randomColor);
+            // }
+
             moons[n]._orbitLine.orbit.material.color = new THREE.Color(randomColor);
           }
         }
@@ -34,15 +38,13 @@ function($, _, Backbone, TemplateLoader) {
           var moons = this.sceneObjects[i]._moons;
 
           for (var n = 0; n < moons.length; n++) {
-            moons[n]._orbitLine.orbit.material.color = new THREE.Color('#222222');
+            moons[n]._orbitLine.orbit.material.color = new THREE.Color('#2b2b2b');
           }
         }
       });
     },
 
     toggleOrbitHighlight: function(e) {
-      console.debug('Toggle Change:', e.currentTarget.checked);
-
       if (e.currentTarget.checked) {
         document.dispatchEvent(this._enableOrbitEffectsEvent);
       } else {

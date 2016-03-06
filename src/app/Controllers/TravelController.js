@@ -15,13 +15,9 @@ define(function() {
 
             this.camera.up.set(0, 0, 1);
             var targetPosition = targetObject.threeObject.position;
-            var travelDuration = 6000; // milliseconds
+            var travelDuration = 7000; // milliseconds
 
             targetObject.orbitCentroid.add(this.camera);
-
-            this.camera.position.x = currentPosition.x;
-            this.camera.position.y = currentPosition.y;
-            this.camera.position.z = currentPosition.z;
 
             var self = this;
             var endPoint = this.calculateTravelToPoint(targetObject);
@@ -59,18 +55,43 @@ define(function() {
             }
 
             var point = getPoint(targetObject);
-            var cameraTween = new TWEEN.Tween(this.camera.position)
-                .to(point, travelDuration)
+
+            this.camera.position.x = currentPosition.x;
+            this.camera.position.y = currentPosition.y;
+            this.camera.position.z = currentPosition.z;
+
+            var takeOffPoint = {
+                x: currentPosition.x,
+                y: currentPosition.y,
+                z: currentPosition.z + 25
+            };
+
+            var takeOff = new TWEEN.Tween(this.camera.position)
+                .to(takeOffPoint, 3000)
                 .easing(TWEEN.Easing.Cubic.InOut)
                 .onUpdate(function(currentAnimationPosition) {
-                    // Follow the target for a smooth transition from "flight" to "orbit".
-                    this.y = targetObject.threeObject.position.y;
                     self.camera.lookAt(targetObject.threeObject.position);
-                    this.targetPosition = targetObject.threeObject.position;
                 })
-                .onComplete(this.handleComplete.bind(this, targetObject))
+                .onComplete(go.bind(this))
                 .start()
             ;
+
+            function go() {
+                self.camera.lookAt(targetObject.threeObject.position);
+
+                var cameraTween = new TWEEN.Tween(this.camera.position)
+                    .to(point, travelDuration)
+                    .easing(TWEEN.Easing.Cubic.InOut)
+                    .onUpdate(function(currentAnimationPosition) {
+                        // Follow the target for a smooth transition from "flight" to "orbit".
+                        this.y = targetObject.threeObject.position.y;
+                        self.camera.lookAt(targetObject.threeObject.position);
+                        this.targetPosition = targetObject.threeObject.position;
+                    })
+                    .onComplete(this.handleComplete.bind(this, targetObject))
+                    .start()
+                ;
+            }
         }
 
         calculateTravelToPoint(targetObject) {

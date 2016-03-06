@@ -1,5 +1,9 @@
 {% spaceless %}
     <ul class="accordion planet-list" data-accordion>
+        <div class="menu-title">
+            Planets
+        </div>
+
         {% for planet in planets %}
             <li class="accordion-item" data-accordion-item>
                 <a id="{{ planet.id }}" class="accordion-title planet-name" data-id="{{ planet.id }}">{{ planet.name }}</a>

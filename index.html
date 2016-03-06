@@ -25,9 +25,9 @@
                         <p>A solar system refers to a star and all the objects that travel in orbit around it. Our solar system consists of the sun, eight planets (and their natural satellites), dwarf planets, asteroids, and comets. Our solar system is located within the Orion Arm of the Milky Way Galaxy, which is located about 27,000 light-years away from the Milky Way Galactic Center.</p>
                         <p>This is a project powered by Three.js and WebGL. All objects within this project have been modeled to scale based on real astronomical data. The scene currently renders the sun, all eight planets, all five dwarf planets, each planet's moons, thousands of stars, and the asteriod belt.</p>
                         <p>For a better viewing experience, view within Chrome and use a computer that has at least 4 GB of RAM (8GB+ recommended) and a good video card.</p>
-                        <button id="render-scene" class="button large render-scene">
-                            <span>Render</span>
-                        </button>
+                        <div id="render-scene" class="button large render-scene">
+                            <span>View Solar System</span>
+                        </div>
                     </div>
                     <div id="loading-prompt" class="loading-prompt">
                         <span>Building the Solar System...</span>
@@ -39,16 +39,12 @@
             </div>
         </div>
 
-        <div id="tutorial" class="reveal tutorial-modal" data-reveal data-overlay="false">
+        <div id="tutorial" class="reveal tutorial-modal" data-reveal data-close-on-click="true">
             <h3>Controls</h3>
             <p class="lead">Use your mouse or trackpad to navigate the scene. To zoom, use a scroll motion. The move around a planet, use a click + drag motion.</p>
-            <!-- <img src="/src/assets/img/orbit_controls_zoom.png"> -->
-
-
             <button class="close-button" data-close aria-label="Close modal" type="button">
                 <span aria-hidden="true">&times;</span>
             </button>
-
             <a class="button" data-close="tutorial">Got It</a>
         </div>
 

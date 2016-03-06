@@ -582,6 +582,216 @@
                             "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
                         }
                     }
+                },
+                {
+                    "id": 5.17,
+                    "name": "Dia",
+                    "distanceFromParent": 12570424,
+                    "orbitalPeriod": 287.93,
+                    "orbitalInclination": 27.584,
+                    "diameter": 4,
+                    "mass": "0.009 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.18,
+                    "name": "Carpo",
+                    "distanceFromParent": 17144873,
+                    "orbitalPeriod": 458.62,
+                    "orbitalInclination": 56.001,
+                    "diameter": 3,
+                    "mass": "0.0045 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.19,
+                    "name": "Euporie",
+                    "diameter": 2,
+                    "distanceFromParent": 19088434,
+                    "orbitalPeriod": "−538.78",
+                    "orbitalInclination": 144.694,
+                    "mass": "0.0045 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.20,
+                    "name": "Thelxinoe",
+                    "diameter": 2,
+                    "distanceFromParent": 20453753,
+                    "orbitalPeriod": "−597.61",
+                    "orbitalInclination": 151.292,
+                    "mass": "0.0015 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.21,
+                    "name": "Euanthe",
+                    "diameter": 3,
+                    "distanceFromParent": 20464854,
+                    "orbitalPeriod": "−598.09",
+                    "orbitalInclination": 143.409,
+                    "mass": "0.0045 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.22,
+                    "name": "Helike",
+                    "diameter": 4,
+                    "distanceFromParent": 20540266,
+                    "orbitalPeriod": "−601.4",
+                    "orbitalInclination": 154.586,
+                    "mass": "0.0090 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.23,
+                    "name": "Praxidike",
+                    "diameter": 7,
+                    "distanceFromParent": 20823948,
+                    "orbitalPeriod": "−613.90",
+                    "orbitalInclination": 154.586,
+                    "mass": "0.043 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.24,
+                    "name": "Praxidike",
+                    "diameter": 7,
+                    "distanceFromParent": 20823948,
+                    "orbitalPeriod": "−613.90",
+                    "orbitalInclination": 154.586,
+                    "mass": "0.043 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.25,
+                    "name": "Sinope",
+                    "diameter": 38,
+                    "distanceFromParent": 24057865,
+                    "orbitalPeriod": "−739.33",
+                    "orbitalInclination": 153.778,
+                    "mass": "7.5 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.25,
+                    "name": "Pasithee",
+                    "diameter": 2,
+                    "distanceFromParent": 23307318,
+                    "orbitalPeriod": "−726.93",
+                    "orbitalInclination": 165.759,
+                    "mass": "0.0015 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
                 }
             ],
             "_3d": {
@@ -722,12 +932,12 @@
                 },
                 {
                     "id": 6.6,
-                    "name": "Janus",
-                    "distanceFromParent": 151472,
-                    "orbitalPeriod": 0.695,
-                    "orbitalInclination": 0.165,
-                    "diameter": 179,
-                    "mass": "1897.5 * 10^15",
+                    "name": "Aegaeon",
+                    "distanceFromParent": 167500,
+                    "orbitalPeriod": 0.80812,
+                    "orbitalInclination": 0.001,
+                    "diameter": 1,
+                    "mass": "0.0001 * 10^15",
                     "gravity": null,
                     "surfaceTemps": {
                         "min": null,
@@ -901,6 +1111,279 @@
                         "min": -183.15,
                         "max": -143.15,
                         "mean": -163.15
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 6.15,
+                    "name": "Daphnis",
+                    "diameter": 7.6,
+                    "distanceFromParent": 136505,
+                    "orbitalPeriod": 0.59408,
+                    "orbitalInclination": 0,
+                    "mass": "0.084 * 10^15",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 6.16,
+                    "name": "Atlas",
+                    "diameter": 30.2,
+                    "distanceFromParent": 137670,
+                    "orbitalPeriod": 0.60169,
+                    "orbitalInclination": 0.003,
+                    "mass": "6.6 * 10^15",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 6.17,
+                    "name": "Methone",
+                    "diameter": 3.2,
+                    "mass": "0.02 * 10^15",
+                    "distanceFromParent": 194440,
+                    "orbitalPeriod": 1.00957,
+                    "orbitalInclination": 0.007,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 6.18,
+                    "name": "Anthe",
+                    "diameter": 1,
+                    "mass": "0.007 * 10^15",
+                    "distanceFromParent": 197700,
+                    "orbitalPeriod": 1.03650,
+                    "orbitalInclination": 0.1,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 6.19,
+                    "name": "Pallene",
+                    "diameter": 6,
+                    "mass": "0.05 * 10^15",
+                    "distanceFromParent": 212280,
+                    "orbitalPeriod": 1.15375,
+                    "orbitalInclination": 0.181,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 6.20,
+                    "name": "Telesto",
+                    "diameter": 24.8,
+                    "mass": "9.41 * 10^15",
+                    "distanceFromParent": 294619,
+                    "orbitalPeriod": 1.887802,
+                    "orbitalInclination": 1.158,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 6.21,
+                    "name": "Calypso",
+                    "diameter": 21.4,
+                    "mass": "6.3 * 10^15",
+                    "distanceFromParent": 294619,
+                    "orbitalPeriod": 1.887802,
+                    "orbitalInclination": 1.473,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 6.22,
+                    "name": "Helene",
+                    "diameter": 35.2,
+                    "mass": "24.46 * 10^15",
+                    "distanceFromParent": 377396,
+                    "orbitalPeriod": 2.736915,
+                    "orbitalInclination": 0.212,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 6.23,
+                    "name": "Kiviuq",
+                    "diameter": 16,
+                    "mass": "2.79 * 10^15",
+                    "distanceFromParent": 11294800,
+                    "orbitalPeriod": 448.16,
+                    "orbitalInclination": 49.087,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 6.24,
+                    "name": "Ijiraq",
+                    "diameter": 12,
+                    "mass": "1.18 * 10^15",
+                    "distanceFromParent": 11355316,
+                    "orbitalPeriod": 451.77,
+                    "orbitalInclination": 50.212,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 6.25,
+                    "name": "Albiorix",
+                    "diameter": 32,
+                    "mass": "22.3 * 10^15",
+                    "distanceFromParent": 16266700,
+                    "orbitalPeriod": 774.58,
+                    "orbitalInclination": 38.042,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 6.26,
+                    "name": "Siarnaq",
+                    "diameter": 40,
+                    "mass": "43.5 * 10^15",
+                    "distanceFromParent": 17776600,
+                    "orbitalPeriod": 884.88,
+                    "orbitalInclination": 45.798,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 6.27,
+                    "name": "Tarvos",
+                    "diameter": 15,
+                    "mass": "2.3 * 10^15",
+                    "distanceFromParent": 18562800,
+                    "orbitalPeriod": 944.23,
+                    "orbitalInclination": 34.679,
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
                     },
                     "_3d": {
                         "textures": {

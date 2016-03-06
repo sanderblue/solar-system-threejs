@@ -1,6 +1,11 @@
 @import "../../app/vendor/foundation-sites/scss/foundation";
 
 /**
+ * Globals
+ */
+$global-radius: 2px;
+
+/**
  * Accordion
  */
 $accordion-background: rgba(25, 25, 25, 0.5);
@@ -9,7 +14,7 @@ $accordion-item-background-hover: rgba(25, 25, 25, 0.75);
 $accordion-item-padding: 0.5rem 1rem;
 $accordion-content-background: $accordion-background;
 $accordion-content-color: white;
-$accordion-content-border: 1px solid rgba(40, 40, 40, 0.8);
+$accordion-content-border: 1px solid rgba(45, 45, 45, 0.8);
 
 /**
  * Table
@@ -26,9 +31,16 @@ $table-striped-background: transparent;
 $button-radius: 2px;
 $button-fill: hollow;
 
+/**
+ * Reveal Modal
+ */
+$reveal-background: rgba(50, 50, 50, 0.9);
+$reveal-border: 1px solid rgba(80, 80, 80, 0.9);
+$reveal-overlay-background: transparent;
+
 @include foundation-everything();
 
-button.button {
+.button {
     border: 2px solid rgba(100, 163, 175, 0.75);
     color: #f2f2f2;
     font-weight: 600;
@@ -40,5 +52,15 @@ button.button {
 
     &:focus {
         outline: 0;
+    }
+}
+
+.reveal {
+    * {
+        color: #f2f2f2;
+    }
+
+    &:focus {
+        outline: none;
     }
 }

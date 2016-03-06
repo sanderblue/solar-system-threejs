@@ -17,7 +17,7 @@ function(Constants, CelestialObject, Orbit) {
       this._orbitalPeriod = data.orbitalPeriod || null;
       this._orbitalInclination = data.orbitalInclination || null;
       this._mass = data.mass || null;
-      this._orbitColorDefault = '#222222';
+      this._orbitColorDefault = '#2b2b2b';
       this._orbitColor = orbitColor || this._orbitColorDefault;
 
       // THREE properties

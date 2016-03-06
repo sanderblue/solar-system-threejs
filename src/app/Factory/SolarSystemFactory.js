@@ -146,6 +146,12 @@ function(
           0.5
         );
 
+        var focalPointChangeEvent = new CustomEvent('solarsystem.focalpoint.change', {
+          detail: {
+            object: this.solarSystemObjects.planets[2]
+          }
+        });
+
         this.scene.camera.lookAt(new THREE.Vector3());
 
         document.dispatchEvent(endEvent);
@@ -165,6 +171,8 @@ function(
           el: '#toggle-effects',
           sceneObjects: this.solarSystemObjects.planets
         });
+
+        document.dispatchEvent(focalPointChangeEvent);
 
         resolve();
       } catch(e) {

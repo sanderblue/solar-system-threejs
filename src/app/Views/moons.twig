@@ -1,5 +1,8 @@
 {% spaceless %}
     <ul class="accordion moon-list" data-accordion>
+        <div class="menu-title">
+            Moons
+        </div>
         {% for moon in moons %}
             <li class="accordion-item" data-accordion-item>
                 {% set moonId = moon.id|default(loop.index) %}

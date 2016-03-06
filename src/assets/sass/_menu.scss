@@ -3,7 +3,7 @@
     position: fixed;
     top: 0;
     background: rgba(25, 25, 25, 0.1);
-    z-index: 2;
+    z-index: 3;
 
     ul {
         list-style: none;
@@ -44,12 +44,12 @@
 
     .accordion-title {
         @include font-semibold();
-        font-size: 1rem;
+        font-size: 0.8125rem;
     }
 
     table {
         @include font-semibold();
-        font-size: 0.925rem;
+        font-size: 0.75rem;
         line-height: 1rem;
     }
 }
@@ -62,16 +62,27 @@
 .toggle-effects {
     position: fixed;
     width: 250px;
-    bottom: 0;
+    top: 0;
+    left: 0;
     right: 0;
     z-index: 2;
+    text-align: center;
+    width: 100%;
 
     label {
         color: white;
     }
 
     .control-holder {
-
-
+        width: 80%;
+        max-width: 600px;
+        margin: 0 auto;
     }
+}
+
+.menu-title {
+    @include font-bold();
+    font-size: 1.5rem;
+    border-bottom: 1px solid rgba(45, 45, 45, 0.8);
+    padding: 0.5rem 1rem;
 }
