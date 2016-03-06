@@ -30,12 +30,13 @@ function(
 
       console.debug('DATA:', data);
       var solarSystemFactory = new SolarSystemFactory(solarSystemData);
-      var introScreen = $('#render-scene');
+      var introScreen = $('.intro-screen');
+      var renderButton = $('#render-scene');
       var solarsystem = $('#solar-system');
 
       solarsystem.fadeOut();
 
-      introScreen.one('click', function() {
+      renderButton.one('click', function() {
         solarSystemFactory.build(solarSystemData).then(()=> {
           setTimeout(()=> {
             introScreen.fadeOut(3000, function() {

@@ -20,4 +20,25 @@ $table-color-scale: 0%;
 $table-border: none;
 $table-striped-background: transparent;
 
+/**
+ * Buttons
+ */
+$button-radius: 2px;
+$button-fill: hollow;
+
 @include foundation-everything();
+
+button.button {
+    border: 2px solid rgba(100, 163, 175, 0.75);
+    color: #f2f2f2;
+    font-weight: 600;
+
+    &:hover {
+        color: white;
+        border: 2px solid rgba(100, 163, 175, 1);
+    }
+
+    &:focus {
+        outline: 0;
+    }
+}

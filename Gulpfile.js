@@ -6,6 +6,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var wrapUMD = require('gulp-wrap-umd');
+var sourcemaps = require('gulp-sourcemaps');
 
 
 /**
@@ -40,7 +41,9 @@ function handleError(err) {
  */
 gulp.task('sass', function() {
   return gulp.src(src.sass + '/main.scss')
+    .pipe(sourcemaps.init())
     .pipe(sass())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(src.css))
     .on('error', handleError)
     .on('end', sassCompileCallback)

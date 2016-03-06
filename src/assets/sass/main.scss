@@ -8,16 +8,41 @@
 
 
 // Temporary
-.render-scene {
+.intro-screen {
     position: fixed;
     width: 100%;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    font-size: 72px;
+    font-size: 1rem;
     z-index: 3;
     background: black;
+    padding-top: 100px;
+}
+
+.intro-text {
+    @include loading-prompt-text();
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    height: 100%;
+    font-size: 1.25rem;
+    display: table;
+    font-weight: 600;
+
+    .inner {
+        // display: table-cell;
+        // vertical-align: middle;
+    }
+}
+
+.render-scene {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
 }
 
 .scene {

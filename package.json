@@ -7,6 +7,7 @@
     "gulp-sass": "^2.1.0"
   },
   "devDependencies": {
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-wrap-umd": "^0.2.1"
   }
 }

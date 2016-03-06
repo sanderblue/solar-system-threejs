@@ -127,12 +127,3 @@ $base_link_color: #0080ff;
 @mixin font-72() {
     font-size: 72px;
 }
-
-/**
- * Custom Font Mixins
- */
-@mixin loading-prompt-text() {
-    @include font-regular();
-    @include font-size(17px);
-    line-height: 28px;
-}

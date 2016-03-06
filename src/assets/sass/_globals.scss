@@ -9,6 +9,7 @@ canvas {
 body {
     @include font-regular();
     background: black;
-    color: white;
+    color: #f9f9f9;
+    letter-spacing: 0.01rem;
     -webkit-font-smoothing: antialiased;
 }

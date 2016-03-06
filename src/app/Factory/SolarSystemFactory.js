@@ -125,8 +125,8 @@ function(
         this.solarSystemObjects.planets[2].core.add(this.scene.camera);
         this.scene.camera.up.set(0, 0, 1);
         this.scene.camera.position.set(
-          6,
-          -4,
+          5,
+          -3,
           0.5
         );
 
