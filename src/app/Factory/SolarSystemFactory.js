@@ -48,12 +48,10 @@ function(
   SolarSystemFactory.prototype.buildMoons = function(planetData, planet) {
     for (var i = 0; i < planetData.satellites.length; i++) {
       var orbitColor = this._randomColorGenerator.getRandomColor({
-        luminosity: 'bright',
+        luminosity: 'light',
         format: 'hex',
-        hue: 'green'
+        hue: 'blue'
       });
-
-      // console.debug('secondaryOrbitColor', orbitColor);
 
       var moon = new Moon(planetData.satellites[i], planet, planetData, orbitColor);
       var orbitCtrlMoon = new OrbitController(moon);
@@ -62,6 +60,12 @@ function(
 
       planet._moons.push(moon);
       planet.core.add(moon.orbitCentroid);
+
+      var buildEvent = new CustomEvent('solarsystem.build.object.complete', {
+        detail: moon
+      });
+
+      document.dispatchEvent(buildEvent);
     }
   };
 
@@ -81,6 +85,12 @@ function(
 
       threePlanets.push(planet.threeObject);
       this.solarSystemObjects.planets.push(planet);
+
+      var buildEvent = new CustomEvent('solarsystem.build.object.complete', {
+        detail: planet
+      });
+
+      document.dispatchEvent(buildEvent);
     }
 
     return threePlanets;
@@ -91,6 +101,12 @@ function(
 
     this.scene.add(sun.threeObject);
 
+    var buildEvent = new CustomEvent('solarsystem.build.object.complete', {
+      detail: sun
+    });
+
+    document.dispatchEvent(buildEvent);
+
     return sun;
   };
 
@@ -100,7 +116,7 @@ function(
         var planets = data.planets;
         var orbitControls = new OrbitControls(this.scene.camera);
         var startTime = new Date().getTime();
-        var startEvent = new CustomEvent('build.solarsystem.start', {
+        var startEvent = new CustomEvent('solarsystem.start', {
           detail: {
             timestamp: new Date().getTime()
           }
@@ -114,7 +130,7 @@ function(
         var threePlanets = this.buildPlanets(planets, sun);
         var renderController = new RenderController(this.scene, threePlanets);
         var endTime = new Date().getTime();
-        var endEvent = new CustomEvent('build.solarsystem.end', {
+        var endEvent = new CustomEvent('solarsystem.build.end', {
           detail: {
             timestamp: endTime,
             elapsedTime: (endTime - startTime) * 0.001

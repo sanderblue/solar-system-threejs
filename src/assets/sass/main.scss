@@ -54,3 +54,50 @@
     width: 100%;
     z-index: 0;
 }
+
+@keyframes progressBar {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.loading-prompt {
+    text-align: center;
+    opacity: 0;
+    transition: opacity 300ms ease-out;
+    margin: 2rem auto;
+
+    &.active {
+        opacity: 1;
+    }
+}
+
+.progress {
+    transition: opacity 300ms ease-out;
+    margin-top: 1rem;
+    opacity: 0;
+
+    &.active {
+        opacity: 1;
+
+        .progress-meter {
+            animation: progressBar 2000ms ease-out;
+        }
+    }
+
+    &.complete {
+        opacity: 1;
+
+        .progress-meter {
+            width: 100%;
+        }
+    }
+}
+
+.tutorial-modal {
+    color: black;
+}

@@ -168,7 +168,7 @@ function(Constants, CelestialObject, Orbit) {
         segmentsOffset = Number.parseInt(this._threeDiameter + 1.5 * 120);
       }
 
-      console.debug(this.name + ' radius:', this._threeRadius, segmentsOffset);
+      // console.debug(this.name + ' radius:', this._threeRadius, segmentsOffset);
 
       var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
