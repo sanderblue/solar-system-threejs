@@ -5,7 +5,9 @@ define(
 	'backbone',
 	'Controllers/TravelController',
   'Controllers/MoonMenuController',
-	'Modules/TemplateLoader'
+	'Modules/TemplateLoader',
+  'Models/PLanet',
+  'Models/Moon'
 ],
 function(
   $,
@@ -13,7 +15,9 @@ function(
   Backbone,
   TravelController,
   MoonMenuController,
-  TemplateLoader
+  TemplateLoader,
+  Planet,
+  Moon
 ) {
   'use strict';
 
@@ -42,10 +46,16 @@ function(
       document.addEventListener('solarsystem.travel.complete', handleTravelComplete.bind(this));
 
       function handleTravelComplete(e) {
-        var planet = e.detail.object;
+        var object = e.detail.object;
+
+        console.debug(object instanceof Moon);
+
+        if (object instanceof Moon) {
+          return;
+        }
 
         getMoonTemplate.then((template)=> {
-          var html = template.render({ moons: planet._moons });
+          var html = template.render({ moons: object._moons });
 
           html = $('#moons').html(html);
 

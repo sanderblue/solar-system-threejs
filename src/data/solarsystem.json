@@ -263,8 +263,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
-                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                            "base": "/src/assets/textures/jupiter/moons/europa.jpg",
+                            "topo": null
                         }
                     }
                 },
@@ -284,8 +284,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
-                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                            "base": "/src/assets/textures/jupiter/moons/io.jpg",
+                            "topo": null
                         }
                     }
                 },
@@ -305,8 +305,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
-                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                            "base": "/src/assets/textures/jupiter/moons/ganymede.jpg",
+                            "topo": null
                         }
                     }
                 },
@@ -967,8 +967,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
-                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                            "base": "/src/assets/textures/saturn/satellites/tethys.jpg",
+                            "topo": null
                         }
                     }
                 },
@@ -1030,8 +1030,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
-                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                            "base": "/src/assets/textures/saturn/satellites/enceladus.jpg",
+                            "topo": null
                         }
                     }
                 },
@@ -1051,8 +1051,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
-                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                            "base": "/src/assets/textures/saturn/satellites/dione.jpg",
+                            "topo": null
                         }
                     }
                 },
@@ -1072,8 +1072,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
-                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                            "base": "/src/assets/textures/saturn/satellites/rhea.jpg",
+                            "topo": null
                         }
                     }
                 },
@@ -1114,8 +1114,8 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
-                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                            "base": "/src/assets/textures/saturn/satellites/iapetus.jpg",
+                            "topo": null
                         }
                     }
                 },
@@ -2414,7 +2414,7 @@
             "satellites": [],
             "_3d": {
                 "textures": {
-                    "base": "/src/assets/textures/pluto.jpg"
+                    "base": "/src/assets/textures/ceres.png"
                 }
             }
         },
