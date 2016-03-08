@@ -54,7 +54,21 @@ function(
                 introScreen.fadeOut(2000, ()=> {
                   introScreen.remove();
                   solarsystem.fadeIn(2000, ()=> {
-                    $('#tutorial').foundation('open');
+                    var seenModal = false;
+
+                    if (window.localStorage) {
+                      seenModal = localStorage.getItem('seenModal');
+                    }
+
+                    if (!seenModal) {
+                      $('#tutorial').foundation('open');
+
+                      $('#tutorial-got-it').on('click', ()=> {
+                        if (window.localStorage) {
+                          localStorage.setItem('seenModal', 'true');
+                        }
+                      });
+                    }
                   });
                 });
               });

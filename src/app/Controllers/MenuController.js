@@ -48,7 +48,7 @@ function(
       function handleTravelComplete(e) {
         var object = e.detail.object;
 
-        console.debug(object instanceof Moon);
+        console.debug('Moon?', object instanceof Moon);
 
         if (object instanceof Moon) {
           return;

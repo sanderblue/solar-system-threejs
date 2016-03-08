@@ -61,9 +61,9 @@ function(CelestialObject, Constants) {
 
     createGeometry(surface) {
       var geometry = new THREE.SphereGeometry(
-          this._threeRadius,
-          120,
-          60
+        this._threeRadius,
+        100,
+        50
       );
 
       var mesh = new THREE.Mesh(geometry, surface);
@@ -73,7 +73,7 @@ function(CelestialObject, Constants) {
       var lightDecayRate = 0.6;
       var sunLight = new THREE.PointLight(lightColor, intesity, lightDistanceStrength, lightDecayRate);
 
-      mesh.rotation.x = 90 * Constants.degreesToRadiansRatio; // degrees to radians
+      // mesh.rotation.x = 90 * Constants.degreesToRadiansRatio; // degrees to radians
 
       mesh.add(sunLight);
 

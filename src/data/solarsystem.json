@@ -57,6 +57,7 @@
             "orbitalVelocity": 47.4,
             "orbitalInclination": 3.38,
             "axialTilt": 0.01,
+            "orbitPositionOffset": 48,
             "meanTemperature": 167,
             "surfaceTemps": {
                 "min": 100,
@@ -86,6 +87,7 @@
             "orbitalVelocity": 35,
             "orbitalInclination": 3.86,
             "axialTilt": 177.4,
+            "orbitPositionOffset": 155,
             "meanTemperature": 464,
             "surfaceTemps": {
                 "min": 655,
@@ -115,6 +117,7 @@
             "orbitalVelocity": 29.8,
             "orbitalInclination": 7.155,
             "axialTilt": 23.4,
+            "orbitPositionOffset": 0,
             "meanTemperature": 15,
             "surfaceTemps": {
                 "min": 185,
@@ -167,6 +170,7 @@
             "orbitalVelocity": 24.1,
             "orbitalInclination": 5.65,
             "axialTilt": 25.2,
+            "orbitPositionOffset": 71,
             "meanTemperature": -65,
             "surfaceTemps": {
                 "min": 130,
@@ -239,6 +243,7 @@
             "orbitalVelocity": 13.1,
             "orbitalInclination": 6.09,
             "axialTilt": 3.1,
+            "orbitPositionOffset": 2692,
             "meanTemperature": -110,
             "surfaceTemps": {
                 "min": null,
@@ -263,7 +268,7 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/jupiter/moons/europa.jpg",
+                            "base": "/src/assets/textures/jupiter/satellites/europa.jpg",
                             "topo": null
                         }
                     }
@@ -284,7 +289,7 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/jupiter/moons/io.jpg",
+                            "base": "/src/assets/textures/jupiter/satellites/io.jpg",
                             "topo": null
                         }
                     }
@@ -305,7 +310,7 @@
                     },
                     "_3d": {
                         "textures": {
-                            "base": "/src/assets/textures/jupiter/moons/ganymede.jpg",
+                            "base": "/src/assets/textures/jupiter/satellites/ganymede.jpg",
                             "topo": null
                         }
                     }
@@ -814,6 +819,7 @@
             "orbitalVelocity": 9.7,
             "orbitalInclination": 5.51,
             "axialTilt": 26.7,
+            "orbitPositionOffset": 13753,
             "meanTemperature": -140,
             "surfaceTemps": {
                 "min": null,
@@ -1413,6 +1419,7 @@
             "orbitalVelocity": 6.8,
             "orbitalInclination": 6.48,
             "axialTilt": 97.8,
+            "orbitPositionOffset": 29654,
             "meanTemperature": -195,
             "surfaceTemps": {
                 "min": null,
@@ -1967,6 +1974,7 @@
             "orbitalVelocity": 5.4,
             "orbitalInclination": 6.43,
             "axialTilt": 28.3,
+            "orbitPositionOffset": 62885,
             "meanTemperature": -200,
             "surfaceTemps": {
                 "min": null,
@@ -2269,6 +2277,7 @@
             "orbitalVelocity": 4.67,
             "orbitalInclination": 11.88,
             "axialTilt": 119.59,
+            "orbitPositionOffset": 20,
             "meanTemperature": -229,
             "surfaceTemps": {
                 "min": 40,

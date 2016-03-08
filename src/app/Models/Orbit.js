@@ -17,6 +17,14 @@ function(Constants) {
       return this._orbit;
     }
 
+    get color() {
+      return this._color;
+    }
+
+    set color(color) {
+      this._color = color;
+    }
+
     createOrbit() {
       var resolution = 2880; // segments in the line
       var length = 360 / resolution;
@@ -49,7 +57,7 @@ function(Constants) {
     };
 
     setOrbitInclination() {
-      this._object.orbitCentroid.rotation.y = this._object.orbitalInclination * Constants.degreesToRadiansRatio;
+      this._object.orbitCentroid.rotation.x = this._object.orbitalInclination * Constants.degreesToRadiansRatio;
     }
   }
 

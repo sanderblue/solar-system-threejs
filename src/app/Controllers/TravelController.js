@@ -4,13 +4,37 @@ define(function() {
     class TravelController {
         constructor(scene) {
             this.scene = scene;
-            this.camera = scene.camera;
+            this.camera = this.scene.camera;
             this.travelStartEvent = new CustomEvent('travelStart');
             this.travelCompleteEvent = new CustomEvent('travelComplete');
             this.targetPosition = new THREE.Vector3();
         }
 
+        setupCamera() {
+            console.debug('Camera Position:', this.camera.position);
+            // console.debug('Global Camera Position');
+
+            // if (this.camera.parent.children[this.camera.parent.children.length - 1].distanceFromParent < target.objectliteral.distanceFromParent) {
+            //     point = {
+            //         x: posX - (offset * 2),
+            //         y: posY,
+            //         z: posZ
+            //     };
+            // }
+
+            // this.scene.add(this.camera);
+
+            // this.camera.up.set(0, 0, 1);
+
+            // this.camera.position.x = globalCameraPosition.x;
+            // this.camera.position.y = globalCameraPosition.y;
+            // this.camera.position.z = globalCameraPosition.z;
+        }
+
         travelToObject(currentPosition, targetObject) {
+            this.setupCamera();
+            return;
+
             document.dispatchEvent(this.travelStartEvent);
 
             this.camera.up.set(0, 0, 1);
@@ -66,32 +90,30 @@ define(function() {
                 z: currentPosition.z + 25
             };
 
-            var takeOff = new TWEEN.Tween(this.camera.position)
-                .to(takeOffPoint, 3000)
+            // var takeOff = new TWEEN.Tween(this.camera.position)
+            //     .to(takeOffPoint, 3000)
+            //     .easing(TWEEN.Easing.Cubic.InOut)
+            //     .onUpdate(function(currentAnimationPosition) {
+            //         self.camera.lookAt(targetObject.threeObject.position);
+            //     })
+            //     .onComplete(go.bind(this))
+            //     .start()
+            // ;
+
+            this.camera.lookAt(targetObject.threeObject.position);
+
+            var cameraTween = new TWEEN.Tween(this.camera.position)
+                .to(point, travelDuration)
                 .easing(TWEEN.Easing.Cubic.InOut)
                 .onUpdate(function(currentAnimationPosition) {
+                    // Follow the target for a smooth transition from "flight" to "orbit".
+                    this.y = targetObject.threeObject.position.y;
                     self.camera.lookAt(targetObject.threeObject.position);
+                    this.targetPosition = targetObject.threeObject.position;
                 })
-                .onComplete(go.bind(this))
+                .onComplete(this.handleComplete.bind(this, targetObject))
                 .start()
             ;
-
-            function go() {
-                self.camera.lookAt(targetObject.threeObject.position);
-
-                var cameraTween = new TWEEN.Tween(this.camera.position)
-                    .to(point, travelDuration)
-                    .easing(TWEEN.Easing.Cubic.InOut)
-                    .onUpdate(function(currentAnimationPosition) {
-                        // Follow the target for a smooth transition from "flight" to "orbit".
-                        this.y = targetObject.threeObject.position.y;
-                        self.camera.lookAt(targetObject.threeObject.position);
-                        this.targetPosition = targetObject.threeObject.position;
-                    })
-                    .onComplete(this.handleComplete.bind(this, targetObject))
-                    .start()
-                ;
-            }
         }
 
         calculateTravelToPoint(targetObject) {

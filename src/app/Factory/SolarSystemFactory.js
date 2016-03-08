@@ -79,9 +79,9 @@ function(
 
       this.scene.add(planet.orbitCentroid); // all 3d objects are attached to the orbit centroid
 
-      if (planets[i].satellites.length) {
-        this.buildMoons(planets[i], planet);
-      }
+      // if (planets[i].satellites.length) {
+      //   this.buildMoons(planets[i], planet);
+      // }
 
       threePlanets.push(planet.threeObject);
       this.solarSystemObjects.planets.push(planet);
@@ -124,9 +124,12 @@ function(
 
         document.dispatchEvent(startEvent);
 
-        this.buildStars(this.scene);
+        // this.buildStars(this.scene);
 
         var sun = this.buildSun(data.parent, this.scene);
+
+        this.solarSystemObjects.sun = sun;
+
         var threePlanets = this.buildPlanets(planets, sun);
         var renderController = new RenderController(this.scene, threePlanets);
         var endTime = new Date().getTime();
@@ -137,18 +140,20 @@ function(
           }
         });
 
+        var focalpoint = this.scene;
+
         // Add camera to a planet to start off
-        this.solarSystemObjects.planets[2].core.add(this.scene.camera);
-        this.scene.camera.up.set(0, 0, 1);
+        focalpoint.add(this.scene.camera);
+        // this.scene.camera.up.set(0, 0, 1);
         this.scene.camera.position.set(
-          5,
-          -3,
-          0.5
+          0,
+          -333888,
+          10000
         );
 
         var focalPointChangeEvent = new CustomEvent('solarsystem.focalpoint.change', {
           detail: {
-            object: this.solarSystemObjects.planets[2]
+            object: focalpoint
           }
         });
 

@@ -21,6 +21,7 @@ function(Constants, CelestialObject, Orbit) {
       this._orbitalInclination = data.orbitalInclination || null;
       this._axialTilt = data.axialTilt || null;
       this._meanTemperature = data.meanTemperature || null;
+      this._orbitPositionOffset = data.orbitPositionOffset;
       this._threeDiameter = this.createThreeDiameter();
       this._threeRadius = this.createThreeRadius();
       this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo, data._3d.textures.specular);
@@ -84,6 +85,10 @@ function(Constants, CelestialObject, Orbit) {
       return this._moons;
     }
 
+    get orbitPositionOffset() {
+      return this._orbitPositionOffset;
+    }
+
     /**
      * 3D Model Data
      */
@@ -121,7 +126,10 @@ function(Constants, CelestialObject, Orbit) {
 
     buildFullObject3D() {
       this._orbitLine = new Orbit(this);
-      this._orbitCentroid.rotation.x = 90 + this._orbitalInclination * Constants.degreesToRadiansRatio;
+
+      // THIS ISN'T NEEDED BECAUSE THE ORBIT CLASS HANDLES THIS
+      // this._orbitCentroid.rotation.x = 90 + this._orbitalInclination * Constants.degreesToRadiansRatio;
+
       this._orbitCentroid.add(
         this._threeObject,
         this._core,
