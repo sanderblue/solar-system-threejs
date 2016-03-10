@@ -79,9 +79,9 @@ function(
 
       this.scene.add(planet.orbitCentroid); // all 3d objects are attached to the orbit centroid
 
-      // if (planets[i].satellites.length) {
-      //   this.buildMoons(planets[i], planet);
-      // }
+      if (planets[i].satellites.length) {
+        this.buildMoons(planets[i], planet);
+      }
 
       threePlanets.push(planet.threeObject);
       this.solarSystemObjects.planets.push(planet);
@@ -144,12 +144,65 @@ function(
 
         // Add camera to a planet to start off
         focalpoint.add(this.scene.camera);
-        // this.scene.camera.up.set(0, 0, 1);
+        this.scene.camera.up.set(0, 0, 1);
         this.scene.camera.position.set(
           0,
           -333888,
           15000
         );
+
+
+
+        /**********************************************/
+        /* TESTING AREA */
+          // Mars orbitOffset = 71 (dont forget to put this back to 71 in the json)
+
+          // var testPlanet = this.solarSystemObjects.planets[3];
+
+          // alert(testPlanet.theta);
+
+          // var time = (clock.getElapsedTime() / 60) + (testPlanet.orbitPositionOffset);
+          // var theta = time * (360 / testPlanet.orbitalPeriod) * 0.0174532925;
+
+          // testPlanet.threeObject.add(new THREE.AxisHelper(500));
+
+          // console.debug('Coordinates:\n',
+          //   'x:' + Number.parseInt(testPlanet.threeObject.position.x), '\n',
+          //   'y:' + Number.parseInt(testPlanet.threeObject.position.y)
+          // );
+          // console.debug('Orbit Radius:', Number.parseInt(testPlanet.threeDistanceFromParent));
+          // console.debug('Theta in radians:', theta);
+          // console.debug('Theta in degrees:', theta * 57.2958);
+          // // console.debug('Clock:', window.clock);
+          // //
+          // var r1 = Number.parseInt(testPlanet.threeDistanceFromParent + 100);
+          // var x1 = r1 * Math.cos(theta);
+          // var y1 = r1 * Math.sin(theta);
+
+          // var newPoint = new THREE.Object3D();
+          // newPoint.position.x = x1;
+          // newPoint.position.y = y1;
+          // newPoint.position.z = 0;
+
+          // newPoint.add(new THREE.AxisHelper(400));
+          // this.scene.add(newPoint);
+
+
+          // var gridHelper = new GridHelper(400000);
+          // gridHelper.rotation.x = 90 * 0.0174532925;
+
+          // this.scene.add(gridHelper);
+
+          // this.scene.camera.position.set(
+          //   0,
+          //   0,
+          //   40000
+          // );
+
+        /* END TESTING AREA */
+        /***********************************************/
+
+
 
         var focalPointChangeEvent = new CustomEvent('solarsystem.focalpoint.change', {
           detail: {
@@ -169,7 +222,8 @@ function(
           el: '#menu',
           scene: this.scene,
           data: this.data,
-          sceneObjects: this.solarSystemObjects
+          sceneObjects: this.solarSystemObjects,
+          currentTarget: sun
         });
 
         var effectsController = new EffectsController({

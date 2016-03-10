@@ -34,7 +34,7 @@ function(
       this.sceneObjects = options.sceneObjects || [];
       this.travelController = new TravelController(this.scene);
       this.templateLoader = new TemplateLoader();
-      this.currentTarget = null;
+      this.currentTarget = options.currentTarget || this.sceneObjects[0];
       this.initListeners();
     },
 
@@ -114,7 +114,7 @@ function(
       }
 
       // Return old target to default orbit line color
-      if (this.currentTarget) {
+      if (this.currentTarget && this.currentTarget.orbitLine) {
         this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
       }
 
@@ -122,8 +122,13 @@ function(
       target.orbitLine.orbit.material.color = new THREE.Color('#aaaaaa');
       target.orbitLine.orbit.material.needsUpdate = true;
 
+      this.travelController.travelToObject(
+        this.scene.camera.parent.position,
+        target,
+        target.threeDiameter * 2.5
+      );
+
       this.currentTarget = target;
-      this.travelController.travelToObject(this.scene.camera.parent.position, this.currentTarget);
     },
 
   	highlightObject: function(e) {

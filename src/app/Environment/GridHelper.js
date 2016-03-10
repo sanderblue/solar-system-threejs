@@ -1,8 +1,8 @@
 define(function() {
   'use strict';
 
-  const SIZE = 360 * 2;
-  const STEP = 360;
+  const SIZE = 100;
+  const STEP = 1 * Math.pow(10, 4);
 
   class GridHelper extends THREE.GridHelper {
     constructor(size, step) {

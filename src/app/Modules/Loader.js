@@ -28,7 +28,7 @@ function(
       var menu = template.render({ planets: data.planets });
       menu = $('#menu').html(menu);
 
-      console.debug('DATA:', data);
+      // console.debug('DATA:', data);
 
       var solarSystemFactory = new SolarSystemFactory(solarSystemData);
       var introScreen = $('.intro-screen');

@@ -30,6 +30,7 @@ function(Constants, CelestialObject, Orbit) {
       this._threeDistanceFromParent = this.createThreeDistanceFromParent();
       this._threeParent = threeParent || null;
       this._moons = [];
+      this._theta = 0;
 
       this._threeObject.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
 
@@ -87,6 +88,14 @@ function(Constants, CelestialObject, Orbit) {
 
     get orbitPositionOffset() {
       return this._orbitPositionOffset;
+    }
+
+    get theta() {
+      return this._theta;
+    }
+
+    set theta(theta) {
+      this._theta = theta;
     }
 
     /**
