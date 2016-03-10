@@ -150,7 +150,8 @@ function(Constants, CelestialObject, Orbit) {
       }
 
       if (src) {
-        var texture = THREE.ImageUtils.loadTexture(src);
+        // this._textureLoader = new THREE.TextureLoader();
+        var texture = new THREE.TextureLoader().load(src);
 
         texture.wrapS = THREE.ClampToEdgeWrapping;
         texture.wrapT = THREE.ClampToEdgeWrapping;

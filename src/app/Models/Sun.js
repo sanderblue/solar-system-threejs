@@ -42,7 +42,7 @@ function(CelestialObject, Constants) {
 
     getTexture(src) {
       if (src) {
-        var texture = THREE.ImageUtils.loadTexture(src);
+        var texture = new THREE.TextureLoader().load(src);
 
         texture.wrapS = THREE.ClampToEdgeWrapping;
         texture.wrapT = THREE.ClampToEdgeWrapping;
