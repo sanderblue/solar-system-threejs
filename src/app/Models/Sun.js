@@ -73,8 +73,6 @@ function(CelestialObject, Constants) {
       var lightDecayRate = 0.6;
       var sunLight = new THREE.PointLight(lightColor, intesity, lightDistanceStrength, lightDecayRate);
 
-      // mesh.rotation.x = 90 * Constants.degreesToRadiansRatio; // degrees to radians
-
       mesh.add(sunLight);
 
       return mesh;

@@ -11,7 +11,7 @@ define(function() {
 
       super(size, step);
 
-      this.setAxis();
+      // this.setAxis();
     }
 
     setAxis() {

@@ -126,10 +126,6 @@ function(Constants, CelestialObject, Orbit) {
 
     buildFullObject3D() {
       this._orbitLine = new Orbit(this);
-
-      // THIS ISN'T NEEDED BECAUSE THE ORBIT CLASS HANDLES THIS
-      // this._orbitCentroid.rotation.x = 90 + this._orbitalInclination * Constants.degreesToRadiansRatio;
-
       this._orbitCentroid.add(
         this._threeObject,
         this._core,

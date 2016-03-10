@@ -10,110 +10,54 @@ define(function() {
             this.targetPosition = new THREE.Vector3();
         }
 
-        setupCamera() {
-            console.debug('Camera Position:', this.camera.position);
-            // console.debug('Global Camera Position');
-
-            // if (this.camera.parent.children[this.camera.parent.children.length - 1].distanceFromParent < target.objectliteral.distanceFromParent) {
-            //     point = {
-            //         x: posX - (offset * 2),
-            //         y: posY,
-            //         z: posZ
-            //     };
-            // }
-
-            // this.scene.add(this.camera);
-
-            // this.camera.up.set(0, 0, 1);
-
-            // this.camera.position.x = globalCameraPosition.x;
-            // this.camera.position.y = globalCameraPosition.y;
-            // this.camera.position.z = globalCameraPosition.z;
-        }
-
         travelToObject(currentPosition, targetObject) {
-            this.setupCamera();
-            return;
+            console.debug('Target Object:', targetObject);
 
             document.dispatchEvent(this.travelStartEvent);
 
-            this.camera.up.set(0, 0, 1);
+            var currentCameraPosition = this.camera.position;
             var targetPosition = targetObject.threeObject.position;
-            var travelDuration = 7000; // milliseconds
+            var travelDuration = 6000; // milliseconds
 
             targetObject.orbitCentroid.add(this.camera);
+            this.camera.position.x = currentCameraPosition.x;
+            this.camera.position.y = currentCameraPosition.y;
+            this.camera.position.z = currentCameraPosition.z;
 
-            var self = this;
-            var endPoint = this.calculateTravelToPoint(targetObject);
-
-            function getPoint(targetObject) {
-                var targetPosition = targetObject.threeObject.position;
-                var posX = 0;
-                var posY = 0;
-                var posZ = 0;
-
-                if (targetPosition.x > 0) {
-                    posX = targetObject.threeDiameter + 1.5 + (targetObject.threeDiameter / 2);
-                    posX = posX + targetPosition.x;
-                }
-
-                if (targetPosition.x < 0) {
-                    posX = targetObject.threeDiameter + 1.5 + (targetObject.threeDiameter / 2);
-                    posX = posX - targetPosition.x;
-                }
-
-                if (targetPosition.y > 0) {
-                    // posY = targetObject.threeDiameter + 1.5 + (targetObject.threeDiameter / 2);
-                    posY = targetPosition.y;
-                }
-
-                if (targetPosition.y < 0) {
-
-                }
-
-                return {
-                    x: posX,
-                    y: posY,
-                    z: 0
-                };
-            }
-
-            var point = getPoint(targetObject);
-
-            this.camera.position.x = currentPosition.x;
-            this.camera.position.y = currentPosition.y;
-            this.camera.position.z = currentPosition.z;
-
-            var takeOffPoint = {
-                x: currentPosition.x,
-                y: currentPosition.y,
-                z: currentPosition.z + 25
-            };
-
-            // var takeOff = new TWEEN.Tween(this.camera.position)
-            //     .to(takeOffPoint, 3000)
-            //     .easing(TWEEN.Easing.Cubic.InOut)
-            //     .onUpdate(function(currentAnimationPosition) {
-            //         self.camera.lookAt(targetObject.threeObject.position);
-            //     })
-            //     .onComplete(go.bind(this))
-            //     .start()
-            // ;
-
+            this.camera.up.set(0, 0, 1);
             this.camera.lookAt(targetObject.threeObject.position);
 
-            var cameraTween = new TWEEN.Tween(this.camera.position)
-                .to(point, travelDuration)
-                .easing(TWEEN.Easing.Cubic.InOut)
-                .onUpdate(function(currentAnimationPosition) {
-                    // Follow the target for a smooth transition from "flight" to "orbit".
-                    this.y = targetObject.threeObject.position.y;
-                    self.camera.lookAt(targetObject.threeObject.position);
-                    this.targetPosition = targetObject.threeObject.position;
-                })
-                .onComplete(this.handleComplete.bind(this, targetObject))
-                .start()
-            ;
+            // var cameraTween = new TWEEN.Tween(this.camera.position)
+            //     .to(targetObject.core.position, travelDuration)
+            //     .easing(TWEEN.Easing.Cubic.InOut)
+            //     .onUpdate(function(currentAnimationPosition) {
+            //         // Follow the target for a smooth transition from "flight" to "orbit".
+            //         // this.y = targetObject.threeObject.position.y;
+            //         // this.camera.lookAt(targetObject.threeObject.position);
+            //         // this.targetPosition = targetObject.threeObject.position;
+            //     }.bind(this))
+            //     .onComplete(this.handleComplete.bind(this, targetObject))
+            //     .start()
+            // ;
+        }
+
+        prepareForTravel(targetObject) {
+          var self = this;
+
+          return new TWEEN.Tween(this.camera.position)
+            .to({
+              x: this.camera.position.x,
+              y: this.camera.position.y,
+              z: this.camera.position.z + 500
+            },
+              liftOffDuration
+            )
+            .easing(TWEEN.Easing.Cubic.InOut)
+            .onUpdate(()=> {
+              this.camera.lookAt(targetObject.position);
+            })
+            .start()
+          ;
         }
 
         calculateTravelToPoint(targetObject) {
