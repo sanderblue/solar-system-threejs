@@ -11,24 +11,31 @@ define(function() {
     }
 
     /**
-     * @param  {Number} radius [The target object's orbit amplitude (distance from parent)]
-     * @param  {Number} theta  [The day of the year in the form of radians]
+     * @param  {Number} radius              [The target object's orbit amplitude (distance from parent)]
+     * @param  {Number} theta               [The day of the year in the form of radians]
+     * @param  {Number} distanceFromParent  []
      * @return {Object}
      */
-    calculateDestinationCoordinates(radius, theta) {
-      var r1 = radius + 100;
-      var x1 = r1 * Math.cos(theta);
-      var y1 = r1 * Math.sin(theta);
+    calculateDestinationCoordinates(radius, theta, distanceFromParent) {
+
+      console.debug('Radius:', radius);
+      console.debug('Theta:', theta);
+      console.debug('Distance:', distanceFromParent);
+
+      var d = distanceFromParent || 50;
+      var r = radius + d;
+      var x = r * Math.cos(theta);
+      var y = r * Math.sin(theta);
 
       return {
-        x: x1,
-        y: y1,
+        x: x,
+        y: y,
         z: 0
       };
     }
 
     travelToObject(currentPosition, targetObject, takeOffHeight) {
-      var travelDuration = 4000; // milliseconds
+      var travelDuration = 5000; // milliseconds
 
       document.dispatchEvent(this.travelStartEvent);
 
@@ -36,11 +43,13 @@ define(function() {
       THREE.SceneUtils.attach(this.camera, this.scene, targetObject.orbitCentroid);
 
       // targetObject.orbitCentroid.updateMatrixWorld();
+      var destinationDistanceFromParent = targetObject.threeDiameter > 3 ? targetObject.threeDiameter * 5 : targetObject.threeDiameter * 2;
+      var destinationCoordinates = this.calculateDestinationCoordinates(targetObject.threeDistanceFromParent, targetObject.theta, destinationDistanceFromParent);
 
-      var destinationCoordinates = this.calculateDestinationCoordinates(targetObject.threeDistanceFromParent, targetObject.theta);
-
-
-      console.debug('destinationCoordinates', destinationCoordinates);
+      console.log('');
+      console.debug('Target Coordinates', targetObject.threeObject.position);
+      console.debug('Destination Coordinates', destinationCoordinates);
+      console.debug('TWEEN ease:', TWEEN.Easing);
 
       // return;
 
@@ -79,38 +88,18 @@ define(function() {
       ;
     }
 
-    calculateTravelToPoint(targetObject) {
-      var posX = targetObject.threeDiameter + 1.5 + (targetObject.threeDiameter / 1.75);
-
-      return {
-        x: posX,
-        y: 0,
-        z: 0
-      };
-    }
-
     handleComplete(targetObject) {
-      // this.camera.lookAt(new THREE.Vector3());
-      var cameraDistanceFromTarget = targetObject.threeDiameter + 1.5 + (targetObject.threeDiameter / 2);
-      var endPoint = this.calculateTravelToPoint(targetObject);
+      // var endPoint = this.calculateTravelToPoint(targetObject);
+      // targetObject.core.add(this.camera);
+      // this.camera.position.x = endPoint.x; // newPosX; // zoom
+      // this.camera.position.y = endPoint.y; // newPosY; // vertical positioning of the camera
+      // this.camera.position.z = endPoint.z; // 0;       // this is really the y-axis in terms of plan view
 
-      // console.debug('targetObject.core.position: ', targetObject.core.position);
+      THREE.SceneUtils.detach(this.camera, this.camera.parent, this.scene);
+      THREE.SceneUtils.attach(this.camera, this.scene, targetObject.core);
 
-      targetObject.core.add(this.camera);
-
-      this.camera.position.x = endPoint.x; // newPosX; // zoom
-      this.camera.position.y = endPoint.y; // newPosY; // vertical positioning of the camera
-      this.camera.position.z = endPoint.z; // 0;       // this is really the y-axis in terms of plan view
-
-      targetObject.orbitCentroid.updateMatrixWorld();
       this.camera.lookAt(new THREE.Vector3());
-
-      // console.debug('this.camera.position: ', this.camera.position);
-
-      // console.debug(
-      //   'Distance To Target',
-      //   this.camera.position.distanceTo(targetObject.threeObject.position)
-      // );
+      targetObject.orbitCentroid.updateMatrixWorld();
 
       document.dispatchEvent(this.travelCompleteEvent);
       document.dispatchEvent(new CustomEvent('solarsystem.travel.complete', {
