@@ -3,6 +3,7 @@ define(
   'Environment/GridHelper',
   'Modules/Scene',
   'Factory/StarFactory',
+  'Factory/AsteroidBeltFactory',
   'Models/Sun',
   'Models/Planet',
   'Models/Moon',
@@ -11,7 +12,6 @@ define(
   'Controllers/TravelController',
   'Controllers/MenuController',
   'Controllers/EffectsController',
-  'vendor/THREEOrbitControls/umd/index',
   'Modules/RandomColorGenerator',
   'Listeners/FactoryListener'
 ],
@@ -19,6 +19,7 @@ function(
   GridHelper,
   Scene,
   StarFactory,
+  AsteroidBeltFactory,
   Sun,
   Planet,
   Moon,
@@ -27,7 +28,6 @@ function(
   TravelController,
   MenuController,
   EffectsController,
-  OrbitControls,
   RandomColorGenerator
 ) {
   'use strict';
@@ -111,10 +111,26 @@ function(
   };
 
   SolarSystemFactory.prototype.build = function(data) {
+
+    function zoomModel(isZoomOut, scale) {
+      if (!isZoomOut) {
+          this.scene.orbitControls.dollyIn(scale);
+      }else{
+          this.scene.orbitControls.dollyOut(scale);
+      }
+
+      this.scene.orbitControls.update();
+    }
+
+    $('#zoom-in').on('click', ()=> {
+      console.debug('ZOoooooom...');
+
+      zoomModel.call(this, false, 1.1);
+    });
+
     return new Promise((resolve, reject)=> {
       try {
         var planets = data.planets;
-        var orbitControls = new OrbitControls(this.scene.camera);
         var startTime = new Date().getTime();
         var startEvent = new CustomEvent('solarsystem.start', {
           detail: {
@@ -150,6 +166,12 @@ function(
           -333888,
           15000
         );
+
+
+
+        var asteroidBeltFactory = new AsteroidBeltFactory(this.scene, data);
+
+        asteroidBeltFactory.build();
 
 
 

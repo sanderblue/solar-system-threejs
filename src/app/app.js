@@ -28,7 +28,7 @@ require.config({
             ]
         }
     },
-    urlArgs: 'bust=' + new Date().getTime().toString()
+    urlArgs: 'bust=' + new Date().getTime()
 });
 
 // Initialize app

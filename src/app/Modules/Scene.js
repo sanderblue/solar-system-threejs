@@ -1,4 +1,8 @@
-define(function() {
+define(
+[
+  'vendor/THREEOrbitControls/umd/index',
+],
+function(OrbitControls) {
   'use strict';
 
   class Scene extends THREE.Scene {
@@ -6,6 +10,7 @@ define(function() {
       super();
 
       this._camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.05, 5 * Math.pow(10, 13));
+      this._orbitControls = new OrbitControls(this._camera);
 
       // this.setCamera();
       this.setLights();
@@ -15,6 +20,10 @@ define(function() {
     get camera() {
       return this._camera;
     };
+
+    get orbitControls() {
+      return this._orbitControls;
+    }
 
     setCamera() {
       this._camera.position.set(0, 0, 300);

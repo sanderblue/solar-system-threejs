@@ -17,15 +17,22 @@ define(function() {
      * @return {Object}
      */
     calculateDestinationCoordinates(radius, theta, distanceFromParent) {
-
-      console.debug('Radius:', radius);
-      console.debug('Theta:', theta);
-      console.debug('Distance:', distanceFromParent);
-
-      var d = distanceFromParent || 50;
-      var r = radius + d;
+      // var d = distanceFromParent + (distanceFromParent / 2);
+      var r = radius;
       var x = r * Math.cos(theta);
       var y = r * Math.sin(theta);
+
+
+      console.debug('Radius | threeDistanceFromParent:', radius);
+      console.debug('Theta:', theta);
+      // console.debug('Distance:', d);
+      console.debug('Coordinates:\n',
+        'x:', x,
+        '\n',
+        'y:', y,
+        '\n'
+      );
+
 
       return {
         x: x,
@@ -46,10 +53,10 @@ define(function() {
       var destinationDistanceFromParent = targetObject.threeDiameter > 3 ? targetObject.threeDiameter * 5 : targetObject.threeDiameter * 2;
       var destinationCoordinates = this.calculateDestinationCoordinates(targetObject.threeDistanceFromParent, targetObject.theta, destinationDistanceFromParent);
 
-      console.log('');
-      console.debug('Target Coordinates', targetObject.threeObject.position);
-      console.debug('Destination Coordinates', destinationCoordinates);
-      console.debug('TWEEN ease:', TWEEN.Easing);
+      // console.log('');
+      // console.debug('Target Coordinates', targetObject.threeObject.position);
+      // console.debug('Destination Coordinates', destinationCoordinates);
+      // console.debug('TWEEN ease:', TWEEN.Easing);
 
       // return;
 
@@ -82,9 +89,9 @@ define(function() {
           z: this.camera.position.z + takeOffHeight
         }, 1500)
         .easing(TWEEN.Easing.Cubic.InOut)
-        .onUpdate(function(currentAnimationPosition) {
+        .onUpdate((currentAnimationPosition)=> {
             this.camera.lookAt(targetObject.threeObject.position);
-        }.bind(this))
+        })
       ;
     }
 
@@ -97,9 +104,15 @@ define(function() {
 
       THREE.SceneUtils.detach(this.camera, this.camera.parent, this.scene);
       THREE.SceneUtils.attach(this.camera, this.scene, targetObject.core);
+      targetObject.core.add(this.camera);
 
       this.camera.lookAt(new THREE.Vector3());
+      targetObject.core.updateMatrixWorld();
       targetObject.orbitCentroid.updateMatrixWorld();
+
+      var distanceToObject = this.camera.position.distanceTo(targetObject.threeObject.position);
+
+      console.debug('Distance To Object:', distanceToObject);
 
       document.dispatchEvent(this.travelCompleteEvent);
       document.dispatchEvent(new CustomEvent('solarsystem.travel.complete', {
