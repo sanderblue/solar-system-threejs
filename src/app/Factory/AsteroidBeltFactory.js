@@ -15,9 +15,11 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
       this._distanceFromParent = data.asteroidBelt.distanceFromParent.min;
       this._distanceFromParentMin = data.asteroidBelt.distanceFromParent.min;
       this._distanceFromParentMax = data.asteroidBelt.distanceFromParent.max;
-      this._texture = new THREE.TextureLoader().load('/textures/crust_tiny.jpg');
+      this._texture = new THREE.TextureLoader().load('src/assets/textures/crust_tiny.jpg');
       this._randomNumberGenerator = new RandomNumberGenerator();
       this._orbitCentroid = new THREE.Object3D();
+      this._orbitRadian = 360 / 1681.6;
+      this._d2r = Constants.degreesToRadiansRatio;
     }
 
     build() {
@@ -25,16 +27,16 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
         var asteroids = [];
 
         for (var i = 0; i < this._count; i++) {
-          var asteroid = new Asteroid();
+          var asteroid = new Asteroid(i, this._texture);
 
           this.positionAsteroid(asteroid.threeObject, i);
 
           asteroids.push(asteroid);
 
-          this._orbitCentroid.add(asteroid.threeObject);
+          this._orbitCentroid.add(asteroid.orbitCentroid);
         }
 
-        console.debug('asteroids', asteroids);
+        // console.debug('asteroids', asteroids);
 
         this._scene.add(this._orbitCentroid);
 
@@ -47,44 +49,40 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
         return num % 2;
       }
 
-      var d = isOdd(count) ? this._distanceFromParentMax : this.distanceFromParentMix;
-      var amplitude = d + this._randomNumberGenerator.getRandomNumber() * 170;
-      var d2r = Constants.degreesToRadiansRatio;
-      amplitude = amplitude * Constants.orbitScale;
+      var odd = isOdd(count);
+      var d = this._distanceFromParentMax * Constants.orbitScale;
 
-      console.debug('asteroid', asteroid, count);
+      if (odd) {
+        d = this._distanceFromParentMin * Constants.orbitScale;
+      }
 
-      // var amplitude = this._distanceFromParent + this._randomNumberGenerator.getRandomNumber() * 170; // randomize the amplitudes to spread them out
+      if (count % 5) {
+        d = this._distanceFromParentMax * Constants.orbitScale;
+      }
 
-      var posX = d * Constants.orbitScale
-          * Math.cos(count + 35 * Math.random()
-          * this.getAsteroidRadian()
-          * d2r)
-      ;
+      if (count % 12) {
+        d = this._distanceFromParentMin * Constants.orbitScale;
+      }
 
-      var posY = d * Constants.orbitScale
-          * Math.sin(count + 50 * Math.random()
-          * this.getAsteroidRadian()
-          * d2r)
-      ;
+      if (odd && count % 13 && !(count % 23) && count % 200) {
+        d = this._distanceFromParentMax * Constants.orbitScale;
+      }
 
-      console.debug('Asteroid: ', 'x:', posX, 'y:', posY);
+      var randomNumber = this._randomNumberGenerator.getRandomNumber();
+      var randomOffset = odd ? randomNumber * 40 : randomNumber * 18;
+
+      var amplitude = odd ? d + randomOffset : d - randomOffset;
+      var theta = count + 1 * Math.random() * this._orbitRadian * this._d2r;
+
+      var posX = amplitude * Math.cos(theta);
+      var posY = amplitude * Math.sin(theta);
 
       asteroid.position.set(
-          posX,
-          posY,
-          0
+        posX,
+        posY,
+        0
       );
     }
-
-    /**
-     * Gets an asteroid's current radian value based on each asteroid's earth days to orbit the Sun.
-     * This ratio helps create an accurate representation of each asteroid's location along its orbit.
-     */
-    getAsteroidRadian() {
-      return 360 / 1681.6; // Using Ceres as a reference point
-    }
-
   }
 
   return AsteroidBeltFactory;

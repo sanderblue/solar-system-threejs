@@ -161,10 +161,16 @@ function(
         // Add camera to a planet to start off
         focalpoint.add(this.scene.camera);
         this.scene.camera.up.set(0, 0, 1);
+        // this.scene.camera.position.set(
+        //   0,
+        //   -333888,
+        //   15000
+        // );
+
         this.scene.camera.position.set(
           0,
-          -333888,
-          15000
+          0,  // -27888,
+          50000
         );
 
 

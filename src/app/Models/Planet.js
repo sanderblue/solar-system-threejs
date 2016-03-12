@@ -32,7 +32,7 @@ function(Constants, CelestialObject, Orbit) {
       this._moons = [];
       this._theta = 0;
 
-      this._threeObject.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
+      // this._threeObject.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
 
       this._orbitCentroid = this.createOrbitCentroid();
 

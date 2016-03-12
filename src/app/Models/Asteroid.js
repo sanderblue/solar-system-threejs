@@ -1,29 +1,43 @@
 define(
 [
-  'Models/CelestialObject'
+  'Environment/Constants',
+  'Models/CelestialObject',
+  'Modules/RandomNumberGenerator'
 ],
-function(CelestialObject) {
+function(Constants, CelestialObject, RandomNumberGenerator) {
 
   class Asteroid extends CelestialObject {
-    constructor() {
+    constructor(index, texture) {
       super();
 
-      this._threeObject = new THREE.Object3D();
-      this._threeObject.add(new THREE.AxisHelper(400));
+      this._texture = texture;
+      this._id = index || String(Math.random()).slice(1, 4);
+      this._threeObject = this.createGeometry();
+      this._randomNumberGenerator = new RandomNumberGenerator();
+      this._orbitInclination = (Math.random() * this._randomNumberGenerator.getRandomNumberWithinRange(1, 7) / 90);
+      this._orbitCentroid = new THREE.Object3D();
+      this._orbitCentroid.rotation.x = this._orbitInclination;
+      this._orbitCentroid.rotation.z = 360 / index;
+      this._orbitCentroid.add(this._threeObject);
 
-      // if (!texture) {
-      //   throw new Error('Missing argument 1 "texture" for Asteroid object constructor.');
-      // }
-
-      // this._texture = texture || new THREE.TextureLoader().load('/textures/crust_tiny.jpg');
-      // this._id = index || String(Math.random()).slice(1, 3);
-      // this._threeDiameter = 0.5;
-      // this._surface = this.createSurface();
-      // this._threeObject = this.createGeometry(this._surface);
+      // this._threeObject.add(new THREE.AxisHelper(100));
     }
 
     get threeObject() {
       return this._threeObject;
+    }
+
+    get orbitCentroid() {
+      return this._orbitCentroid;
+    }
+
+    createGeometry() {
+      var materials = [
+        new THREE.MeshPhongMaterial({ map: this._texture }),
+        new THREE.MeshLambertMaterial({ emissive: 0xffffff, transparent: true, opacity: 0.3, wireframe: true })
+      ];
+
+      return new THREE.SceneUtils.createMultiMaterialObject(new THREE.TetrahedronGeometry(8), materials);
     }
   }
 

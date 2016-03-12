@@ -36,10 +36,10 @@ define(function() {
      * @return integer
      */
     getRandomNumber() {
-      var randomNumA = new Date().getMilliseconds() - (new Date().getMilliseconds() / 2.1);
+      var randomNumA = new Date().getMilliseconds() - (new Date().getMilliseconds() / 3.5);
       var randomNumB = Math.random() * randomNumA;
 
-      if (randomNumB > 250) {
+      if (randomNumB > 80) {
           return Number.parseFloat(randomNumB - 100 * Math.PI / 2);
       }
 
