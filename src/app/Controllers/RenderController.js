@@ -7,20 +7,6 @@ define(
 function(Constants, Stats) {
   'use strict';
 
-  // class RenderController extends THREE.WebGLRenderer {
-  //   constructor(scene, threePlanets) {
-  //     super();
-
-  //     this._scene = scene;
-  //     this._threePlanets = threePlanets;
-  //   };
-
-  //   render() {
-  //     requestAnimationFrame(this.render);
-  //     super.render(this._scene, this._scene.camera);
-  //   };
-  // }
-
   var tweening = false;
 
   document.addEventListener('travelStart', (e)=> {
@@ -39,11 +25,10 @@ function(Constants, Stats) {
     return Math.round(value / 100) * 100;
   }
 
-  function RenderController(scene, planets) {
+  function RenderController(scene) {
     this._renderEngine = new THREE.WebGLRenderer();
     this._scene = scene;
     this._camera = scene.camera;
-    this._planets = planets || [];
 
     this.setFrame();
 

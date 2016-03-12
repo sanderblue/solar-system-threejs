@@ -41,39 +41,41 @@ function(
 
       renderButton.one('click', ()=> {
         $('.inner').slideUp(500, ()=> {
-          progressBar.addClass('active');
+          // progressBar.addClass('active');
           progressPrompt.addClass('active');
 
-          progressBar.on('animationend', ()=> {
-            progressBar.addClass('complete');
-            progressBar.after('Loading the Solar System. Please wait.');
+          solarSystemFactory.build(solarSystemData);
 
-            setTimeout(()=> {
-              solarSystemFactory.build(solarSystemData).then(()=> {
+          // progressBar.on('animationend', ()=> {
+          //   progressBar.addClass('complete');
+          //   progressBar.after('Loading the Solar System. Please wait.');
 
-                introScreen.fadeOut(2000, ()=> {
-                  introScreen.remove();
-                  solarsystem.fadeIn(2000, ()=> {
-                    var seenModal = false;
+          //   setTimeout(()=> {
+          //     solarSystemFactory.build(solarSystemData).then(()=> {
 
-                    if (window.localStorage) {
-                      seenModal = localStorage.getItem('seenModal');
-                    }
+          //       introScreen.fadeOut(2000, ()=> {
+          //         introScreen.remove();
+          //         solarsystem.fadeIn(2000, ()=> {
+          //           var seenModal = false;
 
-                    if (!seenModal) {
-                      $('#tutorial').foundation('open');
+          //           if (window.localStorage) {
+          //             seenModal = localStorage.getItem('seenModal');
+          //           }
 
-                      $('#tutorial-got-it').on('click', ()=> {
-                        if (window.localStorage) {
-                          localStorage.setItem('seenModal', 'true');
-                        }
-                      });
-                    }
-                  });
-                });
-              });
-            }, 10);
-          });
+          //           if (!seenModal) {
+          //             $('#tutorial').foundation('open');
+
+          //             $('#tutorial-got-it').on('click', ()=> {
+          //               if (window.localStorage) {
+          //                 localStorage.setItem('seenModal', 'true');
+          //               }
+          //             });
+          //           }
+          //         });
+          //       });
+          //     });
+          //   }, 10);
+          // });
         });
       });
     });

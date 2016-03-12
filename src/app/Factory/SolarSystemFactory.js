@@ -37,6 +37,7 @@ function(
     this.data = data || {};
     this.parent = data.parent || null;
     this.planets = data.planets || [];
+
     this.solarSystemObjects = {
       planets: [],
       moons: []
@@ -69,21 +70,17 @@ function(
     }
   };
 
-  SolarSystemFactory.prototype.buildPlanets = function(planets, sun) {
-    var threePlanets = [];
-
-    for (var i = 0; i < planets.length; i++) {
-      var startTime = new Date().getTime();
-      var planet = new Planet(planets[i], sun);
+  SolarSystemFactory.prototype.buildPlanet = function(data, sun) {
+    return new Promise((resolve)=> {
+      var planet = new Planet(data, sun);
       var orbitCtrl = new OrbitController(planet);
 
       this.scene.add(planet.orbitCentroid); // all 3d objects are attached to the orbit centroid
 
-      if (planets[i].satellites.length) {
-        this.buildMoons(planets[i], planet);
+      if (data.satellites.length) {
+        this.buildMoons(data, planet);
       }
 
-      threePlanets.push(planet.threeObject);
       this.solarSystemObjects.planets.push(planet);
 
       var buildEvent = new CustomEvent('solarsystem.build.object.complete', {
@@ -91,6 +88,20 @@ function(
       });
 
       document.dispatchEvent(buildEvent);
+
+      resolve(planet);
+    });
+  };
+
+  SolarSystemFactory.prototype.buildPlanets = function(planets, sun) {
+    var threePlanets = [];
+
+    for (var i = 0; i < planets.length; i++) {
+      this.buildPlanet(planets[i], sun).then((planet) => {
+        this.solarSystemObjects.planets.push(planet);
+      });
+
+      // threePlanets.push(planet.threeObject);
     }
 
     return threePlanets;
@@ -110,27 +121,39 @@ function(
     return sun;
   };
 
-  SolarSystemFactory.prototype.build = function(data) {
+  SolarSystemFactory.prototype.build = function() {
+    var i = 0;
 
-    function zoomModel(isZoomOut, scale) {
-      if (!isZoomOut) {
-          this.scene.orbitControls.dollyIn(scale);
-      }else{
-          this.scene.orbitControls.dollyOut(scale);
+    var interval = setInterval(()=> {
+      var element = $('.progress-meter');
+
+      if (element) {
+        element.width(i + '%');
+        console.debug('interval', i);
+        i = i + 10;
       }
 
-      this.scene.orbitControls.update();
-    }
+      if (i > 100) {
+        clearInterval(interval);
+      }
+    }, 500);
+  };
 
-    $('#zoom-in').on('click', ()=> {
-      console.debug('ZOoooooom...');
+  // SolarSystemFactory.prototype.build = function() {
+  //   var wait;
 
-      zoomModel.call(this, false, 1.1);
-    });
+  //   wait = ms((function(_this) {
+  //     return function() {
+  //       return new Promise(resolve(function() {
+  //         return setTimeout(resolve, ms);
+  //       }));
+  //     };
+  //   })(this));
+  // };
 
+  SolarSystemFactory.prototype._build = function(data) {
     return new Promise((resolve, reject)=> {
       try {
-        var planets = data.planets;
         var startTime = new Date().getTime();
         var startEvent = new CustomEvent('solarsystem.start', {
           detail: {
@@ -146,12 +169,12 @@ function(
 
         this.solarSystemObjects.sun = sun;
 
-        var threePlanets = this.buildPlanets(planets, sun);
-        var renderController = new RenderController(this.scene, threePlanets);
+        this.buildPlanets(data.planets, sun);
+
+        var renderController = new RenderController(this.scene);
         var endTime = new Date().getTime();
         var endEvent = new CustomEvent('solarsystem.build.end', {
           detail: {
-            timestamp: endTime,
             elapsedTime: (endTime - startTime) * 0.001
           }
         });
@@ -278,3 +301,20 @@ function(
 
   return SolarSystemFactory;
 });
+
+
+// function zoomModel(isZoomOut, scale) {
+//   if (!isZoomOut) {
+//       this.scene.orbitControls.dollyIn(scale);
+//   }else{
+//       this.scene.orbitControls.dollyOut(scale);
+//   }
+
+//   this.scene.orbitControls.update();
+// }
+
+// $('#zoom-in').on('click', ()=> {
+//   console.debug('ZOoooooom...');
+
+//   zoomModel.call(this, false, 1.1);
+// });

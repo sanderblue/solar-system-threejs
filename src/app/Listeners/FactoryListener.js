@@ -6,13 +6,26 @@ define(function() {
     }
 
     function logEnd(event) {
-        console.log('Build took', event.detail);
+      console.log('Build took', event.detail);
     }
 
-    function logObjectComplete(event) {
-        var object =  event.detail;
+    var i = 0;
 
-        // console.log('Done building ', object.name);
+    function logObjectComplete(event) {
+      var object =  event.detail;
+
+      // console.log('Done building ', object.name);
+
+      // setTimeout(()=> {
+      //   var realtimeUpdates = document.getElementById('realtime-updates');
+
+      //   if (realtimeUpdates) {
+      //     realtimeUpdates.innerHTML += i;
+
+      //     console.debug('setTimeout', i);
+
+      //   }
+      // }, 0);
     }
 
     document.addEventListener('solarsystem.build.start', logStart);

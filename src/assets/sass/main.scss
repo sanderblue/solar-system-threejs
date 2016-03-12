@@ -79,7 +79,11 @@
 .progress {
     transition: opacity 300ms ease-out;
     margin-top: 1rem;
-    opacity: 0;
+    opacity: 1;
+
+    .progress-meter {
+        transition: width 250ms ease-out;
+    }
 
     &.active {
         opacity: 1;
