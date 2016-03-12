@@ -2556,10 +2556,15 @@
         }
     ],
     "asteroidBelt": {
-        "count": 1000,
+        "count": 700,
         "distanceFromParent": {
             "min": 344100000,
             "max": 493700000
+        },
+        "_3d": {
+            "textures": {
+                "base": "/src/assets/textures/pluto.jpg"
+            }
         }
     }
 }
