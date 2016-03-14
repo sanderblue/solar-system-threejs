@@ -23,7 +23,7 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
     }
 
     build() {
-      // return new Promise((resolve, reject)=> {
+      return new Promise((resolve, reject)=> {
         var asteroids = [];
 
         for (var i = 0; i < this._count; i++) {
@@ -40,8 +40,8 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
 
         this._scene.add(this._orbitCentroid);
 
-        // resolve(asteroids);
-      // });
+        resolve();
+      });
     }
 
     positionAsteroid(asteroid, count) {

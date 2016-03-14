@@ -25,29 +25,35 @@ function(Constants, Scene, RandomNumberGenerator) {
     }
 
     buildStarField() {
-      var geometry = new THREE.SphereGeometry(24, 16, 8);
-      var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+      return new Promise((resolve)=> {
+        var geometry = new THREE.SphereGeometry(24, 16, 8);
+        var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-      for (var i = 0; i < this._starsCount; i++) {
-        var star = new THREE.Mesh(geometry, material);
-        var randomizedPosition = this.getPosition(i);
+        var i;
 
-        star.position.set(
-            randomizedPosition.x,
-            randomizedPosition.y,
-            randomizedPosition.z
-        );
+        for (i = 0; i < this._starsCount; i++) {
+          var star = new THREE.Mesh(geometry, material);
+          var randomizedPosition = this.getPosition(i);
 
-        var scale = Math.random() + 6;
+          star.position.set(
+              randomizedPosition.x,
+              randomizedPosition.y,
+              randomizedPosition.z
+          );
 
-        // Scale it up a bit
-        star.scale.x = scale;
-        star.scale.y = scale;
-        star.scale.z = scale;
+          var scale = Math.random() + 6;
 
-        // Add the star to the scene
-        this._scene.add(star);
-      }
+          // Scale it up a bit
+          star.scale.x = scale;
+          star.scale.y = scale;
+          star.scale.z = scale;
+
+          // Add the star to the scene
+          this._scene.add(star);
+        }
+
+        resolve();
+      });
     }
   }
 

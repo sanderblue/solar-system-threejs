@@ -12,9 +12,11 @@ define(function() {
     var i = 0;
 
     function logObjectComplete(event) {
-      var object =  event.detail;
+      // var object =  event.detail;
 
-      // console.log('Done building ', object.name);
+      // console.debug('Done building ', event.detail);
+
+      // console.debug('Build took', detail.elapsedTime);
 
       // setTimeout(()=> {
       //   var realtimeUpdates = document.getElementById('realtime-updates');

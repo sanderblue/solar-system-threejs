@@ -68,7 +68,7 @@
 .loading-prompt {
     text-align: center;
     opacity: 0;
-    transition: opacity 300ms ease-out;
+    transition: opacity 500ms ease-out;
     margin: 2rem auto;
 
     &.active {
@@ -77,12 +77,12 @@
 }
 
 .progress {
-    transition: opacity 300ms ease-out;
+    transition: opacity 450ms ease-out;
     margin-top: 1rem;
     opacity: 1;
 
     .progress-meter {
-        transition: width 250ms ease-out;
+        transition: width 425ms ease-in-out;
     }
 
     &.active {

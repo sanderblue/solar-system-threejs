@@ -40,7 +40,7 @@ function(Constants, CelestialObject, Orbit) {
         this.createRingGeometry(data);
       }
 
-      console.debug(this._name + ' Diameter: '+ this._threeDiameter);
+      // console.debug(this._name + ' Diameter: '+ this._threeDiameter);
 
       this.buildFullObject3D();
     }
