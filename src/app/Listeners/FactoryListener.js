@@ -15,19 +15,7 @@ define(function() {
       // var object =  event.detail;
 
       // console.debug('Done building ', event.detail);
-
       // console.debug('Build took', detail.elapsedTime);
-
-      // setTimeout(()=> {
-      //   var realtimeUpdates = document.getElementById('realtime-updates');
-
-      //   if (realtimeUpdates) {
-      //     realtimeUpdates.innerHTML += i;
-
-      //     console.debug('setTimeout', i);
-
-      //   }
-      // }, 0);
     }
 
     document.addEventListener('solarsystem.build.start', logStart);
