@@ -34,22 +34,23 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
           asteroids.push(asteroid);
 
           this._orbitCentroid.add(asteroid.orbitCentroid);
+          this._orbitCentroid.rotation.z = i * Constants.degreesToRadiansRatio;
         }
 
-        // console.debug('asteroids', asteroids);
-
         this._scene.add(this._orbitCentroid);
+
+        // document.addEventListener('frame', (e)=> {
+        //   var degreesToRotate = 0.001;
+
+        //   this._orbitCentroid.rotation.z +=  degreesToRotate * Constants.degreesToRadiansRatio;
+        // }, false);
 
         resolve();
       });
     }
 
     positionAsteroid(asteroid, count) {
-      function isOdd(num) {
-        return num % 2;
-      }
-
-      var odd = isOdd(count);
+      var odd = count % 2;
       var d = this._distanceFromParentMax * Constants.orbitScale;
 
       if (odd) {

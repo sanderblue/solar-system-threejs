@@ -15,16 +15,17 @@ function(Constants, Clock) {
   const COORDINATE_PRECISION = 4;
 
   class OrbitController {
-    constructor(planet) {
-      this._object = planet;
-      this._threePlanet = planet.threeObject;
-      this._distanceFromParent = planet.threeDistanceFromParent;
+    constructor(object) {
+      this._object = object;
+      this._threePlanet = object.threeObject;
+      this._distanceFromParent = object.threeDistanceFromParent;
       this._segmentsInDay = 1;
       this._currentDay = 1;
-      this._orbitAmplitude = this._object.threeParent.threeRadius + this._distanceFromParent;
+      this._orbitAmplitude = this._object.threeParent ? this._object.threeParent.threeRadius + this._distanceFromParent : 1000;
       this._degreesToRotate = 0.1; // 1 min = 1 day
-      this._orbitPositionOffset = planet.orbitPositionOffset || 0;
+      this._orbitPositionOffset = object.orbitPositionOffset || 0;
       this._theta = 0;
+      this._rotationEnabled ||
 
       this.initListeners();
     }

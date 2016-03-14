@@ -16,23 +16,11 @@ define(function() {
      * @param  {Number} distanceFromParent  []
      * @return {Object}
      */
-    calculateDestinationCoordinates(radius, theta, distanceFromParent) {
+    calculateDestinationCoordinates_(radius, theta, distanceFromParent) {
       // var d = distanceFromParent + (distanceFromParent / 2);
       var r = radius;
       var x = r * Math.cos(theta);
       var y = r * Math.sin(theta);
-
-
-      console.debug('Radius | threeDistanceFromParent:', radius);
-      console.debug('Theta:', theta);
-      // console.debug('Distance:', d);
-      console.debug('Coordinates:\n',
-        'x:', x,
-        '\n',
-        'y:', y,
-        '\n'
-      );
-
 
       return {
         x: x,
@@ -41,17 +29,77 @@ define(function() {
       };
     }
 
+    calculateDestinationCoordinates(targetObject) {
+      var x = targetObject.core.position.x;
+      var y = targetObject.core.position.y;
+      var z = targetObject.core.position.z;
+      var destinationX = x;
+      var destinationY = y;
+      var destinationZ = z;
+
+      var quadrant1 = x > 0 && y > 0;
+      var quadrant2 = x < 0 && y > 0;
+      var quadrant3 = x < 0 && y < 0;
+      var quadrant4 = x > 0 && y < 0;
+
+      var offset = targetObject.threeDiameter * 2.5;
+
+      if (quadrant1) {
+        destinationX = destinationX + offset;
+        destinationY = destinationY + offset;
+      }
+
+      if (quadrant2) {
+        destinationX = destinationX - offset;
+        destinationY = destinationY + offset;
+      }
+
+      if (quadrant3) {
+        destinationX = destinationX - offset;
+        destinationY = destinationY - offset;
+      }
+
+      if (quadrant4) {
+        destinationX = destinationX + offset;
+        destinationY = destinationY - offset;
+      }
+
+      return {
+        x: destinationX,
+        y: destinationY,
+        z: destinationZ + 1
+      };
+    }
+
     travelToObject(currentPosition, targetObject, takeOffHeight) {
-      var travelDuration = 5000; // milliseconds
+      var travelDuration = 6000; // milliseconds
 
       document.dispatchEvent(this.travelStartEvent);
 
       THREE.SceneUtils.detach(this.camera, this.camera.parent, this.scene);
       THREE.SceneUtils.attach(this.camera, this.scene, targetObject.orbitCentroid);
 
-      // targetObject.orbitCentroid.updateMatrixWorld();
-      var destinationDistanceFromParent = targetObject.threeDiameter > 3 ? targetObject.threeDiameter * 5 : targetObject.threeDiameter * 2;
-      var destinationCoordinates = this.calculateDestinationCoordinates(targetObject.threeDistanceFromParent, targetObject.theta, destinationDistanceFromParent);
+      // console.debug('targetObject', targetObject);
+
+      var destinationCoordinates = this.calculateDestinationCoordinates(targetObject);
+
+      console.debug('Destination', destinationCoordinates);
+
+      // return;
+
+      // console.debug('Target Coordinates:\n',
+      //   'x:', targetObject.threeObject.position.x,
+      //   '\n',
+      //   'y:', targetObject.threeObject.position.y,
+      //   '\n'
+      // );
+
+      // console.debug('Destination Coordinates:\n',
+      //   'x:', destinationCoordinates.x,
+      //   '\n',
+      //   'y:', destinationCoordinates.y,
+      //   '\n'
+      // );
 
       // console.log('');
       // console.debug('Target Coordinates', targetObject.threeObject.position);
@@ -61,19 +109,26 @@ define(function() {
       // return;
 
       // targetObject.orbitCentroid.add(this.camera);
-      this.camera.up.set(0, 0, 1);
-      this.camera.lookAt(targetObject.threeObject.position);
+      // this.camera.up.set(0, 0, 1);
 
+      var self = this;
       var takeOff = this.prepareForTravel(takeOffHeight, targetObject);
+      var count = 1;
 
       takeOff.start().onComplete(()=> {
-        console.debug('Take off complete...');
+        // console.debug('Take off complete...');
 
         var cameraTween = new TWEEN.Tween(this.camera.position)
           .to(destinationCoordinates, travelDuration)
-          .easing(TWEEN.Easing.Cubic.InOut)
+          .easing(TWEEN.Easing.Cubic.Out)
           .onUpdate(function(currentAnimationPosition) {
-              this.camera.lookAt(targetObject.threeObject.position);
+            var destinationCoordinates = this.calculateDestinationCoordinates(targetObject);
+
+            // var test = this.calculateDestinationCoordinates_(targetObject.threeDistanceFromParent, targetObject.theta);
+
+            cameraTween.to(destinationCoordinates);
+
+            this.camera.lookAt(targetObject.threeObject.position);
           }.bind(this))
           .onComplete(this.handleComplete.bind(this, targetObject))
           .start()
@@ -86,8 +141,8 @@ define(function() {
         .to({
           x: this.camera.position.x,
           y: this.camera.position.y,
-          z: this.camera.position.z + takeOffHeight
-        }, 1500)
+          z: this.camera.position.z + takeOffHeight * 10
+        }, 3000)
         .easing(TWEEN.Easing.Cubic.InOut)
         .onUpdate((currentAnimationPosition)=> {
             this.camera.lookAt(targetObject.threeObject.position);
@@ -96,15 +151,8 @@ define(function() {
     }
 
     handleComplete(targetObject) {
-      // var endPoint = this.calculateTravelToPoint(targetObject);
-      // targetObject.core.add(this.camera);
-      // this.camera.position.x = endPoint.x; // newPosX; // zoom
-      // this.camera.position.y = endPoint.y; // newPosY; // vertical positioning of the camera
-      // this.camera.position.z = endPoint.z; // 0;       // this is really the y-axis in terms of plan view
-
       THREE.SceneUtils.detach(this.camera, this.camera.parent, this.scene);
       THREE.SceneUtils.attach(this.camera, this.scene, targetObject.core);
-      targetObject.core.add(this.camera);
 
       this.camera.lookAt(new THREE.Vector3());
       targetObject.core.updateMatrixWorld();
@@ -112,7 +160,22 @@ define(function() {
 
       var distanceToObject = this.camera.position.distanceTo(targetObject.threeObject.position);
 
+      console.debug('\nDONE');
       console.debug('Distance To Object:', distanceToObject);
+
+      console.debug('Target Coordinates:\n',
+        'x:', targetObject.threeObject.position.x,
+        '\n',
+        'y:', targetObject.threeObject.position.y,
+        '\n'
+      );
+
+      console.debug('Camera Coordinates:\n',
+        'x:', this.camera.position.x,
+        '\n',
+        'y:', this.camera.position.y,
+        '\n'
+      );
 
       document.dispatchEvent(this.travelCompleteEvent);
       document.dispatchEvent(new CustomEvent('solarsystem.travel.complete', {

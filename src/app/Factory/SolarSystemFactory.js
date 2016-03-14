@@ -196,15 +196,17 @@ function(
         '1': {
           buildGroup: this.buildPlanets.bind(this, data.planets, sun),
           timeout: 500
-        },
+        }
+        ,
         '2': {
           buildGroup: this.buildAsteroidBelt.bind(this, data),
           timeout: 500
-        },
-        '3': {
-          buildGroup: this.buildStars.bind(this),
-          timeout: 1000
         }
+        // ,
+        // '3': {
+        //   buildGroup: this.buildStars.bind(this),
+        //   timeout: 1000
+        // }
       };
 
       var percentage = 25;
@@ -308,9 +310,9 @@ function(
     // );
 
     this.scene.camera.position.set(
-      0,
+      -29000,
       0,  // -27888,
-      50000
+      0
     );
 
     var focalPointChangeEvent = new CustomEvent('solarsystem.focalpoint.change', {
