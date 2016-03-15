@@ -30,6 +30,7 @@ function(Constants, CelestialObject, Orbit) {
       this._threeObject.rotation.x = 90 * Constants.degreesToRadiansRatio;
       this._parentData = parentData || null;
       this._orbitCentroid = this.createOrbitCentroid();
+      this._highlight = this.createHighlight();
 
       if (data.rings) {
         this.createRingGeometry(data);
@@ -108,6 +109,44 @@ function(Constants, CelestialObject, Orbit) {
 
     get parentData() {
       return this._parentData;
+    }
+
+    get highlight() {
+      return this._highlight;
+    }
+
+    createHighlight() {
+      var resolution = 2880; // segments in the line
+      var length = 360 / resolution;
+      var orbitLine = new THREE.Geometry();
+      var material = new THREE.LineBasicMaterial({
+        color: '#151515',
+        linewidth: 1,
+        fog: true
+      });
+
+      // Build the orbit line
+      for (var i = 0; i <= resolution; i++) {
+        var segment = (i * length) * Math.PI / 180;
+        var orbitAmplitude = this._threeRadius < 0.3 ? this._threeRadius * 3 : this._threeRadius * 1.5;
+
+        orbitLine.vertices.push(
+          new THREE.Vector3(
+            Math.cos(segment) * orbitAmplitude,
+            Math.sin(segment) * orbitAmplitude,
+            0
+          )
+        );
+      }
+
+      var line = new THREE.Line(orbitLine, material);
+
+      line.rotation.y += 90 * Constants.degreesToRadiansRatio;
+      line.position.set(0, 0, 0);
+
+      this._core.add(line);
+
+      return line;
     }
 
     createOrbitCentroid() {
@@ -192,24 +231,16 @@ function(Constants, CelestialObject, Orbit) {
 
       map.minFilter = THREE.NearestFilter;
 
-      if (topo) {
-        var bumpMap = this.getTexture(topo);
+      // if (topo) {
+      //   var bumpMap = this.getTexture(topo);
 
-        bumpMap.minFilter = THREE.NearestFilter;
-      }
-
-      if (specular) {
-        var specularMap = this.getTexture(specular);
-
-        specularMap.minFilter = THREE.LinearFilter;
-      }
+      //   bumpMap.minFilter = THREE.NearestFilter;
+      // }
 
       return new THREE.MeshLambertMaterial({
-        map: map,
+        map: map
         // bumpMap: bumpMap || null,
         // bumpScale: bumpMap ? 0.012 : null,
-        // specularMap: specularMap || null,
-        specular: specularMap ? new THREE.Color(0x0a0a0a) : null
       });
     }
   }

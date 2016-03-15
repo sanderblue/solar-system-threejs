@@ -42,6 +42,10 @@ function($, _, Backbone, TemplateLoader, TravelController) {
         return;
       }
 
+      if (target.highlight) {
+        target.highlight.material.color = new THREE.Color('#00ff48');
+      }
+
       target.orbitLine.orbit.material.color = new THREE.Color(target.orbitColor);
       target.orbitLine.orbit.material.needsUpdate = true;
     },
@@ -51,6 +55,10 @@ function($, _, Backbone, TemplateLoader, TravelController) {
 
       if (this.currentTarget && _.isEqual(this.currentTarget, target)) {
         return;
+      }
+
+      if (target.highlight) {
+        target.highlight.material.color = new THREE.Color('#000000');
       }
 
       target.orbitLine.orbit.material.color = new THREE.Color(target.orbitColorDefault);

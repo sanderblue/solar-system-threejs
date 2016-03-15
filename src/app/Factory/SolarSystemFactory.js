@@ -39,6 +39,7 @@ function(
     this.planets = data.planets || [];
 
     this.solarSystemObjects = {
+      sun: null,
       planets: [],
       moons: []
     };
@@ -132,7 +133,7 @@ function(
   SolarSystemFactory.prototype.buildSun = function(parentData) {
     var sun = new Sun(parentData);
 
-    this.scene.add(sun.threeObject);
+    this.solarSystemObjects.sun = sun;
 
     var buildEvent = new CustomEvent('solarsystem.build.object.complete', {
       detail: {
@@ -187,8 +188,8 @@ function(
       });
 
       var sun = this.buildSun(data.parent);
-
       this.solarSystemObjects.sun = sun;
+      this.scene.add(sun.threeObject)
 
       this.updateProgress(25);
 
@@ -303,14 +304,8 @@ function(
 
     focalpoint.add(this.scene.camera);
     this.scene.camera.up.set(0, 0, 1);
-    // this.scene.camera.position.set(
-    //   0,
-    //   -333888,
-    //   15000
-    // );
-
     this.scene.camera.position.set(
-      -25000,
+      25000,
       0,  // -27888,
       500
     );

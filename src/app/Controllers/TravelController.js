@@ -42,7 +42,7 @@ define(['Models/Moon'],function(Moon) {
       var quadrant3 = x < 0 && y < 0;
       var quadrant4 = x > 0 && y < 0;
 
-      var offset = targetObject.threeDiameter > 3 ? targetObject.threeDiameter * 5 : targetObject.threeDiameter * 2.5;
+      var offset = targetObject.threeDiameter > 3 ? targetObject.threeDiameter * 6 : targetObject.threeDiameter * 3;
 
       if (quadrant1) {
         destinationX = destinationX + offset;
