@@ -204,7 +204,7 @@ function(Constants, CelestialObject, Orbit) {
         specularMap.minFilter = THREE.LinearFilter;
       }
 
-      return new THREE.MeshPhongMaterial({
+      return new THREE.MeshLambertMaterial({
         map: map,
         // bumpMap: bumpMap || null,
         // bumpScale: bumpMap ? 0.012 : null,

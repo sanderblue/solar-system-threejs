@@ -202,11 +202,11 @@ function(
           buildGroup: this.buildAsteroidBelt.bind(this, data),
           timeout: 500
         }
-        // ,
-        // '3': {
-        //   buildGroup: this.buildStars.bind(this),
-        //   timeout: 1000
-        // }
+        ,
+        '3': {
+          buildGroup: this.buildStars.bind(this),
+          timeout: 300
+        }
       };
 
       var percentage = 25;
@@ -234,7 +234,7 @@ function(
 
               run.call(this);
             });
-          }, 400);
+          }, 500);
 
         } else {
           this.renderScene(startTime);
@@ -310,9 +310,9 @@ function(
     // );
 
     this.scene.camera.position.set(
-      -29000,
+      -25000,
       0,  // -27888,
-      0
+      500
     );
 
     var focalPointChangeEvent = new CustomEvent('solarsystem.focalpoint.change', {

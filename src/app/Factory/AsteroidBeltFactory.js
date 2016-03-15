@@ -39,11 +39,11 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
 
         this._scene.add(this._orbitCentroid);
 
-        // document.addEventListener('frame', (e)=> {
-        //   var degreesToRotate = 0.001;
+        document.addEventListener('frame', (e)=> {
+          var degreesToRotate = 0.002;
 
-        //   this._orbitCentroid.rotation.z +=  degreesToRotate * Constants.degreesToRadiansRatio;
-        // }, false);
+          this._orbitCentroid.rotation.z +=  degreesToRotate * Constants.degreesToRadiansRatio;
+        }, false);
 
         resolve();
       });

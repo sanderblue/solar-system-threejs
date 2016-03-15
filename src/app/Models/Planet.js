@@ -267,12 +267,12 @@ function(Constants, CelestialObject, Orbit) {
       );
 
       var map = this.getTexture('src/assets/textures/saturn_rings.png');
-      map.minFilter = THREE.NearestFilter;
+      // map.minFilter = THREE.NearestFilter;
 
       var colorMap = this.getTexture('src/assets/textures/saturn_rings_color_map.png');
-      colorMap.minFilter = THREE.NearestFilter;
+      // colorMap.minFilter = THREE.NearestFilter;
 
-      var material = new THREE.MeshPhongMaterial({
+      var material = new THREE.MeshLambertMaterial({
         map: colorMap,
         alphaMap: map,
         transparent: true,

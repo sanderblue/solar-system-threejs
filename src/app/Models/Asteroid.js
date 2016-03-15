@@ -44,7 +44,7 @@ function(Constants, CelestialObject, RandomNumberGenerator) {
     createGeometry() {
       var materials = [
         new THREE.MeshPhongMaterial({ map: this._texture }),
-        new THREE.MeshLambertMaterial({ emissive: 0xffffff, transparent: true, opacity: 0.3, wireframe: true })
+        new THREE.MeshLambertMaterial({ emissive: 0xffffff, transparent: true, opacity: 0.15, wireframe: true })
       ];
 
       return new THREE.SceneUtils.createMultiMaterialObject(new THREE.TetrahedronGeometry(7), materials);

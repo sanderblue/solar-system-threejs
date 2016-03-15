@@ -34,7 +34,7 @@ function(OrbitControls) {
       var ambientLightCount = 4;
 
       for (var i = 0; i < ambientLightCount; i++) {
-        var directionalLight = new THREE.DirectionalLight(0xffffff, 0.25/* 0.125 */);
+        var directionalLight = new THREE.DirectionalLight(0xffffff, 0.15/* 0.125 */);
 
         this.setObjectPosition(directionalLight, i);
 

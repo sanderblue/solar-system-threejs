@@ -1,4 +1,4 @@
-define(function() {
+define(['Models/Moon'],function(Moon) {
   'use strict';
 
   class TravelController {
@@ -42,7 +42,7 @@ define(function() {
       var quadrant3 = x < 0 && y < 0;
       var quadrant4 = x > 0 && y < 0;
 
-      var offset = targetObject.threeDiameter * 2.5;
+      var offset = targetObject.threeDiameter > 3 ? targetObject.threeDiameter * 5 : targetObject.threeDiameter * 2.5;
 
       if (quadrant1) {
         destinationX = destinationX + offset;
@@ -64,52 +64,34 @@ define(function() {
         destinationY = destinationY - offset;
       }
 
+      console.debug('targetObject.threeDiameter', targetObject.threeDiameter, targetObject.threeDiameter * 0.15);
+
       return {
         x: destinationX,
         y: destinationY,
-        z: destinationZ + 1
+        z: destinationZ + (targetObject.threeDiameter * 0.15)
       };
     }
 
     travelToObject(currentPosition, targetObject, takeOffHeight) {
       var travelDuration = 6000; // milliseconds
 
+      console.debug('Instanceof', targetObject instanceof Moon);
+
       document.dispatchEvent(this.travelStartEvent);
+
+      var isMoon = targetObject instanceof Moon;
 
       THREE.SceneUtils.detach(this.camera, this.camera.parent, this.scene);
       THREE.SceneUtils.attach(this.camera, this.scene, targetObject.orbitCentroid);
+      targetObject.core.updateMatrixWorld();
+      targetObject.orbitCentroid.updateMatrixWorld();
 
       // console.debug('targetObject', targetObject);
 
       var destinationCoordinates = this.calculateDestinationCoordinates(targetObject);
 
       console.debug('Destination', destinationCoordinates);
-
-      // return;
-
-      // console.debug('Target Coordinates:\n',
-      //   'x:', targetObject.threeObject.position.x,
-      //   '\n',
-      //   'y:', targetObject.threeObject.position.y,
-      //   '\n'
-      // );
-
-      // console.debug('Destination Coordinates:\n',
-      //   'x:', destinationCoordinates.x,
-      //   '\n',
-      //   'y:', destinationCoordinates.y,
-      //   '\n'
-      // );
-
-      // console.log('');
-      // console.debug('Target Coordinates', targetObject.threeObject.position);
-      // console.debug('Destination Coordinates', destinationCoordinates);
-      // console.debug('TWEEN ease:', TWEEN.Easing);
-
-      // return;
-
-      // targetObject.orbitCentroid.add(this.camera);
-      // this.camera.up.set(0, 0, 1);
 
       var self = this;
       var takeOff = this.prepareForTravel(takeOffHeight, targetObject);
@@ -120,11 +102,9 @@ define(function() {
 
         var cameraTween = new TWEEN.Tween(this.camera.position)
           .to(destinationCoordinates, travelDuration)
-          .easing(TWEEN.Easing.Cubic.Out)
+          .easing(TWEEN.Easing.Cubic.InOut)
           .onUpdate(function(currentAnimationPosition) {
             var destinationCoordinates = this.calculateDestinationCoordinates(targetObject);
-
-            // var test = this.calculateDestinationCoordinates_(targetObject.threeDistanceFromParent, targetObject.theta);
 
             cameraTween.to(destinationCoordinates);
 
@@ -141,11 +121,11 @@ define(function() {
         .to({
           x: this.camera.position.x,
           y: this.camera.position.y,
-          z: this.camera.position.z + takeOffHeight * 10
+          z: this.camera.position.z + takeOffHeight * 12
         }, 3000)
         .easing(TWEEN.Easing.Cubic.InOut)
         .onUpdate((currentAnimationPosition)=> {
-            this.camera.lookAt(targetObject.threeObject.position);
+            this.camera.lookAt(new THREE.Vector3(0,0,0));
         })
       ;
     }
