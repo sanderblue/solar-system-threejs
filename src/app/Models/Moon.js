@@ -119,6 +119,7 @@ function(Constants, CelestialObject, Orbit) {
       var resolution = 2880; // segments in the line
       var length = 360 / resolution;
       var orbitLine = new THREE.Geometry();
+      var orbitAmplitude = this._threeRadius < 0.3 ? this._threeRadius * 3 : this._threeRadius * 1.5;
       var material = new THREE.LineBasicMaterial({
         color: '#151515',
         linewidth: 1,
@@ -128,7 +129,6 @@ function(Constants, CelestialObject, Orbit) {
       // Build the orbit line
       for (var i = 0; i <= resolution; i++) {
         var segment = (i * length) * Math.PI / 180;
-        var orbitAmplitude = this._threeRadius < 0.3 ? this._threeRadius * 3 : this._threeRadius * 1.5;
 
         orbitLine.vertices.push(
           new THREE.Vector3(

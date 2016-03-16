@@ -35,6 +35,7 @@ function(Constants, CelestialObject, Orbit) {
       this._threeObject.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
 
       this._orbitCentroid = this.createOrbitCentroid();
+      this._highlight = this.createHighlight();
 
       if (data.rings) {
         this.createRingGeometry(data);
@@ -98,6 +99,10 @@ function(Constants, CelestialObject, Orbit) {
 
     set theta(theta) {
       this._theta = theta;
+    }
+
+    get highlight() {
+      return this._highlight;
     }
 
     /**
@@ -285,6 +290,42 @@ function(Constants, CelestialObject, Orbit) {
       ring.rotation.x = 90 * Constants.degreesToRadiansRatio;
 
       this._threeObject.add(ring);
+    }
+
+    createHighlight() {
+      var resolution = 2880; // segments in the line
+      var length = 360 / resolution;
+      var orbitAmplitude = this._threeDiameter > 4 ? this._threeDiameter * 45 : this._threeDiameter * 75;
+      var orbitLine = new THREE.Geometry();
+      var material = new THREE.MeshBasicMaterial({
+        color: '#3beaf7',
+        transparent: true,
+        opacity: 0,
+        depthTest: false
+      });
+
+
+      // Build the orbit line
+      for (var i = 0; i <= resolution; i++) {
+        var segment = (i * length) * Math.PI / 180;
+
+        orbitLine.vertices.push(
+          new THREE.Vector3(
+            Math.cos(segment) * orbitAmplitude,
+            Math.sin(segment) * orbitAmplitude,
+            0
+          )
+        );
+      }
+
+      var line = new THREE.Line(orbitLine, material);
+
+      line.rotation.y += 90 * Constants.degreesToRadiansRatio;
+      line.position.set(0, 0, 0);
+
+      this._core.add(line);
+
+      return line;
     }
 
     getSphereGeometrySegmentOffset() {

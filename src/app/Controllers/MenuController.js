@@ -23,7 +23,7 @@ function(
 
   return Backbone.View.extend({
     events: {
-      'click a[data-id]': 'travelToObject',
+      'click a[data-id]': 'onClick',
       'mouseenter a[data-id]': 'highlightObject',
       'mouseleave a[data-id]': 'unhighlightObject'
     },
@@ -36,6 +36,38 @@ function(
       this.templateLoader = new TemplateLoader();
       this.currentTarget = options.currentTarget || this.sceneObjects[0];
       this.initListeners();
+    },
+
+    onClick: function(e) {
+      var id = Number.parseInt(e.currentTarget.dataset.id);
+      var target = this.matchTarget(id);
+
+      console.debug('Target', id);
+
+      if (this.currentTarget && _.isEqual(this.currentTarget.id, target.id)) {
+        return false;
+      }
+
+      this.travelToObject(target);
+    },
+
+    travelToObject: function(target) {
+      // Return old target to default orbit line color
+      if (this.currentTarget && this.currentTarget.orbitLine) {
+        this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+      }
+
+      // Change new target orbit line color
+      target.orbitLine.orbit.material.color = new THREE.Color('#aaaaaa');
+      target.orbitLine.orbit.material.needsUpdate = true;
+
+      this.travelController.travelToObject(
+        this.scene.camera.parent.position,
+        target,
+        target.threeDiameter * 2.5
+      );
+
+      this.currentTarget = target;
     },
 
     initListeners: function() {
@@ -106,36 +138,18 @@ function(
       return target;
     },
 
-    travelToObject: function(e) {
-      var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
-
-      if (this.currentTarget && _.isEqual(this.currentTarget.id, target.id)) {
-        return;
-      }
-
-      // Return old target to default orbit line color
-      if (this.currentTarget && this.currentTarget.orbitLine) {
-        this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
-      }
-
-      // Change new target orbit line color
-      target.orbitLine.orbit.material.color = new THREE.Color('#aaaaaa');
-      target.orbitLine.orbit.material.needsUpdate = true;
-
-      this.travelController.travelToObject(
-        this.scene.camera.parent.position,
-        target,
-        target.threeDiameter * 2.5
-      );
-
-      this.currentTarget = target;
-    },
-
   	highlightObject: function(e) {
 		  var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
 
       if (this.currentTarget && _.isEqual(this.currentTarget.id, target.id)) {
       	return;
+      }
+
+      var distanceTo = this.scene.camera.position.distanceTo(target.threeObject.position);
+      console.debug('distanceTo', distanceTo, target.highlight);
+
+      if (target.highlight) {
+        target.highlight.material.opacity = 0.9;
       }
 
       target.orbitLine.orbit.material.color = new THREE.Color('#d3d3d3');
@@ -147,6 +161,10 @@ function(
 
       if (this.currentTarget && _.isEqual(this.currentTarget, target)) {
         return;
+      }
+
+      if (target.highlight) {
+        target.highlight.material.opacity = 0;
       }
 
       target.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');

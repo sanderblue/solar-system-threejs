@@ -12,7 +12,7 @@ function($, _, Backbone, TemplateLoader, TravelController) {
     events: {
       'mouseenter a[data-id]': 'highlightObject',
       'mouseleave a[data-id]': 'unhighlightObject',
-      'click a[data-id]': 'travelToObject'
+      'click a[data-id]': 'onClick'
     },
 
     initialize: function(options) {
@@ -21,6 +21,36 @@ function($, _, Backbone, TemplateLoader, TravelController) {
       this.sceneObjects = options.sceneObjects || [];
       this.currentTarget = null;
       this.travelController = new TravelController(this.scene);
+    },
+
+    onClick: function(e) {
+      var target = this.matchTarget(e.currentTarget.dataset.id);
+
+      console.debug('Target', target);
+
+      if (this.currentTarget && _.isEqual(this.currentTarget.id, target.id)) {
+        return false;
+      }
+
+      $(e.currentTarget).addClass('active');
+
+      this.travelToObject(target);
+    },
+
+    travelToObject: function(target) {
+      console.debug('Target', target);
+
+      // Return old target to default orbit line color
+      if (this.currentTarget) {
+        this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+      }
+
+      // Change new target orbit line color
+      target.orbitLine.orbit.material.color = new THREE.Color('#aaaaaa');
+      target.orbitLine.orbit.material.needsUpdate = true;
+
+      this.currentTarget = target;
+      this.travelController.travelToObject(this.scene.camera.parent.position, this.currentTarget);
     },
 
     matchTarget: function(id) {
@@ -63,28 +93,6 @@ function($, _, Backbone, TemplateLoader, TravelController) {
 
       target.orbitLine.orbit.material.color = new THREE.Color(target.orbitColorDefault);
       target.orbitLine.orbit.material.needsUpdate = true;
-    },
-
-    travelToObject: function(e) {
-      var target = this.matchTarget(e.currentTarget.dataset.id);
-
-      if (this.currentTarget && _.isEqual(this.currentTarget.id, target.id)) {
-        return;
-      }
-
-      console.debug('Target', target);
-
-      // Return old target to default orbit line color
-      if (this.currentTarget) {
-        this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
-      }
-
-      // Change new target orbit line color
-      target.orbitLine.orbit.material.color = new THREE.Color('#aaaaaa');
-      target.orbitLine.orbit.material.needsUpdate = true;
-
-      this.currentTarget = target;
-      this.travelController.travelToObject(this.scene.camera.parent.position, this.currentTarget);
-    },
+    }
   });
 });

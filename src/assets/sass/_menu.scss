@@ -86,3 +86,12 @@
     border-bottom: 1px solid rgba(45, 45, 45, 0.8);
     padding: 0.5rem 1rem;
 }
+
+.accordion-item {
+    &.is-active {
+        .accordion-title {
+            background-color: rgba(30, 30, 30, 0.75);
+            color: #3beaf7;
+        }
+    }
+}

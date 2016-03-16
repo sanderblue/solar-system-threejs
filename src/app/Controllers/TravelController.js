@@ -76,7 +76,7 @@ define(['Models/Moon'],function(Moon) {
     travelToObject(currentPosition, targetObject, takeOffHeight) {
       var travelDuration = 6000; // milliseconds
 
-      console.debug('Instanceof', targetObject instanceof Moon);
+      // console.debug('Instanceof', targetObject instanceof Moon);
 
       document.dispatchEvent(this.travelStartEvent);
 
@@ -86,6 +86,8 @@ define(['Models/Moon'],function(Moon) {
       THREE.SceneUtils.attach(this.camera, this.scene, targetObject.orbitCentroid);
       targetObject.core.updateMatrixWorld();
       targetObject.orbitCentroid.updateMatrixWorld();
+
+      this.camera.lookAt(targetObject.threeObject.position);
 
       // console.debug('targetObject', targetObject);
 
@@ -99,6 +101,9 @@ define(['Models/Moon'],function(Moon) {
 
       takeOff.start().onComplete(()=> {
         // console.debug('Take off complete...');
+        if (targetObject.highlight) {
+          targetObject.highlight.material.opacity = 0.5;
+        }
 
         var cameraTween = new TWEEN.Tween(this.camera.position)
           .to(destinationCoordinates, travelDuration)
@@ -125,7 +130,7 @@ define(['Models/Moon'],function(Moon) {
         }, 3000)
         .easing(TWEEN.Easing.Cubic.InOut)
         .onUpdate((currentAnimationPosition)=> {
-            this.camera.lookAt(new THREE.Vector3(0,0,0));
+            this.camera.lookAt(targetObject.threeObject.position);
         })
       ;
     }
@@ -133,6 +138,10 @@ define(['Models/Moon'],function(Moon) {
     handleComplete(targetObject) {
       THREE.SceneUtils.detach(this.camera, this.camera.parent, this.scene);
       THREE.SceneUtils.attach(this.camera, this.scene, targetObject.core);
+
+      if (targetObject.highlight) {
+        targetObject.highlight.material.opacity = 0;
+      }
 
       this.camera.lookAt(new THREE.Vector3());
       targetObject.core.updateMatrixWorld();
