@@ -298,9 +298,6 @@ function(Constants, CelestialObject, Orbit) {
     }
 
     createHighlight(amplitude) {
-
-      console.debug('amplitude', amplitude);
-
       var resolution = 2880; // segments in the line
       var length = 360 / resolution;
       var highlightDiameter = this._threeDiameter > 4 ? this._threeDiameter * 45 : this._threeDiameter * 75;
@@ -313,10 +310,6 @@ function(Constants, CelestialObject, Orbit) {
         depthTest: false
       });
 
-      // console.debug('orbitAmplitude', orbitAmplitude);
-
-
-      // Build the orbit line
       for (var i = 0; i <= resolution; i++) {
         var segment = (i * length) * Math.PI / 180;
 

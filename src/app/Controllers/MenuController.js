@@ -7,7 +7,8 @@ define(
   'Controllers/MoonMenuController',
 	'Modules/TemplateLoader',
   'Models/PLanet',
-  'Models/Moon'
+  'Models/Moon',
+  'Modules/ColorManager'
 ],
 function(
   $,
@@ -17,15 +18,16 @@ function(
   MoonMenuController,
   TemplateLoader,
   Planet,
-  Moon
+  Moon,
+  ColorManager
 ) {
   'use strict';
 
   return Backbone.View.extend({
     events: {
       'click a[data-id]': 'onClick',
-      'mouseenter a[data-id]': 'highlightObject',
-      'mouseleave a[data-id]': 'unhighlightObject'
+      'mouseenter a[data-id]': 'onMouseEnter',
+      'mouseleave a[data-id]': 'onMouseLeave'
     },
 
     initialize: function(options) {
@@ -34,6 +36,7 @@ function(
       this.sceneObjects = options.sceneObjects || [];
       this.travelController = new TravelController(this.scene);
       this.templateLoader = new TemplateLoader();
+      this.colorManager = new ColorManager();
       this.currentTarget = options.currentTarget || this.sceneObjects[0];
       this.initListeners();
     },
@@ -45,11 +48,37 @@ function(
       console.debug('isCurrentTarget', this.isCurrentTarget(target));
 
       if (this.isCurrentTarget(target)) {
-        e.stopImmediatePropogation();
+        e.stopImmediatePropagation();
         return false;
       }
 
       this.travelToObject(target);
+    },
+
+    onMouseEnter: function(e) {
+      var id = Number.parseInt(e.currentTarget.dataset.id);
+      var target = this.matchTarget(id);
+
+      if (this.isCurrentTarget(target)) {
+        return true;
+      }
+
+      var startingColor = target.highlight.material.color;
+
+      console.debug('startingColor', startingColor);
+
+      this.highlightTarget(target);
+    },
+
+    onMouseLeave: function(e) {
+      var id = Number.parseInt(e.currentTarget.dataset.id);
+      var target = this.matchTarget(id);
+
+      if (this.isCurrentTarget(target)) {
+        return true;
+      }
+
+      this.unhighlightTarget(target);
     },
 
     travelToObject: function(target) {

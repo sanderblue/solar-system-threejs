@@ -10,8 +10,8 @@ function($, _, Backbone, TemplateLoader, TravelController) {
 
   return Backbone.View.extend({
     events: {
-      'mouseenter a[data-id]': 'highlightObject',
-      'mouseleave a[data-id]': 'unhighlightObject',
+      'mouseenter a[data-id]': 'onMouseEnter',
+      'mouseleave a[data-id]': 'onMouseLeave',
       'click a[data-id]': 'onClick'
     },
 
@@ -28,13 +28,76 @@ function($, _, Backbone, TemplateLoader, TravelController) {
 
       console.debug('Target', target);
 
-      if (this.currentTarget && _.isEqual(this.currentTarget.id, target.id)) {
+      if (this.isCurrentTarget(target)) {
+        e.stopImmediatePropagation();
         return false;
       }
 
-      $(e.currentTarget).addClass('active');
-
       this.travelToObject(target);
+    },
+
+    onMouseEnter: function(e) {
+      var target = this.matchTarget(e.currentTarget.dataset.id);
+
+      if (this.isCurrentTarget(target)) {
+        return true;
+      }
+
+      this.highlightTarget(target);
+    },
+
+    onMouseLeave: function(e) {
+      var target = this.matchTarget(e.currentTarget.dataset.id);
+
+      if (this.isCurrentTarget(target)) {
+        return true;
+      }
+
+      this.unhighlightTarget(target);
+    },
+
+    isCurrentTarget: function(target) {
+      return this.currentTarget && _.isEqual(this.currentTarget.id, target.id);
+    },
+
+    highlightObject: function(e) {
+      var target = this.matchTarget(e.currentTarget.dataset.id);
+
+      this.highlightTarget(target);
+      this.highlightOrbit(target);
+    },
+
+    unhighlightObject: function(e) {
+      var target = this.matchTarget(e.currentTarget.dataset.id);
+
+      this.unhighlightTarget(target);
+      this.unhighlightOrbit(target);
+    },
+
+    highlightTarget: function(target) {
+      var distanceTo = this.scene.camera.position.distanceTo(target.threeObject.position);
+      var highlightDiameter = distanceTo * 0.011; // 1.1% of distance to target
+
+      target.highlight = highlightDiameter;
+      target.highlight.material.opacity = 0.9;
+
+      // console.debug('');
+      // console.debug('Distance To:       ', distanceTo);
+      // console.debug('Target Diameter:   ', target.threeDiameter);
+    },
+
+    highlightOrbit: function(target) {
+      target.orbitLine.orbit.material.color = new THREE.Color('#ffffff');
+      target.orbitLine.orbit.material.needsUpdate = true;
+    },
+
+    unhighlightTarget: function(target) {
+      target.core.remove(target.highlight);
+    },
+
+    unhighlightOrbit: function(target) {
+      target.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+      target.orbitLine.orbit.material.needsUpdate = true;
     },
 
     travelToObject: function(target) {
@@ -65,34 +128,5 @@ function($, _, Backbone, TemplateLoader, TravelController) {
       return target;
     },
 
-    highlightObject: function(e) {
-      var target = this.matchTarget(e.currentTarget.dataset.id);
-
-      if (this.currentTarget && _.isEqual(this.currentTarget.id, target.id)) {
-        return;
-      }
-
-      if (target.highlight) {
-        target.highlight.material.color = new THREE.Color('#00ff48');
-      }
-
-      target.orbitLine.orbit.material.color = new THREE.Color(target.orbitColor);
-      target.orbitLine.orbit.material.needsUpdate = true;
-    },
-
-    unhighlightObject: function(e) {
-      var target = this.matchTarget(e.currentTarget.dataset.id);
-
-      if (this.currentTarget && _.isEqual(this.currentTarget, target)) {
-        return;
-      }
-
-      if (target.highlight) {
-        target.highlight.material.color = new THREE.Color('#000000');
-      }
-
-      target.orbitLine.orbit.material.color = new THREE.Color(target.orbitColorDefault);
-      target.orbitLine.orbit.material.needsUpdate = true;
-    }
   });
 });

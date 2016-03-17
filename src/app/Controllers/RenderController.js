@@ -41,14 +41,14 @@ function(Constants, Stats) {
       Stats.begin();
 
       requestAnimationFrame(render);
+      TWEEN.update();
       document.dispatchEvent(frameEvent);
       self._renderEngine.render(self._scene, self._camera);
 
       // console.debug('Tweening?', tweening);
 
-      if (tweening) {
-        TWEEN.update();
-      }
+      // if (tweening) ;
+      // }
 
       Stats.end();
     }

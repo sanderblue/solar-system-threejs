@@ -23,6 +23,7 @@ require.config({
         init: {
             deps: [
                 'Extensions/Date',
+                'Extensions/HSV',
                 'Modules/Error/InvalidArgumentException',
                 'Modules/Error/MissingArgumentException'
             ]

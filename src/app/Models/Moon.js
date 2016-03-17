@@ -115,18 +115,23 @@ function(Constants, CelestialObject, Orbit) {
       return this._highlight;
     }
 
-    createHighlight() {
+    set highlight(amplitude) {
+      this._highlight = this.createHighlight(amplitude);
+    }
+
+    createHighlight(amplitude) {
       var resolution = 2880; // segments in the line
       var length = 360 / resolution;
+      var highlightDiameter = this._threeDiameter > 4 ? this._threeDiameter * 45 : this._threeDiameter * 75;
+      var orbitAmplitude = amplitude || highlightDiameter;
       var orbitLine = new THREE.Geometry();
-      var orbitAmplitude = this._threeRadius < 0.3 ? this._threeRadius * 3 : this._threeRadius * 1.5;
-      var material = new THREE.LineBasicMaterial({
-        color: '#151515',
-        linewidth: 1,
-        fog: true
+      var material = new THREE.MeshBasicMaterial({
+        color: '#3beaf7',
+        transparent: true,
+        opacity: 0,
+        depthTest: false
       });
 
-      // Build the orbit line
       for (var i = 0; i <= resolution; i++) {
         var segment = (i * length) * Math.PI / 180;
 

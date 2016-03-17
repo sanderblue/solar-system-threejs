@@ -1,4 +1,9 @@
-define(['Models/Moon'],function(Moon) {
+define(
+[
+  'Models/Moon',
+  'Modules/ColorManager'
+],
+function(Moon, ColorManager) {
   'use strict';
 
   class TravelController {
@@ -8,7 +13,19 @@ define(['Models/Moon'],function(Moon) {
       this.travelStartEvent = new CustomEvent('travelStart');
       this.travelCompleteEvent = new CustomEvent('travelComplete');
       this.targetPosition = new THREE.Vector3();
+      this.colorManager = new ColorManager();
     }
+
+    updateTargetHighlight(target) {
+      target.core.remove(target.highlight);
+
+      var distanceTo = this.camera.position.distanceTo(target.threeObject.position);
+      var highlightDiameter = distanceTo * 0.011; // 1.1% of distance to target
+
+      target.highlight = highlightDiameter;
+      target.highlight.material.opacity = 0.9;
+    }
+
 
     /**
      * @param  {Number} radius              [The target object's orbit amplitude (distance from parent)]
@@ -64,7 +81,7 @@ define(['Models/Moon'],function(Moon) {
         destinationY = destinationY - offset;
       }
 
-      console.debug('targetObject.threeDiameter', targetObject.threeDiameter, targetObject.threeDiameter * 0.15);
+      // console.debug('targetObject.threeDiameter', targetObject.threeDiameter, targetObject.threeDiameter * 0.15);
 
       return {
         x: destinationX,
@@ -89,22 +106,15 @@ define(['Models/Moon'],function(Moon) {
 
       this.camera.lookAt(targetObject.threeObject.position);
 
-      // console.debug('targetObject', targetObject);
-
       var destinationCoordinates = this.calculateDestinationCoordinates(targetObject);
 
       console.debug('Destination', destinationCoordinates);
+      console.debug('targetObject.highlight.geometry', targetObject.highlight.geometry);
 
       var self = this;
       var takeOff = this.prepareForTravel(takeOffHeight, targetObject);
-      var count = 1;
 
-      takeOff.start().onComplete(()=> {
-        // console.debug('Take off complete...');
-        if (targetObject.highlight) {
-          targetObject.highlight.material.opacity = 0.5;
-        }
-
+      return takeOff.start().onComplete(()=> {
         var cameraTween = new TWEEN.Tween(this.camera.position)
           .to(destinationCoordinates, travelDuration)
           .easing(TWEEN.Easing.Cubic.InOut)
@@ -114,6 +124,10 @@ define(['Models/Moon'],function(Moon) {
             cameraTween.to(destinationCoordinates);
 
             this.camera.lookAt(targetObject.threeObject.position);
+
+            if (targetObject.highlight.geometry.boundingSphere.radius > targetObject.threeDiameter / 1.25) {
+              this.updateTargetHighlight(targetObject);
+            }
           }.bind(this))
           .onComplete(this.handleComplete.bind(this, targetObject))
           .start()
@@ -127,7 +141,7 @@ define(['Models/Moon'],function(Moon) {
           x: this.camera.position.x,
           y: this.camera.position.y,
           z: this.camera.position.z + takeOffHeight * 12
-        }, 3000)
+        }, 4000)
         .easing(TWEEN.Easing.Cubic.InOut)
         .onUpdate((currentAnimationPosition)=> {
             this.camera.lookAt(targetObject.threeObject.position);
@@ -139,9 +153,11 @@ define(['Models/Moon'],function(Moon) {
       THREE.SceneUtils.detach(this.camera, this.camera.parent, this.scene);
       THREE.SceneUtils.attach(this.camera, this.scene, targetObject.core);
 
-      if (targetObject.highlight) {
-        targetObject.highlight.material.opacity = 0;
-      }
+      var transition = this.colorManager.fadeOut(
+        targetObject.highlight,
+        targetObject.highlight.material.color,
+        3000
+      );
 
       this.camera.lookAt(new THREE.Vector3());
       targetObject.core.updateMatrixWorld();
@@ -149,22 +165,22 @@ define(['Models/Moon'],function(Moon) {
 
       var distanceToObject = this.camera.position.distanceTo(targetObject.threeObject.position);
 
-      console.debug('\nDONE');
-      console.debug('Distance To Object:', distanceToObject);
+      // console.debug('\nDONE');
+      // console.debug('Distance To Object:', distanceToObject);
 
-      console.debug('Target Coordinates:\n',
-        'x:', targetObject.threeObject.position.x,
-        '\n',
-        'y:', targetObject.threeObject.position.y,
-        '\n'
-      );
+      // console.debug('Target Coordinates:\n',
+      //   'x:', targetObject.threeObject.position.x,
+      //   '\n',
+      //   'y:', targetObject.threeObject.position.y,
+      //   '\n'
+      // );
 
-      console.debug('Camera Coordinates:\n',
-        'x:', this.camera.position.x,
-        '\n',
-        'y:', this.camera.position.y,
-        '\n'
-      );
+      // console.debug('Camera Coordinates:\n',
+      //   'x:', this.camera.position.x,
+      //   '\n',
+      //   'y:', this.camera.position.y,
+      //   '\n'
+      // );
 
       document.dispatchEvent(this.travelCompleteEvent);
       document.dispatchEvent(new CustomEvent('solarsystem.travel.complete', {
