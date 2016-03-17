@@ -136,6 +136,11 @@ function(Constants, CelestialObject, Orbit) {
       return this._orbitLine;
     }
 
+    set highlight(amplitude) {
+      // this._highlight = null;
+      this._highlight = this.createHighlight(amplitude);
+    }
+
     createOrbitCentroid() {
       return new THREE.Object3D();
     }
@@ -292,10 +297,14 @@ function(Constants, CelestialObject, Orbit) {
       this._threeObject.add(ring);
     }
 
-    createHighlight() {
+    createHighlight(amplitude) {
+
+      console.debug('amplitude', amplitude);
+
       var resolution = 2880; // segments in the line
       var length = 360 / resolution;
-      var orbitAmplitude = this._threeDiameter > 4 ? this._threeDiameter * 45 : this._threeDiameter * 75;
+      var highlightDiameter = this._threeDiameter > 4 ? this._threeDiameter * 45 : this._threeDiameter * 75;
+      var orbitAmplitude = amplitude || highlightDiameter;
       var orbitLine = new THREE.Geometry();
       var material = new THREE.MeshBasicMaterial({
         color: '#3beaf7',
@@ -303,6 +312,8 @@ function(Constants, CelestialObject, Orbit) {
         opacity: 0,
         depthTest: false
       });
+
+      // console.debug('orbitAmplitude', orbitAmplitude);
 
 
       // Build the orbit line

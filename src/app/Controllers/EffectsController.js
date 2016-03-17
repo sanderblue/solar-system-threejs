@@ -24,10 +24,6 @@ function($, _, Backbone, TemplateLoader) {
           for (var n = 0; n < moons.length; n++) {
             var randomColor = '#'+ (Math.random().toString(16) + '000000').slice(2, 8);
 
-            // if (moons[n].name == 'Phobos' || moons[n].name == 'Deimos') {
-            //   console.debug('color:', randomColor);
-            // }
-
             moons[n]._orbitLine.orbit.material.color = new THREE.Color(randomColor);
           }
         }

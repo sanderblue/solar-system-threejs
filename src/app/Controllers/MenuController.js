@@ -42,9 +42,10 @@ function(
       var id = Number.parseInt(e.currentTarget.dataset.id);
       var target = this.matchTarget(id);
 
-      console.debug('Target', id);
+      console.debug('isCurrentTarget', this.isCurrentTarget(target));
 
-      if (this.currentTarget && _.isEqual(this.currentTarget.id, target.id)) {
+      if (this.isCurrentTarget(target)) {
+        e.stopImmediatePropogation();
         return false;
       }
 
@@ -70,6 +71,62 @@ function(
       this.currentTarget = target;
     },
 
+    matchTarget: function(id) {
+      var target = null;
+
+      for (var i = 0; i < this.sceneObjects.planets.length; i++) {
+        if (this.sceneObjects.planets[i].id === id) {
+          return this.sceneObjects.planets[i];
+      	}
+      }
+
+      return target;
+    },
+
+    isCurrentTarget: function(target) {
+      return this.currentTarget && _.isEqual(this.currentTarget.id, target.id);
+    },
+
+  	highlightObject: function(e) {
+		  var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
+
+      this.highlightTarget(target);
+      this.highlightOrbit(target);
+    },
+
+    unhighlightObject: function(e) {
+      var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
+
+      this.unhighlightTarget(target);
+      this.unhighlightOrbit(target);
+    },
+
+    highlightTarget: function(target) {
+      var distanceTo = this.scene.camera.position.distanceTo(target.threeObject.position);
+      var highlightDiameter = distanceTo * 0.011; // 1.1% of distance to target
+
+      target.highlight = highlightDiameter;
+      target.highlight.material.opacity = 0.9;
+
+      // console.debug('');
+      // console.debug('Distance To:       ', distanceTo);
+      // console.debug('Target Diameter:   ', target.threeDiameter);
+    },
+
+    highlightOrbit: function(target) {
+      target.orbitLine.orbit.material.color = new THREE.Color('#d3d3d3');
+      target.orbitLine.orbit.material.needsUpdate = true;
+    },
+
+    unhighlightTarget: function(target) {
+      target.core.remove(target.highlight);
+    },
+
+    unhighlightOrbit: function(target) {
+      target.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+      target.orbitLine.orbit.material.needsUpdate = true;
+    },
+
     initListeners: function() {
       var getMoonTemplate = this.templateLoader.get('moons', 'src/app/Views/moons.twig');
 
@@ -79,8 +136,6 @@ function(
 
       function handleTravelComplete(e) {
         var object = e.detail.object;
-
-        console.debug('Moon?', object instanceof Moon);
 
         if (object instanceof Moon) {
           return;
@@ -125,50 +180,5 @@ function(
         });
       }
     },
-
-    matchTarget: function(id) {
-      var target = null;
-
-      for (var i = 0; i < this.sceneObjects.planets.length; i++) {
-        if (this.sceneObjects.planets[i].id === id) {
-          return this.sceneObjects.planets[i];
-      	}
-      }
-
-      return target;
-    },
-
-  	highlightObject: function(e) {
-		  var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
-
-      if (this.currentTarget && _.isEqual(this.currentTarget.id, target.id)) {
-      	return;
-      }
-
-      var distanceTo = this.scene.camera.position.distanceTo(target.threeObject.position);
-      console.debug('distanceTo', distanceTo, target.highlight);
-
-      if (target.highlight) {
-        target.highlight.material.opacity = 0.9;
-      }
-
-      target.orbitLine.orbit.material.color = new THREE.Color('#d3d3d3');
-      target.orbitLine.orbit.material.needsUpdate = true;
-    },
-
-    unhighlightObject: function(e) {
-      var target = this.matchTarget(Number.parseInt(e.currentTarget.dataset.id));
-
-      if (this.currentTarget && _.isEqual(this.currentTarget, target)) {
-        return;
-      }
-
-      if (target.highlight) {
-        target.highlight.material.opacity = 0;
-      }
-
-      target.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
-      target.orbitLine.orbit.material.needsUpdate = true;
-    }
   });
 });
