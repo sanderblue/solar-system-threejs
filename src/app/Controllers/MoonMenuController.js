@@ -92,6 +92,9 @@ function($, _, Backbone, TemplateLoader, TravelController) {
     },
 
     unhighlightTarget: function(target) {
+
+      console.debug('unhighlightTarget', target.highlight);
+
       target.core.remove(target.highlight);
     },
 

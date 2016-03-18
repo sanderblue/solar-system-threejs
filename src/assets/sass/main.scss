@@ -111,3 +111,21 @@
         margin: 0 auto;
     }
 }
+
+.current-target-title {
+    @include font-semibold();
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    font-size: 56px;
+    transition: opacity 500ms ease-in-out;
+    opacity: 0;
+
+    &.active {
+        opacity: 1;
+    }
+}

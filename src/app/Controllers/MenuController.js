@@ -7,8 +7,7 @@ define(
   'Controllers/MoonMenuController',
 	'Modules/TemplateLoader',
   'Models/PLanet',
-  'Models/Moon',
-  'Modules/ColorManager'
+  'Models/Moon'
 ],
 function(
   $,
@@ -18,8 +17,7 @@ function(
   MoonMenuController,
   TemplateLoader,
   Planet,
-  Moon,
-  ColorManager
+  Moon
 ) {
   'use strict';
 
@@ -36,7 +34,6 @@ function(
       this.sceneObjects = options.sceneObjects || [];
       this.travelController = new TravelController(this.scene);
       this.templateLoader = new TemplateLoader();
-      this.colorManager = new ColorManager();
       this.currentTarget = options.currentTarget || this.sceneObjects[0];
       this.initListeners();
     },
@@ -62,10 +59,6 @@ function(
       if (this.isCurrentTarget(target)) {
         return true;
       }
-
-      var startingColor = target.highlight.material.color;
-
-      console.debug('startingColor', startingColor);
 
       this.highlightTarget(target);
     },
@@ -161,7 +154,12 @@ function(
 
       document.addEventListener('solarsystem.focalpoint.change', handleFocalPointChange.bind(this));
       document.removeEventListener('solarsystem.travel.complete', handleTravelComplete);
+      document.addEventListener('solarsystem.travel.start', handleTravelStart.bind(this));
       document.addEventListener('solarsystem.travel.complete', handleTravelComplete.bind(this));
+
+      function handleTravelStart(e) {
+        $('#current-target-title').removeClass('active').html('');
+      }
 
       function handleTravelComplete(e) {
         var object = e.detail.object;
@@ -169,6 +167,8 @@ function(
         if (object instanceof Moon) {
           return;
         }
+
+        $('#current-target-title').html(object.name).addClass('active');
 
         getMoonTemplate.then((template)=> {
           var html = template.render({ moons: object._moons });

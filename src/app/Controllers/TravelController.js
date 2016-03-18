@@ -10,7 +10,7 @@ function(Moon, ColorManager) {
     constructor(scene) {
       this.scene = scene;
       this.camera = this.scene.camera;
-      this.travelStartEvent = new CustomEvent('travelStart');
+      this.travelStartEvent = new CustomEvent('solarsystem.travel.start');
       this.travelCompleteEvent = new CustomEvent('travelComplete');
       this.targetPosition = new THREE.Vector3();
       this.colorManager = new ColorManager();
@@ -105,14 +105,11 @@ function(Moon, ColorManager) {
       targetObject.orbitCentroid.updateMatrixWorld();
 
       this.camera.lookAt(targetObject.threeObject.position);
-
       var destinationCoordinates = this.calculateDestinationCoordinates(targetObject);
+      var takeOff = this.prepareForTravel(takeOffHeight, targetObject);
 
       console.debug('Destination', destinationCoordinates);
       console.debug('targetObject.highlight.geometry', targetObject.highlight.geometry);
-
-      var self = this;
-      var takeOff = this.prepareForTravel(takeOffHeight, targetObject);
 
       return takeOff.start().onComplete(()=> {
         var cameraTween = new TWEEN.Tween(this.camera.position)
@@ -120,9 +117,7 @@ function(Moon, ColorManager) {
           .easing(TWEEN.Easing.Cubic.InOut)
           .onUpdate(function(currentAnimationPosition) {
             var destinationCoordinates = this.calculateDestinationCoordinates(targetObject);
-
             cameraTween.to(destinationCoordinates);
-
             this.camera.lookAt(targetObject.threeObject.position);
 
             if (targetObject.highlight.geometry.boundingSphere.radius > targetObject.threeDiameter / 1.25) {
@@ -140,7 +135,7 @@ function(Moon, ColorManager) {
         .to({
           x: this.camera.position.x,
           y: this.camera.position.y,
-          z: this.camera.position.z + takeOffHeight * 12
+          z: this.camera.position.z + takeOffHeight + 700
         }, 4000)
         .easing(TWEEN.Easing.Cubic.InOut)
         .onUpdate((currentAnimationPosition)=> {
@@ -157,30 +152,14 @@ function(Moon, ColorManager) {
         targetObject.highlight,
         targetObject.highlight.material.color,
         3000
-      );
+      ).onComplete(()=> {
+        targetObject.core.remove(targetObject.highlight);
+      });
 
       this.camera.lookAt(new THREE.Vector3());
+
       targetObject.core.updateMatrixWorld();
       targetObject.orbitCentroid.updateMatrixWorld();
-
-      var distanceToObject = this.camera.position.distanceTo(targetObject.threeObject.position);
-
-      // console.debug('\nDONE');
-      // console.debug('Distance To Object:', distanceToObject);
-
-      // console.debug('Target Coordinates:\n',
-      //   'x:', targetObject.threeObject.position.x,
-      //   '\n',
-      //   'y:', targetObject.threeObject.position.y,
-      //   '\n'
-      // );
-
-      // console.debug('Camera Coordinates:\n',
-      //   'x:', this.camera.position.x,
-      //   '\n',
-      //   'y:', this.camera.position.y,
-      //   '\n'
-      // );
 
       document.dispatchEvent(this.travelCompleteEvent);
       document.dispatchEvent(new CustomEvent('solarsystem.travel.complete', {
