@@ -10,8 +10,8 @@ function(Moon, ColorManager) {
     constructor(scene) {
       this.scene = scene;
       this.camera = this.scene.camera;
+      this.travelObjectType = 'planet'; // default
       this.travelStartEvent = new CustomEvent('solarsystem.travel.start');
-      this.travelCompleteEvent = new CustomEvent('travelComplete');
       this.targetPosition = new THREE.Vector3();
       this.colorManager = new ColorManager();
     }
@@ -90,14 +90,27 @@ function(Moon, ColorManager) {
       };
     }
 
+    dispatchTravelStartEvent(data) {
+      var event = new CustomEvent('solarsystem.travel.'+ this.travelObjectType +'.start', {
+        detail: data
+      });
+
+      document.dispatchEvent(event);
+    }
+
+    dispatchTravelCompleteEvent(data) {
+      var event = new CustomEvent('solarsystem.travel.'+ this.travelObjectType +'.complete', {
+        detail: data
+      });
+
+      document.dispatchEvent(event);
+    }
+
     travelToObject(currentPosition, targetObject, takeOffHeight) {
       var travelDuration = 6000; // milliseconds
 
-      // console.debug('Instanceof', targetObject instanceof Moon);
-
-      document.dispatchEvent(this.travelStartEvent);
-
-      var isMoon = targetObject instanceof Moon;
+      this.travelObjectType = targetObject instanceof Moon ? 'moon' : 'planet';
+      this.dispatchTravelStartEvent(targetObject);
 
       THREE.SceneUtils.detach(this.camera, this.camera.parent, this.scene);
       THREE.SceneUtils.attach(this.camera, this.scene, targetObject.orbitCentroid);
@@ -161,12 +174,13 @@ function(Moon, ColorManager) {
       targetObject.core.updateMatrixWorld();
       targetObject.orbitCentroid.updateMatrixWorld();
 
-      document.dispatchEvent(this.travelCompleteEvent);
-      document.dispatchEvent(new CustomEvent('solarsystem.travel.complete', {
-          detail: {
-              object: targetObject
-          }
-      }));
+      this.dispatchTravelCompleteEvent(targetObject);
+
+      // document.dispatchEvent(new CustomEvent('solarsystem.travel.complete', {
+      //     detail: {
+      //         object: targetObject
+      //     }
+      // }));
     }
   }
 

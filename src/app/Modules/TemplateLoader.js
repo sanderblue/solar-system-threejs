@@ -10,7 +10,21 @@ function(Twig) {
       // Twig.debug = options.debug || true;
     }
 
-    get(id, pathToTemplate) {
+    get(id, pathToTemplate, async) {
+      var template = Twig.twig({ ref: id });
+
+      if (async === false) {
+        if (!template) {
+          return Twig.twig({
+            id: id,
+            href: pathToTemplate,
+            async: false
+          });
+        }
+
+        return template;
+      }
+
       return new Promise(function(resolve, reject) {
         var template = Twig.twig({ ref: id });
 

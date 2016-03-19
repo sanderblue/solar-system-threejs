@@ -330,10 +330,6 @@ function(
   };
 
   SolarSystemFactory.prototype.initializeUserInterface = function(currentTarget) {
-    var accordion = new Foundation.Accordion($('#menu').find('.accordion'), {
-      allowAllClosed: true
-    });
-
     var menuController = new MenuController({
       el: '#menu',
       scene: this.scene,
