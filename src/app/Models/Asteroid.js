@@ -5,6 +5,7 @@ define(
   'Modules/RandomNumberGenerator'
 ],
 function(Constants, CelestialObject, RandomNumberGenerator) {
+  'use strict';
 
   class Asteroid extends CelestialObject {
     constructor(index, texture) {

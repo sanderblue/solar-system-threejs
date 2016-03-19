@@ -4,11 +4,14 @@ define(
     'underscore',
     'backbone',
     'Modules/TemplateLoader',
-    'Controllers/TravelController',
+    'Controllers/TravelController'
 ],
 function($, _, Backbone, TemplateLoader, TravelController) {
+  'use strict';
 
   return Backbone.View.extend({
+    // template: templateLoader.get('', pathToTemplate),
+
     events: {
       'mouseenter a[data-id]': 'onMouseEnter',
       'mouseleave a[data-id]': 'onMouseLeave',
@@ -17,16 +20,20 @@ function($, _, Backbone, TemplateLoader, TravelController) {
 
     initialize: function(options) {
       this.scene = options.scene || null;
+      this.model = options.data || {};
       this.data = options.data || {};
       this.sceneObjects = options.sceneObjects || [];
       this.currentTarget = null;
       this.travelController = new TravelController(this.scene);
     },
 
+    render: function() {
+      this.$el.html(this.template(this.model.attributes));
+      return this;
+    },
+
     onClick: function(e) {
       var target = this.matchTarget(e.currentTarget.dataset.id);
-
-      console.debug('Target', target);
 
       if (this.isCurrentTarget(target)) {
         e.stopImmediatePropagation();
@@ -80,10 +87,6 @@ function($, _, Backbone, TemplateLoader, TravelController) {
 
       target.highlight = highlightDiameter;
       target.highlight.material.opacity = 0.9;
-
-      // console.debug('');
-      // console.debug('Distance To:       ', distanceTo);
-      // console.debug('Target Diameter:   ', target.threeDiameter);
     },
 
     highlightOrbit: function(target) {
@@ -92,9 +95,6 @@ function($, _, Backbone, TemplateLoader, TravelController) {
     },
 
     unhighlightTarget: function(target) {
-
-      console.debug('unhighlightTarget', target.highlight);
-
       target.core.remove(target.highlight);
     },
 
@@ -104,8 +104,6 @@ function($, _, Backbone, TemplateLoader, TravelController) {
     },
 
     travelToObject: function(target) {
-      console.debug('Target', target);
-
       // Return old target to default orbit line color
       if (this.currentTarget) {
         this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');

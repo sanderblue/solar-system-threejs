@@ -52,6 +52,17 @@
         font-size: 0.75rem;
         line-height: 1rem;
     }
+
+    &.traveling {
+        .moon-list {
+            opacity: 0;
+        }
+    }
+
+    .moon-list {
+        opacity: 1;
+        transition: opacity 500ms ease-in-out;
+    }
 }
 
 .planet-name {
@@ -83,7 +94,7 @@
 .menu-title {
     @include font-bold();
     font-size: 1.5rem;
-    border-bottom: 1px solid rgba(45, 45, 45, 0.8);
+    border: 1px solid rgba(45, 45, 45, 0.8);
     padding: 0.5rem 1rem;
 }
 

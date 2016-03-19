@@ -235,12 +235,10 @@ function(
 
               run.call(this);
             });
-          }, 500);
+          }, 750);
 
         } else {
           this.renderScene(startTime);
-
-          console.debug('DONE');
 
           /**********************************************/
           /* TESTING AREA */
