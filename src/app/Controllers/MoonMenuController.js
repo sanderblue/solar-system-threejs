@@ -9,11 +9,7 @@ define(
 function($, _, Backbone, TemplateLoader, TravelController) {
   'use strict';
 
-  var Sidebar = Backbone.Model.extend();
-
   return Backbone.View.extend({
-    // template: templateLoader.get('', pathToTemplate),
-
     events: {
       'mouseenter a[data-id]': 'onMouseEnter',
       'mouseleave a[data-id]': 'onMouseLeave',
@@ -22,10 +18,12 @@ function($, _, Backbone, TemplateLoader, TravelController) {
 
     initialize: function(options) {
       this.scene = options.scene || null;
-      this.model = new Backbone.Model.extend(options.data) || {};
+      this.model = null;
       this.data = options.data || {};
       this.sceneObjects = options.sceneObjects || [];
       this.currentTarget = null;
+      this.model = Backbone.Model.extend();
+      this.model = new this.model({ data: [] });
       this.templateLoader = new TemplateLoader();
       this.travelController = new TravelController(this.scene);
       this.template = this.templateLoader.get('moons', 'src/app/Views/moons.twig').then((template)=> {
@@ -36,7 +34,10 @@ function($, _, Backbone, TemplateLoader, TravelController) {
       });
 
       this.listenTo(this.model, 'change', this.render);
-      this.initializeListeners();
+    },
+
+    setModel: function(data) {
+      this.model.set({ data: data });
     },
 
     initializePlugins: function() {
@@ -44,12 +45,13 @@ function($, _, Backbone, TemplateLoader, TravelController) {
     },
 
     render: function() {
-      this.$el.html(this.template.render({ planets: this.data.planets }));
-    },
+      var data = this.model.get('data');
 
-    render: function() {
-      // this.$el.html(this.template());
-      return this;
+      if (data && !data.length) {
+        return this;
+      }
+
+      this.$el.html(this.template.render({ moons: data }));
     },
 
     onClick: function(e) {
@@ -150,44 +152,26 @@ function($, _, Backbone, TemplateLoader, TravelController) {
     },
 
     initializeListeners: function() {
-      document.addEventListener('solarsystem.travel.start', this.handleTravelStart.bind(this));
-      document.addEventListener('solarsystem.travel.complete', this.handleTravelComplete.bind(this));
+      document.addEventListener('solarsystem.travel.planet.start', this.handleTravelStart.bind(this));
+      document.addEventListener('solarsystem.travel.planet.complete', this.handleTravelComplete.bind(this));
+      document.addEventListener('solarsystem.travel.moon.start', this.handleTravelToMoonStart.bind(this));
+      document.addEventListener('solarsystem.travel.moon.complete', this.handleTravelToMoonComplete.bind(this));
     },
 
     handleTravelStart: function(e) {
-      $('#moons').addClass('traveling');
-      $('#current-target-title').removeClass('active').html('');
+      this.$el.addClass('traveling');
     },
 
     handleTravelComplete: function(e) {
-      var object = e.detail.object;
+      this.$el.removeClass('traveling');
+    },
 
-      $('#current-target-title').html(object.name).addClass('active');
+    handleTravelToMoonStart: function(e) {
 
-      this.templateLoader
-        .get('moons', 'src/app/Views/moons.twig')
-        .then((template)=> {
+    },
 
-          console.debug('Template', template);
+    handleTravelToMoonComplete: function(e) {
 
-          // var html = template.render({ moons: object._moons });
-
-          // html = $('#moons').html(html);
-
-          // $('#moons').removeClass('traveling');
-
-          // var accordion = new Foundation.Accordion($('#moons').find('.accordion'), {
-          //   allowAllClosed: true
-          // });
-
-          // var moonMenuController = new MoonMenuController({
-          //   el: $('.moon-list'),
-          //   scene: this.scene,
-          //   data: this.data,
-          //   sceneObjects: this.sceneObjects.moons
-          // });
-        }
-      );
     }
   });
 });

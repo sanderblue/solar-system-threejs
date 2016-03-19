@@ -235,7 +235,7 @@ function(
 
               run.call(this);
             });
-          }, 750);
+          }, 1000);
 
         } else {
           this.renderScene(startTime);

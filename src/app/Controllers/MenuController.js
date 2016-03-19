@@ -17,7 +17,8 @@ function(
   MoonMenuController,
   TemplateLoader,
   Planet,
-  Moon
+  Moon,
+  MoonData
 ) {
   'use strict';
 
@@ -34,12 +35,21 @@ function(
       this.sceneObjects = options.sceneObjects || [];
       this.travelController = new TravelController(this.scene);
       this.templateLoader = new TemplateLoader();
+      this.moonDataModel = null;
+
       this.currentTarget = options.currentTarget || this.sceneObjects[0];
       this.template = this.templateLoader.get('planets', 'src/app/Views/menu.twig').then((template)=> {
         this.template = template;
         this.render();
         this.initializePlugins();
         this.initializeListeners();
+
+        this.moonMenuController = new MoonMenuController({
+          el: $('#moons'),
+          scene: this.scene,
+          data: this.data,
+          sceneObjects: this.sceneObjects.moons
+        });
       });
     },
 
@@ -140,10 +150,6 @@ function(
 
       target.highlight = highlightDiameter;
       target.highlight.material.opacity = 0.9;
-
-      // console.debug('');
-      // console.debug('Distance To:       ', distanceTo);
-      // console.debug('Target Diameter:   ', target.threeDiameter);
     },
 
     highlightOrbit: function(target) {
@@ -161,19 +167,12 @@ function(
     },
 
     initializeListeners: function() {
-
-      console.debug('initializeListeners', this);
-
       document.addEventListener('solarsystem.travel.planet.start', this.handleTravelStart.bind(this));
       document.addEventListener('solarsystem.travel.planet.complete', this.handleTravelComplete.bind(this));
       document.addEventListener('solarsystem.focalpoint.change', this.handleTravelComplete.bind(this));
     },
 
     handleTravelStart: function(e) {
-
-      console.debug('TRAVEL START, YAY', e);
-
-      $('#moons').addClass('traveling');
       $('#current-target-title').removeClass('active').html('');
     },
 
@@ -182,88 +181,7 @@ function(
 
       $('#current-target-title').html(object.name).addClass('active');
 
-      // getMoonTemplate.then((template)=> {
-      //   var html = template.render({ moons: object._moons });
-
-      //   html = $('#moons').html(html);
-
-      //   $('#moons').removeClass('traveling');
-
-      //   var accordion = new Foundation.Accordion($('#moons').find('.accordion'), {
-      //     allowAllClosed: true
-      //   });
-
-      //   var moonMenuController = new MoonMenuController({
-      //     el: $('.moon-list'),
-      //     scene: this.scene,
-      //     data: this.data,
-      //     sceneObjects: this.sceneObjects.moons
-      //   });
-      // });
-    },
-
-    initListeners: function() {
-      // var getMoonTemplate = this.templateLoader.get('moons', 'src/app/Views/moons.twig');
-
-      // document.addEventListener('solarsystem.focalpoint.change', handleFocalPointChange.bind(this));
-      // document.removeEventListener('solarsystem.travel.complete', handleTravelComplete);
-      // document.addEventListener('solarsystem.travel.start', handleTravelStart.bind(this));
-      // document.addEventListener('solarsystem.travel.complete', handleTravelComplete.bind(this));
-
-      // function handleTravelStart(e) {
-      //   $('#moons').addClass('traveling');
-      //   $('#current-target-title').removeClass('active').html('');
-      // }
-
-      // function handleTravelComplete(e) {
-      //   var object = e.detail.object;
-
-      //   if (object instanceof Moon) {
-      //     return;
-      //   }
-
-      //   $('#current-target-title').html(object.name).addClass('active');
-
-      //   getMoonTemplate.then((template)=> {
-      //     var html = template.render({ moons: object._moons });
-
-      //     html = $('#moons').html(html);
-
-      //     $('#moons').removeClass('traveling');
-
-      //     var accordion = new Foundation.Accordion($('#moons').find('.accordion'), {
-      //       allowAllClosed: true
-      //     });
-
-      //     var moonMenuController = new MoonMenuController({
-      //       el: $('.moon-list'),
-      //       scene: this.scene,
-      //       data: this.data,
-      //       sceneObjects: this.sceneObjects.moons
-      //     });
-      //   });
-      // }
-
-      // function handleFocalPointChange(e) {
-      //   var object = e.detail.object;
-
-      //   getMoonTemplate.then((template)=> {
-      //     var html = template.render({ moons: object._moons });
-
-      //     html = $('#moons').html(html);
-
-      //     var accordion = new Foundation.Accordion($('#moons').find('.accordion'), {
-      //       allowAllClosed: true
-      //     });
-
-      //     var moonMenuController = new MoonMenuController({
-      //       el: '#moons',
-      //       scene: this.scene,
-      //       data: this.data,
-      //       sceneObjects: this.sceneObjects.moons
-      //     });
-      //   });
-      // }
+      this.moonMenuController.setModel(object._moons);
     }
   });
 });

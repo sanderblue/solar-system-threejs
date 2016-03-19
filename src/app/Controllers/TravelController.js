@@ -121,8 +121,8 @@ function(Moon, ColorManager) {
       var destinationCoordinates = this.calculateDestinationCoordinates(targetObject);
       var takeOff = this.prepareForTravel(takeOffHeight, targetObject);
 
-      console.debug('Destination', destinationCoordinates);
-      console.debug('targetObject.highlight.geometry', targetObject.highlight.geometry);
+      // console.debug('Destination', destinationCoordinates);
+      // console.debug('targetObject.highlight.geometry', targetObject.highlight.geometry);
 
       return takeOff.start().onComplete(()=> {
         var cameraTween = new TWEEN.Tween(this.camera.position)

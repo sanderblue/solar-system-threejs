@@ -15,9 +15,6 @@ define(function() {
     fadeOut(object, rgb, speed) {
       speed = speed || 1000;
 
-      console.debug('rgb', rgb);
-      console.debug('Speed', speed);
-
       return new TWEEN.Tween({ r: rgb.r, g: rgb.b, b: rgb.b })
         .to({
           r: 0,
