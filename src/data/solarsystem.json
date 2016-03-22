@@ -147,6 +147,13 @@
                     }
                 }
             ],
+            "satellites_mech": [
+                {
+                    "ISS": {
+                        "distanceFromParent": 400
+                    }
+                }
+            ],
             "_3d": {
                 "textures": {
                     "base": "/src/assets/textures/earth_4k.jpg",

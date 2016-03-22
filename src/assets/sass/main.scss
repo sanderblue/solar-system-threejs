@@ -18,7 +18,15 @@
     font-size: 1rem;
     z-index: 3;
     background: black;
-    padding-top: 100px;
+    padding-top: 50px;
+}
+
+.intro-heading {
+    background: url('../img/sun-horizon-glow-600.png') no-repeat center center;
+    text-transform: uppercase;
+    letter-spacing: 0.25rem;
+    text-align: center;
+    padding-top: 80px;
 }
 
 .intro-text {
@@ -37,12 +45,15 @@
     }
 }
 
-.render-scene {
-    width: 100%;
-    max-width: 300px;
-    text-align: center;
-    margin: 0 auto;
-    display: block;
+.button {
+    &.render-scene {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+        font-size: 1.4125rem;
+    }
 }
 
 .scene {

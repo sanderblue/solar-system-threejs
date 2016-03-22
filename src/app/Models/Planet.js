@@ -31,11 +31,9 @@ function(Constants, CelestialObject, Orbit) {
       this._threeParent = threeParent || null;
       this._moons = [];
       this._theta = 0;
-
-      this._threeObject.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
-
       this._orbitCentroid = this.createOrbitCentroid();
       this._highlight = this.createHighlight();
+      this._threeObject.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
 
       if (data.rings) {
         this.createRingGeometry(data);

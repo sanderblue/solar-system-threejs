@@ -13,6 +13,7 @@ define(
   'Controllers/MenuController',
   'Controllers/EffectsController',
   'Modules/RandomColorGenerator',
+  'Environment/Constants',
   'Listeners/FactoryListener'
 ],
 function(
@@ -28,7 +29,8 @@ function(
   TravelController,
   MenuController,
   EffectsController,
-  RandomColorGenerator
+  RandomColorGenerator,
+  Constants
 ) {
   'use strict';
 
@@ -46,6 +48,38 @@ function(
 
     this._randomColorGenerator = new RandomColorGenerator();
   }
+
+  /**
+   * Right now this basically just renders the prototype of the ISS. I'd like to get this to
+   * work with man-made satellites and model those as well.
+   */
+  SolarSystemFactory.prototype.buildMechanicalSatellites = function(planet, satellitesData) {
+
+    console.debug('Build Mech Satellite', planet, satellitesData);
+
+    if (!(satellitesData instanceof Array)) {
+      throw new Error('Argument satellitesData must be an instanceof Array.');
+    }
+
+    var mesh = new THREE.Mesh(
+      new THREE.SphereGeometry(
+          0.002,
+          16,
+          16
+        ),
+        new THREE.MeshPhongMaterial()
+      )
+    ;
+
+    var threeRadius = planet.threeDiameter / 2;
+    var threeDistanceFromParent = threeRadius + 400 * Constants.universeScale;
+
+    for (var i = 0; i < satellitesData.length; i++) {
+      planet.threeObject.add(mesh);
+
+      mesh.position.x = threeDistanceFromParent;
+    }
+  };
 
   SolarSystemFactory.prototype.buildMoons = function(planetData, planet) {
     for (var i = 0; i < planetData.satellites.length; i++) {
@@ -83,6 +117,10 @@ function(
 
       if (data.satellites.length) {
         this.buildMoons(data, planet);
+      }
+
+      if (data.satellites_mech && data.satellites_mech.length) {
+        this.buildMechanicalSatellites(planet, data.satellites_mech);
       }
 
       this.solarSystemObjects.planets.push(planet);
@@ -303,9 +341,9 @@ function(
     focalpoint.add(this.scene.camera);
     this.scene.camera.up.set(0, 0, 1);
     this.scene.camera.position.set(
-      12000,
+      11000,
       0,  // -27888,
-      500
+      100
     );
 
     var focalPointChangeEvent = new CustomEvent('solarsystem.focalpoint.change', {

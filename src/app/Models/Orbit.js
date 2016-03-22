@@ -26,7 +26,7 @@ function(Constants) {
     }
 
     createOrbit() {
-      var resolution = 2880; // segments in the line
+      var resolution = this._object.threeDistanceFromParent + 15 * 50; // segments in the line
       var length = 360 / resolution;
       var orbitLine = new THREE.Geometry();
       var material = new THREE.LineBasicMaterial({

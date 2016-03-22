@@ -32,10 +32,6 @@ function(Constants, CelestialObject, Orbit) {
       this._orbitCentroid = this.createOrbitCentroid();
       this._highlight = this.createHighlight();
 
-      if (data.rings) {
-        this.createRingGeometry(data);
-      }
-
       this.buildFullObject3D();
     }
 
@@ -160,7 +156,7 @@ function(Constants, CelestialObject, Orbit) {
 
     buildFullObject3D() {
       this._orbitLine = new Orbit(this, this._orbitColorDefault);
-      this._orbitCentroid.rotation.x += this._parentData.axialTilt * Constants.degreesToRadiansRatio;
+      // this._orbitCentroid.rotation.x += this._parentData.axialTilt * Constants.degreesToRadiansRatio;
       this._orbitCentroid.add(
         this._threeObject,
         this._core,
@@ -209,7 +205,7 @@ function(Constants, CelestialObject, Orbit) {
     }
 
     createGeometry(surface, atmosphere) {
-      var segmentsOffset = Number.parseInt(this._threeDiameter + 1 * 60);
+      var segmentsOffset = Number.parseInt(this._threeDiameter + 1 * 35);
       var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
             this._threeRadius,

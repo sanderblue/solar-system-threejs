@@ -12,7 +12,7 @@ function(Constants, Clock) {
   window.clock.start();
   window.clock.stop();
 
-  const COORDINATE_PRECISION = 4;
+  const COORDINATE_PRECISION = 12;
 
   class OrbitController {
     constructor(object) {
@@ -22,10 +22,10 @@ function(Constants, Clock) {
       this._segmentsInDay = 1;
       this._currentDay = 1;
       this._orbitAmplitude = this._object.threeParent ? this._object.threeParent.threeRadius + this._distanceFromParent : 1000;
-      this._degreesToRotate = 0.1; // 1 min = 1 day
+      this._degreesToRotate = 0.1 * Math.PI / 180;
       this._orbitPositionOffset = object.orbitPositionOffset || 0;
       this._theta = 0;
-      this._rotationEnabled ||
+      this._rotationEnabled = true;
 
       this.initListeners();
     }
@@ -69,7 +69,7 @@ function(Constants, Clock) {
     };
 
     rotateObject() {
-      this._threePlanet.rotation.y += this._degreesToRotate * Math.PI / 180; // 1 degree per frame
+      this._threePlanet.rotation.y += this._degreesToRotate; // 1 degree per frame
     };
   }
 
