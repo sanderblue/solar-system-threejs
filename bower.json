@@ -25,7 +25,8 @@
     "foundation-sites": "~6.1.2",
     "backbone": "^1.2.3",
     "randomcolor": "^0.4.4",
-    "three.js": "threejs#*"
+    "three.js": "threejs#*",
+    "foundation-icon-fonts": "*"
   },
   "devDependencies": {
     "stats.js": "*",

@@ -140,3 +140,14 @@
         opacity: 1;
     }
 }
+
+.help-section {
+    position: fixed;
+    top: 0;
+    left: 300px;
+    z-index: 1;
+
+    i {
+        font-size: 1.5rem;
+    }
+}
