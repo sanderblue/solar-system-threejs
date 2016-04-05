@@ -19,7 +19,7 @@ function(
     true
   );
 
-  dataRequest.send().then(function(data) {
+  dataRequest.send().then((data)=> {
     solarSystemData = data;
 
     var updateUserInterfaceEvent = new CustomEvent('solarsystem.update.ui', { detail: data });
