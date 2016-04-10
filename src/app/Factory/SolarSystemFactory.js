@@ -292,9 +292,9 @@ function(
     focalpoint.add(this.scene.camera);
     this.scene.camera.up.set(0, 0, 1);
     this.scene.camera.position.set(
-      11000,
+      17000,
       0,  // -27888,
-      100
+      2500
     );
 
     var focalPointChangeEvent = new CustomEvent('solarsystem.focalpoint.change', {
