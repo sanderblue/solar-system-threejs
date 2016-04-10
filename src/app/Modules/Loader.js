@@ -1,15 +1,35 @@
 define(
 [
   'vendor/httprequest/httprequest',
+  'Modules/GoogleAnalytics',
+  'Modules/Detector',
   'Modules/TemplateLoader',
   'Factory/SolarSystemFactory'
 ],
 function(
   HttpRequest,
+  GoogleAnalytics,
+  Detector,
   TemplateLoader,
   SolarSystemFactory
 ) {
   'use strict';
+
+  function notifyGa(category, action, label) {
+    ga('send', 'event', category, action, label);
+
+    console.log('GA Event:', category, '-', action, '-',label);
+  }
+
+  if (!Detector.webgl) {
+    Detector.addGetWebGLMessage();
+
+    notifyGa('Compatibility Check', 'Fail', window.navigator.userAgent);
+
+    return;
+  }
+
+  notifyGa('Compatibility Check', 'Pass', window.navigator.userAgent);
 
   var solarSystemData = null;
   var templateLoader = new TemplateLoader();

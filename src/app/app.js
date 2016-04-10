@@ -24,6 +24,7 @@ require.config({
             deps: [
                 'Extensions/Date',
                 'Extensions/HSV',
+                'Modules/GoogleAnalytics',
                 'Modules/Error/InvalidArgumentException',
                 'Modules/Error/MissingArgumentException'
             ]
