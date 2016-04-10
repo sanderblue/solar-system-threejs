@@ -2,7 +2,10 @@
 <html>
 	<head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<title>The Solar System</title>
+
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" type="text/css" href="src/assets/css/main.css">
@@ -48,9 +51,17 @@
             </div>
         </div>
 
+        <div class="full reveal" id="exampleModal8" data-reveal>
+          <p>Sorry, but this project is currently not viewable from a mobile device.</p>
+          <img src="http://placekitten.com/1920/1280" alt="Intropsective Cage">
+          <button class="close-button" data-close aria-label="Close reveal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
         <div id="browser-compatibility-modal" class="reveal browser-compatibility-modal">
             <h3>Browser Compatibility</h3>
-            <p class="lead">This project utilizes some of JavaScript's lastest ES6 features. Currently this project is best viewed using the latest version of <a href="https://www.google.com/chrome/browser/desktop/index.html" class="browser-link" target="_blank">Google Chrome</a> or <a href="https://developer.apple.com/safari/download/" target="_blank" class="browser-link">Safari Technology Preview</a>. At a minimum, your browser must support the following ES6 features. If you can't navigate past this page, this project is not compitible with the browser you're using.</p>
+            <p class="lead">This project utilizes some of JavaScript's lastest ES6 features. Currently this project is best viewed using the latest version of <a href="https://www.google.com/chrome/browser/desktop/index.html" class="browser-link" target="_blank">Google Chrome</a> or <a href="https://developer.apple.com/safari/download/" target="_blank" class="browser-link">Safari Technology Preview</a>. At a minimum, your browser must support the following ES6 features. If you can't navigate past this page, this project is not compitible with the browser you're using. Sorry, but this project is currently not viewable from a mobile device.</p>
             <ul>
                 <li>Classes</li>
                 <li>Arrow Functions</li>
@@ -75,6 +86,23 @@
             <a id="tutorial-got-it" class="button large" data-close="tutorial">Got It</a>
         </div>
 
+        <script type="text/javascript">
+            function isMobile() {
+                return navigator.userAgent.match(/Android/i)
+                    || navigator.userAgent.match(/BlackBerry/i)
+                    || navigator.userAgent.match(/iPhone|iPad|iPod/i)
+                    || navigator.userAgent.match(/Opera Mini/i)
+                    || navigator.userAgent.match(/IEMobile/i)
+                ;
+            }
+            if (isMobile()) {
+                var viewButton = document.getElementById('render-scene');
+
+                if (viewButton) {
+                    viewButton.innerHTML = '<span>Sorry, this project is currently not mobile friendly.</span>';
+                }
+            }
+        </script>
         <script type="text/javascript" src="src/app/vendor/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="src/app/vendor/foundation-sites/dist/foundation.min.js"></script>
         <script type="text/javascript" src="src/app/vendor/stats/build/stats.min.js"></script>

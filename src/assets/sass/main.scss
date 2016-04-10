@@ -43,6 +43,15 @@
         // display: table-cell;
         // vertical-align: middle;
     }
+
+    p {
+        font-size: 0.75rem;
+        padding: 0 1rem;
+
+        @media screen and (min-width: 40em) {
+            font-size: 1.25rem;
+        }
+    }
 }
 
 .button {
