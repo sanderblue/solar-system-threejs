@@ -156,7 +156,7 @@ function(Constants, CelestialObject, Orbit) {
 
     buildFullObject3D() {
       this._orbitLine = new Orbit(this, this._orbitColorDefault);
-      // this._orbitCentroid.rotation.x += this._parentData.axialTilt * Constants.degreesToRadiansRatio;
+      this._orbitCentroid.rotation.x += this._parentData.axialTilt * Constants.degreesToRadiansRatio; // double check this
       this._orbitCentroid.add(
         this._threeObject,
         this._core,

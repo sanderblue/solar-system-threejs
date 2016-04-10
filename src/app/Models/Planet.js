@@ -274,16 +274,16 @@ function(Constants, CelestialObject, Orbit) {
         Math.PI * 2
       );
 
-      geometry.uvsNeedUpdate = true;
+      // geometry.uvsNeedUpdate = true;
 
       // console.debug('geometry', geometry);
 
       // uvs.push( new THREE.Vector2( o / thetaSegments, i / phiSegments ) );
 
-      var map = this.getTexture('src/assets/textures/saturn_rings.png');
+      var map = THREE.ImageUtils.loadTexture('src/assets/textures/saturn_rings.png'); // this.getTexture('src/assets/textures/saturn_rings.png');
       map.minFilter = THREE.NearestFilter;
 
-      var colorMap = this.getTexture('src/assets/textures/saturn_rings_color_map.png');
+      var colorMap = THREE.ImageUtils.loadTexture('src/assets/textures/saturn_rings_color_map.png'); // this.getTexture('src/assets/textures/saturn_rings_color_map.png');
       colorMap.minFilter = THREE.NearestFilter;
 
       var material = new THREE.MeshLambertMaterial({
