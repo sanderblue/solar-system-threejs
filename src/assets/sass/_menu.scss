@@ -27,8 +27,12 @@
         @include font-semibold();
         margin-bottom: 0;
         color: white;
-        font-size: 0.8125rem;
+        font-size: 0.9rem;
         line-height: normal;
+
+        sup {
+            font-size: 50%;
+        }
     }
 
     a {
