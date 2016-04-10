@@ -55,7 +55,7 @@ function(
    */
   SolarSystemFactory.prototype.buildMechanicalSatellites = function(planet, satellitesData) {
 
-    console.debug('Build Mech Satellite', planet, satellitesData);
+    // console.debug('Build Mech Satellite', planet, satellitesData);
 
     if (!(satellitesData instanceof Array)) {
       throw new Error('Argument satellitesData must be an instanceof Array.');
@@ -236,16 +236,16 @@ function(
           buildGroup: this.buildPlanets.bind(this, data.planets, sun),
           timeout: 500
         }
-        // ,
-        // '2': {
-        //   buildGroup: this.buildAsteroidBelt.bind(this, data),
-        //   timeout: 500
-        // }
-        // ,
-        // '3': {
-        //   buildGroup: this.buildStars.bind(this),
-        //   timeout: 300
-        // }
+        ,
+        '2': {
+          buildGroup: this.buildAsteroidBelt.bind(this, data),
+          timeout: 500
+        }
+        ,
+        '3': {
+          buildGroup: this.buildStars.bind(this),
+          timeout: 300
+        }
       };
 
       var percentage = 25;
@@ -262,9 +262,9 @@ function(
               var groupEndTime = new Date().getTime();
               var elapsedTime = (groupEndTime - groupStartTime) * 0.001;
 
-              console.debug('Promise done.', i, response);
-              console.debug('Elapsed time:', elapsedTime);
-              console.debug('');
+              // console.debug('Promise done.', i, response);
+              // console.debug('Elapsed time:', elapsedTime);
+              // console.debug('');
 
               percentage = percentage + 25;
               this.updateProgress(percentage);
@@ -277,55 +277,6 @@ function(
 
         } else {
           this.renderScene(startTime);
-
-          /**********************************************/
-          /* TESTING AREA */
-            // Mars orbitOffset = 71 (dont forget to put this back to 71 in the json)
-
-            // var testPlanet = this.solarSystemObjects.planets[3];
-
-            // alert(testPlanet.theta);
-
-            // var time = (clock.getElapsedTime() / 60) + (testPlanet.orbitPositionOffset);
-            // var theta = time * (360 / testPlanet.orbitalPeriod) * 0.0174532925;
-
-            // testPlanet.threeObject.add(new THREE.AxisHelper(500));
-
-            // console.debug('Coordinates:\n',
-            //   'x:' + Number.parseInt(testPlanet.threeObject.position.x), '\n',
-            //   'y:' + Number.parseInt(testPlanet.threeObject.position.y)
-            // );
-            // console.debug('Orbit Radius:', Number.parseInt(testPlanet.threeDistanceFromParent));
-            // console.debug('Theta in radians:', theta);
-            // console.debug('Theta in degrees:', theta * 57.2958);
-            // // console.debug('Clock:', window.clock);
-            // //
-            // var r1 = Number.parseInt(testPlanet.threeDistanceFromParent + 100);
-            // var x1 = r1 * Math.cos(theta);
-            // var y1 = r1 * Math.sin(theta);
-
-            // var newPoint = new THREE.Object3D();
-            // newPoint.position.x = x1;
-            // newPoint.position.y = y1;
-            // newPoint.position.z = 0;
-
-            // newPoint.add(new THREE.AxisHelper(400));
-            // this.scene.add(newPoint);
-
-
-            // var gridHelper = new GridHelper(400000);
-            // gridHelper.rotation.x = 90 * 0.0174532925;
-
-            // this.scene.add(gridHelper);
-
-            // this.scene.camera.position.set(
-            //   0,
-            //   0,
-            //   40000
-            // );
-
-          /* END TESTING AREA */
-          /***********************************************/
           resolve();
         }
       }
@@ -387,29 +338,12 @@ function(
 
     // console.debug('Update Progress', meter[0].style.transitionDuration);
 
-    // meter.css({
-    //   'transitionDuration': elapsedTime +'ms'
-    // });
+    meter.css({
+      'transitionDuration': elapsedTime +'ms'
+    });
 
     meter.width(percentage+ '%');
   };
 
   return SolarSystemFactory;
 });
-
-
-// function zoomModel(isZoomOut, scale) {
-//   if (!isZoomOut) {
-//       this.scene.orbitControls.dollyIn(scale);
-//   }else{
-//       this.scene.orbitControls.dollyOut(scale);
-//   }
-
-//   this.scene.orbitControls.update();
-// }
-
-// $('#zoom-in').on('click', ()=> {
-//   console.debug('ZOoooooom...');
-
-//   zoomModel.call(this, false, 1.1);
-// });

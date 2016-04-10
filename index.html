@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+        <meta charset="UTF-8">
 		<title>The Solar System</title>
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -17,7 +18,6 @@
                         <input type="checkbox" id="toggle-orbit-highlight" class="toggle-control">
                         <span>Orbit Color Effects</span>
                     </label>
-                    <button id="zoom-in">Zoom In</button>
                 </div>
             </div>
             <div class="help-section">
@@ -48,13 +48,31 @@
             </div>
         </div>
 
-        <div id="tutorial" class="reveal tutorial-modal" data-reveal data-close-on-click="true">
-            <h3>Controls</h3>
-            <p class="lead">Use your mouse or trackpad to navigate the scene. To zoom, use a scroll motion. The move around a planet, use a click + drag motion.</p>
+        <div id="browser-compatibility-modal" class="reveal browser-compatibility-modal">
+            <h3>Browser Compatibility</h3>
+            <p class="lead">This project utilizes some of JavaScript's lastest ES6 features. Currently this project is best viewed using the latest version of <a href="https://www.google.com/chrome/browser/desktop/index.html" class="browser-link" target="_blank">Google Chrome</a> or <a href="https://developer.apple.com/safari/download/" target="_blank" class="browser-link">Safari Technology Preview</a>. At a minimum, your browser must support the following ES6 features. If you can't navigate past this page, this project is not compitible with the browser you're using.</p>
+            <ul>
+                <li>Classes</li>
+                <li>Arrow Functions</li>
+            </ul>
             <button class="close-button" data-close aria-label="Close modal" type="button">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <a id="tutorial-got-it" class="button" data-close="tutorial">Got It</a>
+            <span>
+                <a id="browser-compatibility-got-it" class="button large" data-close="browser-compatibility-modal">Got It</a>
+            </span>
+            <span>
+                <a href="https://kangax.github.io/compat-table/es6/" class="button large es6-feature-link">ES6 feature support</a>
+            </span>
+        </div>
+
+        <div id="tutorial" class="reveal tutorial-modal" data-reveal data-close-on-click="true">
+            <h3>Controls</h3>
+            <p class="lead">Use your mouse or trackpad to navigate the scene. To zoom, use a scroll motion. When viewing a planet, you can move around a planet using a click + drag motion.</p>
+            <button class="close-button" data-close aria-label="Close modal" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <a id="tutorial-got-it" class="button large" data-close="tutorial">Got It</a>
         </div>
 
         <script type="text/javascript" src="src/app/vendor/jquery/dist/jquery.min.js"></script>

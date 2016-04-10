@@ -10,7 +10,7 @@ define(function() {
     }
 
     function logEnd(event) {
-      console.log('Build took', event.detail);
+      // console.log('Build took', event.detail);
     }
 
     function logObjectComplete(event) {

@@ -144,10 +144,40 @@
 .help-section {
     position: fixed;
     top: 0;
-    left: 300px;
+    left: 256px;
     z-index: 1;
+    cursor: pointer;
 
     i {
         font-size: 1.5rem;
+    }
+}
+
+.browser-compatibility-modal {
+    background: #111111;
+    min-height: 325px;
+
+    ul {
+        margin-bottom: 2rem;
+    }
+
+    a.browser-link {
+        font-weight: 700;
+
+        color: rgba(100, 163, 175, 0.9);
+
+        &:hover {
+            color: rgba(100, 163, 175, 1);
+        }
+
+    }
+
+    a.es6-feature-link {
+        border: 2px solid transparent;
+        color: rgba(100, 163, 175, 0.9);
+
+        &:hover {
+            color: rgba(100, 163, 175, 1);
+        }
     }
 }

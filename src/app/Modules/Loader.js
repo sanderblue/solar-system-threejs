@@ -14,18 +14,32 @@ function(
   SolarSystemFactory
 ) {
   'use strict';
+  var seenJsFeaturesModal = false;
+
+  if (window.localStorage) {
+    seenJsFeaturesModal = localStorage.getItem('seenJsFeaturesModal');
+  }
+
+  if (!seenJsFeaturesModal) {
+    var browserAlert = new Foundation.Reveal($('#browser-compatibility-modal'));
+    browserAlert.open();
+
+    $('#browser-compatibility-got-it').on('click', ()=> {
+      if (window.localStorage) {
+        localStorage.setItem('seenJsFeaturesModal', 'true');
+      }
+    });
+  }
 
   function notifyGa(category, action, label) {
     ga('send', 'event', category, action, label);
 
-    console.log('GA Event:', category, '-', action, '-',label);
+    console.log('Event:', category, '-', action, '-',label);
   }
 
   if (!Detector.webgl) {
     Detector.addGetWebGLMessage();
-
     notifyGa('Compatibility Check', 'Fail', window.navigator.userAgent);
-
     return;
   }
 
