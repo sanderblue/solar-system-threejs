@@ -1,0 +1,34 @@
+{% spaceless %}
+    <div class="menu-title">Moons</div>
+    <ul class="accordion moon-list" data-accordion>
+        {% for moon in moons %}
+            <li class="accordion-item" data-accordion-item>
+                {% set moonId = moon.id|default(loop.index) %}
+
+                <a class="accordion-title moon-name" data-id="{{ moonId }}">{{ moon.name }}</a>
+                <div class="accordion-content" data-tab-content>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Diameter</td>
+                                <td>{{ moon.diameter }} km</td>
+                            </tr>
+                            <tr>
+                                <td>Semi-major Axis</td>
+                                <td>{{ moon.distanceFromParent|number_format(0, ',') }} km</td>
+                            </tr>
+                            <tr>
+                                <td>Orbital Period</td>
+                                <td>{{ moon.orbitalPeriod }} days</td>
+                            </tr>
+                            <tr>
+                                <td>Mass</td>
+                                <td>{{ moon.mass }} kg</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endspaceless %}

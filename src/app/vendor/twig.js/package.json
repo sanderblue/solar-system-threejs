@@ -1,0 +1,36 @@
+{
+  "author": "John Roepke <john@justjohn.us> (http://john.sh/)",
+  "name": "twig",
+  "description": "JS port of the Twig templating language.",
+  "version": "0.8.7",
+  "homepage": "https://github.com/justjohn/twig.js",
+  "licenses": [
+    { "type": "BSD-2-Clause",
+      "url":  "https://raw.github.com/justjohn/twig.js/master/LICENSE" }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/justjohn/twig.js.git"
+  },
+  "main": "twig.min.js",
+  "engines": {
+    "node": "*"
+  },
+  "bin": {
+    "twigjs": "./bin/twigjs"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "dependencies": {
+    "walk": "2.3.x",
+    "minimatch": "0.2.x"
+  },
+  "devDependencies": {
+    "tokenizer": "1.1.x",
+    "should": "3.3.x",
+    "mocha": "1.18.x",
+    "docco": "0.6.x",
+    "uglify-js": "2.4.x"
+  }
+}

@@ -1,0 +1,108 @@
+.menu,
+.moons {
+    position: fixed;
+    top: 0;
+    background: rgba(25, 25, 25, 0.1);
+    z-index: 3;
+
+    ul {
+        list-style: none;
+        margin-bottom: 0;
+    }
+
+    li {
+        line-height: 2rem;
+    }
+}
+
+.menu {
+    left: 0;
+    width: 250px;
+
+    li {
+        font-size: 0.925rem;
+    }
+
+    table {
+        @include font-semibold();
+        margin-bottom: 0;
+        color: white;
+        font-size: 0.8125rem;
+        line-height: normal;
+    }
+
+    a {
+        &:hover {
+            color: white;
+        }
+    }
+}
+
+.moons {
+    right: 0;
+    width: 250px;
+
+    .accordion-title {
+        @include font-semibold();
+        font-size: 0.8125rem;
+    }
+
+    table {
+        @include font-semibold();
+        font-size: 0.75rem;
+        line-height: 1rem;
+    }
+
+    &.traveling {
+        .moon-list {
+            opacity: 0;
+        }
+    }
+
+    .moon-list {
+        opacity: 1;
+        transition: opacity 500ms ease-in-out;
+    }
+}
+
+.planet-name {
+    @include font-semibold();
+    font-size: 1.125rem;
+}
+
+.toggle-effects {
+    position: fixed;
+    width: 250px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+
+    label {
+        color: white;
+    }
+
+    .control-holder {
+        width: 80%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+.menu-title {
+    @include font-bold();
+    font-size: 1.5rem;
+    border: 1px solid rgba(45, 45, 45, 0.8);
+    padding: 0.5rem 1rem;
+}
+
+.accordion-item {
+    &.is-active {
+        .accordion-title {
+            background-color: rgba(30, 30, 30, 0.75);
+            color: #3beaf7;
+        }
+    }
+}

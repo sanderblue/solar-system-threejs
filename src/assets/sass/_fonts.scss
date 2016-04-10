@@ -1,0 +1,129 @@
+$base_font_color: rgba(240, 240, 240, 1);
+$base_font_color_hover: rgba(255, 255, 255, 1);
+$base_font_color_light_opacity: rgba(240, 240, 240, 0.8);
+$base_link_color: #0080ff;
+
+/**
+ * Font Faces
+ */
+@include font-face('Rajdhani-Light', '../fonts/rajdhani/rajdhani-light-webfont', $file-formats: eot woff svg ttf);
+@include font-face('Rajdhani-Medium', '../fonts/rajdhani/rajdhani-medium-webfont', $file-formats: eot woff svg ttf);
+@include font-face('Rajdhani-Regular', '../fonts/rajdhani/rajdhani-regular-webfont', $file-formats: eot woff svg ttf);
+@include font-face('Rajdhani-Semibold', '../fonts/rajdhani/rajdhani-semibold-webfont', $file-formats: eot woff svg ttf);
+@include font-face('Rajdhani-Bold', '../fonts/rajdhani/rajdhani-bold-webfont', $file-formats: eot woff svg ttf);
+
+/**
+ * Font Families
+ */
+@mixin Rajdhani-Light() {
+    font-family: 'Rajdhani-Light', sans-serif;
+}
+
+@mixin Rajdhani-Medium() {
+    font-family: 'Rajdhani-Medium', sans-serif;
+}
+
+@mixin Rajdhani-Regular() {
+    font-family: 'Rajdhani-Regular', sans-serif;
+}
+
+@mixin Rajdhani-Semibold() {
+    font-family: 'Rajdhani-Semibold', sans-serif;
+}
+
+@mixin Rajdhani-Bold() {
+    font-family: 'Rajdhani-Bold', sans-serif;
+}
+
+
+
+/**
+ * Font Variables
+ */
+@mixin font-light() {
+    @include Rajdhani-Light();
+}
+
+@mixin font-medium() {
+    @include Rajdhani-Medium();
+}
+
+@mixin font-regular() {
+    @include Rajdhani-Regular();
+}
+
+@mixin font-semibold() {
+    @include Rajdhani-Semibold();
+}
+
+@mixin font-bold() {
+    @include Rajdhani-Bold();
+}
+
+
+/**
+ * Font Sizes
+ */
+@mixin font-size ($size) {
+    font-size: $size;
+}
+
+@mixin font-12() {
+    font-size: 12px;
+}
+
+@mixin font-13() {
+    font-size: 13px;
+}
+
+@mixin font-14() {
+    font-size: 14px;
+}
+
+@mixin font-15() {
+    font-size: 15px;
+}
+
+@mixin font-16() {
+    font-size: 16px;
+}
+
+@mixin font-18() {
+    font-size: 18px;
+}
+
+@mixin font-20() {
+    font-size: 20px;
+}
+
+@mixin font-22() {
+    font-size: 22px;
+}
+
+@mixin font-24() {
+    font-size: 24px;
+}
+
+@mixin font-32() {
+    font-size: 32px;
+}
+
+@mixin font-36() {
+    font-size: 36px;
+}
+
+@mixin font-42() {
+    font-size: 42px;
+}
+
+@mixin font-48() {
+    font-size: 48px;
+}
+
+@mixin font-60() {
+    font-size: 60px;
+}
+
+@mixin font-72() {
+    font-size: 72px;
+}

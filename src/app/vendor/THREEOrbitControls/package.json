@@ -1,0 +1,41 @@
+{
+  "name": "three-orbit-controls",
+  "version": "71.1.0",
+  "description": "orbit controls for ThreeJS",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Matt DesLauriers",
+    "email": "dave.des@gmail.com",
+    "url": "https://github.com/mattdesl"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^8.1.1",
+    "canvas-testbed": "^1.0.3",
+    "scriptjs": "^2.5.7",
+    "three": "^0.71.0",
+    "wzrd": "^1.2.1"
+  },
+  "scripts": {
+    "start": "wzrd test.js"
+  },
+  "keywords": [
+    "orbit",
+    "controls",
+    "threejs",
+    "three",
+    "js",
+    "orbiter",
+    "camera",
+    "controller"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mattdesl/three-orbit-controls.git"
+  },
+  "homepage": "https://github.com/mattdesl/three-orbit-controls",
+  "bugs": {
+    "url": "https://github.com/mattdesl/three-orbit-controls/issues"
+  }
+}

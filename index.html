@@ -1,104 +1,85 @@
+<!DOCTYPE html>
 <html>
 	<head>
+        <meta charset="UTF-8">
 		<title>The Solar System</title>
-        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-
-        <script data-main="assets/js/config" src="assets/js/libs/requirejs/require.js"></script>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" type="text/css" href="src/assets/css/main.css">
 	</head>
 	<body>
-        <!-- LOADING PROMPT -->
-        <div id="loading-prompt" class="loading-prompt">
-            <div class="loading-prompt-inner-wrap">
-                <div id="introduction" class="introduction">
-                    <div class="header-holder">
-                        <div class="introduction-header">Our Solar System</div>
-                    </div>
-                    <div class="line-segment"></div>
-                    <div class="introduction-text">
-                        <p>
-                            A solar system refers to a star and all the objects that travel in orbit around it. Our solar system consists of the sun, eight planets (and their natural satellites), dwarf planets, asteroids, and comets. Our solar system is located within the Orion Arm of the Milky Way Galaxy, which is located about 27,000 light-years away from the Milky Way Galactic Center.
-                        </p>
-                        <p>
-                            This is a project powered by Three.js and WebGL. All objects within this project have been modeled to scale based on real astronomical data. The scene currently renders the sun, thousands of stars, the asteriod belt, all eight planets, each planet's orbit path, their rings (if applicable), and moons (with exception to tiny moons).
-                        </p>
-                        <p>
-                            For a better viewing experience, view within Chrome and use a computer that has at least 4 GB of RAM (8GB+ recommended) and a good video card.
-                        </p>
-                    </div>
-                    <div id="build-button" class="btn-ss">BUILD SOLAR SYSTEM</div>
+        <div class="container-main">
+            <div id="menu" class="menu"></div>
+            <div id="moons" class="moons"></div>
+            <div id="current-target-title" class="current-target-title active">Solar System</div>
+            <div id="toggle-effects" class="toggle-effects">
+                <div class="control-holder">
+                    <label for="toggle-orbit-highlight">
+                        <input type="checkbox" id="toggle-orbit-highlight" class="toggle-control">
+                        <span>Orbit Color Effects</span>
+                    </label>
                 </div>
-                <div id="build-status-prompt" class="build-status-prompt">
-                    <div class="status-prompt-header">Building the Solar System...</div>
-                    <div id="status-messages" class="status-messages-holder"></div>
+            </div>
+            <div class="help-section">
+                <i data-open="tutorial" class="fi-info"></i>
+            </div>
+            <div id="solar-system" class="scene"></div>
+            <div class="intro-screen">
+                <div class="intro-text">
+                    <div class="intro-heading">
+                        <h1>Our Solar System</h1>
+                    </div>
+                    <div class="inner">
+                        <p>A solar system refers to a star and all the objects that travel in orbit around it. Our solar system consists of the sun, eight planets (and their natural satellites), dwarf planets, asteroids, and comets. Our solar system is located within the Orion Arm of the Milky Way Galaxy, which is located about 27,000 light-years away from the Milky Way Galactic Center.</p>
+                        <p>This is a project powered by Three.js and WebGL. All objects within this project have been modeled to scale based on real astronomical data. The scene currently renders the sun, all eight planets, all five dwarf planets, each planet's moons, thousands of stars, and the asteriod belt.</p>
+                        <p>For a better viewing experience, view within Chrome and use a computer that has at least 4 GB of RAM (8GB+ recommended) and a good video card.</p>
+                        <div id="render-scene" class="button large render-scene">
+                            <span>View Solar System</span>
+                        </div>
+                    </div>
+                    <div id="loading-prompt" class="loading-prompt">
+                        <span>Building the Solar System...</span>
+                        <div id="realtime-updates"></div>
+                        <div id="progress-bar" class="progress" role="progressbar" tabindex="0">
+                            <div class="progress-meter"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="container">
-            <div id="control-panel" class="control-panel">
-                <div id="accordian" class="accordian">
-                    <div class="accordian-item">
-                        <div class="accordian-item-label">Camera Controls</div>
-                        <div class="accordian-submenu">
-                            <div id="camera-control">
-                                <div id="dynamic-container" class="camera-orbit-track">
-                                    <div id="marker" class="camera-positioner"></div>
-                                    <div id="innerCircle" class="compass">
-                                        <div class="compass-circle"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <input id="camera-zoom-control" class="zoom-control-input" type="range" name="zoom" min="-60000" max="60000" step="1">
-                        </div>
-                    </div>
-                    <div class="accordian-item">
-                        <div class="accordian-item-label">Planets</div>
-                        <div id="planets" class="accordian-submenu">
-                            <!-- Planet list items are built and appended via javascript -->
-                        </div>
-                    </div>
-                    <div class="accordian-item">
-                        <div class="accordian-item-label">Dwarf Planets</div>
-                        <div id="dwarf-planets" class="accordian-submenu">
-                            <!-- Dwarf planet list items are built and appended via javascript -->
-                        </div>
-                    </div>
-                    <div class="accordian-item">
-                        <div class="accordian-item-label">Audio Controls</div>
-                        <div class="accordian-submenu">
-                            <audio
-                                src="assets/sound/granulation.mp3"
-                                id="sound"
-                                class="soundscape"
-                                autoplay="true"
-                                loop="true"
-                                type="audio/mpeg"
-                                volume="0.05"
-                                controls
-                            >
-                            </audio>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="planet-data-module" class="planet-data-module"></div>
+        <div id="browser-compatibility-modal" class="reveal browser-compatibility-modal">
+            <h3>Browser Compatibility</h3>
+            <p class="lead">This project utilizes some of JavaScript's lastest ES6 features. Currently this project is best viewed using the latest version of <a href="https://www.google.com/chrome/browser/desktop/index.html" class="browser-link" target="_blank">Google Chrome</a> or <a href="https://developer.apple.com/safari/download/" target="_blank" class="browser-link">Safari Technology Preview</a>. At a minimum, your browser must support the following ES6 features. If you can't navigate past this page, this project is not compitible with the browser you're using.</p>
+            <ul>
+                <li>Classes</li>
+                <li>Arrow Functions</li>
+            </ul>
+            <button class="close-button" data-close aria-label="Close modal" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <span>
+                <a id="browser-compatibility-got-it" class="button large" data-close="browser-compatibility-modal">Got It</a>
+            </span>
+            <span>
+                <a href="https://kangax.github.io/compat-table/es6/" class="button large es6-feature-link">ES6 feature support</a>
+            </span>
         </div>
 
-        <div id="solar-system" class="scene"></div>
+        <div id="tutorial" class="reveal tutorial-modal" data-reveal data-close-on-click="true">
+            <h3>Controls</h3>
+            <p class="lead">Use your mouse or trackpad to navigate the scene. To zoom, use a scroll motion. When viewing a planet, you can move around a planet using a click + drag motion.</p>
+            <button class="close-button" data-close aria-label="Close modal" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <a id="tutorial-got-it" class="button large" data-close="tutorial">Got It</a>
+        </div>
 
-        <script>
-            (function(i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function() {
-                (i[r].q = i[r].q || []).push(arguments)},
-                i[r].l  = 1 * new Date();
-                a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-41944984-1', 'sanderblue.github.io/solar-system-threejs');
-            ga('send', 'pageview');
-        </script>
+        <script type="text/javascript" src="src/app/vendor/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="src/app/vendor/foundation-sites/dist/foundation.min.js"></script>
+        <script type="text/javascript" src="src/app/vendor/stats/build/stats.min.js"></script>
+        <script type="text/javascript" src="src/app/vendor/tweenjs/build/tween.min.js"></script>
+        <script type="text/javascript" src="src/app/vendor/three.js/build/three.js"></script>
+        <script data-main="src/app/app" src="src/app/vendor/requirejs/require.js"></script>
 	</body>
 </html>

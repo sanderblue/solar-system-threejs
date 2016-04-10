@@ -1,0 +1,24 @@
+html {
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    @include font-regular();
+    background: black;
+    color: #f9f9f9;
+    letter-spacing: 0.02rem;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    @include font-medium();
+}
+
+.button {
+    @include font-semibold();
+}
+

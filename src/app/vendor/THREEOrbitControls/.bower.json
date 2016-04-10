@@ -1,0 +1,15 @@
+{
+  "name": "THREEOrbitControls",
+  "homepage": "https://github.com/eristoddle/three-orbit-controls",
+  "version": "71.1.0",
+  "_release": "71.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v71.1.0",
+    "commit": "2fb0bd4c94e642ffa75368dd9aee9504fd9fada8"
+  },
+  "_source": "git://github.com/eristoddle/three-orbit-controls.git",
+  "_target": "~71.1.0",
+  "_originalSource": "THREEOrbitControls",
+  "_direct": true
+}

@@ -1,6 +1,6 @@
 {
   "name": "solarsystemjs",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/sanderblue/solar-system-threejs",
   "authors": [
     "Sander Blue <william.a.blue@gmail.com>"
@@ -15,6 +15,21 @@
     "tests"
   ],
   "dependencies": {
-    "twig.js": "~0.7.2"
+    "twig.js": "~0.8.7",
+    "jquery": "~2.1.4",
+    "requirejs": "~2.1.17",
+    "tweenjs": "*",
+    "threejs": "*",
+    "THREEOrbitControls": "~71.1.0",
+    "tween.js": "tweenjs#~16.3.1",
+    "foundation-sites": "~6.1.2",
+    "backbone": "^1.2.3",
+    "randomcolor": "^0.4.4",
+    "three.js": "threejs#*",
+    "foundation-icon-fonts": "*"
+  },
+  "devDependencies": {
+    "stats.js": "*",
+    "bourbon": "~4.2.6"
   }
 }
