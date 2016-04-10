@@ -6,7 +6,7 @@ define(
 	'Controllers/TravelController',
   'Controllers/MoonMenuController',
 	'Modules/TemplateLoader',
-  'Models/PLanet',
+  'Models/Planet',
   'Models/Moon'
 ],
 function(
