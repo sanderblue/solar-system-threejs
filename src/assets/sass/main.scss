@@ -18,7 +18,11 @@
     font-size: 1rem;
     z-index: 3;
     background: black;
-    padding-top: 50px;
+    padding-top: 20px;
+
+    @media screen and (min-width: 40em) {
+        padding-top: 50px;
+    }
 }
 
 .intro-heading {
@@ -26,7 +30,13 @@
     text-transform: uppercase;
     letter-spacing: 0.25rem;
     text-align: center;
-    padding-top: 80px;
+    padding-top: 2rem;
+    margin: 0 2rem;
+
+    @media screen and (min-width: 40em) {
+        padding-top: 80px;
+        margin: 0;
+    }
 }
 
 .intro-text {
