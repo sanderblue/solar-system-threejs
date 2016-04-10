@@ -10,5 +10,9 @@
 
     p {
         line-height: 1.3;
+
+        @media screen and (min-width: 40em) {
+            line-height: 1.5;
+        }
     }
 }

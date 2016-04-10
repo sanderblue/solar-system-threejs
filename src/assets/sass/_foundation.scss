@@ -41,6 +41,12 @@ $reveal-background: rgba(50, 50, 50, 0.9);
 $reveal-border: 1px solid rgba(80, 80, 80, 0.9);
 $reveal-overlay-background: transparent;
 
+/**
+ * Tooltip
+ */
+$tooltip-font-size: 0.9125rem;
+$tooltip-background-color: rgba(35, 35, 35, 0.95);
+
 @include foundation-everything();
 
 .button {

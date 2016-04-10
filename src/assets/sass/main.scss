@@ -6,6 +6,12 @@
 @import "header";
 @import "menu";
 
+.container-main {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
 
 // Temporary
 .intro-screen {
@@ -19,10 +25,6 @@
     z-index: 3;
     background: black;
     padding-top: 20px;
-
-    @media screen and (min-width: 40em) {
-        padding-top: 50px;
-    }
 }
 
 .intro-heading {
@@ -197,6 +199,44 @@
 
         &:hover {
             color: rgba(100, 163, 175, 1);
+        }
+    }
+}
+
+.tooltip {
+    font-style: italic;
+    box-shadow: 0 0 10px rgba(100, 100, 100, 0.75);
+}
+
+.social-buttons {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding-right: 0.3125rem;
+    padding-bottom: 0.25rem;
+    z-index: 3000;
+
+    iframe {
+        transition: opacity 275ms ease-out;
+        opacity: 0;
+        height: 20px;
+        width: 150px;
+
+        &.github-button {
+            width: 51px;
+        }
+    }
+}
+
+.twitter-follow-button {
+    transition: opacity 275ms ease-in-out;
+    opacity: 0;
+
+    &.twitter-follow-button-rendered {
+        opacity: 1;
+
+        + iframe {
+            opacity: 1;
         }
     }
 }

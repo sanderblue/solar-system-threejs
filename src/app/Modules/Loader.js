@@ -1,14 +1,14 @@
 define(
 [
   'vendor/httprequest/httprequest',
-  'Modules/GoogleAnalytics',
+  'Modules/ThirdPartyScripts',
   'Modules/Detector',
   'Modules/TemplateLoader',
   'Factory/SolarSystemFactory'
 ],
 function(
   HttpRequest,
-  GoogleAnalytics,
+  ThirdPartyScripts,
   Detector,
   TemplateLoader,
   SolarSystemFactory

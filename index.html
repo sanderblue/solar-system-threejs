@@ -12,6 +12,10 @@
 	</head>
 	<body>
         <div class="container-main">
+            <div class="social-buttons">
+                <a href="https://twitter.com/SanderBlue" class="twitter-follow-button" data-show-count="false">Follow @SanderBlue</a>
+                <iframe src="https://ghbtns.com/github-btn.html?user=sanderblue&repo=solar-system-threejs&type=star&count=false" class="github-button" frameborder="0" scrolling="0"></iframe>
+            </div>
             <div id="menu" class="menu"></div>
             <div id="moons" class="moons"></div>
             <div id="current-target-title" class="current-target-title active">Solar System</div>
@@ -24,9 +28,9 @@
                 </div>
             </div>
             <div class="help-section">
+                <i data-open="info" class="fi-info"></i>
                 <i data-open="tutorial" class="fi-info"></i>
             </div>
-            <div id="solar-system" class="scene"></div>
             <div class="intro-screen">
                 <div class="intro-text">
                     <div class="intro-heading">
@@ -34,8 +38,8 @@
                     </div>
                     <div class="inner">
                         <p>A solar system refers to a star and all the objects that travel in orbit around it. Our solar system consists of the sun, eight planets (and their natural satellites), dwarf planets, asteroids, and comets. Our solar system is located within the Orion Arm of the Milky Way Galaxy, which is located about 27,000 light-years away from the Milky Way Galactic Center.</p>
-                        <p>This is a project powered by Three.js and WebGL. All objects within this project have been modeled to scale based on real astronomical data. The scene currently renders the sun, all eight planets, all five dwarf planets, each planet's moons, thousands of stars, and the asteriod belt.</p>
-                        <p>For a better viewing experience, view within Chrome and use a computer that has at least 4 GB of RAM (8GB+ recommended) and a good video card.</p>
+                        <p>This is a project powered by <a href="http://threejs.org/" target="_blank">Three.js</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API">WebGL</a>. All objects within this project have been modeled to <span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false" tabindex="1" title="Scale = 1 * 10^-4.2">scale</span> based on real astronomical data. The scene currently renders the sun, all eight planets (nine if you side with Pluto being a planet), each planet's moons, the asteriod belt and thousands of stars.</p>
+                        <p>For a better viewing experience, use a laptop or desktop with the latest version of Google Chrome or Safari Technology Preview.</p>
                         <div id="render-scene" class="button large render-scene">
                             <span>View Solar System</span>
                         </div>
@@ -49,6 +53,7 @@
                     </div>
                 </div>
             </div>
+            <div id="solar-system" class="scene"></div>
         </div>
 
         <div class="full reveal" id="exampleModal8" data-reveal>
@@ -75,6 +80,15 @@
             <span>
                 <a href="https://kangax.github.io/compat-table/es6/" class="button large es6-feature-link">ES6 feature support</a>
             </span>
+        </div>
+
+        <div id="info" class="reveal info-modal" data-reveal data-close-on-click="true">
+            <h3>Project Info</h3>
+
+            <button class="close-button" data-close aria-label="Close modal" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <a id="info-got-it" class="button large" data-close="info">Close</a>
         </div>
 
         <div id="tutorial" class="reveal tutorial-modal" data-reveal data-close-on-click="true">
