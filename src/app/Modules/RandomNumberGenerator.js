@@ -46,6 +46,10 @@ define(function() {
       return randomNumB;
     }
 
+    getRandomArbitraryNumber(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
     /**
      * Gets a random number between a range min and range max.
      *
@@ -55,18 +59,28 @@ define(function() {
      */
     getRandomNumberWithinRange(rangeMin, rangeMax) {
       // Create byte array and fill with 1 random number
-      var byteArray = new Uint8Array(1);
+      var byteArray = new Uint8Array(2);
 
-      window.crypto.getRandomValues(byteArray);
+      byteArray = window.crypto.getRandomValues(byteArray);
 
+      var sum = byteArray.reduce(this.add.bind(this), 0);
+
+      // console.log('byteArray:', byteArray);
+      // console.log('sum', sum);
+
+      var randNum = sum * (rangeMax.toFixed(0).length + 3);
       var range = rangeMax - rangeMin + 1;
-      var maxRange = rangeMax;
+      var max = Math.floor(rangeMax / range) * range;
 
-      if (byteArray[0] >= Math.floor(maxRange / range) * range) {
-        return this.getRandomNumberWithinRange(rangeMin, rangeMax);
+      if (randNum >= max) {
+        randNum = this.getRandomNumberWithinRange(rangeMin, rangeMax);
       }
 
-      return rangeMin + (byteArray[0] % range);
+      return rangeMin + (randNum % range);
+    }
+
+    add(a, b) {
+      return a + b;
     }
   }
 
