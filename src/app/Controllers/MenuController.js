@@ -81,7 +81,7 @@ function(
         return true;
       }
 
-      this.highlightTarget(target);
+      this.highlightObject(e);
     },
 
     onMouseLeave: function(e) {
@@ -92,13 +92,13 @@ function(
         return true;
       }
 
-      this.unhighlightTarget(target);
+      this.unhighlightObject(e);
     },
 
     travelToObject: function(target) {
       // Return old target to default orbit line color
       if (this.currentTarget && this.currentTarget.orbitLine) {
-        this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+        this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#2d2d2d');
       }
 
       // Change new target orbit line color
@@ -153,7 +153,7 @@ function(
     },
 
     highlightOrbit: function(target) {
-      target.orbitLine.orbit.material.color = new THREE.Color('#d3d3d3');
+      target.orbitLine.orbit.material.color = new THREE.Color('#214956'); // new THREE.Color('#d3d3d3');
       target.orbitLine.orbit.material.needsUpdate = true;
     },
 
@@ -162,7 +162,7 @@ function(
     },
 
     unhighlightOrbit: function(target) {
-      target.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+      target.orbitLine.orbit.material.color = new THREE.Color('#2d2d2d');
       target.orbitLine.orbit.material.needsUpdate = true;
     },
 
