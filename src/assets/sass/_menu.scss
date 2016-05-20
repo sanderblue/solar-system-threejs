@@ -37,7 +37,7 @@
 
     a {
         &:hover {
-            color: white;
+            color: #ffbd00;
         }
     }
 }
@@ -66,6 +66,12 @@
     .moon-list {
         opacity: 1;
         transition: opacity 500ms ease-in-out;
+    }
+
+    a {
+        &:hover {
+            color: #3beaf7;
+        }
     }
 }
 
