@@ -45,7 +45,7 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
           positions[i + 2] = z;
 
           var rgbValue = this._randomNumberGenerator.getRandomArbitraryNumber(1, 20);
-          color.setRGB(rgbValue, rgbValue, rgbValue);
+          color.setRGB(119, 81, 20);
 
           colors[i] = color.r;
           colors[i + 1] = color.g;
@@ -57,8 +57,9 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
         geometry.computeBoundingSphere();
 
         var material = new THREE.PointsMaterial({
-          size: 3,
-          vertexColors: THREE.VertexColors
+          size: 3
+          // ,
+          // vertexColors: THREE.VertexColors
         });
 
         var particleSystem = new THREE.Points(geometry, material);

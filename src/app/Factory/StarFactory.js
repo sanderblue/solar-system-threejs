@@ -10,8 +10,8 @@ function(Constants, Scene, RandomNumberGenerator) {
   class StarFactory {
     constructor(scene) {
       this._starsCentriod = new THREE.Object3D();
-      this._starsCount = 10000;
-      this._threeDistanceFromParent = 14959787070 * 1000 * Constants.orbitScale;
+      this._starsCount = 8000;
+      this._threeDistanceFromParent = 14959787070 * 40000 * Constants.orbitScale;
       this._randomNumberGenorator = new RandomNumberGenerator();
       this._scene = scene;
     }
@@ -33,8 +33,6 @@ function(Constants, Scene, RandomNumberGenerator) {
         var color = new THREE.Color();
         var n = 1000;
         var n2 = n / 2; // particles spread in the cube
-
-        console.log('ERE');
 
         for (var i = 0; i < positions.length; i += 3) {
           var pos = this.getPosition(i);
@@ -59,7 +57,7 @@ function(Constants, Scene, RandomNumberGenerator) {
 
         var material = new THREE.PointsMaterial({
           size: 1,
-          vertexColors: THREE.VertexColors
+          vertexColors: true
         });
 
         var particleSystem = new THREE.Points(geometry, material);
