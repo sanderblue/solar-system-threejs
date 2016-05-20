@@ -24,18 +24,47 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
 
     build() {
       return new Promise((resolve, reject)=> {
-        var asteroids = [];
 
-        for (var i = 0; i < this._count; i++) {
-          var asteroid = new Asteroid(i, this._texture);
+        var particles = 10000;
+        var geometry = new THREE.BufferGeometry();
+        var positions = new Float32Array( particles * 3 );
+        var colors = new Float32Array( particles * 3 );
+        var color = new THREE.Color();
+        var n = 1000, n2 = n / 2; // particles spread in the cube
 
-          this.positionAsteroid(asteroid.threeObject, i);
+        for ( var i = 0; i < positions.length; i += 3 ) {
+          // positions
+          var pos = this.positionAsteroid(null, i);
+          var x = pos.x;
+          var y = pos.y;
+          var z = pos.z;
 
-          asteroids.push(asteroid);
+          positions[ i ]     = x;
+          positions[ i + 1 ] = y;
+          positions[ i + 2 ] = z;
 
-          this._orbitCentroid.add(asteroid.orbitCentroid);
-          this._orbitCentroid.rotation.z = i * Constants.degreesToRadiansRatio;
+          // colors
+          var vx = ( x / n ) + 0.5;
+          var vy = ( y / n ) + 0.5;
+          var vz = ( z / n ) + 0.5;
+
+          var rgbValue = this._randomNumberGenerator.getRandomNumberWithinRange(150, 225);
+          color.setRGB( rgbValue, rgbValue, rgbValue );
+
+          colors[ i ]     = color.r;
+          colors[ i + 1 ] = color.g;
+          colors[ i + 2 ] = color.b;
         }
+
+        geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+        geometry.addAttribute( 'color', new THREE.BufferAttribute( colors, 3 ) );
+        geometry.computeBoundingSphere();
+
+        //
+        var material = new THREE.PointsMaterial( { size: 15, vertexColors: THREE.VertexColors } );
+        var particleSystem = new THREE.Points( geometry, material );
+
+        this._orbitCentroid.add(particleSystem);
 
         this._scene.add(this._orbitCentroid);
 
@@ -44,6 +73,34 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
 
           this._orbitCentroid.rotation.z +=  degreesToRotate * Constants.degreesToRadiansRatio;
         }, false);
+
+
+
+
+
+
+
+
+        // var asteroids = [];
+
+        // for (var i = 0; i < this._count; i++) {
+        //   var asteroid = new Asteroid(i, this._texture);
+
+        //   this.positionAsteroid(asteroid.threeObject, i);
+
+        //   asteroids.push(asteroid);
+
+        //   this._orbitCentroid.add(asteroid.orbitCentroid);
+        //   this._orbitCentroid.rotation.z = i * Constants.degreesToRadiansRatio;
+        // }
+
+        // this._scene.add(this._orbitCentroid);
+
+        // document.addEventListener('frame', (e)=> {
+        //   var degreesToRotate = 0.002;
+
+        //   this._orbitCentroid.rotation.z +=  degreesToRotate * Constants.degreesToRadiansRatio;
+        // }, false);
 
         resolve();
       });
@@ -77,6 +134,12 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
 
       var posX = amplitude * Math.cos(theta);
       var posY = amplitude * Math.sin(theta);
+
+      return {
+        x: posX,
+        y: posY,
+        z: this._randomNumberGenerator.getRandomNumberWithinRange(0, 3)
+      }
 
       asteroid.position.set(
         posX,
