@@ -236,16 +236,16 @@ function(
           buildGroup: this.buildPlanets.bind(this, data.planets, sun),
           timeout: 500
         }
-        // ,
-        // '2': {
-        //   buildGroup: this.buildAsteroidBelt.bind(this, data),
-        //   timeout: 500
-        // }
-        // ,
-        // '3': {
-        //   buildGroup: this.buildStars.bind(this),
-        //   timeout: 300
-        // }
+        ,
+        '2': {
+          buildGroup: this.buildAsteroidBelt.bind(this, data),
+          timeout: 500
+        }
+        ,
+        '3': {
+          buildGroup: this.buildStars.bind(this),
+          timeout: 300
+        }
       };
 
       var percentage = 25;
@@ -256,7 +256,11 @@ function(
 
         var groupStartTime = new Date().getTime();
 
+        console.log('RUN', i, map.hasOwnProperty(i))
+
         if (map.hasOwnProperty(i)) {
+          console.log('map[i]', map[i]);
+
           setTimeout(()=> {
             map[i].buildGroup.call().then((response)=> {
               var groupEndTime = new Date().getTime();
