@@ -308,7 +308,7 @@ function(Constants, CelestialObject, Orbit) {
       var orbitAmplitude = amplitude || highlightDiameter;
       var orbitLine = new THREE.Geometry();
       var material = new THREE.MeshBasicMaterial({
-        color: '#00ffff',
+        color: '#ffbd00', // '#00ffff',
         transparent: true,
         opacity: 0,
         depthTest: false

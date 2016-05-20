@@ -102,7 +102,7 @@ function(
       }
 
       // Change new target orbit line color
-      target.orbitLine.orbit.material.color = new THREE.Color('#aaaaaa');
+      target.orbitLine.orbit.material.color = new THREE.Color('#3a666d');
       target.orbitLine.orbit.material.needsUpdate = true;
 
       this.travelController.travelToObject(

@@ -72,7 +72,8 @@ function($, _, Backbone, TemplateLoader, TravelController) {
         return true;
       }
 
-      this.highlightTarget(target);
+      // this.highlightTarget(target);
+      this.highlightObject(e);
     },
 
     onMouseLeave: function(e) {
@@ -82,7 +83,8 @@ function($, _, Backbone, TemplateLoader, TravelController) {
         return true;
       }
 
-      this.unhighlightTarget(target);
+      // this.unhighlightTarget(target);
+      this.unhighlightObject(e);
     },
 
     isCurrentTarget: function(target) {
@@ -112,7 +114,7 @@ function($, _, Backbone, TemplateLoader, TravelController) {
     },
 
     highlightOrbit: function(target) {
-      target.orbitLine.orbit.material.color = new THREE.Color('#ffffff');
+      target.orbitLine.orbit.material.color = new THREE.Color('#b863f2');
       target.orbitLine.orbit.material.needsUpdate = true;
     },
 
@@ -121,9 +123,7 @@ function($, _, Backbone, TemplateLoader, TravelController) {
     },
 
     unhighlightOrbit: function(target) {
-      console.log('unhighlightOrbit', target);
-
-      target.orbitLine.orbit.material.color = new THREE.Color('#3b748e'); // new THREE.Color('#2d2d2d');
+      target.orbitLine.orbit.material.color = new THREE.Color('#2d2d2d');
       target.orbitLine.orbit.material.needsUpdate = true;
     },
 
