@@ -2563,7 +2563,7 @@
         }
     ],
     "asteroidBelt": {
-        "count": 6000,
+        "count": 5000,
         "distanceFromParent": {
             "min": 344100000,
             "max": 493700000

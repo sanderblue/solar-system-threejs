@@ -107,7 +107,7 @@ function(Moon, ColorManager) {
     }
 
     travelToObject(currentPosition, targetObject, takeOffHeight) {
-      var travelDuration = 2000; // milliseconds
+      var travelDuration = 10000; // milliseconds
 
       this.travelObjectType = targetObject instanceof Moon ? 'moon' : 'planet';
       this.dispatchTravelStartEvent(targetObject);
@@ -149,7 +149,7 @@ function(Moon, ColorManager) {
           x: this.camera.position.x,
           y: this.camera.position.y,
           z: this.camera.position.z + takeOffHeight + 700
-        }, 1000)
+        }, 3000)
         .easing(TWEEN.Easing.Cubic.InOut)
         .onUpdate((currentAnimationPosition)=> {
             this.camera.lookAt(targetObject.threeObject.position);

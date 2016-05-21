@@ -57,10 +57,16 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
         geometry.computeBoundingSphere();
 
         var material = new THREE.PointsMaterial({
-          size: 3
-          // ,
-          // vertexColors: THREE.VertexColors
+          size: 15,
+          map: this._texture
         });
+
+        // var material = new THREE.MeshLambertMaterial({
+        //   color: 0x61210B,
+        //   // emissive: 0x61210B,
+        //   vertexColors: THREE.VertexColors,
+        //   fog: true
+        // });
 
         var particleSystem = new THREE.Points(geometry, material);
 

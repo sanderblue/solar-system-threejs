@@ -13,6 +13,7 @@ function(Constants, Scene, RandomNumberGenerator) {
       this._starsCount = 8000;
       this._threeDistanceFromParent = 14959787070 * 40000 * Constants.orbitScale;
       this._randomNumberGenorator = new RandomNumberGenerator();
+      this._texture = new THREE.TextureLoader().load('src/assets/textures/star.jpg');
       this._scene = scene;
     }
 
@@ -57,7 +58,8 @@ function(Constants, Scene, RandomNumberGenerator) {
 
         var material = new THREE.PointsMaterial({
           size: 1,
-          vertexColors: true
+          map: this._texture
+          // vertexColors: THREE.vertexColors
         });
 
         var particleSystem = new THREE.Points(geometry, material);
