@@ -25,7 +25,6 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
 
     build() {
       return new Promise((resolve, reject)=> {
-
         var particles = this._count;
         var geometry = new THREE.BufferGeometry();
         var positions = new Float32Array(particles * 3);
@@ -57,16 +56,9 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
         geometry.computeBoundingSphere();
 
         var material = new THREE.PointsMaterial({
-          size: 15,
+          size: 20,
           map: this._texture
         });
-
-        // var material = new THREE.MeshLambertMaterial({
-        //   color: 0x61210B,
-        //   // emissive: 0x61210B,
-        //   vertexColors: THREE.VertexColors,
-        //   fog: true
-        // });
 
         var particleSystem = new THREE.Points(geometry, material);
 
@@ -77,7 +69,7 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
         document.addEventListener('frame', (e)=> {
           var degreesToRotate = 0.002;
 
-          this._orbitCentroid.rotation.z +=  degreesToRotate * Constants.degreesToRadiansRatio;
+          this._orbitCentroid.rotation.z += degreesToRotate * Constants.degreesToRadiansRatio;
         }, false);
 
         resolve();
@@ -112,7 +104,7 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
       // console.debug('randomOffset', randomOffset);
       // console.debug('randomNumber', randomNumber);
 
-      var posZ = this._randomNumberGenerator.getRandomArbitraryNumber(1, 900);
+      var posZ = this._randomNumberGenerator.getRandomArbitraryNumber(1, 700);
 
       return {
         x: posX,

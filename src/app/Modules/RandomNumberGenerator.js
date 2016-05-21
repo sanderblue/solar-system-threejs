@@ -13,7 +13,7 @@ define(function() {
      *
      * @return Vector3 [THREE object]
      */
-    getRandomPointInSphere(radius, x0, y0, z0){
+    getRandomPointInSphere(radius, x0, y0, z0) {
       if (!x0) { x0 = 0 }
       if (!y0) { y0 = 0 }
       if (!z0) { z0 = 0 }
@@ -68,7 +68,7 @@ define(function() {
       // console.log('byteArray:', byteArray);
       // console.log('sum', sum);
 
-      var randNum = sum * (rangeMax.toFixed(0).length + 3);
+      var randNum = sum * (rangeMax.toFixed(0).length + 3) + (1 * Math.random());
       var range = rangeMax - rangeMin + 1;
       var max = Math.floor(rangeMax / range) * range;
 

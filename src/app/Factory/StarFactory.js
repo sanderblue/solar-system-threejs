@@ -57,42 +57,13 @@ function(Constants, Scene, RandomNumberGenerator) {
         geometry.computeBoundingSphere();
 
         var material = new THREE.PointsMaterial({
-          size: 1,
+          size: 5,
           map: this._texture
-          // vertexColors: THREE.vertexColors
         });
 
-        var particleSystem = new THREE.Points(geometry, material);
+        var stars = new THREE.Points(geometry, material);
 
-        // this._starsCentriod.add(particleSystem);
-
-        this._scene.add(particleSystem);
-
-        // var geometry = new THREE.SphereGeometry(24, 16, 8);
-        // var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-
-        // var i;
-
-        // for (i = 0; i < this._starsCount; i++) {
-        //   var star = new THREE.Mesh(geometry, material);
-        //   var randomizedPosition = this.getPosition(i);
-
-        //   star.position.set(
-        //       randomizedPosition.x,
-        //       randomizedPosition.y,
-        //       randomizedPosition.z
-        //   );
-
-        //   var scale = Math.random() + 6;
-
-        //   // Scale it up a bit
-        //   star.scale.x = scale;
-        //   star.scale.y = scale;
-        //   star.scale.z = scale;
-
-        //   // Add the star to the scene
-        //   this._scene.add(star);
-        // }
+        this._scene.add(stars);
 
         resolve();
       });
