@@ -68,7 +68,7 @@ define(function() {
       // console.log('byteArray:', byteArray);
       // console.log('sum', sum);
 
-      var randNum = sum * (rangeMax.toFixed(0).length + 3) + (1 * Math.random());
+      var randNum = sum * (rangeMax.toFixed(0).length + 3) + (1 * Math.random()) + Math.random();
       var range = rangeMax - rangeMin + 1;
       var max = Math.floor(rangeMax / range) * range;
 

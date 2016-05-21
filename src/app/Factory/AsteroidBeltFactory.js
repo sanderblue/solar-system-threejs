@@ -16,7 +16,7 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
       this._distanceFromParentMin = data.asteroidBelt.distanceFromParent.min;
       this._distanceFromParentMax = data.asteroidBelt.distanceFromParent.max;
       this._distanceFromParentMedian = this.calculateDistanceFromParentMedian();
-      this._texture = new THREE.TextureLoader().load('src/assets/textures/crust_tiny.jpg');
+      this._texture = new THREE.TextureLoader().load('src/assets/textures/asteroid.jpg');
       this._randomNumberGenerator = new RandomNumberGenerator();
       this._orbitCentroid = new THREE.Object3D();
       this._orbitRadian = 360 / 1681.6;

@@ -8,7 +8,7 @@ function(Constants) {
   class Orbit {
     constructor(object, color) {
       this._object = object;
-      this._color = color || new THREE.Color('#2d2d2d');
+      this._color = color || new THREE.Color('#303030');
       this._orbit = this.createOrbit();
       this.setOrbitInclination();
     }
