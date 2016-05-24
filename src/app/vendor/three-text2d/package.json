@@ -1,0 +1,88 @@
+{
+  "_args": [
+    [
+      "three-text2d",
+      "/Library/WebServer/Documents/www/projects/solarsystemjs"
+    ]
+  ],
+  "_from": "three-text2d@latest",
+  "_id": "three-text2d@0.2.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/three-text2d",
+  "_nodeVersion": "5.0.0",
+  "_npmUser": {
+    "email": "endel.dreyer@gmail.com",
+    "name": "endel"
+  },
+  "_npmVersion": "3.3.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "three-text2d",
+    "raw": "three-text2d",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/three-text2d/-/three-text2d-0.2.2.tgz",
+  "_shasum": "4b914e471e8ae9905b1c89186c964ba6867af47a",
+  "_shrinkwrap": null,
+  "_spec": "three-text2d",
+  "_where": "/Library/WebServer/Documents/www/projects/solarsystemjs",
+  "author": {
+    "email": "endel.dreyer@gmail.com",
+    "name": "Endel Dreyer"
+  },
+  "bugs": {
+    "url": "https://github.com/gamestdio/three-text2d/issues"
+  },
+  "dependencies": {},
+  "description": "Render texture from canvas into THREE's Mesh or Sprite.",
+  "devDependencies": {
+    "babel-cli": "^6.1.2",
+    "babel-preset-es2015": "^6.1.2",
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1",
+    "uglifyify": "^3.0.1",
+    "watchify": "^3.7.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "4b914e471e8ae9905b1c89186c964ba6867af47a",
+    "tarball": "https://registry.npmjs.org/three-text2d/-/three-text2d-0.2.2.tgz"
+  },
+  "gitHead": "4a53a6ae52a1b109c6d040a7a8203613036c04ab",
+  "homepage": "https://github.com/gamestdio/three-text2d#readme",
+  "keywords": [
+    "three.js",
+    "text",
+    "canvas",
+    "font"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "maintainers": [
+    {
+      "email": "endel.dreyer@gmail.com",
+      "name": "endel"
+    }
+  ],
+  "name": "three-text2d",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gamestdio/three-text2d.git"
+  },
+  "scripts": {
+    "dist": "./node_modules/browserify/bin/cmd.js src/index.js -t babelify -s THREE_Text -o dist/three-text2d.js && ./node_modules/browserify/bin/cmd.js src/index.js -t babelify -t uglifyify -s THREE_Text -o dist/three-text2d.min.js",
+    "prepublish": "babel src -d lib",
+    "watch": "babel src -d lib -w",
+    "watch-dist": "./node_modules/watchify/bin/cmd.js src/index.js -t babelify -s THREE_Text -o dist/three-text2d.js -v"
+  },
+  "version": "0.2.2"
+}

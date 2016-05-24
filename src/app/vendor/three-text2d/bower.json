@@ -1,0 +1,28 @@
+{
+  "name": "three-text2d",
+  "description": "Render texture from canvas into THREE's Mesh or Sprite.",
+  "main": "lib/index.js",
+  "authors": [
+    "Endel Dreyer <endel.dreyer@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "three.js",
+    "text",
+    "canvas",
+    "font"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "homepage": "https://github.com/gamestdio/three-text2d",
+  "ignore": [
+    "**/.*",
+    "src",
+    "lib",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

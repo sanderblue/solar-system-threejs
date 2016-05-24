@@ -14,6 +14,7 @@ define(
   'Controllers/EffectsController',
   'Modules/RandomColorGenerator',
   'Environment/Constants',
+  'vendor/three-text2d/dist/three-text2d',
   'Listeners/FactoryListener'
 ],
 function(
@@ -30,7 +31,8 @@ function(
   MenuController,
   EffectsController,
   RandomColorGenerator,
-  Constants
+  Constants,
+  ThreeText
 ) {
   'use strict';
 
@@ -286,6 +288,9 @@ function(
       }
 
       run.call(this);
+
+      // this.renderScene(new Date().getTime());
+      // resolve();
     });
   };
 

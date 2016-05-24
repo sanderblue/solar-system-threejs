@@ -1,0 +1,96 @@
+<html>
+  <head>
+    <title>three-text2d example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.js"></script>
+    <script src="http://threejs.org/examples/js/controls/OrbitControls.js"></script>
+    <script src="dist/three-text2d.js"></script>
+
+    <style type="text/css">* {margin:0; padding: 0;}</style>
+  </head>
+  <body>
+
+    <script>
+      var WIDTH = window.innerWidth , HEIGHT = window.innerHeight
+
+      var Text2D = THREE_Text.Text2D;
+      var SpriteText2D = THREE_Text.SpriteText2D;
+      var textAlign = THREE_Text.textAlign;
+
+      function Application (container) {
+        this.container = container;
+
+        this.camera = new THREE.PerspectiveCamera(60, WIDTH / HEIGHT, 1, 5000),
+        this.camera.position.set(0, 0, 500)
+
+        this.controls = new THREE.OrbitControls(this.camera)
+
+        this.renderer = new THREE.WebGLRenderer({
+          alpha: true,
+          antialias: true,
+        })
+        this.renderer.setSize(WIDTH, HEIGHT)
+        this.renderer.setClearColor(0xffff00)
+        this.container.appendChild(this.renderer.domElement)
+
+        this.scene = new THREE.Scene();
+
+        this.text = new Text2D("CENTER", { align: textAlign.center,  font: '30px Arial', fillStyle: '#000000' , antialias: false })
+        this.text.material.alphaTest = 0.1
+        this.text.position.set(0,0,0)
+        this.text.scale.set(1.5,1.5,1.5)
+        this.scene.add(this.text)
+
+        this.text2 = new Text2D("LEFT", { align: textAlign.left, font: '30px Arial', fillStyle: '#000000', antialias: false })
+        this.text2.material.alphaTest = 0.1
+        this.text2.position.set(0,100,0)
+        this.text2.scale.set(1.5,1.5,1.5)
+        this.scene.add(this.text2)
+
+        this.text3 = new Text2D("RIGHT", { align: textAlign.right, font: '30px Arial', fillStyle: '#000000', antialias: true })
+        this.text3.material.alphaTest = 0.1
+        this.text3.position.set(0,-100,0)
+        this.text3.scale.set(1.5,1.5,1.5)
+        this.scene.add(this.text3)
+
+        this.sprite = new SpriteText2D("SPRITE", { align: textAlign.center, font: '30px Arial', fillStyle: '#000000', antialias: true })
+        this.sprite.position.set(0, -200, 0)
+        this.sprite.scale.set(1.5, 1.5, 1.5)
+        this.sprite.material.alphaTest = 0.1
+        this.scene.add(this.sprite)
+
+        var i = 0
+        setInterval(() => {
+          this.text.text = "CENTER" + i
+          this.text2.text = "LEFT" + i
+          this.text3.text = "RIGHT" + i
+          this.sprite.text = "SPRITE " + i
+          i++
+        }, 50)
+
+        window.addEventListener('resize', this.onResize.bind(this))
+      }
+
+      Application.prototype.onResize = function (e) {
+        WIDTH = window.innerWidth
+        HEIGHT = window.innerHeight
+
+        this.renderer.setSize(WIDTH, HEIGHT)
+        this.camera.aspect = WIDTH / HEIGHT
+        this.camera.updateProjectionMatrix()
+      }
+
+      Application.prototype.loop = function () {
+        this.text.rotation.y += 0.010
+        this.text2.rotation.y += 0.015
+        this.text3.rotation.y += 0.02
+
+        this.renderer.render(this.scene, this.camera)
+        requestAnimationFrame(this.loop.bind(this))
+      }
+
+      var app = new Application(document.body)
+      app.loop()
+    </script>
+
+  </body>
+</html>
