@@ -1,0 +1,14 @@
+{
+  "name": "ajaxrequest",
+  "homepage": "https://github.com/sanderblue/ajaxrequest",
+  "_release": "36b89f388c",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "36b89f388c37cd9f8b8335f7eefbaf4e1c978775"
+  },
+  "_source": "https://github.com/sanderblue/ajaxrequest.git",
+  "_target": "*",
+  "_originalSource": "ajaxrequest",
+  "_direct": true
+}

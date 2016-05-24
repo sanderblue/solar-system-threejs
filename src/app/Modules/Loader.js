@@ -4,16 +4,55 @@ define(
   'Modules/ThirdPartyScripts',
   'Modules/Detector',
   'Modules/TemplateLoader',
-  'Factory/SolarSystemFactory'
+  'Factory/SolarSystemFactory',
+  'vendor/ajaxrequest/dist/ajaxrequest'
 ],
 function(
   HttpRequest,
   ThirdPartyScripts,
   Detector,
   TemplateLoader,
-  SolarSystemFactory
+  SolarSystemFactory,
+  AjaxRequest
 ) {
   'use strict';
+
+  var apiUrl = 'http://star-api.herokuapp.com/api/v1/stars?max[distly]=500';
+  var request = new AjaxRequest('GET', apiUrl);
+
+  request.send().then((data)=> {
+    var star = data[1];
+
+    var scale = Math.pow(10, 8);
+
+    var x = star.x * scale;
+    var y = star.y * scale;
+    var z = star.z * scale;
+
+    console.debug('Stars:          ', data.length);
+    console.debug('Star Data:      ', data);
+    console.debug('Star:           ', y);
+    console.debug('Distance to KB: ', 14959787070);
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   var seenJsFeaturesModal = false;
 
   if (window.localStorage) {

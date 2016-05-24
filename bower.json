@@ -26,7 +26,8 @@
     "backbone": "^1.2.3",
     "randomcolor": "^0.4.4",
     "three.js": "threejs#*",
-    "foundation-icon-fonts": "*"
+    "foundation-icon-fonts": "*",
+    "ajaxrequest": "*"
   },
   "devDependencies": {
     "stats.js": "*",
