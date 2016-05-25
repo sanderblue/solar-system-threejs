@@ -57,9 +57,11 @@ define(function() {
      * @param rangeMax [integer]
      * @return integer
      */
-    getRandomNumberWithinRange(rangeMin, rangeMax) {
+    getRandomNumberWithinRange(rangeMin, rangeMax, bits) {
+      bits = bits || 2;
+
       // Create byte array and fill with 1 random number
-      var byteArray = new Uint8Array(2);
+      var byteArray = new Uint8Array(bits);
 
       byteArray = window.crypto.getRandomValues(byteArray);
 

@@ -3,23 +3,21 @@ define(
   'Modules/Scene',
   'Environment/Constants',
   'Modules/RandomNumberGenerator',
-  'Models/Asteroid'
 ],
-function(Scene, Constants, RandomNumberGenerator, Asteroid) {
+function(Scene, Constants, RandomNumberGenerator) {
   'use strict';
 
-  class AsteroidBeltFactory {
+  class KuiperBeltFactory {
     constructor(scene, data) {
       this._scene = scene || null;
-      this._count = data.asteroidBelt.count || 1000;
-      this._distanceFromParent = data.asteroidBelt.distanceFromParent.min;
-      this._distanceFromParentMin = data.asteroidBelt.distanceFromParent.min;
-      this._distanceFromParentMax = data.asteroidBelt.distanceFromParent.max;
+      this._count = data.kuiperBelt.count || 1000;
+      this._distanceFromParentMin = data.kuiperBelt.distanceFromParent.min;
+      this._distanceFromParentMax = data.kuiperBelt.distanceFromParent.max;
       this._distanceFromParentMedian = this.calculateDistanceFromParentMedian();
-      this._texture = new THREE.TextureLoader().load('src/assets/textures/asteroid.jpg');
+      this._texture = new THREE.TextureLoader().load('src/assets/textures/asteroid_dark.jpg');
       this._randomNumberGenerator = new RandomNumberGenerator();
       this._orbitCentroid = new THREE.Object3D();
-      this._orbitRadian = 360 / 1681.6;
+      this._orbitRadian = 360 / 112897;
       this._d2r = Constants.degreesToRadiansRatio;
     }
 
@@ -34,12 +32,12 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
         var n2 = n / 2; // particles spread in the cube
 
         var material = new THREE.PointsMaterial({
-          size: 20,
+          size: 1,
           map: this._texture
         });
 
         for (var i = 0; i < positions.length; i += 3) {
-          var pos = this.positionAsteroid(null, i);
+          var pos = this.positionObject(null, i);
           var x = pos.x;
           var y = pos.y;
           var z = pos.z;
@@ -47,13 +45,6 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
           positions[i] = x;
           positions[i + 1] = y;
           positions[i + 2] = z;
-
-          var rgbValue = this._randomNumberGenerator.getRandomArbitraryNumber(1, 20);
-          color.setRGB(119, 81, 20);
-
-          colors[i] = color.r;
-          colors[i + 1] = color.g;
-          colors[i + 2] = color.b;
         }
 
         geometry.addAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -76,26 +67,20 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
       });
     }
 
-    positionAsteroid(asteroid, count) {
+    positionObject(object, count) {
       var odd = count % 2;
       var d = this._distanceFromParentMin * Constants.orbitScale;
-
-      if (odd) {
-        d = this._distanceFromParentMedian * Constants.orbitScale;
-      }
-
-      if (count % 3) {
-        d = this._distanceFromParentMax * Constants.orbitScale;
-      }
 
       d = d + (count / count.toFixed(0).length);
 
       // console.log('Distance: ',d);
 
-      var randomNumber = this._randomNumberGenerator.getRandomNumberWithinRange(1, 4000) * (Math.random() + 1);
-      var randomOffset = odd ? randomNumber * -1 : randomNumber;
+      var randomNumber = this._randomNumberGenerator.getRandomNumberWithinRange(1, 10000000, 64) * (Math.random() + 1);
+      var randomOffset = odd ? randomNumber * (Math.random() + 0.2) : randomNumber * (Math.random() + 0.05);
 
-      var amplitude = d + randomOffset * (2 + Math.random());
+      console.debug('randomNumber', randomNumber);
+
+      var amplitude = d + randomOffset * (3 + Math.random());
       var theta = count + 1 * Math.random() * this._orbitRadian * this._d2r;
 
       var posX = amplitude * Math.cos(theta);
@@ -104,19 +89,19 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
       // console.debug('randomOffset', randomOffset);
       // console.debug('randomNumber', randomNumber);
 
-      var posZ = this._randomNumberGenerator.getRandomArbitraryNumber(1, 700);
+      var posZ = this._randomNumberGenerator.getRandomArbitraryNumber(-7000, 7000);
 
       return {
         x: posX,
         y: posY,
-        z: odd ? posZ * -1 : posZ
+        z: posZ
       }
     }
 
     calculateDistanceFromParentMedian() {
-      return Number.parseFloat((this._distanceFromParentMin + this._distanceFromParentMax) / 2);
+        return Number.parseFloat((this._distanceFromParentMin + this._distanceFromParentMax) / 2);
     }
   }
 
-  return AsteroidBeltFactory;
+  return KuiperBeltFactory;
 });

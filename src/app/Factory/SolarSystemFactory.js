@@ -4,6 +4,7 @@ define(
   'Modules/Scene',
   'Factory/StarFactory',
   'Factory/AsteroidBeltFactory',
+  'Factory/KuiperBeltFactory',
   'Models/Sun',
   'Models/Planet',
   'Models/Moon',
@@ -22,6 +23,7 @@ function(
   Scene,
   StarFactory,
   AsteroidBeltFactory,
+  KuiperBeltFactory,
   Sun,
   Planet,
   Moon,
@@ -202,6 +204,22 @@ function(
     });
   };
 
+  SolarSystemFactory.prototype.buildKuiperBelt = function(data) {
+    var startTime = new Date().getTime();
+    var kuiperBeltFactory = new KuiperBeltFactory(this.scene, data);
+
+    return new Promise((resolve)=> {
+      kuiperBeltFactory.build();
+
+      var endTime = new Date().getTime();
+
+      resolve({
+        group: 'asteroids',
+        elapsedTime: (endTime - startTime) * 0.001
+      });
+    });
+  };
+
   SolarSystemFactory.prototype.buildStars = function() {
     var startTime = new Date().getTime();
     var starFactory = new StarFactory(this.scene);
@@ -245,6 +263,11 @@ function(
         }
         ,
         '3': {
+          buildGroup: this.buildKuiperBelt.bind(this, data),
+          timeout: 300
+        }
+        ,
+        '4': {
           buildGroup: this.buildStars.bind(this),
           timeout: 300
         }
@@ -258,11 +281,7 @@ function(
 
         var groupStartTime = new Date().getTime();
 
-        console.log('RUN', i, map.hasOwnProperty(i))
-
         if (map.hasOwnProperty(i)) {
-          console.log('map[i]', map[i]);
-
           setTimeout(()=> {
             map[i].buildGroup.call().then((response)=> {
               var groupEndTime = new Date().getTime();

@@ -2573,5 +2573,17 @@
                 "base": "/src/assets/textures/pluto.jpg"
             }
         }
+    },
+    "kuiperBelt": {
+        "count": 10000,
+        "distanceFromParent": {
+            "min": 4638000000,
+            "max": 7480000000
+        },
+        "_3d": {
+            "textures": {
+                "base": "/src/assets/textures/pluto.jpg"
+            }
+        }
     }
 }

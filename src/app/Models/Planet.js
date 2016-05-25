@@ -158,7 +158,7 @@ function(
         antialias: false
       });
 
-      console.debug('this._threeDiameter', this._threeDiameter);
+      // console.debug('this._threeDiameter', this._threeDiameter);
 
       // sprite.position.y ;
 
