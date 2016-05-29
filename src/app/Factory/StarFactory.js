@@ -21,11 +21,11 @@ function(Constants, Scene, RandomNumberGenerator, AjaxRequest) {
     }
 
     getStarData() {
-      var request = new AjaxRequest('GET', 'http://star-api.herokuapp.com/api/v1/stars');
+      // var request = new AjaxRequest('GET', 'http://star-api.herokuapp.com/api/v1/stars');
 
-      request.send().then((data)=> {
-        console.debug('Star Data:', data);
-      });
+      // request.send().then((data)=> {
+      //   console.debug('Star Data:', data);
+      // });
     }
 
     getPosition(i) {

@@ -1,26 +1,23 @@
 {
-	"name": "three.js",
-	"homepage": "http://threejs.org/",
-	"description": "JavaScript 3D library",
-	"main": "build/three.js",
-	"keywords": [
-		"three",
-		"threejs",
-		"three.js",
-		"3D",
-		"webgl"
-	],
-	"license": "MIT",
-	"ignore": [
-		"**/.*",
-		"*.md",
-		"/docs",
-		"/editor",
-		"/examples/*",
-		"!/examples/js",
-		"/src",
-		"/test",
-		"/utils",
-		"/LICENSE"
-	]
+  "name": "three.js",
+  "version": "0.76.0",
+  "homepage": "http://threejs.org/",
+  "authors": [
+    "http://mrdoob.com"
+  ],
+  "description": "JavaScript 3D library",
+  "main": "three.min.js",
+  "keywords": [
+    "threejs",
+    "3d",
+    "webgl"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
