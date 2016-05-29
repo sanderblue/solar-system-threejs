@@ -13,6 +13,18 @@ function(
 ) {
   'use strict';
 
+  // function createRings(radius, segments) {
+  //   return new THREE.Mesh(
+  //     new THREE.XRingGeometry(1.2 * radius, 2 * radius, 2 * segments, 5, 0, Math.PI * 2),
+  //     new THREE.MeshBasicMaterial({
+  //       map: THREE.ImageUtils.loadTexture('https://cdn.rawgit.com/bubblin/The-Solar-System/master/images/page-60/saturn-rings.png'),
+  //       side: THREE.DoubleSide,
+  //       transparent: true,
+  //       opacity: 0.6
+  //     })
+  //   );
+  // }
+
   class Planet extends CelestialObject {
     constructor(data, threeParent) {
       super(data.diameter, data.mass, data.gravity, data.density);
@@ -28,6 +40,7 @@ function(
       this._axialTilt = data.axialTilt || null;
       this._meanTemperature = data.meanTemperature || null;
       this._orbitPositionOffset = data.orbitPositionOffset;
+      this._orbitHighlightColor = data.orbitHighlightColor || "#2d2d2d";
       this._threeDiameter = this.createThreeDiameter();
       this._threeRadius = this.createThreeRadius();
       this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo, data._3d.textures.specular);
@@ -138,6 +151,10 @@ function(
 
     get orbitLine() {
       return this._orbitLine;
+    }
+
+    get orbitHighlightColor() {
+      return this._orbitHighlightColor;
     }
 
     set highlight(amplitude) {
@@ -292,27 +309,37 @@ function(
         Math.PI * 2
       );
 
-      // geometry.uvsNeedUpdate = true;
+      function createRings(radius, segments) {
+        return new THREE.Mesh(
+          new THREE.RingGeometry(1.2 * radius, 2 * radius, 2 * segments, 5, 0, Math.PI * 2),
+          new THREE.MeshBasicMaterial({
+            map: THREE.ImageUtils.loadTexture('src/assets/textures/saturn_rings.png'),
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.6
+          })
+        );
+      }
 
-      // console.debug('geometry', geometry);
+      console.debug('HERERER');
 
-      // uvs.push( new THREE.Vector2( o / thetaSegments, i / phiSegments ) );
+      var ring = createRings(innerRadius, 180);
 
-      var map = THREE.ImageUtils.loadTexture('src/assets/textures/saturn_rings.png'); // this.getTexture('src/assets/textures/saturn_rings.png');
-      map.minFilter = THREE.NearestFilter;
+      // var map = THREE.ImageUtils.loadTexture('src/assets/textures/saturn_rings.png'); // this.getTexture('src/assets/textures/saturn_rings.png');
+      // map.minFilter = THREE.NearestFilter;
 
-      var colorMap = THREE.ImageUtils.loadTexture('src/assets/textures/saturn_rings_color_map.png'); // this.getTexture('src/assets/textures/saturn_rings_color_map.png');
-      colorMap.minFilter = THREE.NearestFilter;
+      // var colorMap = THREE.ImageUtils.loadTexture('src/assets/textures/saturn_rings_color_map.png'); // this.getTexture('src/assets/textures/saturn_rings_color_map.png');
+      // colorMap.minFilter = THREE.NearestFilter;
 
-      var material = new THREE.MeshLambertMaterial({
-        map: colorMap,
-        alphaMap: map,
-        transparent: true,
-        opacity: 0.98,
-        side: THREE.DoubleSide
-      });
+      // var material = new THREE.MeshLambertMaterial({
+      //   map: colorMap,
+      //   alphaMap: map,
+      //   transparent: true,
+      //   opacity: 0.98,
+      //   side: THREE.DoubleSide
+      // });
 
-      var ring = new THREE.Mesh(geometry, material);
+      // var ring = new THREE.Mesh(geometry, material);
       ring.position.set(0, 0, 0);
       ring.rotation.x = 90 * Constants.degreesToRadiansRatio;
 

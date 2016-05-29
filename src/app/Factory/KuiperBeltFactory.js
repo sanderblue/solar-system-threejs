@@ -37,6 +37,8 @@ function(Scene, Constants, RandomNumberGenerator) {
         });
 
         for (var i = 0; i < positions.length; i += 3) {
+          this._orbitCentroid.rotation.z += Math.random() + 1;
+
           var pos = this.positionObject(null, i);
           var x = pos.x;
           var y = pos.y;
@@ -75,10 +77,10 @@ function(Scene, Constants, RandomNumberGenerator) {
 
       // console.log('Distance: ',d);
 
-      var randomNumber = this._randomNumberGenerator.getRandomNumberWithinRange(1, 10000000, 64) * (Math.random() + 1);
+      var randomNumber = this._randomNumberGenerator.getRandomNumberWithinRange(1, 8000000, 64) * (Math.random() + 1);
       var randomOffset = odd ? randomNumber * (Math.random() + 0.2) : randomNumber * (Math.random() + 0.05);
 
-      console.debug('randomNumber', randomNumber);
+      // console.debug('randomNumber', randomNumber);
 
       var amplitude = d + randomOffset * (3 + Math.random());
       var theta = count + 1 * Math.random() * this._orbitRadian * this._d2r;

@@ -107,7 +107,7 @@ function(Moon, ColorManager) {
     }
 
     travelToObject(currentPosition, targetObject, takeOffHeight) {
-      var travelDuration = 20000; // milliseconds
+      var travelDuration = 4000; // milliseconds
 
       this.travelObjectType = targetObject instanceof Moon ? 'moon' : 'planet';
       this.dispatchTravelStartEvent(targetObject);

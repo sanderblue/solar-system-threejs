@@ -247,9 +247,7 @@ function(
 
       var sun = this.buildSun(data.parent);
       this.solarSystemObjects.sun = sun;
-      this.scene.add(sun.threeObject)
-
-      this.updateProgress(25);
+      this.scene.add(sun.threeObject);
 
       var map = {
         '1': {
@@ -287,11 +285,11 @@ function(
               var groupEndTime = new Date().getTime();
               var elapsedTime = (groupEndTime - groupStartTime) * 0.001;
 
-              // console.debug('Promise done.', i, response);
-              // console.debug('Elapsed time:', elapsedTime);
-              // console.debug('');
+              percentage = (i / 4) * 100;
 
-              percentage = percentage + 25;
+              console.debug('percentage:', percentage);
+              console.debug('');
+              //
               this.updateProgress(percentage);
 
               groupStartTime = groupEndTime;
