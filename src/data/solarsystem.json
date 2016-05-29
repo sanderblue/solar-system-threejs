@@ -252,8 +252,8 @@
             "distanceFromParent": 778600000,
             "orbitalPeriod": 4331,
             "orbitalVelocity": 13.1,
-            "orbitalInclination": 1.3,
-            "axialTilt": 3.1,
+            "orbitalInclination": 1.303,
+            "axialTilt": 3.13,
             "orbitPositionOffset": 2692,
             "orbitHighlightColor": "#ED6A5A",
             "meanTemperature": -110,
@@ -262,7 +262,14 @@
                 "mean": 125,
                 "max": null
             },
-            "rings": false,
+            "rings": {
+                "innerRadius": 110500,
+                "outerRadius": 129000,
+                "textures": {
+                    "base": "/src/assets/textures/jupiter/rings/rings_map.png",
+                    "colorMap": "/src/assets/textures/jupiter/rings/rings_color_map.png"
+                }
+            },
             "satellites": [
                 {
                     "id": 5.1,
@@ -749,32 +756,11 @@
                 },
                 {
                     "id": 5.24,
-                    "name": "Praxidike",
-                    "diameter": 7,
-                    "distanceFromParent": 20823948,
-                    "orbitalPeriod": "−613.90",
-                    "orbitalInclination": 154.586,
-                    "mass": "0.043 * 10^16",
-                    "gravity": null,
-                    "surfaceTemps": {
-                        "min": null,
-                        "max": null,
-                        "mean": null
-                    },
-                    "_3d": {
-                        "textures": {
-                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
-                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
-                        }
-                    }
-                },
-                {
-                    "id": 5.25,
                     "name": "Sinope",
                     "diameter": 38,
                     "distanceFromParent": 24057865,
                     "orbitalPeriod": "−739.33",
-                    "orbitalInclination": 153.778,
+                    "orbitalInclination": 128.11,
                     "mass": "7.5 * 10^16",
                     "gravity": null,
                     "surfaceTemps": {
@@ -795,7 +781,112 @@
                     "diameter": 2,
                     "distanceFromParent": 23307318,
                     "orbitalPeriod": "−726.93",
-                    "orbitalInclination": 165.759,
+                    "orbitalInclination": 165.76,
+                    "mass": "0.0015 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.26,
+                    "name": "Thyone",
+                    "diameter": 4,
+                    "distanceFromParent": 21406000,
+                    "orbitalPeriod":  "-639.803",
+                    "orbitalInclination": 147,
+                    "mass": "0.0015 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.27,
+                    "name": "Aitne",
+                    "diameter": 3,
+                    "distanceFromParent": 22285000,
+                    "orbitalPeriod":  "-679.641",
+                    "orbitalInclination": 166,
+                    "mass": "0.0015 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.28,
+                    "name": "Chaldene",
+                    "diameter": 3.8,
+                    "distanceFromParent": 22713000,
+                    "orbitalPeriod":  "-699.327",
+                    "orbitalInclination": 167,
+                    "mass": "0.0015 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.29,
+                    "name": "Megaclite",
+                    "diameter": 5.4,
+                    "distanceFromParent": 24687000,
+                    "orbitalPeriod":  "-792.437",
+                    "orbitalInclination": 150,
+                    "mass": "0.0015 * 10^16",
+                    "gravity": null,
+                    "surfaceTemps": {
+                        "min": null,
+                        "max": null,
+                        "mean": null
+                    },
+                    "_3d": {
+                        "textures": {
+                            "base": "/src/assets/textures/earth/satellites/moon_1k.jpg",
+                            "topo": "/src/assets/textures/earth/satellites/moon_topo_1k.jpg"
+                        }
+                    }
+                },
+                {
+                    "id": 5.30,
+                    "name": "Megaclite",
+                    "diameter": 5.4,
+                    "distanceFromParent": 21064000,
+                    "orbitalPeriod":  "-624.542",
+                    "orbitalInclination": 147,
                     "mass": "0.0015 * 10^16",
                     "gravity": null,
                     "surfaceTemps": {
@@ -841,7 +932,11 @@
             },
             "rings": {
                 "innerRadius": 74510,
-                "outerRadius": 140220
+                "outerRadius": 140220,
+                "textures": {
+                    "base": "/src/assets/textures/saturn/rings/rings_map.png",
+                    "colorMap": "/src/assets/textures/saturn/rings/rings_color_map.png"
+                }
             },
             "satellites": [
                 {

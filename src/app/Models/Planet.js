@@ -326,10 +326,10 @@ function(
         thetaSegments
       );
 
-      var map = THREE.ImageUtils.loadTexture('src/assets/textures/saturn_rings.png');
+      var map = THREE.ImageUtils.loadTexture(data.rings.textures.base);
       map.minFilter = THREE.NearestFilter;
 
-      var colorMap = THREE.ImageUtils.loadTexture('src/assets/textures/saturn_rings_color_map.png');
+      var colorMap = THREE.ImageUtils.loadTexture(data.rings.textures.colorMap);
       colorMap.minFilter = THREE.NearestFilter;
 
       var material = new THREE.MeshLambertMaterial({
