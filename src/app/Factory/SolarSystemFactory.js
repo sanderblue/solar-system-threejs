@@ -38,6 +38,11 @@ function(
 ) {
   'use strict';
 
+  /**
+   * SolarSystemFactory
+   *
+   * @param {Object} data
+   */
   function SolarSystemFactory(data) {
     this.scene = new Scene();
     this.data = data || {};
@@ -52,6 +57,117 @@ function(
 
     this._randomColorGenerator = new RandomColorGenerator();
   }
+
+  /**
+   * Builds all objects in the scene.
+   *
+   * @param  {Object}  data
+   * @return {Promise}
+   */
+  SolarSystemFactory.prototype.build = function(data) {
+    return new Promise((resolve)=> {
+      var startTime = new Date().getTime();
+      var startEvent = new CustomEvent('solarsystem.build.start', {
+        detail: {
+          timestamp: startTime
+        }
+      });
+
+      var sun = this.buildSun(data.parent);
+      this.solarSystemObjects.sun = sun;
+      this.scene.add(sun.threeObject);
+
+      var map = {
+        '1': {
+          buildGroup: this.buildPlanets.bind(this, data.planets, sun),
+          timeout: 500
+        }
+        ,
+        '2': {
+          buildGroup: this.buildAsteroidBelt.bind(this, data),
+          timeout: 500
+        }
+        ,
+        '3': {
+          buildGroup: this.buildKuiperBelt.bind(this, data),
+          timeout: 300
+        }
+        ,
+        '4': {
+          buildGroup: this.buildStars.bind(this),
+          timeout: 300
+        }
+      };
+
+      console.log('map.length', Object.keys(map).length);
+
+      var buildGroupsCount = Object.keys(map).length;
+      var i = 0;
+
+      function run() {
+        i++;
+
+        var groupStartTime = new Date().getTime();
+
+        if (map.hasOwnProperty(i)) {
+          setTimeout(()=> {
+            map[i].buildGroup.call().then((response)=> {
+              var groupEndTime = new Date().getTime();
+              var elapsedTime = (groupEndTime - groupStartTime) * 0.001;
+              var percentage = (i / 4) * 100;
+
+              console.debug('percentage:', percentage);
+
+              this.updateProgress(percentage);
+
+              groupStartTime = groupEndTime;
+
+              run.call(this);
+            });
+          }, 1000);
+
+        } else {
+          this.renderScene(startTime);
+          resolve();
+        }
+      }
+
+      run.call(this);
+    });
+  };
+
+  SolarSystemFactory.prototype.renderScene = function(startTime) {
+    var renderController = new RenderController(this.scene);
+    var focalpoint = this.scene;
+
+    focalpoint.add(this.scene.camera);
+    this.scene.camera.up.set(0, 0, 1);
+    this.scene.camera.position.set(
+      60000,
+      0,
+      15000
+    );
+
+    var focalPointChangeEvent = new CustomEvent('solarsystem.focalpoint.change', {
+      detail: {
+        object: focalpoint
+      }
+    });
+
+    this.scene.camera.lookAt(new THREE.Vector3());
+    document.dispatchEvent(focalPointChangeEvent);
+
+    this.initializeUserInterface();
+
+    var endTime = new Date().getTime();
+    var endEvent = new CustomEvent('solarsystem.build.end', {
+      detail: {
+        elapsedTime: (endTime - startTime) * 0.001
+      }
+    });
+
+    document.dispatchEvent(endEvent);
+  };
 
   /**
    * Right now this basically just renders the prototype of the ISS. I'd like to get this to
@@ -234,114 +350,6 @@ function(
         });
       });
     });
-  };
-
-  SolarSystemFactory.prototype.build = function(data) {
-    return new Promise((resolve)=> {
-      var startTime = new Date().getTime();
-      var startEvent = new CustomEvent('solarsystem.build.start', {
-        detail: {
-          timestamp: startTime
-        }
-      });
-
-      var sun = this.buildSun(data.parent);
-      this.solarSystemObjects.sun = sun;
-      this.scene.add(sun.threeObject);
-
-      var map = {
-        '1': {
-          buildGroup: this.buildPlanets.bind(this, data.planets, sun),
-          timeout: 500
-        }
-        ,
-        '2': {
-          buildGroup: this.buildAsteroidBelt.bind(this, data),
-          timeout: 500
-        }
-        ,
-        '3': {
-          buildGroup: this.buildKuiperBelt.bind(this, data),
-          timeout: 300
-        }
-        ,
-        '4': {
-          buildGroup: this.buildStars.bind(this),
-          timeout: 300
-        }
-      };
-
-      var percentage = 25;
-      var i = 0;
-
-      function run() {
-        i++;
-
-        var groupStartTime = new Date().getTime();
-
-        if (map.hasOwnProperty(i)) {
-          setTimeout(()=> {
-            map[i].buildGroup.call().then((response)=> {
-              var groupEndTime = new Date().getTime();
-              var elapsedTime = (groupEndTime - groupStartTime) * 0.001;
-
-              percentage = (i / 4) * 100;
-
-              console.debug('percentage:', percentage);
-              console.debug('');
-              //
-              this.updateProgress(percentage);
-
-              groupStartTime = groupEndTime;
-
-              run.call(this);
-            });
-          }, 1000);
-
-        } else {
-          this.renderScene(startTime);
-          resolve();
-        }
-      }
-
-      run.call(this);
-
-      // this.renderScene(new Date().getTime());
-      // resolve();
-    });
-  };
-
-  SolarSystemFactory.prototype.renderScene = function(startTime) {
-    var renderController = new RenderController(this.scene);
-    var focalpoint = this.scene;
-
-    focalpoint.add(this.scene.camera);
-    this.scene.camera.up.set(0, 0, 1);
-    this.scene.camera.position.set(
-      60000,
-      0,  // -27888,
-      15000
-    );
-
-    var focalPointChangeEvent = new CustomEvent('solarsystem.focalpoint.change', {
-      detail: {
-        object: focalpoint
-      }
-    });
-
-    this.scene.camera.lookAt(new THREE.Vector3());
-    document.dispatchEvent(focalPointChangeEvent);
-
-    this.initializeUserInterface();
-
-    var endTime = new Date().getTime();
-    var endEvent = new CustomEvent('solarsystem.build.end', {
-      detail: {
-        elapsedTime: (endTime - startTime) * 0.001
-      }
-    });
-
-    document.dispatchEvent(endEvent);
   };
 
   SolarSystemFactory.prototype.initializeUserInterface = function(currentTarget) {

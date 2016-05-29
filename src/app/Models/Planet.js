@@ -42,7 +42,6 @@ function(
       this._theta = 0;
       this._orbitCentroid = this.createOrbitCentroid();
       this._highlight = this.createHighlight();
-      this._threeObject.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
 
       if (data.rings) {
         this.createRingGeometry(data);
@@ -148,7 +147,6 @@ function(
     }
 
     set highlight(amplitude) {
-      // this._highlight = null;
       this._highlight = this.createHighlight(amplitude);
     }
 
@@ -156,20 +154,24 @@ function(
       return new THREE.Object3D();
     }
 
-    buildFullObject3D() {
-
+    createLabelSprite() {
       var sprite = new ThreeText.SpriteText2D(this._name, {
         align: ThreeText.textAlign.center,
-        font: '500px Arial',
+        font: '400px Arial',
         fillStyle: '#ffffff',
         antialias: false
       });
 
-      // console.debug('this._threeDiameter', this._threeDiameter);
-
-      // sprite.position.y ;
-
       this._core.add(sprite);
+    }
+
+    setAxes() {
+      this._threeObject.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
+    }
+
+    buildFullObject3D() {
+      this.setAxes();
+      this.createLabelSprite();
 
       this._orbitLine = new Orbit(this);
       this._orbitCentroid.add(
@@ -220,13 +222,16 @@ function(
 
       var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
-            this._threeRadius,
+            this._threeRadius - 0.1,
             segmentsOffset,
             segmentsOffset
-          ),
-          surface
+          )
         )
       ;
+
+      mesh.add(surface);
+
+      // mesh1.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
 
       if (atmosphere) {
         mesh.add(atmosphere);
@@ -238,6 +243,13 @@ function(
     createSurface(base, topo, specular) {
       if (!base) {
         return;
+      }
+
+      var hiRes = false;
+      var segmentsOffset = Number.parseInt(this._threeDiameter + 1.1 * 60);
+
+      if (hiRes) {
+        segmentsOffset = Number.parseInt(this._threeDiameter + 1.5 * 120);
       }
 
       var map = this.getTexture(base);
@@ -256,13 +268,27 @@ function(
         specularMap.minFilter = THREE.LinearFilter;
       }
 
-      return new THREE.MeshPhongMaterial({
+      var surface = new THREE.MeshPhongMaterial({
         map: map,
         bumpMap: bumpMap || null,
         bumpScale: bumpMap ? 0.01 : null,
         specularMap: null, // specularMap || null,
         // specular: specularMap ? new THREE.Color(0x0a0a0a) : null
       });
+
+      var mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(
+            this._threeRadius,
+            segmentsOffset,
+            segmentsOffset
+          ),
+          surface
+        )
+      ;
+
+      mesh.rotation.x = 90 * Constants.degreesToRadiansRatio;
+
+      return mesh;
     }
 
     createAtmosphere(clouds, haze) {
@@ -272,7 +298,7 @@ function(
 
         map.minFilter = THREE.LinearFilter;
 
-        return new THREE.Mesh(
+        var mesh = new THREE.Mesh(
           new THREE.SphereGeometry(this._threeRadius * 1.01, segmentsOffset, segmentsOffset),
           new THREE.MeshPhongMaterial({
             map: map,
@@ -280,6 +306,10 @@ function(
             opacity: 0.9
           })
         );
+
+        mesh.rotation.x = 90 * Constants.degreesToRadiansRatio;
+
+        return mesh;
       }
 
       return null;
@@ -312,7 +342,6 @@ function(
 
       var ring = new THREE.Mesh(geometry, material);
       ring.position.set(0, 0, 0);
-      ring.rotation.x = 90 * Constants.degreesToRadiansRatio;
 
       this._threeObject.add(ring);
     }
@@ -357,8 +386,7 @@ function(
     }
   }
 
-  function makeTextSprite( message, parameters )
-  {
+  function makeTextSprite( message, parameters ) {
     if ( parameters === undefined ) parameters = {};
 
     var fontface = parameters.hasOwnProperty("fontface") ?

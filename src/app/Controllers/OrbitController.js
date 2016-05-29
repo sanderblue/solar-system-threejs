@@ -26,6 +26,7 @@ function(Constants, Clock) {
       this._orbitPositionOffset = object.orbitPositionOffset || 0;
       this._theta = 0;
       this._rotationEnabled = true;
+      this._dateObject = new Date();
 
       this.initListeners();
     }
@@ -40,7 +41,8 @@ function(Constants, Clock) {
     };
 
     positionObject(canlog) {
-      var time = (clock.getElapsedTime() / 60) + this._orbitPositionOffset;
+      var dayOfYear = this._dateObject.getDOYwithTimeAsDecimal();
+      var time = (dayOfYear + (clock.getElapsedTime() / 60)) + this._orbitPositionOffset;
       var theta = time * (360 / this._object.orbitalPeriod) * Constants.degreesToRadiansRatio;
       var x = this._orbitAmplitude * Math.cos(theta);
       var y = this._orbitAmplitude * Math.sin(theta);
@@ -69,7 +71,7 @@ function(Constants, Clock) {
     };
 
     rotateObject() {
-      this._threePlanet.rotation.y += this._degreesToRotate; // 1 degree per frame
+      this._threePlanet.rotation.z += this._degreesToRotate; // 1 degree per frame
     };
   }
 
