@@ -159,7 +159,7 @@ function(Moon, ColorManager) {
 
     handleComplete(targetObject) {
       THREE.SceneUtils.detach(this.camera, this.camera.parent, this.scene);
-      THREE.SceneUtils.attach(this.camera, this.scene, targetObject.core);
+      THREE.SceneUtils.attach(this.camera, this.scene, targetObject.objectCentroid);
 
       var transition = this.colorManager.fadeOut(
         targetObject.highlight,

@@ -99,7 +99,7 @@ function(
         }
       };
 
-      console.log('map.length', Object.keys(map).length);
+      // console.log('map.length', Object.keys(map).length);
 
       var buildGroupsCount = Object.keys(map).length;
       var i = 0;
@@ -215,6 +215,7 @@ function(
       this.solarSystemObjects.moons.push(moon);
 
       planet._moons.push(moon);
+      // planet.threeObject.add(moon.orbitCentroid);
       planet.core.add(moon.orbitCentroid);
 
       var buildEvent = new CustomEvent('solarsystem.build.object.complete', {

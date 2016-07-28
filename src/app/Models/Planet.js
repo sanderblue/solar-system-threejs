@@ -31,6 +31,7 @@ function(
       this._meanTemperature = data.meanTemperature || null;
       this._orbitPositionOffset = data.orbitPositionOffset;
       this._orbitHighlightColor = data.orbitHighlightColor || "#2d2d2d";
+      this._textureLoader = new THREE.TextureLoader();
       this._threeDiameter = this.createThreeDiameter();
       this._threeRadius = this.createThreeRadius();
       this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo, data._3d.textures.specular);
@@ -167,17 +168,20 @@ function(
 
     setAxes() {
       this._threeObject.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
+      this._core.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
+      // this._objectCentroid.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
     }
 
     buildFullObject3D() {
       this.setAxes();
-      this.createLabelSprite();
+      // this.createLabelSprite();
 
       this._orbitLine = new Orbit(this);
       this._orbitCentroid.add(
         this._threeObject,
         this._core,
-        this._orbitLine.orbit
+        this._orbitLine.orbit,
+        this._objectCentroid
       );
     }
 
@@ -199,7 +203,7 @@ function(
       }
 
       if (src) {
-        var texture = new THREE.TextureLoader().load(src);
+        var texture = this._textureLoader.load(src);
 
         texture.wrapS = THREE.ClampToEdgeWrapping;
         texture.wrapT = THREE.ClampToEdgeWrapping;
@@ -231,7 +235,7 @@ function(
 
       mesh.add(surface);
 
-      // mesh1.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
+      // mesh.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
 
       if (atmosphere) {
         mesh.add(atmosphere);
@@ -326,10 +330,10 @@ function(
         thetaSegments
       );
 
-      var map = THREE.ImageUtils.loadTexture(data.rings.textures.base);
+      var map = this._textureLoader.load(data.rings.textures.base); // THREE.ImageUtils.loadTexture(data.rings.textures.base);
       map.minFilter = THREE.NearestFilter;
 
-      var colorMap = THREE.ImageUtils.loadTexture(data.rings.textures.colorMap);
+      var colorMap = this._textureLoader.load(data.rings.textures.colorMap); // THREE.ImageUtils.loadTexture(data.rings.textures.colorMap);
       colorMap.minFilter = THREE.NearestFilter;
 
       var material = new THREE.MeshLambertMaterial({
@@ -384,61 +388,6 @@ function(
     getSphereGeometrySegmentOffset() {
       return Number.parseInt(this._threeDiameter + 1 * 60);
     }
-  }
-
-  function makeTextSprite( message, parameters ) {
-    if ( parameters === undefined ) parameters = {};
-
-    var fontface = parameters.hasOwnProperty("fontface") ?
-      parameters["fontface"] : "Arial";
-
-    var fontsize = parameters.hasOwnProperty("fontsize") ?
-      parameters["fontsize"] : 18;
-
-    var borderThickness = parameters.hasOwnProperty("borderThickness") ?
-      parameters["borderThickness"] : 4;
-
-    var borderColor = parameters.hasOwnProperty("borderColor") ?
-      parameters["borderColor"] : { r:0, g:0, b:0, a:1.0 };
-
-    var backgroundColor = parameters.hasOwnProperty("backgroundColor") ?
-      parameters["backgroundColor"] : { r:255, g:255, b:255, a:1.0 };
-
-    var spriteAlignment = THREE.SpriteAlignment.topLeft;
-
-    var canvas = document.createElement('canvas');
-    var context = canvas.getContext('2d');
-    context.font = "Bold " + fontsize + "px " + fontface;
-
-    // get size data (height depends only on font size)
-    var metrics = context.measureText( message );
-    var textWidth = metrics.width;
-
-    // background color
-    context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + ","
-                    + backgroundColor.b + "," + backgroundColor.a + ")";
-    // border color
-    context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + ","
-                    + borderColor.b + "," + borderColor.a + ")";
-
-    context.lineWidth = borderThickness;
-    roundRect(context, borderThickness/2, borderThickness/2, textWidth + borderThickness, fontsize * 1.4 + borderThickness, 6);
-    // 1.4 is extra height factor for text below baseline: g,j,p,q.
-
-    // text color
-    context.fillStyle = "rgba(0, 0, 0, 1.0)";
-
-    context.fillText( message, borderThickness, fontsize + borderThickness);
-
-    // canvas contents will be used for a texture
-    var texture = new THREE.Texture(canvas)
-    texture.needsUpdate = true;
-
-    var spriteMaterial = new THREE.SpriteMaterial(
-      { map: texture, useScreenCoordinates: false, alignment: spriteAlignment } );
-    var sprite = new THREE.Sprite( spriteMaterial );
-    sprite.scale.set(100,50,1.0);
-    return sprite;
   }
 
   return Planet;

@@ -55,6 +55,10 @@ function(Constants, Clock) {
       this._threePlanet.position.set(x, y, 0);
       this._object.core.position.set(x, y, 0);
 
+      if (this._object.objectCentroid) {
+        this._object.objectCentroid.position.set(x, y, 0);
+      }
+
       var timeParsed = Number.parseInt(time);
 
       if (timeParsed > 0 && timeParsed % 60 === 0) {
