@@ -6,7 +6,6 @@
     "Sander Blue <william.a.blue@gmail.com>"
   ],
   "description": "The solar system modeled to scale with Three.js",
-  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
