@@ -216,7 +216,8 @@ function(
 
       planet._moons.push(moon);
       // planet.threeObject.add(moon.orbitCentroid);
-      planet.core.add(moon.orbitCentroid);
+      // planet.core.add(moon.orbitCentroid);
+      planet.objectCentroid.add(moon.orbitCentroid);
 
       var buildEvent = new CustomEvent('solarsystem.build.object.complete', {
         detail: {
