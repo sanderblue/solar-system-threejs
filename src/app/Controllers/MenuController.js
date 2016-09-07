@@ -101,8 +101,10 @@ function(
         this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#2d2d2d');
       }
 
+      console.debug('Target:', target);
+
       // Change new target orbit line color
-      target.orbitLine.orbit.material.color = new THREE.Color( target.orbitHighlightColor || '#3a666d');
+      target.orbitLine.orbit.material.color = new THREE.Color(target.orbitHighlightColor || '#3a666d');
       target.orbitLine.orbit.material.needsUpdate = true;
 
       this.travelController.travelToObject(
@@ -153,7 +155,7 @@ function(
     },
 
     highlightOrbit: function(target) {
-      var hightlightColor = target.orbitHighlightColor || '#214956';
+      var hightlightColor = '#197eaa'; // target.orbitHighlightColor || #216883
 
       target.orbitLine.orbit.material.color = new THREE.Color(hightlightColor); // new THREE.Color('#d3d3d3');
       target.orbitLine.orbit.material.needsUpdate = true;
