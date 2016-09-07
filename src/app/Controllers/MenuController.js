@@ -104,7 +104,7 @@ function(
       console.debug('Target:', target);
 
       // Change new target orbit line color
-      target.orbitLine.orbit.material.color = new THREE.Color(target.orbitHighlightColor || '#3a666d');
+      target.orbitLine.orbit.material.color = new THREE.Color('#3beaf7'); // same color as hover and active state
       target.orbitLine.orbit.material.needsUpdate = true;
 
       this.travelController.travelToObject(
