@@ -99,8 +99,6 @@ function(
         }
       };
 
-      // console.log('map.length', Object.keys(map).length);
-
       var buildGroupsCount = Object.keys(map).length;
       var i = 0;
 
@@ -115,8 +113,6 @@ function(
               var groupEndTime = new Date().getTime();
               var elapsedTime = (groupEndTime - groupStartTime) * 0.001;
               var percentage = (i / 4) * 100;
-
-              console.debug('percentage:', percentage);
 
               this.updateProgress(percentage);
 
@@ -367,12 +363,12 @@ function(
       el: '#toggle-effects',
       sceneObjects: this.solarSystemObjects.planets
     });
+
+    $('#social-buttons-corner').addClass('visible');
   };
 
   SolarSystemFactory.prototype.updateProgress = function(percentage, elapsedTime) {
     var meter = $('.progress-meter');
-
-    // console.debug('Update Progress', meter[0].style.transitionDuration);
 
     meter.css({
       'transitionDuration': elapsedTime +'ms'

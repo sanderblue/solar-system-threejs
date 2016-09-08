@@ -39,7 +39,7 @@ function handleError(err) {
 /**
  * Tasks
  */
-gulp.task('sass', function() {
+gulp.task('sass', function () {
   return gulp.src(src.sass + '/main.scss')
     .pipe(sourcemaps.init())
     .pipe(sass())
@@ -50,18 +50,18 @@ gulp.task('sass', function() {
   ;
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
   return gulp.watch(src.sass + '/**/*.scss', ['sass'])
     .on('change', watcherCallback)
     .on('error', handleError)
   ;
 });
 
-gulp.task('umd', function(){
+gulp.task('umd', function () {
   gulp.src([src.js + 'vendor/THREEOrbitControls/index.js'])
     .pipe(wrapUMD({
       namespace: 'THREE.OrbitControls'
-     }))
+    }))
     .pipe(gulp.dest(src.js + 'vendor/THREEOrbitControls/umd'))
   ;
 });

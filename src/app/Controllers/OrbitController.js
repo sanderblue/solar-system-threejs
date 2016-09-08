@@ -62,14 +62,6 @@ function(Constants, Clock) {
       var timeParsed = Number.parseInt(time);
 
       if (timeParsed > 0 && timeParsed % 60 === 0) {
-        console.debug(
-          '\n',
-          'Clock: ', clock.getElapsedTime(),
-          '\n',
-          'Day Of Year:', time,
-          '\n'
-        );
-
         clock = new Clock(true);
       }
     };
