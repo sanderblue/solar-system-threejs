@@ -90,9 +90,7 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
 
       d = d + (count / count.toFixed(0).length);
 
-      // console.log('Distance: ',d);
-
-      var randomNumber = this._randomNumberGenerator.getRandomNumberWithinRange(1, 4000) * (Math.random() + 1);
+      var randomNumber = this._randomNumberGenerator.getRandomNumberWithinRange(1, 3000) * (Math.random() + 1);
       var randomOffset = odd ? randomNumber * -1 : randomNumber;
 
       var amplitude = d + randomOffset * (2 + Math.random());
@@ -100,10 +98,6 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
 
       var posX = amplitude * Math.cos(theta);
       var posY = amplitude * Math.sin(theta);
-
-      // console.debug('randomOffset', randomOffset);
-      // console.debug('randomNumber', randomNumber);
-
       var posZ = this._randomNumberGenerator.getRandomArbitraryNumber(1, 700);
 
       return {
