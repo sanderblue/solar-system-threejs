@@ -58,7 +58,6 @@
             "orbitalInclination": 7,
             "axialTilt": 0.01,
             "orbitPositionOffset": 48,
-            "orbitHighlightColor": "#db6aed",
             "meanTemperature": 167,
             "surfaceTemps": {
                 "min": 100,
@@ -89,7 +88,6 @@
             "orbitalInclination": 3.4,
             "axialTilt": 177.4,
             "orbitPositionOffset": 155,
-            "orbitHighlightColor": "#00FF04",
             "meanTemperature": 464,
             "surfaceTemps": {
                 "min": 655,
@@ -120,7 +118,6 @@
             "orbitalInclination": 0,
             "axialTilt": 23.4,
             "orbitPositionOffset": 0,
-            "orbitHighlightColor": "#5FE2D5",
             "meanTemperature": 15,
             "surfaceTemps": {
                 "min": 185,
@@ -181,7 +178,6 @@
             "orbitalInclination": 1.9,
             "axialTilt": 25.2,
             "orbitPositionOffset": 85,
-            "orbitHighlightColor": "#FFBD00",
             "meanTemperature": -65,
             "surfaceTemps": {
                 "min": 130,
@@ -255,7 +251,6 @@
             "orbitalInclination": 1.303,
             "axialTilt": 3.13,
             "orbitPositionOffset": 2692,
-            "orbitHighlightColor": "#ED6A5A",
             "meanTemperature": -110,
             "surfaceTemps": {
                 "min": null,
@@ -923,7 +918,6 @@
             "orbitalInclination": 2.48524,
             "axialTilt": 26.73,
             "orbitPositionOffset": 13753,
-            "orbitHighlightColor": "#FFCA3A",
             "meanTemperature": -140,
             "surfaceTemps": {
                 "min": null,
@@ -1528,7 +1522,6 @@
             "orbitalInclination": 0.8,
             "axialTilt": 97.8,
             "orbitPositionOffset": 29654,
-            "orbitHighlightColor": "#7DC999",
             "meanTemperature": -195,
             "surfaceTemps": {
                 "min": null,
@@ -2084,7 +2077,6 @@
             "orbitalInclination": 1.8,
             "axialTilt": 28.3,
             "orbitPositionOffset": 62885,
-            "orbitHighlightColor": "#7DC999",
             "meanTemperature": -200,
             "surfaceTemps": {
                 "min": null,
@@ -2388,7 +2380,6 @@
             "orbitalInclination": 17.2,
             "axialTilt": 119.59,
             "orbitPositionOffset": 20,
-            "orbitHighlightColor": "#DCDEB6",
             "meanTemperature": -229,
             "surfaceTemps": {
                 "min": 40,

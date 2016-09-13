@@ -37,6 +37,12 @@ function($, _, Backbone, TemplateLoader, TravelController) {
     },
 
     setModel: function(data) {
+      if (data instanceof Array) {
+        data.sort(function (objectA, objectB) {
+          return objectA.distanceFromParent - objectB.distanceFromParent;
+        });
+      }
+
       this.model.set({ data: data });
     },
 
@@ -83,7 +89,7 @@ function($, _, Backbone, TemplateLoader, TravelController) {
         return true;
       }
 
-      // this.unhighlightTarget(target);
+      this.unhighlightTarget(target);
       this.unhighlightObject(e);
     },
 
@@ -123,7 +129,7 @@ function($, _, Backbone, TemplateLoader, TravelController) {
     },
 
     unhighlightOrbit: function(target) {
-      target.orbitLine.orbit.material.color = new THREE.Color('#2d2d2d');
+      target.orbitLine.orbit.material.color = new THREE.Color('#404040');
       target.orbitLine.orbit.material.needsUpdate = true;
     },
 

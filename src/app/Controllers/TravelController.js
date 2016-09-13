@@ -16,17 +16,6 @@ function(Moon, ColorManager) {
       this.colorManager = new ColorManager();
     }
 
-    updateTargetHighlight(target) {
-      target.core.remove(target.highlight);
-
-      var distanceTo = this.camera.position.distanceTo(target.threeObject.position);
-      var highlightDiameter = distanceTo * 0.011; // 1.1% of distance to target
-
-      target.highlight = highlightDiameter;
-      target.highlight.material.opacity = 0.9;
-    }
-
-
     /**
      * @param  {Number} radius              [The target object's orbit amplitude (distance from parent)]
      * @param  {Number} theta               [The day of the year in the form of radians]
@@ -50,6 +39,7 @@ function(Moon, ColorManager) {
       var x = targetObject.core.position.x;
       var y = targetObject.core.position.y;
       var z = targetObject.core.position.z;
+
       var destinationX = x;
       var destinationY = y;
       var destinationZ = z;
@@ -81,8 +71,6 @@ function(Moon, ColorManager) {
         destinationY = destinationY - offset;
       }
 
-      // console.debug('targetObject.threeDiameter', targetObject.threeDiameter, targetObject.threeDiameter * 0.15);
-
       return {
         x: destinationX,
         y: destinationY,
@@ -106,23 +94,38 @@ function(Moon, ColorManager) {
       document.dispatchEvent(event);
     }
 
+    prepareForTravel(takeOffHeight, targetObject) {
+      var travelDuration = 3000;
+
+      return new TWEEN.Tween(this.camera.position)
+        .to({
+          x: this.camera.position.x,
+          y: this.camera.position.y,
+          z: this.camera.position.z + takeOffHeight + 700
+        }, travelDuration)
+        .easing(TWEEN.Easing.Cubic.InOut)
+        .onUpdate((currentAnimationPosition)=> {
+            this.camera.lookAt(targetObject.threeObject.position);
+        })
+      ;
+    }
+
     travelToObject(currentPosition, targetObject, takeOffHeight) {
-      var travelDuration = 4000; // milliseconds
+      var travelDuration = 5000; // milliseconds
 
       this.travelObjectType = targetObject instanceof Moon ? 'moon' : 'planet';
       this.dispatchTravelStartEvent(targetObject);
 
       THREE.SceneUtils.detach(this.camera, this.camera.parent, this.scene);
       THREE.SceneUtils.attach(this.camera, this.scene, targetObject.orbitCentroid);
+
       targetObject.core.updateMatrixWorld();
       targetObject.orbitCentroid.updateMatrixWorld();
 
       this.camera.lookAt(targetObject.threeObject.position);
+
       var destinationCoordinates = this.calculateDestinationCoordinates(targetObject);
       var takeOff = this.prepareForTravel(takeOffHeight, targetObject);
-
-      // console.debug('Destination', destinationCoordinates);
-      // console.debug('targetObject.highlight.geometry', targetObject.highlight.geometry);
 
       return takeOff.start().onComplete(()=> {
         var cameraTween = new TWEEN.Tween(this.camera.position)
@@ -130,7 +133,9 @@ function(Moon, ColorManager) {
           .easing(TWEEN.Easing.Cubic.InOut)
           .onUpdate(function(currentAnimationPosition) {
             var destinationCoordinates = this.calculateDestinationCoordinates(targetObject);
+
             cameraTween.to(destinationCoordinates);
+
             this.camera.lookAt(targetObject.threeObject.position);
 
             if (targetObject.highlight.geometry.boundingSphere.radius > targetObject.threeDiameter / 1.25) {
@@ -143,27 +148,14 @@ function(Moon, ColorManager) {
       });
     }
 
-    prepareForTravel(takeOffHeight, targetObject) {
-      return new TWEEN.Tween(this.camera.position)
-        .to({
-          x: this.camera.position.x,
-          y: this.camera.position.y,
-          z: this.camera.position.z + takeOffHeight + 700
-        }, 3000)
-        .easing(TWEEN.Easing.Cubic.InOut)
-        .onUpdate((currentAnimationPosition)=> {
-            this.camera.lookAt(targetObject.threeObject.position);
-        })
-      ;
-    }
-
     handleComplete(targetObject) {
       THREE.SceneUtils.detach(this.camera, this.camera.parent, this.scene);
       THREE.SceneUtils.attach(this.camera, this.scene, targetObject.objectCentroid);
 
-      var transition = this.colorManager.fadeOut(
+      var transition = this.colorManager.fadeTo(
         targetObject.highlight,
         targetObject.highlight.material.color,
+        { r: 59, b: 234, b: 247 },
         3000
       ).onComplete(()=> {
         targetObject.core.remove(targetObject.highlight);
@@ -175,6 +167,22 @@ function(Moon, ColorManager) {
       targetObject.orbitCentroid.updateMatrixWorld();
 
       this.dispatchTravelCompleteEvent(targetObject);
+    }
+
+    /**
+     * Updates the target's highlight geometry based on the camera's
+     * distance from the target.
+     *
+     * @param {Object} target
+     */
+    updateTargetHighlight(target) {
+      target.core.remove(target.highlight);
+
+      var distanceTo = this.camera.position.distanceTo(target.threeObject.position);
+      var highlightDiameter = distanceTo * 0.011; // 1.1% of distance to target
+
+      target.highlight = highlightDiameter;
+      target.highlight.material.opacity = 0.9;
     }
   }
 

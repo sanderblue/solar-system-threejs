@@ -31,11 +31,14 @@ function(
 
     initialize: function(options) {
       this.scene = options.scene || null;
+      this.camera = this.scene ? this.scene.camera : null;
       this.data = options.data || {};
       this.sceneObjects = options.sceneObjects || [];
       this.travelController = new TravelController(this.scene);
       this.templateLoader = new TemplateLoader();
       this.moonDataModel = null;
+      this.isTraveling = false;
+      this.hasTraveled = false;
 
       this.currentTarget = options.currentTarget || this.sceneObjects[0];
       this.template = this.templateLoader.get('planets', 'src/app/Views/menu.twig').then((template)=> {
@@ -78,6 +81,10 @@ function(
       var target = this.matchTarget(id);
 
       if (this.isCurrentTarget(target)) {
+        if (!this.isTraveling) {
+          this.highlightTarget(target);
+        }
+
         return true;
       }
 
@@ -89,6 +96,10 @@ function(
       var target = this.matchTarget(id);
 
       if (this.isCurrentTarget(target)) {
+        if (!this.isTraveling) {
+          this.unhighlightTarget(target);
+        }
+
         return true;
       }
 
@@ -100,8 +111,6 @@ function(
       if (this.currentTarget && this.currentTarget.orbitLine) {
         this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#2d2d2d');
       }
-
-      console.debug('Target:', target);
 
       // Change new target orbit line color
       target.orbitLine.orbit.material.color = new THREE.Color('#3beaf7'); // same color as hover and active state
@@ -177,6 +186,8 @@ function(
     },
 
     handleTravelStart: function(e) {
+      this.isTraveling = true;
+
       $('#current-target-title').removeClass('active').html('');
     },
 
@@ -186,6 +197,7 @@ function(
       $('#current-target-title').html(object.name).addClass('active');
 
       this.moonMenuController.setModel(object._moons);
+      this.isTraveling = false;
     }
   });
 });
