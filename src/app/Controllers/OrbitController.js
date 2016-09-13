@@ -15,7 +15,7 @@ function(Constants, Clock) {
   const COORDINATE_PRECISION = 12;
 
   class OrbitController {
-    constructor(object) {
+    constructor(object, rotationEnabled) {
       this._object = object;
       this._threePlanet = object.threeObject;
       this._distanceFromParent = object.threeDistanceFromParent;
@@ -25,7 +25,7 @@ function(Constants, Clock) {
       this._degreesToRotate = 0.1 * Math.PI / 180;
       this._orbitPositionOffset = object.orbitPositionOffset || 0;
       this._theta = 0;
-      this._rotationEnabled = true;
+      this._rotationEnabled = typeof rotationEnabled === 'boolean' ? rotationEnabled : true;
       this._dateObject = new Date();
 
       this.initListeners();
@@ -36,7 +36,10 @@ function(Constants, Clock) {
 
       document.addEventListener('frame', (e)=> {
         this.positionObject();
-        this.rotateObject();
+
+        if (this._rotationEnabled) {
+          this.rotateObject();
+        }
       }, false);
     };
 

@@ -127,6 +127,8 @@ function(Moon, ColorManager) {
       var destinationCoordinates = this.calculateDestinationCoordinates(targetObject);
       var takeOff = this.prepareForTravel(takeOffHeight, targetObject);
 
+      var cameraTarget = targetObject instanceof Moon ? targetObject.core : targetObject.objectCentroid;
+
       return takeOff.start().onComplete(()=> {
         var cameraTween = new TWEEN.Tween(this.camera.position)
           .to(destinationCoordinates, travelDuration)
@@ -142,15 +144,17 @@ function(Moon, ColorManager) {
               this.updateTargetHighlight(targetObject);
             }
           }.bind(this))
-          .onComplete(this.handleComplete.bind(this, targetObject))
+          .onComplete(this.handleComplete.bind(this, targetObject, cameraTarget))
           .start()
         ;
       });
     }
 
-    handleComplete(targetObject) {
+    handleComplete(targetObject, cameraTarget) {
+      cameraTarget = cameraTarget || targetObject.objectCentroid;
+
       THREE.SceneUtils.detach(this.camera, this.camera.parent, this.scene);
-      THREE.SceneUtils.attach(this.camera, this.scene, targetObject.objectCentroid);
+      THREE.SceneUtils.attach(this.camera, this.scene, cameraTarget);
 
       var transition = this.colorManager.fadeTo(
         targetObject.highlight,

@@ -206,7 +206,7 @@ function(
       });
 
       var moon = new Moon(planetData.satellites[i], planet, planetData, orbitColor);
-      var orbitCtrlMoon = new OrbitController(moon);
+      var orbitCtrlMoon = new OrbitController(moon, false);
 
       this.solarSystemObjects.moons.push(moon);
 

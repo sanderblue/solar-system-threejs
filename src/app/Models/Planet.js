@@ -169,7 +169,7 @@ function(
     setAxes() {
       this._threeObject.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
       this._core.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
-      // this._objectCentroid.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
+      this._objectCentroid.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
     }
 
     buildFullObject3D() {

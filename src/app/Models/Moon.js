@@ -27,7 +27,7 @@ function(Constants, CelestialObject, Orbit) {
       this._threeObject = this.createGeometry(this._surface);
       this._threeDistanceFromParent = this.createThreeDistanceFromParent();
       this._threeParent = threeParent || null;
-      this._threeObject.rotation.x = 90 * Constants.degreesToRadiansRatio;
+      // this._threeObject.rotation.x = 90 * Constants.degreesToRadiansRatio;
       this._parentData = parentData || null;
       this._orbitCentroid = this.createOrbitCentroid();
       this._highlight = this.createHighlight();
