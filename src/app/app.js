@@ -29,7 +29,8 @@ require.config({
                 'Modules/Error/MissingArgumentException'
             ]
         }
-    }
+    },
+    urlArgs: 'bust=' + new Date().getTime()
 });
 
 // Initialize app
