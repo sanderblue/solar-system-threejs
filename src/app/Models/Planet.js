@@ -26,7 +26,7 @@ function(
       this._distanceFromParent = data.distanceFromParent || null;
       this._orbitalPeriod = data.orbitalPeriod || null;
       this._orbitalVelocity = data.orbitalVelocity || null;
-      this._orbitalInclination = data.orbitalInclination || null;
+      this._orbitalInclination = data.orbitalInclination || null; // to the ecliptic plane
       this._axialTilt = data.axialTilt || null;
       this._meanTemperature = data.meanTemperature || null;
       this._orbitPositionOffset = data.orbitPositionOffset;
@@ -169,7 +169,7 @@ function(
     setAxes() {
       this._threeObject.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
       this._core.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
-      this._objectCentroid.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
+      // this._objectCentroid.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
     }
 
     buildFullObject3D() {
@@ -234,8 +234,6 @@ function(
       ;
 
       mesh.add(surface);
-
-      // mesh.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
 
       if (atmosphere) {
         mesh.add(atmosphere);

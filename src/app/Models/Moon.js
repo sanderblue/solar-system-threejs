@@ -15,7 +15,7 @@ function(Constants, CelestialObject, Orbit) {
       this._name = data.name || null;
       this._distanceFromParent = data.distanceFromParent || null;
       this._orbitalPeriod = data.orbitalPeriod || null;
-      this._orbitalInclination = data.orbitalInclination || null;
+      this._orbitalInclination = data.orbitalInclination || null; // to the equatorial plane of the parent object
       this._mass = data.mass || null;
       this._orbitColorDefault = '#2b2b2b';
       this._orbitColor = orbitColor || this._orbitColorDefault;
