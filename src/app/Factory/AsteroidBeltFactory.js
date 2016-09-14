@@ -34,7 +34,7 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
         var n2 = n / 2; // particles spread in the cube
 
         var material = new THREE.PointsMaterial({
-          size: 20,
+          size: 16,
           map: this._texture
         });
 
@@ -90,7 +90,7 @@ function(Scene, Constants, RandomNumberGenerator, Asteroid) {
 
       d = d + (count / count.toFixed(0).length);
 
-      var randomNumber = this._randomNumberGenerator.getRandomNumberWithinRange(1, 3000) * (Math.random() + 1);
+      var randomNumber = this._randomNumberGenerator.getRandomNumberWithinRange(1, 2000) * (Math.random() + 1);
       var randomOffset = odd ? randomNumber * -1 : randomNumber;
 
       var amplitude = d + randomOffset * (2 + Math.random());
