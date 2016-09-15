@@ -17,8 +17,8 @@ function(Constants, CelestialObject, Orbit) {
       this._orbitalPeriod = data.orbitalPeriod || null;
       this._orbitalInclination = data.orbitalInclination || null; // to the equatorial plane of the parent object
       this._mass = data.mass || null;
-      this._orbitColorDefault = '#2b2b2b';
-      this._orbitColor = orbitColor || this._orbitColorDefault;
+      this._orbitColorDefault = '#424242';
+      this._orbitColor = this._orbitColorDefault; // || orbitColor
 
       // THREE properties
       this._threeDiameter = this.createThreeDiameter();

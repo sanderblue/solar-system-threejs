@@ -183,6 +183,9 @@ function(
         this._orbitLine.orbit,
         this._objectCentroid
       );
+
+      // Axis Helper (x = red, y = green, z = blue)
+      // this._threeObject.add(new THREE.AxisHelper(this._threeDiameter * 2 + 1));
     }
 
     createThreeDiameter() {
@@ -273,7 +276,7 @@ function(
       var surface = new THREE.MeshPhongMaterial({
         map: map,
         bumpMap: bumpMap || null,
-        bumpScale: bumpMap ? 0.01 : null,
+        bumpScale: bumpMap ? 0.015 : null,
         specularMap: null, // specularMap || null,
         // specular: specularMap ? new THREE.Color(0x0a0a0a) : null
       });

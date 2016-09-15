@@ -22,6 +22,10 @@ function(
 ) {
   'use strict';
 
+  const ORBIT_COLOR_DEFAULT = '#424242';
+  const ORBIT_COLOR_HIGHLIGHT = '#197eaa';
+  const ORBIT_COLOR_ACTIVE = '#3beaf7';
+
   return Backbone.View.extend({
     events: {
       'click a[data-id]': 'onClick',
@@ -109,11 +113,11 @@ function(
     travelToObject: function(target) {
       // Return old target to default orbit line color
       if (this.currentTarget && this.currentTarget.orbitLine) {
-        this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#2d2d2d');
+        this.currentTarget.orbitLine.orbit.material.color = new THREE.Color(ORBIT_COLOR_DEFAULT);
       }
 
       // Change new target orbit line color
-      target.orbitLine.orbit.material.color = new THREE.Color('#3beaf7'); // same color as hover and active state
+      target.orbitLine.orbit.material.color = new THREE.Color(ORBIT_COLOR_ACTIVE); // same color as hover and active state
       target.orbitLine.orbit.material.needsUpdate = true;
 
       this.travelController.travelToObject(
@@ -166,7 +170,7 @@ function(
     highlightOrbit: function(target) {
       var hightlightColor = '#197eaa'; // target.orbitHighlightColor || #216883
 
-      target.orbitLine.orbit.material.color = new THREE.Color(hightlightColor); // new THREE.Color('#d3d3d3');
+      target.orbitLine.orbit.material.color = new THREE.Color(ORBIT_COLOR_HIGHLIGHT); // new THREE.Color('#d3d3d3');
       target.orbitLine.orbit.material.needsUpdate = true;
     },
 
@@ -175,7 +179,7 @@ function(
     },
 
     unhighlightOrbit: function(target) {
-      target.orbitLine.orbit.material.color = new THREE.Color('#2d2d2d');
+      target.orbitLine.orbit.material.color = new THREE.Color(ORBIT_COLOR_DEFAULT);
       target.orbitLine.orbit.material.needsUpdate = true;
     },
 
