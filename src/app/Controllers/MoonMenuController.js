@@ -9,6 +9,10 @@ define(
 function($, _, Backbone, TemplateLoader, TravelController) {
   'use strict';
 
+  const ORBIT_COLOR_DEFAULT = '#424242';
+  const ORBIT_COLOR_HIGHLIGHT = '#b863f2';
+  const ORBIT_COLOR_ACTIVE = '#3beaf7';
+
   return Backbone.View.extend({
     events: {
       'mouseenter a[data-id]': 'onMouseEnter',
@@ -32,16 +36,27 @@ function($, _, Backbone, TemplateLoader, TravelController) {
         this.initializePlugins();
         this.initializeListeners();
       });
+      this.isTraveling = false;
 
       this.listenTo(this.model, 'change', this.render);
     },
 
     setModel: function(data) {
+      if (data instanceof Array) {
+        data.sort(function (objectA, objectB) {
+          return objectA.distanceFromParent - objectB.distanceFromParent;
+        });
+      }
+
       this.model.set({ data: data });
+
+      this.initializePlugins();
     },
 
     initializePlugins: function() {
-      this.accordion = new Foundation.Accordion(this.$('.accordion'), { allowAllClosed: true });
+      this.accordion = new Foundation.Accordion(this.$('.accordion'), {
+        allowAllClosed: true
+      });
     },
 
     render: function() {
@@ -69,20 +84,32 @@ function($, _, Backbone, TemplateLoader, TravelController) {
       var target = this.matchTarget(e.currentTarget.dataset.id);
 
       if (this.isCurrentTarget(target)) {
+        if (!this.isTraveling) {
+          this.highlightTarget(target);
+        }
+
         return true;
       }
 
-      this.highlightTarget(target);
+      this.highlightObject(e);
+
+      // $(e.currentTarget).trigger('click.zf.accordion');
     },
 
     onMouseLeave: function(e) {
       var target = this.matchTarget(e.currentTarget.dataset.id);
 
       if (this.isCurrentTarget(target)) {
+        if (!this.isTraveling) {
+          this.unhighlightTarget(target);
+        }
+
         return true;
       }
 
-      this.unhighlightTarget(target);
+      this.unhighlightObject(e);
+
+      // $(e.currentTarget).trigger('click.zf.accordion');
     },
 
     isCurrentTarget: function(target) {
@@ -112,7 +139,7 @@ function($, _, Backbone, TemplateLoader, TravelController) {
     },
 
     highlightOrbit: function(target) {
-      target.orbitLine.orbit.material.color = new THREE.Color('#ffffff');
+      target.orbitLine.orbit.material.color = new THREE.Color(ORBIT_COLOR_HIGHLIGHT);
       target.orbitLine.orbit.material.needsUpdate = true;
     },
 
@@ -121,18 +148,18 @@ function($, _, Backbone, TemplateLoader, TravelController) {
     },
 
     unhighlightOrbit: function(target) {
-      target.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+      target.orbitLine.orbit.material.color = new THREE.Color(ORBIT_COLOR_DEFAULT);
       target.orbitLine.orbit.material.needsUpdate = true;
     },
 
     travelToObject: function(target) {
       // Return old target to default orbit line color
       if (this.currentTarget) {
-        this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+        this.currentTarget.orbitLine.orbit.material.color = new THREE.Color(ORBIT_COLOR_DEFAULT);
       }
 
       // Change new target orbit line color
-      target.orbitLine.orbit.material.color = new THREE.Color('#aaaaaa');
+      target.orbitLine.orbit.material.color = new THREE.Color(ORBIT_COLOR_HIGHLIGHT);
       target.orbitLine.orbit.material.needsUpdate = true;
 
       this.currentTarget = target;
@@ -159,11 +186,15 @@ function($, _, Backbone, TemplateLoader, TravelController) {
     },
 
     handleTravelStart: function(e) {
+      this.isTraveling = true;
+
       this.$el.addClass('traveling');
     },
 
     handleTravelComplete: function(e) {
       this.$el.removeClass('traveling');
+
+      this.isTraveling = false;
     },
 
     handleTravelToMoonStart: function(e) {

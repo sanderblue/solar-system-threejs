@@ -22,6 +22,10 @@ function(
 ) {
   'use strict';
 
+  const ORBIT_COLOR_DEFAULT = '#424242';
+  const ORBIT_COLOR_HIGHLIGHT = '#197eaa';
+  const ORBIT_COLOR_ACTIVE = '#3beaf7';
+
   return Backbone.View.extend({
     events: {
       'click a[data-id]': 'onClick',
@@ -31,11 +35,14 @@ function(
 
     initialize: function(options) {
       this.scene = options.scene || null;
+      this.camera = this.scene ? this.scene.camera : null;
       this.data = options.data || {};
       this.sceneObjects = options.sceneObjects || [];
       this.travelController = new TravelController(this.scene);
       this.templateLoader = new TemplateLoader();
       this.moonDataModel = null;
+      this.isTraveling = false;
+      this.hasTraveled = false;
 
       this.currentTarget = options.currentTarget || this.sceneObjects[0];
       this.template = this.templateLoader.get('planets', 'src/app/Views/menu.twig').then((template)=> {
@@ -78,10 +85,14 @@ function(
       var target = this.matchTarget(id);
 
       if (this.isCurrentTarget(target)) {
+        if (!this.isTraveling) {
+          this.highlightTarget(target);
+        }
+
         return true;
       }
 
-      this.highlightTarget(target);
+      this.highlightObject(e);
     },
 
     onMouseLeave: function(e) {
@@ -89,20 +100,24 @@ function(
       var target = this.matchTarget(id);
 
       if (this.isCurrentTarget(target)) {
+        if (!this.isTraveling) {
+          this.unhighlightTarget(target);
+        }
+
         return true;
       }
 
-      this.unhighlightTarget(target);
+      this.unhighlightObject(e);
     },
 
     travelToObject: function(target) {
       // Return old target to default orbit line color
       if (this.currentTarget && this.currentTarget.orbitLine) {
-        this.currentTarget.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+        this.currentTarget.orbitLine.orbit.material.color = new THREE.Color(ORBIT_COLOR_DEFAULT);
       }
 
       // Change new target orbit line color
-      target.orbitLine.orbit.material.color = new THREE.Color('#aaaaaa');
+      target.orbitLine.orbit.material.color = new THREE.Color(ORBIT_COLOR_ACTIVE); // same color as hover and active state
       target.orbitLine.orbit.material.needsUpdate = true;
 
       this.travelController.travelToObject(
@@ -153,7 +168,9 @@ function(
     },
 
     highlightOrbit: function(target) {
-      target.orbitLine.orbit.material.color = new THREE.Color('#d3d3d3');
+      var hightlightColor = '#197eaa'; // target.orbitHighlightColor || #216883
+
+      target.orbitLine.orbit.material.color = new THREE.Color(ORBIT_COLOR_HIGHLIGHT); // new THREE.Color('#d3d3d3');
       target.orbitLine.orbit.material.needsUpdate = true;
     },
 
@@ -162,7 +179,7 @@ function(
     },
 
     unhighlightOrbit: function(target) {
-      target.orbitLine.orbit.material.color = new THREE.Color('#3d3d3d');
+      target.orbitLine.orbit.material.color = new THREE.Color(ORBIT_COLOR_DEFAULT);
       target.orbitLine.orbit.material.needsUpdate = true;
     },
 
@@ -173,6 +190,8 @@ function(
     },
 
     handleTravelStart: function(e) {
+      this.isTraveling = true;
+
       $('#current-target-title').removeClass('active').html('');
     },
 
@@ -182,6 +201,7 @@ function(
       $('#current-target-title').html(object.name).addClass('active');
 
       this.moonMenuController.setModel(object._moons);
+      this.isTraveling = false;
     }
   });
 });

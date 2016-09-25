@@ -2,9 +2,17 @@ define(
 [
   'Environment/Constants',
   'Models/CelestialObject',
-  'Models/Orbit'
+  'Models/Orbit',
+  'vendor/three-text2d/dist/three-text2d',
+  'Extensions/RadialRingGeometry'
 ],
-function(Constants, CelestialObject, Orbit) {
+function(
+  Constants,
+  CelestialObject,
+  Orbit,
+  ThreeText,
+  RadialRingGeometry
+) {
   'use strict';
 
   class Planet extends CelestialObject {
@@ -18,10 +26,12 @@ function(Constants, CelestialObject, Orbit) {
       this._distanceFromParent = data.distanceFromParent || null;
       this._orbitalPeriod = data.orbitalPeriod || null;
       this._orbitalVelocity = data.orbitalVelocity || null;
-      this._orbitalInclination = data.orbitalInclination || null;
+      this._orbitalInclination = data.orbitalInclination || null; // to the ecliptic plane
       this._axialTilt = data.axialTilt || null;
       this._meanTemperature = data.meanTemperature || null;
       this._orbitPositionOffset = data.orbitPositionOffset;
+      this._orbitHighlightColor = data.orbitHighlightColor || "#2d2d2d";
+      this._textureLoader = new THREE.TextureLoader();
       this._threeDiameter = this.createThreeDiameter();
       this._threeRadius = this.createThreeRadius();
       this._surface = this.createSurface(data._3d.textures.base, data._3d.textures.topo, data._3d.textures.specular);
@@ -33,7 +43,6 @@ function(Constants, CelestialObject, Orbit) {
       this._theta = 0;
       this._orbitCentroid = this.createOrbitCentroid();
       this._highlight = this.createHighlight();
-      this._threeObject.rotation.x = (90 + this._axialTilt) * Constants.degreesToRadiansRatio;
 
       if (data.rings) {
         this.createRingGeometry(data);
@@ -134,8 +143,11 @@ function(Constants, CelestialObject, Orbit) {
       return this._orbitLine;
     }
 
+    get orbitHighlightColor() {
+      return this._orbitHighlightColor;
+    }
+
     set highlight(amplitude) {
-      // this._highlight = null;
       this._highlight = this.createHighlight(amplitude);
     }
 
@@ -143,13 +155,37 @@ function(Constants, CelestialObject, Orbit) {
       return new THREE.Object3D();
     }
 
+    createLabelSprite() {
+      var sprite = new ThreeText.SpriteText2D(this._name, {
+        align: ThreeText.textAlign.center,
+        font: '400px Arial',
+        fillStyle: '#ffffff',
+        antialias: false
+      });
+
+      this._core.add(sprite);
+    }
+
+    setAxes() {
+      this._threeObject.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
+      this._core.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
+      // this._objectCentroid.rotation.y = this._axialTilt * Constants.degreesToRadiansRatio;
+    }
+
     buildFullObject3D() {
+      this.setAxes();
+      // this.createLabelSprite();
+
       this._orbitLine = new Orbit(this);
       this._orbitCentroid.add(
         this._threeObject,
         this._core,
-        this._orbitLine.orbit
+        this._orbitLine.orbit,
+        this._objectCentroid
       );
+
+      // Axis Helper (x = red, y = green, z = blue)
+      // this._threeObject.add(new THREE.AxisHelper(this._threeDiameter * 2 + 1));
     }
 
     createThreeDiameter() {
@@ -170,7 +206,7 @@ function(Constants, CelestialObject, Orbit) {
       }
 
       if (src) {
-        var texture = new THREE.TextureLoader().load(src);
+        var texture = this._textureLoader.load(src);
 
         texture.wrapS = THREE.ClampToEdgeWrapping;
         texture.wrapT = THREE.ClampToEdgeWrapping;
@@ -191,17 +227,16 @@ function(Constants, CelestialObject, Orbit) {
         segmentsOffset = Number.parseInt(this._threeDiameter + 1.5 * 120);
       }
 
-      // console.debug(this.name + ' radius:', this._threeRadius, segmentsOffset);
-
       var mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
-            this._threeRadius,
+            this._threeRadius - 0.1,
             segmentsOffset,
             segmentsOffset
-          ),
-          surface
+          )
         )
       ;
+
+      mesh.add(surface);
 
       if (atmosphere) {
         mesh.add(atmosphere);
@@ -213,6 +248,13 @@ function(Constants, CelestialObject, Orbit) {
     createSurface(base, topo, specular) {
       if (!base) {
         return;
+      }
+
+      var hiRes = false;
+      var segmentsOffset = Number.parseInt(this._threeDiameter + 1.1 * 60);
+
+      if (hiRes) {
+        segmentsOffset = Number.parseInt(this._threeDiameter + 1.5 * 120);
       }
 
       var map = this.getTexture(base);
@@ -231,13 +273,27 @@ function(Constants, CelestialObject, Orbit) {
         specularMap.minFilter = THREE.LinearFilter;
       }
 
-      return new THREE.MeshPhongMaterial({
+      var surface = new THREE.MeshPhongMaterial({
         map: map,
         bumpMap: bumpMap || null,
-        bumpScale: bumpMap ? 0.01 : null,
+        bumpScale: bumpMap ? 0.015 : null,
         specularMap: null, // specularMap || null,
         // specular: specularMap ? new THREE.Color(0x0a0a0a) : null
       });
+
+      var mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(
+            this._threeRadius,
+            segmentsOffset,
+            segmentsOffset
+          ),
+          surface
+        )
+      ;
+
+      mesh.rotation.x = 90 * Constants.degreesToRadiansRatio;
+
+      return mesh;
     }
 
     createAtmosphere(clouds, haze) {
@@ -247,7 +303,7 @@ function(Constants, CelestialObject, Orbit) {
 
         map.minFilter = THREE.LinearFilter;
 
-        return new THREE.Mesh(
+        var mesh = new THREE.Mesh(
           new THREE.SphereGeometry(this._threeRadius * 1.01, segmentsOffset, segmentsOffset),
           new THREE.MeshPhongMaterial({
             map: map,
@@ -255,6 +311,10 @@ function(Constants, CelestialObject, Orbit) {
             opacity: 0.9
           })
         );
+
+        mesh.rotation.x = 90 * Constants.degreesToRadiansRatio;
+
+        return mesh;
       }
 
       return null;
@@ -264,26 +324,17 @@ function(Constants, CelestialObject, Orbit) {
       var innerRadius = data.rings.innerRadius * Constants.celestialScale;
       var outerRadius = data.rings.outerRadius * Constants.celestialScale;
       var thetaSegments = 180;
-      var phiSegments = 180;
-      var geometry = new THREE.RingGeometry(
+      var phiSegments = 80;
+      var geometry = new RadialRingGeometry(
         innerRadius,
         outerRadius,
-        thetaSegments,
-        phiSegments,
-        0,
-        Math.PI * 2
+        thetaSegments
       );
 
-      // geometry.uvsNeedUpdate = true;
-
-      // console.debug('geometry', geometry);
-
-      // uvs.push( new THREE.Vector2( o / thetaSegments, i / phiSegments ) );
-
-      var map = THREE.ImageUtils.loadTexture('src/assets/textures/saturn_rings.png'); // this.getTexture('src/assets/textures/saturn_rings.png');
+      var map = this._textureLoader.load(data.rings.textures.base); // THREE.ImageUtils.loadTexture(data.rings.textures.base);
       map.minFilter = THREE.NearestFilter;
 
-      var colorMap = THREE.ImageUtils.loadTexture('src/assets/textures/saturn_rings_color_map.png'); // this.getTexture('src/assets/textures/saturn_rings_color_map.png');
+      var colorMap = this._textureLoader.load(data.rings.textures.colorMap); // THREE.ImageUtils.loadTexture(data.rings.textures.colorMap);
       colorMap.minFilter = THREE.NearestFilter;
 
       var material = new THREE.MeshLambertMaterial({
@@ -296,7 +347,6 @@ function(Constants, CelestialObject, Orbit) {
 
       var ring = new THREE.Mesh(geometry, material);
       ring.position.set(0, 0, 0);
-      ring.rotation.x = 90 * Constants.degreesToRadiansRatio;
 
       this._threeObject.add(ring);
     }
@@ -308,7 +358,7 @@ function(Constants, CelestialObject, Orbit) {
       var orbitAmplitude = amplitude || highlightDiameter;
       var orbitLine = new THREE.Geometry();
       var material = new THREE.MeshBasicMaterial({
-        color: '#3beaf7',
+        color: '#ffbd00', // '#00ffff',
         transparent: true,
         opacity: 0,
         depthTest: false

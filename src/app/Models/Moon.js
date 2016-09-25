@@ -15,10 +15,10 @@ function(Constants, CelestialObject, Orbit) {
       this._name = data.name || null;
       this._distanceFromParent = data.distanceFromParent || null;
       this._orbitalPeriod = data.orbitalPeriod || null;
-      this._orbitalInclination = data.orbitalInclination || null;
+      this._orbitalInclination = data.orbitalInclination || null; // to the equatorial plane of the parent object
       this._mass = data.mass || null;
-      this._orbitColorDefault = '#2b2b2b';
-      this._orbitColor = orbitColor || this._orbitColorDefault;
+      this._orbitColorDefault = '#424242';
+      this._orbitColor = this._orbitColorDefault; // || orbitColor
 
       // THREE properties
       this._threeDiameter = this.createThreeDiameter();
@@ -27,7 +27,7 @@ function(Constants, CelestialObject, Orbit) {
       this._threeObject = this.createGeometry(this._surface);
       this._threeDistanceFromParent = this.createThreeDistanceFromParent();
       this._threeParent = threeParent || null;
-      this._threeObject.rotation.x = 90 * Constants.degreesToRadiansRatio;
+      // this._threeObject.rotation.x = 90 * Constants.degreesToRadiansRatio;
       this._parentData = parentData || null;
       this._orbitCentroid = this.createOrbitCentroid();
       this._highlight = this.createHighlight();
@@ -156,7 +156,7 @@ function(Constants, CelestialObject, Orbit) {
 
     buildFullObject3D() {
       this._orbitLine = new Orbit(this, this._orbitColorDefault);
-      this._orbitCentroid.rotation.x += this._parentData.axialTilt * Constants.degreesToRadiansRatio; // double check this
+
       this._orbitCentroid.add(
         this._threeObject,
         this._core,

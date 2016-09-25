@@ -15,7 +15,7 @@ function(Constants, Clock) {
   const COORDINATE_PRECISION = 12;
 
   class OrbitController {
-    constructor(object) {
+    constructor(object, rotationEnabled) {
       this._object = object;
       this._threePlanet = object.threeObject;
       this._distanceFromParent = object.threeDistanceFromParent;
@@ -25,7 +25,8 @@ function(Constants, Clock) {
       this._degreesToRotate = 0.1 * Math.PI / 180;
       this._orbitPositionOffset = object.orbitPositionOffset || 0;
       this._theta = 0;
-      this._rotationEnabled = true;
+      this._rotationEnabled = typeof rotationEnabled === 'boolean' ? rotationEnabled : true;
+      this._dateObject = new Date();
 
       this.initListeners();
     }
@@ -35,12 +36,16 @@ function(Constants, Clock) {
 
       document.addEventListener('frame', (e)=> {
         this.positionObject();
-        this.rotateObject();
+
+        if (this._rotationEnabled) {
+          this.rotateObject();
+        }
       }, false);
     };
 
     positionObject(canlog) {
-      var time = (clock.getElapsedTime() / 60) + this._orbitPositionOffset;
+      var dayOfYear = this._dateObject.getDOYwithTimeAsDecimal();
+      var time = (dayOfYear + (clock.getElapsedTime() / 60)) + this._orbitPositionOffset;
       var theta = time * (360 / this._object.orbitalPeriod) * Constants.degreesToRadiansRatio;
       var x = this._orbitAmplitude * Math.cos(theta);
       var y = this._orbitAmplitude * Math.sin(theta);
@@ -53,23 +58,19 @@ function(Constants, Clock) {
       this._threePlanet.position.set(x, y, 0);
       this._object.core.position.set(x, y, 0);
 
+      if (this._object.objectCentroid) {
+        this._object.objectCentroid.position.set(x, y, 0);
+      }
+
       var timeParsed = Number.parseInt(time);
 
       if (timeParsed > 0 && timeParsed % 60 === 0) {
-        console.debug(
-          '\n',
-          'Clock: ', clock.getElapsedTime(),
-          '\n',
-          'Day Of Year:', time,
-          '\n'
-        );
-
         clock = new Clock(true);
       }
     };
 
     rotateObject() {
-      this._threePlanet.rotation.y += this._degreesToRotate; // 1 degree per frame
+      this._threePlanet.rotation.z += this._degreesToRotate; // 1 degree per frame
     };
   }
 

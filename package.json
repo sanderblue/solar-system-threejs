@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "gulp": "^3.9.0",
-    "gulp-sass": "^2.1.0"
+    "gulp-sass": "^2.1.0",
+    "three-text2d": "^0.2.2"
   },
   "devDependencies": {
     "gulp-sourcemaps": "^1.6.0",

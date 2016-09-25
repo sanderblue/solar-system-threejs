@@ -45,11 +45,6 @@ function(Constants, Stats) {
       document.dispatchEvent(frameEvent);
       self._renderEngine.render(self._scene, self._camera);
 
-      // console.debug('Tweening?', tweening);
-
-      // if (tweening) ;
-      // }
-
       Stats.end();
     }
 

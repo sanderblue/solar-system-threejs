@@ -2,8 +2,9 @@
 .moons {
     position: fixed;
     top: 0;
-    background: rgba(25, 25, 25, 0.1);
+    background: rgba(25, 25, 25, 0.15);
     z-index: 3;
+    border: 1px solid rgba(45, 45, 45, 0.85);
 
     ul {
         list-style: none;
@@ -36,8 +37,10 @@
     }
 
     a {
+        color: #cccccc;
+
         &:hover {
-            color: white;
+            color: #ffbd00;
         }
     }
 }
@@ -55,6 +58,7 @@
         @include font-semibold();
         font-size: 0.75rem;
         line-height: 1rem;
+        margin-bottom: 0;
     }
 
     &.traveling {
@@ -66,6 +70,15 @@
     .moon-list {
         opacity: 1;
         transition: opacity 500ms ease-in-out;
+        max-height: 85vh;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+
+    a {
+        &:hover {
+            color: #3beaf7;
+        }
     }
 }
 
@@ -98,7 +111,7 @@
 .menu-title {
     @include font-bold();
     font-size: 1.5rem;
-    border: 1px solid rgba(45, 45, 45, 0.8);
+    border-bottom: 1px solid rgba(45, 45, 45, 0.8);
     padding: 0.5rem 1rem;
 }
 

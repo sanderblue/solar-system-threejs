@@ -226,6 +226,27 @@
             width: 51px;
         }
     }
+
+    &.social-buttons-corner {
+        opacity: 0;
+        transition: opacity 1000ms ease-out;
+
+        &.visible {
+            opacity: 1;
+            z-index: 3;
+        }
+    }
+
+    &.social-buttons-intro-screen {
+        position: relative;
+        bottom: initial;
+        right: initial;
+        padding-right: initial;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        z-index: 2;
+        text-align: center;
+    }
 }
 
 .twitter-follow-button {

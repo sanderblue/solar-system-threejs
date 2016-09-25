@@ -4,16 +4,19 @@ define(
   'Modules/ThirdPartyScripts',
   'Modules/Detector',
   'Modules/TemplateLoader',
-  'Factory/SolarSystemFactory'
+  'Factory/SolarSystemFactory',
+  'vendor/ajaxrequest/dist/ajaxrequest'
 ],
 function(
   HttpRequest,
   ThirdPartyScripts,
   Detector,
   TemplateLoader,
-  SolarSystemFactory
+  SolarSystemFactory,
+  AjaxRequest
 ) {
   'use strict';
+
   var seenJsFeaturesModal = false;
 
   if (window.localStorage) {
