@@ -49,10 +49,14 @@ function($, _, Backbone, TemplateLoader, TravelController) {
       }
 
       this.model.set({ data: data });
+
+      this.initializePlugins();
     },
 
     initializePlugins: function() {
-      this.accordion = new Foundation.Accordion(this.$('.accordion'), { allowAllClosed: true });
+      this.accordion = new Foundation.Accordion(this.$('.accordion'), {
+        allowAllClosed: true
+      });
     },
 
     render: function() {
@@ -88,6 +92,8 @@ function($, _, Backbone, TemplateLoader, TravelController) {
       }
 
       this.highlightObject(e);
+
+      // $(e.currentTarget).trigger('click.zf.accordion');
     },
 
     onMouseLeave: function(e) {
@@ -102,6 +108,8 @@ function($, _, Backbone, TemplateLoader, TravelController) {
       }
 
       this.unhighlightObject(e);
+
+      // $(e.currentTarget).trigger('click.zf.accordion');
     },
 
     isCurrentTarget: function(target) {

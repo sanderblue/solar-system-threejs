@@ -95,7 +95,7 @@ function(Moon, ColorManager) {
     }
 
     prepareForTravel(takeOffHeight, targetObject) {
-      var travelDuration = 1000; // 3000;
+      var travelDuration = 3000; // 3000;
 
       return new TWEEN.Tween(this.camera.position)
         .to({
@@ -111,7 +111,7 @@ function(Moon, ColorManager) {
     }
 
     travelToObject(currentPosition, targetObject, takeOffHeight) {
-      var travelDuration = 1000; // 5000; // milliseconds
+      var travelDuration = 5000; // 5000; // milliseconds
 
       this.travelObjectType = targetObject instanceof Moon ? 'moon' : 'planet';
       this.dispatchTravelStartEvent(targetObject);
