@@ -52,7 +52,7 @@ function(
   var templateLoader = new TemplateLoader();
   var dataRequest = new HttpRequest(
     'GET',
-    window.location.origin + '/src/data/solarsystem.json',
+    '../../src/data/solarsystem.json',
     true
   );
 
