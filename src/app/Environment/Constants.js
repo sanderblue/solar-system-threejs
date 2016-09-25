@@ -7,7 +7,7 @@ define(function() {
      * This object contains a number of mathematical and physical constants.
      */
     const UNIVERSE_SCALE = Math.pow(10, -4.2); // 4.2
-    const CELESTIAL_SCALE = Math.pow(10, -3.75); // 3.9
+    const CELESTIAL_SCALE = Math.pow(10, -3.8); // 3.9
     const ORBIT_SCALE = UNIVERSE_SCALE;
     const DEGREES_TO_RADIANS_RATIO = 0.0174532925;
     const RADIANS_TO_DEGREES_RATIO = 57.2957795;
