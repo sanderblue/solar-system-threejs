@@ -9,3 +9,4 @@ assets/sass/lib/neat
 assets/sass/lib/neat/*
 node_modules
 bower_components
+src/app/vendor/twig.js/CHANGELOG.md
