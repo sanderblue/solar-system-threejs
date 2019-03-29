@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "extend": "^3.0.2",
     "three-text2d": "^0.2.2"
   },
   "devDependencies": {
